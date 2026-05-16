@@ -2172,7 +2172,7 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
     },{threshold:0});
     obs.observe(heroCta);
   })();
-  function _navH(){return document.getElementById('nav')?.offsetHeight||64}
+  function _navH(){const nav=document.getElementById('nav');if(!nav)return 64;return nav.classList.contains('scrolled')?nav.offsetHeight:64;}
   window.scrollTo_=function(id){
     const sec=document.getElementById(id);
     if(!sec)return;
