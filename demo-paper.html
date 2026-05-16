@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Démo — Style Pages | Menu Pro</title>
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; overflow: hidden; background: #0c0a08; font-family: 'Outfit', system-ui, sans-serif; }
+
+    /* ── DEMO BAR ── */
+    .demo-bar {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 44px; padding: 0 16px;
+      background: rgba(12,10,8,0.98);
+      border-bottom: 1px solid rgba(200,164,78,0.18);
+      position: relative; z-index: 10;
+    }
+    .demo-bar-left { display: flex; align-items: center; gap: 10px; }
+    .demo-bar-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 3px 10px; border-radius: 20px;
+      background: rgba(200,164,78,0.12); border: 1px solid rgba(200,164,78,0.3);
+      font-size: 0.72rem; letter-spacing: 0.08em; color: #c8a44e; font-weight: 500;
+    }
+    .demo-bar-badge::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: #c8a44e; flex-shrink: 0;
+      animation: pulse 1.8s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+    .demo-bar-title {
+      font-size: 0.82rem; color: rgba(244,234,210,0.7); font-weight: 300;
+    }
+    .demo-bar-title strong { color: rgba(244,234,210,0.95); font-weight: 500; }
+    .demo-bar-right { display: flex; align-items: center; gap: 8px; }
+    .demo-bar-link {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 500;
+      text-decoration: none; letter-spacing: 0.04em; transition: all 0.2s;
+    }
+    .demo-bar-link.outline {
+      border: 1px solid rgba(200,164,78,0.35); color: rgba(244,234,210,0.75);
+      background: transparent;
+    }
+    .demo-bar-link.outline:hover { border-color: #c8a44e; color: #f0ead8; background: rgba(200,164,78,0.08); }
+    .demo-bar-link svg { flex-shrink: 0; }
+
+    /* ── IFRAME ── */
+    .demo-frame {
+      width: 100%; height: calc(100svh - 44px);
+      border: none; display: block;
+    }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="demo-bar">
+    <div class="demo-bar-left">
+      <span class="demo-bar-badge">MODE DÉMO</span>
+      <span class="demo-bar-title"><strong>Style Pages</strong> — Menu QR code classique</span>
+    </div>
+    <div class="demo-bar-right">
+      <a href="index.html" class="demo-bar-link outline">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+        Retour
+      </a>
+    </div>
+  </div>
+
+  <iframe
+    class="demo-frame"
+    src="https://cafe-elysee-dye1.vercel.app/?demo=1&demo_style=paper&demo_bell=0&demo_order=0&demo_theme=prestige"
+    title="Démo Style Pages"
+    allow="fullscreen"
+  ></iframe>
+</body>
+</html>

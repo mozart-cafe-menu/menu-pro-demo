@@ -1943,7 +1943,7 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
                 <span class="o-per">/ mois</span>
               </div>
               <div class="fo-option-actions">
-                <button class="fo-btn fo-btn-test" onclick="openPopup('pop-pages')" data-i18n="fo.btn.demo">Voir un exemple</button>
+                <button class="fo-btn fo-btn-test" onclick="openPopup('pop-themes')" data-i18n="fo.btn.demo">Voir un exemple</button>
                 <button class="fo-btn fo-btn-choose" onclick="scrollTo_('contact')" data-i18n="fo.btn.choose">Choisir</button>
               </div>
             </div>
@@ -1962,7 +1962,7 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
                 <span class="o-per">/ mois</span>
               </div>
               <div class="fo-option-actions">
-                <button class="fo-btn fo-btn-test" onclick="openPopup('pop-pages')" data-i18n="fo.btn.demo">Voir un exemple</button>
+                <button class="fo-btn fo-btn-test" onclick="openPopup('pop-bell')" data-i18n="fo.btn.demo">Voir un exemple</button>
                 <button class="fo-btn fo-btn-choose" onclick="scrollTo_('contact')" data-i18n="fo.btn.choose">Choisir</button>
               </div>
             </div>
@@ -1981,7 +1981,7 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
                 <span class="o-per">/ mois</span>
               </div>
               <div class="fo-option-actions">
-                <button class="fo-btn fo-btn-test" onclick="openPopup('pop-pages')" data-i18n="fo.btn.demo">Voir un exemple</button>
+                <button class="fo-btn fo-btn-test" onclick="openPopup('pop-order')" data-i18n="fo.btn.demo">Voir un exemple</button>
                 <button class="fo-btn fo-btn-choose" onclick="scrollTo_('contact')" data-i18n="fo.btn.choose">Choisir</button>
               </div>
             </div>
@@ -2087,9 +2087,14 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
     <h3 data-i18n-html="pp.pages.h3">Tester le menu <em>Pages.</em></h3>
     <p class="popup-lead" data-i18n="pp.pages.lead">Explorez la présentation claire et élégante du Style Pages — menu multilingue, QR code, identité visuelle personnalisée.</p>
     <div class="popup-list">
-      <a href="https://cafe-elysee-dye1.vercel.app/?demo=1" target="_blank" rel="noopener" class="popup-link">
+      <a href="demo-paper.html" target="_blank" rel="noopener" class="popup-link">
         <div class="popup-link-num">1</div>
         <div class="popup-link-meta"><strong data-i18n="pp.pages.l1.label">Menu client (QR code)</strong><small data-i18n="pp.pages.l1.sub">Vue depuis la table · style Pages</small></div>
+        <div class="popup-link-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
+      </a>
+      <a href="https://cafe-elysee-dye1.vercel.app/admin.html?demo=1" target="_blank" rel="noopener" class="popup-link">
+        <div class="popup-link-num">2</div>
+        <div class="popup-link-meta"><strong data-i18n="pp.pages.l2.label">Interface admin</strong><small data-i18n="pp.pages.l2.sub">Gestion du contenu en temps réel</small></div>
         <div class="popup-link-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
       </a>
     </div>
@@ -2106,14 +2111,81 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
     <h3 data-i18n-html="pp.dyn.h3">Tester le menu <em>Dynamique.</em></h3>
     <p class="popup-lead" data-i18n="pp.dyn.lead">Découvrez l'expérience immersive avec photos HD, animations fluides et navigation par catégories.</p>
     <div class="popup-list">
-      <a href="https://cafe-elysee-dye1.vercel.app/?demo=1" target="_blank" rel="noopener" class="popup-link">
+      <a href="demo-dynamic.html" target="_blank" rel="noopener" class="popup-link">
         <div class="popup-link-num">1</div>
         <div class="popup-link-meta"><strong data-i18n="pp.dyn.l1.label">Menu client</strong><small data-i18n="pp.dyn.l1.sub">Photos, animations, multilingue</small></div>
         <div class="popup-link-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
       </a>
       <a href="https://cafe-elysee-dye1.vercel.app/admin.html?demo=1" target="_blank" rel="noopener" class="popup-link">
         <div class="popup-link-num">2</div>
-        <div class="popup-link-meta"><strong data-i18n="pp.dyn.l2.label">Interface admin (avec admin)</strong><small data-i18n="pp.dyn.l2.sub">Tableau de bord, mise à jour en direct</small></div>
+        <div class="popup-link-meta"><strong data-i18n="pp.dyn.l2.label">Interface admin</strong><small data-i18n="pp.dyn.l2.sub">Tableau de bord, mise à jour en direct</small></div>
+        <div class="popup-link-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
+      </a>
+    </div>
+    <p class="popup-foot" data-i18n="pp.foot">Mode démo — aucune action n'est enregistrée.</p>
+  </div>
+</div>
+
+<div class="popup" id="pop-bell" onclick="popupOutside(event,'pop-bell')">
+  <div class="popup-card">
+    <button class="popup-close" onclick="closePopup('pop-bell')" aria-label="Fermer">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="eyebrow popup-eyebrow" data-i18n="pp.bell.eyebrow">Option Sonnette</div>
+    <h3 data-i18n-html="pp.bell.h3">Voir la sonnette <em>en action.</em></h3>
+    <p class="popup-lead" data-i18n="pp.bell.lead">Le client tape "Appeler le serveur" — vous recevez une notification push instantanée sur votre téléphone.</p>
+    <div class="popup-list">
+      <a href="demo-bell.html" target="_blank" rel="noopener" class="popup-link">
+        <div class="popup-link-num">1</div>
+        <div class="popup-link-meta"><strong data-i18n="pp.bell.l1.label">Menu client avec sonnette</strong><small data-i18n="pp.bell.l1.sub">Bouton "Appeler le serveur" activé</small></div>
+        <div class="popup-link-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
+      </a>
+      <a href="demo-server.html?section=calls" target="_blank" rel="noopener" class="popup-link">
+        <div class="popup-link-num">2</div>
+        <div class="popup-link-meta"><strong data-i18n="pp.bell.l2.label">App serveur (appels)</strong><small data-i18n="pp.bell.l2.sub">Interface reçue sur le téléphone du staff</small></div>
+        <div class="popup-link-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
+      </a>
+    </div>
+    <p class="popup-foot" data-i18n="pp.foot">Mode démo — aucune action n'est enregistrée.</p>
+  </div>
+</div>
+
+<div class="popup" id="pop-order" onclick="popupOutside(event,'pop-order')">
+  <div class="popup-card">
+    <button class="popup-close" onclick="closePopup('pop-order')" aria-label="Fermer">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="eyebrow popup-eyebrow" data-i18n="pp.order.eyebrow">Option Commande</div>
+    <h3 data-i18n-html="pp.order.h3">Voir la commande <em>en action.</em></h3>
+    <p class="popup-lead" data-i18n="pp.order.lead">Le client compose sa commande depuis le menu — elle arrive instantanément dans l'app de votre établissement.</p>
+    <div class="popup-list">
+      <a href="demo-order.html" target="_blank" rel="noopener" class="popup-link">
+        <div class="popup-link-num">1</div>
+        <div class="popup-link-meta"><strong data-i18n="pp.order.l1.label">Menu client avec commande</strong><small data-i18n="pp.order.l1.sub">Panier et validation activés</small></div>
+        <div class="popup-link-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
+      </a>
+      <a href="demo-server.html?section=orders" target="_blank" rel="noopener" class="popup-link">
+        <div class="popup-link-num">2</div>
+        <div class="popup-link-meta"><strong data-i18n="pp.order.l2.label">App serveur (commandes)</strong><small data-i18n="pp.order.l2.sub">Suivi live des commandes côté établissement</small></div>
+        <div class="popup-link-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
+      </a>
+    </div>
+    <p class="popup-foot" data-i18n="pp.foot">Mode démo — aucune action n'est enregistrée.</p>
+  </div>
+</div>
+
+<div class="popup" id="pop-themes" onclick="popupOutside(event,'pop-themes')">
+  <div class="popup-card">
+    <button class="popup-close" onclick="closePopup('pop-themes')" aria-label="Fermer">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="eyebrow popup-eyebrow" data-i18n="pp.themes.eyebrow">Option Thèmes</div>
+    <h3 data-i18n-html="pp.themes.h3">Choisissez votre <em>ambiance.</em></h3>
+    <p class="popup-lead" data-i18n="pp.themes.lead">Explorez tous les thèmes visuels disponibles — changez l'identité de votre menu en un clic.</p>
+    <div class="popup-list">
+      <a href="demo-themes.html" target="_blank" rel="noopener" class="popup-link">
+        <div class="popup-link-num">1</div>
+        <div class="popup-link-meta"><strong data-i18n="pp.themes.l1.label">Galerie des thèmes</strong><small data-i18n="pp.themes.l1.sub">Prévisualisation en direct de chaque ambiance</small></div>
         <div class="popup-link-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
       </a>
     </div>
@@ -2456,10 +2528,19 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
       'foot.copy':'© 2026 · Conçu avec exigence','foot.home':'Accueil','foot.pricing':'Tarifs','foot.contact':'Contact',
       'pp.pages.eyebrow':'Style Pages','pp.pages.h3':'Tester le menu <em>Pages.</em>','pp.pages.lead':'Explorez la présentation claire et élégante du Style Pages — menu multilingue, QR code, identité visuelle personnalisée.',
       'pp.pages.l1.label':'Menu client (QR code)','pp.pages.l1.sub':'Vue depuis la table · style Pages',
+      'pp.pages.l2.label':'Interface admin','pp.pages.l2.sub':'Gestion du contenu en temps réel',
       'pp.foot':'Mode démo — aucune action n\'est enregistrée.',
       'pp.dyn.eyebrow':'Style Dynamique','pp.dyn.h3':'Tester le menu <em>Dynamique.</em>','pp.dyn.lead':'Découvrez l\'expérience immersive avec photos HD, animations fluides et navigation par catégories.',
       'pp.dyn.l1.label':'Menu client','pp.dyn.l1.sub':'Photos, animations, multilingue',
-      'pp.dyn.l2.label':'Interface admin (avec admin)','pp.dyn.l2.sub':'Tableau de bord, mise à jour en direct'
+      'pp.dyn.l2.label':'Interface admin','pp.dyn.l2.sub':'Tableau de bord, mise à jour en direct',
+      'pp.bell.eyebrow':'Option Sonnette','pp.bell.h3':'Voir la sonnette <em>en action.</em>','pp.bell.lead':'Le client tape "Appeler le serveur" — vous recevez une notification push instantanée sur votre téléphone.',
+      'pp.bell.l1.label':'Menu client avec sonnette','pp.bell.l1.sub':'Bouton "Appeler le serveur" activé',
+      'pp.bell.l2.label':'App serveur (appels)','pp.bell.l2.sub':'Interface reçue sur le téléphone du staff',
+      'pp.order.eyebrow':'Option Commande','pp.order.h3':'Voir la commande <em>en action.</em>','pp.order.lead':'Le client compose sa commande depuis le menu — elle arrive instantanément dans l\'app de votre établissement.',
+      'pp.order.l1.label':'Menu client avec commande','pp.order.l1.sub':'Panier et validation activés',
+      'pp.order.l2.label':'App serveur (commandes)','pp.order.l2.sub':'Suivi live des commandes côté établissement',
+      'pp.themes.eyebrow':'Option Thèmes','pp.themes.h3':'Choisissez votre <em>ambiance.</em>','pp.themes.lead':'Explorez tous les thèmes visuels disponibles — changez l\'identité de votre menu en un clic.',
+      'pp.themes.l1.label':'Galerie des thèmes','pp.themes.l1.sub':'Prévisualisation en direct de chaque ambiance'
     },
     en:{
       'nav.advantages':'Benefits','nav.pricing':'Pricing','nav.contact':'Contact','nav.start':'Contact',
@@ -2510,10 +2591,19 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
       'foot.copy':'© 2026 · Crafted with precision','foot.home':'Home','foot.pricing':'Pricing','foot.contact':'Contact',
       'pp.pages.eyebrow':'Pages Style','pp.pages.h3':'Try the <em>Pages</em> menu.','pp.pages.lead':'Explore the clean and elegant Pages Style presentation — multilingual menu, QR code, personalized visual identity.',
       'pp.pages.l1.label':'Customer menu (QR code)','pp.pages.l1.sub':'View from the table · Pages style',
+      'pp.pages.l2.label':'Admin interface','pp.pages.l2.sub':'Real-time content management',
       'pp.foot':'Demo mode — no actions are recorded.',
       'pp.dyn.eyebrow':'Dynamic Style','pp.dyn.h3':'Try the <em>Dynamic</em> menu.','pp.dyn.lead':'Discover the immersive experience with HD photos, smooth animations and category navigation.',
       'pp.dyn.l1.label':'Customer menu','pp.dyn.l1.sub':'Photos, animations, multilingual',
-      'pp.dyn.l2.label':'Admin interface (with admin)','pp.dyn.l2.sub':'Dashboard, live updates'
+      'pp.dyn.l2.label':'Admin interface','pp.dyn.l2.sub':'Dashboard, live updates',
+      'pp.bell.eyebrow':'Bell Option','pp.bell.h3':'See the bell <em>in action.</em>','pp.bell.lead':'The customer taps "Call the waiter" — you receive an instant push notification on your phone.',
+      'pp.bell.l1.label':'Customer menu with bell','pp.bell.l1.sub':'"Call the waiter" button enabled',
+      'pp.bell.l2.label':'Server app (calls)','pp.bell.l2.sub':'Staff phone interface for incoming calls',
+      'pp.order.eyebrow':'Order Option','pp.order.h3':'See ordering <em>in action.</em>','pp.order.lead':'The customer builds their order in the menu — it arrives instantly in your establishment\'s app.',
+      'pp.order.l1.label':'Customer menu with ordering','pp.order.l1.sub':'Cart and checkout enabled',
+      'pp.order.l2.label':'Server app (orders)','pp.order.l2.sub':'Live order tracking for your team',
+      'pp.themes.eyebrow':'Themes Option','pp.themes.h3':'Choose your <em>atmosphere.</em>','pp.themes.lead':'Explore all available visual themes — change your menu\'s identity in one click.',
+      'pp.themes.l1.label':'Theme gallery','pp.themes.l1.sub':'Live preview of every atmosphere'
     },
     el:{
       'nav.advantages':'Πλεονεκτήματα','nav.pricing':'Τιμές','nav.contact':'Επικοινωνία','nav.start':'Επικοινωνία',
@@ -2565,10 +2655,19 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
       'foot.copy':'© 2026 · Σχεδιασμένο με επιμέλεια','foot.home':'Αρχική','foot.pricing':'Τιμές','foot.contact':'Επικοινωνία',
       'pp.pages.eyebrow':'Στυλ Pages','pp.pages.h3':'Δοκιμάστε το μενού <em>Pages.</em>','pp.pages.lead':'Εξερευνήστε την καθαρή και κομψή παρουσίαση του Στυλ Pages — πολύγλωσσο μενού, QR code, εξατομικευμένη οπτική ταυτότητα.',
       'pp.pages.l1.label':'Μενού πελατών (QR code)','pp.pages.l1.sub':'Προβολή από το τραπέζι · στυλ Pages',
+      'pp.pages.l2.label':'Διεπαφή διαχειριστή','pp.pages.l2.sub':'Διαχείριση περιεχομένου σε πραγματικό χρόνο',
       'pp.foot':'Λειτουργία demo — καμία ενέργεια δεν καταγράφεται.',
       'pp.dyn.eyebrow':'Στυλ Dynamic','pp.dyn.h3':'Δοκιμάστε το μενού <em>Dynamic.</em>','pp.dyn.lead':'Ανακαλύψτε την καθηλωτική εμπειρία με HD φωτογραφίες, ομαλές κινήσεις και πλοήγηση ανά κατηγορία.',
       'pp.dyn.l1.label':'Μενού πελατών','pp.dyn.l1.sub':'Φωτογραφίες, κινήσεις, πολύγλωσσο',
-      'pp.dyn.l2.label':'Διεπαφή διαχειριστή','pp.dyn.l2.sub':'Πίνακας ελέγχου, ζωντανή ενημέρωση'
+      'pp.dyn.l2.label':'Διεπαφή διαχειριστή','pp.dyn.l2.sub':'Πίνακας ελέγχου, ζωντανή ενημέρωση',
+      'pp.bell.eyebrow':'Επιλογή Κουδουνιού','pp.bell.h3':'Δείτε το κουδούνι <em>σε δράση.</em>','pp.bell.lead':'Ο πελάτης πατά "Κάλεσε σερβιτόρο" — λαμβάνετε άμεση ειδοποίηση push στο τηλέφωνό σας.',
+      'pp.bell.l1.label':'Μενού πελατών με κουδούνι','pp.bell.l1.sub':'Κουμπί "Κάλεσε σερβιτόρο" ενεργοποιημένο',
+      'pp.bell.l2.label':'Εφαρμογή σερβιτόρου (κλήσεις)','pp.bell.l2.sub':'Διεπαφή εισερχόμενων κλήσεων στο τηλέφωνο',
+      'pp.order.eyebrow':'Επιλογή Παραγγελίας','pp.order.h3':'Δείτε την παραγγελία <em>σε δράση.</em>','pp.order.lead':'Ο πελάτης συνθέτει την παραγγελία του — φτάνει αμέσως στην εφαρμογή του καταστήματος.',
+      'pp.order.l1.label':'Μενού πελατών με παραγγελία','pp.order.l1.sub':'Καλάθι και επιβεβαίωση ενεργοποιημένα',
+      'pp.order.l2.label':'Εφαρμογή σερβιτόρου (παραγγελίες)','pp.order.l2.sub':'Ζωντανή παρακολούθηση παραγγελιών',
+      'pp.themes.eyebrow':'Επιλογή Θεμάτων','pp.themes.h3':'Επιλέξτε την <em>ατμόσφαιρά σας.</em>','pp.themes.lead':'Εξερευνήστε όλα τα διαθέσιμα οπτικά θέματα — αλλάξτε την ταυτότητα του μενού σας με ένα κλικ.',
+      'pp.themes.l1.label':'Γκαλερί θεμάτων','pp.themes.l1.sub':'Ζωντανή προεπισκόπηση κάθε ατμόσφαιρας'
     },
     ar:{
       'nav.advantages':'المميزات','nav.pricing':'الأسعار','nav.contact':'اتصل بنا','nav.start':'تواصل',
@@ -2619,10 +2718,19 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
       'foot.copy':'© 2026 · مصمم بعناية','foot.home':'الرئيسية','foot.pricing':'الأسعار','foot.contact':'تواصل',
       'pp.pages.eyebrow':'أسلوب Pages','pp.pages.h3':'جرّب قائمة <em>Pages.</em>','pp.pages.lead':'استكشف العرض الواضح والأنيق لأسلوب Pages — قائمة متعددة اللغات، QR code، هوية بصرية مخصصة.',
       'pp.pages.l1.label':'قائمة العملاء (QR code)','pp.pages.l1.sub':'عرض من الطاولة · أسلوب Pages',
+      'pp.pages.l2.label':'واجهة المشرف','pp.pages.l2.sub':'إدارة المحتوى في الوقت الفعلي',
       'pp.foot':'وضع تجريبي — لا يتم تسجيل أي إجراء.',
       'pp.dyn.eyebrow':'أسلوب Dynamic','pp.dyn.h3':'جرّب قائمة <em>Dynamic.</em>','pp.dyn.lead':'اكتشف التجربة الانغماسية مع صور HD وحركات سلسة وتنقل حسب الفئات.',
       'pp.dyn.l1.label':'قائمة العملاء','pp.dyn.l1.sub':'صور، حركات، متعدد اللغات',
-      'pp.dyn.l2.label':'واجهة المشرف','pp.dyn.l2.sub':'لوحة تحكم، تحديث مباشر'
+      'pp.dyn.l2.label':'واجهة المشرف','pp.dyn.l2.sub':'لوحة تحكم، تحديث مباشر',
+      'pp.bell.eyebrow':'خيار الجرس','pp.bell.h3':'شاهد الجرس <em>في العمل.</em>','pp.bell.lead':'يضغط العميل على "استدعاء النادل" — تصلك إشعار فوري على هاتفك.',
+      'pp.bell.l1.label':'قائمة العملاء مع الجرس','pp.bell.l1.sub':'زر "استدعاء النادل" مفعّل',
+      'pp.bell.l2.label':'تطبيق النادل (المكالمات)','pp.bell.l2.sub':'واجهة المكالمات الواردة على الهاتف',
+      'pp.order.eyebrow':'خيار الطلب','pp.order.h3':'شاهد الطلب <em>في العمل.</em>','pp.order.lead':'يؤلف العميل طلبه من القائمة — يصل فوراً إلى تطبيق مؤسستك.',
+      'pp.order.l1.label':'قائمة العملاء مع الطلب','pp.order.l1.sub':'السلة والتأكيد مفعّلان',
+      'pp.order.l2.label':'تطبيق النادل (الطلبات)','pp.order.l2.sub':'متابعة الطلبات المباشرة',
+      'pp.themes.eyebrow':'خيار الثيمات','pp.themes.h3':'اختر <em>أجواءك.</em>','pp.themes.lead':'استكشف جميع الثيمات البصرية المتاحة — غيّر هوية قائمتك بنقرة واحدة.',
+      'pp.themes.l1.label':'معرض الثيمات','pp.themes.l1.sub':'معاينة مباشرة لكل أجواء'
     },
     de:{
       'nav.advantages':'Vorteile','nav.pricing':'Preise','nav.contact':'Kontakt','nav.start':'Kontakt',
@@ -2673,10 +2781,19 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
       'foot.copy':'© 2026 · Mit Sorgfalt gestaltet','foot.home':'Startseite','foot.pricing':'Preise','foot.contact':'Kontakt',
       'pp.pages.eyebrow':'Pages-Stil','pp.pages.h3':'Das <em>Pages</em>-Menü testen.','pp.pages.lead':'Entdecken Sie die klare und elegante Präsentation des Pages-Stils — mehrsprachiges Menü, QR-Code, personalisierte visuelle Identität.',
       'pp.pages.l1.label':'Gästemenü (QR-Code)','pp.pages.l1.sub':'Ansicht vom Tisch · Pages-Stil',
+      'pp.pages.l2.label':'Admin-Oberfläche','pp.pages.l2.sub':'Inhaltsverwaltung in Echtzeit',
       'pp.foot':'Demo-Modus — keine Aktionen werden gespeichert.',
       'pp.dyn.eyebrow':'Dynamischer Stil','pp.dyn.h3':'Das <em>dynamische</em> Menü testen.','pp.dyn.lead':'Erleben Sie das immersive Erlebnis mit HD-Fotos, fließenden Animationen und Kategorienavigation.',
       'pp.dyn.l1.label':'Gästemenü','pp.dyn.l1.sub':'Fotos, Animationen, mehrsprachig',
-      'pp.dyn.l2.label':'Admin-Oberfläche','pp.dyn.l2.sub':'Dashboard, Live-Updates'
+      'pp.dyn.l2.label':'Admin-Oberfläche','pp.dyn.l2.sub':'Dashboard, Live-Updates',
+      'pp.bell.eyebrow':'Klingel-Option','pp.bell.h3':'Die Klingel <em>in Aktion sehen.</em>','pp.bell.lead':'Der Gast tippt „Kellner rufen" — Sie erhalten sofort eine Push-Benachrichtigung auf Ihrem Telefon.',
+      'pp.bell.l1.label':'Gästemenü mit Klingel','pp.bell.l1.sub':'Schaltfläche „Kellner rufen" aktiviert',
+      'pp.bell.l2.label':'Service-App (Anrufe)','pp.bell.l2.sub':'Eingehende Anrufe auf dem Personaltelefon',
+      'pp.order.eyebrow':'Bestell-Option','pp.order.h3':'Die Bestellung <em>in Aktion sehen.</em>','pp.order.lead':'Der Gast stellt seine Bestellung zusammen — sie erscheint sofort in der App Ihres Betriebs.',
+      'pp.order.l1.label':'Gästemenü mit Bestellung','pp.order.l1.sub':'Warenkorb und Bestätigung aktiviert',
+      'pp.order.l2.label':'Service-App (Bestellungen)','pp.order.l2.sub':'Live-Bestellverfolgung für Ihr Team',
+      'pp.themes.eyebrow':'Themen-Option','pp.themes.h3':'Wählen Sie Ihre <em>Atmosphäre.</em>','pp.themes.lead':'Entdecken Sie alle verfügbaren visuellen Themen — ändern Sie die Identität Ihres Menüs mit einem Klick.',
+      'pp.themes.l1.label':'Themen-Galerie','pp.themes.l1.sub':'Live-Vorschau jeder Atmosphäre'
     }
   };
 
