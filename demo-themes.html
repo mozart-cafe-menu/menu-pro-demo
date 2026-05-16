@@ -182,9 +182,29 @@ const THEMES = [
   { id:'santorin',        name:'Santorin',          family:'Méditerranée',bg:'#04090f', accent:'#4db8ff' },
 ];
 
-const BASE_URL = 'https://cafe-elysee-dye1.vercel.app/?demo=1&demo_style=simple&demo_bell=0&demo_order=0&demo_theme=';
+const EVENTS = [
+  { id:'none',      name:'Aucun événement', icon:'—' },
+  { id:'christmas', name:'Noël',            icon:'🎄' },
+  { id:'new-year',  name:'Nouvel An',       icon:'🥂' },
+  { id:'easter',    name:'Pâques',          icon:'🌸' },
+  { id:'summer',    name:'Été',             icon:'☀️' },
+  { id:'halloween', name:'Halloween',       icon:'🎃' },
+];
+
+const BASE_URL = 'menu-demo.html?demo_style=simple&demo_bell=0&demo_order=0&demo_theme=';
 
 let activeTheme = 'gold-noir';
+let activeEvent = 'none';
+let _iframeLoaded = false;
+
+function getIframe() { return document.getElementById('preview-frame'); }
+
+function postToMenu(msg) {
+  const iframe = getIframe();
+  if (iframe && iframe.contentWindow) {
+    iframe.contentWindow.postMessage(msg, '*');
+  }
+}
 
 function buildSwatch(theme) {
   return `<div class="theme-swatch" style="background:${theme.bg};">
@@ -202,26 +222,43 @@ function selectTheme(id) {
   // Update sidebar
   document.querySelectorAll('.theme-card').forEach(c => c.classList.toggle('active', c.dataset.themeId === id));
   // Update mobile strip
-  document.querySelectorAll('.mobile-pill').forEach(p => p.classList.toggle('active', p.dataset.themeId === id));
+  document.querySelectorAll('.mobile-pill[data-theme-id]').forEach(p => p.classList.toggle('active', p.dataset.themeId === id));
 
-  // Show loader, reload iframe
-  const loader = document.getElementById('loader');
-  const iframe = document.getElementById('preview-frame');
-  loader.classList.remove('hidden');
-  iframe.onload = () => { setTimeout(() => loader.classList.add('hidden'), 400); };
-  iframe.src = BASE_URL + id;
+  if (_iframeLoaded) {
+    // Live update via postMessage — no reload
+    postToMenu({ type: 'set-theme', theme: id });
+  } else {
+    // First load — use URL
+    const loader = document.getElementById('loader');
+    const iframe = getIframe();
+    loader.classList.remove('hidden');
+    iframe.onload = () => {
+      _iframeLoaded = true;
+      // Re-apply event if any
+      if (activeEvent !== 'none') postToMenu({ type: 'set-event', event: activeEvent });
+      setTimeout(() => loader.classList.add('hidden'), 400);
+    };
+    iframe.src = BASE_URL + id;
+  }
+}
+
+function selectEvent(id) {
+  activeEvent = id;
+  // Update event pills
+  document.querySelectorAll('.event-pill').forEach(p => p.classList.toggle('active', p.dataset.eventId === id));
+  postToMenu({ type: 'set-event', event: id });
 }
 
 function buildSidebar() {
   const sidebar = document.getElementById('sidebar');
-  // Group by family
+  // Group themes by family
   const families = {};
   THEMES.forEach(t => {
     if (!families[t.family]) families[t.family] = [];
     families[t.family].push(t);
   });
 
-  let html = '<div class="sidebar-label">Choisir un thème</div>';
+  let html = '';
   Object.entries(families).forEach(([family, themes]) => {
     html += `<div class="sidebar-label" style="margin-top:10px">${family}</div>`;
     themes.forEach(t => {
@@ -233,17 +270,39 @@ function buildSidebar() {
       </div>`;
     });
   });
+
+  // Events section
+  html += `<div class="sidebar-label" style="margin-top:18px;border-top:1px solid rgba(200,164,78,0.12);padding-top:14px">Événements</div>`;
+  EVENTS.forEach(ev => {
+    html += `<div class="theme-card${ev.id === activeEvent ? ' active' : ''} event-pill" data-event-id="${ev.id}" onclick="selectEvent('${ev.id}')">
+      <div class="theme-swatch" style="background:rgba(200,164,78,0.06);font-size:1.1rem;display:flex;align-items:center;justify-content:center">${ev.icon}</div>
+      <div>
+        <div class="theme-name">${ev.name}</div>
+      </div>
+    </div>`;
+  });
+
   sidebar.innerHTML = html;
 }
 
 function buildMobileStrip() {
   const strip = document.getElementById('mobile-strip');
-  strip.innerHTML = THEMES.map(t => `
+  const themesPills = THEMES.map(t => `
     <button class="mobile-pill${t.id === activeTheme ? ' active' : ''}" data-theme-id="${t.id}" onclick="selectTheme('${t.id}')">
       <span class="mobile-pill-dot" style="background:${t.accent}"></span>
       ${t.name}
     </button>
   `).join('');
+
+  const sep = `<span style="display:inline-flex;align-items:center;padding:0 6px;color:rgba(240,234,216,0.3);font-size:.7rem">|</span>`;
+
+  const eventsPills = EVENTS.map(ev => `
+    <button class="mobile-pill event-pill${ev.id === activeEvent ? ' active' : ''}" data-event-id="${ev.id}" onclick="selectEvent('${ev.id}')">
+      ${ev.icon} ${ev.name}
+    </button>
+  `).join('');
+
+  strip.innerHTML = themesPills + sep + eventsPills;
 }
 
 function init() {
