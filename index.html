@@ -2092,7 +2092,7 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
         <div class="popup-link-meta"><strong data-i18n="pp.pages.l1.label">Menu client (QR code)</strong><small data-i18n="pp.pages.l1.sub">Vue depuis la table · style Pages</small></div>
         <div class="popup-link-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
       </a>
-      <a href="https://cafe-elysee-dye1.vercel.app/admin.html?demo=1" target="_blank" rel="noopener" class="popup-link">
+      <a href="https://cafe-elysee-dye1.vercel.app/admin.html?demo=1" target="_blank" rel="noopener" class="popup-link" id="pp-pages-admin-lnk">
         <div class="popup-link-num">2</div>
         <div class="popup-link-meta"><strong data-i18n="pp.pages.l2.label">Interface admin</strong><small data-i18n="pp.pages.l2.sub">Gestion du contenu en temps réel</small></div>
         <div class="popup-link-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
@@ -2116,7 +2116,7 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
         <div class="popup-link-meta"><strong data-i18n="pp.dyn.l1.label">Menu client</strong><small data-i18n="pp.dyn.l1.sub">Photos, animations, multilingue</small></div>
         <div class="popup-link-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
       </a>
-      <a href="https://cafe-elysee-dye1.vercel.app/admin.html?demo=1" target="_blank" rel="noopener" class="popup-link">
+      <a href="https://cafe-elysee-dye1.vercel.app/admin.html?demo=1" target="_blank" rel="noopener" class="popup-link" id="pp-dyn-admin-lnk">
         <div class="popup-link-num">2</div>
         <div class="popup-link-meta"><strong data-i18n="pp.dyn.l2.label">Interface admin</strong><small data-i18n="pp.dyn.l2.sub">Tableau de bord, mise à jour en direct</small></div>
         <div class="popup-link-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
@@ -2410,6 +2410,9 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
       admPrice.classList.remove('is-visible');
       modifNote.classList.add('is-visible');
     }
+    // Afficher/masquer le lien Interface Admin dans le popup correspondant
+    const adminLnk = document.getElementById(panelIdx===0 ? 'pp-pages-admin-lnk' : 'pp-dyn-admin-lnk');
+    if(adminLnk) adminLnk.style.display = mode==='avec' ? '' : 'none';
   };
 
   // ── Sub-page switcher ──────────────────────────────────
