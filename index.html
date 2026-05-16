@@ -712,6 +712,15 @@ button{background:none;border:none;color:inherit;font:inherit;cursor:pointer}
   margin-top:1px;flex-shrink:0;
 }
 .fo-feat-item .check svg{width:11px;height:11px}
+.fo-feat-item-body{display:flex;flex-direction:column;gap:.45rem}
+.fo-feat-tags{display:flex;flex-wrap:wrap;gap:.4rem}
+.fo-feat-tag{
+  display:inline-flex;align-items:center;gap:.4rem;
+  padding:.28rem .72rem;border-radius:99px;
+  border:1px solid var(--line-2);background:rgba(241,234,217,.03);
+  font-size:.7rem;font-weight:500;color:var(--bone-2);letter-spacing:.02em;
+}
+.fo-feat-tag::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--gold)}
 
 /* ── Pricing card ── */
 .fo-side{
@@ -1516,15 +1525,14 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
   <div class="nav-mid">
     <a href="#avantages" onclick="event.preventDefault();scrollTo_('avantages')" data-i18n="nav.advantages">Avantages</a>
     <a href="#forfaits" onclick="event.preventDefault();scrollTo_('forfaits')" data-i18n="nav.pricing">Tarifs</a>
-    <a href="#contact" onclick="event.preventDefault();scrollTo_('contact')" data-i18n="nav.contact">Contact</a>
   </div>
   <div style="display:flex;align-items:center;gap:.6rem">
     <button id="lang-nav-btn" onclick="toggleLangDropdown()" aria-label="Change language">
       <span class="lnb-flag" id="lnb-flag">🇫🇷</span>
       <span class="lnb-code" id="lnb-code">FR</span>
     </button>
-    <a href="#contact" onclick="event.preventDefault();scrollTo_('contact')" class="nav-cta" data-i18n="nav.start">
-      Démarrer
+    <a href="#contact" onclick="event.preventDefault();scrollTo_('contact')" class="nav-cta" data-i18n="nav.contact">
+      Contact
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
     </a>
   </div>
@@ -1834,11 +1842,11 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
                   </div>
                 </div>
                 <div class="fo-feat-list">
-                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span data-i18n="fo.p0.f1">Menu QR code consulté depuis smartphone, tablette ou ordinateur</span></div>
-                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span data-i18n="fo.p0.f2">Mise en page soignée style carte imprimable — présentation claire et lisible</span></div>
-                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span data-i18n="fo.p0.f3">Multilingue avec détection automatique de la langue du client</span></div>
-                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span data-i18n="fo.p0.f4">Logo, couleurs et identité visuelle de votre établissement</span></div>
-                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span data-i18n="fo.p0.f5">Hébergement, mise en ligne et maintenance inclus — clé en main</span></div>
+                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="fo-feat-item-body"><span data-i18n="fo.p0.f1">Menu QR code consulté depuis smartphone, tablette ou ordinateur</span><div class="fo-feat-tags"><span class="fo-feat-tag" data-i18n="fo.p0.f1.t1">Sans app</span><span class="fo-feat-tag" data-i18n="fo.p0.f1.t2">Tous appareils</span></div></div></div>
+                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="fo-feat-item-body"><span data-i18n="fo.p0.f2">Mise en page soignée style carte imprimable — présentation claire et lisible</span><div class="fo-feat-tags"><span class="fo-feat-tag" data-i18n="fo.p0.f2.t1">12 thèmes</span><span class="fo-feat-tag" data-i18n="fo.p0.f2.t2">Imprimable</span></div></div></div>
+                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="fo-feat-item-body"><span data-i18n="fo.p0.f3">Multilingue avec détection automatique de la langue du client</span><div class="fo-feat-tags"><span class="fo-feat-tag" data-i18n="fo.p0.f3.t1">5 langues</span><span class="fo-feat-tag" data-i18n="fo.p0.f3.t2">Automatique</span></div></div></div>
+                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="fo-feat-item-body"><span data-i18n="fo.p0.f4">Logo, couleurs et identité visuelle de votre établissement</span><div class="fo-feat-tags"><span class="fo-feat-tag" data-i18n="fo.p0.f4.t1">Logo</span><span class="fo-feat-tag" data-i18n="fo.p0.f4.t2">Couleurs perso</span></div></div></div>
+                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="fo-feat-item-body"><span data-i18n="fo.p0.f5">Hébergement, mise en ligne et maintenance inclus — clé en main</span><div class="fo-feat-tags"><span class="fo-feat-tag" data-i18n="fo.p0.f5.t1">Clé en main</span><span class="fo-feat-tag" data-i18n="fo.p0.f5.t2">Maintenance</span></div></div></div>
                 </div>
               </div>
             </div>
@@ -1898,11 +1906,11 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
                   </div>
                 </div>
                 <div class="fo-feat-list">
-                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span data-i18n="fo.p1.f1">Tout ce qui est inclus dans le Style Pages</span></div>
-                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span data-i18n="fo.p1.f2">Photos HD des produits, hero animé, badges Nouveau / Populaire</span></div>
-                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span data-i18n="fo.p1.f3">Animations d'entrée fluides et navigation par catégories</span></div>
-                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span data-i18n="fo.p1.f4">Mode dark / light + thème visuel adapté à votre ambiance</span></div>
-                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span data-i18n="fo.p1.f5">WiFi affiché en page d'accueil, note personnalisée, info établissement</span></div>
+                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="fo-feat-item-body"><span data-i18n="fo.p1.f1">Tout ce qui est inclus dans le Style Pages</span><div class="fo-feat-tags"><span class="fo-feat-tag" data-i18n="fo.p1.f1.t1">Tout inclus</span></div></div></div>
+                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="fo-feat-item-body"><span data-i18n="fo.p1.f2">Photos HD des produits, hero animé, badges Nouveau / Populaire</span><div class="fo-feat-tags"><span class="fo-feat-tag" data-i18n="fo.p1.f2.t1">Photos HD</span><span class="fo-feat-tag" data-i18n="fo.p1.f2.t2">Badges Promo</span></div></div></div>
+                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="fo-feat-item-body"><span data-i18n="fo.p1.f3">Animations d'entrée fluides et navigation par catégories</span><div class="fo-feat-tags"><span class="fo-feat-tag" data-i18n="fo.p1.f3.t1">Animations</span><span class="fo-feat-tag" data-i18n="fo.p1.f3.t2">Par catégories</span></div></div></div>
+                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="fo-feat-item-body"><span data-i18n="fo.p1.f4">Mode dark / light + thème visuel adapté à votre ambiance</span><div class="fo-feat-tags"><span class="fo-feat-tag" data-i18n="fo.p1.f4.t1">Dark</span><span class="fo-feat-tag" data-i18n="fo.p1.f4.t2">Light</span></div></div></div>
+                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><div class="fo-feat-item-body"><span data-i18n="fo.p1.f5">WiFi affiché en page d'accueil, note personnalisée, info établissement</span><div class="fo-feat-tags"><span class="fo-feat-tag" data-i18n="fo.p1.f5.t1">WiFi</span><span class="fo-feat-tag" data-i18n="fo.p1.f5.t2">Personnalisable</span></div></div></div>
                 </div>
               </div>
             </div>
@@ -1928,6 +1936,7 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
             </div>
             <div class="fo-option-name" data-i18n="fo.opt0.name">Option Thèmes</div>
             <div class="fo-option-desc" data-i18n="fo.opt0.desc">Accès à l'ensemble des thèmes visuels premium — changez l'ambiance de votre menu à tout moment.</div>
+            <div class="fo-feat-tags" style="margin-bottom:.85rem"><span class="fo-feat-tag" data-i18n="fo.opt0.t1">20+ thèmes</span><span class="fo-feat-tag" data-i18n="fo.opt0.t2">Instantané</span></div>
             <div class="fo-option-price">
               <div class="fo-option-price-val">
                 <span class="o-amount">20</span>
@@ -1947,6 +1956,7 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
             </div>
             <div class="fo-option-name" data-i18n="fo.opt1.name">Option Sonnette</div>
             <div class="fo-option-desc" data-i18n="fo.opt1.desc">Vos clients appellent le service en un tap depuis leur table. Notification push instantanée sur votre téléphone.</div>
+            <div class="fo-feat-tags" style="margin-bottom:.85rem"><span class="fo-feat-tag" data-i18n="fo.opt1.t1">Push notif</span><span class="fo-feat-tag" data-i18n="fo.opt1.t2">1 tap</span></div>
             <div class="fo-option-price">
               <div class="fo-option-price-val">
                 <span class="o-amount">50</span>
@@ -1966,6 +1976,7 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
             </div>
             <div class="fo-option-name" data-i18n="fo.opt2.name">Option Commande</div>
             <div class="fo-option-desc" data-i18n="fo.opt2.desc">Vos clients commandent directement depuis le menu. Suivi live de la préparation, historique complet côté établissement.</div>
+            <div class="fo-feat-tags" style="margin-bottom:.85rem"><span class="fo-feat-tag" data-i18n="fo.opt2.t1">Suivi live</span><span class="fo-feat-tag" data-i18n="fo.opt2.t2">Historique</span></div>
             <div class="fo-option-price">
               <div class="fo-option-price-val">
                 <span class="o-amount">150</span>
@@ -1995,15 +2006,19 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
     <div class="co-left reveal">
       <div class="eyebrow" style="margin-bottom:1.4rem" data-i18n="co.eyebrow">Nous contacter</div>
       <h2 class="display" data-i18n-html="co.h2">Parlons de<br>votre <em>projet.</em></h2>
-      <p class="lead" data-i18n="co.lead">Une question, un devis, une démo personnalisée — nous répondons rapidement, dans la langue qui vous convient. Choisissez le canal qui vous arrange.</p>
+      <p class="lead" data-i18n="co.lead">Une question, un devis, une démo personnalisée — nous répondons sous 24h, dans la langue qui vous convient. Choisissez le canal qui vous arrange.</p>
       <div class="co-info">
         <div class="co-info-item">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-          <span data-i18n="co.info1">Réponse sous 1 heure en journée</span>
+          <span data-i18n="co.info1">Réponse sous 24h</span>
         </div>
         <div class="co-info-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
-          <span data-i18n="co.info2">Service en français, anglais, grec</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          <span data-i18n="co.info2">Viber &amp; WhatsApp · toutes langues</span>
+        </div>
+        <div class="co-info-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2A19.79 19.79 0 0111.63 19 19.5 19.5 0 015 12.36 19.79 19.79 0 011.11 3.18 2 2 0 013.08 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+          <span data-i18n="co.info3">Téléphone · français ou anglais</span>
         </div>
       </div>
     </div>
@@ -2015,7 +2030,7 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
         </div>
         <div class="co-card-text">
           <strong data-i18n="co.ph.label">Appeler</strong>
-          <small data-i18n="co.ph.sub">+30 694 399 5696 · disponible 9h–22h</small>
+          <small data-i18n="co.ph.sub">+30 694 399 5696 · français ou anglais</small>
         </div>
         <div class="co-card-arrow">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg>
@@ -2028,7 +2043,7 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
         </div>
         <div class="co-card-text">
           <strong data-i18n="co.wa.label">WhatsApp</strong>
-          <small data-i18n="co.wa.sub">+30 694 399 5696 · réponse rapide</small>
+          <small data-i18n="co.wa.sub">+30 694 399 5696 · toutes langues</small>
         </div>
         <div class="co-card-arrow">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg>
@@ -2041,7 +2056,7 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
         </div>
         <div class="co-card-text">
           <strong data-i18n="co.vb.label">Viber</strong>
-          <small data-i18n="co.vb.sub">+30 694 399 5696 · messagerie chiffrée</small>
+          <small data-i18n="co.vb.sub">+30 694 399 5696 · toutes langues</small>
         </div>
         <div class="co-card-arrow">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg>
@@ -2174,11 +2189,20 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
   })();
   function _navH(){const nav=document.getElementById('nav');if(!nav)return 64;return nav.classList.contains('scrolled')?nav.offsetHeight:64;}
   window.scrollTo_=function(id){
-    const sec=document.getElementById(id);
-    if(!sec)return;
-    /* Instantly reveal without transition so elements are at their final position */
+    const sec=document.getElementById(id);if(!sec)return;
     let docTop=0,node=sec;
     while(node){docTop+=node.offsetTop;node=node.offsetParent;}
+    if(id==='avantages'){
+      var ctrl=document.querySelector('.av-controls');
+      if(ctrl){
+        var ctrlBottom=0,cn=ctrl;
+        while(cn){ctrlBottom+=cn.offsetTop;cn=cn.offsetParent;}
+        ctrlBottom+=ctrl.offsetHeight;
+        var byCtrl=ctrlBottom-window.innerHeight+24;
+        window.scrollTo({top:Math.round(Math.max(docTop-_navH(),byCtrl)),behavior:'smooth'});
+        return;
+      }
+    }
     window.scrollTo({top:Math.round(docTop-_navH()),behavior:'smooth'});
   };
 
@@ -2404,26 +2428,34 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
       'fo.h2':'Deux styles,<br><em>toutes les options.</em>','fo.lead':'Choisissez votre style de menu, avec ou sans tableau de bord admin, puis composez votre formule avec les options qui vous correspondent.',
       'fo.style.pages':'Style Pages','fo.style.dynamic':'Style Dynamique','fo.style.options':'Options',
       'fo.p0.feat.h3':'Style Pages','fo.p0.feat.desc':'Un menu élégant, clair et imprimable. Idéal pour les établissements qui veulent une présence digitale soignée sans complexité.',
-      'fo.p0.f1':'Menu QR code consulté depuis smartphone, tablette ou ordinateur','fo.p0.f2':'Mise en page soignée style carte imprimable — présentation claire et lisible','fo.p0.f3':'Multilingue avec détection automatique de la langue du client','fo.p0.f4':'Logo, couleurs et identité visuelle de votre établissement','fo.p0.f5':'Hébergement, mise en ligne et maintenance inclus — clé en main',
+      'fo.p0.f1':'Menu QR code consulté depuis smartphone, tablette ou ordinateur','fo.p0.f1.t1':'Sans app','fo.p0.f1.t2':'Tous appareils',
+      'fo.p0.f2':'Mise en page soignée style carte imprimable — présentation claire et lisible','fo.p0.f2.t1':'12 thèmes','fo.p0.f2.t2':'Imprimable',
+      'fo.p0.f3':'Multilingue avec détection automatique de la langue du client','fo.p0.f3.t1':'5 langues','fo.p0.f3.t2':'Automatique',
+      'fo.p0.f4':'Logo, couleurs et identité visuelle de votre établissement','fo.p0.f4.t1':'Logo','fo.p0.f4.t2':'Couleurs perso',
+      'fo.p0.f5':'Hébergement, mise en ligne et maintenance inclus — clé en main','fo.p0.f5.t1':'Clé en main','fo.p0.f5.t2':'Maintenance',
       'fo.p0.side.label':'Style Pages','fo.p0.side.tag':'Création unique · mis en ligne en 1 à 2 semaines',
       'fo.admin.sans':'Sans admin','fo.admin.avec':'Avec admin',
       'fo.p0.admin.price.label':'/ mois · gérez votre menu vous-même',
       'fo.p0.modif.html':'<strong>Modifications à la demande :</strong><br>Contenu (produits, prix…) — <strong style="color:var(--bone)">40 €</strong><br>Structure ou design — <strong style="color:var(--bone)">50 €</strong>',
       'fo.btn.test':'Tester la démo','fo.btn.contact':'Nous contacter','fo.btn.demo':'Voir un exemple','fo.btn.choose':'Choisir',
       'fo.p1.feat.h3':'Style Dynamique','fo.p1.feat.desc':'Un menu vivant avec photos, animations et mise à jour instantanée. L\'expérience la plus immersive pour vos clients.',
-      'fo.p1.f1':'Tout ce qui est inclus dans le Style Pages','fo.p1.f2':'Photos HD des produits, hero animé, badges Nouveau / Populaire','fo.p1.f3':'Animations d\'entrée fluides et navigation par catégories','fo.p1.f4':'Mode dark / light + thème visuel adapté à votre ambiance','fo.p1.f5':'WiFi affiché en page d\'accueil, note personnalisée, info établissement',
+      'fo.p1.f1':'Tout ce qui est inclus dans le Style Pages','fo.p1.f1.t1':'Tout inclus',
+      'fo.p1.f2':'Photos HD des produits, hero animé, badges Nouveau / Populaire','fo.p1.f2.t1':'Photos HD','fo.p1.f2.t2':'Badges Promo',
+      'fo.p1.f3':'Animations d\'entrée fluides et navigation par catégories','fo.p1.f3.t1':'Animations','fo.p1.f3.t2':'Par catégories',
+      'fo.p1.f4':'Mode dark / light + thème visuel adapté à votre ambiance','fo.p1.f4.t1':'Dark','fo.p1.f4.t2':'Light',
+      'fo.p1.f5':'WiFi affiché en page d\'accueil, note personnalisée, info établissement','fo.p1.f5.t1':'WiFi','fo.p1.f5.t2':'Personnalisable',
       'fo.p1.side.label':'Style Dynamique','fo.p1.side.tag':'Création unique · mis en ligne en 1 à 2 semaines',
       'fo.p1.admin.price.label':'/ mois · gérez votre menu vous-même',
       'fo.p1.modif.html':'<strong>Modifications à la demande :</strong><br>Contenu (produits, prix…) — <strong style="color:var(--bone)">80 €</strong><br>Structure ou design — <strong style="color:var(--bone)">100 €</strong>',
       'fo.opts.h3':'Options <em>à la carte</em>','fo.opts.p':'Ajoutez les fonctionnalités qui correspondent à votre flux de service — indépendamment du style choisi.',
-      'fo.opt0.name':'Option Thèmes','fo.opt0.desc':'Accès à l\'ensemble des thèmes visuels premium — changez l\'ambiance de votre menu à tout moment.',
-      'fo.opt1.name':'Option Sonnette','fo.opt1.desc':'Vos clients appellent le service en un tap depuis leur table. Notification push instantanée sur votre téléphone.',
-      'fo.opt2.name':'Option Commande','fo.opt2.desc':'Vos clients commandent directement depuis le menu. Suivi live de la préparation, historique complet côté établissement.',
-      'co.eyebrow':'Nous contacter','co.h2':'Parlons de<br>votre <em>projet.</em>','co.lead':'Une question, un devis, une démo personnalisée — nous répondons rapidement, dans la langue qui vous convient. Choisissez le canal qui vous arrange.',
-      'co.info1':'Réponse sous 1 heure en journée','co.info2':'Service en français, anglais, grec',
-      'co.ph.label':'Appeler','co.ph.sub':'+30 694 399 5696 · disponible 9h–22h',
-      'co.wa.label':'WhatsApp','co.wa.sub':'+30 694 399 5696 · réponse rapide',
-      'co.vb.label':'Viber','co.vb.sub':'+30 694 399 5696 · messagerie chiffrée',
+      'fo.opt0.name':'Option Thèmes','fo.opt0.desc':'Accès à l\'ensemble des thèmes visuels premium — changez l\'ambiance de votre menu à tout moment.','fo.opt0.t1':'20+ thèmes','fo.opt0.t2':'Instantané',
+      'fo.opt1.name':'Option Sonnette','fo.opt1.desc':'Vos clients appellent le service en un tap depuis leur table. Notification push instantanée sur votre téléphone.','fo.opt1.t1':'Push notif','fo.opt1.t2':'1 tap',
+      'fo.opt2.name':'Option Commande','fo.opt2.desc':'Vos clients commandent directement depuis le menu. Suivi live de la préparation, historique complet côté établissement.','fo.opt2.t1':'Suivi live','fo.opt2.t2':'Historique',
+      'co.eyebrow':'Nous contacter','co.h2':'Parlons de<br>votre <em>projet.</em>','co.lead':'Une question, un devis, une démo personnalisée — nous répondons sous 24h, dans la langue qui vous convient. Choisissez le canal qui vous arrange.',
+      'co.info1':'Réponse sous 24h','co.info2':'Viber & WhatsApp · toutes langues','co.info3':'Téléphone · français ou anglais',
+      'co.ph.label':'Appeler','co.ph.sub':'+30 694 399 5696 · français ou anglais',
+      'co.wa.label':'WhatsApp','co.wa.sub':'+30 694 399 5696 · toutes langues',
+      'co.vb.label':'Viber','co.vb.sub':'+30 694 399 5696 · toutes langues',
       'foot.copy':'© 2026 · Conçu avec exigence','foot.home':'Accueil','foot.pricing':'Tarifs','foot.contact':'Contact',
       'pp.pages.eyebrow':'Style Pages','pp.pages.h3':'Tester le menu <em>Pages.</em>','pp.pages.lead':'Explorez la présentation claire et élégante du Style Pages — menu multilingue, QR code, identité visuelle personnalisée.',
       'pp.pages.l1.label':'Menu client (QR code)','pp.pages.l1.sub':'Vue depuis la table · style Pages',
@@ -2433,7 +2465,7 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
       'pp.dyn.l2.label':'Interface admin (avec admin)','pp.dyn.l2.sub':'Tableau de bord, mise à jour en direct'
     },
     en:{
-      'nav.advantages':'Benefits','nav.pricing':'Pricing','nav.contact':'Contact','nav.start':'Get started',
+      'nav.advantages':'Benefits','nav.pricing':'Pricing','nav.contact':'Contact','nav.start':'Contact',
       'hero.eyebrow':'Create an elegant menu instantly accessible via QR code',
       'hero.title.1':'Elegance, Comfort,','hero.title.2':'Security, Speed,','hero.title.3':'<em>Efficiency &amp; Hygiene.</em>',
       'hero.lead':'The customer scans the QR Code at their table and instantly accesses an elegant menu directly on their phone, with no wait and no contact with paper menus handled by other customers.',
@@ -2450,26 +2482,34 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
       'fo.h2':'Two styles,<br><em>all the options.</em>','fo.lead':'Choose your menu style, with or without an admin dashboard, then build your package with the options that suit you.',
       'fo.style.pages':'Pages Style','fo.style.dynamic':'Dynamic Style','fo.style.options':'Options',
       'fo.p0.feat.h3':'Pages Style','fo.p0.feat.desc':'An elegant, clear and printable menu. Ideal for establishments that want a polished digital presence without complexity.',
-      'fo.p0.f1':'QR code menu accessible on smartphone, tablet or computer','fo.p0.f2':'Clean printable card layout — clear and readable presentation','fo.p0.f3':'Multilingual with automatic detection of the customer\'s language','fo.p0.f4':'Your logo, colors and visual identity','fo.p0.f5':'Hosting, deployment and maintenance included — turnkey',
+      'fo.p0.f1':'QR code menu accessible on smartphone, tablet or computer','fo.p0.f1.t1':'No app','fo.p0.f1.t2':'All devices',
+      'fo.p0.f2':'Clean printable card layout — clear and readable presentation','fo.p0.f2.t1':'12 themes','fo.p0.f2.t2':'Printable',
+      'fo.p0.f3':'Multilingual with automatic detection of the customer\'s language','fo.p0.f3.t1':'5 languages','fo.p0.f3.t2':'Automatic',
+      'fo.p0.f4':'Your logo, colors and visual identity','fo.p0.f4.t1':'Logo','fo.p0.f4.t2':'Custom colors',
+      'fo.p0.f5':'Hosting, deployment and maintenance included — turnkey','fo.p0.f5.t1':'Turnkey','fo.p0.f5.t2':'Maintenance',
       'fo.p0.side.label':'Pages Style','fo.p0.side.tag':'One-time creation · live in 1–2 weeks',
       'fo.admin.sans':'No admin','fo.admin.avec':'With admin',
       'fo.p0.admin.price.label':'/ month · manage your menu yourself',
       'fo.p0.modif.html':'<strong>On-demand updates:</strong><br>Content (products, prices…) — <strong style="color:var(--bone)">€40</strong><br>Layout or design — <strong style="color:var(--bone)">€50</strong>',
       'fo.btn.test':'Try the demo','fo.btn.contact':'Contact us','fo.btn.demo':'See an example','fo.btn.choose':'Choose',
       'fo.p1.feat.h3':'Dynamic Style','fo.p1.feat.desc':'A living menu with photos, animations and instant updates. The most immersive experience for your customers.',
-      'fo.p1.f1':'Everything included in Pages Style','fo.p1.f2':'HD product photos, animated hero, New / Popular badges','fo.p1.f3':'Smooth entry animations and category navigation','fo.p1.f4':'Dark / light mode + visual theme tailored to your ambiance','fo.p1.f5':'WiFi displayed on home screen, custom note, venue info',
+      'fo.p1.f1':'Everything included in Pages Style','fo.p1.f1.t1':'All included',
+      'fo.p1.f2':'HD product photos, animated hero, New / Popular badges','fo.p1.f2.t1':'HD Photos','fo.p1.f2.t2':'Promo Badges',
+      'fo.p1.f3':'Smooth entry animations and category navigation','fo.p1.f3.t1':'Animations','fo.p1.f3.t2':'By category',
+      'fo.p1.f4':'Dark / light mode + visual theme tailored to your ambiance','fo.p1.f4.t1':'Dark','fo.p1.f4.t2':'Light',
+      'fo.p1.f5':'WiFi displayed on home screen, custom note, venue info','fo.p1.f5.t1':'WiFi','fo.p1.f5.t2':'Customizable',
       'fo.p1.side.label':'Dynamic Style','fo.p1.side.tag':'One-time creation · live in 1–2 weeks',
       'fo.p1.admin.price.label':'/ month · manage your menu yourself',
       'fo.p1.modif.html':'<strong>On-demand updates:</strong><br>Content (products, prices…) — <strong style="color:var(--bone)">€80</strong><br>Layout or design — <strong style="color:var(--bone)">€100</strong>',
       'fo.opts.h3':'À la carte <em>options</em>','fo.opts.p':'Add the features that match your service flow — regardless of the style chosen.',
-      'fo.opt0.name':'Themes Option','fo.opt0.desc':'Access to all premium visual themes — change your menu\'s look and feel at any time.',
-      'fo.opt1.name':'Bell Option','fo.opt1.desc':'Customers call the waiter with a single tap from their table. Instant push notification on your phone.',
-      'fo.opt2.name':'Order Option','fo.opt2.desc':'Customers order directly from the menu. Live preparation tracking, complete history on the venue side.',
-      'co.eyebrow':'Contact us','co.h2':'Let\'s talk about<br>your <em>project.</em>','co.lead':'A question, a quote, a personalized demo — we respond quickly, in the language that suits you. Choose the channel that works for you.',
-      'co.info1':'Response within 1 hour during business hours','co.info2':'Service in French, English, Greek',
-      'co.ph.label':'Call','co.ph.sub':'+30 694 399 5696 · available 9am–10pm',
-      'co.wa.label':'WhatsApp','co.wa.sub':'+30 694 399 5696 · quick response',
-      'co.vb.label':'Viber','co.vb.sub':'+30 694 399 5696 · encrypted messaging',
+      'fo.opt0.name':'Themes Option','fo.opt0.desc':'Access to all premium visual themes — change your menu\'s look and feel at any time.','fo.opt0.t1':'20+ themes','fo.opt0.t2':'Instant',
+      'fo.opt1.name':'Bell Option','fo.opt1.desc':'Customers call the waiter with a single tap from their table. Instant push notification on your phone.','fo.opt1.t1':'Push notif','fo.opt1.t2':'1 tap',
+      'fo.opt2.name':'Order Option','fo.opt2.desc':'Customers order directly from the menu. Live preparation tracking, complete history on the venue side.','fo.opt2.t1':'Live tracking','fo.opt2.t2':'History',
+      'co.eyebrow':'Contact us','co.h2':'Let\'s talk about<br>your <em>project.</em>','co.lead':'A question, a quote, a personalized demo — we respond within 24h, in the language that suits you. Choose the channel that works for you.',
+      'co.info1':'Response within 24h','co.info2':'Viber & WhatsApp · all languages','co.info3':'Phone · French or English only',
+      'co.ph.label':'Call','co.ph.sub':'+30 694 399 5696 · French or English',
+      'co.wa.label':'WhatsApp','co.wa.sub':'+30 694 399 5696 · all languages',
+      'co.vb.label':'Viber','co.vb.sub':'+30 694 399 5696 · all languages',
       'foot.copy':'© 2026 · Crafted with precision','foot.home':'Home','foot.pricing':'Pricing','foot.contact':'Contact',
       'pp.pages.eyebrow':'Pages Style','pp.pages.h3':'Try the <em>Pages</em> menu.','pp.pages.lead':'Explore the clean and elegant Pages Style presentation — multilingual menu, QR code, personalized visual identity.',
       'pp.pages.l1.label':'Customer menu (QR code)','pp.pages.l1.sub':'View from the table · Pages style',
@@ -2479,7 +2519,7 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
       'pp.dyn.l2.label':'Admin interface (with admin)','pp.dyn.l2.sub':'Dashboard, live updates'
     },
     el:{
-      'nav.advantages':'Πλεονεκτήματα','nav.pricing':'Τιμές','nav.contact':'Επικοινωνία','nav.start':'Ξεκινήστε',
+      'nav.advantages':'Πλεονεκτήματα','nav.pricing':'Τιμές','nav.contact':'Επικοινωνία','nav.start':'Επικοινωνία',
       'hero.eyebrow':'Δημιουργήστε ένα κομψό μενού προσβάσιμο άμεσα μέσω QR code',
       'hero.title.1':'Κομψότητα, Άνεση,','hero.title.2':'Ασφάλεια, Ταχύτητα,','hero.title.3':'<em>Αποδοτικότητα και Υγιεινή.</em>',
       'hero.lead':'Ο πελάτης σαρώνει τον κωδικό QR του τραπεζιού του και αποκτά άμεση πρόσβαση σε ένα κομψό μενού απευθείας στο τηλέφωνό του, χωρίς αναμονή και χωρίς επαφή με χάρτινα μενού που χρησιμοποιήθηκαν από άλλους πελάτες.',
@@ -2497,26 +2537,34 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
       'fo.h2':'Δύο στυλ,<br><em>όλες οι επιλογές.</em>','fo.lead':'Επιλέξτε το στυλ μενού σας, με ή χωρίς πίνακα ελέγχου διαχειριστή, και συνθέστε το πακέτο σας με τις επιλογές που σας ταιριάζουν.',
       'fo.style.pages':'Στυλ Pages','fo.style.dynamic':'Στυλ Dynamic','fo.style.options':'Επιλογές',
       'fo.p0.feat.h3':'Στυλ Pages','fo.p0.feat.desc':'Ένα κομψό, σαφές και εκτυπώσιμο μενού. Ιδανικό για επιχειρήσεις που θέλουν ψηφιακή παρουσία χωρίς πολυπλοκότητα.',
-      'fo.p0.f1':'Πρόσβαση στο μενού QR code από smartphone, tablet ή υπολογιστή','fo.p0.f2':'Επιμελημένη διάταξη τύπου εκτυπώσιμου καταλόγου — καθαρή και ευανάγνωστη','fo.p0.f3':'Πολύγλωσσο με αυτόματη ανίχνευση γλώσσας πελάτη','fo.p0.f4':'Λογότυπο, χρώματα και οπτική ταυτότητα της επιχείρησής σας','fo.p0.f5':'Φιλοξενία, ανέβασμα και συντήρηση συμπεριλαμβάνονται — έτοιμο προς χρήση',
+      'fo.p0.f1':'Μενού QR code προσβάσιμο από smartphone, tablet ή υπολογιστή','fo.p0.f1.t1':'Χωρίς app','fo.p0.f1.t2':'Όλες οι συσκευές',
+      'fo.p0.f2':'Καλαίσθητη διάταξη στυλ εκτυπώσιμης κάρτας — σαφής και ευανάγνωστη παρουσίαση','fo.p0.f2.t1':'12 θέματα','fo.p0.f2.t2':'Εκτυπώσιμο',
+      'fo.p0.f3':'Πολύγλωσσο με αυτόματη ανίχνευση γλώσσας πελάτη','fo.p0.f3.t1':'5 γλώσσες','fo.p0.f3.t2':'Αυτόματο',
+      'fo.p0.f4':'Λογότυπο, χρώματα και οπτική ταυτότητα της επιχείρησής σας','fo.p0.f4.t1':'Λογότυπο','fo.p0.f4.t2':'Χρώματα',
+      'fo.p0.f5':'Φιλοξενία, ανάρτηση και συντήρηση συμπεριλαμβάνονται — έτοιμο προς χρήση','fo.p0.f5.t1':'Έτοιμο','fo.p0.f5.t2':'Συντήρηση',
       'fo.p0.side.label':'Στυλ Pages','fo.p0.side.tag':'Μοναδική δημιουργία · σε λειτουργία σε 1–2 εβδομάδες',
       'fo.admin.sans':'Χωρίς admin','fo.admin.avec':'Με admin',
       'fo.p0.admin.price.label':'/ μήνα · διαχειριστείτε το μενού σας μόνοι σας',
       'fo.p0.modif.html':'<strong>Τροποποιήσεις κατόπιν αιτήματος:</strong><br>Περιεχόμενο (προϊόντα, τιμές…) — <strong style="color:var(--bone)">40 €</strong><br>Δομή ή σχεδιασμός — <strong style="color:var(--bone)">50 €</strong>',
       'fo.btn.test':'Δοκιμάστε το demo','fo.btn.contact':'Επικοινωνήστε μαζί μας','fo.btn.demo':'Δείτε παράδειγμα','fo.btn.choose':'Επιλέξτε',
       'fo.p1.feat.h3':'Στυλ Dynamic','fo.p1.feat.desc':'Ένα ζωντανό μενού με φωτογραφίες, κινήσεις και άμεση ενημέρωση. Η πιο καθηλωτική εμπειρία για τους πελάτες σας.',
-      'fo.p1.f1':'Όλα όσα περιλαμβάνονται στο Στυλ Pages','fo.p1.f2':'HD φωτογραφίες προϊόντων, κινούμενο hero, σήματα Νέο / Δημοφιλές','fo.p1.f3':'Ομαλές κινήσεις εισόδου και πλοήγηση ανά κατηγορία','fo.p1.f4':'Σκοτεινή / φωτεινή λειτουργία + οπτικό θέμα στο στυλ σας','fo.p1.f5':'WiFi στην αρχική σελίδα, προσωποποιημένη σημείωση, πληροφορίες καταστήματος',
+      'fo.p1.f1':'Όλα όσα περιλαμβάνονται στο Στυλ Pages','fo.p1.f1.t1':'Όλα συμπεριλαμβάνονται',
+      'fo.p1.f2':'Φωτογραφίες HD προϊόντων, κινούμενο hero, σήμανση Νέο / Δημοφιλές','fo.p1.f2.t1':'Φωτ. HD','fo.p1.f2.t2':'Σήματα Promo',
+      'fo.p1.f3':'Ομαλές εισαγωγικές κινήσεις και πλοήγηση ανά κατηγορία','fo.p1.f3.t1':'Animations','fo.p1.f3.t2':'Ανά κατηγορία',
+      'fo.p1.f4':'Σκοτεινή / φωτεινή λειτουργία + οπτικό θέμα προσαρμοσμένο στην ατμόσφαιρά σας','fo.p1.f4.t1':'Dark','fo.p1.f4.t2':'Light',
+      'fo.p1.f5':'WiFi στην αρχική σελίδα, προσαρμοσμένη σημείωση, πληροφορίες επιχείρησης','fo.p1.f5.t1':'WiFi','fo.p1.f5.t2':'Προσαρμόσιμο',
       'fo.p1.side.label':'Στυλ Dynamic','fo.p1.side.tag':'Μοναδική δημιουργία · σε λειτουργία σε 1–2 εβδομάδες',
       'fo.p1.admin.price.label':'/ μήνα · διαχειριστείτε το μενού σας μόνοι σας',
       'fo.p1.modif.html':'<strong>Τροποποιήσεις κατόπιν αιτήματος:</strong><br>Περιεχόμενο (προϊόντα, τιμές…) — <strong style="color:var(--bone)">80 €</strong><br>Δομή ή σχεδιασμός — <strong style="color:var(--bone)">100 €</strong>',
       'fo.opts.h3':'Επιλογές <em>à la carte</em>','fo.opts.p':'Προσθέστε τις λειτουργίες που ταιριάζουν στη ροή εξυπηρέτησής σας — ανεξάρτητα από το στυλ που επιλέξατε.',
-      'fo.opt0.name':'Επιλογή Θεμάτων','fo.opt0.desc':'Πρόσβαση σε όλα τα premium οπτικά θέματα — αλλάξτε την εμφάνιση του μενού σας οποιαδήποτε στιγμή.',
-      'fo.opt1.name':'Επιλογή Κουδουνιού','fo.opt1.desc':'Οι πελάτες καλούν την εξυπηρέτηση με ένα tap από το τραπέζι τους. Άμεση ειδοποίηση στο κινητό σας.',
-      'fo.opt2.name':'Επιλογή Παραγγελίας','fo.opt2.desc':'Οι πελάτες παραγγέλνουν απευθείας από το μενού. Live παρακολούθηση παρασκευής, πλήρες ιστορικό.',
-      'co.eyebrow':'Επικοινωνία','co.h2':'Ας μιλήσουμε για<br>το <em>έργο σας.</em>','co.lead':'Μια ερώτηση, μια προσφορά, μια εξατομικευμένη επίδειξη — απαντάμε γρήγορα, στη γλώσσα που σας εξυπηρετεί. Επιλέξτε το κανάλι που σας βολεύει.',
-      'co.info1':'Απάντηση εντός 1 ώρας κατά τη διάρκεια της ημέρας','co.info2':'Εξυπηρέτηση στα γαλλικά, αγγλικά, ελληνικά',
-      'co.ph.label':'Κλήση','co.ph.sub':'+30 694 399 5696 · διαθέσιμο 9:00–22:00',
-      'co.wa.label':'WhatsApp','co.wa.sub':'+30 694 399 5696 · γρήγορη απάντηση',
-      'co.vb.label':'Viber','co.vb.sub':'+30 694 399 5696 · κρυπτογραφημένη αλληλογραφία',
+      'fo.opt0.name':'Επιλογή Θεμάτων','fo.opt0.desc':'Πρόσβαση σε όλα τα premium οπτικά θέματα — αλλάξτε την εμφάνιση του μενού σας οποιαδήποτε στιγμή.','fo.opt0.t1':'20+ θέματα','fo.opt0.t2':'Άμεσα',
+      'fo.opt1.name':'Επιλογή Κουδουνιού','fo.opt1.desc':'Οι πελάτες καλούν την εξυπηρέτηση με ένα tap από το τραπέζι τους. Άμεση ειδοποίηση στο κινητό σας.','fo.opt1.t1':'Push notif','fo.opt1.t2':'1 tap',
+      'fo.opt2.name':'Επιλογή Παραγγελίας','fo.opt2.desc':'Οι πελάτες παραγγέλνουν απευθείας από το μενού. Live παρακολούθηση παρασκευής, πλήρες ιστορικό.','fo.opt2.t1':'Live','fo.opt2.t2':'Ιστορικό',
+      'co.eyebrow':'Επικοινωνία','co.h2':'Ας μιλήσουμε για<br>το <em>έργο σας.</em>','co.lead':'Μια ερώτηση, μια προσφορά, μια εξατομικευμένη επίδειξη — απαντάμε εντός 24 ωρών, στη γλώσσα που σας εξυπηρετεί.',
+      'co.info1':'Απάντηση εντός 24 ωρών','co.info2':'Viber & WhatsApp · όλες οι γλώσσες','co.info3':'Τηλέφωνο · Γαλλικά ή Αγγλικά',
+      'co.ph.label':'Κλήση','co.ph.sub':'+30 694 399 5696 · Γαλλικά ή Αγγλικά',
+      'co.wa.label':'WhatsApp','co.wa.sub':'+30 694 399 5696 · όλες οι γλώσσες',
+      'co.vb.label':'Viber','co.vb.sub':'+30 694 399 5696 · όλες οι γλώσσες',
       'foot.copy':'© 2026 · Σχεδιασμένο με επιμέλεια','foot.home':'Αρχική','foot.pricing':'Τιμές','foot.contact':'Επικοινωνία',
       'pp.pages.eyebrow':'Στυλ Pages','pp.pages.h3':'Δοκιμάστε το μενού <em>Pages.</em>','pp.pages.lead':'Εξερευνήστε την καθαρή και κομψή παρουσίαση του Στυλ Pages — πολύγλωσσο μενού, QR code, εξατομικευμένη οπτική ταυτότητα.',
       'pp.pages.l1.label':'Μενού πελατών (QR code)','pp.pages.l1.sub':'Προβολή από το τραπέζι · στυλ Pages',
@@ -2526,7 +2574,7 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
       'pp.dyn.l2.label':'Διεπαφή διαχειριστή','pp.dyn.l2.sub':'Πίνακας ελέγχου, ζωντανή ενημέρωση'
     },
     ar:{
-      'nav.advantages':'المميزات','nav.pricing':'الأسعار','nav.contact':'اتصل بنا','nav.start':'ابدأ الآن',
+      'nav.advantages':'المميزات','nav.pricing':'الأسعار','nav.contact':'اتصل بنا','nav.start':'تواصل',
       'hero.eyebrow':'أنشئ قائمة أنيقة يمكن الوصول إليها فوراً عبر رمز QR',
       'hero.title.1':'أناقة، راحة،','hero.title.2':'أمان، سرعة،','hero.title.3':'<em>كفاءة ونظافة.</em>',
       'hero.lead':'يمسح الزبون رمز QR الخاص بطاولته ويصل فوراً إلى قائمة أنيقة على هاتفه، دون انتظار ودون لمس قوائم ورقية تداولها زبائن آخرون.',
@@ -2543,26 +2591,34 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
       'fo.h2':'أسلوبان،<br><em>جميع الخيارات.</em>','fo.lead':'اختر أسلوب قائمتك، مع أو بدون لوحة تحكم المشرف، ثم أنشئ حزمتك بالخيارات المناسبة لك.',
       'fo.style.pages':'أسلوب Pages','fo.style.dynamic':'أسلوب Dynamic','fo.style.options':'خيارات',
       'fo.p0.feat.h3':'أسلوب Pages','fo.p0.feat.desc':'قائمة أنيقة وواضحة وقابلة للطباعة. مثالية للمؤسسات التي تريد حضوراً رقمياً دون تعقيد.',
-      'fo.p0.f1':'قائمة QR code يمكن الوصول إليها من هاتف ذكي أو جهاز لوحي أو كمبيوتر','fo.p0.f2':'تخطيط أنيق بأسلوب قائمة قابلة للطباعة — واضح وسهل القراءة','fo.p0.f3':'متعدد اللغات مع كشف تلقائي للغة العميل','fo.p0.f4':'شعارك وألوانك وهويتك البصرية','fo.p0.f5':'استضافة ونشر وصيانة مشمولة — جاهز للاستخدام',
+      'fo.p0.f1':'قائمة QR code متاحة على الهاتف الذكي والجهاز اللوحي والكمبيوتر','fo.p0.f1.t1':'بدون تطبيق','fo.p0.f1.t2':'جميع الأجهزة',
+      'fo.p0.f2':'تخطيط أنيق بأسلوب البطاقة القابلة للطباعة — عرض واضح ومقروء','fo.p0.f2.t1':'12 ثيم','fo.p0.f2.t2':'قابل للطباعة',
+      'fo.p0.f3':'متعدد اللغات مع اكتشاف تلقائي للغة العميل','fo.p0.f3.t1':'5 لغات','fo.p0.f3.t2':'تلقائي',
+      'fo.p0.f4':'شعارك وألوانك وهويتك البصرية','fo.p0.f4.t1':'شعار','fo.p0.f4.t2':'ألوان مخصصة',
+      'fo.p0.f5':'الاستضافة والنشر والصيانة مشمولة — جاهز للاستخدام','fo.p0.f5.t1':'جاهز','fo.p0.f5.t2':'صيانة',
       'fo.p0.side.label':'أسلوب Pages','fo.p0.side.tag':'إنشاء لمرة واحدة · يعمل خلال 1–2 أسبوع',
       'fo.admin.sans':'بدون admin','fo.admin.avec':'مع admin',
       'fo.p0.admin.price.label':'/ شهر · أدر قائمتك بنفسك',
       'fo.p0.modif.html':'<strong>تعديلات عند الطلب:</strong><br>المحتوى (المنتجات، الأسعار…) — <strong style="color:var(--bone)">40 €</strong><br>الهيكل أو التصميم — <strong style="color:var(--bone)">50 €</strong>',
       'fo.btn.test':'جرّب النسخة التجريبية','fo.btn.contact':'تواصل معنا','fo.btn.demo':'شاهد مثالاً','fo.btn.choose':'اختر',
       'fo.p1.feat.h3':'أسلوب Dynamic','fo.p1.feat.desc':'قائمة حية بصور وحركات وتحديث فوري. التجربة الأكثر انغماساً لعملائك.',
-      'fo.p1.f1':'كل ما هو مشمول في أسلوب Pages','fo.p1.f2':'صور HD للمنتجات، hero متحرك، شارات جديد / شائع','fo.p1.f3':'حركات دخول سلسة وتنقل حسب الفئات','fo.p1.f4':'وضع مظلم / فاتح + ثيم بصري يناسب أجواءك','fo.p1.f5':'WiFi في الصفحة الرئيسية، ملاحظة مخصصة، معلومات المؤسسة',
+      'fo.p1.f1':'كل ما هو مشمول في أسلوب Pages','fo.p1.f1.t1':'الكل مشمول',
+      'fo.p1.f2':'صور HD للمنتجات، hero متحرك، شارات جديد / شائع','fo.p1.f2.t1':'صور HD','fo.p1.f2.t2':'شارات Promo',
+      'fo.p1.f3':'حركات دخول سلسة وتنقل حسب الفئات','fo.p1.f3.t1':'Animations','fo.p1.f3.t2':'حسب الفئات',
+      'fo.p1.f4':'وضع مظلم / فاتح + ثيم بصري يناسب أجواءك','fo.p1.f4.t1':'Dark','fo.p1.f4.t2':'Light',
+      'fo.p1.f5':'WiFi في الصفحة الرئيسية، ملاحظة مخصصة، معلومات المؤسسة','fo.p1.f5.t1':'WiFi','fo.p1.f5.t2':'مخصص',
       'fo.p1.side.label':'أسلوب Dynamic','fo.p1.side.tag':'إنشاء لمرة واحدة · يعمل خلال 1–2 أسبوع',
       'fo.p1.admin.price.label':'/ شهر · أدر قائمتك بنفسك',
       'fo.p1.modif.html':'<strong>تعديلات عند الطلب:</strong><br>المحتوى (المنتجات، الأسعار…) — <strong style="color:var(--bone)">80 €</strong><br>الهيكل أو التصميم — <strong style="color:var(--bone)">100 €</strong>',
       'fo.opts.h3':'خيارات <em>à la carte</em>','fo.opts.p':'أضف الميزات التي تناسب تدفق خدمتك — بغض النظر عن الأسلوب المختار.',
-      'fo.opt0.name':'خيار الثيمات','fo.opt0.desc':'الوصول إلى جميع الثيمات البصرية المتميزة — غيّر مظهر قائمتك في أي وقت.',
-      'fo.opt1.name':'خيار الجرس','fo.opt1.desc':'يطلب العملاء الخدمة بنقرة واحدة من طاولتهم. إشعار فوري على هاتفك.',
-      'fo.opt2.name':'خيار الطلب','fo.opt2.desc':'يطلب العملاء مباشرة من القائمة. متابعة مباشرة للتحضير، سجل كامل من جانب المؤسسة.',
-      'co.eyebrow':'تواصل معنا','co.h2':'لنتحدث عن<br><em>مشروعك.</em>','co.lead':'سؤال، عرض سعر، عرض توضيحي مخصص — نرد بسرعة، بالغة التي تناسبك. اختر القناة التي تريحك.',
-      'co.info1':'رد خلال ساعة في أوقات العمل','co.info2':'خدمة بالفرنسية والإنجليزية واليونانية',
-      'co.ph.label':'اتصل','co.ph.sub':'+30 694 399 5696 · متاح 9:00–22:00',
-      'co.wa.label':'WhatsApp','co.wa.sub':'+30 694 399 5696 · رد سريع',
-      'co.vb.label':'Viber','co.vb.sub':'+30 694 399 5696 · مراسلة مشفرة',
+      'fo.opt0.name':'خيار الثيمات','fo.opt0.desc':'الوصول إلى جميع الثيمات البصرية المتميزة — غيّر مظهر قائمتك في أي وقت.','fo.opt0.t1':'20+ ثيم','fo.opt0.t2':'فوري',
+      'fo.opt1.name':'خيار الجرس','fo.opt1.desc':'يطلب العملاء الخدمة بنقرة واحدة من طاولتهم. إشعار فوري على هاتفك.','fo.opt1.t1':'Push notif','fo.opt1.t2':'نقرة واحدة',
+      'fo.opt2.name':'خيار الطلب','fo.opt2.desc':'يطلب العملاء مباشرة من القائمة. متابعة مباشرة للتحضير، سجل كامل.','fo.opt2.t1':'متابعة مباشرة','fo.opt2.t2':'سجل',
+      'co.eyebrow':'تواصل معنا','co.h2':'لنتحدث عن<br><em>مشروعك.</em>','co.lead':'سؤال، عرض سعر، عرض توضيحي مخصص — نرد خلال 24 ساعة، بالغة التي تناسبك.',
+      'co.info1':'رد خلال 24 ساعة','co.info2':'Viber وWhatsApp · جميع اللغات','co.info3':'الهاتف · بالفرنسية أو الإنجليزية فقط',
+      'co.ph.label':'اتصل','co.ph.sub':'+30 694 399 5696 · بالفرنسية أو الإنجليزية',
+      'co.wa.label':'WhatsApp','co.wa.sub':'+30 694 399 5696 · جميع اللغات',
+      'co.vb.label':'Viber','co.vb.sub':'+30 694 399 5696 · جميع اللغات',
       'foot.copy':'© 2026 · مصمم بعناية','foot.home':'الرئيسية','foot.pricing':'الأسعار','foot.contact':'تواصل',
       'pp.pages.eyebrow':'أسلوب Pages','pp.pages.h3':'جرّب قائمة <em>Pages.</em>','pp.pages.lead':'استكشف العرض الواضح والأنيق لأسلوب Pages — قائمة متعددة اللغات، QR code، هوية بصرية مخصصة.',
       'pp.pages.l1.label':'قائمة العملاء (QR code)','pp.pages.l1.sub':'عرض من الطاولة · أسلوب Pages',
@@ -2572,7 +2628,7 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
       'pp.dyn.l2.label':'واجهة المشرف','pp.dyn.l2.sub':'لوحة تحكم، تحديث مباشر'
     },
     de:{
-      'nav.advantages':'Vorteile','nav.pricing':'Preise','nav.contact':'Kontakt','nav.start':'Loslegen',
+      'nav.advantages':'Vorteile','nav.pricing':'Preise','nav.contact':'Kontakt','nav.start':'Kontakt',
       'hero.eyebrow':'Erstellen Sie eine elegante, sofort per QR-Code zugängliche Speisekarte',
       'hero.title.1':'Eleganz, Komfort,','hero.title.2':'Sicherheit, Schnelligkeit,','hero.title.3':'<em>Effizienz und Hygiene.</em>',
       'hero.lead':'Der Gast scannt den QR-Code seines Tisches und ruft sofort eine elegante Speisekarte direkt auf seinem Handy ab – ohne Wartezeit und ohne Berührung von Papierspeisekarten anderer Gäste.',
@@ -2589,26 +2645,34 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
       'fo.h2':'Zwei Stile,<br><em>alle Optionen.</em>','fo.lead':'Wählen Sie Ihren Menüstil, mit oder ohne Admin-Dashboard, und stellen Sie Ihr Paket mit den passenden Optionen zusammen.',
       'fo.style.pages':'Pages-Stil','fo.style.dynamic':'Dynamischer Stil','fo.style.options':'Optionen',
       'fo.p0.feat.h3':'Pages-Stil','fo.p0.feat.desc':'Ein elegantes, klares und druckbares Menü. Ideal für Betriebe, die eine gepflegte digitale Präsenz ohne Komplexität wünschen.',
-      'fo.p0.f1':'QR-Code-Menü abrufbar auf Smartphone, Tablet oder Computer','fo.p0.f2':'Gepflegtes Layout im Stil einer druckbaren Karte — klar und lesbar','fo.p0.f3':'Mehrsprachig mit automatischer Spracherkennung des Gastes','fo.p0.f4':'Ihr Logo, Ihre Farben und visuelle Identität','fo.p0.f5':'Hosting, Veröffentlichung und Wartung inklusive — schlüsselfertig',
+      'fo.p0.f1':'QR-Code-Menü abrufbar auf Smartphone, Tablet oder Computer','fo.p0.f1.t1':'Keine App','fo.p0.f1.t2':'Alle Geräte',
+      'fo.p0.f2':'Gepflegtes Layout im Stil einer druckbaren Karte — klar und lesbar','fo.p0.f2.t1':'12 Themes','fo.p0.f2.t2':'Druckbar',
+      'fo.p0.f3':'Mehrsprachig mit automatischer Spracherkennung des Gastes','fo.p0.f3.t1':'5 Sprachen','fo.p0.f3.t2':'Automatisch',
+      'fo.p0.f4':'Ihr Logo, Ihre Farben und visuelle Identität','fo.p0.f4.t1':'Logo','fo.p0.f4.t2':'Eigene Farben',
+      'fo.p0.f5':'Hosting, Veröffentlichung und Wartung inklusive — schlüsselfertig','fo.p0.f5.t1':'Schlüsselfertig','fo.p0.f5.t2':'Wartung',
       'fo.p0.side.label':'Pages-Stil','fo.p0.side.tag':'Einmalige Erstellung · In Betrieb in 1–2 Wochen',
       'fo.admin.sans':'Ohne Admin','fo.admin.avec':'Mit Admin',
       'fo.p0.admin.price.label':'/ Monat · verwalten Sie Ihr Menü selbst',
       'fo.p0.modif.html':'<strong>Änderungen auf Anfrage:</strong><br>Inhalt (Produkte, Preise…) — <strong style="color:var(--bone)">40 €</strong><br>Struktur oder Design — <strong style="color:var(--bone)">50 €</strong>',
       'fo.btn.test':'Demo testen','fo.btn.contact':'Kontakt aufnehmen','fo.btn.demo':'Beispiel ansehen','fo.btn.choose':'Auswählen',
       'fo.p1.feat.h3':'Dynamischer Stil','fo.p1.feat.desc':'Ein lebendiges Menü mit Fotos, Animationen und sofortigen Updates. Das immersivste Erlebnis für Ihre Gäste.',
-      'fo.p1.f1':'Alles, was im Pages-Stil enthalten ist','fo.p1.f2':'HD-Produktfotos, animiertes Hero-Bild, Neu- / Beliebt-Badges','fo.p1.f3':'Fließende Eingangsanimationen und Kategorienavigation','fo.p1.f4':'Dark / Light-Modus + visuelles Theme passend zu Ihrer Atmosphäre','fo.p1.f5':'WLAN auf der Startseite, personalisierte Notiz, Betriebsinformationen',
+      'fo.p1.f1':'Alles, was im Pages-Stil enthalten ist','fo.p1.f1.t1':'Alles inklusive',
+      'fo.p1.f2':'HD-Produktfotos, animiertes Hero-Bild, Neu- / Beliebt-Badges','fo.p1.f2.t1':'HD-Fotos','fo.p1.f2.t2':'Promo-Badges',
+      'fo.p1.f3':'Fließende Eingangsanimationen und Kategorienavigation','fo.p1.f3.t1':'Animationen','fo.p1.f3.t2':'Kategorien',
+      'fo.p1.f4':'Dark / Light-Modus + visuelles Theme passend zu Ihrer Atmosphäre','fo.p1.f4.t1':'Dark','fo.p1.f4.t2':'Light',
+      'fo.p1.f5':'WLAN auf der Startseite, personalisierte Notiz, Betriebsinformationen','fo.p1.f5.t1':'WLAN','fo.p1.f5.t2':'Anpassbar',
       'fo.p1.side.label':'Dynamischer Stil','fo.p1.side.tag':'Einmalige Erstellung · In Betrieb in 1–2 Wochen',
       'fo.p1.admin.price.label':'/ Monat · verwalten Sie Ihr Menü selbst',
       'fo.p1.modif.html':'<strong>Änderungen auf Anfrage:</strong><br>Inhalt (Produkte, Preise…) — <strong style="color:var(--bone)">80 €</strong><br>Struktur oder Design — <strong style="color:var(--bone)">100 €</strong>',
       'fo.opts.h3':'Optionen <em>à la carte</em>','fo.opts.p':'Fügen Sie die Funktionen hinzu, die zu Ihrem Service-Ablauf passen — unabhängig vom gewählten Stil.',
-      'fo.opt0.name':'Themes-Option','fo.opt0.desc':'Zugang zu allen Premium-Themes — ändern Sie das Erscheinungsbild Ihres Menüs jederzeit.',
-      'fo.opt1.name':'Glocken-Option','fo.opt1.desc':'Gäste rufen den Service mit einem Tap von ihrem Tisch. Sofortige Push-Benachrichtigung auf Ihrem Telefon.',
-      'fo.opt2.name':'Bestell-Option','fo.opt2.desc':'Gäste bestellen direkt aus dem Menü. Live-Verfolgung der Zubereitung, vollständige Bestellhistorie.',
-      'co.eyebrow':'Kontakt','co.h2':'Sprechen wir über<br>Ihr <em>Projekt.</em>','co.lead':'Eine Frage, ein Angebot, eine persönliche Demo — wir antworten schnell, in der Sprache, die Ihnen passt. Wählen Sie den Kanal, der Ihnen am besten liegt.',
-      'co.info1':'Antwort innerhalb 1 Stunde tagsüber','co.info2':'Service auf Französisch, Englisch, Griechisch',
-      'co.ph.label':'Anrufen','co.ph.sub':'+30 694 399 5696 · verfügbar 9–22 Uhr',
-      'co.wa.label':'WhatsApp','co.wa.sub':'+30 694 399 5696 · schnelle Antwort',
-      'co.vb.label':'Viber','co.vb.sub':'+30 694 399 5696 · verschlüsselte Nachrichten',
+      'fo.opt0.name':'Themes-Option','fo.opt0.desc':'Zugang zu allen Premium-Themes — ändern Sie das Erscheinungsbild Ihres Menüs jederzeit.','fo.opt0.t1':'20+ Themes','fo.opt0.t2':'Sofort',
+      'fo.opt1.name':'Glocken-Option','fo.opt1.desc':'Gäste rufen den Service mit einem Tap von ihrem Tisch. Sofortige Push-Benachrichtigung auf Ihrem Telefon.','fo.opt1.t1':'Push notif','fo.opt1.t2':'1 Tap',
+      'fo.opt2.name':'Bestell-Option','fo.opt2.desc':'Gäste bestellen direkt aus dem Menü. Live-Verfolgung der Zubereitung, vollständige Bestellhistorie.','fo.opt2.t1':'Live','fo.opt2.t2':'Verlauf',
+      'co.eyebrow':'Kontakt','co.h2':'Sprechen wir über<br>Ihr <em>Projekt.</em>','co.lead':'Eine Frage, ein Angebot, eine persönliche Demo — wir antworten innerhalb von 24h, in der Sprache, die Ihnen passt.',
+      'co.info1':'Antwort innerhalb 24h','co.info2':'Viber & WhatsApp · alle Sprachen','co.info3':'Telefon · Französisch oder Englisch',
+      'co.ph.label':'Anrufen','co.ph.sub':'+30 694 399 5696 · Französisch oder Englisch',
+      'co.wa.label':'WhatsApp','co.wa.sub':'+30 694 399 5696 · alle Sprachen',
+      'co.vb.label':'Viber','co.vb.sub':'+30 694 399 5696 · alle Sprachen',
       'foot.copy':'© 2026 · Mit Sorgfalt gestaltet','foot.home':'Startseite','foot.pricing':'Preise','foot.contact':'Kontakt',
       'pp.pages.eyebrow':'Pages-Stil','pp.pages.h3':'Das <em>Pages</em>-Menü testen.','pp.pages.lead':'Entdecken Sie die klare und elegante Präsentation des Pages-Stils — mehrsprachiges Menü, QR-Code, personalisierte visuelle Identität.',
       'pp.pages.l1.label':'Gästemenü (QR-Code)','pp.pages.l1.sub':'Ansicht vom Tisch · Pages-Stil',
