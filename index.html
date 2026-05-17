@@ -1133,7 +1133,7 @@ footer .right a:hover{color:var(--gold-2)}
 /* ═══════════════════════════════════════════════════════════════
    11 · SCROLL OFFSET (fixed nav compensation)
 ═══════════════════════════════════════════════════════════════ */
-#avantages,#forfaits,#contact{scroll-margin-top:4.5rem}
+#avantages,#forfaits,#devis,#contact{scroll-margin-top:4.5rem}
 #hero{scroll-margin-top:0}
 
 /* ═══════════════════════════════════════════════════════════════
@@ -1445,6 +1445,156 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
   .lp-title{font-size:clamp(1.4rem,6vw,1.9rem);margin-bottom:2rem}
   #lang-dropdown{right:.8rem;top:3.6rem;min-width:170px}
 }
+
+/* ════════════ SECTION DEVIS ════════════ */
+#devis { padding: clamp(5rem,10vh,8rem) 0; }
+.dv-shell {
+  max-width: 1100px; margin: 0 auto;
+  padding: 0 var(--pad-x);
+}
+.dv-head { text-align: center; margin-bottom: 3.5rem; }
+.dv-head .lead { max-width: 600px; margin: 1rem auto 0; }
+
+.dv-form {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 2rem;
+  align-items: start;
+}
+@media(max-width:900px) {
+  .dv-form { grid-template-columns: 1fr; }
+}
+
+/* Steps */
+.dv-step {
+  margin-bottom: 1.5rem;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(200,164,78,0.16);
+  border-radius: 16px;
+  padding: 1.25rem 1.5rem;
+}
+.dv-step-label {
+  font-size: .65rem; text-transform: uppercase;
+  letter-spacing: .14em; color: var(--gold);
+  margin-bottom: .9rem; font-weight: 600;
+}
+.dv-chips {
+  display: flex; flex-wrap: wrap; gap: .5rem;
+}
+.dv-chip {
+  padding: .55rem 1.1rem;
+  background: rgba(255,255,255,0.04);
+  border: 1.5px solid rgba(200,164,78,0.22);
+  border-radius: 99px;
+  font-size: .82rem; color: var(--bone); cursor: pointer;
+  transition: background .2s, border-color .2s, color .2s, transform .15s;
+  user-select: none;
+}
+.dv-chip:hover { border-color: var(--gold); background: rgba(200,164,78,0.08); }
+.dv-chip.is-on {
+  background: linear-gradient(135deg, rgba(200,164,78,0.22), rgba(200,164,78,0.10));
+  border-color: var(--gold); color: var(--gold-2);
+  transform: scale(1.03);
+}
+.dv-chip-opt {
+  display: flex; align-items: center; gap: .55rem;
+  padding: .6rem 1.1rem;
+}
+.dv-chip-opt-price {
+  font-size: .7rem; color: var(--mute);
+  padding: .15rem .45rem; border-radius: 99px;
+  background: rgba(255,255,255,0.06);
+  white-space: nowrap;
+}
+.dv-chip.is-on .dv-chip-opt-price { color: var(--gold); }
+
+.dv-input-wrap { position: relative; }
+.dv-input {
+  width: 100%;
+  padding: .75rem 1rem .75rem 3rem;
+  background: rgba(255,255,255,0.04);
+  border: 1.5px solid rgba(200,164,78,0.22);
+  border-radius: 12px; color: var(--bone);
+  font-family: inherit; font-size: .9rem;
+  outline: none;
+  transition: border-color .2s, box-shadow .2s;
+}
+.dv-input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(200,164,78,.1); }
+.dv-input::placeholder { color: var(--mute); }
+.dv-input-icon {
+  position: absolute; left: 1rem; top: 50%; transform: translateY(-50%);
+  color: var(--mute); pointer-events: none;
+}
+
+/* Summary card */
+.dv-summary {
+  position: sticky; top: 5rem;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(200,164,78,0.2);
+  border-radius: 18px; padding: 1.5rem;
+}
+.dv-summary-title {
+  font-family: var(--serif); font-size: 1.15rem; color: var(--gold-2);
+  margin-bottom: 1rem; letter-spacing: .02em;
+}
+.dv-sum-row {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding: .45rem 0; border-bottom: 1px solid rgba(200,164,78,.08);
+  font-size: .84rem; color: var(--bone);
+}
+.dv-sum-row:last-of-type { border-bottom: none; }
+.dv-sum-key { color: var(--mute); font-size: .8rem; }
+.dv-sum-val { font-weight: 600; color: var(--gold); }
+.dv-total {
+  margin-top: 1rem; padding-top: 1rem;
+  border-top: 1px solid rgba(200,164,78,.2);
+}
+.dv-total-creation {
+  display: flex; justify-content: space-between; align-items: baseline;
+  margin-bottom: .5rem;
+}
+.dv-total-label { font-size: .75rem; color: var(--mute); text-transform: uppercase; letter-spacing: .1em; }
+.dv-total-val { font-size: 1.6rem; font-family: var(--serif); color: var(--gold-2); }
+.dv-total-sub { display: flex; justify-content: space-between; font-size: .82rem; color: var(--mute); }
+.dv-total-sub span:last-child { color: var(--bone); }
+
+.dv-submit {
+  width: 100%; margin-top: 1.25rem;
+  padding: .9rem 1rem;
+  background: linear-gradient(135deg, #d4a94e, #b8922e);
+  color: #0c0a08; border: none; border-radius: 12px;
+  font-family: inherit; font-size: .95rem; font-weight: 700;
+  cursor: pointer; letter-spacing: .03em;
+  transition: opacity .2s, transform .15s, box-shadow .2s;
+  box-shadow: 0 8px 24px rgba(200,164,78,.3);
+}
+.dv-submit:hover { opacity: .9; transform: translateY(-2px); box-shadow: 0 12px 32px rgba(200,164,78,.4); }
+.dv-submit:active { transform: translateY(0); }
+.dv-submit:disabled { opacity: .4; cursor: not-allowed; transform: none; }
+
+.dv-feedback {
+  text-align: center; font-size: .82rem;
+  margin-top: .75rem; min-height: 1.2em;
+  transition: color .3s;
+}
+.dv-feedback.ok  { color: #4caf50; }
+.dv-feedback.err { color: #ef5350; }
+
+.dv-canal-row { display: flex; gap: .5rem; flex-wrap: wrap; }
+
+.dv-lang-sel {
+  width: 100%;
+  padding: .65rem 1rem;
+  background: rgba(255,255,255,0.04);
+  border: 1.5px solid rgba(200,164,78,0.22);
+  border-radius: 12px; color: var(--bone);
+  font-family: inherit; font-size: .88rem;
+  outline: none; cursor: pointer;
+  appearance: none; -webkit-appearance: none;
+  transition: border-color .2s;
+}
+.dv-lang-sel:focus { border-color: var(--gold); }
+.dv-lang-sel option { background: #1a1206; color: var(--bone); }
 </style>
 </head>
 <body>
@@ -1825,7 +1975,7 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
                 <div class="fo-side-divider"></div>
                 <div class="fo-side-actions">
                   <button class="fo-btn fo-btn-test" onclick="openPopup('pop-pages')" data-i18n="fo.btn.demo">Voir un exemple</button>
-                  <button class="fo-btn fo-btn-choose" onclick="scrollTo_('contact')" data-i18n="fo.btn.choose">Choisir</button>
+                  <button class="fo-btn fo-btn-choose" onclick="scrollTo_('devis')" data-i18n="fo.btn.choose">Choisir</button>
                 </div>
               </aside>
             </div>
@@ -1889,7 +2039,7 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
                 <div class="fo-side-divider"></div>
                 <div class="fo-side-actions">
                   <button class="fo-btn fo-btn-test" onclick="openPopup('pop-dyn')" data-i18n="fo.btn.demo">Voir un exemple</button>
-                  <button class="fo-btn fo-btn-choose" onclick="scrollTo_('contact')" data-i18n="fo.btn.choose">Choisir</button>
+                  <button class="fo-btn fo-btn-choose" onclick="scrollTo_('devis')" data-i18n="fo.btn.choose">Choisir</button>
                 </div>
               </aside>
             </div>
@@ -1944,7 +2094,7 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
               </div>
               <div class="fo-option-actions">
                 <button class="fo-btn fo-btn-test" onclick="openPopup('pop-themes')" data-i18n="fo.btn.demo">Voir un exemple</button>
-                <button class="fo-btn fo-btn-choose" onclick="scrollTo_('contact')" data-i18n="fo.btn.choose">Choisir</button>
+                <button class="fo-btn fo-btn-choose" onclick="scrollTo_('devis')" data-i18n="fo.btn.choose">Choisir</button>
               </div>
             </div>
           </div>
@@ -1963,7 +2113,7 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
               </div>
               <div class="fo-option-actions">
                 <button class="fo-btn fo-btn-test" onclick="openPopup('pop-bell')" data-i18n="fo.btn.demo">Voir un exemple</button>
-                <button class="fo-btn fo-btn-choose" onclick="scrollTo_('contact')" data-i18n="fo.btn.choose">Choisir</button>
+                <button class="fo-btn fo-btn-choose" onclick="scrollTo_('devis')" data-i18n="fo.btn.choose">Choisir</button>
               </div>
             </div>
           </div>
@@ -1982,7 +2132,7 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
               </div>
               <div class="fo-option-actions">
                 <button class="fo-btn fo-btn-test" onclick="openPopup('pop-order')" data-i18n="fo.btn.demo">Voir un exemple</button>
-                <button class="fo-btn fo-btn-choose" onclick="scrollTo_('contact')" data-i18n="fo.btn.choose">Choisir</button>
+                <button class="fo-btn fo-btn-choose" onclick="scrollTo_('devis')" data-i18n="fo.btn.choose">Choisir</button>
               </div>
             </div>
           </div>
@@ -1992,6 +2142,114 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
 
     </div>
 
+  </div>
+</section>
+
+<!-- ─── DEVIS ─── -->
+<section id="devis">
+  <div class="dv-shell">
+    <header class="dv-head reveal">
+      <div class="eyebrow" data-i18n="dv.eyebrow">Demande de devis</div>
+      <h2 class="display" data-i18n-html="dv.h2">Composez votre<br><em>formule sur mesure.</em></h2>
+      <p class="lead" data-i18n="dv.lead">Sélectionnez votre style, vos options et laissez-nous votre numéro. Nous vous contactons dans les 24h avec votre devis détaillé.</p>
+    </header>
+
+    <div class="dv-form reveal delay-1">
+      <!-- Left: Steps -->
+      <div class="dv-steps">
+
+        <div class="dv-step">
+          <div class="dv-step-label" data-i18n="dv.s1">1 — Votre style de menu</div>
+          <div class="dv-chips">
+            <div class="dv-chip is-on" data-dv="style" data-val="papier" onclick="dvSelect('style','papier',this)" data-i18n="dv.papier">Style Pages</div>
+            <div class="dv-chip" data-dv="style" data-val="dynamique" onclick="dvSelect('style','dynamique',this)" data-i18n="dv.dynamique">Style Dynamique</div>
+          </div>
+        </div>
+
+        <div class="dv-step">
+          <div class="dv-step-label" data-i18n="dv.s2">2 — Accès à l'interface admin ?</div>
+          <div class="dv-chips">
+            <div class="dv-chip is-on" data-dv="admin" data-val="oui" onclick="dvSelect('admin','oui',this)" data-i18n="dv.admin.oui">Oui, avec admin</div>
+            <div class="dv-chip" data-dv="admin" data-val="non" onclick="dvSelect('admin','non',this)" data-i18n="dv.admin.non">Non, sans admin</div>
+          </div>
+        </div>
+
+        <div class="dv-step">
+          <div class="dv-step-label" data-i18n="dv.s3">3 — Options supplémentaires</div>
+          <div class="dv-chips">
+            <div class="dv-chip dv-chip-opt" data-dv="opt" data-val="themes" onclick="dvToggleOpt('themes',this)">
+              <span data-i18n="dv.opt.themes">Option Thèmes</span>
+              <span class="dv-chip-opt-price">20 €/mois</span>
+            </div>
+            <div class="dv-chip dv-chip-opt" data-dv="opt" data-val="sonnette" onclick="dvToggleOpt('sonnette',this)">
+              <span data-i18n="dv.opt.sonnette">Option Sonnette</span>
+              <span class="dv-chip-opt-price">50 €/mois</span>
+            </div>
+            <div class="dv-chip dv-chip-opt" data-dv="opt" data-val="commande" onclick="dvToggleOpt('commande',this)">
+              <span data-i18n="dv.opt.commande">Option Commande</span>
+              <span class="dv-chip-opt-price">150 €/mois</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="dv-step">
+          <div class="dv-step-label" data-i18n="dv.s4">4 — Canal de contact préféré</div>
+          <div class="dv-canal-row">
+            <div class="dv-chip is-on" data-dv="canal" data-val="whatsapp" onclick="dvToggleCanal('whatsapp',this)">WhatsApp</div>
+            <div class="dv-chip" data-dv="canal" data-val="viber" onclick="dvToggleCanal('viber',this)">Viber</div>
+          </div>
+        </div>
+
+        <div class="dv-step">
+          <div class="dv-step-label" data-i18n="dv.s5">5 — Votre numéro de téléphone</div>
+          <div class="dv-input-wrap">
+            <svg class="dv-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2A19.79 19.79 0 0111.63 19 19.5 19.5 0 015 12.36 19.79 19.79 0 011.11 3.18 2 2 0 013.08 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            <input type="tel" class="dv-input" id="dv-phone" placeholder="+33 6 12 34 56 78" data-i18n-placeholder="dv.phone.ph">
+          </div>
+        </div>
+
+        <div class="dv-step">
+          <div class="dv-step-label" data-i18n="dv.s6">6 — Langue préférée</div>
+          <select class="dv-lang-sel" id="dv-lang">
+            <option value="fr">Français</option>
+            <option value="el">Ελληνικά</option>
+            <option value="en">English</option>
+            <option value="ar">العربية</option>
+            <option value="de">Deutsch</option>
+          </select>
+        </div>
+
+      </div>
+
+      <!-- Right: Summary -->
+      <div class="dv-summary">
+        <div class="dv-summary-title" data-i18n="dv.sum.title">Votre formule</div>
+        <div class="dv-sum-row">
+          <span class="dv-sum-key" data-i18n="dv.sum.style">Style</span>
+          <span class="dv-sum-val" id="dv-sum-style">Style Pages</span>
+        </div>
+        <div class="dv-sum-row">
+          <span class="dv-sum-key" data-i18n="dv.sum.admin">Admin</span>
+          <span class="dv-sum-val" id="dv-sum-admin">Avec admin</span>
+        </div>
+        <div class="dv-sum-row" id="dv-sum-opts-row" style="display:none">
+          <span class="dv-sum-key" data-i18n="dv.sum.options">Options</span>
+          <span class="dv-sum-val" id="dv-sum-opts"></span>
+        </div>
+        <div class="dv-total">
+          <div class="dv-total-creation">
+            <span class="dv-total-label" data-i18n="dv.sum.creation">Création</span>
+            <span class="dv-total-val"><span id="dv-price-creation">100</span> €</span>
+          </div>
+          <div class="dv-total-sub">
+            <span data-i18n="dv.sum.mensuel">Mensuel</span>
+            <span><span id="dv-price-mensuel">20</span> €/mois</span>
+          </div>
+        </div>
+        <button class="dv-submit" id="dv-submit" onclick="submitDevis()" data-i18n="dv.submit">Envoyer ma demande</button>
+        <div class="dv-feedback" id="dv-feedback"></div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -2203,7 +2461,7 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
   // ── NAV scroll state ───────────────────────────────────
   const nav=document.getElementById('nav');
   const sideDots=document.querySelectorAll('.s-dot');
-  const sectionIds=['hero','avantages','forfaits','contact'];
+  const sectionIds=['hero','avantages','forfaits','devis','contact'];
   const floatNav=document.getElementById('float-nav');
 
   // Float nav top position per section
@@ -2543,7 +2801,31 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
       'pp.order.l1.label':'Menu client avec commande','pp.order.l1.sub':'Panier et validation activés',
       'pp.order.l2.label':'App serveur (commandes)','pp.order.l2.sub':'Suivi live des commandes côté établissement',
       'pp.themes.eyebrow':'Option Thèmes','pp.themes.h3':'Choisissez votre <em>ambiance.</em>','pp.themes.lead':'Explorez tous les thèmes visuels disponibles — changez l\'identité de votre menu en un clic.',
-      'pp.themes.l1.label':'Galerie des thèmes','pp.themes.l1.sub':'Prévisualisation en direct de chaque ambiance'
+      'pp.themes.l1.label':'Galerie des thèmes','pp.themes.l1.sub':'Prévisualisation en direct de chaque ambiance',
+      'dv.eyebrow':'Demande de devis',
+      'dv.h2':'Composez votre<br><em>formule sur mesure.</em>',
+      'dv.lead':'Sélectionnez votre style, vos options et laissez-nous votre numéro. Nous vous contactons dans les 24h.',
+      'dv.s1':'1 — Votre style de menu',
+      'dv.s2':'2 — Interface admin ?',
+      'dv.s3':'3 — Options supplémentaires',
+      'dv.s4':'4 — Canal de contact',
+      'dv.s5':'5 — Votre numéro',
+      'dv.s6':'6 — Langue préférée',
+      'dv.papier':'Style Pages',
+      'dv.dynamique':'Style Dynamique',
+      'dv.admin.oui':'Avec admin',
+      'dv.admin.non':'Sans admin',
+      'dv.opt.themes':'Option Thèmes',
+      'dv.opt.sonnette':'Option Sonnette',
+      'dv.opt.commande':'Option Commande',
+      'dv.phone.ph':'+33 6 12 34 56 78',
+      'dv.sum.title':'Votre formule',
+      'dv.sum.style':'Style',
+      'dv.sum.admin':'Admin',
+      'dv.sum.options':'Options',
+      'dv.sum.creation':'Création',
+      'dv.sum.mensuel':'Mensuel',
+      'dv.submit':'Envoyer ma demande'
     },
     en:{
       'nav.advantages':'Benefits','nav.pricing':'Pricing','nav.contact':'Contact','nav.start':'Contact',
@@ -2606,7 +2888,31 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
       'pp.order.l1.label':'Customer menu with ordering','pp.order.l1.sub':'Cart and checkout enabled',
       'pp.order.l2.label':'Server app (orders)','pp.order.l2.sub':'Live order tracking for your team',
       'pp.themes.eyebrow':'Themes Option','pp.themes.h3':'Choose your <em>atmosphere.</em>','pp.themes.lead':'Explore all available visual themes — change your menu\'s identity in one click.',
-      'pp.themes.l1.label':'Theme gallery','pp.themes.l1.sub':'Live preview of every atmosphere'
+      'pp.themes.l1.label':'Theme gallery','pp.themes.l1.sub':'Live preview of every atmosphere',
+      'dv.eyebrow':'Request a Quote',
+      'dv.h2':'Build your<br><em>custom plan.</em>',
+      'dv.lead':'Select your style, options and leave your number. We contact you within 24 hours.',
+      'dv.s1':'1 — Your menu style',
+      'dv.s2':'2 — Admin dashboard?',
+      'dv.s3':'3 — Additional options',
+      'dv.s4':'4 — Preferred contact',
+      'dv.s5':'5 — Your phone number',
+      'dv.s6':'6 — Preferred language',
+      'dv.papier':'Page Style',
+      'dv.dynamique':'Dynamic Style',
+      'dv.admin.oui':'With admin',
+      'dv.admin.non':'Without admin',
+      'dv.opt.themes':'Themes Option',
+      'dv.opt.sonnette':'Bell Option',
+      'dv.opt.commande':'Order Option',
+      'dv.phone.ph':'+44 7700 900000',
+      'dv.sum.title':'Your plan',
+      'dv.sum.style':'Style',
+      'dv.sum.admin':'Admin',
+      'dv.sum.options':'Options',
+      'dv.sum.creation':'Setup',
+      'dv.sum.mensuel':'Monthly',
+      'dv.submit':'Send my request'
     },
     el:{
       'nav.advantages':'Πλεονεκτήματα','nav.pricing':'Τιμές','nav.contact':'Επικοινωνία','nav.start':'Επικοινωνία',
@@ -2670,7 +2976,31 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
       'pp.order.l1.label':'Μενού πελατών με παραγγελία','pp.order.l1.sub':'Καλάθι και επιβεβαίωση ενεργοποιημένα',
       'pp.order.l2.label':'Εφαρμογή σερβιτόρου (παραγγελίες)','pp.order.l2.sub':'Ζωντανή παρακολούθηση παραγγελιών',
       'pp.themes.eyebrow':'Επιλογή Θεμάτων','pp.themes.h3':'Επιλέξτε την <em>ατμόσφαιρά σας.</em>','pp.themes.lead':'Εξερευνήστε όλα τα διαθέσιμα οπτικά θέματα — αλλάξτε την ταυτότητα του μενού σας με ένα κλικ.',
-      'pp.themes.l1.label':'Γκαλερί θεμάτων','pp.themes.l1.sub':'Ζωντανή προεπισκόπηση κάθε ατμόσφαιρας'
+      'pp.themes.l1.label':'Γκαλερί θεμάτων','pp.themes.l1.sub':'Ζωντανή προεπισκόπηση κάθε ατμόσφαιρας',
+      'dv.eyebrow':'Αίτημα προσφοράς',
+      'dv.h2':'Δημιουργήστε το<br><em>πλάνο σας.</em>',
+      'dv.lead':'Επιλέξτε στυλ, επιλογές και αφήστε τον αριθμό σας. Επικοινωνούμε μαζί σας εντός 24ωρών.',
+      'dv.s1':'1 — Στυλ μενού',
+      'dv.s2':'2 — Διαχειριστικό;',
+      'dv.s3':'3 — Πρόσθετες επιλογές',
+      'dv.s4':'4 — Τρόπος επικοινωνίας',
+      'dv.s5':'5 — Τηλέφωνό σας',
+      'dv.s6':'6 — Προτιμώμενη γλώσσα',
+      'dv.papier':'Στυλ Σελίδων',
+      'dv.dynamique':'Δυναμικό Στυλ',
+      'dv.admin.oui':'Με διαχείριση',
+      'dv.admin.non':'Χωρίς διαχείριση',
+      'dv.opt.themes':'Επιλογή Θεμάτων',
+      'dv.opt.sonnette':'Επιλογή Κουδουνιού',
+      'dv.opt.commande':'Επιλογή Παραγγελιών',
+      'dv.phone.ph':'+30 69X XXX XXXX',
+      'dv.sum.title':'Η φόρμουλά σας',
+      'dv.sum.style':'Στυλ',
+      'dv.sum.admin':'Διαχείριση',
+      'dv.sum.options':'Επιλογές',
+      'dv.sum.creation':'Δημιουργία',
+      'dv.sum.mensuel':'Μηνιαίως',
+      'dv.submit':'Αποστολή αιτήματος'
     },
     ar:{
       'nav.advantages':'المميزات','nav.pricing':'الأسعار','nav.contact':'اتصل بنا','nav.start':'تواصل',
@@ -2733,7 +3063,31 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
       'pp.order.l1.label':'قائمة العملاء مع الطلب','pp.order.l1.sub':'السلة والتأكيد مفعّلان',
       'pp.order.l2.label':'تطبيق النادل (الطلبات)','pp.order.l2.sub':'متابعة الطلبات المباشرة',
       'pp.themes.eyebrow':'خيار الثيمات','pp.themes.h3':'اختر <em>أجواءك.</em>','pp.themes.lead':'استكشف جميع الثيمات البصرية المتاحة — غيّر هوية قائمتك بنقرة واحدة.',
-      'pp.themes.l1.label':'معرض الثيمات','pp.themes.l1.sub':'معاينة مباشرة لكل أجواء'
+      'pp.themes.l1.label':'معرض الثيمات','pp.themes.l1.sub':'معاينة مباشرة لكل أجواء',
+      'dv.eyebrow':'طلب عرض سعر',
+      'dv.h2':'اختر<br><em>خطتك المخصصة.</em>',
+      'dv.lead':'اختر أسلوبك وخياراتك واترك رقمك. سنتواصل معك خلال 24 ساعة.',
+      'dv.s1':'١ — أسلوب القائمة',
+      'dv.s2':'٢ — لوحة الإدارة؟',
+      'dv.s3':'٣ — خيارات إضافية',
+      'dv.s4':'٤ — وسيلة التواصل',
+      'dv.s5':'٥ — رقم هاتفك',
+      'dv.s6':'٦ — اللغة المفضلة',
+      'dv.papier':'أسلوب الصفحات',
+      'dv.dynamique':'الأسلوب الديناميكي',
+      'dv.admin.oui':'مع إدارة',
+      'dv.admin.non':'بدون إدارة',
+      'dv.opt.themes':'خيار الثيمات',
+      'dv.opt.sonnette':'خيار الجرس',
+      'dv.opt.commande':'خيار الطلبات',
+      'dv.phone.ph':'+966 5X XXX XXXX',
+      'dv.sum.title':'خطتك',
+      'dv.sum.style':'الأسلوب',
+      'dv.sum.admin':'إدارة',
+      'dv.sum.options':'خيارات',
+      'dv.sum.creation':'الإنشاء',
+      'dv.sum.mensuel':'شهرياً',
+      'dv.submit':'إرسال طلبي'
     },
     de:{
       'nav.advantages':'Vorteile','nav.pricing':'Preise','nav.contact':'Kontakt','nav.start':'Kontakt',
@@ -2796,7 +3150,31 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
       'pp.order.l1.label':'Gästemenü mit Bestellung','pp.order.l1.sub':'Warenkorb und Bestätigung aktiviert',
       'pp.order.l2.label':'Service-App (Bestellungen)','pp.order.l2.sub':'Live-Bestellverfolgung für Ihr Team',
       'pp.themes.eyebrow':'Themen-Option','pp.themes.h3':'Wählen Sie Ihre <em>Atmosphäre.</em>','pp.themes.lead':'Entdecken Sie alle verfügbaren visuellen Themen — ändern Sie die Identität Ihres Menüs mit einem Klick.',
-      'pp.themes.l1.label':'Themen-Galerie','pp.themes.l1.sub':'Live-Vorschau jeder Atmosphäre'
+      'pp.themes.l1.label':'Themen-Galerie','pp.themes.l1.sub':'Live-Vorschau jeder Atmosphäre',
+      'dv.eyebrow':'Angebot anfragen',
+      'dv.h2':'Stellen Sie Ihr<br><em>Paket zusammen.</em>',
+      'dv.lead':'Wählen Sie Stil und Optionen und hinterlassen Sie Ihre Nummer. Wir melden uns innerhalb von 24h.',
+      'dv.s1':'1 — Ihr Menü-Stil',
+      'dv.s2':'2 — Admin-Zugang?',
+      'dv.s3':'3 — Zusatzoptionen',
+      'dv.s4':'4 — Kontaktkanal',
+      'dv.s5':'5 — Ihre Telefonnummer',
+      'dv.s6':'6 — Bevorzugte Sprache',
+      'dv.papier':'Seitenstil',
+      'dv.dynamique':'Dynamischer Stil',
+      'dv.admin.oui':'Mit Admin',
+      'dv.admin.non':'Ohne Admin',
+      'dv.opt.themes':'Themen-Option',
+      'dv.opt.sonnette':'Klingel-Option',
+      'dv.opt.commande':'Bestell-Option',
+      'dv.phone.ph':'+49 15X XXXXXXXX',
+      'dv.sum.title':'Ihre Formel',
+      'dv.sum.style':'Stil',
+      'dv.sum.admin':'Admin',
+      'dv.sum.options':'Optionen',
+      'dv.sum.creation':'Einrichtung',
+      'dv.sum.mensuel':'Monatlich',
+      'dv.submit':'Anfrage senden'
     }
   };
 
@@ -2826,6 +3204,11 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
     document.querySelectorAll('[data-i18n-label]').forEach(function(el){
       var k=el.getAttribute('data-i18n-label');
       if(t[k]!==undefined)el.setAttribute('data-label',t[k]);
+    });
+    // placeholder nodes
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(function(el){
+      var k=el.getAttribute('data-i18n-placeholder');
+      if(t[k]!==undefined)el.setAttribute('placeholder',t[k]);
     });
     // Direction + lang attr
     var isRTL=code==='ar';
@@ -2966,6 +3349,160 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
       }
     });
   });
+})();
+</script>
+
+<script>
+(function(){
+  'use strict';
+
+  // ── Devis form state ──────────────────────────────
+  var dvState = {
+    style:  'papier',
+    admin:  true,
+    opts:   [],
+    canaux: ['whatsapp'],
+    phone:  '',
+    langue: 'fr'
+  };
+
+  var PRICES = {
+    creation:     { papier: 100, dynamique: 200 },
+    admin_mois:   { papier: 20,  dynamique: 50  },
+    opts_mois:    { themes: 20,  sonnette: 50, commande: 150 }
+  };
+
+  function calcPrices() {
+    var cr = PRICES.creation[dvState.style] || 100;
+    var mo = dvState.admin ? (PRICES.admin_mois[dvState.style] || 20) : 0;
+    dvState.opts.forEach(function(o){ mo += PRICES.opts_mois[o] || 0; });
+    return { creation: cr, mensuel: mo };
+  }
+
+  function updateSummary() {
+    var p = calcPrices();
+    var styleLabel = dvState.style === 'papier' ? 'Style Pages' : 'Style Dynamique';
+    var adminLabel = dvState.admin ? 'Avec admin' : 'Sans admin';
+
+    document.getElementById('dv-sum-style').textContent = styleLabel;
+    document.getElementById('dv-sum-admin').textContent = adminLabel;
+    document.getElementById('dv-price-creation').textContent = p.creation;
+    document.getElementById('dv-price-mensuel').textContent = p.mensuel;
+
+    var optsRow = document.getElementById('dv-sum-opts-row');
+    if (dvState.opts.length > 0) {
+      optsRow.style.display = '';
+      var labels = { themes:'Thèmes', sonnette:'Sonnette', commande:'Commande' };
+      document.getElementById('dv-sum-opts').textContent = dvState.opts.map(function(o){ return labels[o]||o; }).join(', ');
+    } else {
+      optsRow.style.display = 'none';
+    }
+  }
+
+  window.dvSelect = function(group, val, el) {
+    document.querySelectorAll('[data-dv="'+group+'"]').forEach(function(c){ c.classList.remove('is-on'); });
+    el.classList.add('is-on');
+    if (group === 'style') dvState.style = val;
+    if (group === 'admin') dvState.admin = (val === 'oui');
+    updateSummary();
+  };
+
+  window.dvToggleOpt = function(opt, el) {
+    el.classList.toggle('is-on');
+    var idx = dvState.opts.indexOf(opt);
+    if (idx >= 0) dvState.opts.splice(idx, 1);
+    else dvState.opts.push(opt);
+    updateSummary();
+  };
+
+  window.dvToggleCanal = function(canal, el) {
+    el.classList.toggle('is-on');
+    var idx = dvState.canaux.indexOf(canal);
+    if (idx >= 0) dvState.canaux.splice(idx, 1);
+    else dvState.canaux.push(canal);
+  };
+
+  // ── Firebase Control ──────────────────────────────
+  var controlApp = (firebase.apps || []).find(function(a){ return a.name === 'control-devis'; })
+    || firebase.initializeApp({
+         apiKey:      'AIzaSyAwHbV2dueFQFL5eJCNkB0siVjdB_7AtKU',
+         databaseURL: 'https://menu-pro-control-default-rtdb.europe-west1.firebasedatabase.app',
+         projectId:   'menu-pro-control',
+         appId:       '1:457842698651:web:f5cbff82ec4cb729ded93e'
+       }, 'control-devis');
+  var controlDb = firebase.database(controlApp);
+
+  // ── Submit ────────────────────────────────────────
+  window.submitDevis = function() {
+    var phone = document.getElementById('dv-phone').value.trim();
+    var fb    = document.getElementById('dv-feedback');
+    var btn   = document.getElementById('dv-submit');
+
+    if (!phone || phone.length < 6) {
+      fb.className = 'dv-feedback err';
+      fb.textContent = '⚠ Veuillez saisir un numéro de téléphone valide.';
+      return;
+    }
+    if (dvState.canaux.length === 0) {
+      fb.className = 'dv-feedback err';
+      fb.textContent = '⚠ Choisissez au moins un canal de contact.';
+      return;
+    }
+
+    dvState.phone  = phone;
+    dvState.langue = document.getElementById('dv-lang').value;
+
+    var p  = calcPrices();
+    var ts = Date.now();
+    var devis = {
+      style:          dvState.style,
+      admin:          dvState.admin,
+      options:        dvState.opts.slice(),
+      total_creation: p.creation,
+      total_mensuel:  p.mensuel,
+      phone:          phone,
+      canal:          dvState.canaux.slice(),
+      langue:         dvState.langue,
+      lu:             false,
+      statut:         'nouveau',
+      ts:             ts
+    };
+
+    btn.disabled   = true;
+    btn.textContent = '⏳ Envoi en cours…';
+    fb.className   = 'dv-feedback';
+    fb.textContent = '';
+
+    controlDb.ref('/devis/' + ts).set(devis)
+      .then(function() {
+        return fetch('/api/notify-devis', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ phone: phone, langue: dvState.langue })
+        });
+      })
+      .then(function() {
+        fb.className   = 'dv-feedback ok';
+        fb.textContent = '✓ Demande envoyée — nous vous contactons dans les 24h !';
+        btn.textContent = '✓ Envoyé';
+        document.getElementById('dv-phone').value = '';
+      })
+      .catch(function(err) {
+        fb.className   = 'dv-feedback err';
+        fb.textContent = '⚠ Erreur : ' + err.message;
+        btn.disabled   = false;
+        btn.textContent = 'Envoyer ma demande';
+      });
+  };
+
+  // init summary
+  updateSummary();
+
+  // sync lang select with page lang
+  var storedLang = localStorage.getItem('mqr_lang') || 'fr';
+  var langSel = document.getElementById('dv-lang');
+  if (langSel && ['fr','el','en','ar','de'].includes(storedLang)) langSel.value = storedLang;
+
 })();
 </script>
 </body>
