@@ -834,7 +834,7 @@ button{background:none;border:none;color:inherit;font:inherit;cursor:pointer}
 }
 .fo-options-head p{font-size:.84rem;color:var(--bone-2);max-width:340px;line-height:1.55}
 .fo-options-grid{
-  display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;max-width:620px;
 }
 .fo-option-card{
   border:1px solid var(--line);border-radius:20px;
@@ -972,7 +972,7 @@ button{background:none;border:none;color:inherit;font:inherit;cursor:pointer}
   .fo-subpage .fo-feat::before{display:block}
   .fo-dots{display:none}
   .fo-panel-opts.is-active{display:block}
-  .fo-options-grid{grid-template-columns:repeat(3,1fr)}
+  .fo-options-grid{grid-template-columns:repeat(2,1fr)}
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -1129,6 +1129,68 @@ footer .right a:hover{color:var(--gold-2)}
   line-height:1.5;
 }
 
+
+/* ═══════════════════════════════════════════════════════════════
+   10b · DEMO FULL-SCREEN
+═══════════════════════════════════════════════════════════════ */
+.demo-fs{
+  display:none;position:fixed;inset:0;z-index:600;
+  flex-direction:column;background:#0a0907;
+}
+.demo-fs.is-open{display:flex}
+.demo-fs-bar{
+  display:flex;align-items:center;gap:.75rem;
+  padding:.6rem 1rem;
+  background:rgba(10,9,7,.92);backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(241,234,217,.08);
+  flex-shrink:0;z-index:1;
+}
+.demo-fs-back{
+  display:flex;align-items:center;gap:.5rem;
+  padding:.5rem 1rem;border-radius:99px;
+  border:1px solid rgba(241,234,217,.15);
+  font-size:.8rem;font-weight:500;color:var(--bone-2);
+  background:rgba(241,234,217,.04);
+  transition:all .3s var(--e-out);cursor:pointer;font-family:inherit;
+  flex-shrink:0;
+}
+.demo-fs-back:hover{border-color:var(--gold);color:var(--bone);background:rgba(200,164,78,.10)}
+.demo-fs-title{
+  font-size:.78rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--mute);flex:1;text-align:center;
+}
+.demo-fs-colors{
+  display:flex;align-items:center;gap:.35rem;flex-shrink:0;
+}
+.demo-fs-color{
+  width:20px;height:20px;border-radius:50%;cursor:pointer;
+  border:2px solid transparent;
+  transition:transform .25s var(--e-back),border-color .2s;
+  flex-shrink:0;
+}
+.demo-fs-color:hover{transform:scale(1.25)}
+.demo-fs-color.is-active{border-color:rgba(255,255,255,.6);transform:scale(1.2)}
+.demo-fs iframe{
+  flex:1;border:none;width:100%;height:100%;
+}
+
+/* Themes popup grid */
+.pop-themes-grid{
+  display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.4rem;
+}
+.pop-theme-item{
+  display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:1rem;
+  padding:1rem 1.1rem;border-radius:14px;
+  border:1px solid var(--line);background:rgba(241,234,217,.02);
+}
+.pop-theme-icon{
+  width:36px;height:36px;border-radius:10px;
+  background:rgba(200,164,78,.08);border:1px solid rgba(200,164,78,.15);
+  display:flex;align-items:center;justify-content:center;color:var(--gold);
+}
+.pop-theme-icon svg{width:16px;height:16px}
+.pop-theme-meta strong{display:block;font-weight:500;color:var(--bone);font-size:.92rem}
+.pop-theme-meta small{font-size:.74rem;color:var(--mute);letter-spacing:.03em}
 
 /* ═══════════════════════════════════════════════════════════════
    11 · SCROLL OFFSET (fixed nav compensation)
@@ -1763,8 +1825,8 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
     </div>
 
     <div class="hero-meta">
-      <div class="hero-meta-num" data-i18n-html="hero.meta.num"><span>02</span> styles</div>
-      <div class="hero-meta-label" data-i18n-html="hero.meta.label">Pages ou Dynamique<br>+ options à la carte</div>
+      <div class="hero-meta-num" data-i18n-html="hero.meta.num"><span>04</span> forfaits</div>
+      <div class="hero-meta-label" data-i18n-html="hero.meta.label">Basic, Avancé, Élégance, Ultime<br>+ options à la carte</div>
     </div>
   </div>
 
@@ -1930,73 +1992,73 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
 <section id="forfaits">
   <div class="fo-shell">
     <header class="fo-head reveal">
-      <h2 class="display" data-i18n-html="fo.h2">Deux styles,<br><em>toutes les options.</em></h2>
-      <p class="lead" data-i18n="fo.lead">Choisissez votre style de menu, avec ou sans tableau de bord admin, puis composez votre formule avec les options qui vous correspondent.</p>
+      <h2 class="display" data-i18n-html="fo.h2">Quatre niveaux,<br><em>toutes les options.</em></h2>
+      <p class="lead" data-i18n="fo.lead">Choisissez votre forfait selon l'ambiance souhaitée — avec ou sans accès admin — et ajoutez les options qui correspondent à votre service.</p>
     </header>
 
     <!-- Style selector -->
     <div class="fo-style-selector reveal delay-1" id="foStyleSelector">
       <div class="fo-style-pill" id="foStylePill"></div>
-      <button class="fo-style-btn is-active" data-i="0" onclick="switchStyle(0)" data-i18n="fo.style.pages">Style Pages</button>
-      <button class="fo-style-btn" data-i="1" onclick="switchStyle(1)" data-i18n="fo.style.dynamic">Style Dynamique</button>
-      <button class="fo-style-btn" data-i="2" onclick="switchStyle(2)" data-i18n="fo.style.options">Options</button>
+      <button class="fo-style-btn is-active" data-i="0" onclick="switchStyle(0)">Basic</button>
+      <button class="fo-style-btn" data-i="1" onclick="switchStyle(1)">Avancé</button>
+      <button class="fo-style-btn" data-i="2" onclick="switchStyle(2)">Élégance</button>
+      <button class="fo-style-btn" data-i="3" onclick="switchStyle(3)">Ultime</button>
+      <button class="fo-style-btn" data-i="4" onclick="switchStyle(4)" data-i18n="fo.style.options">Options</button>
     </div>
 
     <div class="fo-stage">
 
-      <!-- Panel Pages -->
+      <!-- Panel Basic -->
       <div class="fo-panel is-active" data-i="0">
         <div class="fo-subpages">
           <div class="fo-subpages-track">
-            <!-- Sub-page 0 : Tarifs -->
             <div class="fo-subpage">
               <aside class="fo-side">
-                <div class="fo-side-label" data-i18n="fo.p0.side.label">Style Pages</div>
+                <div class="fo-side-label">Basic</div>
                 <div class="fo-setup-price">
                   <span class="currency">€</span>
                   <span class="amount">100</span>
                 </div>
-                <span class="fo-setup-tag" data-i18n="fo.p0.side.tag">Création unique · mis en ligne en 1 à 2 semaines</span>
+                <span class="fo-setup-tag">Création unique · mis en ligne en 1 à 2 semaines</span>
                 <div class="fo-admin-toggle">
-                  <button class="fo-admin-btn is-active" onclick="toggleAdmin(0,'avec')" data-i18n="fo.admin.avec">Avec admin</button>
-                  <button class="fo-admin-btn" onclick="toggleAdmin(0,'sans')" data-i18n="fo.admin.sans">Sans admin</button>
+                  <button class="fo-admin-btn is-active" onclick="toggleAdmin(0,'avec')">Pro — avec admin</button>
+                  <button class="fo-admin-btn" onclick="toggleAdmin(0,'sans')">Simple — sans admin</button>
                 </div>
                 <div class="fo-admin-price is-visible" id="adm-price-0">
                   <span class="plus">+</span>
-                  <span class="a-amount">20</span>
+                  <span class="a-amount">15</span>
                   <span class="currency" style="font-size:.85rem;color:var(--mute);margin:0 .1em">€</span>
-                  <span class="a-per" data-i18n="fo.p0.admin.price.label">/ mois · gérez votre menu vous-même</span>
+                  <span class="a-per">/ mois · accès admin + 15 couleurs</span>
                 </div>
-                <div class="fo-modif-note" id="modif-note-0" data-i18n-html="fo.p0.modif.html">
+                <div class="fo-modif-note" id="modif-note-0">
                   <strong>Modifications à la demande :</strong><br>
-                  Contenu (produits, prix…) — <strong style="color:var(--bone)">40 €</strong><br>
+                  Contenu (produits, prix…) — <strong style="color:var(--bone)">30 €</strong><br>
                   Structure ou design — <strong style="color:var(--bone)">50 €</strong>
                 </div>
                 <div class="fo-side-divider"></div>
                 <div class="fo-side-actions">
-                  <button class="fo-btn fo-btn-test" onclick="openPopup('pop-pages')" data-i18n="fo.btn.demo">Voir un exemple</button>
-                  <button class="fo-btn fo-btn-choose" onclick="scrollTo_('devis')" data-i18n="fo.btn.choose">Choisir</button>
+                  <button class="fo-btn fo-btn-test" onclick="openThemePopup('basic')">Voir les thèmes</button>
+                  <button class="fo-btn fo-btn-choose" onclick="scrollTo_('devis')">Choisir</button>
                 </div>
               </aside>
             </div>
-            <!-- Sub-page 1 : Détails -->
             <div class="fo-subpage">
               <div class="fo-feat">
                 <div class="fo-feat-head">
                   <div class="fo-feat-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
                   </div>
                   <div>
-                    <h3 data-i18n="fo.p0.feat.h3">Style Pages</h3>
-                    <p data-i18n="fo.p0.feat.desc">Un menu élégant façon flipbook à pages. Idéal pour les établissements qui veulent une présence digitale soignée sans complexité.</p>
+                    <h3>Basic</h3>
+                    <p>Menu élégant façon carte de restaurant. Idéal pour les établissements qui souhaitent une présence digitale soignée et simple.</p>
                   </div>
                 </div>
                 <div class="fo-feat-list">
-                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span data-i18n="fo.p0.f1">Menu QR code consulté depuis smartphone, tablette ou ordinateur — sans application à télécharger</span></div>
-                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span data-i18n="fo.p0.f2">Navigation par pages façon carte de restaurant — présentation claire et élégante</span></div>
-                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span data-i18n="fo.p0.f3">Multilingue avec détection automatique de la langue du client</span></div>
-                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span data-i18n="fo.p0.f4">Mode dark / light, thèmes visuels, logo et couleurs de votre établissement</span></div>
-                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span data-i18n="fo.p0.f5">Hébergement, mise en ligne et maintenance inclus — clé en main</span></div>
+                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>Menu QR code consulté depuis smartphone, tablette ou ordinateur — sans application à télécharger</span></div>
+                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>Thème Papier — navigation élégante façon carte de restaurant</span></div>
+                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>Multilingue avec détection automatique de la langue du client</span></div>
+                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>Pro : 15 couleurs au choix + accès au tableau de bord admin</span></div>
+                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>Hébergement, mise en ligne et maintenance inclus</span></div>
                 </div>
               </div>
             </div>
@@ -2008,59 +2070,57 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
         </div>
       </div>
 
-      <!-- Panel Dynamique -->
+      <!-- Panel Avancé -->
       <div class="fo-panel" data-i="1">
         <div class="fo-subpages">
           <div class="fo-subpages-track">
-            <!-- Sub-page 0 : Tarifs -->
             <div class="fo-subpage">
               <aside class="fo-side">
-                <div class="fo-side-label" data-i18n="fo.p1.side.label">Style Dynamique</div>
+                <div class="fo-side-label">Avancé</div>
                 <div class="fo-setup-price">
                   <span class="currency">€</span>
-                  <span class="amount">200</span>
+                  <span class="amount">150</span>
                 </div>
-                <span class="fo-setup-tag" data-i18n="fo.p1.side.tag">Création unique · mis en ligne en 1 à 2 semaines</span>
+                <span class="fo-setup-tag">Création unique · mis en ligne en 1 à 2 semaines</span>
                 <div class="fo-admin-toggle">
-                  <button class="fo-admin-btn is-active" onclick="toggleAdmin(1,'avec')" data-i18n="fo.admin.avec">Avec admin</button>
-                  <button class="fo-admin-btn" onclick="toggleAdmin(1,'sans')" data-i18n="fo.admin.sans">Sans admin</button>
+                  <button class="fo-admin-btn is-active" onclick="toggleAdmin(1,'avec')">Pro — avec admin</button>
+                  <button class="fo-admin-btn" onclick="toggleAdmin(1,'sans')">Simple — sans admin</button>
                 </div>
                 <div class="fo-admin-price is-visible" id="adm-price-1">
                   <span class="plus">+</span>
-                  <span class="a-amount">50</span>
+                  <span class="a-amount">25</span>
                   <span class="currency" style="font-size:.85rem;color:var(--mute);margin:0 .1em">€</span>
-                  <span class="a-per" data-i18n="fo.p1.admin.price.label">/ mois · gérez votre menu vous-même</span>
+                  <span class="a-per">/ mois · accès admin + 15 couleurs</span>
                 </div>
-                <div class="fo-modif-note" id="modif-note-1" data-i18n-html="fo.p1.modif.html">
+                <div class="fo-modif-note" id="modif-note-1">
                   <strong>Modifications à la demande :</strong><br>
-                  Contenu (produits, prix…) — <strong style="color:var(--bone)">80 €</strong><br>
-                  Structure ou design — <strong style="color:var(--bone)">100 €</strong>
+                  Contenu (produits, prix…) — <strong style="color:var(--bone)">35 €</strong><br>
+                  Structure ou design — <strong style="color:var(--bone)">60 €</strong>
                 </div>
                 <div class="fo-side-divider"></div>
                 <div class="fo-side-actions">
-                  <button class="fo-btn fo-btn-test" onclick="openPopup('pop-dyn')" data-i18n="fo.btn.demo">Voir un exemple</button>
-                  <button class="fo-btn fo-btn-choose" onclick="scrollTo_('devis')" data-i18n="fo.btn.choose">Choisir</button>
+                  <button class="fo-btn fo-btn-test" onclick="openThemePopup('avance')">Voir les thèmes</button>
+                  <button class="fo-btn fo-btn-choose" onclick="scrollTo_('devis')">Choisir</button>
                 </div>
               </aside>
             </div>
-            <!-- Sub-page 1 : Détails -->
             <div class="fo-subpage">
               <div class="fo-feat">
                 <div class="fo-feat-head">
                   <div class="fo-feat-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
                   </div>
                   <div>
-                    <h3 data-i18n="fo.p1.feat.h3">Style Dynamique</h3>
-                    <p data-i18n="fo.p1.feat.desc">Un menu vivant avec photos, animations et mise à jour instantanée. L'expérience la plus immersive pour vos clients.</p>
+                    <h3>Avancé</h3>
+                    <p>Menu esthétique façon livre — typographie soignée, navigation immersive. Idéal pour les établissements raffinés.</p>
                   </div>
                 </div>
                 <div class="fo-feat-list">
-                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span data-i18n="fo.p1.f1">Tout ce qui est inclus dans le Style Pages</span></div>
-                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span data-i18n="fo.p1.f2">Page d'accueil immersive avec hero animé, parallax et scroll automatique</span></div>
-                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span data-i18n="fo.p1.f3">Photos HD des produits, animations d'entrée fluides, badges Nouveau / Populaire</span></div>
-                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span data-i18n="fo.p1.f4">WiFi affiché en page d'accueil, note personnalisée, informations établissement</span></div>
-                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span data-i18n="fo.p1.f5">Navigation par catégories avec défilement fluide et particules festives</span></div>
+                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>Tout ce qui est inclus dans Basic</span></div>
+                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>Famille de thèmes "Livre" — typographie premium, mise en page éditoriale</span></div>
+                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>Ajout progressif de nouveaux thèmes Avancé</span></div>
+                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>Pro : 15 couleurs au choix + accès au tableau de bord admin</span></div>
+                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>Hébergement, mise en ligne et maintenance inclus</span></div>
                 </div>
               </div>
             </div>
@@ -2072,48 +2132,143 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
         </div>
       </div>
 
+      <!-- Panel Élégance -->
+      <div class="fo-panel" data-i="2">
+        <div class="fo-subpages">
+          <div class="fo-subpages-track">
+            <div class="fo-subpage">
+              <aside class="fo-side">
+                <div class="fo-side-label">Élégance</div>
+                <div class="fo-setup-price">
+                  <span class="currency">€</span>
+                  <span class="amount">200</span>
+                </div>
+                <span class="fo-setup-tag">Création unique · mis en ligne en 1 à 2 semaines</span>
+                <div class="fo-admin-toggle">
+                  <button class="fo-admin-btn is-active" onclick="toggleAdmin(2,'avec')">Pro — avec admin</button>
+                  <button class="fo-admin-btn" onclick="toggleAdmin(2,'sans')">Simple — sans admin</button>
+                </div>
+                <div class="fo-admin-price is-visible" id="adm-price-2">
+                  <span class="plus">+</span>
+                  <span class="a-amount">40</span>
+                  <span class="currency" style="font-size:.85rem;color:var(--mute);margin:0 .1em">€</span>
+                  <span class="a-per">/ mois · accès admin + 15 couleurs</span>
+                </div>
+                <div class="fo-modif-note" id="modif-note-2">
+                  <strong>Modifications à la demande :</strong><br>
+                  Contenu (produits, prix…) — <strong style="color:var(--bone)">40 €</strong><br>
+                  Structure ou design — <strong style="color:var(--bone)">80 €</strong>
+                </div>
+                <div class="fo-side-divider"></div>
+                <div class="fo-side-actions">
+                  <button class="fo-btn fo-btn-test" onclick="openThemePopup('elegance')">Voir les thèmes</button>
+                  <button class="fo-btn fo-btn-choose" onclick="scrollTo_('devis')">Choisir</button>
+                </div>
+              </aside>
+            </div>
+            <div class="fo-subpage">
+              <div class="fo-feat">
+                <div class="fo-feat-head">
+                  <div class="fo-feat-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                  </div>
+                  <div>
+                    <h3>Élégance</h3>
+                    <p>Menu vivant avec animations, photos HD et mise à jour instantanée. L'expérience la plus immersive pour vos clients.</p>
+                  </div>
+                </div>
+                <div class="fo-feat-list">
+                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>Tout ce qui est inclus dans Avancé</span></div>
+                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>Accès à tous les thèmes Dynamique — photos HD, animations fluides, hero animé</span></div>
+                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>Page d'accueil immersive avec parallax, défilement automatique et badges produits</span></div>
+                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>Pro : 15 couleurs au choix + accès au tableau de bord admin</span></div>
+                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>Hébergement, mise en ligne et maintenance inclus</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="fo-dots">
+          <button class="fo-dot is-active" onclick="switchSubPage(2,0)" aria-label="Tarifs"></button>
+          <button class="fo-dot" onclick="switchSubPage(2,1)" aria-label="Détails"></button>
+        </div>
+      </div>
+
+      <!-- Panel Ultime -->
+      <div class="fo-panel" data-i="3">
+        <div class="fo-subpages">
+          <div class="fo-subpages-track">
+            <div class="fo-subpage">
+              <aside class="fo-side">
+                <div class="fo-side-label">Ultime</div>
+                <div class="fo-setup-price">
+                  <span class="currency">€</span>
+                  <span class="amount">300</span>
+                </div>
+                <span class="fo-setup-tag">Tous les thèmes · admin inclus · 15 couleurs</span>
+                <div class="fo-admin-price is-visible" style="margin-top:0;margin-bottom:1.4rem">
+                  <span class="plus">+</span>
+                  <span class="a-amount">60</span>
+                  <span class="currency" style="font-size:.85rem;color:var(--mute);margin:0 .1em">€</span>
+                  <span class="a-per">/ mois · admin + tous les thèmes</span>
+                </div>
+                <div class="fo-side-divider"></div>
+                <div class="fo-side-actions">
+                  <button class="fo-btn fo-btn-test" onclick="openThemePopup('ultime')">Voir les thèmes</button>
+                  <button class="fo-btn fo-btn-choose" onclick="scrollTo_('devis')">Choisir</button>
+                </div>
+              </aside>
+            </div>
+            <div class="fo-subpage">
+              <div class="fo-feat">
+                <div class="fo-feat-head">
+                  <div class="fo-feat-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                  </div>
+                  <div>
+                    <h3>Ultime</h3>
+                    <p>Accès à tous les thèmes Basic, Avancé et Élégance. Le forfait complet pour les établissements qui veulent tout.</p>
+                  </div>
+                </div>
+                <div class="fo-feat-list">
+                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>Tout ce qui est inclus dans Élégance</span></div>
+                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>Accès à TOUS les thèmes — Basic, Avancé et Élégance</span></div>
+                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>15 couleurs universelles — changez l'ambiance à tout moment depuis l'admin</span></div>
+                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>Tableau de bord admin inclus — gérez votre menu vous-même</span></div>
+                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>Hébergement, mise en ligne et maintenance inclus</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="fo-dots">
+          <button class="fo-dot is-active" onclick="switchSubPage(3,0)" aria-label="Tarifs"></button>
+          <button class="fo-dot" onclick="switchSubPage(3,1)" aria-label="Détails"></button>
+        </div>
+      </div>
+
       <!-- Panel Options -->
-      <div class="fo-panel fo-panel-opts" data-i="2">
+      <div class="fo-panel fo-panel-opts" data-i="4">
         <div class="fo-opts-head-inner">
-          <h3 class="display" data-i18n-html="fo.opts.h3">Options <em>à la carte</em></h3>
-          <p data-i18n="fo.opts.p">Ajoutez les fonctionnalités qui correspondent à votre flux de service — indépendamment du style choisi.</p>
+          <h3 class="display">Options <em>à la carte</em></h3>
+          <p>Ajoutez les fonctionnalités qui correspondent à votre service — disponibles avec tous les forfaits, elles incluent automatiquement l'accès admin.</p>
         </div>
         <div class="fo-options-grid">
 
           <div class="fo-option-card">
             <div class="fo-option-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="10.5" r="2.5"/><circle cx="8.5" cy="7.5" r="2.5"/><circle cx="6.5" cy="12.5" r="2.5"/><path d="M12 22a10 10 0 010-20 7.5 7.5 0 015 13c-1 1-2 2-2 3a2 2 0 002 2 5 5 0 005-5"/></svg>
-            </div>
-            <div class="fo-option-name" data-i18n="fo.opt0.name">Option Thèmes</div>
-            <div class="fo-option-desc" data-i18n="fo.opt0.desc">Accès à l'ensemble des thèmes visuels premium — changez l'ambiance de votre menu à tout moment.</div>
-            <div class="fo-option-price">
-              <div class="fo-option-price-val">
-                <span class="o-amount">20</span>
-                <span style="font-size:.9rem;color:var(--mute);margin:0 .1em">€</span>
-                <span class="o-per">/ mois</span>
-              </div>
-              <div class="fo-option-actions">
-                <button class="fo-btn fo-btn-test" onclick="openPopup('pop-themes')" data-i18n="fo.btn.demo">Voir un exemple</button>
-                <button class="fo-btn fo-btn-choose" onclick="scrollTo_('devis')" data-i18n="fo.btn.choose">Choisir</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="fo-option-card">
-            <div class="fo-option-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>
             </div>
-            <div class="fo-option-name" data-i18n="fo.opt1.name">Option Sonnette</div>
-            <div class="fo-option-desc" data-i18n="fo.opt1.desc">Vos clients appellent le service en un tap depuis leur table. Notification push instantanée sur votre téléphone.</div>
+            <div class="fo-option-name">Option Sonnette</div>
+            <div class="fo-option-desc">Vos clients appellent le service en un tap depuis leur table. Notification push instantanée sur votre téléphone.</div>
             <div class="fo-option-price">
               <div class="fo-option-price-val">
-                <span class="o-amount">50</span>
-                <span style="font-size:.9rem;color:var(--mute);margin:0 .1em">€</span>
-                <span class="o-per">/ mois</span>
+                <span class="o-amount">—</span>
+                <span class="o-per" style="margin-left:.4rem">Sur devis</span>
               </div>
               <div class="fo-option-actions">
-                <button class="fo-btn fo-btn-test" onclick="openPopup('pop-bell')" data-i18n="fo.btn.demo">Voir un exemple</button>
-                <button class="fo-btn fo-btn-choose" onclick="scrollTo_('devis')" data-i18n="fo.btn.choose">Choisir</button>
+                <button class="fo-btn fo-btn-test" onclick="openDemoFs('demo-bell.html','Option Sonnette')">Voir l'option</button>
+                <button class="fo-btn fo-btn-choose" onclick="scrollTo_('devis')">Choisir</button>
               </div>
             </div>
           </div>
@@ -2122,17 +2277,16 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
             <div class="fo-option-icon">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
             </div>
-            <div class="fo-option-name" data-i18n="fo.opt2.name">Option Commande</div>
-            <div class="fo-option-desc" data-i18n="fo.opt2.desc">Vos clients commandent directement depuis le menu. Suivi live de la préparation, historique complet côté établissement.</div>
+            <div class="fo-option-name">Option Commande</div>
+            <div class="fo-option-desc">Vos clients commandent directement depuis le menu. Suivi live de la préparation, historique complet côté établissement.</div>
             <div class="fo-option-price">
               <div class="fo-option-price-val">
-                <span class="o-amount">150</span>
-                <span style="font-size:.9rem;color:var(--mute);margin:0 .1em">€</span>
-                <span class="o-per">/ mois</span>
+                <span class="o-amount">—</span>
+                <span class="o-per" style="margin-left:.4rem">Sur devis</span>
               </div>
               <div class="fo-option-actions">
-                <button class="fo-btn fo-btn-test" onclick="openPopup('pop-order')" data-i18n="fo.btn.demo">Voir un exemple</button>
-                <button class="fo-btn fo-btn-choose" onclick="scrollTo_('devis')" data-i18n="fo.btn.choose">Choisir</button>
+                <button class="fo-btn fo-btn-test" onclick="openDemoFs('demo-order.html','Option Commande')">Voir l'option</button>
+                <button class="fo-btn fo-btn-choose" onclick="scrollTo_('devis')">Choisir</button>
               </div>
             </div>
           </div>
@@ -2336,119 +2490,83 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
      POPUPS
 ════════════════════════════════════════════════════════════ -->
 
-<div class="popup" id="pop-pages" onclick="popupOutside(event,'pop-pages')">
+<!-- Popup Thèmes (contenu dynamique) -->
+<div class="popup" id="pop-themes-tier" onclick="popupOutside(event,'pop-themes-tier')">
   <div class="popup-card">
-    <button class="popup-close" onclick="closePopup('pop-pages')" aria-label="Fermer">
+    <button class="popup-close" onclick="closePopup('pop-themes-tier')" aria-label="Fermer">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
     </button>
-    <div class="eyebrow popup-eyebrow" data-i18n="pp.pages.eyebrow">Style Pages</div>
-    <h3 data-i18n-html="pp.pages.h3">Tester le menu <em>Pages.</em></h3>
-    <p class="popup-lead" data-i18n="pp.pages.lead">Explorez la présentation claire et élégante du Style Pages — menu multilingue, QR code, identité visuelle personnalisée.</p>
-    <div class="popup-list">
-      <a href="demo-paper.html" target="_blank" rel="noopener" class="popup-link">
-        <div class="popup-link-num">1</div>
-        <div class="popup-link-meta"><strong data-i18n="pp.pages.l1.label">Menu client (QR code)</strong><small data-i18n="pp.pages.l1.sub">Vue depuis la table · style Pages</small></div>
-        <div class="popup-link-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
-      </a>
-      <a href="https://cafe-elysee-dye1.vercel.app/admin.html?demo=1" target="_blank" rel="noopener" class="popup-link" id="pp-pages-admin-lnk">
-        <div class="popup-link-num">2</div>
-        <div class="popup-link-meta"><strong data-i18n="pp.pages.l2.label">Interface admin</strong><small data-i18n="pp.pages.l2.sub">Gestion du contenu en temps réel</small></div>
-        <div class="popup-link-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
-      </a>
+    <div class="eyebrow popup-eyebrow" id="pop-themes-eyebrow">Thèmes</div>
+    <h3 id="pop-themes-title">Choisissez votre <em>ambiance.</em></h3>
+    <p class="popup-lead" id="pop-themes-lead">Explorez les thèmes disponibles et prévisualisez-les en direct avec vos couleurs.</p>
+    <div class="pop-themes-grid" id="pop-themes-grid">
+      <!-- Rempli dynamiquement par JS -->
     </div>
-    <p class="popup-foot" data-i18n="pp.foot">Mode démo — aucune action n'est enregistrée.</p>
+    <p class="popup-foot">Mode démo — aucune action n'est enregistrée.</p>
   </div>
 </div>
 
-<div class="popup" id="pop-dyn" onclick="popupOutside(event,'pop-dyn')">
-  <div class="popup-card">
-    <button class="popup-close" onclick="closePopup('pop-dyn')" aria-label="Fermer">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
-    </button>
-    <div class="eyebrow popup-eyebrow" data-i18n="pp.dyn.eyebrow">Style Dynamique</div>
-    <h3 data-i18n-html="pp.dyn.h3">Tester le menu <em>Dynamique.</em></h3>
-    <p class="popup-lead" data-i18n="pp.dyn.lead">Découvrez l'expérience immersive avec photos HD, animations fluides et navigation par catégories.</p>
-    <div class="popup-list">
-      <a href="demo-dynamic.html" target="_blank" rel="noopener" class="popup-link">
-        <div class="popup-link-num">1</div>
-        <div class="popup-link-meta"><strong data-i18n="pp.dyn.l1.label">Menu client</strong><small data-i18n="pp.dyn.l1.sub">Photos, animations, multilingue</small></div>
-        <div class="popup-link-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
-      </a>
-      <a href="https://cafe-elysee-dye1.vercel.app/admin.html?demo=1" target="_blank" rel="noopener" class="popup-link" id="pp-dyn-admin-lnk">
-        <div class="popup-link-num">2</div>
-        <div class="popup-link-meta"><strong data-i18n="pp.dyn.l2.label">Interface admin</strong><small data-i18n="pp.dyn.l2.sub">Tableau de bord, mise à jour en direct</small></div>
-        <div class="popup-link-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
-      </a>
-    </div>
-    <p class="popup-foot" data-i18n="pp.foot">Mode démo — aucune action n'est enregistrée.</p>
-  </div>
-</div>
-
+<!-- Popup Bell (conserver pour compatibilité) -->
 <div class="popup" id="pop-bell" onclick="popupOutside(event,'pop-bell')">
   <div class="popup-card">
     <button class="popup-close" onclick="closePopup('pop-bell')" aria-label="Fermer">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
     </button>
-    <div class="eyebrow popup-eyebrow" data-i18n="pp.bell.eyebrow">Option Sonnette</div>
-    <h3 data-i18n-html="pp.bell.h3">Voir la sonnette <em>en action.</em></h3>
-    <p class="popup-lead" data-i18n="pp.bell.lead">Le client tape "Appeler le serveur" — vous recevez une notification push instantanée sur votre téléphone.</p>
+    <div class="eyebrow popup-eyebrow">Option Sonnette</div>
+    <h3>Voir la sonnette <em>en action.</em></h3>
+    <p class="popup-lead">Le client tape "Appeler le serveur" — vous recevez une notification push instantanée sur votre téléphone.</p>
     <div class="popup-list">
       <a href="demo-bell.html" target="_blank" rel="noopener" class="popup-link">
         <div class="popup-link-num">1</div>
-        <div class="popup-link-meta"><strong data-i18n="pp.bell.l1.label">Menu client avec sonnette</strong><small data-i18n="pp.bell.l1.sub">Bouton "Appeler le serveur" activé</small></div>
+        <div class="popup-link-meta"><strong>Menu client avec sonnette</strong><small>Bouton "Appeler le serveur" activé</small></div>
         <div class="popup-link-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
       </a>
       <a href="demo-server.html?section=calls" target="_blank" rel="noopener" class="popup-link">
         <div class="popup-link-num">2</div>
-        <div class="popup-link-meta"><strong data-i18n="pp.bell.l2.label">App serveur (appels)</strong><small data-i18n="pp.bell.l2.sub">Interface reçue sur le téléphone du staff</small></div>
+        <div class="popup-link-meta"><strong>App serveur (appels)</strong><small>Interface reçue sur le téléphone du staff</small></div>
         <div class="popup-link-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
       </a>
     </div>
-    <p class="popup-foot" data-i18n="pp.foot">Mode démo — aucune action n'est enregistrée.</p>
+    <p class="popup-foot">Mode démo — aucune action n'est enregistrée.</p>
   </div>
 </div>
 
+<!-- Popup Order (conserver pour compatibilité) -->
 <div class="popup" id="pop-order" onclick="popupOutside(event,'pop-order')">
   <div class="popup-card">
     <button class="popup-close" onclick="closePopup('pop-order')" aria-label="Fermer">
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
     </button>
-    <div class="eyebrow popup-eyebrow" data-i18n="pp.order.eyebrow">Option Commande</div>
-    <h3 data-i18n-html="pp.order.h3">Voir la commande <em>en action.</em></h3>
-    <p class="popup-lead" data-i18n="pp.order.lead">Le client compose sa commande depuis le menu — elle arrive instantanément dans l'app de votre établissement.</p>
+    <div class="eyebrow popup-eyebrow">Option Commande</div>
+    <h3>Voir la commande <em>en action.</em></h3>
+    <p class="popup-lead">Le client compose sa commande depuis le menu — elle arrive instantanément dans l'app de votre établissement.</p>
     <div class="popup-list">
       <a href="demo-order.html" target="_blank" rel="noopener" class="popup-link">
         <div class="popup-link-num">1</div>
-        <div class="popup-link-meta"><strong data-i18n="pp.order.l1.label">Menu client avec commande</strong><small data-i18n="pp.order.l1.sub">Panier et validation activés</small></div>
+        <div class="popup-link-meta"><strong>Menu client avec commande</strong><small>Panier et validation activés</small></div>
         <div class="popup-link-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
       </a>
       <a href="demo-server.html?section=orders" target="_blank" rel="noopener" class="popup-link">
         <div class="popup-link-num">2</div>
-        <div class="popup-link-meta"><strong data-i18n="pp.order.l2.label">App serveur (commandes)</strong><small data-i18n="pp.order.l2.sub">Suivi live des commandes côté établissement</small></div>
+        <div class="popup-link-meta"><strong>App serveur (commandes)</strong><small>Suivi live des commandes côté établissement</small></div>
         <div class="popup-link-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
       </a>
     </div>
-    <p class="popup-foot" data-i18n="pp.foot">Mode démo — aucune action n'est enregistrée.</p>
+    <p class="popup-foot">Mode démo — aucune action n'est enregistrée.</p>
   </div>
 </div>
 
-<div class="popup" id="pop-themes" onclick="popupOutside(event,'pop-themes')">
-  <div class="popup-card">
-    <button class="popup-close" onclick="closePopup('pop-themes')" aria-label="Fermer">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+<!-- Overlay plein écran demo -->
+<div class="demo-fs" id="demo-fs">
+  <div class="demo-fs-bar">
+    <button class="demo-fs-back" onclick="demoFsBack()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Retour
     </button>
-    <div class="eyebrow popup-eyebrow" data-i18n="pp.themes.eyebrow">Option Thèmes</div>
-    <h3 data-i18n-html="pp.themes.h3">Choisissez votre <em>ambiance.</em></h3>
-    <p class="popup-lead" data-i18n="pp.themes.lead">Explorez tous les thèmes visuels disponibles — changez l'identité de votre menu en un clic.</p>
-    <div class="popup-list">
-      <a href="demo-themes.html" target="_blank" rel="noopener" class="popup-link">
-        <div class="popup-link-num">1</div>
-        <div class="popup-link-meta"><strong data-i18n="pp.themes.l1.label">Galerie des thèmes</strong><small data-i18n="pp.themes.l1.sub">Prévisualisation en direct de chaque ambiance</small></div>
-        <div class="popup-link-arrow"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg></div>
-      </a>
-    </div>
-    <p class="popup-foot" data-i18n="pp.foot">Mode démo — aucune action n'est enregistrée.</p>
+    <span class="demo-fs-title" id="demo-fs-title"></span>
+    <div class="demo-fs-colors" id="demo-fs-colors"></div>
   </div>
+  <iframe id="demo-fs-iframe" src="" title="Démo menu" allow="fullscreen"></iframe>
 </div>
 
 <!-- ════════════════════════════════════════════════════════════
@@ -2639,7 +2757,6 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
     styleBtns.forEach((b,j)=>b.classList.toggle('is-active',j===i));
     fosPanels.forEach((p,j)=>p.classList.toggle('is-active',j===i));
     placeStylePill(i);
-    // Recalculate after scroll settles
     setTimeout(_forfaitsNavTop, 600);
     const sel=document.getElementById('foStyleSelector');
     if(sel){
@@ -2654,28 +2771,21 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
   });
 
   // ── Admin toggle ───────────────────────────────────────
-  // buttons order: 0=Avec admin (left), 1=Sans admin (right)
   window.toggleAdmin=function(panelIdx,mode){
     const panel=fosPanels[panelIdx];
+    if(!panel)return;
     const btns=panel.querySelectorAll('.fo-admin-btn');
     btns.forEach((b,j)=>b.classList.toggle('is-active',j===(mode==='avec'?0:1)));
     const admPrice=document.getElementById('adm-price-'+panelIdx);
     const modifNote=document.getElementById('modif-note-'+panelIdx);
-    if(mode==='avec'){
-      admPrice.classList.add('is-visible');
-      modifNote.classList.remove('is-visible');
-    } else {
-      admPrice.classList.remove('is-visible');
-      modifNote.classList.add('is-visible');
-    }
-    // Afficher/masquer le lien Interface Admin dans le popup correspondant
-    const adminLnk = document.getElementById(panelIdx===0 ? 'pp-pages-admin-lnk' : 'pp-dyn-admin-lnk');
-    if(adminLnk) adminLnk.style.display = mode==='avec' ? '' : 'none';
+    if(admPrice)admPrice.classList.toggle('is-visible',mode==='avec');
+    if(modifNote)modifNote.classList.toggle('is-visible',mode==='sans');
   };
 
   // ── Sub-page switcher ──────────────────────────────────
   window.switchSubPage=function(panelIdx,subIdx){
     const panel=fosPanels[panelIdx];
+    if(!panel)return;
     const track=panel.querySelector('.fo-subpages-track');
     const dots=panel.querySelectorAll('.fo-dot');
     if(track)track.style.transform=`translateX(-${subIdx*100}%)`;
@@ -2699,6 +2809,118 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
     },{passive:true});
   });
 
+  // ── THEME POPUP ────────────────────────────────────────
+  const TIER_THEMES={
+    basic:{
+      label:'Basic',
+      desc:'Le thème Papier — élégant, épuré, intemporel.',
+      themes:[
+        {icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>',name:'Papier',sub:'Carte de restaurant classique',url:'demo-paper.html'}
+      ]
+    },
+    avance:{
+      label:'Avancé',
+      desc:'La famille Livre — typographie premium, mise en page éditoriale.',
+      themes:[
+        {icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>',name:'Livre',sub:'Design éditorial raffiné',url:'menu-demo.html'}
+      ]
+    },
+    elegance:{
+      label:'Élégance',
+      desc:'Thèmes dynamiques — photos HD, animations, expérience immersive.',
+      themes:[
+        {icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',name:'Dynamique',sub:'Hero animé, parallax, photos HD',url:'menu-demo.html'},
+        {icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>',name:'Galerie des thèmes',sub:'Prévisualisation de tous les thèmes',url:'demo-themes.html'}
+      ]
+    },
+    ultime:{
+      label:'Ultime',
+      desc:'Tous les thèmes — Basic, Avancé et Élégance.',
+      themes:[
+        {icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>',name:'Papier',sub:'Thème Basic — carte classique',url:'demo-paper.html'},
+        {icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>',name:'Livre',sub:'Thème Avancé — design éditorial',url:'menu-demo.html'},
+        {icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',name:'Dynamique',sub:'Thème Élégance — photos HD, animations',url:'menu-demo.html'},
+        {icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>',name:'Galerie des thèmes',sub:'Tous les thèmes disponibles',url:'demo-themes.html'}
+      ]
+    }
+  };
+
+  window.openThemePopup=function(tier){
+    const data=TIER_THEMES[tier];
+    if(!data)return;
+    document.getElementById('pop-themes-eyebrow').textContent='Thèmes '+data.label;
+    document.getElementById('pop-themes-title').innerHTML='Explorez les thèmes <em>'+data.label+'.</em>';
+    document.getElementById('pop-themes-lead').textContent=data.desc;
+    const grid=document.getElementById('pop-themes-grid');
+    grid.innerHTML=data.themes.map(t=>`
+      <div class="pop-theme-item">
+        <div class="pop-theme-icon">${t.icon}</div>
+        <div class="pop-theme-meta"><strong>${t.name}</strong><small>${t.sub}</small></div>
+        <button class="fo-btn fo-btn-test" style="flex:none;padding:.5rem 1rem;font-size:.8rem;border-radius:10px" onclick="openDemoFs('${t.url}','${t.name}')">Voir un exemple</button>
+      </div>
+    `).join('');
+    openPopup('pop-themes-tier');
+  };
+
+  // ── DEMO FULL-SCREEN ───────────────────────────────────
+  const FS_COLORS=[
+    {hex:'#C8A44E',name:'Or'},
+    {hex:'#E8D5A0',name:'Champagne'},
+    {hex:'#F0F0EB',name:'Crème'},
+    {hex:'#4A4A4A',name:'Anthracite'},
+    {hex:'#1E3A5F',name:'Marine'},
+    {hex:'#2B7FBE',name:'Bleu royal'},
+    {hex:'#47A3A3',name:'Turquoise'},
+    {hex:'#2E7D52',name:'Vert forêt'},
+    {hex:'#9B4DCA',name:'Violet'},
+    {hex:'#E91E8C',name:'Rose vif'},
+    {hex:'#D4A090',name:'Rose poudré'},
+    {hex:'#E87B3A',name:'Terracotta'},
+    {hex:'#C73535',name:'Rouge'},
+    {hex:'#8B6914',name:'Brun doré'},
+    {hex:'#5D4037',name:'Brun profond'}
+  ];
+  let _demoFsPrevPopup=null;
+  let _demoFsActiveColor=0;
+
+  (function buildColorBar(){
+    const bar=document.getElementById('demo-fs-colors');
+    if(!bar)return;
+    bar.innerHTML=FS_COLORS.map((c,i)=>`
+      <button class="demo-fs-color${i===0?' is-active':''}" style="background:${c.hex}" title="${c.name}" onclick="demoFsColor(${i})" aria-label="${c.name}"></button>
+    `).join('');
+  })();
+
+  window.openDemoFs=function(url,title){
+    _demoFsPrevPopup=_openPopupId;
+    if(_openPopupId)closePopup(_openPopupId);
+    document.getElementById('demo-fs-title').textContent=title||'';
+    document.getElementById('demo-fs-iframe').src=url;
+    document.getElementById('demo-fs').classList.add('is-open');
+    document.body.style.overflow='hidden';
+    _demoFsActiveColor=0;
+    document.querySelectorAll('.demo-fs-color').forEach((b,i)=>b.classList.toggle('is-active',i===0));
+  };
+
+  window.demoFsBack=function(){
+    document.getElementById('demo-fs').classList.remove('is-open');
+    document.getElementById('demo-fs-iframe').src='';
+    document.body.style.overflow='';
+    if(_demoFsPrevPopup){
+      openPopup(_demoFsPrevPopup);
+      _demoFsPrevPopup=null;
+    }
+  };
+
+  window.demoFsColor=function(i){
+    _demoFsActiveColor=i;
+    document.querySelectorAll('.demo-fs-color').forEach((b,j)=>b.classList.toggle('is-active',j===i));
+    const iframe=document.getElementById('demo-fs-iframe');
+    try{
+      iframe.contentWindow.postMessage({type:'menu-color',color:FS_COLORS[i].hex},'*');
+    }catch(e){}
+  };
+
   // ── POPUPS ─────────────────────────────────────────────
   let _openPopupId=null;
   window.openPopup=id=>{
@@ -2718,13 +2940,15 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
   });
   document.addEventListener('keydown',e=>{
     if(e.key==='Escape'){
+      if(document.getElementById('demo-fs').classList.contains('is-open')){
+        demoFsBack();return;
+      }
       document.querySelectorAll('.popup.is-open').forEach(p=>p.classList.remove('is-open'));
       document.body.style.overflow='';
     }
   });
 
   // ── REVEAL on scroll ───────────────────────────────────
-  // Reveal all elements immediately on load — no scroll dependency
   document.querySelectorAll('.reveal').forEach(el=>{
     el.style.transition='none';
     el.classList.add('in');
@@ -2746,7 +2970,7 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
       'hero.title.1':'Élégance, Confort,','hero.title.2':'Sécurité, Rapidité,','hero.title.3':'<em>Efficacité et Hygiène.</em>',
       'hero.lead':'Le client scanne le QR Code de sa table et accède instantanément à un menu élégant directement sur son téléphone, sans attente et sans contact avec des menus papier manipulés par d\'autres clients.',
       'hero.cta1':'Découvrir les avantages','hero.cta2':'Voir les forfaits','hero.cta3':'Nous contacter',
-      'hero.meta.num':'<span>02</span> styles','hero.meta.label':'Pages ou Dynamique<br>+ options à la carte',
+      'hero.meta.num':'<span>04</span> forfaits','hero.meta.label':'Basic, Avancé, Élégance, Ultime<br>+ options à la carte',
       'hero.hud.label':'Aperçu du menu',
       'av.h2':'Cinq raisons de<br><em>passer au digital.</em>',
       'av.lead':'Chaque avantage a été pensé pour améliorer l\'expérience de vos clients et simplifier la gestion de votre établissement.',
@@ -2755,7 +2979,7 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
       'av.c3.h3':'Accessible partout,<br><em>idéal pour les touristes.</em>','av.c3.p':'Disponible en plusieurs langues, le menu facilite l\'accueil des touristes et valorise l\'image moderne de votre établissement. Accessible 24h/24 et facile à partager sur les réseaux sociaux.','av.c3.t1':'Multilingue','av.c3.t2':'24h/24',
       'av.c4.h3':'Gestion instantanée<br><em>et personnalisation.</em>','av.c4.p':'Modifiez immédiatement vos prix, produits ou promotions depuis une page d\'administration simple et intuitive. Ajoutez facilement des photos et adaptez votre menu selon les saisons ou événements.','av.c4.t1':'Admin simple','av.c4.t2':'Temps réel','av.c4.opt':'Optionnel',
       'av.c5.h3':'Commande intelligente,<br><em>design avancé.</em>','av.c5.p':'Les clients peuvent appeler un serveur ou commander directement depuis le menu QR Code. Le propriétaire peut également changer instantanément les thèmes et le design du menu selon ses préférences.','av.c5.t1':'Appel serveur','av.c5.t2':'Commande en ligne','av.c5.opt':'Optionnel',
-      'fo.h2':'Deux styles,<br><em>toutes les options.</em>','fo.lead':'Choisissez votre style de menu, avec ou sans tableau de bord admin, puis composez votre formule avec les options qui vous correspondent.',
+      'fo.h2':'Quatre niveaux,<br><em>toutes les options.</em>','fo.lead':'Choisissez votre forfait selon l\'ambiance souhaitée — avec ou sans accès admin — et ajoutez les options qui correspondent à votre service.',
       'fo.style.pages':'Style Pages','fo.style.dynamic':'Style Dynamique','fo.style.options':'Options',
       'fo.p0.feat.h3':'Style Pages','fo.p0.feat.desc':'Un menu élégant façon flipbook à pages. Idéal pour les établissements qui veulent une présence digitale soignée sans complexité.',
       'fo.p0.f1':'Menu QR code consulté depuis smartphone, tablette ou ordinateur — sans application à télécharger',
@@ -2833,7 +3057,7 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
       'hero.title.1':'Elegance, Comfort,','hero.title.2':'Security, Speed,','hero.title.3':'<em>Efficiency &amp; Hygiene.</em>',
       'hero.lead':'The customer scans the QR Code at their table and instantly accesses an elegant menu directly on their phone, with no wait and no contact with paper menus handled by other customers.',
       'hero.cta1':'Discover the benefits','hero.cta2':'View pricing','hero.cta3':'Contact us',
-      'hero.meta.num':'<span>02</span> styles','hero.meta.label':'Pages or Dynamic<br>+ à la carte options',
+      'hero.meta.num':'<span>04</span> plans','hero.meta.label':'Basic, Advanced, Elegance, Ultimate<br>+ optional add-ons',
       'hero.hud.label':'Menu preview',
       'av.h2':'Five reasons to<br><em>go digital.</em>',
       'av.lead':'Every advantage has been designed to improve your customers\' experience and simplify the management of your establishment.',
@@ -2842,7 +3066,7 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
       'av.c3.h3':'Accessible anywhere,<br><em>ideal for tourists.</em>','av.c3.p':'Available in multiple languages, the menu makes it easier to welcome tourists and enhances the modern image of your establishment. Accessible 24/7 and easy to share on social media.','av.c3.t1':'Multilingual','av.c3.t2':'24/7',
       'av.c4.h3':'Instant management<br><em>&amp; personalisation.</em>','av.c4.p':'Immediately update your prices, products or promotions from a simple and intuitive admin page. Easily add photos and adapt your menu by season or event.','av.c4.t1':'Simple admin','av.c4.t2':'Real-time','av.c4.opt':'Optional',
       'av.c5.h3':'Smart ordering,<br><em>advanced design.</em>','av.c5.p':'Customers can call a waiter or order directly from the QR Code menu. The owner can also instantly change the themes and design of the menu to their preferences.','av.c5.t1':'Table call','av.c5.t2':'Online ordering','av.c5.opt':'Optional',
-      'fo.h2':'Two styles,<br><em>all the options.</em>','fo.lead':'Choose your menu style, with or without an admin dashboard, then build your package with the options that suit you.',
+      'fo.h2':'Four levels,<br><em>all options.</em>','fo.lead':'Choose your plan based on the atmosphere you want — with or without admin access — and add the options that match your service.',
       'fo.style.pages':'Pages Style','fo.style.dynamic':'Dynamic Style','fo.style.options':'Options',
       'fo.p0.feat.h3':'Pages Style','fo.p0.feat.desc':'An elegant, clear and printable menu. Ideal for establishments that want a polished digital presence without complexity.',
       'fo.p0.f1':'QR code menu accessible on smartphone, tablet or computer — no app to download',
@@ -2920,7 +3144,7 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
       'hero.title.1':'Κομψότητα, Άνεση,','hero.title.2':'Ασφάλεια, Ταχύτητα,','hero.title.3':'<em>Αποδοτικότητα και Υγιεινή.</em>',
       'hero.lead':'Ο πελάτης σαρώνει τον κωδικό QR του τραπεζιού του και αποκτά άμεση πρόσβαση σε ένα κομψό μενού απευθείας στο τηλέφωνό του, χωρίς αναμονή και χωρίς επαφή με χάρτινα μενού που χρησιμοποιήθηκαν από άλλους πελάτες.',
       'hero.cta1':'Δείτε τα πλεονεκτήματα','hero.cta2':'Δείτε τις τιμές','hero.cta3':'Επικοινωνήστε μαζί μας',
-      'hero.meta.num':'<span>02</span> στυλ','hero.meta.label':'Pages ή Dynamic<br>+ επιπλέον επιλογές',
+      'hero.meta.num':'<span>04</span> πακέτα','hero.meta.label':'Basic, Avancé, Élégance, Ultime<br>+ επιπλέον επιλογές',
       'hero.hud.label':'Προεπισκόπηση μενού',
       'av.h2':'Πέντε λόγοι για να<br><em>πάτε ψηφιακά.</em>',
       'av.lead':'Κάθε πλεονέκτημα σχεδιάστηκε για να βελτιώσει την εμπειρία των πελατών σας και να απλοποιήσει τη διαχείριση της επιχείρησής σας.',
@@ -2930,7 +3154,7 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
       'av.c4.h3':'Άμεση διαχείριση<br><em>και εξατομίκευση.</em>','av.c4.p':'Τροποποιήστε αμέσως τις τιμές, τα προϊόντα ή τις προσφορές σας από μια απλή σελίδα διαχείρισης. Προσθέστε εύκολα φωτογραφίες και προσαρμόστε το μενού ανάλογα με την εποχή ή τις εκδηλώσεις.','av.c4.t1':'Απλή διαχείριση','av.c4.t2':'Πραγματικός χρόνος','av.c4.opt':'Προαιρετικό',
       'av.c5.h3':'Έξυπνη παραγγελία,<br><em>προηγμένο σχέδιο.</em>','av.c5.p':'Οι πελάτες μπορούν να καλέσουν σερβιτόρο ή να παραγγείλουν απευθείας από το μενού QR Code. Ο ιδιοκτήτης μπορεί επίσης να αλλάξει άμεσα τα θέματα και το σχέδιο του μενού.','av.c5.t1':'Κλήση σερβιτόρου','av.c5.t2':'Ηλεκτρονική παραγγελία','av.c5.opt':'Προαιρετικό',
       'av.c6.h3':'Έτοιμο προς χρήση,<br><em>χωρίς ταλαιπωρία.</em>','av.c6.p':'Φιλοξενία, ανέβασμα, ενημερώσεις, υποστήριξη: όλα συμπεριλαμβάνονται. Εσείς φροντίζετε τους πελάτες, εμείς τα υπόλοιπα. Σε λειτουργία σε 1–2 εβδομάδες.','av.c6.t1':'Όλα συμπεριλαμβάνονται','av.c6.t2':'Αποκλειστική υποστήριξη',
-      'fo.h2':'Δύο στυλ,<br><em>όλες οι επιλογές.</em>','fo.lead':'Επιλέξτε το στυλ μενού σας, με ή χωρίς πίνακα ελέγχου διαχειριστή, και συνθέστε το πακέτο σας με τις επιλογές που σας ταιριάζουν.',
+      'fo.h2':'Τέσσερα επίπεδα,<br><em>όλες οι επιλογές.</em>','fo.lead':'Επιλέξτε το πακέτο σας ανάλογα με το επιθυμητό στυλ — με ή χωρίς πρόσβαση admin — και προσθέστε τις επιλογές που ταιριάζουν στην υπηρεσία σας.',
       'fo.style.pages':'Στυλ Pages','fo.style.dynamic':'Στυλ Dynamic','fo.style.options':'Επιλογές',
       'fo.p0.feat.h3':'Στυλ Pages','fo.p0.feat.desc':'Ένα κομψό μενού στυλ flipbook σελίδων. Ιδανικό για επιχειρήσεις που θέλουν ψηφιακή παρουσία χωρίς πολυπλοκότητα.',
       'fo.p0.f1':'Μενού QR code προσβάσιμο από smartphone, tablet ή υπολογιστή — χωρίς εφαρμογή',
@@ -3008,7 +3232,7 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
       'hero.title.1':'أناقة، راحة،','hero.title.2':'أمان، سرعة،','hero.title.3':'<em>كفاءة ونظافة.</em>',
       'hero.lead':'يمسح الزبون رمز QR الخاص بطاولته ويصل فوراً إلى قائمة أنيقة على هاتفه، دون انتظار ودون لمس قوائم ورقية تداولها زبائن آخرون.',
       'hero.cta1':'اكتشف المميزات','hero.cta2':'عرض الأسعار','hero.cta3':'تواصل معنا',
-      'hero.meta.num':'<span>02</span> أسلوب','hero.meta.label':'Pages أو Dynamic<br>+ خيارات إضافية',
+      'hero.meta.num':'<span>04</span> باقات','hero.meta.label':'Basic, Avancé, Élégance, Ultime<br>+ خيارات إضافية',
       'hero.hud.label':'معاينة القائمة',
       'av.h2':'خمسة أسباب للتحول<br><em>إلى الرقمي.</em>',
       'av.lead':'كل ميزة صُمِّمت لتحسين تجربة عملائك وتبسيط إدارة مؤسستك.',
@@ -3017,7 +3241,7 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
       'av.c3.h3':'متاح في كل مكان،<br><em>مثالي للسياح.</em>','av.c3.p':'متاح بعدة لغات، يسهّل القائمة استقبال السياح ويعزز الصورة الحديثة لمؤسستك. متاح على مدار الساعة وسهل المشاركة على وسائل التواصل الاجتماعي.','av.c3.t1':'متعدد اللغات','av.c3.t2':'24 ساعة',
       'av.c4.h3':'إدارة فورية<br><em>وتخصيص شخصي.</em>','av.c4.p':'عدّل أسعارك ومنتجاتك أو عروضك فوراً من صفحة إدارة بسيطة وسهلة الاستخدام. أضف الصور بسهولة وكيّف قائمتك حسب المواسم أو الأحداث.','av.c4.t1':'إدارة بسيطة','av.c4.t2':'وقت فعلي','av.c4.opt':'اختياري',
       'av.c5.h3':'طلب ذكي،<br><em>تصميم متقدم.</em>','av.c5.p':'يمكن للعملاء استدعاء نادل أو الطلب مباشرة من قائمة QR Code. يمكن للمالك أيضاً تغيير السمات والتصميم فوراً حسب تفضيلاته.','av.c5.t1':'استدعاء النادل','av.c5.t2':'طلب إلكتروني','av.c5.opt':'اختياري',
-      'fo.h2':'أسلوبان،<br><em>جميع الخيارات.</em>','fo.lead':'اختر أسلوب قائمتك، مع أو بدون لوحة تحكم المشرف، ثم أنشئ حزمتك بالخيارات المناسبة لك.',
+      'fo.h2':'أربعة مستويات،<br><em>جميع الخيارات.</em>','fo.lead':'اختر باقتك حسب الجو المطلوب — مع أو بدون لوحة تحكم المشرف — وأضف الخيارات المناسبة لخدمتك.',
       'fo.style.pages':'أسلوب Pages','fo.style.dynamic':'أسلوب Dynamic','fo.style.options':'خيارات',
       'fo.p0.feat.h3':'أسلوب Pages','fo.p0.feat.desc':'قائمة أنيقة بأسلوب الكتيب ذي الصفحات. مثالية للمؤسسات التي تريد حضوراً رقمياً راقياً دون تعقيد.',
       'fo.p0.f1':'قائمة QR code متاحة على الهاتف الذكي والجهاز اللوحي والكمبيوتر — دون تحميل أي تطبيق',
@@ -3095,7 +3319,7 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
       'hero.title.1':'Eleganz, Komfort,','hero.title.2':'Sicherheit, Schnelligkeit,','hero.title.3':'<em>Effizienz und Hygiene.</em>',
       'hero.lead':'Der Gast scannt den QR-Code seines Tisches und ruft sofort eine elegante Speisekarte direkt auf seinem Handy ab – ohne Wartezeit und ohne Berührung von Papierspeisekarten anderer Gäste.',
       'hero.cta1':'Vorteile entdecken','hero.cta2':'Preise ansehen','hero.cta3':'Kontakt aufnehmen',
-      'hero.meta.num':'<span>02</span> Stile','hero.meta.label':'Pages oder Dynamisch<br>+ À-la-carte-Optionen',
+      'hero.meta.num':'<span>04</span> Pakete','hero.meta.label':'Basic, Avancé, Élégance, Ultime<br>+ À-la-carte-Optionen',
       'hero.hud.label':'Menüvorschau',
       'av.h2':'Fünf Gründe für den<br><em>digitalen Wandel.</em>',
       'av.lead':'Jeder Vorteil wurde darauf ausgelegt, das Erlebnis Ihrer Gäste zu verbessern und die Verwaltung Ihres Betriebs zu vereinfachen.',
@@ -3104,7 +3328,7 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
       'av.c3.h3':'Überall zugänglich,<br><em>ideal für Touristen.</em>','av.c3.p':'In mehreren Sprachen verfügbar erleichtert die Speisekarte den Empfang von Touristen und wertet das moderne Image Ihres Betriebs auf. Rund um die Uhr zugänglich und leicht in sozialen Medien teilbar.','av.c3.t1':'Mehrsprachig','av.c3.t2':'24/7',
       'av.c4.h3':'Sofortige Verwaltung<br><em>und Personalisierung.</em>','av.c4.p':'Aktualisieren Sie sofort Ihre Preise, Produkte oder Aktionen über eine einfache Admin-Seite. Fügen Sie leicht Fotos hinzu und passen Sie Ihre Speisekarte je nach Saison oder Veranstaltung an.','av.c4.t1':'Einfache Verwaltung','av.c4.t2':'Echtzeit','av.c4.opt':'Optional',
       'av.c5.h3':'Intelligente Bestellung,<br><em>fortschrittliches Design.</em>','av.c5.p':'Gäste können einen Kellner rufen oder direkt über die QR-Code-Speisekarte bestellen. Der Eigentümer kann auch sofort Themen und Design der Speisekarte nach seinen Wünschen ändern.','av.c5.t1':'Tischservice','av.c5.t2':'Online-Bestellung','av.c5.opt':'Optional',
-      'fo.h2':'Zwei Stile,<br><em>alle Optionen.</em>','fo.lead':'Wählen Sie Ihren Menüstil, mit oder ohne Admin-Dashboard, und stellen Sie Ihr Paket mit den passenden Optionen zusammen.',
+      'fo.h2':'Vier Stufen,<br><em>alle Optionen.</em>','fo.lead':'Wählen Sie Ihr Paket nach der gewünschten Atmosphäre — mit oder ohne Admin-Zugang — und fügen Sie die passenden Optionen hinzu.',
       'fo.style.pages':'Pages-Stil','fo.style.dynamic':'Dynamischer Stil','fo.style.options':'Optionen',
       'fo.p0.feat.h3':'Pages-Stil','fo.p0.feat.desc':'Ein elegantes Flipbook-Menü im Seitenstil. Ideal für Betriebe, die eine gepflegte digitale Präsenz ohne Komplexität wünschen.',
       'fo.p0.f1':'QR-Code-Menü abrufbar auf Smartphone, Tablet oder Computer — keine App erforderlich',
