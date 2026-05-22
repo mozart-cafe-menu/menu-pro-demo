@@ -119,10 +119,7 @@ async function sendFCM(projectId, accessToken, entries, phone, langue) {
           ts:     String(Date.now())
         },
         android: {
-          priority: 'high',
-          notification: {
-            channel_id: 'devis_control'
-          }
+          priority: 'high'
         },
         apns: {
           headers: { 'apns-priority': '10' },
