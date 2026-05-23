@@ -3705,9 +3705,13 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
           body: JSON.stringify({ phone: phone, langue: dvState.langue })
         });
       })
-      .then(function() {
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
         fb.className   = 'dv-feedback ok';
-        fb.textContent = '✓ Demande envoyée — nous vous contactons dans les 24h !';
+        var notifMsg = '';
+        if (data && data.sent > 0) notifMsg = ' 📱 Notification envoyée.';
+        else if (data && (data.total === 0 || data.reason === 'no_tokens')) notifMsg = ' (App Control hors ligne)';
+        fb.textContent = '✓ Demande envoyée — nous vous contactons dans les 24h !' + notifMsg;
         btn.textContent = '✓ Envoyé';
         document.getElementById('dv-phone').value = '';
       })
