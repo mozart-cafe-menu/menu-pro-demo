@@ -3551,17 +3551,17 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
 (function(){
   var app = firebase.apps.find(function(a){return a.name==='demo-photos';})
          || firebase.initializeApp({
-              apiKey:            "AIzaSyCcN6eCTaD_PlTJjO0aKbS1Y3rrDnEwp7s",
-              authDomain:        "cafe-elysee-e186c.firebaseapp.com",
-              databaseURL:       "https://cafe-elysee-e186c-default-rtdb.europe-west1.firebasedatabase.app",
-              projectId:         "cafe-elysee-e186c",
-              storageBucket:     "cafe-elysee-e186c.firebasestorage.app",
-              messagingSenderId: "240164681993",
-              appId:             "1:240164681993:web:13654bfe96f1c83db43bd8"
+              apiKey:            "AIzaSyCM6SiQoWQfsq_t-80EfiVplXV9p534_eI",
+              authDomain:        "menu-saas-platform.firebaseapp.com",
+              databaseURL:       "https://menu-saas-platform-default-rtdb.europe-west1.firebasedatabase.app",
+              projectId:         "menu-saas-platform",
+              storageBucket:     "menu-saas-platform.firebasestorage.app",
+              messagingSenderId: "460781372428",
+              appId:             "1:460781372428:web:55c33bfb6f8f8d5582da29"
             }, 'demo-photos');
   var db = firebase.database(app);
 
-  db.ref('demoPage/heroSlides').once('value', function(snap){
+  db.ref('demoPage/heroSlides').on('value', function(snap){
     var data = snap.val() || {};
     var bgs  = document.querySelectorAll('.hero-slide-bg');
     bgs.forEach(function(bg, idx){
@@ -3570,6 +3570,8 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
         bg.style.backgroundImage  = 'url("' + url + '")';
         bg.style.backgroundSize   = 'cover';
         bg.style.backgroundPosition = 'center';
+      } else {
+        bg.style.backgroundImage = '';
       }
     });
   });
