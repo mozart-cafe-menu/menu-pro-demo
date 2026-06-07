@@ -3502,9 +3502,9 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
     var rest = document.getElementById('cmd-restaurant').value.trim();
     var lang = document.getElementById('cmd-langue').value;
     var email= document.getElementById('cmd-email').value.trim();
-    var waNum= document.getElementById('cmd-wa-number').value.trim().replace(/s+/g,'');
+    var waNum= document.getElementById('cmd-wa-number').value.trim().replace(/\s+/g,'');
     var waCtry=document.getElementById('cmd-wa-country').value;
-    var vbNum= document.getElementById('cmd-vb-number').value.trim().replace(/s+/g,'');
+    var vbNum= document.getElementById('cmd-vb-number').value.trim().replace(/\s+/g,'');
     var vbCtry=document.getElementById('cmd-vb-country').value;
 
     fb.className = 'cmd-feedback'; fb.textContent = '';
@@ -3515,7 +3515,7 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
       fb.textContent = '⚠ Veuillez indiquer le nom de votre café ou restaurant.';
       return;
     }
-    var hasEmail = email && /^[^s@]+@[^s@]+.[^s@]+$/.test(email);
+    var hasEmail = email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     var hasWa    = waNum.length >= 6;
     var hasVb    = vbNum.length >= 6;
     if (!hasEmail && !hasWa && !hasVb) {
