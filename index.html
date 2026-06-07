@@ -1663,6 +1663,55 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
     padding:.18rem .55rem;border-radius:99px;margin-left:.5rem;vertical-align:middle;
     background:var(--gold);color:#1a1408;white-space:nowrap;
   }
+  /* ── Popup Commander ── */
+  .cmd-form { display:flex;flex-direction:column;gap:1.2rem;margin-top:1.6rem }
+  .cmd-field { display:flex;flex-direction:column;gap:.45rem }
+  .cmd-label { font-size:.78rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--bone-2) }
+  .cmd-label small { font-weight:400;letter-spacing:0;text-transform:none;opacity:.65;margin-left:.4rem;font-size:.92em }
+  .cmd-input, .cmd-select {
+    width:100%;background:rgba(255,255,255,.04);border:1px solid var(--line-2);
+    border-radius:12px;padding:.72rem 1rem;
+    font-size:.92rem;color:var(--bone);font-family:inherit;
+    outline:none;transition:border-color .2s;appearance:none;-webkit-appearance:none;
+  }
+  .cmd-input::placeholder { color:var(--mute) }
+  .cmd-input:focus, .cmd-select:focus { border-color:var(--gold) }
+  .cmd-select option { background:#1a1206;color:var(--bone) }
+  .cmd-phone-row { display:grid;grid-template-columns:auto 1fr;gap:.6rem;align-items:center }
+  .cmd-country-sel {
+    background:rgba(255,255,255,.04);border:1px solid var(--line-2);border-radius:12px;
+    padding:.72rem .7rem;font-size:.85rem;color:var(--bone);font-family:inherit;
+    outline:none;appearance:none;-webkit-appearance:none;cursor:pointer;
+    width:auto;min-width:110px;transition:border-color .2s;
+  }
+  .cmd-country-sel:focus { border-color:var(--gold) }
+  .cmd-country-sel option { background:#1a1206 }
+  .cmd-phone-input {
+    background:rgba(255,255,255,.04);border:1px solid var(--line-2);border-radius:12px;
+    padding:.72rem 1rem;font-size:.92rem;color:var(--bone);font-family:inherit;
+    outline:none;width:100%;transition:border-color .2s;
+  }
+  .cmd-phone-input::placeholder { color:var(--mute) }
+  .cmd-phone-input:focus { border-color:var(--gold) }
+  .cmd-hint {
+    font-size:.75rem;color:var(--mute);line-height:1.55;
+    padding:.7rem .9rem;border-radius:10px;border:1px solid var(--line);
+    background:rgba(255,255,255,.02);
+  }
+  .cmd-feedback { font-size:.85rem;line-height:1.5;min-height:0;display:none }
+  .cmd-feedback.err { display:block;color:#f09090 }
+  .cmd-feedback.ok  { display:block;color:#90d090 }
+  .cmd-submit {
+    width:100%;padding:1rem 1.5rem;border-radius:14px;border:none;cursor:pointer;
+    background:linear-gradient(135deg,var(--gold),var(--gold-2));
+    color:#1a1408;font-weight:700;font-family:inherit;font-size:.95rem;
+    letter-spacing:.03em;transition:opacity .2s,transform .1s;
+  }
+  .cmd-submit:hover { opacity:.9 }
+  .cmd-submit:active { transform:scale(.98) }
+  .cmd-submit:disabled { opacity:.5;cursor:not-allowed }
+  #pop-commander .popup-card { max-width:520px }
+
 </style>
 </head>
 <body>
@@ -2286,6 +2335,55 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
     <div class="demo-fs-colors" id="demo-fs-colors"></div>
   </div>
   <iframe id="demo-fs-iframe" src="" title="Démo menu" allow="fullscreen"></iframe>
+</div>
+
+<!-- Popup Commander -->
+<div class="popup" id="pop-commander" onclick="popupOutside(event,'pop-commander')">
+  <div class="popup-card">
+    <button class="popup-close" onclick="closePopup('pop-commander')" aria-label="Fermer">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="eyebrow popup-eyebrow" id="pop-cmd-eyebrow">Commander</div>
+    <h3>Démarrer votre <em>projet.</em></h3>
+    <p class="popup-lead">Remplissez le formulaire et nous vous contacterons dans les 24h pour préparer votre installation.</p>
+    <div class="cmd-form">
+      <div class="cmd-field">
+        <label class="cmd-label">Nom du café ou restaurant <span style="color:var(--gold)">*</span></label>
+        <input type="text" id="cmd-restaurant" class="cmd-input" placeholder="Ex : Café Mozart" autocomplete="organization">
+      </div>
+      <div class="cmd-field">
+        <label class="cmd-label">Langue de communication <span style="color:var(--gold)">*</span></label>
+        <select id="cmd-langue" class="cmd-select">
+          <option value="fr">🇫🇷 Français</option>
+          <option value="en">🇬🇧 English</option>
+          <option value="el">🇬🇷 Ελληνικά</option>
+          <option value="ar">🇸🇦 العربية</option>
+          <option value="de">🇩🇪 Deutsch</option>
+        </select>
+      </div>
+      <div class="cmd-field">
+        <label class="cmd-label">Email <small>(optionnel)</small></label>
+        <input type="email" id="cmd-email" class="cmd-input" placeholder="votre@email.com" autocomplete="email">
+      </div>
+      <div class="cmd-field">
+        <label class="cmd-label">WhatsApp <small>(optionnel)</small></label>
+        <div class="cmd-phone-row">
+          <select id="cmd-wa-country" class="cmd-country-sel"></select>
+          <input type="tel" id="cmd-wa-number" class="cmd-phone-input" placeholder="6 XX XX XX XX">
+        </div>
+      </div>
+      <div class="cmd-field">
+        <label class="cmd-label">Viber <small>(optionnel)</small></label>
+        <div class="cmd-phone-row">
+          <select id="cmd-vb-country" class="cmd-country-sel"></select>
+          <input type="tel" id="cmd-vb-number" class="cmd-phone-input" placeholder="6 XX XX XX XX">
+        </div>
+      </div>
+      <div class="cmd-hint">Au moins un moyen de contact est requis — email, WhatsApp ou Viber.</div>
+      <div class="cmd-feedback" id="cmd-feedback"></div>
+      <button class="cmd-submit" id="cmd-submit" onclick="submitCommander()">Envoyer ma demande →</button>
+    </div>
+  </div>
 </div>
 
 <!-- ════════════════════════════════════════════════════════════
@@ -3289,6 +3387,180 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
       }
     });
   });
+})();
+</script>
+
+<script>
+(function(){
+  'use strict';
+
+  // ── Pays / indicatifs ─────────────────────────────────
+  var COUNTRIES = [
+    {c:'+33',f:'🇫🇷',n:'France'},
+    {c:'+30',f:'🇬🇷',n:'Grèce'},
+    {c:'+32',f:'🇧🇪',n:'Belgique'},
+    {c:'+41',f:'🇨🇭',n:'Suisse'},
+    {c:'+352',f:'🇱🇺',n:'Luxembourg'},
+    {c:'+49',f:'🇩🇪',n:'Allemagne'},
+    {c:'+43',f:'🇦🇹',n:'Autriche'},
+    {c:'+34',f:'🇪🇸',n:'Espagne'},
+    {c:'+39',f:'🇮🇹',n:'Italie'},
+    {c:'+351',f:'🇵🇹',n:'Portugal'},
+    {c:'+31',f:'🇳🇱',n:'Pays-Bas'},
+    {c:'+44',f:'🇬🇧',n:'Royaume-Uni'},
+    {c:'+353',f:'🇮🇪',n:'Irlande'},
+    {c:'+357',f:'🇨🇾',n:'Chypre'},
+    {c:'+90',f:'🇹🇷',n:'Turquie'},
+    {c:'+386',f:'🇸🇮',n:'Slovénie'},
+    {c:'+385',f:'🇭🇷',n:'Croatie'},
+    {c:'+382',f:'🇲🇪',n:'Monténégro'},
+    {c:'+381',f:'🇷🇸',n:'Serbie'},
+    {c:'+212',f:'🇲🇦',n:'Maroc'},
+    {c:'+213',f:'🇩🇿',n:'Algérie'},
+    {c:'+216',f:'🇹🇳',n:'Tunisie'},
+    {c:'+218',f:'🇱🇾',n:'Libye'},
+    {c:'+20',f:'🇪🇬',n:'Égypte'},
+    {c:'+961',f:'🇱🇧',n:'Liban'},
+    {c:'+963',f:'🇸🇾',n:'Syrie'},
+    {c:'+962',f:'🇯🇴',n:'Jordanie'},
+    {c:'+971',f:'🇦🇪',n:'Émirats arabes unis'},
+    {c:'+974',f:'🇶🇦',n:'Qatar'},
+    {c:'+966',f:'🇸🇦',n:'Arabie Saoudite'},
+    {c:'+965',f:'🇰🇼',n:'Koweït'},
+    {c:'+973',f:'🇧🇭',n:'Bahreïn'},
+    {c:'+968',f:'🇴🇲',n:'Oman'},
+    {c:'+1',f:'🇨🇦',n:'Canada / USA'},
+    {c:'+61',f:'🇦🇺',n:'Australie'},
+    {c:'+27',f:'🇿🇦',n:'Afrique du Sud'},
+    {c:'+221',f:'🇸🇳',n:'Sénégal'},
+    {c:'+225',f:'🇨🇮',n:"Côte d'Ivoire"},
+    {c:'+237',f:'🇨🇲',n:'Cameroun'},
+    {c:'+230',f:'🇲🇺',n:'Maurice'}
+  ];
+
+  // ── Initialisation selects pays ───────────────────────
+  function buildCountryOptions(selectId, defaultCode) {
+    var sel = document.getElementById(selectId);
+    if (!sel) return;
+    sel.innerHTML = COUNTRIES.map(function(co) {
+      var sel_ = co.c === defaultCode ? ' selected' : '';
+      return '<option value="' + co.c + '"' + sel_ + '>' + co.f + ' ' + co.c + ' ' + co.n + '</option>';
+    }).join('');
+  }
+
+  // ── État ──────────────────────────────────────────────
+  var _cmdForfait = 'menu-qr';
+  var FORFAIT_LABELS = {
+    'menu-qr':            'Menu QR — 49 €/mois',
+    'commandes-services': 'Commandes & Services — 99 €/mois'
+  };
+
+  // ── Ouvrir le popup ───────────────────────────────────
+  window.openCommanderPopup = function(idx) {
+    _cmdForfait = idx === 1 ? 'commandes-services' : 'menu-qr';
+    var label = idx === 1 ? 'Commandes & Services' : 'Menu QR';
+    document.getElementById('pop-cmd-eyebrow').textContent = label;
+    // Reset form
+    ['cmd-restaurant','cmd-email','cmd-wa-number','cmd-vb-number'].forEach(function(id){
+      var el = document.getElementById(id); if (el) el.value = '';
+    });
+    var fb = document.getElementById('cmd-feedback');
+    fb.className = 'cmd-feedback'; fb.textContent = '';
+    var btn = document.getElementById('cmd-submit');
+    btn.disabled = false; btn.textContent = 'Envoyer ma demande →';
+    // Langue : pré-selectionner la langue de la page
+    var storedLang = localStorage.getItem('mqr_lang') || 'fr';
+    var langSel = document.getElementById('cmd-langue');
+    if (langSel) langSel.value = storedLang;
+    // Pays par défaut selon langue
+    var defaultCodes = {fr:'+33',en:'+44',el:'+30',ar:'+213',de:'+49'};
+    var defCode = defaultCodes[storedLang] || '+33';
+    buildCountryOptions('cmd-wa-country', defCode);
+    buildCountryOptions('cmd-vb-country', defCode);
+    openPopup('pop-commander');
+  };
+
+  // ── Firebase Control ──────────────────────────────────
+  var _controlDb = null;
+  function getControlDb() {
+    if (_controlDb) return _controlDb;
+    var app = (firebase.apps || []).find(function(a){ return a.name === 'ctrl-cmd'; })
+      || firebase.initializeApp({
+           apiKey:      'AIzaSyAwHbV2dueFQFL5eJCNkB0siVjdB_7AtKU',
+           databaseURL: 'https://menu-pro-control-default-rtdb.europe-west1.firebasedatabase.app',
+           projectId:   'menu-pro-control',
+           appId:       '1:457842698651:web:f5cbff82ec4cb729ded93e'
+         }, 'ctrl-cmd');
+    _controlDb = firebase.database(app);
+    return _controlDb;
+  }
+
+  // ── Envoi ─────────────────────────────────────────────
+  window.submitCommander = function() {
+    var fb   = document.getElementById('cmd-feedback');
+    var btn  = document.getElementById('cmd-submit');
+    var rest = document.getElementById('cmd-restaurant').value.trim();
+    var lang = document.getElementById('cmd-langue').value;
+    var email= document.getElementById('cmd-email').value.trim();
+    var waNum= document.getElementById('cmd-wa-number').value.trim().replace(/s+/g,'');
+    var waCtry=document.getElementById('cmd-wa-country').value;
+    var vbNum= document.getElementById('cmd-vb-number').value.trim().replace(/s+/g,'');
+    var vbCtry=document.getElementById('cmd-vb-country').value;
+
+    fb.className = 'cmd-feedback'; fb.textContent = '';
+
+    // Validation
+    if (!rest) {
+      fb.className = 'cmd-feedback err';
+      fb.textContent = '⚠ Veuillez indiquer le nom de votre café ou restaurant.';
+      return;
+    }
+    var hasEmail = email && /^[^s@]+@[^s@]+.[^s@]+$/.test(email);
+    var hasWa    = waNum.length >= 6;
+    var hasVb    = vbNum.length >= 6;
+    if (!hasEmail && !hasWa && !hasVb) {
+      fb.className = 'cmd-feedback err';
+      fb.textContent = '⚠ Veuillez fournir au moins un moyen de contact : email, WhatsApp ou Viber.';
+      return;
+    }
+
+    var ts = Date.now();
+    var commande = {
+      forfait:    _cmdForfait,
+      restaurant: rest,
+      langue:     lang,
+      ts:         ts,
+      lu:         false,
+      statut:     'nouveau'
+    };
+    if (hasEmail) commande.email = email;
+    if (hasWa)    commande.whatsapp = { indicatif: waCtry, numero: waNum };
+    if (hasVb)    commande.viber    = { indicatif: vbCtry, numero: vbNum };
+
+    btn.disabled = true; btn.textContent = '⏳ Envoi en cours…';
+
+    getControlDb().ref('/commandes/' + ts).set(commande)
+      .then(function() {
+        return fetch('/api/notify-commande', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ restaurant: rest, forfait: FORFAIT_LABELS[_cmdForfait], langue: lang })
+        });
+      })
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        fb.className = 'cmd-feedback ok';
+        var notif = (data && data.sent > 0) ? ' 📱 Notification envoyée.' : '';
+        fb.textContent = '✓ Demande envoyée — nous vous contactons dans les 24h !' + notif;
+        btn.textContent = '✓ Envoyé';
+      })
+      .catch(function(err) {
+        fb.className = 'cmd-feedback err';
+        fb.textContent = '⚠ Erreur réseau : ' + err.message;
+        btn.disabled = false; btn.textContent = 'Envoyer ma demande →';
+      });
+  };
+
 })();
 </script>
 
