@@ -1657,6 +1657,12 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
 }
 .dv-lang-sel:focus { border-color: var(--gold); }
 .dv-lang-sel option { background: #1a1206; color: var(--bone); }
+  /* ── Badge forfait populaire ── */
+  .fo-badge-popular {
+    display:inline-block;font-size:.58rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+    padding:.18rem .55rem;border-radius:99px;margin-left:.5rem;vertical-align:middle;
+    background:var(--gold);color:#1a1408;white-space:nowrap;
+  }
 </style>
 </head>
 <body>
@@ -1800,20 +1806,20 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
 
   <!-- Marquee -->
   <div class="marquee" aria-hidden="true">
-    <span>Menus digitaux</span><span>Commandes en salle</span><span>Appels de table</span><span>Multi-langues</span><span>Multi-thèmes</span>
-    <span>Menus digitaux</span><span>Commandes en salle</span><span>Appels de table</span><span>Multi-langues</span><span>Multi-thèmes</span>
+    <span>Menu QR digital</span><span>Commandes à table</span><span>Appel serveur</span><span>Application serveur</span><span>Administration simple</span><span>Temps réel</span>
+    <span>Menu QR digital</span><span>Commandes à table</span><span>Appel serveur</span><span>Application serveur</span><span>Administration simple</span><span>Temps réel</span>
   </div>
 
   <!-- Content grid -->
   <div class="hero-grid">
     <div class="hero-copy">
-      <div class="eyebrow hero-eyebrow" data-i18n="hero.eyebrow">Créez un menu élégant et accessible instantanément grâce au QR code</div>
+      <div class="eyebrow hero-eyebrow" data-i18n="hero.eyebrow">Système restaurant complet — menu QR, commandes à table et appel serveur</div>
       <h1 class="display hero-title">
-        <span class="hero-title-line"><span data-i18n="hero.title.1">Élégance, Confort,</span></span>
-        <span class="hero-title-line"><span data-i18n="hero.title.2">Sécurité, Rapidité,</span></span>
-        <span class="hero-title-line"><span data-i18n-html="hero.title.3"><em>Efficacité et Hygiène.</em></span></span>
+        <span class="hero-title-line"><span data-i18n="hero.title.1">Les clients scannent un QR,</span></span>
+        <span class="hero-title-line"><span data-i18n="hero.title.2">commandent, ou appellent</span></span>
+        <span class="hero-title-line"><span data-i18n-html="hero.title.3"><em>le serveur — en un tap.</em></span></span>
       </h1>
-      <p class="hero-lead" data-i18n="hero.lead">Le client scanne le QR Code de sa table et accède instantanément à un menu élégant directement sur son téléphone, sans attente et sans contact avec des menus papier manipulés par d'autres clients.</p>
+      <p class="hero-lead" data-i18n="hero.lead">Les clients scannent un QR code pour accéder au menu et peuvent ensuite commander leurs plats ou appeler un serveur à tout moment depuis leur téléphone.</p>
       <div class="hero-cta-row">
         <a href="#avantages" onclick="event.preventDefault();scrollTo_('avantages')" class="btn btn-primary">
           <span data-i18n="hero.cta1">Découvrir les avantages</span>
@@ -1825,8 +1831,8 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
     </div>
 
     <div class="hero-meta">
-      <div class="hero-meta-num" data-i18n-html="hero.meta.num"><span>04</span> forfaits</div>
-      <div class="hero-meta-label" data-i18n-html="hero.meta.label">Basic, Avancé, Élégance, Ultime<br>+ options à la carte</div>
+      <div class="hero-meta-num" data-i18n-html="hero.meta.num"><span>02</span> forfaits</div>
+      <div class="hero-meta-label" data-i18n-html="hero.meta.label">Menu QR · Commandes &amp; Services<br>+ frais de création uniques</div>
     </div>
   </div>
 
@@ -1999,46 +2005,34 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
     <!-- Style selector -->
     <div class="fo-style-selector reveal delay-1" id="foStyleSelector">
       <div class="fo-style-pill" id="foStylePill"></div>
-      <button class="fo-style-btn is-active" data-i="0" onclick="switchStyle(0)">Basic</button>
-      <button class="fo-style-btn" data-i="1" onclick="switchStyle(1)">Avancé</button>
-      <button class="fo-style-btn" data-i="2" onclick="switchStyle(2)">Élégance</button>
-      <button class="fo-style-btn" data-i="3" onclick="switchStyle(3)">Ultime</button>
-      <button class="fo-style-btn" data-i="4" onclick="switchStyle(4)" data-i18n="fo.style.options">Options</button>
+      <button class="fo-style-btn is-active" data-i="0" onclick="switchStyle(0)">Menu QR</button>
+      <button class="fo-style-btn" data-i="1" onclick="switchStyle(1)">Commandes &amp; Services</button>
     </div>
 
     <div class="fo-stage">
 
-      <!-- Panel Basic -->
+      <!-- Panel Menu QR -->
       <div class="fo-panel is-active" data-i="0">
         <div class="fo-subpages">
           <div class="fo-subpages-track">
             <div class="fo-subpage">
               <aside class="fo-side">
-                <div class="fo-side-label">Basic</div>
+                <div class="fo-side-label">Menu QR</div>
                 <div class="fo-setup-price">
                   <span class="currency">€</span>
-                  <span class="amount">100</span>
+                  <span class="amount">49</span>
                 </div>
-                <span class="fo-setup-tag">Création unique · mis en ligne en 1 à 2 semaines</span>
-                <div class="fo-admin-toggle">
-                  <button class="fo-admin-btn is-active" onclick="toggleAdmin(0,'avec')">Pro — avec admin</button>
-                  <button class="fo-admin-btn" onclick="toggleAdmin(0,'sans')">Simple — sans admin</button>
-                </div>
+                <span class="fo-setup-tag">/mois · administration incluse · sans engagement</span>
                 <div class="fo-admin-price is-visible" id="adm-price-0">
                   <span class="plus">+</span>
-                  <span class="a-amount">15</span>
+                  <span class="a-amount">150</span>
                   <span class="currency" style="font-size:.85rem;color:var(--mute);margin:0 .1em">€</span>
-                  <span class="a-per">/ mois · accès admin + 15 couleurs</span>
-                </div>
-                <div class="fo-modif-note" id="modif-note-0">
-                  <strong>Modifications à la demande :</strong><br>
-                  Contenu (produits, prix…) — <strong style="color:var(--bone)">30 €</strong><br>
-                  Structure ou design — <strong style="color:var(--bone)">50 €</strong>
+                  <span class="a-per">création unique · installation complète</span>
                 </div>
                 <div class="fo-side-divider"></div>
                 <div class="fo-side-actions">
-                  <button class="fo-btn fo-btn-test" onclick="openThemePopup('basic')">Voir les thèmes</button>
-                  <button class="fo-btn fo-btn-choose" onclick="scrollTo_('devis')">Choisir</button>
+                  <button class="fo-btn fo-btn-test" onclick="openThemePopup('basic')">Voir un aperçu</button>
+                  <button class="fo-btn fo-btn-choose" onclick="openCommanderPopup(0)">Commander</button>
                 </div>
               </aside>
             </div>
@@ -2046,19 +2040,20 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
               <div class="fo-feat">
                 <div class="fo-feat-head">
                   <div class="fo-feat-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM18 17h3M14 21h3M21 14v7"/></svg>
                   </div>
                   <div>
-                    <h3>Basic</h3>
-                    <p>Menu élégant façon carte de restaurant. Idéal pour les établissements qui souhaitent une présence digitale soignée et simple.</p>
+                    <h3>Menu QR</h3>
+                    <p>Un menu digital élégant accessible par QR code. Vos clients consultent votre carte depuis leur téléphone — sans rien télécharger.</p>
                   </div>
                 </div>
                 <div class="fo-feat-list">
-                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>Menu QR code consulté depuis smartphone, tablette ou ordinateur — sans application à télécharger</span></div>
-                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>Thème Papier — navigation élégante façon carte de restaurant</span></div>
-                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>Multilingue avec détection automatique de la langue du client</span></div>
-                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>Pro : 15 couleurs au choix + accès au tableau de bord admin</span></div>
-                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>Hébergement, mise en ligne et maintenance inclus</span></div>
+                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>Menu QR digital accessible depuis smartphone, tablette ou ordinateur — sans application à télécharger</span></div>
+                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>3 styles d'affichage — Carte classique, Livre et Dynamique</span></div>
+                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>10 thèmes par style · 15+ couleurs par thème — changez l'ambiance en un clic</span></div>
+                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>Administration complète — modifiez votre menu, vos prix et vos photos en temps réel</span></div>
+                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>QR code général pour l'ensemble du restaurant · multilingue avec détection automatique</span></div>
+                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>Hébergement, mise en ligne et maintenance inclus — clé en main</span></div>
                 </div>
               </div>
             </div>
@@ -2070,37 +2065,28 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
         </div>
       </div>
 
-      <!-- Panel Avancé -->
+      <!-- Panel Commandes & Services -->
       <div class="fo-panel" data-i="1">
         <div class="fo-subpages">
           <div class="fo-subpages-track">
             <div class="fo-subpage">
               <aside class="fo-side">
-                <div class="fo-side-label">Avancé</div>
+                <div class="fo-side-label">Commandes &amp; Services <span class="fo-badge-popular">Le plus choisi</span></div>
                 <div class="fo-setup-price">
                   <span class="currency">€</span>
-                  <span class="amount">150</span>
+                  <span class="amount">99</span>
                 </div>
-                <span class="fo-setup-tag">Création unique · mis en ligne en 1 à 2 semaines</span>
-                <div class="fo-admin-toggle">
-                  <button class="fo-admin-btn is-active" onclick="toggleAdmin(1,'avec')">Pro — avec admin</button>
-                  <button class="fo-admin-btn" onclick="toggleAdmin(1,'sans')">Simple — sans admin</button>
-                </div>
+                <span class="fo-setup-tag">/mois · système complet · sans engagement</span>
                 <div class="fo-admin-price is-visible" id="adm-price-1">
                   <span class="plus">+</span>
-                  <span class="a-amount">25</span>
+                  <span class="a-amount">200</span>
                   <span class="currency" style="font-size:.85rem;color:var(--mute);margin:0 .1em">€</span>
-                  <span class="a-per">/ mois · accès admin + 15 couleurs</span>
-                </div>
-                <div class="fo-modif-note" id="modif-note-1">
-                  <strong>Modifications à la demande :</strong><br>
-                  Contenu (produits, prix…) — <strong style="color:var(--bone)">35 €</strong><br>
-                  Structure ou design — <strong style="color:var(--bone)">60 €</strong>
+                  <span class="a-per">création unique · installation complète</span>
                 </div>
                 <div class="fo-side-divider"></div>
                 <div class="fo-side-actions">
-                  <button class="fo-btn fo-btn-test" onclick="openThemePopup('avance')">Voir les thèmes</button>
-                  <button class="fo-btn fo-btn-choose" onclick="scrollTo_('devis')">Choisir</button>
+                  <button class="fo-btn fo-btn-test" onclick="openDemoFs('demo-order.html','Commandes &amp; Services')">Voir la démo</button>
+                  <button class="fo-btn fo-btn-choose" onclick="openCommanderPopup(1)">Commander</button>
                 </div>
               </aside>
             </div>
@@ -2108,19 +2094,20 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
               <div class="fo-feat">
                 <div class="fo-feat-head">
                   <div class="fo-feat-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>
                   </div>
                   <div>
-                    <h3>Avancé</h3>
-                    <p>Menu esthétique façon livre — typographie soignée, navigation immersive. Idéal pour les établissements raffinés.</p>
+                    <h3>Commandes &amp; Services</h3>
+                    <p>Le système complet — vos clients commandent ou appellent le serveur depuis leur table. Chaque action arrive en temps réel sur l'application du personnel.</p>
                   </div>
                 </div>
                 <div class="fo-feat-list">
-                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>Tout ce qui est inclus dans Basic</span></div>
-                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>Famille de thèmes "Livre" — typographie premium, mise en page éditoriale</span></div>
-                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>Ajout progressif de nouveaux thèmes Avancé</span></div>
-                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>Pro : 15 couleurs au choix + accès au tableau de bord admin</span></div>
-                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>Hébergement, mise en ligne et maintenance inclus</span></div>
+                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>Tout ce qui est inclus dans Menu QR — menu digital, admin, thèmes et couleurs</span></div>
+                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>🔴 Appel serveur depuis la table — bouton dédié, notification push instantanée</span></div>
+                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>🟢 Commandes à table depuis le menu — panier, validation, suivi en temps réel</span></div>
+                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>Application serveur Android — gestion des commandes et appels avec notifications</span></div>
+                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>QR code individuel par table — chaque table a son propre QR code unique</span></div>
+                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>Statistiques commandes et appels — suivez l'activité de votre établissement</span></div>
                 </div>
               </div>
             </div>
@@ -2132,280 +2119,12 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
         </div>
       </div>
 
-      <!-- Panel Élégance -->
-      <div class="fo-panel" data-i="2">
-        <div class="fo-subpages">
-          <div class="fo-subpages-track">
-            <div class="fo-subpage">
-              <aside class="fo-side">
-                <div class="fo-side-label">Élégance</div>
-                <div class="fo-setup-price">
-                  <span class="currency">€</span>
-                  <span class="amount">200</span>
-                </div>
-                <span class="fo-setup-tag">Création unique · mis en ligne en 1 à 2 semaines</span>
-                <div class="fo-admin-toggle">
-                  <button class="fo-admin-btn is-active" onclick="toggleAdmin(2,'avec')">Pro — avec admin</button>
-                  <button class="fo-admin-btn" onclick="toggleAdmin(2,'sans')">Simple — sans admin</button>
-                </div>
-                <div class="fo-admin-price is-visible" id="adm-price-2">
-                  <span class="plus">+</span>
-                  <span class="a-amount">40</span>
-                  <span class="currency" style="font-size:.85rem;color:var(--mute);margin:0 .1em">€</span>
-                  <span class="a-per">/ mois · accès admin + 15 couleurs</span>
-                </div>
-                <div class="fo-modif-note" id="modif-note-2">
-                  <strong>Modifications à la demande :</strong><br>
-                  Contenu (produits, prix…) — <strong style="color:var(--bone)">40 €</strong><br>
-                  Structure ou design — <strong style="color:var(--bone)">80 €</strong>
-                </div>
-                <div class="fo-side-divider"></div>
-                <div class="fo-side-actions">
-                  <button class="fo-btn fo-btn-test" onclick="openThemePopup('elegance')">Voir les thèmes</button>
-                  <button class="fo-btn fo-btn-choose" onclick="scrollTo_('devis')">Choisir</button>
-                </div>
-              </aside>
-            </div>
-            <div class="fo-subpage">
-              <div class="fo-feat">
-                <div class="fo-feat-head">
-                  <div class="fo-feat-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-                  </div>
-                  <div>
-                    <h3>Élégance</h3>
-                    <p>Menu vivant avec animations, photos HD et mise à jour instantanée. L'expérience la plus immersive pour vos clients.</p>
-                  </div>
-                </div>
-                <div class="fo-feat-list">
-                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>Tout ce qui est inclus dans Avancé</span></div>
-                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>Accès à tous les thèmes Dynamique — photos HD, animations fluides, hero animé</span></div>
-                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>Page d'accueil immersive avec parallax, défilement automatique et badges produits</span></div>
-                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>Pro : 15 couleurs au choix + accès au tableau de bord admin</span></div>
-                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>Hébergement, mise en ligne et maintenance inclus</span></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="fo-dots">
-          <button class="fo-dot is-active" onclick="switchSubPage(2,0)" aria-label="Tarifs"></button>
-          <button class="fo-dot" onclick="switchSubPage(2,1)" aria-label="Détails"></button>
-        </div>
-      </div>
-
-      <!-- Panel Ultime -->
-      <div class="fo-panel" data-i="3">
-        <div class="fo-subpages">
-          <div class="fo-subpages-track">
-            <div class="fo-subpage">
-              <aside class="fo-side">
-                <div class="fo-side-label">Ultime</div>
-                <div class="fo-setup-price">
-                  <span class="currency">€</span>
-                  <span class="amount">300</span>
-                </div>
-                <span class="fo-setup-tag">Tous les thèmes · admin inclus · 15 couleurs</span>
-                <div class="fo-admin-price is-visible" style="margin-top:0;margin-bottom:1.4rem">
-                  <span class="plus">+</span>
-                  <span class="a-amount">60</span>
-                  <span class="currency" style="font-size:.85rem;color:var(--mute);margin:0 .1em">€</span>
-                  <span class="a-per">/ mois · admin + tous les thèmes</span>
-                </div>
-                <div class="fo-side-divider"></div>
-                <div class="fo-side-actions">
-                  <button class="fo-btn fo-btn-test" onclick="openThemePopup('ultime')">Voir les thèmes</button>
-                  <button class="fo-btn fo-btn-choose" onclick="scrollTo_('devis')">Choisir</button>
-                </div>
-              </aside>
-            </div>
-            <div class="fo-subpage">
-              <div class="fo-feat">
-                <div class="fo-feat-head">
-                  <div class="fo-feat-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                  </div>
-                  <div>
-                    <h3>Ultime</h3>
-                    <p>Accès à tous les thèmes Basic, Avancé et Élégance. Le forfait complet pour les établissements qui veulent tout.</p>
-                  </div>
-                </div>
-                <div class="fo-feat-list">
-                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>Tout ce qui est inclus dans Élégance</span></div>
-                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>Accès à TOUS les thèmes — Basic, Avancé et Élégance</span></div>
-                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>15 couleurs universelles — changez l'ambiance à tout moment depuis l'admin</span></div>
-                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>Tableau de bord admin inclus — gérez votre menu vous-même</span></div>
-                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>Hébergement, mise en ligne et maintenance inclus</span></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="fo-dots">
-          <button class="fo-dot is-active" onclick="switchSubPage(3,0)" aria-label="Tarifs"></button>
-          <button class="fo-dot" onclick="switchSubPage(3,1)" aria-label="Détails"></button>
-        </div>
-      </div>
-
-      <!-- Panel Options -->
-      <div class="fo-panel fo-panel-opts" data-i="4">
-        <div class="fo-opts-head-inner">
-          <h3 class="display">Options <em>à la carte</em></h3>
-          <p>Ajoutez les fonctionnalités qui correspondent à votre service — disponibles avec tous les forfaits, elles incluent automatiquement l'accès admin.</p>
-        </div>
-        <div class="fo-options-grid">
-
-          <div class="fo-option-card">
-            <div class="fo-option-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>
-            </div>
-            <div class="fo-option-name">Option Sonnette</div>
-            <div class="fo-option-desc">Vos clients appellent le service en un tap depuis leur table. Notification push instantanée sur votre téléphone.</div>
-            <div class="fo-option-price">
-              <div class="fo-option-price-val">
-                <span class="o-amount">—</span>
-                <span class="o-per" style="margin-left:.4rem">Sur devis</span>
-              </div>
-              <div class="fo-option-actions">
-                <button class="fo-btn fo-btn-test" onclick="openDemoFs('demo-bell.html','Option Sonnette')">Voir l'option</button>
-                <button class="fo-btn fo-btn-choose" onclick="scrollTo_('devis')">Choisir</button>
-              </div>
-            </div>
-          </div>
-
-          <div class="fo-option-card">
-            <div class="fo-option-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
-            </div>
-            <div class="fo-option-name">Option Commande</div>
-            <div class="fo-option-desc">Vos clients commandent directement depuis le menu. Suivi live de la préparation, historique complet côté établissement.</div>
-            <div class="fo-option-price">
-              <div class="fo-option-price-val">
-                <span class="o-amount">—</span>
-                <span class="o-per" style="margin-left:.4rem">Sur devis</span>
-              </div>
-              <div class="fo-option-actions">
-                <button class="fo-btn fo-btn-test" onclick="openDemoFs('demo-order.html','Option Commande')">Voir l'option</button>
-                <button class="fo-btn fo-btn-choose" onclick="scrollTo_('devis')">Choisir</button>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
     </div>
 
   </div>
 </section>
 
-<!-- ─── DEVIS ─── -->
-<section id="devis">
-  <div class="dv-shell">
-    <header class="dv-head reveal">
-      <div class="eyebrow" data-i18n="dv.eyebrow">Demande de devis</div>
-      <h2 class="display" data-i18n-html="dv.h2">Composez votre<br><em>formule sur mesure.</em></h2>
-      <p class="lead" data-i18n="dv.lead">Sélectionnez votre style, vos options et laissez-nous votre numéro. Nous vous contactons dans les 24h avec votre devis détaillé.</p>
-    </header>
 
-    <div class="dv-form reveal delay-1">
-      <!-- Left: Steps -->
-      <div class="dv-steps">
-
-        <div class="dv-step">
-          <div class="dv-step-label" data-i18n="dv.s1">1 — Votre style de menu</div>
-          <div class="dv-chips">
-            <div class="dv-chip is-on" data-dv="style" data-val="papier" onclick="dvSelect('style','papier',this)" data-i18n="dv.papier">Style Pages</div>
-            <div class="dv-chip" data-dv="style" data-val="dynamique" onclick="dvSelect('style','dynamique',this)" data-i18n="dv.dynamique">Style Dynamique</div>
-          </div>
-        </div>
-
-        <div class="dv-step">
-          <div class="dv-step-label" data-i18n="dv.s2">2 — Accès à l'interface admin ?</div>
-          <div class="dv-chips">
-            <div class="dv-chip is-on" data-dv="admin" data-val="oui" onclick="dvSelect('admin','oui',this)" data-i18n="dv.admin.oui">Oui, avec admin</div>
-            <div class="dv-chip" data-dv="admin" data-val="non" onclick="dvSelect('admin','non',this)" data-i18n="dv.admin.non">Non, sans admin</div>
-          </div>
-        </div>
-
-        <div class="dv-step">
-          <div class="dv-step-label" data-i18n="dv.s3">3 — Options supplémentaires</div>
-          <div class="dv-chips">
-            <div class="dv-chip dv-chip-opt" data-dv="opt" data-val="themes" onclick="dvToggleOpt('themes',this)">
-              <span data-i18n="dv.opt.themes">Option Thèmes</span>
-              <span class="dv-chip-opt-price">20 €/mois</span>
-            </div>
-            <div class="dv-chip dv-chip-opt" data-dv="opt" data-val="sonnette" onclick="dvToggleOpt('sonnette',this)">
-              <span data-i18n="dv.opt.sonnette">Option Sonnette</span>
-              <span class="dv-chip-opt-price">50 €/mois</span>
-            </div>
-            <div class="dv-chip dv-chip-opt" data-dv="opt" data-val="commande" onclick="dvToggleOpt('commande',this)">
-              <span data-i18n="dv.opt.commande">Option Commande</span>
-              <span class="dv-chip-opt-price">150 €/mois</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="dv-step">
-          <div class="dv-step-label" data-i18n="dv.s4">4 — Canal de contact préféré</div>
-          <div class="dv-canal-row">
-            <div class="dv-chip is-on" data-dv="canal" data-val="whatsapp" onclick="dvToggleCanal('whatsapp',this)">WhatsApp</div>
-            <div class="dv-chip" data-dv="canal" data-val="viber" onclick="dvToggleCanal('viber',this)">Viber</div>
-          </div>
-        </div>
-
-        <div class="dv-step">
-          <div class="dv-step-label" data-i18n="dv.s5">5 — Votre numéro de téléphone</div>
-          <div class="dv-input-wrap">
-            <svg class="dv-input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2A19.79 19.79 0 0111.63 19 19.5 19.5 0 015 12.36 19.79 19.79 0 011.11 3.18 2 2 0 013.08 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-            <input type="tel" class="dv-input" id="dv-phone" placeholder="+33 6 12 34 56 78" data-i18n-placeholder="dv.phone.ph">
-          </div>
-        </div>
-
-        <div class="dv-step">
-          <div class="dv-step-label" data-i18n="dv.s6">6 — Langue préférée</div>
-          <select class="dv-lang-sel" id="dv-lang">
-            <option value="fr">Français</option>
-            <option value="el">Ελληνικά</option>
-            <option value="en">English</option>
-            <option value="ar">العربية</option>
-            <option value="de">Deutsch</option>
-          </select>
-        </div>
-
-      </div>
-
-      <!-- Right: Summary -->
-      <div class="dv-summary">
-        <div class="dv-summary-title" data-i18n="dv.sum.title">Votre formule</div>
-        <div class="dv-sum-row">
-          <span class="dv-sum-key" data-i18n="dv.sum.style">Style</span>
-          <span class="dv-sum-val" id="dv-sum-style">Style Pages</span>
-        </div>
-        <div class="dv-sum-row">
-          <span class="dv-sum-key" data-i18n="dv.sum.admin">Admin</span>
-          <span class="dv-sum-val" id="dv-sum-admin">Avec admin</span>
-        </div>
-        <div class="dv-sum-row" id="dv-sum-opts-row" style="display:none">
-          <span class="dv-sum-key" data-i18n="dv.sum.options">Options</span>
-          <span class="dv-sum-val" id="dv-sum-opts"></span>
-        </div>
-        <div class="dv-total">
-          <div class="dv-total-creation">
-            <span class="dv-total-label" data-i18n="dv.sum.creation">Création</span>
-            <span class="dv-total-val"><span id="dv-price-creation">100</span> €</span>
-          </div>
-          <div class="dv-total-sub">
-            <span data-i18n="dv.sum.mensuel">Mensuel</span>
-            <span><span id="dv-price-mensuel">20</span> €/mois</span>
-          </div>
-        </div>
-        <button class="dv-submit" id="dv-submit" onclick="submitDevis()" data-i18n="dv.submit">Envoyer ma demande</button>
-        <div class="dv-feedback" id="dv-feedback"></div>
-      </div>
-    </div>
-  </div>
-</section>
 
 <!-- ════════════════════════════════════════════════════════════
      SECTION 4 · CONTACT
@@ -2966,11 +2685,11 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
   var T={
     fr:{
       'nav.advantages':'Avantages','nav.pricing':'Tarifs','nav.contact':'Contact','nav.start':'Démarrer',
-      'hero.eyebrow':'Créez un menu élégant et accessible instantanément grâce au QR code',
-      'hero.title.1':'Élégance, Confort,','hero.title.2':'Sécurité, Rapidité,','hero.title.3':'<em>Efficacité et Hygiène.</em>',
-      'hero.lead':'Le client scanne le QR Code de sa table et accède instantanément à un menu élégant directement sur son téléphone, sans attente et sans contact avec des menus papier manipulés par d\'autres clients.',
+      'hero.eyebrow':'Système restaurant complet — menu QR, commandes à table et appel serveur',
+      'hero.title.1':'Les clients scannent un QR,','hero.title.2':'commandent, ou appellent','hero.title.3':'<em>le serveur — en un tap.</em>',
+      'hero.lead':'Les clients scannent un QR code pour accéder au menu et peuvent ensuite commander leurs plats ou appeler un serveur à tout moment depuis leur téléphone.',
       'hero.cta1':'Découvrir les avantages','hero.cta2':'Voir les forfaits','hero.cta3':'Nous contacter',
-      'hero.meta.num':'<span>04</span> forfaits','hero.meta.label':'Basic, Avancé, Élégance, Ultime<br>+ options à la carte',
+      'hero.meta.num':'<span>02</span> forfaits','hero.meta.label':'Menu QR · Commandes &amp; Services<br>+ frais de création uniques',
       'hero.hud.label':'Aperçu du menu',
       'av.h2':'Cinq raisons de<br><em>passer au digital.</em>',
       'av.lead':'Chaque avantage a été pensé pour améliorer l\'expérience de vos clients et simplifier la gestion de votre établissement.',
@@ -2978,29 +2697,24 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
       'av.c2.h3':'Réduction des coûts,<br><em>solution durable.</em>','av.c2.p':'Le menu digital supprime les frais d\'impression et évite les menus perdus, abîmés ou à réimprimer. Une solution économique, pratique et durable pour votre établissement.','av.c2.t1':'Économique','av.c2.t2':'Durable',
       'av.c3.h3':'Accessible partout,<br><em>idéal pour les touristes.</em>','av.c3.p':'Disponible en plusieurs langues, le menu facilite l\'accueil des touristes et valorise l\'image moderne de votre établissement. Accessible 24h/24 et facile à partager sur les réseaux sociaux.','av.c3.t1':'Multilingue','av.c3.t2':'24h/24',
       'av.c4.h3':'Gestion instantanée<br><em>et personnalisation.</em>','av.c4.p':'Modifiez immédiatement vos prix, produits ou promotions depuis une page d\'administration simple et intuitive. Ajoutez facilement des photos et adaptez votre menu selon les saisons ou événements.','av.c4.t1':'Admin simple','av.c4.t2':'Temps réel','av.c4.opt':'Optionnel',
-      'av.c5.h3':'Commande intelligente,<br><em>design avancé.</em>','av.c5.p':'Les clients peuvent appeler un serveur ou commander directement depuis le menu QR Code. Le propriétaire peut également changer instantanément les thèmes et le design du menu selon ses préférences.','av.c5.t1':'Appel serveur','av.c5.t2':'Commande en ligne','av.c5.opt':'Optionnel',
-      'fo.h2':'Quatre niveaux,<br><em>toutes les options.</em>','fo.lead':'Choisissez votre forfait selon l\'ambiance souhaitée — avec ou sans accès admin — et ajoutez les options qui correspondent à votre service.',
-      'fo.style.pages':'Style Pages','fo.style.dynamic':'Style Dynamique','fo.style.options':'Options',
-      'fo.p0.feat.h3':'Style Pages','fo.p0.feat.desc':'Un menu élégant façon flipbook à pages. Idéal pour les établissements qui veulent une présence digitale soignée sans complexité.',
-      'fo.p0.f1':'Menu QR code consulté depuis smartphone, tablette ou ordinateur — sans application à télécharger',
-      'fo.p0.f2':'Navigation par pages façon carte de restaurant — présentation claire et élégante',
-      'fo.p0.f3':'Multilingue avec détection automatique de la langue du client',
-      'fo.p0.f4':'Mode dark / light, thèmes visuels, logo et couleurs de votre établissement',
+      'av.c5.h3':'Commander ou appeler<br><em>le serveur, en un tap.</em>','av.c5.p':'Depuis leur table, les clients peuvent commander leurs plats 🟢 ou appeler le serveur 🔴 — deux boutons distincts, clairs et intuitifs. Chaque action arrive instantanément sur l\'application du personnel.','av.c5.t1':'🟢 Commander','av.c5.t2':'🔴 Appeler le serveur',
+      'fo.h2':'Deux forfaits,<br><em>clé en main.</em>','fo.lead':'Choisissez le forfait qui correspond à votre service. Installation complète, sans engagement à long terme.',
+      'fo.style.pages':'Menu QR','fo.style.dynamic':'Commandes &amp; Services',
+      'fo.p0.feat.h3':'Menu QR','fo.p0.feat.desc':'Un menu digital élégant accessible par QR code. Vos clients consultent votre carte depuis leur téléphone — sans rien télécharger.',
+      'fo.p0.f1':'Menu QR digital accessible depuis smartphone, tablette ou ordinateur — sans application à télécharger',
+      'fo.p0.f2':'3 styles d\'affichage — Carte classique, Livre et Dynamique',
+      'fo.p0.f3':'10 thèmes par style · 15+ couleurs par thème — changez l\'ambiance en un clic',
+      'fo.p0.f4':'Administration complète — modifiez votre menu, vos prix et vos photos en temps réel',
       'fo.p0.f5':'Hébergement, mise en ligne et maintenance inclus — clé en main',
-      'fo.p0.side.label':'Style Pages','fo.p0.side.tag':'Création unique · mis en ligne en 1 à 2 semaines',
-      'fo.admin.sans':'Sans admin','fo.admin.avec':'Avec admin',
-      'fo.p0.admin.price.label':'/ mois · gérez votre menu vous-même',
-      'fo.p0.modif.html':'<strong>Modifications à la demande :</strong><br>Contenu (produits, prix…) — <strong style="color:var(--bone)">40 €</strong><br>Structure ou design — <strong style="color:var(--bone)">50 €</strong>',
+      'fo.p0.side.label':'Menu QR','fo.p0.side.tag':'/mois · administration incluse · sans engagement',
       'fo.btn.test':'Tester la démo','fo.btn.contact':'Nous contacter','fo.btn.demo':'Voir un exemple','fo.btn.choose':'Choisir',
-      'fo.p1.feat.h3':'Style Dynamique','fo.p1.feat.desc':'Un menu vivant avec hero animé, photos HD et scroll fluide. L\'expérience la plus immersive pour vos clients.',
-      'fo.p1.f1':'Tout ce qui est inclus dans le Style Pages',
-      'fo.p1.f2':'Page d\'accueil immersive avec hero animé, parallax et scroll automatique',
-      'fo.p1.f3':'Photos HD des produits, animations d\'entrée fluides, badges Nouveau / Populaire',
-      'fo.p1.f4':'WiFi affiché en page d\'accueil, note personnalisée, informations établissement',
-      'fo.p1.f5':'Navigation par catégories avec défilement fluide et particules festives',
-      'fo.p1.side.label':'Style Dynamique','fo.p1.side.tag':'Création unique · mis en ligne en 1 à 2 semaines',
-      'fo.p1.admin.price.label':'/ mois · gérez votre menu vous-même',
-      'fo.p1.modif.html':'<strong>Modifications à la demande :</strong><br>Contenu (produits, prix…) — <strong style="color:var(--bone)">80 €</strong><br>Structure ou design — <strong style="color:var(--bone)">100 €</strong>',
+      'fo.p1.feat.h3':'Commandes &amp; Services','fo.p1.feat.desc':'Le système complet — commandes à table, appel serveur, application Android pour le personnel, statistiques et QR par table.',
+      'fo.p1.f1':'Tout ce qui est inclus dans Menu QR — menu digital, admin, thèmes et couleurs',
+      'fo.p1.f2':'🔴 Appel serveur depuis la table — bouton dédié, notification push instantanée',
+      'fo.p1.f3':'🟢 Commandes à table depuis le menu — panier, validation, suivi en temps réel',
+      'fo.p1.f4':'Application serveur Android — gestion des commandes et appels avec notifications',
+      'fo.p1.f5':'QR code individuel par table · statistiques commandes et appels',
+      'fo.p1.side.label':'Commandes &amp; Services','fo.p1.side.tag':'/mois · système complet · sans engagement',
       'fo.opts.h3':'Options <em>à la carte</em>','fo.opts.p':'Ajoutez les fonctionnalités qui correspondent à votre flux de service — indépendamment du style choisi.',
       'fo.opt0.name':'Option Thèmes','fo.opt0.desc':'Accès à plus de 20 thèmes visuels premium (Gold Noir, Neon, Botanical, Rose Parisien…) avec variantes de couleurs — changez l\'ambiance de votre menu à tout moment depuis l\'admin.',
       'fo.opt1.name':'Option Sonnette','fo.opt1.desc':'Vos clients appellent le serveur en un tap depuis leur table. Notification push instantanée reçue sur votre téléphone ou tablette — sans application à installer côté client.',
@@ -3053,11 +2767,11 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
     },
     en:{
       'nav.advantages':'Benefits','nav.pricing':'Pricing','nav.contact':'Contact','nav.start':'Contact',
-      'hero.eyebrow':'Create an elegant menu instantly accessible via QR code',
-      'hero.title.1':'Elegance, Comfort,','hero.title.2':'Security, Speed,','hero.title.3':'<em>Efficiency &amp; Hygiene.</em>',
-      'hero.lead':'The customer scans the QR Code at their table and instantly accesses an elegant menu directly on their phone, with no wait and no contact with paper menus handled by other customers.',
+      'hero.eyebrow':'Complete restaurant system — QR menu, table orders and waiter call',
+      'hero.title.1':'Customers scan a QR code,','hero.title.2':'order their food,','hero.title.3':'<em>or call the waiter — in one tap.</em>',
+      'hero.lead':'Customers scan a QR code to access the menu and can then order their food or call a waiter at any time from their phone.',
       'hero.cta1':'Discover the benefits','hero.cta2':'View pricing','hero.cta3':'Contact us',
-      'hero.meta.num':'<span>04</span> plans','hero.meta.label':'Basic, Advanced, Elegance, Ultimate<br>+ optional add-ons',
+      'hero.meta.num':'<span>02</span> plans','hero.meta.label':'QR Menu · Orders &amp; Service<br>+ one-time setup fee',
       'hero.hud.label':'Menu preview',
       'av.h2':'Five reasons to<br><em>go digital.</em>',
       'av.lead':'Every advantage has been designed to improve your customers\' experience and simplify the management of your establishment.',
@@ -3065,9 +2779,9 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
       'av.c2.h3':'Cost reduction,<br><em>sustainable solution.</em>','av.c2.p':'The digital menu eliminates printing costs and avoids lost, damaged or reprinted menus. An economical, practical and sustainable solution for your establishment.','av.c2.t1':'Economical','av.c2.t2':'Sustainable',
       'av.c3.h3':'Accessible anywhere,<br><em>ideal for tourists.</em>','av.c3.p':'Available in multiple languages, the menu makes it easier to welcome tourists and enhances the modern image of your establishment. Accessible 24/7 and easy to share on social media.','av.c3.t1':'Multilingual','av.c3.t2':'24/7',
       'av.c4.h3':'Instant management<br><em>&amp; personalisation.</em>','av.c4.p':'Immediately update your prices, products or promotions from a simple and intuitive admin page. Easily add photos and adapt your menu by season or event.','av.c4.t1':'Simple admin','av.c4.t2':'Real-time','av.c4.opt':'Optional',
-      'av.c5.h3':'Smart ordering,<br><em>advanced design.</em>','av.c5.p':'Customers can call a waiter or order directly from the QR Code menu. The owner can also instantly change the themes and design of the menu to their preferences.','av.c5.t1':'Table call','av.c5.t2':'Online ordering','av.c5.opt':'Optional',
-      'fo.h2':'Four levels,<br><em>all options.</em>','fo.lead':'Choose your plan based on the atmosphere you want — with or without admin access — and add the options that match your service.',
-      'fo.style.pages':'Pages Style','fo.style.dynamic':'Dynamic Style','fo.style.options':'Options',
+      'av.c5.h3':'Order food or call<br><em>the waiter, in one tap.</em>','av.c5.p':'From their table, customers can order food 🟢 or call the waiter 🔴 — two distinct, clear and intuitive buttons. Each action reaches the staff app instantly.','av.c5.t1':'🟢 Order food','av.c5.t2':'🔴 Call waiter',
+      'fo.h2':'Two plans,<br><em>turnkey.</em>','fo.lead':'Choose the plan that matches your service. Full setup included, no long-term commitment.',
+      'fo.style.pages':'QR Menu','fo.style.dynamic':'Orders &amp; Service',
       'fo.p0.feat.h3':'Pages Style','fo.p0.feat.desc':'An elegant, clear and printable menu. Ideal for establishments that want a polished digital presence without complexity.',
       'fo.p0.f1':'QR code menu accessible on smartphone, tablet or computer — no app to download',
       'fo.p0.f2':'Page-by-page navigation like a restaurant card — clear and elegant presentation',
@@ -3578,162 +3292,5 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
 })();
 </script>
 
-<script>
-(function(){
-  'use strict';
-
-  // ── Devis form state ──────────────────────────────
-  var dvState = {
-    style:  'papier',
-    admin:  true,
-    opts:   [],
-    canaux: ['whatsapp'],
-    phone:  '',
-    langue: 'fr'
-  };
-
-  var PRICES = {
-    creation:     { papier: 100, dynamique: 200 },
-    admin_mois:   { papier: 20,  dynamique: 50  },
-    opts_mois:    { themes: 20,  sonnette: 50, commande: 150 }
-  };
-
-  function calcPrices() {
-    var cr = PRICES.creation[dvState.style] || 100;
-    var mo = dvState.admin ? (PRICES.admin_mois[dvState.style] || 20) : 0;
-    dvState.opts.forEach(function(o){ mo += PRICES.opts_mois[o] || 0; });
-    return { creation: cr, mensuel: mo };
-  }
-
-  function updateSummary() {
-    var p = calcPrices();
-    var styleLabel = dvState.style === 'papier' ? 'Style Pages' : 'Style Dynamique';
-    var adminLabel = dvState.admin ? 'Avec admin' : 'Sans admin';
-
-    document.getElementById('dv-sum-style').textContent = styleLabel;
-    document.getElementById('dv-sum-admin').textContent = adminLabel;
-    document.getElementById('dv-price-creation').textContent = p.creation;
-    document.getElementById('dv-price-mensuel').textContent = p.mensuel;
-
-    var optsRow = document.getElementById('dv-sum-opts-row');
-    if (dvState.opts.length > 0) {
-      optsRow.style.display = '';
-      var labels = { themes:'Thèmes', sonnette:'Sonnette', commande:'Commande' };
-      document.getElementById('dv-sum-opts').textContent = dvState.opts.map(function(o){ return labels[o]||o; }).join(', ');
-    } else {
-      optsRow.style.display = 'none';
-    }
-  }
-
-  window.dvSelect = function(group, val, el) {
-    document.querySelectorAll('[data-dv="'+group+'"]').forEach(function(c){ c.classList.remove('is-on'); });
-    el.classList.add('is-on');
-    if (group === 'style') dvState.style = val;
-    if (group === 'admin') dvState.admin = (val === 'oui');
-    updateSummary();
-  };
-
-  window.dvToggleOpt = function(opt, el) {
-    el.classList.toggle('is-on');
-    var idx = dvState.opts.indexOf(opt);
-    if (idx >= 0) dvState.opts.splice(idx, 1);
-    else dvState.opts.push(opt);
-    updateSummary();
-  };
-
-  window.dvToggleCanal = function(canal, el) {
-    el.classList.toggle('is-on');
-    var idx = dvState.canaux.indexOf(canal);
-    if (idx >= 0) dvState.canaux.splice(idx, 1);
-    else dvState.canaux.push(canal);
-  };
-
-  // ── Firebase Control ──────────────────────────────
-  var controlApp = (firebase.apps || []).find(function(a){ return a.name === 'control-devis'; })
-    || firebase.initializeApp({
-         apiKey:      'AIzaSyAwHbV2dueFQFL5eJCNkB0siVjdB_7AtKU',
-         databaseURL: 'https://menu-pro-control-default-rtdb.europe-west1.firebasedatabase.app',
-         projectId:   'menu-pro-control',
-         appId:       '1:457842698651:web:f5cbff82ec4cb729ded93e'
-       }, 'control-devis');
-  var controlDb = firebase.database(controlApp);
-
-  // ── Submit ────────────────────────────────────────
-  window.submitDevis = function() {
-    var phone = document.getElementById('dv-phone').value.trim();
-    var fb    = document.getElementById('dv-feedback');
-    var btn   = document.getElementById('dv-submit');
-
-    if (!phone || phone.length < 6) {
-      fb.className = 'dv-feedback err';
-      fb.textContent = '⚠ Veuillez saisir un numéro de téléphone valide.';
-      return;
-    }
-    if (dvState.canaux.length === 0) {
-      fb.className = 'dv-feedback err';
-      fb.textContent = '⚠ Choisissez au moins un canal de contact.';
-      return;
-    }
-
-    dvState.phone  = phone;
-    dvState.langue = document.getElementById('dv-lang').value;
-
-    var p  = calcPrices();
-    var ts = Date.now();
-    var devis = {
-      style:          dvState.style,
-      admin:          dvState.admin,
-      options:        dvState.opts.slice(),
-      total_creation: p.creation,
-      total_mensuel:  p.mensuel,
-      phone:          phone,
-      canal:          dvState.canaux.slice(),
-      langue:         dvState.langue,
-      lu:             false,
-      statut:         'nouveau',
-      ts:             ts
-    };
-
-    btn.disabled   = true;
-    btn.textContent = '⏳ Envoi en cours…';
-    fb.className   = 'dv-feedback';
-    fb.textContent = '';
-
-    controlDb.ref('/devis/' + ts).set(devis)
-      .then(function() {
-        return fetch('/api/notify-devis', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ phone: phone, langue: dvState.langue })
-        });
-      })
-      .then(function(r) { return r.json(); })
-      .then(function(data) {
-        fb.className   = 'dv-feedback ok';
-        var notifMsg = '';
-        if (data && data.sent > 0) notifMsg = ' 📱 Notification envoyée.';
-        else if (data && (data.total === 0 || data.reason === 'no_tokens')) notifMsg = ' (App Control hors ligne)';
-        fb.textContent = '✓ Demande envoyée — nous vous contactons dans les 24h !' + notifMsg;
-        btn.textContent = '✓ Envoyé';
-        document.getElementById('dv-phone').value = '';
-      })
-      .catch(function(err) {
-        fb.className   = 'dv-feedback err';
-        fb.textContent = '⚠ Erreur : ' + err.message;
-        btn.disabled   = false;
-        btn.textContent = 'Envoyer ma demande';
-      });
-  };
-
-  // init summary
-  updateSummary();
-
-  // sync lang select with page lang
-  var storedLang = localStorage.getItem('mqr_lang') || 'fr';
-  var langSel = document.getElementById('dv-lang');
-  if (langSel && ['fr','el','en','ar','de'].includes(storedLang)) langSel.value = storedLang;
-
-})();
-</script>
 </body>
 </html>
