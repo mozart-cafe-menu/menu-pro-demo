@@ -1677,12 +1677,12 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
   .cmd-input::placeholder { color:var(--mute) }
   .cmd-input:focus, .cmd-select:focus { border-color:var(--gold) }
   .cmd-select option { background:#1a1206;color:var(--bone) }
-  .cmd-phone-row { display:grid;grid-template-columns:auto 1fr;gap:.6rem;align-items:center }
+  .cmd-phone-row { display:grid;grid-template-columns:108px 1fr;gap:.6rem;align-items:center }
   .cmd-country-sel {
     background:rgba(255,255,255,.04);border:1px solid var(--line-2);border-radius:12px;
-    padding:.72rem .7rem;font-size:.85rem;color:var(--bone);font-family:inherit;
+    padding:.72rem .5rem;font-size:.85rem;color:var(--bone);font-family:inherit;
     outline:none;appearance:none;-webkit-appearance:none;cursor:pointer;
-    width:auto;min-width:110px;transition:border-color .2s;
+    width:100%;transition:border-color .2s;
   }
   .cmd-country-sel:focus { border-color:var(--gold) }
   .cmd-country-sel option { background:#1a1206 }
@@ -3444,7 +3444,7 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
     if (!sel) return;
     sel.innerHTML = COUNTRIES.map(function(co) {
       var sel_ = co.c === defaultCode ? ' selected' : '';
-      return '<option value="' + co.c + '"' + sel_ + '>' + co.f + ' ' + co.c + ' ' + co.n + '</option>';
+      return '<option value="' + co.c + '"' + sel_ + ' title="' + co.n + '">' + co.f + ' ' + co.c + '</option>';
     }).join('');
   }
 
