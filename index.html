@@ -1712,6 +1712,29 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
   .cmd-submit:disabled { opacity:.5;cursor:not-allowed }
   #pop-commander .popup-card { max-width:520px }
 
+  /* ── Popup notice Android ── */
+  #pop-android-notice .popup-card { max-width:440px }
+  .android-notice-icon { font-size:2.2rem; margin-bottom:1rem }
+  .android-notice-title { font-family:'Cormorant Garamond',Georgia,serif; font-size:1.5rem; font-weight:600; color:var(--bone); margin-bottom:.6rem; line-height:1.2 }
+  .android-notice-body { font-size:.88rem; color:var(--mute); line-height:1.7; margin-bottom:1.4rem }
+  .android-notice-body strong { color:var(--bone-2); font-weight:600 }
+  .android-notice-tag {
+    display:inline-flex; align-items:center; gap:.4rem;
+    font-size:.72rem; font-weight:600; letter-spacing:.07em; text-transform:uppercase;
+    padding:.3rem .75rem; border-radius:99px;
+    background:rgba(200,164,78,.1); border:1px solid rgba(200,164,78,.28); color:var(--gold);
+    margin-bottom:1.2rem;
+  }
+  .android-notice-continue {
+    width:100%; padding:.9rem 1.5rem; border-radius:13px; border:none; cursor:pointer;
+    background:linear-gradient(135deg,var(--gold),var(--gold-2));
+    color:#1a1408; font-weight:700; font-family:inherit; font-size:.9rem;
+    letter-spacing:.03em; transition:opacity .2s,transform .1s;
+    box-shadow:0 4px 14px rgba(200,164,78,.35),inset 0 1.5px 0 rgba(255,255,255,.28),inset 0 -1px 0 rgba(0,0,0,.2);
+  }
+  .android-notice-continue:hover { opacity:.9; transform:translateY(-1px) }
+  .android-notice-continue:active { transform:translateY(1px) }
+
 </style>
 </head>
 <body>
@@ -2338,6 +2361,28 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
 </div>
 
 <!-- Popup Commander -->
+<div class="popup" id="pop-android-notice" onclick="popupOutside(event,'pop-android-notice')">
+  <div class="popup-card">
+    <button class="popup-close" onclick="closePopup('pop-android-notice')" aria-label="Fermer">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="android-notice-icon">📱</div>
+    <div class="android-notice-tag">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      Information importante
+    </div>
+    <div class="android-notice-title">Application serveur — Android uniquement</div>
+    <div class="android-notice-body">
+      Le forfait <strong>Commandes & Services</strong> inclut une application dédiée pour vos serveurs, leur permettant de recevoir les commandes et appels de vos clients en temps réel.<br><br>
+      <strong>⚠️ Cette application est actuellement disponible sur Android uniquement.</strong> Vos serveurs devront disposer d'un téléphone Android pour l'utiliser.<br><br>
+      La version <strong>iOS (iPhone)</strong> est en cours de développement et sera disponible prochainement.
+    </div>
+    <button class="android-notice-continue" onclick="closePopup('pop-android-notice');openCommanderPopupDirect();">
+      J'ai compris — Continuer →
+    </button>
+  </div>
+</div>
+
 <div class="popup" id="pop-commander" onclick="popupOutside(event,'pop-commander')">
   <div class="popup-card">
     <button class="popup-close" onclick="closePopup('pop-commander')" aria-label="Fermer">
@@ -3455,8 +3500,8 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
     'commandes-services': 'Commandes & Services — 99 €/mois'
   };
 
-  // ── Ouvrir le popup ───────────────────────────────────
-  window.openCommanderPopup = function(idx) {
+  // ── Préparer le formulaire Commander (appelé aussi depuis le notice) ──
+  function _prepareCommanderForm(idx) {
     _cmdForfait = idx === 1 ? 'commandes-services' : 'menu-qr';
     var label = idx === 1 ? 'Commandes & Services' : 'Menu QR';
     document.getElementById('pop-cmd-eyebrow').textContent = label;
@@ -3477,7 +3522,22 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
     var defCode = defaultCodes[storedLang] || '+33';
     buildCountryOptions('cmd-wa-country', defCode);
     buildCountryOptions('cmd-vb-country', defCode);
+  }
+
+  // ── Ouvrir le popup Commander directement (après notice ou Menu QR) ──
+  window.openCommanderPopupDirect = function() {
     openPopup('pop-commander');
+  };
+
+  // ── Ouvrir le popup Commander ───────────────────────────────────────
+  window.openCommanderPopup = function(idx) {
+    _prepareCommanderForm(idx);
+    if (idx === 1) {
+      // Forfait Commandes & Services → notice Android d'abord
+      openPopup('pop-android-notice');
+    } else {
+      openPopup('pop-commander');
+    }
   };
 
   // ── Firebase Control ──────────────────────────────────
