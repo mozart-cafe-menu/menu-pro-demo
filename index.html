@@ -6434,13 +6434,14 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
   }
 
   // ── Language picker ────────────────────────────────────
-  var picker=document.getElementById('lang-picker');
+  // querySelectorAll — le DOM contient deux #lang-picker (structure dupliquée)
+  function _allPickers(){return document.querySelectorAll('#lang-picker')}
   var STORAGE_KEY='mqr_lang';
   var savedLang=localStorage.getItem(STORAGE_KEY);
 
   if(savedLang&&T[savedLang]){
-    // Already chose → hide picker immediately, apply lang
-    picker.classList.add('is-gone');
+    // Already chose → hide all pickers immediately, apply lang
+    _allPickers().forEach(function(p){p.classList.add('is-gone')});
     applyLang(savedLang);
   } else {
     // Show picker on load
@@ -6457,21 +6458,16 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
         titleEl.classList.remove('fading');
       },350);
     },2500);
-    // Stop cycling once user picks a language
-    var _origChoose=window.chooseLang;
-    window.chooseLang=function(code){
-      clearInterval(titleTimer);
-      _origChoose(code);
-    };
   }
 
   window.chooseLang=function(code){
+    if(typeof titleTimer!=='undefined')clearInterval(titleTimer);
     localStorage.setItem(STORAGE_KEY,code);
     applyLang(code);
-    // Animate out
-    picker.classList.add('is-hiding');
+    // Animate out ALL pickers
+    _allPickers().forEach(function(p){p.classList.add('is-hiding')});
     setTimeout(function(){
-      picker.classList.add('is-gone');
+      _allPickers().forEach(function(p){p.classList.add('is-gone')});
       document.body.style.overflow='';
     },780);
   };
