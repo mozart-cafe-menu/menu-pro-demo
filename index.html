@@ -4690,6 +4690,7 @@ html.light .pm-cta-btn.pm-cta-gold{color:#1a1208}
 
   // ── Valider le mode de paiement et ouvrir le popup suivant ──
   window.openCommanderWithMode = function(mode) {
+    if (mode !== 'monthly' && mode !== 'annual') return; // whitelist guard
     _cmdPayMode = mode;
     closePopup('pop-paymode');
     if (_cmdForfait === 'commandes-services') {
@@ -4776,7 +4777,13 @@ html.light .pm-cta-btn.pm-cta-gold{color:#1a1208}
         return fetch('/api/notify-commande', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ restaurant: rest, forfait: FORFAIT_LABELS[_cmdForfait], paymentMode: _cmdPayMode, langue: lang })
+          body: JSON.stringify({
+            restaurant: rest,
+            forfait: (_cmdForfait === 'commandes-services' ? 'Commandes & Services' : 'Menu QR')
+                   + ' — ' + (_cmdPayMode === 'annual' ? PM_ANNUAL[_cmdForfait] + ' €/an' : PM_MONTHLY[_cmdForfait] + ' €/mois'),
+            paymentMode: _cmdPayMode,
+            langue: lang
+          })
         });
       })
       .then(function(r) { return r.json(); })
