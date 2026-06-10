@@ -2534,6 +2534,63 @@ html.light .fp-promise svg{color:var(--gold-3)}
 
 
 
+/* ── Payment mode chooser popup ── */
+#pop-paymode .popup-card{max-width:480px}
+.pm-options{
+  display:grid;grid-template-columns:1fr 1fr;gap:.85rem;
+  margin:1.2rem 0 .8rem;
+}
+.pm-opt{
+  position:relative;display:flex;flex-direction:column;
+  padding:1.3rem 1.1rem 1.1rem;border-radius:16px;
+  border:1px solid var(--line);background:var(--ink-2);
+  gap:.5rem;
+}
+.pm-opt-featured{
+  border-color:rgba(200,164,78,.38);
+  background:linear-gradient(155deg,rgba(200,164,78,.09),var(--ink-2));
+}
+.pm-opt-badge{
+  position:absolute;top:-11px;left:50%;transform:translateX(-50%);
+  padding:.2rem .75rem;border-radius:99px;white-space:nowrap;
+  background:var(--gold);color:#0e0a04;
+  font-size:.63rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;
+}
+.pm-opt-label{
+  font-size:.7rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--gold);
+}
+.pm-price-wrap{display:flex;align-items:baseline;gap:.2rem;margin:.1rem 0}
+.pm-price-main{
+  font-family:var(--serif);font-weight:300;font-size:2rem;
+  font-variation-settings:"opsz" 144;line-height:1;
+  background:linear-gradient(135deg,var(--gold-2),var(--gold));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.pm-price-period{font-size:.8rem;color:var(--mute);font-weight:400}
+.pm-opt-desc{font-size:.76rem;color:var(--bone-2);line-height:1.45}
+.pm-opt-sub{font-size:.7rem;color:var(--gold-3);padding:.3rem .5rem;border-radius:7px;background:rgba(200,164,78,.07);margin-top:auto;line-height:1.4}
+.pm-cta-btn{
+  margin-top:.7rem;padding:.65rem 1rem;border-radius:99px;width:100%;
+  border:1px solid var(--line);background:transparent;
+  color:var(--bone-2);font-family:var(--sans);font-size:.83rem;font-weight:500;
+  cursor:pointer;transition:all .3s var(--e-out);
+}
+.pm-cta-btn:hover{border-color:rgba(200,164,78,.5);color:var(--gold-2);background:rgba(200,164,78,.07)}
+.pm-cta-btn.pm-cta-gold{
+  background:var(--gold);border-color:var(--gold);color:#0e0a04;font-weight:700;
+  box-shadow:0 6px 20px -8px rgba(200,164,78,.5);
+}
+.pm-cta-btn.pm-cta-gold:hover{transform:translateY(-2px);box-shadow:0 10px 28px -8px rgba(200,164,78,.65)}
+.pm-note{font-size:.71rem;color:var(--mute);text-align:center;line-height:1.5}
+/* Light mode */
+html.light .pm-opt{background:rgba(255,255,255,.55)}
+html.light .pm-opt-featured{background:linear-gradient(155deg,rgba(200,164,78,.1),rgba(255,255,255,.6))}
+html.light .pm-opt-sub{background:rgba(200,164,78,.1)}
+html.light .pm-cta-btn{color:var(--bone)}
+html.light .pm-cta-btn.pm-cta-gold{color:#1a1208}
+@media(max-width:400px){.pm-options{grid-template-columns:1fr}}
+
 /* ═══════════════════════════════════════════════════════════════
    RESPONSIVE — All devices · Minimize vertical scroll
 ═══════════════════════════════════════════════════════════════ */
@@ -3414,6 +3471,43 @@ html.light .fp-promise svg{color:var(--gold-3)}
     <button class="android-notice-continue" onclick="closePopup('pop-android-notice');openCommanderPopupDirect();">
       J'ai compris — Continuer →
     </button>
+  </div>
+</div>
+
+
+<!-- ── Payment mode chooser ─── -->
+<div class="popup" id="pop-paymode" onclick="popupOutside(event,'pop-paymode')">
+  <div class="popup-card">
+    <button class="popup-close" onclick="closePopup('pop-paymode')" aria-label="Fermer">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="eyebrow popup-eyebrow" id="pop-pm-eyebrow">Commander</div>
+    <h3>Mode de <em>paiement</em></h3>
+    <p class="popup-lead">Choisissez comment vous souhaitez régler votre abonnement.</p>
+    <div class="pm-options">
+      <div class="pm-opt">
+        <div class="pm-opt-label">Mensuel</div>
+        <div class="pm-price-wrap">
+          <span class="pm-price-main" id="pm-price-monthly">49€</span>
+          <span class="pm-price-period">/mois</span>
+        </div>
+        <div class="pm-opt-desc">Sans engagement · facturation mensuelle</div>
+        <div class="pm-opt-sub">2 mois offerts à la création</div>
+        <button class="pm-cta-btn" onclick="openCommanderWithMode('monthly')">Choisir ce mode</button>
+      </div>
+      <div class="pm-opt pm-opt-featured">
+        <div class="pm-opt-badge">Économique</div>
+        <div class="pm-opt-label">Annuel</div>
+        <div class="pm-price-wrap">
+          <span class="pm-price-main" id="pm-price-annual">490€</span>
+          <span class="pm-price-period">/an</span>
+        </div>
+        <div class="pm-opt-desc">Payez 10 mois · profitez de 12</div>
+        <div class="pm-opt-sub">2 mois offerts au total</div>
+        <button class="pm-cta-btn pm-cta-gold" onclick="openCommanderWithMode('annual')">Choisir ce mode</button>
+      </div>
+    </div>
+    <p class="pm-note">Les frais de création sont facturés séparément, une seule fois.</p>
   </div>
 </div>
 
@@ -4551,6 +4645,7 @@ html.light .fp-promise svg{color:var(--gold-3)}
 
   // ── État ──────────────────────────────────────────────
   var _cmdForfait = 'menu-qr';
+  var _cmdPayMode  = 'monthly';  // 'monthly' | 'annual'
   var FORFAIT_LABELS = {
     'menu-qr':            'Menu QR — 49 €/mois',
     'commandes-services': 'Commandes & Services — 99 €/mois'
@@ -4580,6 +4675,30 @@ html.light .fp-promise svg{color:var(--gold-3)}
     buildCountryOptions('cmd-vb-country', defCode);
   }
 
+  // ── Préparer le popup mode de paiement ────────────────────────────
+  var PM_MONTHLY = { 'menu-qr': 49, 'commandes-services': 99 };
+  var PM_ANNUAL  = { 'menu-qr': 490,'commandes-services': 990 };
+  function _preparePaymodePopup(idx) {
+    var forfait   = idx === 1 ? 'commandes-services' : 'menu-qr';
+    var monthly   = PM_MONTHLY[forfait];
+    var annual    = PM_ANNUAL[forfait];
+    var eyebrow   = idx === 1 ? 'Commandes & Services' : 'Menu QR Code';
+    document.getElementById('pop-pm-eyebrow').textContent = eyebrow;
+    document.getElementById('pm-price-monthly').textContent = monthly + '€';
+    document.getElementById('pm-price-annual').textContent  = annual  + '€';
+  }
+
+  // ── Valider le mode de paiement et ouvrir le popup suivant ──
+  window.openCommanderWithMode = function(mode) {
+    _cmdPayMode = mode;
+    closePopup('pop-paymode');
+    if (_cmdForfait === 'commandes-services') {
+      openPopup('pop-android-notice');
+    } else {
+      openPopup('pop-commander');
+    }
+  };
+
   // ── Ouvrir le popup Commander directement (après notice ou Menu QR) ──
   window.openCommanderPopupDirect = function() {
     openPopup('pop-commander');
@@ -4588,12 +4707,8 @@ html.light .fp-promise svg{color:var(--gold-3)}
   // ── Ouvrir le popup Commander ───────────────────────────────────────
   window.openCommanderPopup = function(idx) {
     _prepareCommanderForm(idx);
-    if (idx === 1) {
-      // Forfait Commandes & Services → notice Android d'abord
-      openPopup('pop-android-notice');
-    } else {
-      openPopup('pop-commander');
-    }
+    _preparePaymodePopup(idx);
+    openPopup('pop-paymode');
   };
 
   // ── Firebase Control ──────────────────────────────────
@@ -4642,7 +4757,8 @@ html.light .fp-promise svg{color:var(--gold-3)}
 
     var ts = Date.now();
     var commande = {
-      forfait:    _cmdForfait,
+      forfait:     _cmdForfait,
+      paymentMode: _cmdPayMode,
       restaurant: rest,
       langue:     lang,
       ts:         ts,
@@ -4660,7 +4776,7 @@ html.light .fp-promise svg{color:var(--gold-3)}
         return fetch('/api/notify-commande', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ restaurant: rest, forfait: FORFAIT_LABELS[_cmdForfait], langue: lang })
+          body: JSON.stringify({ restaurant: rest, forfait: FORFAIT_LABELS[_cmdForfait], paymentMode: _cmdPayMode, langue: lang })
         });
       })
       .then(function(r) { return r.json(); })
