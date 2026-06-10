@@ -44,6 +44,50 @@
   --radius:18px;
 }
 
+
+/* ═══════════════════════════════════════════════════════════════
+   01b · LIGHT MODE
+═══════════════════════════════════════════════════════════════ */
+html.light{
+  --ink:#fdfaf5;
+  --ink-2:#f5f0e8;
+  --ink-3:#eee8d8;
+  --line:rgba(140,110,45,.18);
+  --line-2:rgba(140,110,45,.28);
+  --bone:#1a1208;
+  --bone-2:#3d2a0e;
+  --mute:rgba(26,18,8,.65);
+  --mute-2:rgba(26,18,8,.42);
+}
+html.light body::before{opacity:.07;mix-blend-mode:multiply}
+html.light ::selection{color:#fdfaf5}
+html.light #nav.scrolled{background:rgba(253,250,245,.94);border-bottom-color:rgba(140,110,45,.18)}
+html.light .logo{color:var(--bone)}
+html.light #float-nav-trigger{background:rgba(253,250,245,.88);border-color:rgba(140,110,45,.35)}
+html.light #float-nav-trigger svg{color:var(--bone)}
+html.light #float-nav-trigger.is-open svg{color:var(--gold)}
+html.light .fnl-label{background:rgba(253,250,245,.88);border-color:rgba(140,110,45,.28);color:var(--bone)}
+html.light .fnl-dot{background:rgba(253,250,245,.88);border-color:rgba(140,110,45,.28)}
+html.light .fnl-item:hover .fnl-label{background:rgba(200,164,78,.18);border-color:var(--gold);color:var(--gold)}
+html.light .fnl-item:hover .fnl-dot{background:rgba(200,164,78,.18);border-color:var(--gold)}
+html.light .hero-slide:nth-child(1) .hero-slide-bg{background:radial-gradient(80% 60% at 30% 40%,#e0d4b8,#fdfaf5 75%),linear-gradient(135deg,#ecdcc0,#fdfaf5)}
+html.light .hero-slide:nth-child(2) .hero-slide-bg{background:radial-gradient(70% 60% at 70% 30%,#d8ccb0,#fdfaf5 75%),linear-gradient(135deg,#f0e8d0,#fdfaf5)}
+html.light .hero-slide:nth-child(3) .hero-slide-bg{background:radial-gradient(90% 70% at 50% 60%,#e4d8bc,#fdfaf5 80%),linear-gradient(45deg,#ecdcc0,#fdfaf5)}
+html.light .hero-slide:nth-child(4) .hero-slide-bg{background:radial-gradient(80% 60% at 20% 70%,#dcd4c0,#fdfaf5 75%),linear-gradient(135deg,#f0ecd8,#fdfaf5)}
+html.light .hero-slide:nth-child(5) .hero-slide-bg{background:radial-gradient(80% 60% at 80% 50%,#e0d4b0,#fdfaf5 75%),linear-gradient(135deg,#f0e8d0,#fdfaf5)}
+html.light .hero-veil{background:linear-gradient(105deg,rgba(253,250,245,.92) 0%,rgba(253,250,245,.78) 45%,rgba(253,250,245,.55) 75%,rgba(253,250,245,.70) 100%),radial-gradient(120% 80% at 0% 100%,rgba(200,164,78,.08),transparent 60%)}
+html.light .hero-hud{background:linear-gradient(180deg,transparent,rgba(245,240,232,.65))}
+html.light .marquee{-webkit-text-stroke:1px rgba(26,18,8,.06)}
+html.light .flow-grid{background-image:linear-gradient(rgba(26,18,8,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(26,18,8,.03) 1px,transparent 1px)}
+html.light .fo-style-selector{background:rgba(26,18,8,.03)}
+html.light .fo-feat{background:linear-gradient(180deg,rgba(26,18,8,.025),transparent)}
+html.light .fo-subpage .fo-side{background:linear-gradient(180deg,rgba(235,230,218,.75),rgba(245,240,232,.9))}
+html.light .popup{background:rgba(26,18,8,.72)}
+html.light .popup-card{background:linear-gradient(180deg,var(--ink-3),var(--ink-2));box-shadow:0 40px 100px -20px rgba(0,0,0,.12),inset 0 1px 0 rgba(255,255,255,.6)}
+html.light .demo-fs{background:var(--ink)}
+html.light .demo-fs-bar{background:rgba(245,240,232,.94);border-bottom-color:rgba(140,110,45,.18)}
+html.light ::-webkit-scrollbar-track{background:var(--ink)}
+
 /* ═══════════════════════════════════════════════════════════════
    02 · RESET & BASE
 ═══════════════════════════════════════════════════════════════ */
@@ -1462,6 +1506,16 @@ footer .right a:hover{color:var(--gold-2)}
   cursor:pointer;
 }
 #lang-nav-btn:hover{border-color:var(--gold);background:rgba(200,164,78,.08);color:var(--gold-2);transform:translateY(-1px)}
+#theme-nav-btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:36px;height:36px;border-radius:50%;
+  border:1px solid var(--line-2);background:rgba(241,234,217,.02);
+  color:var(--bone);
+  transition:border-color .3s,background .3s,color .3s,transform .3s var(--e-back);
+  cursor:pointer;flex-shrink:0;
+}
+#theme-nav-btn:hover{border-color:var(--gold);background:rgba(200,164,78,.08);color:var(--gold-2);transform:translateY(-1px)}
+#theme-nav-btn svg{width:16px;height:16px;pointer-events:none;transition:opacity .25s}
 .lnb-flag{font-size:1rem;line-height:1}
 .lnb-code{font-size:.72rem;letter-spacing:.07em;text-transform:uppercase}
 
@@ -1736,6 +1790,13 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
   .android-notice-continue:active { transform:translateY(1px) }
 
 </style>
+<script>
+(function(){
+  var t=localStorage.getItem('mqr_theme');
+  if(t!=='dark'&&t!=='light')t='light';
+  if(t==='light')document.documentElement.classList.add('light');
+})();
+</script>
 </head>
 <body>
 
@@ -1810,7 +1871,7 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
 <nav id="nav">
   <a href="#hero" class="logo">
     <span class="logo-mark"></span>
-    <span>Menu&nbsp;QR Code</span>
+    <span data-i18n="brand">Menu&nbsp;QR Code</span>
   </a>
   <div class="nav-mid">
     <a href="#avantages" onclick="event.preventDefault();scrollTo_('avantages')" data-i18n="nav.advantages">Avantages</a>
@@ -1820,6 +1881,10 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
     <button id="lang-nav-btn" onclick="toggleLangDropdown()" aria-label="Change language">
       <span class="lnb-flag" id="lnb-flag">🇫🇷</span>
       <span class="lnb-code" id="lnb-code">FR</span>
+    </button>
+    <button id="theme-nav-btn" onclick="toggleTheme()" aria-label="Changer de thème">
+      <svg class="theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+      <svg class="theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
     </button>
     <a href="#contact" onclick="event.preventDefault();scrollTo_('contact')" class="nav-cta" data-i18n="nav.contact">
       Contact
@@ -2077,8 +2142,8 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
     <!-- Style selector -->
     <div class="fo-style-selector reveal delay-1" id="foStyleSelector">
       <div class="fo-style-pill" id="foStylePill"></div>
-      <button class="fo-style-btn is-active" data-i="0" onclick="switchStyle(0)">Menu QR</button>
-      <button class="fo-style-btn" data-i="1" onclick="switchStyle(1)">Commandes &amp; Services</button>
+      <button class="fo-style-btn is-active" data-i="0" onclick="switchStyle(0)" data-i18n="fo.style.pages">Menu QR</button>
+      <button class="fo-style-btn" data-i="1" onclick="switchStyle(1)" data-i18n="fo.style.dynamic">Commandes &amp; Services</button>
     </div>
 
     <div class="fo-stage">
@@ -2827,7 +2892,7 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
   // ── Translations ──────────────────────────────────────
   var T={
     fr:{
-      'nav.advantages':'Avantages','nav.pricing':'Tarifs','nav.contact':'Contact','nav.start':'Démarrer',
+      'brand':'Menu QR Code','page.title':'Menu QR Code — Une nouvelle ère du menu digital','nav.advantages':'Avantages','nav.pricing':'Tarifs','nav.contact':'Contact','nav.start':'Démarrer',
       'hero.eyebrow':'Système restaurant complet — menu QR, commandes à table et appel serveur',
       'hero.title.1':'Les clients scannent un QR,','hero.title.2':'commandent, ou appellent','hero.title.3':'<em>le serveur — en un tap.</em>',
       'hero.lead':'Les clients scannent un QR code pour accéder au menu et peuvent ensuite commander leurs plats ou appeler un serveur à tout moment depuis leur téléphone.',
@@ -2909,7 +2974,7 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
       'dv.submit':'Envoyer ma demande'
     },
     en:{
-      'nav.advantages':'Benefits','nav.pricing':'Pricing','nav.contact':'Contact','nav.start':'Contact',
+      'brand':'Menu QR Code','page.title':'Menu QR Code — A new era of digital menus','nav.advantages':'Benefits','nav.pricing':'Pricing','nav.contact':'Contact','nav.start':'Contact',
       'hero.eyebrow':'Complete restaurant system — QR menu, table orders and waiter call',
       'hero.title.1':'Customers scan a QR code,','hero.title.2':'order their food,','hero.title.3':'<em>or call the waiter — in one tap.</em>',
       'hero.lead':'Customers scan a QR code to access the menu and can then order their food or call a waiter at any time from their phone.',
@@ -2996,7 +3061,7 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
       'dv.submit':'Send my request'
     },
     el:{
-      'nav.advantages':'Πλεονεκτήματα','nav.pricing':'Τιμές','nav.contact':'Επικοινωνία','nav.start':'Επικοινωνία',
+      'brand':'Menu QR Code','page.title':'Menu QR Code — Μια νέα εποχή ψηφιακών μενού','nav.advantages':'Πλεονεκτήματα','nav.pricing':'Τιμές','nav.contact':'Επικοινωνία','nav.start':'Επικοινωνία',
       'hero.eyebrow':'Δημιουργήστε ένα κομψό μενού προσβάσιμο άμεσα μέσω QR code',
       'hero.title.1':'Κομψότητα, Άνεση,','hero.title.2':'Ασφάλεια, Ταχύτητα,','hero.title.3':'<em>Αποδοτικότητα και Υγιεινή.</em>',
       'hero.lead':'Ο πελάτης σαρώνει τον κωδικό QR του τραπεζιού του και αποκτά άμεση πρόσβαση σε ένα κομψό μενού απευθείας στο τηλέφωνό του, χωρίς αναμονή και χωρίς επαφή με χάρτινα μενού που χρησιμοποιήθηκαν από άλλους πελάτες.',
@@ -3084,7 +3149,7 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
       'dv.submit':'Αποστολή αιτήματος'
     },
     ar:{
-      'nav.advantages':'المميزات','nav.pricing':'الأسعار','nav.contact':'اتصل بنا','nav.start':'تواصل',
+      'brand':'Menu QR Code','page.title':'Menu QR Code — عصر جديد من القوائم الرقمية','nav.advantages':'المميزات','nav.pricing':'الأسعار','nav.contact':'اتصل بنا','nav.start':'تواصل',
       'hero.eyebrow':'أنشئ قائمة أنيقة يمكن الوصول إليها فوراً عبر رمز QR',
       'hero.title.1':'أناقة، راحة،','hero.title.2':'أمان، سرعة،','hero.title.3':'<em>كفاءة ونظافة.</em>',
       'hero.lead':'يمسح الزبون رمز QR الخاص بطاولته ويصل فوراً إلى قائمة أنيقة على هاتفه، دون انتظار ودون لمس قوائم ورقية تداولها زبائن آخرون.',
@@ -3171,7 +3236,7 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
       'dv.submit':'إرسال طلبي'
     },
     de:{
-      'nav.advantages':'Vorteile','nav.pricing':'Preise','nav.contact':'Kontakt','nav.start':'Kontakt',
+      'brand':'Menu QR Code','page.title':'Menu QR Code — Eine neue Ära digitaler Speisekarten','nav.advantages':'Vorteile','nav.pricing':'Preise','nav.contact':'Kontakt','nav.start':'Kontakt',
       'hero.eyebrow':'Erstellen Sie eine elegante, sofort per QR-Code zugängliche Speisekarte',
       'hero.title.1':'Eleganz, Komfort,','hero.title.2':'Sicherheit, Schnelligkeit,','hero.title.3':'<em>Effizienz und Hygiene.</em>',
       'hero.lead':'Der Gast scannt den QR-Code seines Tisches und ruft sofort eine elegante Speisekarte direkt auf seinem Handy ab – ohne Wartezeit und ohne Berührung von Papierspeisekarten anderer Gäste.',
@@ -3295,6 +3360,8 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
     var isRTL=code==='ar';
     document.documentElement.dir=isRTL?'rtl':'ltr';
     document.documentElement.lang=code;
+    // Update page title
+    if(t['page.title'])document.title=t['page.title'];
     // Update nav button
     var meta=LANG_META[code]||LANG_META['fr'];
     var flagEl=document.getElementById('lnb-flag');
@@ -3397,6 +3464,34 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
     }
   })();
 
+})();
+// ════════════════════════════════════════════════════════════
+//  THEME SYSTEM
+// ════════════════════════════════════════════════════════════
+(function(){
+  'use strict';
+  var THEME_KEY='mqr_theme';
+  var _html=document.documentElement;
+
+  function _applyThemeUI(theme){
+    var moon=document.querySelector('#theme-nav-btn .theme-icon-moon');
+    var sun=document.querySelector('#theme-nav-btn .theme-icon-sun');
+    if(moon)moon.style.display=theme==='light'?'none':'block';
+    if(sun)sun.style.display=theme==='light'?'block':'none';
+  }
+
+  var stored=localStorage.getItem(THEME_KEY);
+  var theme=(stored==='dark'||stored==='light')?stored:'light';
+  // Class already applied by early script in <head> — just sync icons
+  _applyThemeUI(theme);
+
+  window.toggleTheme=function(){
+    var current=_html.classList.contains('light')?'light':'dark';
+    var next=current==='light'?'dark':'light';
+    localStorage.setItem(THEME_KEY,next);
+    if(next==='light'){_html.classList.add('light');}else{_html.classList.remove('light');}
+    _applyThemeUI(next);
+  };
 })();
 
 </script>
