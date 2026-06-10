@@ -1789,6 +1789,128 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
   .android-notice-continue:hover { opacity:.9; transform:translateY(-1px) }
   .android-notice-continue:active { transform:translateY(1px) }
 
+/* ══════════════════════════════════════════════════════
+   07b · FORFAIT CARDS + POPUP PRICING
+══════════════════════════════════════════════════════ */
+.fo-cards{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2.5rem}
+.fo-card{
+  border:1px solid var(--line-2);border-radius:24px;
+  padding:clamp(1.6rem,3vw,2.2rem);
+  background:linear-gradient(180deg,rgba(241,234,217,.02),transparent);
+  position:relative;overflow:hidden;
+  display:flex;flex-direction:column;gap:1rem;
+  transition:border-color .4s var(--e-back),box-shadow .4s,transform .4s var(--e-back);
+}
+.fo-card::before{
+  content:'';position:absolute;top:-1px;left:-1px;right:-1px;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  opacity:.3;
+}
+.fo-card:hover{border-color:rgba(200,164,78,.4);box-shadow:0 24px 64px -24px rgba(200,164,78,.15);transform:translateY(-2px)}
+.fo-card-featured{
+  border-color:rgba(200,164,78,.35);
+  background:linear-gradient(180deg,rgba(200,164,78,.06),rgba(200,164,78,.02),transparent);
+  box-shadow:0 24px 64px -24px rgba(200,164,78,.18);
+}
+.fo-card-featured::before{opacity:.7}
+.fo-card-badge{
+  display:inline-flex;align-items:center;
+  padding:.28rem .8rem;border-radius:99px;
+  background:linear-gradient(135deg,var(--gold),var(--gold-2));
+  color:var(--ink);font-size:.69rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
+  width:fit-content;margin-bottom:-.2rem;
+}
+.fo-card-icon{
+  width:48px;height:48px;border-radius:14px;
+  background:rgba(200,164,78,.08);border:1px solid rgba(200,164,78,.18);
+  display:flex;align-items:center;justify-content:center;color:var(--gold);
+}
+.fo-card-icon svg{width:22px;height:22px}
+.fo-card-name{
+  font-family:var(--serif);font-size:1.45rem;font-weight:300;
+  font-variation-settings:"opsz" 144;letter-spacing:-.02em;color:var(--bone);
+}
+.fo-card-subtitle{font-size:.86rem;color:var(--mute);line-height:1.5;margin-top:-.3rem}
+.fo-card-feats{list-style:none;display:flex;flex-direction:column;gap:.5rem;margin:0}
+.fo-card-feat{display:flex;align-items:flex-start;gap:.6rem;font-size:.84rem;color:var(--bone-2);line-height:1.45}
+.fo-card-feat .chk{
+  width:18px;height:18px;border-radius:50%;
+  background:rgba(200,164,78,.12);border:1px solid rgba(200,164,78,.25);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.1rem;color:var(--gold);
+}
+.fo-card-feat .chk svg{width:9px;height:9px;stroke-width:3.5}
+.fo-card-divider{height:1px;background:var(--line);margin:.2rem 0}
+.fo-card-price-row{display:flex;align-items:center;gap:.65rem}
+.fo-card-price-num{
+  font-family:var(--serif);font-size:2.1rem;font-weight:300;
+  font-variation-settings:"opsz" 144;color:var(--bone);line-height:1;
+}
+.fo-card-price-meta{display:flex;flex-direction:column;gap:.08rem}
+.fo-card-price-label{font-size:.72rem;font-weight:600;color:var(--gold);letter-spacing:.07em;text-transform:uppercase}
+.fo-card-price-months{font-size:.74rem;color:var(--mute)}
+.fo-card-monthly{font-size:.81rem;color:var(--mute);line-height:1.4;margin-top:-.3rem}
+.fo-card-monthly strong{color:var(--bone-2);font-weight:600}
+.fo-card-actions{display:flex;flex-direction:column;gap:.6rem;margin-top:auto;padding-top:.4rem}
+.fo-card-btn-detail{
+  padding:.7rem 1.2rem;border-radius:99px;
+  border:1px solid var(--line-2);background:rgba(241,234,217,.02);
+  color:var(--bone-2);font-size:.84rem;font-weight:500;
+  transition:all .3s var(--e-out);cursor:pointer;
+}
+.fo-card-btn-detail:hover{border-color:var(--gold);color:var(--gold);background:rgba(200,164,78,.06)}
+.fo-card-btn-cmd{
+  padding:.8rem 1.2rem;border-radius:99px;
+  background:linear-gradient(135deg,var(--gold),var(--gold-2));
+  color:var(--ink);font-size:.87rem;font-weight:700;letter-spacing:.02em;
+  transition:all .3s var(--e-back);cursor:pointer;
+  box-shadow:0 4px 16px -6px rgba(200,164,78,.55);
+}
+.fo-card-btn-cmd:hover{transform:translateY(-2px);box-shadow:0 8px 24px -8px rgba(200,164,78,.65)}
+@media(max-width:800px){.fo-cards{grid-template-columns:1fr}}
+
+/* ── Popup forfait pricing ── */
+.popup-card-wide{max-width:640px}
+.fp-feat-list{display:flex;flex-direction:column;gap:.55rem;margin:.8rem 0 1.3rem}
+.fp-feat-item{display:flex;align-items:flex-start;gap:.65rem;font-size:.87rem;color:var(--bone-2);line-height:1.5}
+.fp-feat-item .check{
+  width:20px;height:20px;border-radius:50%;
+  background:rgba(200,164,78,.12);border:1px solid rgba(200,164,78,.25);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.1rem;color:var(--gold);
+}
+.fp-feat-item .check svg{width:10px;height:10px;stroke-width:3.5}
+.fp-pricing{
+  border:1px solid var(--line-2);border-radius:16px;
+  padding:1.1rem 1.3rem;background:rgba(200,164,78,.04);
+  display:flex;flex-direction:column;gap:.7rem;margin-bottom:.9rem;
+}
+.fp-row-main{
+  display:flex;align-items:center;gap:1rem;flex-wrap:wrap;
+  padding-bottom:.7rem;border-bottom:1px solid var(--line);
+}
+.fp-price-num{
+  font-family:var(--serif);font-size:2rem;font-weight:300;
+  font-variation-settings:"opsz" 144;color:var(--bone);line-height:1;white-space:nowrap;
+}
+.fp-price-right{display:flex;flex-direction:column;gap:.12rem;min-width:0}
+.fp-price-label{font-size:.7rem;font-weight:700;color:var(--gold);letter-spacing:.1em;text-transform:uppercase}
+.fp-price-sub{font-size:.77rem;color:var(--mute);line-height:1.45}
+.fp-row-month{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;padding-bottom:.7rem;border-bottom:1px solid var(--line)}
+.fp-price-month{
+  font-family:var(--serif);font-size:1.3rem;font-weight:300;
+  font-variation-settings:"opsz" 144;color:var(--bone-2);white-space:nowrap;
+}
+.fp-row-bonus{
+  display:flex;flex-direction:column;gap:.18rem;
+  padding:.65rem .85rem;border-radius:10px;
+  background:rgba(200,164,78,.06);border:1px solid rgba(200,164,78,.15);
+}
+.fp-bonus-label{font-size:.7rem;font-weight:700;color:var(--gold);letter-spacing:.08em;text-transform:uppercase}
+.fp-bonus-desc{font-size:.81rem;color:var(--bone-2);line-height:1.45}
+.fp-bottom{display:flex;flex-direction:column;gap:.45rem;margin-bottom:1.1rem}
+.fp-promise{display:flex;align-items:flex-start;gap:.5rem;font-size:.79rem;color:var(--mute);line-height:1.45}
+.fp-promise svg{flex-shrink:0;margin-top:.1rem;color:var(--gold-3)}
+.fp-cta{width:100%;justify-content:center;padding:1rem;font-size:.95rem;font-weight:700}
+
 </style>
 <script>
 (function(){
@@ -2139,120 +2261,61 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
       <p class="lead" data-i18n="fo.lead">Choisissez votre forfait selon l'ambiance souhaitée — avec ou sans accès admin — et ajoutez les options qui correspondent à votre service.</p>
     </header>
 
-    <!-- Style selector -->
-    <div class="fo-style-selector reveal delay-1" id="foStyleSelector">
-      <div class="fo-style-pill" id="foStylePill"></div>
-      <button class="fo-style-btn is-active" data-i="0" onclick="switchStyle(0)" data-i18n="fo.style.pages">Menu QR</button>
-      <button class="fo-style-btn" data-i="1" onclick="switchStyle(1)" data-i18n="fo.style.dynamic">Commandes &amp; Services</button>
-    </div>
 
-    <div class="fo-stage">
+    <div class="fo-cards reveal delay-1">
 
-      <!-- Panel Menu QR -->
-      <div class="fo-panel is-active" data-i="0">
-        <div class="fo-subpages">
-          <div class="fo-subpages-track">
-            <div class="fo-subpage">
-              <aside class="fo-side">
-                <div class="fo-side-label">Menu QR</div>
-                <div class="fo-setup-price">
-                  <span class="currency">€</span>
-                  <span class="amount">49</span>
-                </div>
-                <span class="fo-setup-tag">/mois · administration incluse · sans engagement</span>
-                <div class="fo-admin-price is-visible" id="adm-price-0">
-                  <span class="plus">+</span>
-                  <span class="a-amount">150</span>
-                  <span class="currency" style="font-size:.85rem;color:var(--mute);margin:0 .1em">€</span>
-                  <span class="a-per">création unique · installation complète</span>
-                </div>
-                <div class="fo-side-divider"></div>
-                <div class="fo-side-actions">
-                  <button class="fo-btn fo-btn-test" onclick="openThemePopup('basic')">Voir un aperçu</button>
-                  <button class="fo-btn fo-btn-choose" onclick="openCommanderPopup(0)">Commander</button>
-                </div>
-              </aside>
-            </div>
-            <div class="fo-subpage">
-              <div class="fo-feat">
-                <div class="fo-feat-head">
-                  <div class="fo-feat-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM18 17h3M14 21h3M21 14v7"/></svg>
-                  </div>
-                  <div>
-                    <h3>Menu QR</h3>
-                    <p>Un menu digital élégant accessible par QR code. Vos clients consultent votre carte depuis leur téléphone — sans rien télécharger.</p>
-                  </div>
-                </div>
-                <div class="fo-feat-list">
-                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>Menu QR digital accessible depuis smartphone, tablette ou ordinateur — sans application à télécharger</span></div>
-                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>3 styles d'affichage — Carte classique, Livre et Dynamique</span></div>
-                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>10 thèmes par style · 15+ couleurs par thème — changez l'ambiance en un clic</span></div>
-                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>Administration complète — modifiez votre menu, vos prix et vos photos en temps réel</span></div>
-                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>QR code général pour l'ensemble du restaurant · multilingue avec détection automatique</span></div>
-                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>Hébergement, mise en ligne et maintenance inclus — clé en main</span></div>
-                </div>
-              </div>
-            </div>
+      <!-- Card 0 : Menu QR Code -->
+      <div class="fo-card">
+        <div class="fo-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM18 17h3M14 21h3M21 14v7"/></svg>
+        </div>
+        <div class="fo-card-name" data-i18n="fo.card0.name">Menu QR Code</div>
+        <p class="fo-card-subtitle" data-i18n="fo.card0.subtitle">Menu digital accessible par QR code — sans application à télécharger</p>
+        <ul class="fo-card-feats">
+          <li class="fo-card-feat"><div class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span data-i18n="fo.card0.f1">Menu QR multilingue accessible depuis smartphone ou tablette</span></li>
+          <li class="fo-card-feat"><div class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span data-i18n="fo.card0.f2">Administration complète — modifiez menu, prix et photos en temps réel</span></li>
+          <li class="fo-card-feat"><div class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span data-i18n="fo.card0.f3">Thèmes, couleurs et styles personnalisables</span></li>
+        </ul>
+        <div class="fo-card-divider"></div>
+        <div class="fo-card-price-row">
+          <span class="fo-card-price-num">149€</span>
+          <div class="fo-card-price-meta">
+            <span class="fo-card-price-label" data-i18n="fp.creation.label">création</span>
+            <span class="fo-card-price-months" data-i18n="fo.card.months2">2 mois offerts</span>
           </div>
         </div>
-        <div class="fo-dots">
-          <button class="fo-dot is-active" onclick="switchSubPage(0,0)" aria-label="Tarifs"></button>
-          <button class="fo-dot" onclick="switchSubPage(0,1)" aria-label="Détails"></button>
+        <div class="fo-card-monthly"><span data-i18n="fo.card.then">puis</span> <strong>49€/mois</strong> <span data-i18n="fo.card.from3">à partir du 3ème mois</span></div>
+        <div class="fo-card-actions">
+          <button class="fo-card-btn-detail" onclick="openPopup('pop-forfait-0')" data-i18n="fo.card.details">Voir les détails</button>
+          <button class="fo-card-btn-cmd" onclick="openCommanderPopup(0)" data-i18n="fo.card.cmd">Commander</button>
         </div>
       </div>
 
-      <!-- Panel Commandes & Services -->
-      <div class="fo-panel" data-i="1">
-        <div class="fo-subpages">
-          <div class="fo-subpages-track">
-            <div class="fo-subpage">
-              <aside class="fo-side">
-                <div class="fo-side-label">Commandes &amp; Services <span class="fo-badge-popular">Le plus choisi</span></div>
-                <div class="fo-setup-price">
-                  <span class="currency">€</span>
-                  <span class="amount">99</span>
-                </div>
-                <span class="fo-setup-tag">/mois · système complet · sans engagement</span>
-                <div class="fo-admin-price is-visible" id="adm-price-1">
-                  <span class="plus">+</span>
-                  <span class="a-amount">200</span>
-                  <span class="currency" style="font-size:.85rem;color:var(--mute);margin:0 .1em">€</span>
-                  <span class="a-per">création unique · installation complète</span>
-                </div>
-                <div class="fo-side-divider"></div>
-                <div class="fo-side-actions">
-                  <button class="fo-btn fo-btn-test" onclick="openDemoFs('demo-order.html','Commandes &amp; Services')">Voir la démo</button>
-                  <button class="fo-btn fo-btn-choose" onclick="openCommanderPopup(1)">Commander</button>
-                </div>
-              </aside>
-            </div>
-            <div class="fo-subpage">
-              <div class="fo-feat">
-                <div class="fo-feat-head">
-                  <div class="fo-feat-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>
-                  </div>
-                  <div>
-                    <h3>Commandes &amp; Services</h3>
-                    <p>Le système complet — vos clients commandent ou appellent le serveur depuis leur table. Chaque action arrive en temps réel sur l'application du personnel.</p>
-                  </div>
-                </div>
-                <div class="fo-feat-list">
-                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>Tout ce qui est inclus dans Menu QR — menu digital, admin, thèmes et couleurs</span></div>
-                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>🔴 Appel serveur depuis la table — bouton dédié, notification push instantanée</span></div>
-                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>🟢 Commandes à table depuis le menu — panier, validation, suivi en temps réel</span></div>
-                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>Application serveur Android — gestion des commandes et appels avec notifications</span></div>
-                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>QR code individuel par table — chaque table a son propre QR code unique</span></div>
-                  <div class="fo-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span>Statistiques commandes et appels — suivez l'activité de votre établissement</span></div>
-                </div>
-              </div>
-            </div>
+      <!-- Card 1 : Menu et Commandes -->
+      <div class="fo-card fo-card-featured">
+        <div class="fo-card-badge" data-i18n="fo.card1.badge">Le plus complet</div>
+        <div class="fo-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>
+        </div>
+        <div class="fo-card-name" data-i18n="fo.card1.name">Menu et Commandes</div>
+        <p class="fo-card-subtitle" data-i18n="fo.card1.subtitle">Menu QR Code + commandes à table et appel serveur</p>
+        <ul class="fo-card-feats">
+          <li class="fo-card-feat"><div class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span data-i18n="fo.card1.f1">Tout ce qui est inclus dans Menu QR Code</span></li>
+          <li class="fo-card-feat"><div class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span data-i18n="fo.card1.f2">🔴 Appel serveur + 🟢 commandes à table en temps réel</span></li>
+          <li class="fo-card-feat"><div class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span data-i18n="fo.card1.f3">Application serveur Android avec notifications push</span></li>
+        </ul>
+        <div class="fo-card-divider"></div>
+        <div class="fo-card-price-row">
+          <span class="fo-card-price-num">299€</span>
+          <div class="fo-card-price-meta">
+            <span class="fo-card-price-label" data-i18n="fp.creation.label">création</span>
+            <span class="fo-card-price-months" data-i18n="fo.card.months2">2 mois offerts</span>
           </div>
         </div>
-        <div class="fo-dots">
-          <button class="fo-dot is-active" onclick="switchSubPage(1,0)" aria-label="Tarifs"></button>
-          <button class="fo-dot" onclick="switchSubPage(1,1)" aria-label="Détails"></button>
+        <div class="fo-card-monthly"><span data-i18n="fo.card.then">puis</span> <strong>99€/mois</strong> <span data-i18n="fo.card.from3">à partir du 3ème mois</span></div>
+        <div class="fo-card-actions">
+          <button class="fo-card-btn-detail" onclick="openPopup('pop-forfait-1')" data-i18n="fo.card.details">Voir les détails</button>
+          <button class="fo-card-btn-cmd" onclick="openCommanderPopup(1)" data-i18n="fo.card.cmd">Commander</button>
         </div>
       </div>
 
@@ -2260,6 +2323,8 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
 
   </div>
 </section>
+
+
 
 
 
@@ -2281,26 +2346,2357 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
           <span data-i18n="co.info2">Viber &amp; WhatsApp · toutes langues</span>
         </div>
-        <div class="co-info-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2A19.79 19.79 0 0111.63 19 19.5 19.5 0 015 12.36 19.79 19.79 0 011.11 3.18 2 2 0 013.08 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-          <span data-i18n="co.info3">Téléphone · français ou anglais</span>
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<title>Menu QR Code — Une nouvelle ère du menu digital</title>
+<meta name="description" content="Menus digitaux premium pour cafés et restaurants. QR code, commandes, appels de table, application serveur. Conçu pour l'excellence."/>
+
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   01 · DESIGN TOKENS
+═══════════════════════════════════════════════════════════════ */
+:root{
+  /* Color · noir profond, or chaud, crème, dérivés tonals */
+  --ink:#0a0907;
+  --ink-2:#100e0a;
+  --ink-3:#191510;
+  --line:rgba(231,206,151,.10);
+  --line-2:rgba(231,206,151,.18);
+  --gold:#c8a44e;
+  --gold-2:#e6c989;
+  --gold-3:#8c6f30;
+  --bone:#f1ead9;
+  --bone-2:#d9d0bd;
+  --mute:rgba(241,234,217,.55);
+  --mute-2:rgba(241,234,217,.38);
+
+  /* Type */
+  --serif:'Fraunces',ui-serif,Georgia,serif;
+  --sans:'Inter',ui-sans-serif,system-ui,sans-serif;
+
+  /* Motion */
+  --e-out:cubic-bezier(.16,1,.3,1);
+  --e-in-out:cubic-bezier(.65,0,.35,1);
+  --e-back:cubic-bezier(.34,1.4,.64,1);
+
+  /* Layout */
+  --pad-x:clamp(1.25rem,5vw,4rem);
+  --max:1440px;
+  --radius:18px;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   01b · LIGHT MODE
+═══════════════════════════════════════════════════════════════ */
+html.light{
+  --ink:#fdfaf5;
+  --ink-2:#f5f0e8;
+  --ink-3:#eee8d8;
+  --line:rgba(140,110,45,.18);
+  --line-2:rgba(140,110,45,.28);
+  --bone:#1a1208;
+  --bone-2:#3d2a0e;
+  --mute:rgba(26,18,8,.65);
+  --mute-2:rgba(26,18,8,.42);
+}
+html.light body::before{opacity:.07;mix-blend-mode:multiply}
+html.light ::selection{color:#fdfaf5}
+html.light #nav.scrolled{background:rgba(253,250,245,.94);border-bottom-color:rgba(140,110,45,.18)}
+html.light .logo{color:var(--bone)}
+html.light #float-nav-trigger{background:rgba(253,250,245,.88);border-color:rgba(140,110,45,.35)}
+html.light #float-nav-trigger svg{color:var(--bone)}
+html.light #float-nav-trigger.is-open svg{color:var(--gold)}
+html.light .fnl-label{background:rgba(253,250,245,.88);border-color:rgba(140,110,45,.28);color:var(--bone)}
+html.light .fnl-dot{background:rgba(253,250,245,.88);border-color:rgba(140,110,45,.28)}
+html.light .fnl-item:hover .fnl-label{background:rgba(200,164,78,.18);border-color:var(--gold);color:var(--gold)}
+html.light .fnl-item:hover .fnl-dot{background:rgba(200,164,78,.18);border-color:var(--gold)}
+html.light .hero-slide:nth-child(1) .hero-slide-bg{background:radial-gradient(80% 60% at 30% 40%,#e0d4b8,#fdfaf5 75%),linear-gradient(135deg,#ecdcc0,#fdfaf5)}
+html.light .hero-slide:nth-child(2) .hero-slide-bg{background:radial-gradient(70% 60% at 70% 30%,#d8ccb0,#fdfaf5 75%),linear-gradient(135deg,#f0e8d0,#fdfaf5)}
+html.light .hero-slide:nth-child(3) .hero-slide-bg{background:radial-gradient(90% 70% at 50% 60%,#e4d8bc,#fdfaf5 80%),linear-gradient(45deg,#ecdcc0,#fdfaf5)}
+html.light .hero-slide:nth-child(4) .hero-slide-bg{background:radial-gradient(80% 60% at 20% 70%,#dcd4c0,#fdfaf5 75%),linear-gradient(135deg,#f0ecd8,#fdfaf5)}
+html.light .hero-slide:nth-child(5) .hero-slide-bg{background:radial-gradient(80% 60% at 80% 50%,#e0d4b0,#fdfaf5 75%),linear-gradient(135deg,#f0e8d0,#fdfaf5)}
+html.light .hero-veil{background:linear-gradient(105deg,rgba(253,250,245,.92) 0%,rgba(253,250,245,.78) 45%,rgba(253,250,245,.55) 75%,rgba(253,250,245,.70) 100%),radial-gradient(120% 80% at 0% 100%,rgba(200,164,78,.08),transparent 60%)}
+html.light .hero-hud{background:linear-gradient(180deg,transparent,rgba(245,240,232,.65))}
+html.light .marquee{-webkit-text-stroke:1px rgba(26,18,8,.06)}
+html.light .flow-grid{background-image:linear-gradient(rgba(26,18,8,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(26,18,8,.03) 1px,transparent 1px)}
+html.light .fo-style-selector{background:rgba(26,18,8,.03)}
+html.light .fo-feat{background:linear-gradient(180deg,rgba(26,18,8,.025),transparent)}
+html.light .fo-subpage .fo-side{background:linear-gradient(180deg,rgba(235,230,218,.75),rgba(245,240,232,.9))}
+html.light .popup{background:rgba(26,18,8,.72)}
+html.light .popup-card{background:linear-gradient(180deg,var(--ink-3),var(--ink-2));box-shadow:0 40px 100px -20px rgba(0,0,0,.12),inset 0 1px 0 rgba(255,255,255,.6)}
+html.light .demo-fs{background:var(--ink)}
+html.light .demo-fs-bar{background:rgba(245,240,232,.94);border-bottom-color:rgba(140,110,45,.18)}
+html.light ::-webkit-scrollbar-track{background:var(--ink)}
+
+/* ═══════════════════════════════════════════════════════════════
+   02 · RESET & BASE
+═══════════════════════════════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;-webkit-text-size-adjust:100%;scroll-behavior:smooth;background:var(--ink)}
+body{
+  font-family:var(--sans);
+  background:var(--ink);
+  color:var(--bone);
+  font-weight:400;
+  line-height:1.5;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  text-rendering:optimizeLegibility;
+}
+body::before{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:1;
+  background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  opacity:.18;mix-blend-mode:overlay;
+}
+img,svg{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+button{background:none;border:none;color:inherit;font:inherit;cursor:pointer}
+::selection{background:var(--gold);color:var(--ink)}
+
+/* Scrollbar */
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-track{background:var(--ink)}
+::-webkit-scrollbar-thumb{background:linear-gradient(var(--gold-3),var(--gold));border-radius:3px}
+
+/* ═══════════════════════════════════════════════════════════════
+   03 · TYPOGRAPHY
+═══════════════════════════════════════════════════════════════ */
+.eyebrow{
+  font-family:var(--sans);font-size:.72rem;font-weight:500;
+  letter-spacing:.24em;text-transform:uppercase;color:var(--gold);
+  display:inline-flex;align-items:center;gap:.7rem;
+}
+.eyebrow::before{
+  content:'';width:28px;height:1px;background:var(--gold);display:inline-block;
+}
+.display{
+  font-family:var(--serif);
+  font-weight:300;
+  font-variation-settings:"opsz" 144, "SOFT" 50;
+  line-height:.95;
+  letter-spacing:-.035em;
+  color:var(--bone);
+}
+.display em{
+  font-style:italic;font-weight:400;
+  font-variation-settings:"opsz" 144, "SOFT" 80;
+  background:linear-gradient(180deg,var(--gold-2) 0%,var(--gold) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.lead{
+  font-family:var(--sans);font-size:clamp(1rem,1.2vw,1.125rem);
+  font-weight:300;line-height:1.65;color:var(--mute);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   04 · NAV
+═══════════════════════════════════════════════════════════════ */
+#nav{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:1.4rem var(--pad-x);
+  transition:padding .55s var(--e-out),background .55s var(--e-out),backdrop-filter .55s,border-color .55s;
+  border-bottom:1px solid transparent;
+}
+#nav.scrolled{
+  padding:.85rem var(--pad-x);
+  background:rgba(10,9,7,.72);
+  backdrop-filter:blur(18px) saturate(180%);
+  -webkit-backdrop-filter:blur(18px) saturate(180%);
+  border-bottom-color:var(--line);
+}
+.logo{
+  display:flex;align-items:center;gap:.55rem;
+  font-family:var(--serif);font-size:1.18rem;font-weight:400;
+  font-variation-settings:"opsz" 144;letter-spacing:-.02em;
+}
+.logo-mark{
+  width:30px;height:30px;border-radius:50%;
+  background:radial-gradient(circle at 30% 30%,var(--gold-2),var(--gold-3));
+  position:relative;flex-shrink:0;
+  box-shadow:0 0 0 1px rgba(255,255,255,.06),inset 0 1px 0 rgba(255,255,255,.18);
+}
+.logo-mark::after{
+  content:'';position:absolute;inset:7px;border-radius:50%;
+  background:radial-gradient(circle at 35% 35%,rgba(255,255,255,.5),transparent 60%);
+}
+.nav-mid{
+  display:flex;gap:2.5rem;align-items:center;
+}
+.nav-mid a{
+  font-size:.85rem;font-weight:500;color:var(--bone-2);
+  position:relative;padding:.4rem 0;transition:color .3s var(--e-out);
+}
+.nav-mid a::after{
+  content:'';position:absolute;left:0;right:0;bottom:0;height:1px;
+  background:var(--gold);transform:scaleX(0);transform-origin:left;
+  transition:transform .4s var(--e-out);
+}
+.nav-mid a:hover{color:var(--bone)}
+.nav-mid a:hover::after{transform:scaleX(1)}
+.nav-cta{
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:.6rem 1.2rem;border-radius:99px;
+  background:var(--bone);color:var(--ink);
+  font-size:.83rem;font-weight:600;letter-spacing:.01em;
+  transition:transform .3s var(--e-back),background .3s,box-shadow .3s;
+}
+.nav-cta:hover{
+  transform:translateY(-1px);
+  background:var(--gold-2);
+  box-shadow:0 8px 24px -8px rgba(230,201,137,.55);
+}
+.nav-cta svg{transition:transform .3s var(--e-out)}
+.nav-cta:hover svg{transform:translateX(3px)}
+/* ── Floating nav button (mobile) ── */
+.menu-btn{display:none}
+#float-nav{
+  display:none;
+  position:fixed;right:1.2rem;top:8.5rem;z-index:250;
+  flex-direction:column;align-items:flex-end;gap:.7rem;
+  /* hidden until hero CTAs scroll out of view */
+  opacity:0;pointer-events:none;
+  transition:opacity .35s var(--e-out),transform .35s var(--e-back),top .4s cubic-bezier(.4,0,.2,1);
+  transform:translateY(-6px) scale(.92);
+}
+#float-nav.is-shown{
+  opacity:1;pointer-events:none;
+  transform:none;
+}
+#float-nav.is-shown #float-nav-trigger{pointer-events:auto}
+#float-nav-trigger{
+  width:48px;height:48px;border-radius:50%;
+  background:rgba(10,9,7,.52);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  border:1px solid rgba(200,164,78,.32);
+  box-shadow:0 8px 32px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.06);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;
+  transition:background .3s,border-color .3s,transform .35s var(--e-back),box-shadow .3s;
+  position:relative;z-index:2;
+}
+#float-nav-trigger:hover{background:rgba(200,164,78,.18);border-color:var(--gold)}
+#float-nav-trigger.is-open{
+  background:rgba(200,164,78,.22);border-color:var(--gold);
+  transform:rotate(45deg);
+}
+#float-nav-trigger svg{width:18px;height:18px;color:var(--bone);transition:color .3s}
+#float-nav-trigger.is-open svg{color:var(--gold-2)}
+
+#float-nav-links{
+  display:flex;flex-direction:column;align-items:flex-end;gap:.5rem;
+  pointer-events:none;
+}
+.fnl-item{
+  display:flex;align-items:center;gap:.55rem;
+  opacity:0;
+  pointer-events:none;
+  visibility:hidden;
+  transform:translateY(-10px) scale(0.88);
+  transition:opacity .35s var(--e-out), transform .35s var(--e-back), visibility 0s .35s;
+}
+.fnl-item.is-visible{
+  opacity:1;transform:translateY(0) scale(1);
+  pointer-events:auto;
+  visibility:visible;
+  transition:opacity .35s var(--e-out), transform .35s var(--e-back), visibility 0s 0s;
+}
+.fnl-item:nth-child(1){transition-delay:.04s}
+.fnl-item:nth-child(2){transition-delay:.09s}
+.fnl-item:nth-child(3){transition-delay:.14s}
+.fnl-item:nth-child(4){transition-delay:.19s}
+.fnl-label{
+  font-size:.78rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--bone);
+  background:rgba(10,9,7,.55);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border:1px solid rgba(200,164,78,.22);
+  padding:.42rem .85rem;border-radius:99px;
+  white-space:nowrap;
+  transition:background .25s,border-color .25s,color .25s;
+}
+.fnl-dot{
+  width:32px;height:32px;border-radius:50%;
+  background:rgba(10,9,7,.45);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border:1px solid rgba(200,164,78,.22);
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+  transition:background .25s,border-color .25s;
+}
+.fnl-dot svg{width:12px;height:12px;color:var(--gold-2)}
+.fnl-item:hover .fnl-label{background:rgba(200,164,78,.18);border-color:var(--gold);color:var(--gold-2)}
+.fnl-item:hover .fnl-dot{background:rgba(200,164,78,.18);border-color:var(--gold)}
+
+/* Side dots */
+#side-dots{
+  position:fixed;right:1.6rem;top:50%;transform:translateY(-50%);z-index:150;
+  display:flex;flex-direction:column;gap:.7rem;
+}
+.s-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:rgba(241,234,217,.18);
+  transition:background .35s var(--e-out),transform .35s var(--e-back);
+  cursor:pointer;position:relative;
+}
+.s-dot::before{
+  content:attr(data-label);
+  position:absolute;right:18px;top:50%;transform:translateY(-50%) translateX(4px);
+  font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--mute-2);white-space:nowrap;
+  opacity:0;transition:opacity .3s,transform .3s var(--e-out);
+  pointer-events:none;
+}
+.s-dot:hover::before{opacity:1;transform:translateY(-50%) translateX(0)}
+.s-dot.active{background:var(--gold);transform:scale(1.6)}
+
+/* ═══════════════════════════════════════════════════════════════
+   05 · HERO
+═══════════════════════════════════════════════════════════════ */
+#hero{
+  position:relative;min-height:100svh;
+  display:grid;grid-template-rows:1fr auto;
+  overflow:hidden;
+  background:var(--ink);
+}
+
+/* Background carousel — dual layer with crossfade + Ken Burns */
+.hero-stage{position:absolute;inset:0;z-index:0;overflow:hidden}
+.hero-slide{
+  position:absolute;inset:0;
+  opacity:0;
+  transition:opacity 1.4s var(--e-in-out);
+  will-change:opacity;
+}
+.hero-slide.is-active{opacity:1}
+.hero-slide-bg{
+  position:absolute;inset:0;
+  background-size:cover;background-position:center;
+  transform:scale(1.12);
+  transition:transform 9s linear;
+  will-change:transform;
+}
+.hero-slide.is-active .hero-slide-bg{transform:scale(1)}
+/* Placeholder backdrops — replace with real photos */
+.hero-slide:nth-child(1) .hero-slide-bg{background:radial-gradient(80% 60% at 30% 40%,#2a1d10,#0a0907 75%),linear-gradient(135deg,#1a1208,#080604)}
+.hero-slide:nth-child(2) .hero-slide-bg{background:radial-gradient(70% 60% at 70% 30%,#1f1812,#080604 75%),linear-gradient(135deg,#0d0a06,#1a1408)}
+.hero-slide:nth-child(3) .hero-slide-bg{background:radial-gradient(90% 70% at 50% 60%,#2a200f,#080604 80%),linear-gradient(45deg,#100c06,#1d1408)}
+.hero-slide:nth-child(4) .hero-slide-bg{background:radial-gradient(80% 60% at 20% 70%,#1a1612,#080604 75%),linear-gradient(135deg,#0a0806,#1a1208)}
+.hero-slide:nth-child(5) .hero-slide-bg{background:radial-gradient(80% 60% at 80% 50%,#241a0c,#080604 75%),linear-gradient(135deg,#0d0a06,#1a1308)}
+
+.hero-veil{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(105deg,rgba(10,9,7,.97) 0%,rgba(10,9,7,.78) 45%,rgba(10,9,7,.55) 75%,rgba(10,9,7,.70) 100%),
+    radial-gradient(120% 80% at 0% 100%,rgba(200,164,78,.10),transparent 60%);
+  z-index:1;
+}
+.hero-grain{
+  position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400'><filter id='g'><feTurbulence baseFrequency='.65' numOctaves='2'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .9 0'/></filter><rect width='100%' height='100%' filter='url(%23g)'/></svg>");
+  opacity:.15;mix-blend-mode:overlay;
+}
+
+/* Hero content */
+.hero-grid{
+  position:relative;z-index:5;
+  padding:max(6rem,11vh) var(--pad-x) max(2rem,4vh);
+  max-width:var(--max);width:100%;margin:0 auto;
+  display:grid;grid-template-columns:minmax(0,1fr) auto;gap:clamp(1.5rem,4vw,3rem);align-items:end;
+  flex:1;
+}
+.hero-copy{max-width:760px}
+.hero-eyebrow{margin-bottom:clamp(1rem,2.5vh,1.6rem)}
+.hero-title{
+  font-size:clamp(2rem,min(7vw,9vh),5.5rem);
+  margin-bottom:clamp(1rem,2.5vh,1.6rem);
+}
+.hero-title-line{
+  display:block;overflow:hidden;
+}
+.hero-title-line span{
+  display:inline-block;
+  transform:translateY(110%);
+  animation:lineRise 1s var(--e-out) forwards;
+}
+.hero-title-line:nth-child(1) span{animation-delay:.1s}
+.hero-title-line:nth-child(2) span{animation-delay:.22s}
+.hero-title-line:nth-child(3) span{animation-delay:.34s}
+@keyframes lineRise{from{transform:translateY(110%)}to{transform:translateY(0)}}
+
+.hero-lead-label{
+  font-family:var(--sans);font-size:.75rem;font-weight:500;
+  letter-spacing:.18em;text-transform:uppercase;
+  color:var(--gold);margin-bottom:.6rem;
+  opacity:0;transform:translateY(16px);
+  animation:fadeUp .9s .45s var(--e-out) forwards;
+}
+.hero-lead{
+  font-size:clamp(.95rem,1.2vw,1.12rem);font-weight:300;
+  line-height:1.55;color:var(--bone-2);max-width:520px;
+  margin-bottom:clamp(1.4rem,3vh,2.4rem);
+  opacity:0;transform:translateY(20px);
+  animation:fadeUp .9s .55s var(--e-out) forwards;
+}
+@keyframes fadeUp{to{opacity:1;transform:none}}
+
+.hero-cta-row{
+  display:flex;flex-wrap:wrap;gap:.8rem;align-items:center;
+  opacity:0;transform:translateY(20px);
+  animation:fadeUp .9s .7s var(--e-out) forwards;
+}
+
+/* Buttons */
+.btn{
+  display:inline-flex;align-items:center;gap:.6rem;
+  padding:.95rem 1.7rem;border-radius:99px;
+  font-family:var(--sans);font-size:.92rem;font-weight:500;letter-spacing:.005em;
+  transition:transform .35s var(--e-back),background .3s,color .3s,border-color .3s,box-shadow .3s;
+  white-space:nowrap;
+}
+.btn-primary{
+  background:var(--bone);color:var(--ink);
+  box-shadow:0 1px 0 rgba(255,255,255,.4) inset,0 12px 28px -10px rgba(241,234,217,.35);
+}
+.btn-primary:hover{transform:translateY(-2px);background:var(--gold-2);box-shadow:0 1px 0 rgba(255,255,255,.4) inset,0 18px 38px -10px rgba(230,201,137,.5)}
+.btn-outline{
+  border:1px solid var(--line-2);color:var(--bone);background:rgba(241,234,217,.02);
+  backdrop-filter:blur(8px);
+}
+.btn-outline:hover{transform:translateY(-2px);border-color:var(--gold);background:rgba(200,164,78,.10);color:var(--gold-2)}
+.btn-ghost{
+  color:var(--bone-2);padding:.95rem .8rem;
+}
+.btn-ghost::after{
+  content:'';display:inline-block;width:14px;height:14px;margin-left:.3rem;
+  background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23f1ead9' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'><path d='M5 12h14M13 5l7 7-7 7'/></svg>") center/contain no-repeat;
+  transition:transform .3s var(--e-out);
+}
+.btn-ghost:hover{color:var(--bone)}
+.btn-ghost:hover::after{transform:translateX(4px)}
+
+/* Hero side metric */
+.hero-meta{
+  align-self:end;
+  border-left:1px solid var(--line);
+  padding:.8rem 0 .8rem 1.6rem;
+  display:flex;flex-direction:column;gap:.3rem;min-width:0;
+  opacity:0;transform:translateY(20px);
+  animation:fadeUp .9s .85s var(--e-out) forwards;
+}
+.hero-meta-num{
+  font-family:var(--serif);font-size:2rem;font-weight:300;
+  font-variation-settings:"opsz" 144;line-height:1;letter-spacing:-.02em;
+  color:var(--bone);
+}
+.hero-meta-num span{font-style:italic;color:var(--gold-2)}
+.hero-meta-label{font-size:.72rem;color:var(--mute);letter-spacing:.12em;text-transform:uppercase;line-height:1.5}
+
+/* Carousel HUD */
+.hero-hud{
+  position:relative;z-index:5;
+  border-top:1px solid var(--line);
+  padding:1.4rem var(--pad-x);
+  display:flex;justify-content:space-between;align-items:center;gap:1.5rem;
+  background:linear-gradient(180deg,transparent,rgba(10,9,7,.55));
+}
+.hero-hud-progress{flex:1;height:1px;background:var(--line);position:relative;max-width:520px;overflow:hidden}
+.hero-hud-progress-fill{
+  position:absolute;inset:0;background:linear-gradient(90deg,var(--gold),var(--gold-2));
+  transform-origin:left;transform:scaleX(0);
+}
+.hero-hud-progress-fill.run{animation:progress 6s linear forwards}
+@keyframes progress{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.hero-hud-counter{
+  font-family:var(--serif);font-size:1rem;font-weight:300;
+  font-variation-settings:"opsz" 144;letter-spacing:-.01em;
+  display:flex;align-items:center;gap:.6rem;color:var(--bone-2);
+}
+.hero-hud-counter strong{color:var(--bone);font-weight:300;font-variation-settings:"opsz" 144}
+.hero-hud-counter em{color:var(--mute-2);font-style:normal}
+.hero-hud-arrows{display:flex;gap:.5rem}
+.hud-arrow{
+  width:38px;height:38px;border-radius:50%;
+  border:1px solid var(--line-2);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--bone);transition:all .3s var(--e-back);
+}
+.hud-arrow:hover{background:var(--bone);color:var(--ink);border-color:var(--bone);transform:scale(1.08)}
+
+/* Marquee */
+.marquee{
+  position:absolute;bottom:5rem;left:0;right:0;z-index:4;
+  font-family:var(--serif);font-size:8vw;font-weight:300;
+  font-variation-settings:"opsz" 144;letter-spacing:-.03em;
+  color:transparent;-webkit-text-stroke:1px rgba(241,234,217,.05);
+  white-space:nowrap;display:flex;
+  pointer-events:none;
+  animation:marqueeRun 38s linear infinite;
+}
+.marquee span{padding:0 1.5rem;display:inline-block}
+.marquee span::before{content:'·';margin-right:1.5rem;color:rgba(200,164,78,.15)}
+@keyframes marqueeRun{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* ═══════════════════════════════════════════════════════════════
+   06 · AVANTAGES
+═══════════════════════════════════════════════════════════════ */
+#avantages{
+  position:relative;min-height:100svh;
+  display:flex;flex-direction:column;justify-content:center;
+  padding:0 0 7rem;overflow:hidden;
+  background:var(--ink-2);
+}
+
+/* Flow background — meshing blobs with grid */
+.flow-bg{position:absolute;inset:0;z-index:0;overflow:hidden}
+.flow-blob{
+  position:absolute;border-radius:50%;
+  filter:blur(80px);
+  mix-blend-mode:screen;
+  animation:flowMove 22s ease-in-out infinite;
+  will-change:transform;
+}
+.flow-blob.b1{
+  width:55vw;height:55vw;left:-15vw;top:-15vw;
+  background:radial-gradient(circle,rgba(200,164,78,.45),transparent 60%);
+  animation-delay:0s;
+}
+.flow-blob.b2{
+  width:45vw;height:45vw;right:-10vw;top:30%;
+  background:radial-gradient(circle,rgba(140,111,48,.45),transparent 60%);
+  animation-delay:-7s;
+}
+.flow-blob.b3{
+  width:40vw;height:40vw;left:35%;bottom:-10vw;
+  background:radial-gradient(circle,rgba(230,201,137,.35),transparent 60%);
+  animation-delay:-14s;
+}
+@keyframes flowMove{
+  0%,100%{transform:translate(0,0) scale(1) rotate(0deg)}
+  25%{transform:translate(8vw,-5vw) scale(1.15) rotate(40deg)}
+  50%{transform:translate(-6vw,4vw) scale(.92) rotate(80deg)}
+  75%{transform:translate(4vw,8vw) scale(1.08) rotate(160deg)}
+}
+.flow-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(241,234,217,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(241,234,217,.025) 1px,transparent 1px);
+  background-size:80px 80px;
+  mask-image:radial-gradient(ellipse 70% 60% at 50% 50%,#000,transparent 80%);
+  -webkit-mask-image:radial-gradient(ellipse 70% 60% at 50% 50%,#000,transparent 80%);
+}
+.flow-vignette{
+  position:absolute;inset:0;
+  background:radial-gradient(80% 60% at 50% 50%,transparent,rgba(10,9,7,.7) 90%);
+}
+
+.av-shell{
+  position:relative;z-index:2;width:100%;max-width:var(--max);margin:0 auto;
+  padding:0 var(--pad-x);
+}
+.av-head{
+  display:grid;grid-template-columns:1fr auto;align-items:end;
+  gap:2rem;margin-bottom:4rem;
+}
+.av-head h2{
+  font-size:clamp(2.2rem,5.5vw,4.4rem);
+  max-width:780px;
+}
+.av-head .lead{max-width:380px}
+
+/* Swiper viewport */
+.av-viewport{
+  position:relative;
+  border:1px solid var(--line);
+  border-radius:24px;
+  background:rgba(10,9,7,.55);
+  backdrop-filter:blur(8px);
+  -webkit-backdrop-filter:blur(8px);
+  overflow:hidden;
+}
+.av-viewport::before{
+  content:'';position:absolute;inset:0;border-radius:24px;
+  background:linear-gradient(135deg,rgba(200,164,78,.08),transparent 40%);
+  pointer-events:none;
+}
+.av-track{
+  display:flex;transition:transform .9s var(--e-in-out);
+  will-change:transform;
+}
+.av-card{
+  flex:0 0 100%;
+  display:grid;grid-template-columns:1.05fr 1fr;
+  gap:3rem;align-items:center;
+  padding:clamp(2rem,5vw,4.5rem);
+  min-height:0;transform:translateZ(0);
+}
+.av-numwrap{position:relative}
+.av-bignum{
+  font-family:var(--serif);font-weight:200;
+  font-variation-settings:"opsz" 144;
+  font-size:clamp(8rem,18vw,16rem);
+  line-height:.85;letter-spacing:-.05em;
+  background:linear-gradient(180deg,rgba(241,234,217,.18),rgba(241,234,217,.02));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  user-select:none;pointer-events:none;
+}
+.av-bignum em{font-style:italic;font-variation-settings:"opsz" 144,"SOFT" 100}
+.av-symbol{
+  position:absolute;left:0;bottom:1rem;
+  width:64px;height:64px;border-radius:18px;
+  background:linear-gradient(140deg,var(--ink-3),var(--ink-2));
+  border:1px solid var(--line-2);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 16px 40px -12px rgba(0,0,0,.6);
+}
+.av-symbol svg{width:30px;height:30px;color:var(--gold-2)}
+.av-body h3{
+  font-family:var(--serif);font-weight:300;
+  font-variation-settings:"opsz" 144;
+  font-size:clamp(1.7rem,3.2vw,2.6rem);
+  line-height:1.05;letter-spacing:-.025em;
+  color:var(--bone);margin-bottom:1.2rem;
+}
+.av-body h3 em{
+  font-style:italic;font-variation-settings:"opsz" 144,"SOFT" 100;
+  color:var(--gold-2);
+}
+.av-body p{
+  font-size:1.02rem;font-weight:300;line-height:1.7;color:var(--bone-2);
+  max-width:480px;margin-bottom:1.6rem;
+}
+.av-tag-row{
+  display:flex;flex-wrap:wrap;gap:.5rem;
+}
+.av-tag{
+  display:inline-flex;align-items:center;gap:.45rem;
+  padding:.35rem .85rem;border-radius:99px;
+  border:1px solid var(--line-2);background:rgba(241,234,217,.03);
+  font-size:.74rem;font-weight:500;color:var(--bone-2);
+  letter-spacing:.02em;
+}
+.av-tag::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--gold)}
+
+.av-controls{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-top:2rem;gap:1.2rem;
+}
+.av-numbers{
+  display:flex;align-items:baseline;gap:.5rem;
+  font-family:var(--serif);font-variation-settings:"opsz" 144;
+}
+.av-numbers .now{font-size:1.6rem;font-weight:300;color:var(--bone)}
+.av-numbers .sep{color:var(--line-2);font-size:1.1rem}
+.av-numbers .total{font-size:1.1rem;color:var(--mute)}
+.av-progress{
+  flex:1;height:1px;background:var(--line);position:relative;max-width:420px;
+}
+.av-progress-fill{
+  position:absolute;inset:0;background:linear-gradient(90deg,var(--gold),var(--gold-2));
+  transform-origin:left;transform:scaleX(0);transition:transform .9s var(--e-in-out);
+}
+.av-arrows{display:flex;gap:.5rem}
+
+/* ═══════════════════════════════════════════════════════════════
+   07 · FORFAITS
+═══════════════════════════════════════════════════════════════ */
+#forfaits{
+  position:relative;padding:0 0 7rem;background:var(--ink);overflow:hidden;
+}
+.fo-shell{
+  position:relative;z-index:1;max-width:var(--max);margin:0 auto;
+  padding:0 var(--pad-x);
+}
+.fo-head{
+  display:grid;grid-template-columns:1fr auto;align-items:end;gap:2rem;
+  margin-bottom:3rem;
+}
+.fo-head h2{font-size:clamp(2.2rem,5.5vw,4.4rem);max-width:780px}
+.fo-head .lead{max-width:380px}
+
+/* ── Style selector (Pages / Dynamique) ── */
+.fo-style-selector{
+  display:flex;gap:.5rem;
+  padding:.35rem;
+  border:1px solid var(--line);border-radius:99px;
+  background:rgba(241,234,217,.02);
+  width:fit-content;
+  margin-bottom:2.5rem;
+  position:relative;
+}
+.fo-style-pill{
+  position:absolute;top:.35rem;left:.35rem;
+  height:calc(100% - .7rem);
+  border-radius:99px;
+  background:linear-gradient(135deg,var(--gold),var(--gold-2));
+  box-shadow:0 6px 18px -6px rgba(200,164,78,.55);
+  transition:transform .5s var(--e-in-out),width .5s var(--e-in-out);
+  z-index:0;pointer-events:none;
+}
+.fo-style-btn{
+  position:relative;z-index:1;
+  padding:.85rem 2rem;border-radius:99px;
+  font-size:.9rem;font-weight:500;letter-spacing:.02em;
+  color:var(--bone-2);
+  transition:color .4s var(--e-out);
+  cursor:pointer;
+}
+.fo-style-btn.is-active{color:var(--ink)}
+
+/* ── Panels ── */
+.fo-stage{position:relative}
+.fo-panel{
+  display:none;
+  grid-template-columns:1.15fr 1fr;gap:2rem;align-items:start;
+}
+.fo-panel.is-active{
+  display:grid;
+  animation:panelIn .8s var(--e-out) both;
+}
+@keyframes panelIn{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:none}
+}
+
+/* ── Feature card ── */
+.fo-feat{
+  border:1px solid var(--line);border-radius:24px;
+  padding:clamp(1.8rem,3vw,2.6rem);
+  background:linear-gradient(180deg,rgba(241,234,217,.02),transparent);
+  position:relative;overflow:hidden;
+}
+.fo-feat::before{
+  content:'';position:absolute;top:-1px;left:-1px;right:-1px;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  opacity:.4;
+}
+.fo-feat-head{display:flex;align-items:flex-start;gap:1.2rem;margin-bottom:2rem}
+.fo-feat-icon{
+  width:52px;height:52px;min-width:52px;border-radius:14px;
+  background:rgba(200,164,78,.08);border:1px solid rgba(200,164,78,.18);
+  display:flex;align-items:center;justify-content:center;color:var(--gold);
+}
+.fo-feat-icon svg{width:22px;height:22px}
+.fo-feat-head h3{
+  font-family:var(--serif);font-size:1.6rem;font-weight:300;
+  font-variation-settings:"opsz" 144;letter-spacing:-.02em;
+  color:var(--bone);margin-bottom:.25rem;
+}
+.fo-feat-head p{font-size:.9rem;color:var(--bone-2);font-weight:300;line-height:1.6}
+
+.fo-feat-list{display:flex;flex-direction:column;gap:.05rem}
+.fo-feat-item{
+  display:flex;align-items:flex-start;gap:1rem;
+  padding:.9rem 0;border-top:1px solid var(--line);
+  font-size:.92rem;color:var(--bone-2);line-height:1.55;
+}
+.fo-feat-item .check{
+  width:22px;height:22px;min-width:22px;border-radius:50%;
+  background:rgba(200,164,78,.10);border:1px solid rgba(200,164,78,.3);
+  display:flex;align-items:center;justify-content:center;color:var(--gold);
+  margin-top:1px;flex-shrink:0;
+}
+.fo-feat-item .check svg{width:11px;height:11px}
+.fo-feat-item-body{display:flex;flex-direction:column;gap:.45rem}
+.fo-feat-tags{display:flex;flex-wrap:wrap;gap:.4rem}
+.fo-feat-tag{
+  display:inline-flex;align-items:center;gap:.4rem;
+  padding:.28rem .72rem;border-radius:99px;
+  border:1px solid var(--line-2);background:rgba(241,234,217,.03);
+  font-size:.7rem;font-weight:500;color:var(--bone-2);letter-spacing:.02em;
+}
+.fo-feat-tag::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--gold)}
+
+/* ── Pricing card ── */
+.fo-side{
+  position:sticky;top:5.5rem;
+  border:1px solid var(--line-2);border-radius:24px;
+  padding:clamp(1.6rem,3vw,2.2rem);
+  background:linear-gradient(180deg,rgba(20,16,9,.55),rgba(10,9,7,.85));
+  backdrop-filter:blur(10px);
+  box-shadow:0 30px 80px -30px rgba(200,164,78,.18),inset 0 1px 0 rgba(255,255,255,.04);
+}
+.fo-side-label{
+  font-size:.68rem;font-weight:600;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--gold-2);margin-bottom:1.4rem;
+  display:flex;align-items:center;gap:.6rem;
+}
+.fo-side-label::before{content:'';width:20px;height:1px;background:var(--gold-2)}
+
+/* Setup price */
+.fo-setup-price{
+  display:flex;align-items:baseline;gap:.4rem;
+  margin-bottom:.3rem;
+}
+.fo-setup-price .amount{
+  font-family:var(--serif);font-size:clamp(2.8rem,5vw,3.8rem);font-weight:300;
+  font-variation-settings:"opsz" 144;letter-spacing:-.03em;color:var(--bone);line-height:1;
+}
+.fo-setup-price .currency{font-size:1.1rem;color:var(--mute);margin-right:.05em}
+.fo-setup-tag{
+  font-size:.78rem;color:var(--mute);
+  padding:.3rem .7rem;border:1px solid var(--line);border-radius:99px;
+  display:inline-flex;width:fit-content;margin-bottom:1.4rem;
+}
+
+/* Admin toggle */
+.fo-admin-toggle{
+  display:grid;grid-template-columns:1fr 1fr;
+  border:1px solid var(--line);border-radius:12px;overflow:hidden;
+  margin-bottom:1.4rem;
+}
+.fo-admin-btn{
+  padding:.65rem .5rem;font-size:.8rem;font-weight:500;text-align:center;
+  color:var(--mute);cursor:pointer;
+  transition:all .3s var(--e-out);
+  border:none;background:none;font-family:inherit;
+}
+.fo-admin-btn:first-child{border-right:1px solid var(--line)}
+.fo-admin-btn.is-active{
+  background:rgba(200,164,78,.12);color:var(--gold-2);
+}
+
+/* Admin addon price */
+.fo-admin-price{
+  display:none;
+  align-items:baseline;gap:.3rem;
+  padding:.8rem .9rem;border-radius:10px;
+  background:rgba(200,164,78,.06);border:1px solid rgba(200,164,78,.15);
+  margin-bottom:1.2rem;
+}
+.fo-admin-price.is-visible{display:flex}
+.fo-admin-price .plus{color:var(--gold);font-size:1.1rem;font-weight:500}
+.fo-admin-price .a-amount{
+  font-family:var(--serif);font-size:1.6rem;font-weight:300;
+  font-variation-settings:"opsz" 144;color:var(--bone);
+}
+.fo-admin-price .a-per{font-size:.78rem;color:var(--mute)}
+
+/* Modif note (sans admin) */
+.fo-modif-note{
+  display:none;
+  padding:.8rem .9rem;border-radius:10px;
+  border:1px solid var(--line);
+  margin-bottom:1.2rem;
+  font-size:.78rem;color:var(--mute);line-height:1.6;
+}
+.fo-modif-note.is-visible{display:block}
+.fo-modif-note strong{color:var(--bone-2)}
+
+.fo-side-divider{height:1px;background:var(--line);margin:1.2rem 0}
+
+.fo-side-actions{display:flex;flex-direction:row;gap:.6rem}
+.fo-btn{
+  flex:1;padding:.95rem .8rem;border-radius:14px;
+  font-size:.9rem;font-weight:500;text-align:center;
+  transition:transform .3s var(--e-back),background .3s,border-color .3s,color .3s,box-shadow .3s;
+  cursor:pointer;font-family:inherit;border:none;
+}
+.fo-btn-test{
+  border:1px solid var(--line-2) !important;color:var(--bone);
+  background:rgba(241,234,217,.02);
+}
+.fo-btn-test:hover{border-color:var(--gold) !important;background:rgba(200,164,78,.10);transform:translateY(-2px)}
+.fo-btn-choose{
+  background:linear-gradient(135deg,var(--gold),var(--gold-2));
+  color:var(--ink);font-weight:600;
+  box-shadow:0 8px 24px -8px rgba(200,164,78,.55);
+}
+.fo-btn-choose:hover{transform:translateY(-2px);box-shadow:0 14px 32px -8px rgba(200,164,78,.7)}
+
+/* ── Options section ── */
+.fo-options-section{
+  margin-top:3rem;padding-top:2.5rem;
+  border-top:1px solid var(--line);
+}
+.fo-options-head{
+  display:flex;align-items:flex-end;justify-content:space-between;
+  margin-bottom:1.5rem;gap:1.5rem;
+}
+.fo-options-head h3{
+  font-family:var(--serif);font-size:1.5rem;font-weight:300;
+  font-variation-settings:"opsz" 144;letter-spacing:-.02em;color:var(--bone);
+}
+.fo-options-head p{font-size:.84rem;color:var(--bone-2);max-width:340px;line-height:1.55}
+.fo-options-grid{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1rem;max-width:620px;
+}
+.fo-option-card{
+  border:1px solid var(--line);border-radius:20px;
+  padding:1.6rem;
+  background:linear-gradient(160deg,rgba(241,234,217,.025),transparent);
+  position:relative;overflow:hidden;
+  transform:translateZ(0);
+  transition:border-color .3s,transform .3s var(--e-back);
+}
+.fo-option-card::before{
+  content:'';position:absolute;top:-1px;left:-1px;right:-1px;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(200,164,78,.4),transparent);
+}
+.fo-option-card:hover{border-color:rgba(200,164,78,.3);transform:translateY(-3px)}
+.fo-option-icon{
+  width:40px;height:40px;border-radius:11px;
+  background:rgba(200,164,78,.08);border:1px solid rgba(200,164,78,.15);
+  display:flex;align-items:center;justify-content:center;color:var(--gold);
+  margin-bottom:1rem;
+}
+.fo-option-icon svg{width:18px;height:18px}
+.fo-option-name{
+  font-family:var(--serif);font-size:1.1rem;font-weight:300;
+  font-variation-settings:"opsz" 144;color:var(--bone);
+  margin-bottom:.3rem;letter-spacing:-.01em;
+}
+.fo-option-desc{font-size:.82rem;color:var(--bone-2);line-height:1.5;margin-bottom:1rem}
+.fo-option-price{
+  display:flex;align-items:center;justify-content:space-between;gap:.6rem;
+  border-top:1px solid var(--line);padding-top:.9rem;flex-wrap:wrap;
+}
+.fo-option-price-val{display:flex;align-items:baseline;gap:.2rem}
+.fo-option-price .o-amount{
+  font-family:var(--serif);font-size:1.4rem;font-weight:300;
+  font-variation-settings:"opsz" 144;color:var(--gold);
+}
+.fo-option-price .o-per{font-size:.76rem;color:var(--mute)}
+.fo-option-actions{display:flex;gap:.4rem;flex-shrink:0}
+.fo-option-actions .fo-btn{padding:.5rem .75rem;font-size:.72rem;border-radius:10px}
+
+/* ── Sub-pages (mobile swipe) ── */
+.fo-subpages{
+  overflow:hidden;
+  border:1px solid var(--line-2);border-radius:24px;
+  background:linear-gradient(180deg,rgba(20,16,9,.55),rgba(10,9,7,.85));
+  backdrop-filter:blur(10px);
+  box-shadow:0 30px 80px -30px rgba(200,164,78,.18),inset 0 1px 0 rgba(255,255,255,.04);
+}
+.fo-subpages-track{
+  display:flex;
+  transition:transform .45s var(--e-in-out);
+}
+.fo-subpage{
+  min-width:100%;box-sizing:border-box;
+  padding:clamp(1.4rem,3vw,2rem);
+}
+.fo-subpage .fo-side{
+  position:static;border:none;border-radius:0;padding:0;
+  background:none;backdrop-filter:none;box-shadow:none;
+}
+.fo-subpage .fo-feat{
+  border:none;border-radius:0;padding:0;background:none;
+}
+.fo-subpage .fo-feat::before{display:none}
+.fo-dots{
+  display:flex;justify-content:center;gap:.7rem;
+  margin-top:.9rem;
+}
+.fo-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:rgba(200,164,78,.2);border:1px solid rgba(200,164,78,.3);
+  cursor:pointer;
+  transition:background .3s var(--e-out),transform .3s var(--e-back);
+}
+.fo-dot.is-active{
+  background:var(--gold);transform:scale(1.3);
+  border-color:var(--gold);
+}
+
+/* Options panel */
+.fo-panel-opts.is-active{display:block}
+.fo-opts-head-inner{margin-bottom:1.8rem}
+.fo-opts-head-inner h3{
+  font-family:var(--serif);font-size:clamp(1.6rem,3.5vw,2.2rem);font-weight:300;
+  font-variation-settings:"opsz" 144;letter-spacing:-.02em;color:var(--bone);margin-bottom:.5rem;
+}
+.fo-opts-head-inner p{font-size:.88rem;color:var(--bone-2);line-height:1.55}
+
+/* Desktop: sub-pages side by side (feat left, side right) */
+/* ── Avantages desktop compact ── */
+@media(min-width:1025px){
+  #avantages{padding:0 0 2rem}
+  .av-head{margin-bottom:1.6rem}
+  .av-head h2{font-size:clamp(1.5rem,3vw,2.4rem)}
+  .av-head .lead{font-size:.82rem}
+  .av-card{
+    padding:clamp(1rem,2vw,1.8rem);
+    gap:1.8rem;
+  }
+  .av-bignum{font-size:clamp(4.5rem,9vw,8rem)}
+  .av-symbol{width:44px;height:44px;border-radius:12px}
+  .av-symbol svg{width:22px;height:22px}
+  .av-body h3{font-size:clamp(1.1rem,1.8vw,1.6rem);margin-bottom:.6rem}
+  .av-body p{font-size:.85rem;margin-bottom:.8rem;line-height:1.55}
+  .av-controls{margin-top:.8rem}
+  .av-numbers .now{font-size:1.1rem}
+  .av-numbers .total{font-size:.85rem}
+}
+
+@media(min-width:1025px){
+  .fo-panel.is-active{display:block}
+  .fo-subpages{overflow:visible;border:none;background:none;box-shadow:none;backdrop-filter:none}
+  .fo-subpages-track{
+    display:grid;grid-template-columns:1.15fr 1fr;gap:2rem;
+    transform:none!important;
+  }
+  .fo-subpage{min-width:auto}
+  /* pricing (first sub-page) → right column */
+  .fo-subpage:first-child{order:2}
+  /* features (second sub-page) → left column */
+  .fo-subpage:last-child{order:1}
+  .fo-subpage .fo-side{
+    position:sticky;top:5.5rem;
+    border:1px solid var(--line-2);border-radius:24px;
+    padding:clamp(1.6rem,3vw,2.2rem);
+    background:linear-gradient(180deg,rgba(20,16,9,.55),rgba(10,9,7,.85));
+    backdrop-filter:blur(10px);
+    box-shadow:0 30px 80px -30px rgba(200,164,78,.18),inset 0 1px 0 rgba(255,255,255,.04);
+  }
+  .fo-subpage .fo-feat{
+    border:1px solid var(--line);border-radius:24px;
+    padding:clamp(1.8rem,3vw,2.6rem);
+    background:linear-gradient(180deg,rgba(241,234,217,.02),transparent);
+  }
+  .fo-subpage .fo-feat::before{display:block}
+  .fo-dots{display:none}
+  .fo-panel-opts.is-active{display:block}
+  .fo-options-grid{grid-template-columns:repeat(2,1fr)}
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   08 · CONTACT
+═══════════════════════════════════════════════════════════════ */
+#contact{
+  position:relative;padding:0 0 6rem;
+  background:var(--ink-2);overflow:hidden;
+}
+#contact::before{
+  content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:120%;height:120%;
+  background:radial-gradient(closest-side,rgba(200,164,78,.10),transparent 70%);
+  pointer-events:none;
+  animation:contactGlow 6s ease-in-out infinite;
+}
+@keyframes contactGlow{0%,100%{transform:translate(-50%,-50%) scale(1);opacity:1}50%{transform:translate(-50%,-50%) scale(1.1);opacity:.7}}
+
+.co-shell{
+  position:relative;z-index:1;max-width:var(--max);margin:0 auto;
+  padding:0 var(--pad-x);
+  display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;
+}
+.co-left h2{font-size:clamp(2.4rem,6vw,4.8rem);margin-bottom:1.5rem}
+.co-left .lead{max-width:480px;margin-bottom:2rem}
+.co-info{display:flex;flex-direction:column;gap:1rem;margin-top:1.5rem}
+.co-info-item{
+  display:flex;align-items:center;gap:.9rem;
+  font-size:.92rem;color:var(--bone-2);
+}
+.co-info-item svg{width:18px;height:18px;color:var(--gold)}
+
+.co-cards{display:flex;flex-direction:column;gap:.9rem}
+.co-card{
+  display:grid;grid-template-columns:auto 1fr auto;gap:1.2rem;align-items:center;
+  padding:1.4rem 1.6rem;border-radius:18px;
+  border:1px solid var(--line-2);
+  background:linear-gradient(180deg,rgba(241,234,217,.02),transparent);
+  transition:transform .4s var(--e-back),border-color .4s,background .4s,box-shadow .4s;
+  position:relative;overflow:hidden;
+}
+.co-card::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,transparent,rgba(200,164,78,0) 50%);
+  transition:background .4s var(--e-out);
+  pointer-events:none;
+}
+.co-card:hover{
+  transform:translateY(-3px);
+  border-color:var(--gold);
+  box-shadow:0 18px 40px -16px rgba(0,0,0,.6),0 0 0 1px rgba(200,164,78,.18);
+}
+.co-card:hover::before{
+  background:linear-gradient(135deg,rgba(200,164,78,.08),transparent 70%);
+}
+.co-card-icon{
+  width:44px;height:44px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.co-card-icon.ph{background:linear-gradient(135deg,var(--gold),var(--gold-2));color:var(--ink)}
+.co-card-icon.wa{background:linear-gradient(135deg,#1aad56,#25d366);color:#fff}
+.co-card-icon.vb{background:linear-gradient(135deg,#7360f2,#9ba3ff);color:#fff}
+.co-card-text strong{
+  display:block;font-family:var(--serif);font-size:1.15rem;font-weight:300;
+  font-variation-settings:"opsz" 144;letter-spacing:-.01em;color:var(--bone);
+}
+.co-card-text small{
+  display:block;font-size:.83rem;color:var(--mute);margin-top:.15rem;letter-spacing:.02em;
+}
+.co-card-arrow{
+  width:32px;height:32px;border-radius:50%;
+  border:1px solid var(--line-2);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--bone-2);transition:all .3s var(--e-back);
+}
+.co-card:hover .co-card-arrow{background:var(--gold);border-color:var(--gold);color:var(--ink);transform:rotate(-45deg)}
+
+/* ═══════════════════════════════════════════════════════════════
+   09 · FOOTER
+═══════════════════════════════════════════════════════════════ */
+footer{
+  padding:2.5rem var(--pad-x);
+  border-top:1px solid var(--line);
+  display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5rem;align-items:center;
+  background:var(--ink);
+}
+footer .left{font-family:var(--serif);font-weight:300;font-variation-settings:"opsz" 144;font-size:1rem;letter-spacing:-.01em}
+footer .left em{font-style:italic;color:var(--gold-2)}
+footer .center{text-align:center;font-size:.78rem;color:var(--mute);letter-spacing:.06em;text-transform:uppercase}
+footer .right{text-align:right;display:flex;justify-content:flex-end;gap:1.2rem;font-size:.82rem;color:var(--bone-2)}
+footer .right a{transition:color .3s}
+footer .right a:hover{color:var(--gold-2)}
+
+/* ═══════════════════════════════════════════════════════════════
+   10 · POPUPS
+═══════════════════════════════════════════════════════════════ */
+.popup{
+  display:none;position:fixed;inset:0;z-index:500;
+  background:rgba(10,9,7,.85);backdrop-filter:blur(16px);
+  -webkit-backdrop-filter:blur(16px);
+  align-items:center;justify-content:center;padding:1.5rem;
+}
+.popup.is-open{display:flex;animation:popOverlay .35s var(--e-out)}
+@keyframes popOverlay{from{opacity:0;backdrop-filter:blur(0)}to{opacity:1;backdrop-filter:blur(16px)}}
+.popup-card{
+  position:relative;width:100%;max-width:560px;max-height:90svh;overflow-y:auto;
+  border:1px solid var(--line-2);border-radius:24px;
+  background:linear-gradient(180deg,var(--ink-3),var(--ink-2));
+  padding:clamp(1.8rem,3.5vw,2.6rem);
+  animation:popIn .5s var(--e-back);
+  box-shadow:0 40px 100px -20px rgba(0,0,0,.7),inset 0 1px 0 rgba(255,255,255,.05);
+}
+@keyframes popIn{from{opacity:0;transform:scale(.94) translateY(20px)}to{opacity:1;transform:none}}
+.popup-close{
+  position:absolute;top:1.1rem;right:1.1rem;
+  width:36px;height:36px;border-radius:50%;
+  border:1px solid var(--line-2);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--bone-2);transition:all .3s var(--e-back);
+}
+.popup-close:hover{background:var(--bone);color:var(--ink);border-color:var(--bone);transform:rotate(90deg)}
+.popup-eyebrow{margin-bottom:1.1rem}
+.popup h3{
+  font-family:var(--serif);font-size:1.8rem;font-weight:300;
+  font-variation-settings:"opsz" 144;letter-spacing:-.02em;line-height:1.1;
+  color:var(--bone);margin-bottom:.6rem;
+}
+.popup h3 em{font-style:italic;color:var(--gold-2)}
+.popup .popup-lead{font-size:.92rem;color:var(--mute);font-weight:300;line-height:1.6;margin-bottom:1.6rem}
+.popup-list{display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.4rem}
+.popup-link{
+  display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:1rem;
+  padding:1rem 1.1rem;border-radius:14px;
+  border:1px solid var(--line);background:rgba(241,234,217,.02);
+  color:var(--bone);font-size:.92rem;
+  transition:all .3s var(--e-back);
+}
+.popup-link:hover{transform:translateY(-2px);border-color:var(--gold);background:rgba(200,164,78,.08)}
+.popup-link-num{
+  width:28px;height:28px;border-radius:8px;
+  background:rgba(200,164,78,.12);border:1px solid var(--line-2);
+  display:flex;align-items:center;justify-content:center;
+  color:var(--gold-2);font-family:var(--serif);font-size:.95rem;font-weight:300;font-variation-settings:"opsz" 144;
+}
+.popup-link-meta{display:flex;flex-direction:column;gap:.05rem}
+.popup-link-meta strong{font-weight:500;color:var(--bone)}
+.popup-link-meta small{font-size:.74rem;color:var(--mute);letter-spacing:.04em}
+.popup-link-arrow{color:var(--bone-2);transition:all .3s var(--e-back)}
+.popup-link:hover .popup-link-arrow{color:var(--gold-2);transform:translateX(4px)}
+.popup-foot{
+  font-size:.78rem;color:var(--mute-2);font-style:italic;text-align:center;
+  padding-top:.5rem;border-top:1px solid var(--line);margin-top:.6rem;padding-top:1.1rem;
+  line-height:1.5;
+}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   10b · DEMO FULL-SCREEN
+═══════════════════════════════════════════════════════════════ */
+.demo-fs{
+  display:none;position:fixed;inset:0;z-index:600;
+  flex-direction:column;background:#0a0907;
+}
+.demo-fs.is-open{display:flex}
+.demo-fs-bar{
+  display:flex;align-items:center;gap:.75rem;
+  padding:.6rem 1rem;
+  background:rgba(10,9,7,.92);backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(241,234,217,.08);
+  flex-shrink:0;z-index:1;
+}
+.demo-fs-back{
+  display:flex;align-items:center;gap:.5rem;
+  padding:.5rem 1rem;border-radius:99px;
+  border:1px solid rgba(241,234,217,.15);
+  font-size:.8rem;font-weight:500;color:var(--bone-2);
+  background:rgba(241,234,217,.04);
+  transition:all .3s var(--e-out);cursor:pointer;font-family:inherit;
+  flex-shrink:0;
+}
+.demo-fs-back:hover{border-color:var(--gold);color:var(--bone);background:rgba(200,164,78,.10)}
+.demo-fs-title{
+  font-size:.78rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--mute);flex:1;text-align:center;
+}
+.demo-fs-colors{
+  display:flex;align-items:center;gap:.35rem;flex-shrink:0;
+}
+.demo-fs-color{
+  width:20px;height:20px;border-radius:50%;cursor:pointer;
+  border:2px solid transparent;
+  transition:transform .25s var(--e-back),border-color .2s;
+  flex-shrink:0;
+}
+.demo-fs-color:hover{transform:scale(1.25)}
+.demo-fs-color.is-active{border-color:rgba(255,255,255,.6);transform:scale(1.2)}
+.demo-fs iframe{
+  flex:1;border:none;width:100%;height:100%;
+}
+
+/* Themes popup grid */
+.pop-themes-grid{
+  display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.4rem;
+}
+.pop-theme-item{
+  display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:1rem;
+  padding:1rem 1.1rem;border-radius:14px;
+  border:1px solid var(--line);background:rgba(241,234,217,.02);
+}
+.pop-theme-icon{
+  width:36px;height:36px;border-radius:10px;
+  background:rgba(200,164,78,.08);border:1px solid rgba(200,164,78,.15);
+  display:flex;align-items:center;justify-content:center;color:var(--gold);
+}
+.pop-theme-icon svg{width:16px;height:16px}
+.pop-theme-meta strong{display:block;font-weight:500;color:var(--bone);font-size:.92rem}
+.pop-theme-meta small{font-size:.74rem;color:var(--mute);letter-spacing:.03em}
+
+/* ═══════════════════════════════════════════════════════════════
+   11 · SCROLL OFFSET (fixed nav compensation)
+═══════════════════════════════════════════════════════════════ */
+#avantages,#forfaits,#devis,#contact{scroll-margin-top:4.5rem}
+#hero{scroll-margin-top:0}
+
+/* ═══════════════════════════════════════════════════════════════
+   11 · REVEAL
+═══════════════════════════════════════════════════════════════ */
+.reveal{opacity:0;transition:opacity .4s var(--e-out)}
+.reveal.in{opacity:1}
+
+/* ═══════════════════════════════════════════════════════════════
+   12 · RESPONSIVE — Mobile-first optimized
+═══════════════════════════════════════════════════════════════ */
+
+/* ── Tablet & below ── */
+@media(max-width:1024px){
+  .nav-mid{display:none}
+  .nav-cta{display:none}
+  #lang-nav-btn{display:none}
+  #lang-dropdown{top:4.2rem}
+  #side-dots{display:none}
+  #float-nav{display:flex}
+  /* trigger shown only when hero CTAs are out of view (via JS .is-shown) */
+
+  .hero-grid{grid-template-columns:1fr;gap:1.5rem}
+  .hero-meta{border-left:none;border-top:1px solid var(--line);padding:1rem 0 0;flex-direction:row;align-items:baseline;min-width:0;gap:1rem}
+  .marquee{font-size:12vw;bottom:3rem}
+
+  .av-head{grid-template-columns:1fr}
+  .av-card{grid-template-columns:1fr;gap:1.2rem;padding:1.8rem;min-height:auto}
+  .av-numwrap{display:flex;align-items:center;gap:1rem}
+  .av-bignum{font-size:4.5rem}
+  .av-symbol{position:static;width:50px;height:50px;border-radius:14px}
+
+  .fo-head{grid-template-columns:1fr}
+  .fo-style-selector{margin-bottom:1.5rem}
+  .fo-style-btn{padding:.75rem 1.4rem;font-size:.84rem}
+  .fo-panel.is-active{display:block;animation:panelIn .6s var(--e-out) both}
+  .fo-panel-opts.is-active{display:block}
+  .fo-side-divider{margin:1rem 0}
+  .fo-options-grid{grid-template-columns:1fr}
+
+  .co-shell{grid-template-columns:1fr;gap:3rem}
+
+  footer{grid-template-columns:1fr;text-align:center;gap:1rem}
+  footer .center,footer .right{justify-content:center;text-align:center}
+}
+
+/* ── Phone ── */
+@media(max-width:600px){
+  :root{--pad-x:1rem;--radius:14px}
+
+  #nav{padding:1rem var(--pad-x)}
+  #nav.scrolled{padding:.65rem var(--pad-x)}
+  .logo{font-size:1.05rem;gap:.4rem}
+  .logo-mark{width:26px;height:26px}
+
+  .hero-grid{padding:max(5rem,8vh) var(--pad-x) max(1.5rem,3vh)}
+  .hero-title{font-size:clamp(1.75rem,7.5vw,2.8rem)}
+  .hero-lead{font-size:.9rem;max-width:100%}
+  .hero-cta-row{flex-direction:column;align-items:stretch;width:100%}
+  .btn{justify-content:center;padding:.82rem 1.3rem;font-size:.88rem}
+  .hero-meta{gap:.8rem}
+  .hero-meta-num{font-size:1.5rem}
+  .hero-meta-label{font-size:.65rem}
+  .hero-hud{flex-wrap:wrap;gap:.6rem;padding:1rem var(--pad-x)}
+  .hero-hud-counter{font-size:.85rem}
+  .hero-hud-progress{order:3;flex:1 1 100%}
+  .hud-arrow{width:34px;height:34px}
+  .marquee{display:none}
+
+  #avantages{padding:4rem 0;min-height:auto}
+  .av-head{margin-bottom:2.5rem}
+  .av-head h2{font-size:clamp(1.8rem,7vw,2.6rem)}
+  .av-head .lead{font-size:.88rem}
+  .av-viewport{border-radius:16px}
+  .av-card{padding:1.4rem;gap:1rem}
+  .av-bignum{font-size:3rem}
+  .av-symbol{width:42px;height:42px;border-radius:11px}
+  .av-symbol svg{width:22px;height:22px}
+  .av-body h3{font-size:1.2rem;margin-bottom:.7rem}
+  .av-body p{font-size:.88rem;margin-bottom:1rem;line-height:1.6}
+  .av-tag{font-size:.68rem;padding:.3rem .7rem}
+  .av-controls{flex-wrap:wrap;margin-top:1.2rem;gap:.8rem}
+  .av-progress{order:3;flex:1 1 100%}
+  .av-numbers .now{font-size:1.3rem}
+  .av-numbers .total{font-size:.95rem}
+
+  #forfaits{padding:0 0 3rem}
+  .fo-head{margin-bottom:2rem}
+  .fo-head h2{font-size:clamp(1.8rem,7vw,2.6rem)}
+  .fo-head .lead{font-size:.88rem}
+  .fo-style-selector{border-radius:14px;padding:.28rem}
+  .fo-style-btn{padding:.7rem 1.1rem;font-size:.8rem;border-radius:12px}
+  .fo-side{padding:1.2rem;border-radius:14px}
+  .fo-subpage{padding:1.2rem}
+  .fo-setup-price .amount{font-size:2.4rem}
+  .fo-side-actions{gap:.4rem}
+  .fo-btn{padding:.75rem .6rem;font-size:.78rem;border-radius:11px}
+  .fo-feat{padding:1.2rem;border-radius:14px}
+  .fo-feat-head{flex-direction:column;gap:.6rem;margin-bottom:1.2rem}
+  .fo-feat-icon{width:44px;height:44px}
+  .fo-feat-head h3{font-size:1.2rem}
+  .fo-feat-head p{font-size:.85rem}
+  .fo-feat-item{font-size:.84rem;gap:.7rem;padding:.75rem 0;line-height:1.5}
+  .fo-feat-item .check{width:20px;height:20px;min-width:20px}
+  .fo-feat-item .check svg{width:10px;height:10px}
+  .fo-options-section{margin-top:2rem;padding-top:1.8rem}
+  .fo-option-card{padding:1.2rem;border-radius:14px}
+
+  #contact{padding:0 0 3rem}
+  .co-left h2{font-size:clamp(1.8rem,7vw,2.6rem)}
+  .co-left .lead{font-size:.88rem}
+  .co-info-item{font-size:.85rem}
+  .co-card{grid-template-columns:auto 1fr auto;gap:.8rem;padding:1rem 1.1rem;border-radius:14px}
+  .co-card-icon{width:40px;height:40px;border-radius:12px}
+  .co-card-text strong{font-size:1rem}
+  .co-card-text small{font-size:.75rem}
+  .co-card-arrow{width:28px;height:28px}
+
+  footer{padding:1.8rem var(--pad-x)}
+  footer .left{font-size:.9rem}
+  footer .center{font-size:.7rem}
+  footer .right{font-size:.78rem;gap:.8rem}
+
+  .popup{padding:.8rem}
+  .popup-card{padding:1.4rem;border-radius:18px}
+  .popup h3{font-size:1.4rem}
+  .popup-link{padding:.8rem .9rem;border-radius:12px}
+}
+
+/* ── Small phones ── */
+@media(max-width:380px){
+  :root{--pad-x:.8rem}
+  .hero-title{font-size:clamp(1.5rem,7vw,2.2rem)}
+  .hero-lead{font-size:.84rem}
+  .av-bignum{font-size:2.5rem}
+  .fo-tab{padding:.45rem .3rem;font-size:.65rem}
+  .fo-tab small{font-size:.52rem}
+  .fo-side-price{font-size:1.9rem}
+}
+
+/* Reduced motion */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   13 · LANGUAGE PICKER
+═══════════════════════════════════════════════════════════════ */
+#lang-picker{
+  position:fixed;inset:0;z-index:900;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+  transition:opacity .75s var(--e-in-out),transform .75s var(--e-in-out);
+}
+#lang-picker.is-hiding{
+  opacity:0;transform:scale(1.05);pointer-events:none;
+}
+#lang-picker.is-gone{display:none}
+
+.lp-bg{position:absolute;inset:0;background:var(--ink);z-index:0}
+.lp-flow{position:absolute;inset:0;z-index:1;overflow:hidden}
+.lp-blob{
+  position:absolute;border-radius:50%;filter:blur(90px);
+  mix-blend-mode:screen;animation:flowMove 22s ease-in-out infinite;will-change:transform;
+}
+.lp-blob.b1{
+  width:60vw;height:60vw;left:-15vw;top:-15vw;
+  background:radial-gradient(circle,rgba(200,164,78,.42),transparent 60%);animation-delay:0s;
+}
+.lp-blob.b2{
+  width:50vw;height:50vw;right:-10vw;top:30%;
+  background:radial-gradient(circle,rgba(140,111,48,.4),transparent 60%);animation-delay:-7s;
+}
+.lp-blob.b3{
+  width:45vw;height:45vw;left:35%;bottom:-10vw;
+  background:radial-gradient(circle,rgba(230,201,137,.32),transparent 60%);animation-delay:-14s;
+}
+.lp-grid{
+  position:absolute;inset:0;
+  background-image:linear-gradient(rgba(241,234,217,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(241,234,217,.025) 1px,transparent 1px);
+  background-size:80px 80px;
+  mask-image:radial-gradient(ellipse 70% 60% at 50% 50%,#000,transparent 80%);
+  -webkit-mask-image:radial-gradient(ellipse 70% 60% at 50% 50%,#000,transparent 80%);
+}
+.lp-vignette{
+  position:absolute;inset:0;z-index:2;
+  background:radial-gradient(80% 60% at 50% 50%,transparent,rgba(10,9,7,.65) 90%);
+}
+.lp-grain{
+  position:absolute;inset:0;z-index:3;pointer-events:none;
+  background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .4 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  opacity:.14;mix-blend-mode:overlay;
+}
+.lp-inner{
+  position:relative;z-index:4;
+  display:flex;flex-direction:column;align-items:center;
+  padding:clamp(2.5rem,5vw,4rem) var(--pad-x);
+  text-align:center;max-width:660px;width:100%;
+  animation:lpIn .95s var(--e-out) both;
+}
+@keyframes lpIn{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:none}}
+
+.lp-logo{
+  display:flex;align-items:center;gap:.55rem;margin-bottom:2.8rem;
+  font-family:var(--serif);font-size:1.1rem;font-weight:300;
+  font-variation-settings:"opsz" 144;color:var(--mute);letter-spacing:.02em;
+}
+.lp-logo-mark{
+  width:28px;height:28px;border-radius:50%;flex-shrink:0;
+  background:radial-gradient(circle at 30% 30%,var(--gold-2),var(--gold-3));
+  box-shadow:0 0 0 1px rgba(255,255,255,.06),inset 0 1px 0 rgba(255,255,255,.18);
+}
+.lp-eyebrow{
+  font-size:.7rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--gold);display:inline-flex;align-items:center;gap:.7rem;margin-bottom:1rem;
+}
+.lp-eyebrow::before{content:'';width:24px;height:1px;background:var(--gold);display:inline-block}
+.lp-title{
+  font-family:var(--serif);font-size:clamp(1.7rem,4vw,2.8rem);font-weight:300;
+  font-variation-settings:"opsz" 144;letter-spacing:-.025em;
+  color:var(--bone);line-height:1.05;margin-bottom:2.8rem;
+  transition:opacity .35s ease;
+}
+.lp-title.fading{opacity:0}
+
+.lp-flags{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:.8rem;width:100%;
+}
+.lp-flag-btn{
+  display:flex;flex-direction:column;align-items:center;gap:.65rem;
+  padding:1.4rem 1.5rem;border:1px solid var(--line);border-radius:22px;
+  background:rgba(241,234,217,.03);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  cursor:pointer;min-width:105px;
+  transition:transform .4s var(--e-back),border-color .3s,background .3s,box-shadow .3s;
+  animation:flagIn .65s var(--e-out) both;
+}
+.lp-flag-btn:nth-child(1){animation-delay:.10s}
+.lp-flag-btn:nth-child(2){animation-delay:.17s}
+.lp-flag-btn:nth-child(3){animation-delay:.24s}
+.lp-flag-btn:nth-child(4){animation-delay:.31s}
+.lp-flag-btn:nth-child(5){animation-delay:.38s}
+@keyframes flagIn{from{opacity:0;transform:translateY(22px) scale(.9)}to{opacity:1;transform:none}}
+.lp-flag-btn:hover{
+  transform:translateY(-5px);
+  border-color:var(--gold);
+  background:rgba(200,164,78,.09);
+  box-shadow:0 18px 42px -12px rgba(200,164,78,.28);
+}
+.lp-flag-btn:active{transform:translateY(-2px) scale(.97)}
+.lp-flag-emoji{font-size:2.4rem;line-height:1;filter:drop-shadow(0 2px 6px rgba(0,0,0,.4))}
+.lp-flag-name{
+  font-size:.76rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--bone-2);transition:color .3s;
+}
+.lp-flag-btn:hover .lp-flag-name{color:var(--gold-2)}
+
+/* ── Nav language button ── */
+#lang-nav-btn{
+  display:inline-flex;align-items:center;gap:.4rem;
+  padding:.48rem .85rem;border-radius:99px;
+  border:1px solid var(--line-2);background:rgba(241,234,217,.02);
+  font-size:.8rem;font-weight:500;color:var(--bone-2);
+  transition:border-color .3s,background .3s,color .3s,transform .3s var(--e-back);
+  cursor:pointer;
+}
+#lang-nav-btn:hover{border-color:var(--gold);background:rgba(200,164,78,.08);color:var(--gold-2);transform:translateY(-1px)}
+#theme-nav-btn{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:36px;height:36px;border-radius:50%;
+  border:1px solid var(--line-2);background:rgba(241,234,217,.02);
+  color:var(--bone);
+  transition:border-color .3s,background .3s,color .3s,transform .3s var(--e-back);
+  cursor:pointer;flex-shrink:0;
+}
+#theme-nav-btn:hover{border-color:var(--gold);background:rgba(200,164,78,.08);color:var(--gold-2);transform:translateY(-1px)}
+#theme-nav-btn svg{width:16px;height:16px;pointer-events:none;transition:opacity .25s}
+.lnb-flag{font-size:1rem;line-height:1}
+.lnb-code{font-size:.72rem;letter-spacing:.07em;text-transform:uppercase}
+
+/* ── Language dropdown ── */
+#lang-dropdown{
+  position:fixed;top:3.8rem;right:var(--pad-x);z-index:400;
+  background:rgba(14,12,9,.94);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);
+  border:1px solid var(--line-2);border-radius:16px;
+  padding:.5rem;min-width:185px;
+  box-shadow:0 24px 64px -12px rgba(0,0,0,.75),0 0 0 1px rgba(200,164,78,.06);
+  opacity:0;transform:translateY(-10px) scale(.96);pointer-events:none;
+  transition:opacity .28s var(--e-out),transform .28s var(--e-back);
+}
+#lang-dropdown.is-open{opacity:1;transform:none;pointer-events:auto}
+.ld-item{
+  display:flex;align-items:center;gap:.7rem;
+  padding:.6rem .85rem;border-radius:10px;
+  font-size:.84rem;font-weight:500;color:var(--bone-2);
+  cursor:pointer;transition:background .2s,color .2s;white-space:nowrap;
+}
+.ld-item:hover,.ld-item.is-active{background:rgba(200,164,78,.10);color:var(--gold-2)}
+.ld-flag{font-size:1.1rem}
+.ld-name{flex:1}
+.ld-check{
+  width:14px;height:14px;color:var(--gold);opacity:0;transition:opacity .2s;flex-shrink:0;
+}
+.ld-item.is-active .ld-check{opacity:1}
+
+/* RTL support */
+html[dir="rtl"] .eyebrow::before,html[dir="rtl"] .fo-side-label::before{order:1}
+html[dir="rtl"] #float-nav{left:1.2rem;right:auto}
+html[dir="rtl"] #float-nav-links{align-items:flex-start}
+html[dir="rtl"] .fnl-item{flex-direction:row-reverse}
+html[dir="rtl"] #side-dots{left:1.6rem;right:auto}
+html[dir="rtl"] .s-dot::before{left:18px;right:auto}
+html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
+
+@media(max-width:600px){
+  .lp-flags{gap:.6rem}
+  .lp-flag-btn{padding:1.05rem 1.1rem;min-width:85px;border-radius:16px}
+  .lp-flag-emoji{font-size:1.9rem}
+  .lp-flag-name{font-size:.7rem}
+  .lp-title{font-size:clamp(1.4rem,6vw,1.9rem);margin-bottom:2rem}
+  #lang-dropdown{right:.8rem;top:3.6rem;min-width:170px}
+}
+
+/* ════════════ SECTION DEVIS ════════════ */
+#devis { padding: clamp(5rem,10vh,8rem) 0; }
+.dv-shell {
+  max-width: 1100px; margin: 0 auto;
+  padding: 0 var(--pad-x);
+}
+.dv-head { text-align: center; margin-bottom: 3.5rem; }
+.dv-head .lead { max-width: 600px; margin: 1rem auto 0; }
+
+.dv-form {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 2rem;
+  align-items: start;
+}
+@media(max-width:900px) {
+  .dv-form { grid-template-columns: 1fr; }
+}
+
+/* Steps */
+.dv-step {
+  margin-bottom: 1.5rem;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(200,164,78,0.16);
+  border-radius: 16px;
+  padding: 1.25rem 1.5rem;
+}
+.dv-step-label {
+  font-size: .65rem; text-transform: uppercase;
+  letter-spacing: .14em; color: var(--gold);
+  margin-bottom: .9rem; font-weight: 600;
+}
+.dv-chips {
+  display: flex; flex-wrap: wrap; gap: .5rem;
+}
+.dv-chip {
+  padding: .55rem 1.1rem;
+  background: rgba(255,255,255,0.04);
+  border: 1.5px solid rgba(200,164,78,0.22);
+  border-radius: 99px;
+  font-size: .82rem; color: var(--bone); cursor: pointer;
+  transition: background .2s, border-color .2s, color .2s, transform .15s;
+  user-select: none;
+}
+.dv-chip:hover { border-color: var(--gold); background: rgba(200,164,78,0.08); }
+.dv-chip.is-on {
+  background: linear-gradient(135deg, rgba(200,164,78,0.22), rgba(200,164,78,0.10));
+  border-color: var(--gold); color: var(--gold-2);
+  transform: scale(1.03);
+}
+.dv-chip-opt {
+  display: flex; align-items: center; gap: .55rem;
+  padding: .6rem 1.1rem;
+}
+.dv-chip-opt-price {
+  font-size: .7rem; color: var(--mute);
+  padding: .15rem .45rem; border-radius: 99px;
+  background: rgba(255,255,255,0.06);
+  white-space: nowrap;
+}
+.dv-chip.is-on .dv-chip-opt-price { color: var(--gold); }
+
+.dv-input-wrap { position: relative; }
+.dv-input {
+  width: 100%;
+  padding: .75rem 1rem .75rem 3rem;
+  background: rgba(255,255,255,0.04);
+  border: 1.5px solid rgba(200,164,78,0.22);
+  border-radius: 12px; color: var(--bone);
+  font-family: inherit; font-size: .9rem;
+  outline: none;
+  transition: border-color .2s, box-shadow .2s;
+}
+.dv-input:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(200,164,78,.1); }
+.dv-input::placeholder { color: var(--mute); }
+.dv-input-icon {
+  position: absolute; left: 1rem; top: 50%; transform: translateY(-50%);
+  color: var(--mute); pointer-events: none;
+}
+
+/* Summary card */
+.dv-summary {
+  position: sticky; top: 5rem;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(200,164,78,0.2);
+  border-radius: 18px; padding: 1.5rem;
+}
+.dv-summary-title {
+  font-family: var(--serif); font-size: 1.15rem; color: var(--gold-2);
+  margin-bottom: 1rem; letter-spacing: .02em;
+}
+.dv-sum-row {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding: .45rem 0; border-bottom: 1px solid rgba(200,164,78,.08);
+  font-size: .84rem; color: var(--bone);
+}
+.dv-sum-row:last-of-type { border-bottom: none; }
+.dv-sum-key { color: var(--mute); font-size: .8rem; }
+.dv-sum-val { font-weight: 600; color: var(--gold); }
+.dv-total {
+  margin-top: 1rem; padding-top: 1rem;
+  border-top: 1px solid rgba(200,164,78,.2);
+}
+.dv-total-creation {
+  display: flex; justify-content: space-between; align-items: baseline;
+  margin-bottom: .5rem;
+}
+.dv-total-label { font-size: .75rem; color: var(--mute); text-transform: uppercase; letter-spacing: .1em; }
+.dv-total-val { font-size: 1.6rem; font-family: var(--serif); color: var(--gold-2); }
+.dv-total-sub { display: flex; justify-content: space-between; font-size: .82rem; color: var(--mute); }
+.dv-total-sub span:last-child { color: var(--bone); }
+
+.dv-submit {
+  width: 100%; margin-top: 1.25rem;
+  padding: .9rem 1rem;
+  background: linear-gradient(135deg, #d4a94e, #b8922e);
+  color: #0c0a08; border: none; border-radius: 12px;
+  font-family: inherit; font-size: .95rem; font-weight: 700;
+  cursor: pointer; letter-spacing: .03em;
+  transition: opacity .2s, transform .15s, box-shadow .2s;
+  box-shadow: 0 8px 24px rgba(200,164,78,.3);
+}
+.dv-submit:hover { opacity: .9; transform: translateY(-2px); box-shadow: 0 12px 32px rgba(200,164,78,.4); }
+.dv-submit:active { transform: translateY(0); }
+.dv-submit:disabled { opacity: .4; cursor: not-allowed; transform: none; }
+
+.dv-feedback {
+  text-align: center; font-size: .82rem;
+  margin-top: .75rem; min-height: 1.2em;
+  transition: color .3s;
+}
+.dv-feedback.ok  { color: #4caf50; }
+.dv-feedback.err { color: #ef5350; }
+
+.dv-canal-row { display: flex; gap: .5rem; flex-wrap: wrap; }
+
+.dv-lang-sel {
+  width: 100%;
+  padding: .65rem 1rem;
+  background: rgba(255,255,255,0.04);
+  border: 1.5px solid rgba(200,164,78,0.22);
+  border-radius: 12px; color: var(--bone);
+  font-family: inherit; font-size: .88rem;
+  outline: none; cursor: pointer;
+  appearance: none; -webkit-appearance: none;
+  transition: border-color .2s;
+}
+.dv-lang-sel:focus { border-color: var(--gold); }
+.dv-lang-sel option { background: #1a1206; color: var(--bone); }
+  /* ── Badge forfait populaire ── */
+  .fo-badge-popular {
+    display:inline-block;font-size:.58rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+    padding:.18rem .55rem;border-radius:99px;margin-left:.5rem;vertical-align:middle;
+    background:var(--gold);color:#1a1408;white-space:nowrap;
+  }
+  /* ── Popup Commander ── */
+  .cmd-form { display:flex;flex-direction:column;gap:1.2rem;margin-top:1.6rem }
+  .cmd-field { display:flex;flex-direction:column;gap:.45rem }
+  .cmd-label { font-size:.78rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--bone-2) }
+  .cmd-label small { font-weight:400;letter-spacing:0;text-transform:none;opacity:.65;margin-left:.4rem;font-size:.92em }
+  .cmd-input, .cmd-select {
+    width:100%;background:rgba(255,255,255,.04);border:1px solid var(--line-2);
+    border-radius:12px;padding:.72rem 1rem;
+    font-size:.92rem;color:var(--bone);font-family:inherit;
+    outline:none;transition:border-color .2s;appearance:none;-webkit-appearance:none;
+  }
+  .cmd-input::placeholder { color:var(--mute) }
+  .cmd-input:focus, .cmd-select:focus { border-color:var(--gold) }
+  .cmd-select option { background:#1a1206;color:var(--bone) }
+  .cmd-phone-row { display:grid;grid-template-columns:108px 1fr;gap:.6rem;align-items:center }
+  .cmd-country-sel {
+    background:rgba(255,255,255,.04);border:1px solid var(--line-2);border-radius:12px;
+    padding:.72rem .5rem;font-size:.85rem;color:var(--bone);font-family:inherit;
+    outline:none;appearance:none;-webkit-appearance:none;cursor:pointer;
+    width:100%;transition:border-color .2s;
+  }
+  .cmd-country-sel:focus { border-color:var(--gold) }
+  .cmd-country-sel option { background:#1a1206 }
+  .cmd-phone-input {
+    background:rgba(255,255,255,.04);border:1px solid var(--line-2);border-radius:12px;
+    padding:.72rem 1rem;font-size:.92rem;color:var(--bone);font-family:inherit;
+    outline:none;width:100%;transition:border-color .2s;
+  }
+  .cmd-phone-input::placeholder { color:var(--mute) }
+  .cmd-phone-input:focus { border-color:var(--gold) }
+  .cmd-hint {
+    font-size:.75rem;color:var(--mute);line-height:1.55;
+    padding:.7rem .9rem;border-radius:10px;border:1px solid var(--line);
+    background:rgba(255,255,255,.02);
+  }
+  .cmd-feedback { font-size:.85rem;line-height:1.5;min-height:0;display:none }
+  .cmd-feedback.err { display:block;color:#f09090 }
+  .cmd-feedback.ok  { display:block;color:#90d090 }
+  .cmd-submit {
+    width:100%;padding:1rem 1.5rem;border-radius:14px;border:none;cursor:pointer;
+    background:linear-gradient(135deg,var(--gold),var(--gold-2));
+    color:#1a1408;font-weight:700;font-family:inherit;font-size:.95rem;
+    letter-spacing:.03em;transition:opacity .2s,transform .1s;
+  }
+  .cmd-submit:hover { opacity:.9 }
+  .cmd-submit:active { transform:scale(.98) }
+  .cmd-submit:disabled { opacity:.5;cursor:not-allowed }
+  #pop-commander .popup-card { max-width:520px }
+
+  /* ── Popup notice Android ── */
+  #pop-android-notice .popup-card { max-width:440px }
+  .android-notice-icon { font-size:2.2rem; margin-bottom:1rem }
+  .android-notice-title { font-family:'Cormorant Garamond',Georgia,serif; font-size:1.5rem; font-weight:600; color:var(--bone); margin-bottom:.6rem; line-height:1.2 }
+  .android-notice-body { font-size:.88rem; color:var(--mute); line-height:1.7; margin-bottom:1.4rem }
+  .android-notice-body strong { color:var(--bone-2); font-weight:600 }
+  .android-notice-tag {
+    display:inline-flex; align-items:center; gap:.4rem;
+    font-size:.72rem; font-weight:600; letter-spacing:.07em; text-transform:uppercase;
+    padding:.3rem .75rem; border-radius:99px;
+    background:rgba(200,164,78,.1); border:1px solid rgba(200,164,78,.28); color:var(--gold);
+    margin-bottom:1.2rem;
+  }
+  .android-notice-continue {
+    width:100%; padding:.9rem 1.5rem; border-radius:13px; border:none; cursor:pointer;
+    background:linear-gradient(135deg,var(--gold),var(--gold-2));
+    color:#1a1408; font-weight:700; font-family:inherit; font-size:.9rem;
+    letter-spacing:.03em; transition:opacity .2s,transform .1s;
+    box-shadow:0 4px 14px rgba(200,164,78,.35),inset 0 1.5px 0 rgba(255,255,255,.28),inset 0 -1px 0 rgba(0,0,0,.2);
+  }
+  .android-notice-continue:hover { opacity:.9; transform:translateY(-1px) }
+  .android-notice-continue:active { transform:translateY(1px) }
+
+/* ══════════════════════════════════════════════════════
+   07b · FORFAIT CARDS + POPUP PRICING
+══════════════════════════════════════════════════════ */
+.fo-cards{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:2.5rem}
+.fo-card{
+  border:1px solid var(--line-2);border-radius:24px;
+  padding:clamp(1.6rem,3vw,2.2rem);
+  background:linear-gradient(180deg,rgba(241,234,217,.02),transparent);
+  position:relative;overflow:hidden;
+  display:flex;flex-direction:column;gap:1rem;
+  transition:border-color .4s var(--e-back),box-shadow .4s,transform .4s var(--e-back);
+}
+.fo-card::before{
+  content:'';position:absolute;top:-1px;left:-1px;right:-1px;height:1px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  opacity:.3;
+}
+.fo-card:hover{border-color:rgba(200,164,78,.4);box-shadow:0 24px 64px -24px rgba(200,164,78,.15);transform:translateY(-2px)}
+.fo-card-featured{
+  border-color:rgba(200,164,78,.35);
+  background:linear-gradient(180deg,rgba(200,164,78,.06),rgba(200,164,78,.02),transparent);
+  box-shadow:0 24px 64px -24px rgba(200,164,78,.18);
+}
+.fo-card-featured::before{opacity:.7}
+.fo-card-badge{
+  display:inline-flex;align-items:center;
+  padding:.28rem .8rem;border-radius:99px;
+  background:linear-gradient(135deg,var(--gold),var(--gold-2));
+  color:var(--ink);font-size:.69rem;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
+  width:fit-content;margin-bottom:-.2rem;
+}
+.fo-card-icon{
+  width:48px;height:48px;border-radius:14px;
+  background:rgba(200,164,78,.08);border:1px solid rgba(200,164,78,.18);
+  display:flex;align-items:center;justify-content:center;color:var(--gold);
+}
+.fo-card-icon svg{width:22px;height:22px}
+.fo-card-name{
+  font-family:var(--serif);font-size:1.45rem;font-weight:300;
+  font-variation-settings:"opsz" 144;letter-spacing:-.02em;color:var(--bone);
+}
+.fo-card-subtitle{font-size:.86rem;color:var(--mute);line-height:1.5;margin-top:-.3rem}
+.fo-card-feats{list-style:none;display:flex;flex-direction:column;gap:.5rem;margin:0}
+.fo-card-feat{display:flex;align-items:flex-start;gap:.6rem;font-size:.84rem;color:var(--bone-2);line-height:1.45}
+.fo-card-feat .chk{
+  width:18px;height:18px;border-radius:50%;
+  background:rgba(200,164,78,.12);border:1px solid rgba(200,164,78,.25);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.1rem;color:var(--gold);
+}
+.fo-card-feat .chk svg{width:9px;height:9px;stroke-width:3.5}
+.fo-card-divider{height:1px;background:var(--line);margin:.2rem 0}
+.fo-card-price-row{display:flex;align-items:center;gap:.65rem}
+.fo-card-price-num{
+  font-family:var(--serif);font-size:2.1rem;font-weight:300;
+  font-variation-settings:"opsz" 144;color:var(--bone);line-height:1;
+}
+.fo-card-price-meta{display:flex;flex-direction:column;gap:.08rem}
+.fo-card-price-label{font-size:.72rem;font-weight:600;color:var(--gold);letter-spacing:.07em;text-transform:uppercase}
+.fo-card-price-months{font-size:.74rem;color:var(--mute)}
+.fo-card-monthly{font-size:.81rem;color:var(--mute);line-height:1.4;margin-top:-.3rem}
+.fo-card-monthly strong{color:var(--bone-2);font-weight:600}
+.fo-card-actions{display:flex;flex-direction:column;gap:.6rem;margin-top:auto;padding-top:.4rem}
+.fo-card-btn-detail{
+  padding:.7rem 1.2rem;border-radius:99px;
+  border:1px solid var(--line-2);background:rgba(241,234,217,.02);
+  color:var(--bone-2);font-size:.84rem;font-weight:500;
+  transition:all .3s var(--e-out);cursor:pointer;
+}
+.fo-card-btn-detail:hover{border-color:var(--gold);color:var(--gold);background:rgba(200,164,78,.06)}
+.fo-card-btn-cmd{
+  padding:.8rem 1.2rem;border-radius:99px;
+  background:linear-gradient(135deg,var(--gold),var(--gold-2));
+  color:var(--ink);font-size:.87rem;font-weight:700;letter-spacing:.02em;
+  transition:all .3s var(--e-back);cursor:pointer;
+  box-shadow:0 4px 16px -6px rgba(200,164,78,.55);
+}
+.fo-card-btn-cmd:hover{transform:translateY(-2px);box-shadow:0 8px 24px -8px rgba(200,164,78,.65)}
+@media(max-width:800px){.fo-cards{grid-template-columns:1fr}}
+
+/* ── Popup forfait pricing ── */
+.popup-card-wide{max-width:640px}
+.fp-feat-list{display:flex;flex-direction:column;gap:.55rem;margin:.8rem 0 1.3rem}
+.fp-feat-item{display:flex;align-items:flex-start;gap:.65rem;font-size:.87rem;color:var(--bone-2);line-height:1.5}
+.fp-feat-item .check{
+  width:20px;height:20px;border-radius:50%;
+  background:rgba(200,164,78,.12);border:1px solid rgba(200,164,78,.25);
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.1rem;color:var(--gold);
+}
+.fp-feat-item .check svg{width:10px;height:10px;stroke-width:3.5}
+.fp-pricing{
+  border:1px solid var(--line-2);border-radius:16px;
+  padding:1.1rem 1.3rem;background:rgba(200,164,78,.04);
+  display:flex;flex-direction:column;gap:.7rem;margin-bottom:.9rem;
+}
+.fp-row-main{
+  display:flex;align-items:center;gap:1rem;flex-wrap:wrap;
+  padding-bottom:.7rem;border-bottom:1px solid var(--line);
+}
+.fp-price-num{
+  font-family:var(--serif);font-size:2rem;font-weight:300;
+  font-variation-settings:"opsz" 144;color:var(--bone);line-height:1;white-space:nowrap;
+}
+.fp-price-right{display:flex;flex-direction:column;gap:.12rem;min-width:0}
+.fp-price-label{font-size:.7rem;font-weight:700;color:var(--gold);letter-spacing:.1em;text-transform:uppercase}
+.fp-price-sub{font-size:.77rem;color:var(--mute);line-height:1.45}
+.fp-row-month{display:flex;align-items:center;gap:1rem;flex-wrap:wrap;padding-bottom:.7rem;border-bottom:1px solid var(--line)}
+.fp-price-month{
+  font-family:var(--serif);font-size:1.3rem;font-weight:300;
+  font-variation-settings:"opsz" 144;color:var(--bone-2);white-space:nowrap;
+}
+.fp-row-bonus{
+  display:flex;flex-direction:column;gap:.18rem;
+  padding:.65rem .85rem;border-radius:10px;
+  background:rgba(200,164,78,.06);border:1px solid rgba(200,164,78,.15);
+}
+.fp-bonus-label{font-size:.7rem;font-weight:700;color:var(--gold);letter-spacing:.08em;text-transform:uppercase}
+.fp-bonus-desc{font-size:.81rem;color:var(--bone-2);line-height:1.45}
+.fp-bottom{display:flex;flex-direction:column;gap:.45rem;margin-bottom:1.1rem}
+.fp-promise{display:flex;align-items:flex-start;gap:.5rem;font-size:.79rem;color:var(--mute);line-height:1.45}
+.fp-promise svg{flex-shrink:0;margin-top:.1rem;color:var(--gold-3)}
+.fp-cta{width:100%;justify-content:center;padding:1rem;font-size:.95rem;font-weight:700}
+
+</style>
+<script>
+(function(){
+  var t=localStorage.getItem('mqr_theme');
+  if(t!=='dark'&&t!=='light')t='light';
+  if(t==='light')document.documentElement.classList.add('light');
+})();
+</script>
+</head>
+<body>
+
+<!-- ─── LANGUAGE PICKER ─── -->
+<div id="lang-picker">
+  <div class="lp-bg"></div>
+  <div class="lp-flow">
+    <div class="lp-blob b1"></div>
+    <div class="lp-blob b2"></div>
+    <div class="lp-blob b3"></div>
+    <div class="lp-grid"></div>
+    <div class="lp-vignette"></div>
+  </div>
+  <div class="lp-grain"></div>
+  <div class="lp-inner">
+    <div class="lp-logo">
+      <div class="lp-logo-mark"></div>
+      <span>Menu&nbsp;QR Code</span>
+    </div>
+    <div class="lp-eyebrow">Καλώς ήρθατε · Welcome · Bienvenue · أهلاً · Willkommen</div>
+    <h1 class="lp-title" id="lp-title-text">Επιλέξτε τη γλώσσα σας</h1>
+    <div class="lp-flags">
+      <button class="lp-flag-btn" onclick="chooseLang('el')">
+        <span class="lp-flag-emoji">🇬🇷</span>
+        <span class="lp-flag-name">Ελληνικά</span>
+      </button>
+      <button class="lp-flag-btn" onclick="chooseLang('en')">
+        <span class="lp-flag-emoji">🇬🇧</span>
+        <span class="lp-flag-name">English</span>
+      </button>
+      <button class="lp-flag-btn" onclick="chooseLang('fr')">
+        <span class="lp-flag-emoji">🇫🇷</span>
+        <span class="lp-flag-name">Français</span>
+      </button>
+      <button class="lp-flag-btn" onclick="chooseLang('ar')">
+        <span class="lp-flag-emoji">🇸🇦</span>
+        <span class="lp-flag-name">العربية</span>
+      </button>
+      <button class="lp-flag-btn" onclick="chooseLang('de')">
+        <span class="lp-flag-emoji">🇩🇪</span>
+        <span class="lp-flag-name">Deutsch</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ─── LANGUAGE DROPDOWN ─── -->
+<div id="lang-dropdown" role="listbox" aria-label="Language">
+  <div class="ld-item" data-lang="el" onclick="setLang('el')">
+    <span class="ld-flag">🇬🇷</span><span class="ld-name">Ελληνικά</span>
+    <svg class="ld-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+  </div>
+  <div class="ld-item" data-lang="en" onclick="setLang('en')">
+    <span class="ld-flag">🇬🇧</span><span class="ld-name">English</span>
+    <svg class="ld-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+  </div>
+  <div class="ld-item" data-lang="fr" onclick="setLang('fr')">
+    <span class="ld-flag">🇫🇷</span><span class="ld-name">Français</span>
+    <svg class="ld-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+  </div>
+  <div class="ld-item" data-lang="ar" onclick="setLang('ar')">
+    <span class="ld-flag">🇸🇦</span><span class="ld-name">العربية</span>
+    <svg class="ld-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+  </div>
+  <div class="ld-item" data-lang="de" onclick="setLang('de')">
+    <span class="ld-flag">🇩🇪</span><span class="ld-name">Deutsch</span>
+    <svg class="ld-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+  </div>
+</div>
+
+<!-- ─── NAV ─── -->
+<nav id="nav">
+  <a href="#hero" class="logo">
+    <span class="logo-mark"></span>
+    <span data-i18n="brand">Menu&nbsp;QR Code</span>
+  </a>
+  <div class="nav-mid">
+    <a href="#avantages" onclick="event.preventDefault();scrollTo_('avantages')" data-i18n="nav.advantages">Avantages</a>
+    <a href="#forfaits" onclick="event.preventDefault();scrollTo_('forfaits')" data-i18n="nav.pricing">Tarifs</a>
+  </div>
+  <div style="display:flex;align-items:center;gap:.6rem">
+    <button id="lang-nav-btn" onclick="toggleLangDropdown()" aria-label="Change language">
+      <span class="lnb-flag" id="lnb-flag">🇫🇷</span>
+      <span class="lnb-code" id="lnb-code">FR</span>
+    </button>
+    <button id="theme-nav-btn" onclick="toggleTheme()" aria-label="Changer de thème">
+      <svg class="theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+      <svg class="theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+    <a href="#contact" onclick="event.preventDefault();scrollTo_('contact')" class="nav-cta" data-i18n="nav.contact">
+      Contact
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+</nav>
+
+<!-- ─── SIDE DOTS ─── -->
+<nav id="side-dots" aria-label="Sections">
+  <button class="s-dot active" data-label="Accueil" data-i18n-label="foot.home" onclick="scrollTo_('hero')"></button>
+  <button class="s-dot" data-label="Avantages" data-i18n-label="nav.advantages" onclick="scrollTo_('avantages')"></button>
+  <button class="s-dot" data-label="Tarifs" data-i18n-label="nav.pricing" onclick="scrollTo_('forfaits')"></button>
+  <button class="s-dot" data-label="Contact" data-i18n-label="nav.contact" onclick="scrollTo_('contact')"></button>
+</nav>
+
+<!-- ─── FLOATING NAV (mobile) ─── -->
+<div id="float-nav" aria-label="Navigation">
+  <button id="float-nav-trigger" aria-label="Navigation" onclick="toggleFloatNav()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+  </button>
+  <div id="float-nav-links">
+    <a href="#hero" class="fnl-item" onclick="event.preventDefault();closeFloatNav();scrollTo_('hero')">
+      <span class="fnl-label" data-i18n="foot.home">Accueil</span>
+      <span class="fnl-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
+    </a>
+    <a href="#avantages" class="fnl-item" onclick="event.preventDefault();closeFloatNav();scrollTo_('avantages')">
+      <span class="fnl-label" data-i18n="nav.advantages">Avantages</span>
+      <span class="fnl-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+    </a>
+    <a href="#forfaits" class="fnl-item" onclick="event.preventDefault();closeFloatNav();scrollTo_('forfaits')">
+      <span class="fnl-label" data-i18n="nav.pricing">Tarifs</span>
+      <span class="fnl-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></span>
+    </a>
+    <a href="#contact" class="fnl-item" onclick="event.preventDefault();closeFloatNav();scrollTo_('contact')">
+      <span class="fnl-label" data-i18n="nav.contact">Contact</span>
+      <span class="fnl-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2A19.79 19.79 0 0111.63 19 19.5 19.5 0 015 12.36 19.79 19.79 0 011.11 3.18 2 2 0 013.08 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L7.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg></span>
+    </a>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════
+     SECTION 1 · HERO
+════════════════════════════════════════════════════════════ -->
+<section id="hero">
+  <!-- Backdrop carousel -->
+  <div class="hero-stage" id="heroStage">
+    <div class="hero-slide is-active"><div class="hero-slide-bg"></div></div>
+    <div class="hero-slide"><div class="hero-slide-bg"></div></div>
+    <div class="hero-slide"><div class="hero-slide-bg"></div></div>
+    <div class="hero-slide"><div class="hero-slide-bg"></div></div>
+    <div class="hero-slide"><div class="hero-slide-bg"></div></div>
+    <div class="hero-veil"></div>
+    <div class="hero-grain"></div>
+  </div>
+
+  <!-- Marquee -->
+  <div class="marquee" aria-hidden="true">
+    <span>Menu QR digital</span><span>Commandes à table</span><span>Appel serveur</span><span>Application serveur</span><span>Administration simple</span><span>Temps réel</span>
+    <span>Menu QR digital</span><span>Commandes à table</span><span>Appel serveur</span><span>Application serveur</span><span>Administration simple</span><span>Temps réel</span>
+  </div>
+
+  <!-- Content grid -->
+  <div class="hero-grid">
+    <div class="hero-copy">
+      <div class="eyebrow hero-eyebrow" data-i18n="hero.eyebrow">Système restaurant complet — menu QR, commandes à table et appel serveur</div>
+      <h1 class="display hero-title">
+        <span class="hero-title-line"><span data-i18n="hero.title.1">Les clients scannent un QR,</span></span>
+        <span class="hero-title-line"><span data-i18n="hero.title.2">commandent, ou appellent</span></span>
+        <span class="hero-title-line"><span data-i18n-html="hero.title.3"><em>le serveur — en un tap.</em></span></span>
+      </h1>
+      <p class="hero-lead" data-i18n="hero.lead">Les clients scannent un QR code pour accéder au menu et peuvent ensuite commander leurs plats ou appeler un serveur à tout moment depuis leur téléphone.</p>
+      <div class="hero-cta-row">
+        <a href="#avantages" onclick="event.preventDefault();scrollTo_('avantages')" class="btn btn-primary">
+          <span data-i18n="hero.cta1">Découvrir les avantages</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#forfaits" onclick="event.preventDefault();scrollTo_('forfaits')" class="btn btn-outline" data-i18n="hero.cta2">Voir les forfaits</a>
+        <a href="#contact" onclick="event.preventDefault();scrollTo_('contact')" class="btn btn-ghost" data-i18n="hero.cta3">Nous contacter</a>
+      </div>
+    </div>
+
+    <div class="hero-meta">
+      <div class="hero-meta-num" data-i18n-html="hero.meta.num"><span>02</span> forfaits</div>
+      <div class="hero-meta-label" data-i18n-html="hero.meta.label">Menu QR · Commandes &amp; Services<br>+ frais de création uniques</div>
+    </div>
+  </div>
+
+  <!-- HUD -->
+  <div class="hero-hud">
+    <div class="hero-hud-counter">
+      <strong id="hudNum">01</strong>
+      <em>—</em>
+      <span data-i18n="hero.hud.label">Aperçu du menu</span>
+      <em>/</em>
+      <span style="color:var(--mute-2)">05</span>
+    </div>
+    <div class="hero-hud-progress"><div class="hero-hud-progress-fill run" id="hudFill"></div></div>
+    <div class="hero-hud-arrows">
+      <button class="hud-arrow" onclick="heroPrev()" aria-label="Précédent">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      </button>
+      <button class="hud-arrow" onclick="heroNext()" aria-label="Suivant">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     SECTION 2 · AVANTAGES
+════════════════════════════════════════════════════════════ -->
+<section id="avantages">
+  <div class="flow-bg">
+    <div class="flow-blob b1"></div>
+    <div class="flow-blob b2"></div>
+    <div class="flow-blob b3"></div>
+    <div class="flow-grid"></div>
+    <div class="flow-vignette"></div>
+  </div>
+
+  <div class="av-shell">
+    <header class="av-head reveal">
+      <h2 class="display" data-i18n-html="av.h2">Cinq raisons de<br><em>passer au digital.</em></h2>
+      <p class="lead" data-i18n="av.lead">Chaque avantage a été pensé pour améliorer l'expérience de vos clients et simplifier la gestion de votre établissement.</p>
+    </header>
+
+    <div class="av-viewport reveal delay-1">
+      <div class="av-track" id="avTrack">
+
+        <!-- Avantage 1 -->
+        <article class="av-card">
+          <div class="av-numwrap">
+            <div class="av-bignum">0<em>1</em></div>
+            <div class="av-symbol">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM18 17h3M14 21h3M21 14v7"/></svg>
+            </div>
+          </div>
+          <div class="av-body">
+            <h3 data-i18n-html="av.c1.h3">Hygiène, rapidité<br><em>et confort client.</em></h3>
+            <p data-i18n="av.c1.p">Le client scanne le QR Code et accède instantanément au menu depuis son téléphone, sans attente ni contact avec des menus papier. Une solution moderne, rapide et plus hygiénique qui améliore l'expérience client.</p>
+            <div class="av-tag-row">
+              <span class="av-tag" data-i18n="av.c1.t1">Hygiène</span>
+              <span class="av-tag" data-i18n="av.c1.t2">Confort client</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Avantage 2 -->
+        <article class="av-card">
+          <div class="av-numwrap">
+            <div class="av-bignum">0<em>2</em></div>
+            <div class="av-symbol">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+          </div>
+          <div class="av-body">
+            <h3 data-i18n-html="av.c2.h3">Réduction des coûts,<br><em>solution durable.</em></h3>
+            <p data-i18n="av.c2.p">Le menu digital supprime les frais d'impression et évite les menus perdus, abîmés ou à réimprimer. Une solution économique, pratique et durable pour votre établissement.</p>
+            <div class="av-tag-row">
+              <span class="av-tag" data-i18n="av.c2.t1">Économique</span>
+              <span class="av-tag" data-i18n="av.c2.t2">Durable</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Avantage 3 -->
+        <article class="av-card">
+          <div class="av-numwrap">
+            <div class="av-bignum">0<em>3</em></div>
+            <div class="av-symbol">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+            </div>
+          </div>
+          <div class="av-body">
+            <h3 data-i18n-html="av.c3.h3">Accessible partout,<br><em>idéal pour les touristes.</em></h3>
+            <p data-i18n="av.c3.p">Disponible en plusieurs langues, le menu facilite l'accueil des touristes et valorise l'image moderne de votre établissement. Accessible 24h/24 et facile à partager sur les réseaux sociaux.</p>
+            <div class="av-tag-row">
+              <span class="av-tag" data-i18n="av.c3.t1">Multilingue</span>
+              <span class="av-tag" data-i18n="av.c3.t2">24h/24</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Avantage 4 -->
+        <article class="av-card">
+          <div class="av-numwrap">
+            <div class="av-bignum">0<em>4</em></div>
+            <div class="av-symbol">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg>
+            </div>
+          </div>
+          <div class="av-body">
+            <h3 data-i18n-html="av.c4.h3">Gestion instantanée<br><em>et personnalisation.</em></h3>
+            <p data-i18n="av.c4.p">Modifiez immédiatement vos prix, produits ou promotions depuis une page d'administration simple et intuitive. Ajoutez facilement des photos et adaptez votre menu selon les saisons ou événements.</p>
+            <div class="av-tag-row">
+              <span class="av-tag" data-i18n="av.c4.t1">Admin simple</span>
+              <span class="av-tag" data-i18n="av.c4.t2">Temps réel</span>
+              <span class="av-tag" data-i18n="av.c4.opt">Optionnel</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Avantage 5 -->
+        <article class="av-card">
+          <div class="av-numwrap">
+            <div class="av-bignum">0<em>5</em></div>
+            <div class="av-symbol">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>
+            </div>
+          </div>
+          <div class="av-body">
+            <h3 data-i18n-html="av.c5.h3">Commande intelligente,<br><em>design avancé.</em></h3>
+            <p data-i18n="av.c5.p">Les clients peuvent appeler un serveur ou commander directement depuis le menu QR Code. Le propriétaire peut également changer instantanément les thèmes et le design du menu selon ses préférences.</p>
+            <div class="av-tag-row">
+              <span class="av-tag" data-i18n="av.c5.t1">Appel serveur</span>
+              <span class="av-tag" data-i18n="av.c5.t2">Commande en ligne</span>
+              <span class="av-tag" data-i18n="av.c5.opt">Optionnel</span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+
+    <div class="av-controls reveal delay-2">
+      <div class="av-numbers">
+        <span class="now" id="avNow">01</span>
+        <span class="sep">/</span>
+        <span class="total">05</span>
+      </div>
+      <div class="av-progress"><div class="av-progress-fill" id="avFill"></div></div>
+      <div class="av-arrows">
+        <button class="hud-arrow" onclick="avPrev()" aria-label="Précédent">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        </button>
+        <button class="hud-arrow" onclick="avNext()" aria-label="Suivant">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     SECTION 3 · FORFAITS
+════════════════════════════════════════════════════════════ -->
+<section id="forfaits">
+  <div class="fo-shell">
+    <header class="fo-head reveal">
+      <h2 class="display" data-i18n-html="fo.h2">Quatre niveaux,<br><em>toutes les options.</em></h2>
+      <p class="lead" data-i18n="fo.lead">Choisissez votre forfait selon l'ambiance souhaitée — avec ou sans accès admin — et ajoutez les options qui correspondent à votre service.</p>
+    </header>
+
+
+    <div class="fo-cards reveal delay-1">
+
+      <!-- Card 0 : Menu QR Code -->
+      <div class="fo-card">
+        <div class="fo-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM18 17h3M14 21h3M21 14v7"/></svg>
         </div>
+        <div class="fo-card-name" data-i18n="fo.card0.name">Menu QR Code</div>
+        <p class="fo-card-subtitle" data-i18n="fo.card0.subtitle">Menu digital accessible par QR code — sans application à télécharger</p>
+        <ul class="fo-card-feats">
+          <li class="fo-card-feat"><div class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span data-i18n="fo.card0.f1">Menu QR multilingue accessible depuis smartphone ou tablette</span></li>
+          <li class="fo-card-feat"><div class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span data-i18n="fo.card0.f2">Administration complète — modifiez menu, prix et photos en temps réel</span></li>
+          <li class="fo-card-feat"><div class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span data-i18n="fo.card0.f3">Thèmes, couleurs et styles personnalisables</span></li>
+        </ul>
+        <div class="fo-card-divider"></div>
+        <div class="fo-card-price-row">
+          <span class="fo-card-price-num">149€</span>
+          <div class="fo-card-price-meta">
+            <span class="fo-card-price-label" data-i18n="fp.creation.label">création</span>
+            <span class="fo-card-price-months" data-i18n="fo.card.months2">2 mois offerts</span>
+          </div>
+        </div>
+        <div class="fo-card-monthly"><span data-i18n="fo.card.then">puis</span> <strong>49€/mois</strong> <span data-i18n="fo.card.from3">à partir du 3ème mois</span></div>
+        <div class="fo-card-actions">
+          <button class="fo-card-btn-detail" onclick="openPopup('pop-forfait-0')" data-i18n="fo.card.details">Voir les détails</button>
+          <button class="fo-card-btn-cmd" onclick="openCommanderPopup(0)" data-i18n="fo.card.cmd">Commander</button>
+        </div>
+      </div>
+
+      <!-- Card 1 : Menu et Commandes -->
+      <div class="fo-card fo-card-featured">
+        <div class="fo-card-badge" data-i18n="fo.card1.badge">Le plus complet</div>
+        <div class="fo-card-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>
+        </div>
+        <div class="fo-card-name" data-i18n="fo.card1.name">Menu et Commandes</div>
+        <p class="fo-card-subtitle" data-i18n="fo.card1.subtitle">Menu QR Code + commandes à table et appel serveur</p>
+        <ul class="fo-card-feats">
+          <li class="fo-card-feat"><div class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span data-i18n="fo.card1.f1">Tout ce qui est inclus dans Menu QR Code</span></li>
+          <li class="fo-card-feat"><div class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span data-i18n="fo.card1.f2">🔴 Appel serveur + 🟢 commandes à table en temps réel</span></li>
+          <li class="fo-card-feat"><div class="chk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span data-i18n="fo.card1.f3">Application serveur Android avec notifications push</span></li>
+        </ul>
+        <div class="fo-card-divider"></div>
+        <div class="fo-card-price-row">
+          <span class="fo-card-price-num">299€</span>
+          <div class="fo-card-price-meta">
+            <span class="fo-card-price-label" data-i18n="fp.creation.label">création</span>
+            <span class="fo-card-price-months" data-i18n="fo.card.months2">2 mois offerts</span>
+          </div>
+        </div>
+        <div class="fo-card-monthly"><span data-i18n="fo.card.then">puis</span> <strong>99€/mois</strong> <span data-i18n="fo.card.from3">à partir du 3ème mois</span></div>
+        <div class="fo-card-actions">
+          <button class="fo-card-btn-detail" onclick="openPopup('pop-forfait-1')" data-i18n="fo.card.details">Voir les détails</button>
+          <button class="fo-card-btn-cmd" onclick="openCommanderPopup(1)" data-i18n="fo.card.cmd">Commander</button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>
+
+
+
+
+
+<!-- ════════════════════════════════════════════════════════════
+     SECTION 4 · CONTACT
+════════════════════════════════════════════════════════════ -->
+<section id="contact">
+  <div class="co-shell">
+    <div class="co-left reveal">
+      <div class="eyebrow" style="margin-bottom:1.4rem" data-i18n="co.eyebrow">Nous contacter</div>
+      <h2 class="display" data-i18n-html="co.h2">Parlons de<br>votre <em>projet.</em></h2>
+      <p class="lead" data-i18n="co.lead">Une question, un devis, une démo personnalisée — nous répondons sous 24h, dans la langue qui vous convient. Choisissez le canal qui vous arrange.</p>
+      <div class="co-info">
+        <div class="co-info-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+          <span data-i18n="co.info1">Réponse sous 24h</span>
+        </div>
+        <div class="co-info-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          <span data-i18n="co.info2">Viber &amp; WhatsApp · toutes langues</span>
+        </div>
+
       </div>
     </div>
 
     <div class="co-cards reveal delay-1">
-      <a href="tel:+306943995696" class="co-card">
-        <div class="co-card-icon ph">
-          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-        </div>
-        <div class="co-card-text">
-          <strong data-i18n="co.ph.label">Appeler</strong>
-          <small data-i18n="co.ph.sub">+30 694 399 5696 · français ou anglais</small>
-        </div>
-        <div class="co-card-arrow">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M7 7h10v10"/></svg>
-        </div>
-      </a>
 
       <a href="https://wa.me/306943995696" target="_blank" rel="noopener" class="co-card">
         <div class="co-card-icon wa">
@@ -2345,6 +4741,98 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
 <!-- ════════════════════════════════════════════════════════════
      POPUPS
 ════════════════════════════════════════════════════════════ -->
+
+<!-- Popup Forfait 0 -->
+<div class="popup" id="pop-forfait-0" onclick="popupOutside(event,'pop-forfait-0')">
+  <div class="popup-card popup-card-wide">
+    <button class="popup-close" onclick="closePopup('pop-forfait-0')" aria-label="Fermer">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="eyebrow popup-eyebrow" data-i18n="fo.card0.name">Menu QR Code</div>
+    <h3 data-i18n-html="fp.0.title">Tout ce qui est <em>inclus.</em></h3>
+    <div class="fp-feat-list">
+      <div class="fp-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span data-i18n="fp.0.f1">Menu QR digital accessible depuis smartphone, tablette ou ordinateur — sans application à télécharger</span></div>
+      <div class="fp-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span data-i18n="fp.0.f2">3 styles d'affichage — Carte classique, Livre et Dynamique</span></div>
+      <div class="fp-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span data-i18n="fp.0.f3">10 thèmes par style · 15+ couleurs par thème — changez l'ambiance en un clic</span></div>
+      <div class="fp-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span data-i18n="fp.0.f4">Administration complète — modifiez votre menu, vos prix et vos photos en temps réel</span></div>
+      <div class="fp-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span data-i18n="fp.0.f5">QR code général pour l'ensemble du restaurant · multilingue avec détection automatique</span></div>
+      <div class="fp-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span data-i18n="fp.0.f6">Hébergement, mise en ligne et maintenance inclus — clé en main</span></div>
+    </div>
+    <div class="fp-pricing">
+      <div class="fp-row-main">
+        <div class="fp-price-num">149€</div>
+        <div class="fp-price-right">
+          <span class="fp-price-label" data-i18n="fp.creation.label">Création</span>
+          <span class="fp-price-sub" data-i18n="fp.creation.sub">2 mois d'utilisation offerts — prêt en 24h maximum</span>
+        </div>
+      </div>
+      <div class="fp-row-month">
+        <div class="fp-price-month">49€<small style="font-size:.65em;color:var(--mute);font-family:var(--sans)">/mois</small></div>
+        <span class="fp-price-sub" data-i18n="fp.monthly.sub">à partir du 3ème mois · sans engagement</span>
+      </div>
+      <div class="fp-row-bonus">
+        <span class="fp-bonus-label" data-i18n="fp.annual.label">Paiement annuel (à la création)</span>
+        <span class="fp-bonus-desc" data-i18n="fp.annual.desc">+1 mois offert supplémentaire · soit 3 mois offerts au total</span>
+      </div>
+      <div class="fp-row-bonus">
+        <span class="fp-bonus-label" data-i18n="fp.renewal.label">Renouvellement annuel</span>
+        <span class="fp-bonus-desc" data-i18n="fp.renewal.desc">Payez 10 mois, profitez de 12 mois</span>
+        <span style="font-size:.74rem;color:var(--mute);margin-top:.1rem">490€ au lieu de 588€/an</span>
+      </div>
+    </div>
+    <div class="fp-bottom">
+      <div class="fp-promise"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span data-i18n="fp.test.desc">4 jours de test offerts avant tout paiement</span></div>
+      <div class="fp-promise"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg><span data-i18n="fp.payment.desc">Virement bancaire (mentionner votre ID dans les détails) · ou en espèces</span></div>
+    </div>
+    <button class="btn fo-card-btn-cmd fp-cta" onclick="closePopup('pop-forfait-0');openCommanderPopup(0)" data-i18n="fo.card.cmd">Commander</button>
+  </div>
+</div>
+
+<!-- Popup Forfait 1 -->
+<div class="popup" id="pop-forfait-1" onclick="popupOutside(event,'pop-forfait-1')">
+  <div class="popup-card popup-card-wide">
+    <button class="popup-close" onclick="closePopup('pop-forfait-1')" aria-label="Fermer">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="eyebrow popup-eyebrow" data-i18n="fo.card1.name">Menu et Commandes</div>
+    <h3 data-i18n-html="fp.1.title">Tout ce qui est <em>inclus.</em></h3>
+    <div class="fp-feat-list">
+      <div class="fp-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span data-i18n="fp.1.f1">Tout ce qui est inclus dans Menu QR Code — menu digital, admin, thèmes et couleurs</span></div>
+      <div class="fp-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span data-i18n="fp.1.f2">🔴 Appel serveur depuis la table — bouton dédié, notification push instantanée</span></div>
+      <div class="fp-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span data-i18n="fp.1.f3">🟢 Commandes à table depuis le menu — panier, validation, suivi en temps réel</span></div>
+      <div class="fp-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span data-i18n="fp.1.f4">Application serveur Android — gestion des commandes et appels avec notifications</span></div>
+      <div class="fp-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span data-i18n="fp.1.f5">QR code individuel par table — chaque table a son propre QR code unique</span></div>
+      <div class="fp-feat-item"><div class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div><span data-i18n="fp.1.f6">Statistiques commandes et appels — suivez l'activité de votre établissement</span></div>
+    </div>
+    <div class="fp-pricing">
+      <div class="fp-row-main">
+        <div class="fp-price-num">299€</div>
+        <div class="fp-price-right">
+          <span class="fp-price-label" data-i18n="fp.creation.label">Création</span>
+          <span class="fp-price-sub" data-i18n="fp.creation.sub">2 mois d'utilisation offerts — prêt en 24h maximum</span>
+        </div>
+      </div>
+      <div class="fp-row-month">
+        <div class="fp-price-month">99€<small style="font-size:.65em;color:var(--mute);font-family:var(--sans)">/mois</small></div>
+        <span class="fp-price-sub" data-i18n="fp.monthly.sub">à partir du 3ème mois · sans engagement</span>
+      </div>
+      <div class="fp-row-bonus">
+        <span class="fp-bonus-label" data-i18n="fp.annual.label">Paiement annuel (à la création)</span>
+        <span class="fp-bonus-desc" data-i18n="fp.annual.desc">+1 mois offert supplémentaire · soit 3 mois offerts au total</span>
+      </div>
+      <div class="fp-row-bonus">
+        <span class="fp-bonus-label" data-i18n="fp.renewal.label">Renouvellement annuel</span>
+        <span class="fp-bonus-desc" data-i18n="fp.renewal.desc">Payez 10 mois, profitez de 12 mois</span>
+        <span style="font-size:.74rem;color:var(--mute);margin-top:.1rem">990€ au lieu de 1188€/an</span>
+      </div>
+    </div>
+    <div class="fp-bottom">
+      <div class="fp-promise"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span data-i18n="fp.test.desc">4 jours de test offerts avant tout paiement</span></div>
+      <div class="fp-promise"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg><span data-i18n="fp.payment.desc">Virement bancaire (mentionner votre ID dans les détails) · ou en espèces</span></div>
+    </div>
+    <button class="btn fo-card-btn-cmd fp-cta" onclick="closePopup('pop-forfait-1');openCommanderPopup(1)" data-i18n="fo.card.cmd">Commander</button>
+  </div>
+</div>
 
 <!-- Popup Thèmes (contenu dynamique) -->
 <div class="popup" id="pop-themes-tier" onclick="popupOutside(event,'pop-themes-tier')">
@@ -2892,7 +5380,7 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
   // ── Translations ──────────────────────────────────────
   var T={
     fr:{
-      'brand':'Menu QR Code','page.title':'Menu QR Code — Une nouvelle ère du menu digital','nav.advantages':'Avantages','nav.pricing':'Tarifs','nav.contact':'Contact','nav.start':'Démarrer',
+      'brand':'Menu QR Code','page.title':'Menu QR Code — Une nouvelle ère du menu digital','fo.card0.name':'Menu QR Code','fo.card0.subtitle':'Menu digital accessible par QR code — sans application à télécharger','fo.card0.f1':'Menu QR multilingue accessible depuis smartphone ou tablette','fo.card0.f2':'Administration complète — modifiez menu, prix et photos en temps réel','fo.card0.f3':'Thèmes, couleurs et styles personnalisables','fo.card1.name':'Menu et Commandes','fo.card1.badge':'Le plus complet','fo.card1.subtitle':'Menu QR Code + commandes à table et appel serveur','fo.card1.f1':'Tout ce qui est inclus dans Menu QR Code','fo.card1.f2':'🔴 Appel serveur + 🟢 commandes à table en temps réel','fo.card1.f3':'Application serveur Android avec notifications push','fo.card.months2':'2 mois offerts','fo.card.then':'puis','fo.card.from3':'à partir du 3ème mois','fo.card.details':'Voir les détails','fo.card.cmd':'Commander','fp.creation.label':'Création','fp.creation.sub':'2 mois d'utilisation offerts — prêt en 24h maximum','fp.monthly.sub':'à partir du 3ème mois · sans engagement','fp.annual.label':'Paiement annuel (à la création)','fp.annual.desc':'+1 mois offert supplémentaire · soit 3 mois offerts au total','fp.renewal.label':'Renouvellement annuel','fp.renewal.desc':'Payez 10 mois, profitez de 12 mois','fp.test.desc':'4 jours de test offerts avant tout paiement','fp.payment.desc':'Virement bancaire (mentionner votre ID dans les détails) · ou en espèces','fp.0.title':'Tout ce qui est <em>inclus.</em>','fp.0.f1':'Menu QR digital accessible depuis smartphone, tablette ou ordinateur — sans application à télécharger','fp.0.f2':"3 styles d'affichage — Carte classique, Livre et Dynamique",'fp.0.f3':"10 thèmes par style · 15+ couleurs par thème — changez l'ambiance en un clic",'fp.0.f4':'Administration complète — modifiez votre menu, vos prix et vos photos en temps réel','fp.0.f5':"QR code général pour l'ensemble du restaurant · multilingue avec détection automatique",'fp.0.f6':'Hébergement, mise en ligne et maintenance inclus — clé en main','fp.1.title':'Tout ce qui est <em>inclus.</em>','fp.1.f1':'Tout ce qui est inclus dans Menu QR Code — menu digital, admin, thèmes et couleurs','fp.1.f2':'🔴 Appel serveur depuis la table — bouton dédié, notification push instantanée','fp.1.f3':'🟢 Commandes à table depuis le menu — panier, validation, suivi en temps réel','fp.1.f4':'Application serveur Android — gestion des commandes et appels avec notifications','fp.1.f5':'QR code individuel par table — chaque table a son propre QR code unique','fp.1.f6':"Statistiques commandes et appels — suivez l'activité de votre établissement",'nav.advantages':'Avantages','nav.pricing':'Tarifs','nav.contact':'Contact','nav.start':'Démarrer',
       'hero.eyebrow':'Système restaurant complet — menu QR, commandes à table et appel serveur',
       'hero.title.1':'Les clients scannent un QR,','hero.title.2':'commandent, ou appellent','hero.title.3':'<em>le serveur — en un tap.</em>',
       'hero.lead':'Les clients scannent un QR code pour accéder au menu et peuvent ensuite commander leurs plats ou appeler un serveur à tout moment depuis leur téléphone.',
@@ -2906,8 +5394,8 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
       'av.c3.h3':'Accessible partout,<br><em>idéal pour les touristes.</em>','av.c3.p':'Disponible en plusieurs langues, le menu facilite l\'accueil des touristes et valorise l\'image moderne de votre établissement. Accessible 24h/24 et facile à partager sur les réseaux sociaux.','av.c3.t1':'Multilingue','av.c3.t2':'24h/24',
       'av.c4.h3':'Gestion instantanée<br><em>et personnalisation.</em>','av.c4.p':'Modifiez immédiatement vos prix, produits ou promotions depuis une page d\'administration simple et intuitive. Ajoutez facilement des photos et adaptez votre menu selon les saisons ou événements.','av.c4.t1':'Admin simple','av.c4.t2':'Temps réel','av.c4.opt':'Optionnel',
       'av.c5.h3':'Commander ou appeler<br><em>le serveur, en un tap.</em>','av.c5.p':'Depuis leur table, les clients peuvent commander leurs plats 🟢 ou appeler le serveur 🔴 — deux boutons distincts, clairs et intuitifs. Chaque action arrive instantanément sur l\'application du personnel.','av.c5.t1':'🟢 Commander','av.c5.t2':'🔴 Appeler le serveur',
-      'fo.h2':'Deux forfaits,<br><em>clé en main.</em>','fo.lead':'Choisissez le forfait qui correspond à votre service. Installation complète, sans engagement à long terme.',
-      'fo.style.pages':'Menu QR','fo.style.dynamic':'Commandes &amp; Services',
+      'fo.h2':'Deux forfaits,<br><em>clé en main.</em>','fo.lead':'Choisissez le forfait adapté à votre service. Prêt en 24h · 4 jours de test gratuits · paiement après test.',
+      'fo.style.pages':'Menu QR Code','fo.style.dynamic':'Menu et Commandes',
       'fo.p0.feat.h3':'Menu QR','fo.p0.feat.desc':'Un menu digital élégant accessible par QR code. Vos clients consultent votre carte depuis leur téléphone — sans rien télécharger.',
       'fo.p0.f1':'Menu QR digital accessible depuis smartphone, tablette ou ordinateur — sans application à télécharger',
       'fo.p0.f2':'3 styles d\'affichage — Carte classique, Livre et Dynamique',
@@ -2928,8 +5416,8 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
       'fo.opt1.name':'Option Sonnette','fo.opt1.desc':'Vos clients appellent le serveur en un tap depuis leur table. Notification push instantanée reçue sur votre téléphone ou tablette — sans application à installer côté client.',
       'fo.opt2.name':'Option Commande','fo.opt2.desc':'Vos clients passent leur commande directement depuis le menu QR code. Suivi live de la préparation affiché côté client, historique et gestion des commandes côté établissement.',
       'co.eyebrow':'Nous contacter','co.h2':'Parlons de<br>votre <em>projet.</em>','co.lead':'Une question, un devis, une démo personnalisée — nous répondons sous 24h, dans la langue qui vous convient. Choisissez le canal qui vous arrange.',
-      'co.info1':'Réponse sous 24h','co.info2':'Viber & WhatsApp · toutes langues','co.info3':'Téléphone · français ou anglais',
-      'co.ph.label':'Appeler','co.ph.sub':'+30 694 399 5696 · français ou anglais',
+      'co.info1':'Réponse sous 24h','co.info2':'Viber & WhatsApp · toutes langues',
+      
       'co.wa.label':'WhatsApp','co.wa.sub':'+30 694 399 5696 · toutes langues',
       'co.vb.label':'Viber','co.vb.sub':'+30 694 399 5696 · toutes langues',
       'foot.copy':'© 2026 · Conçu avec exigence','foot.home':'Accueil','foot.pricing':'Tarifs','foot.contact':'Contact',
@@ -2974,7 +5462,7 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
       'dv.submit':'Envoyer ma demande'
     },
     en:{
-      'brand':'Menu QR Code','page.title':'Menu QR Code — A new era of digital menus','nav.advantages':'Benefits','nav.pricing':'Pricing','nav.contact':'Contact','nav.start':'Contact',
+      'brand':'Menu QR Code','page.title':'Menu QR Code — A new era of digital menus','fo.card0.name':'Menu QR Code','fo.card0.subtitle':'Digital menu accessible via QR code — no app to download','fo.card0.f1':'Multilingual QR menu on smartphone or tablet','fo.card0.f2':'Full admin — update menu, prices and photos in real time','fo.card0.f3':'Customizable themes, colors and styles','fo.card1.name':'Menu &amp; Orders','fo.card1.badge':'Most complete','fo.card1.subtitle':'Menu QR Code + table orders and waiter call','fo.card1.f1':'Everything included in Menu QR Code','fo.card1.f2':'🔴 Waiter call + 🟢 table orders in real time','fo.card1.f3':'Android server app with push notifications','fo.card.months2':'2 months free','fo.card.then':'then','fo.card.from3':'from month 3','fo.card.details':'View details','fo.card.cmd':'Order now','fp.creation.label':'Setup','fp.creation.sub':'2 months of use included free — your menu is ready within 24h','fp.monthly.sub':'from month 3 · no commitment','fp.annual.label':'Annual payment (at creation)','fp.annual.desc':'+1 extra free month · 3 free months in total','fp.renewal.label':'Annual renewal','fp.renewal.desc':'Pay 10 months, enjoy 12 months','fp.test.desc':'4 free test days before any payment','fp.payment.desc':'Bank transfer (mention your ID in the details) · or cash','fp.0.title':'Everything <em>included.</em>','fp.0.f1':'QR digital menu on smartphone, tablet or computer — no app to download','fp.0.f2':'3 display styles — Classic card, Book and Dynamic','fp.0.f3':'10 themes per style · 15+ colors — change the atmosphere in one click','fp.0.f4':'Full admin — update your menu, prices and photos in real time','fp.0.f5':'General QR code for the entire restaurant · multilingual with automatic detection','fp.0.f6':'Hosting, deployment and maintenance included — turnkey','fp.1.title':'Everything <em>included.</em>','fp.1.f1':'Everything included in Menu QR Code — digital menu, admin, themes','fp.1.f2':'🔴 Waiter call from the table — dedicated button, instant push notification','fp.1.f3':'🟢 Table orders from the menu — cart, checkout, live tracking','fp.1.f4':'Android server app — manage orders and calls with notifications','fp.1.f5':'Individual QR code per table — each table has its own unique QR code','fp.1.f6':"Order and call statistics — track your establishment's activity",'nav.advantages':'Benefits','nav.pricing':'Pricing','nav.contact':'Contact','nav.start':'Contact',
       'hero.eyebrow':'Complete restaurant system — QR menu, table orders and waiter call',
       'hero.title.1':'Customers scan a QR code,','hero.title.2':'order their food,','hero.title.3':'<em>or call the waiter — in one tap.</em>',
       'hero.lead':'Customers scan a QR code to access the menu and can then order their food or call a waiter at any time from their phone.',
@@ -2988,8 +5476,8 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
       'av.c3.h3':'Accessible anywhere,<br><em>ideal for tourists.</em>','av.c3.p':'Available in multiple languages, the menu makes it easier to welcome tourists and enhances the modern image of your establishment. Accessible 24/7 and easy to share on social media.','av.c3.t1':'Multilingual','av.c3.t2':'24/7',
       'av.c4.h3':'Instant management<br><em>&amp; personalisation.</em>','av.c4.p':'Immediately update your prices, products or promotions from a simple and intuitive admin page. Easily add photos and adapt your menu by season or event.','av.c4.t1':'Simple admin','av.c4.t2':'Real-time','av.c4.opt':'Optional',
       'av.c5.h3':'Order food or call<br><em>the waiter, in one tap.</em>','av.c5.p':'From their table, customers can order food 🟢 or call the waiter 🔴 — two distinct, clear and intuitive buttons. Each action reaches the staff app instantly.','av.c5.t1':'🟢 Order food','av.c5.t2':'🔴 Call waiter',
-      'fo.h2':'Two plans,<br><em>turnkey.</em>','fo.lead':'Choose the plan that matches your service. Full setup included, no long-term commitment.',
-      'fo.style.pages':'QR Menu','fo.style.dynamic':'Orders &amp; Service',
+      'fo.h2':'Two plans,<br><em>turnkey.</em>','fo.lead':'Choose the plan that suits your service. Ready in 24h · 4-day free trial · pay after testing.',
+      'fo.style.pages':'Menu QR Code','fo.style.dynamic':'Menu &amp; Orders',
       'fo.p0.feat.h3':'Pages Style','fo.p0.feat.desc':'An elegant, clear and printable menu. Ideal for establishments that want a polished digital presence without complexity.',
       'fo.p0.f1':'QR code menu accessible on smartphone, tablet or computer — no app to download',
       'fo.p0.f2':'Page-by-page navigation like a restaurant card — clear and elegant presentation',
@@ -3015,8 +5503,7 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
       'fo.opt1.name':'Bell Option','fo.opt1.desc':'Customers call the waiter with a single tap from their table. Instant push notification on your phone or tablet — no app needed on the customer side.',
       'fo.opt2.name':'Order Option','fo.opt2.desc':'Customers place their order directly from the QR code menu. Live preparation tracking shown to the customer, full order history and management on the venue side.',
       'co.eyebrow':'Contact us','co.h2':'Let\'s talk about<br>your <em>project.</em>','co.lead':'A question, a quote, a personalized demo — we respond within 24h, in the language that suits you. Choose the channel that works for you.',
-      'co.info1':'Response within 24h','co.info2':'Viber & WhatsApp · all languages','co.info3':'Phone · French or English only',
-      'co.ph.label':'Call','co.ph.sub':'+30 694 399 5696 · French or English',
+      'co.info1':'Response within 24h','co.info2':'Viber & WhatsApp · all languages',
       'co.wa.label':'WhatsApp','co.wa.sub':'+30 694 399 5696 · all languages',
       'co.vb.label':'Viber','co.vb.sub':'+30 694 399 5696 · all languages',
       'foot.copy':'© 2026 · Crafted with precision','foot.home':'Home','foot.pricing':'Pricing','foot.contact':'Contact',
@@ -3061,7 +5548,7 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
       'dv.submit':'Send my request'
     },
     el:{
-      'brand':'Menu QR Code','page.title':'Menu QR Code — Μια νέα εποχή ψηφιακών μενού','nav.advantages':'Πλεονεκτήματα','nav.pricing':'Τιμές','nav.contact':'Επικοινωνία','nav.start':'Επικοινωνία',
+      'brand':'Menu QR Code','page.title':'Menu QR Code — Μια νέα εποχή ψηφιακών μενού','fo.card0.name':'Menu QR Code','fo.card0.subtitle':'Ψηφιακό μενού προσβάσιμο μέσω QR code — χωρίς εφαρμογή','fo.card0.f1':'Πολύγλωσσο μενού QR σε smartphone ή tablet','fo.card0.f2':'Πλήρης διαχείριση — αλλάξτε τιμές και φωτογραφίες σε πραγματικό χρόνο','fo.card0.f3':'Θέματα, χρώματα και στυλ — εξατομικεύσιμα','fo.card1.name':'Μενού &amp; Παραγγελίες','fo.card1.badge':'Πιο ολοκληρωμένο','fo.card1.subtitle':'Menu QR Code + παραγγελίες τραπεζιού και κλήση σερβιτόρου','fo.card1.f1':'Όλα όσα περιλαμβάνει το Menu QR Code','fo.card1.f2':'🔴 Κλήση σερβιτόρου + 🟢 παραγγελίες τραπεζιού σε πραγματικό χρόνο','fo.card1.f3':'Android εφαρμογή σερβιτόρου με push ειδοποιήσεις','fo.card.months2':'2 μήνες δωρεάν','fo.card.then':'έπειτα','fo.card.from3':'από τον 3ο μήνα','fo.card.details':'Λεπτομέρειες','fo.card.cmd':'Παραγγείλτε','fp.creation.label':'Δημιουργία','fp.creation.sub':'2 μήνες χρήσης δωρεάν — έτοιμο σε 24 ώρες το αργότερο','fp.monthly.sub':'από τον 3ο μήνα · χωρίς δέσμευση','fp.annual.label':'Ετήσια πληρωμή (κατά τη δημιουργία)','fp.annual.desc':'+1 επιπλέον δωρεάν μήνας · σύνολο 3 δωρεάν μήνες','fp.renewal.label':'Ετήσια ανανέωση','fp.renewal.desc':'Πληρώνετε 10 μήνες, έχετε 12 μήνες','fp.test.desc':'4 ημέρες δωρεάν δοκιμή πριν οποιαδήποτε πληρωμή','fp.payment.desc':'Τραπεζικό έμβασμα (αναφέρετε το ID σας) · ή μετρητά','fp.0.title':'Όλα όσα <em>περιλαμβάνονται.</em>','fp.0.f1':'Ψηφιακό μενού QR σε smartphone, tablet ή υπολογιστή — χωρίς εφαρμογή','fp.0.f2':'3 στυλ εμφάνισης — Κλασική κάρτα, Βιβλίο και Δυναμικό','fp.0.f3':'10 θέματα ανά στυλ · 15+ χρώματα — αλλάξτε την ατμόσφαιρα με ένα κλικ','fp.0.f4':'Πλήρης διαχείριση — αλλάξτε μενού, τιμές και φωτογραφίες σε πραγματικό χρόνο','fp.0.f5':'Γενικός QR code για το εστιατόριο · πολύγλωσσο με αυτόματη ανίχνευση','fp.0.f6':'Φιλοξενία, δημοσίευση και συντήρηση — όλα συμπεριλαμβάνονται','fp.1.title':'Όλα όσα <em>περιλαμβάνονται.</em>','fp.1.f1':'Όλα όσα περιλαμβάνει το Menu QR Code — μενού, admin, θέματα','fp.1.f2':'🔴 Κλήση σερβιτόρου — αφιερωμένο κουμπί, άμεση push ειδοποίηση','fp.1.f3':'🟢 Παραγγελίες τραπεζιού — καλάθι, επιβεβαίωση, παρακολούθηση σε πραγματικό χρόνο','fp.1.f4':'Android εφαρμογή σερβιτόρου — διαχείριση παραγγελιών και κλήσεων','fp.1.f5':'Μεμονωμένος QR code ανά τραπέζι — κάθε τραπέζι έχει τον δικό του QR','fp.1.f6':'Στατιστικά παραγγελιών και κλήσεων — παρακολουθήστε την κίνηση','nav.advantages':'Πλεονεκτήματα','nav.pricing':'Τιμές','nav.contact':'Επικοινωνία','nav.start':'Επικοινωνία',
       'hero.eyebrow':'Δημιουργήστε ένα κομψό μενού προσβάσιμο άμεσα μέσω QR code',
       'hero.title.1':'Κομψότητα, Άνεση,','hero.title.2':'Ασφάλεια, Ταχύτητα,','hero.title.3':'<em>Αποδοτικότητα και Υγιεινή.</em>',
       'hero.lead':'Ο πελάτης σαρώνει τον κωδικό QR του τραπεζιού του και αποκτά άμεση πρόσβαση σε ένα κομψό μενού απευθείας στο τηλέφωνό του, χωρίς αναμονή και χωρίς επαφή με χάρτινα μενού που χρησιμοποιήθηκαν από άλλους πελάτες.',
@@ -3076,8 +5563,8 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
       'av.c4.h3':'Άμεση διαχείριση<br><em>και εξατομίκευση.</em>','av.c4.p':'Τροποποιήστε αμέσως τις τιμές, τα προϊόντα ή τις προσφορές σας από μια απλή σελίδα διαχείρισης. Προσθέστε εύκολα φωτογραφίες και προσαρμόστε το μενού ανάλογα με την εποχή ή τις εκδηλώσεις.','av.c4.t1':'Απλή διαχείριση','av.c4.t2':'Πραγματικός χρόνος','av.c4.opt':'Προαιρετικό',
       'av.c5.h3':'Έξυπνη παραγγελία,<br><em>προηγμένο σχέδιο.</em>','av.c5.p':'Οι πελάτες μπορούν να καλέσουν σερβιτόρο ή να παραγγείλουν απευθείας από το μενού QR Code. Ο ιδιοκτήτης μπορεί επίσης να αλλάξει άμεσα τα θέματα και το σχέδιο του μενού.','av.c5.t1':'Κλήση σερβιτόρου','av.c5.t2':'Ηλεκτρονική παραγγελία','av.c5.opt':'Προαιρετικό',
       'av.c6.h3':'Έτοιμο προς χρήση,<br><em>χωρίς ταλαιπωρία.</em>','av.c6.p':'Φιλοξενία, ανέβασμα, ενημερώσεις, υποστήριξη: όλα συμπεριλαμβάνονται. Εσείς φροντίζετε τους πελάτες, εμείς τα υπόλοιπα. Σε λειτουργία σε 1–2 εβδομάδες.','av.c6.t1':'Όλα συμπεριλαμβάνονται','av.c6.t2':'Αποκλειστική υποστήριξη',
-      'fo.h2':'Τέσσερα επίπεδα,<br><em>όλες οι επιλογές.</em>','fo.lead':'Επιλέξτε το πακέτο σας ανάλογα με το επιθυμητό στυλ — με ή χωρίς πρόσβαση admin — και προσθέστε τις επιλογές που ταιριάζουν στην υπηρεσία σας.',
-      'fo.style.pages':'Στυλ Pages','fo.style.dynamic':'Στυλ Dynamic','fo.style.options':'Επιλογές',
+      'fo.h2':'Δύο πλάνα,<br><em>έτοιμα για εσάς.</em>','fo.lead':'Επιλέξτε το πλάνο που ταιριάζει στην υπηρεσία σας. Έτοιμο σε 24ώρες · 4 ημέρες δωρεάν δοκιμή · πληρωμή μετά τη δοκιμή.',
+      'fo.style.pages':'Menu QR Code','fo.style.dynamic':'Μενού &amp; Παραγγελίες',
       'fo.p0.feat.h3':'Στυλ Pages','fo.p0.feat.desc':'Ένα κομψό μενού στυλ flipbook σελίδων. Ιδανικό για επιχειρήσεις που θέλουν ψηφιακή παρουσία χωρίς πολυπλοκότητα.',
       'fo.p0.f1':'Μενού QR code προσβάσιμο από smartphone, tablet ή υπολογιστή — χωρίς εφαρμογή',
       'fo.p0.f2':'Πλοήγηση ανά σελίδες στυλ κάρτας εστιατορίου — σαφής και κομψή παρουσίαση',
@@ -3103,8 +5590,7 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
       'fo.opt1.name':'Επιλογή Κουδουνιού','fo.opt1.desc':'Οι πελάτες καλούν τον σερβιτόρο με ένα tap από το τραπέζι τους. Άμεση push ειδοποίηση στο κινητό ή tablet σας — χωρίς εφαρμογή από την πλευρά του πελάτη.',
       'fo.opt2.name':'Επιλογή Παραγγελίας','fo.opt2.desc':'Οι πελάτες παραγγέλνουν απευθείας από το μενού QR code. Live παρακολούθηση παρασκευής για τον πελάτη, πλήρες ιστορικό και διαχείριση παραγγελιών για την επιχείρηση.',
       'co.eyebrow':'Επικοινωνία','co.h2':'Ας μιλήσουμε για<br>το <em>έργο σας.</em>','co.lead':'Μια ερώτηση, μια προσφορά, μια εξατομικευμένη επίδειξη — απαντάμε εντός 24 ωρών, στη γλώσσα που σας εξυπηρετεί.',
-      'co.info1':'Απάντηση εντός 24 ωρών','co.info2':'Viber & WhatsApp · όλες οι γλώσσες','co.info3':'Τηλέφωνο · Γαλλικά ή Αγγλικά',
-      'co.ph.label':'Κλήση','co.ph.sub':'+30 694 399 5696 · Γαλλικά ή Αγγλικά',
+      'co.info1':'Απάντηση εντός 24 ωρών','co.info2':'Viber & WhatsApp · όλες οι γλώσσες',
       'co.wa.label':'WhatsApp','co.wa.sub':'+30 694 399 5696 · όλες οι γλώσσες',
       'co.vb.label':'Viber','co.vb.sub':'+30 694 399 5696 · όλες οι γλώσσες',
       'foot.copy':'© 2026 · Σχεδιασμένο με επιμέλεια','foot.home':'Αρχική','foot.pricing':'Τιμές','foot.contact':'Επικοινωνία',
@@ -3149,7 +5635,7 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
       'dv.submit':'Αποστολή αιτήματος'
     },
     ar:{
-      'brand':'Menu QR Code','page.title':'Menu QR Code — عصر جديد من القوائم الرقمية','nav.advantages':'المميزات','nav.pricing':'الأسعار','nav.contact':'اتصل بنا','nav.start':'تواصل',
+      'brand':'Menu QR Code','page.title':'Menu QR Code — عصر جديد من القوائم الرقمية','fo.card0.name':'Menu QR Code','fo.card0.subtitle':'قائمة رقمية يمكن الوصول إليها عبر رمز QR — بدون تطبيق','fo.card0.f1':'قائمة QR متعددة اللغات على الهاتف أو الجهاز اللوحي','fo.card0.f2':'إدارة كاملة — حدّث القائمة والأسعار والصور في الوقت الفعلي','fo.card0.f3':'قوالب وألوان وأنماط قابلة للتخصيص','fo.card1.name':'القائمة والطلبات','fo.card1.badge':'الأكثر اكتمالاً','fo.card1.subtitle':'Menu QR Code + طلبات الطاولة واستدعاء النادل','fo.card1.f1':'كل ما هو مدرج في Menu QR Code','fo.card1.f2':'🔴 استدعاء النادل + 🟢 طلبات الطاولة في الوقت الفعلي','fo.card1.f3':'تطبيق خادم Android مع إشعارات فورية','fo.card.months2':'شهران مجاناً','fo.card.then':'ثم','fo.card.from3':'من الشهر الثالث','fo.card.details':'عرض التفاصيل','fo.card.cmd':'اطلب الآن','fp.creation.label':'الإنشاء','fp.creation.sub':'شهران من الاستخدام مجاناً — قائمتك جاهزة خلال 24 ساعة','fp.monthly.sub':'من الشهر الثالث · بدون التزام','fp.annual.label':'الدفع السنوي (عند الإنشاء)','fp.annual.desc':'+شهر مجاني إضافي · إجمالي 3 أشهر مجانية','fp.renewal.label':'التجديد السنوي','fp.renewal.desc':'ادفع 10 أشهر، استمتع بـ 12 شهراً','fp.test.desc':'4 أيام تجربة مجانية قبل أي دفع','fp.payment.desc':'تحويل بنكي (اذكر هويتك في التفاصيل) · أو نقداً','fp.0.title':'كل ما هو <em>مدرج.</em>','fp.0.f1':'قائمة QR رقمية على الهاتف أو الجهاز اللوحي أو الكمبيوتر — بدون تطبيق','fp.0.f2':'3 أنماط عرض — البطاقة الكلاسيكية، الكتاب والديناميكي','fp.0.f3':'10 قوالب لكل نمط · أكثر من 15 لوناً — غيّر الأجواء بنقرة واحدة','fp.0.f4':'إدارة كاملة — حدّث قائمتك وأسعارك وصورك في الوقت الفعلي','fp.0.f5':'رمز QR عام للمطعم بأكمله · متعدد اللغات مع الكشف التلقائي','fp.0.f6':'الاستضافة والنشر والصيانة مدرجة — تسليم مفتاح بيد','fp.1.title':'كل ما هو <em>مدرج.</em>','fp.1.f1':'كل ما هو مدرج في Menu QR Code — القائمة الرقمية والإدارة والقوالب','fp.1.f2':'🔴 استدعاء النادل من الطاولة — زر مخصص، إشعار فوري','fp.1.f3':'🟢 طلبات الطاولة من القائمة — سلة، تأكيد، تتبع في الوقت الفعلي','fp.1.f4':'تطبيق خادم Android — إدارة الطلبات والمكالمات مع الإشعارات','fp.1.f5':'رمز QR فردي لكل طاولة — لكل طاولة رمز QR فريد خاص بها','fp.1.f6':'إحصاءات الطلبات والمكالمات — تتبع نشاط مطعمك','nav.advantages':'المميزات','nav.pricing':'الأسعار','nav.contact':'اتصل بنا','nav.start':'تواصل',
       'hero.eyebrow':'أنشئ قائمة أنيقة يمكن الوصول إليها فوراً عبر رمز QR',
       'hero.title.1':'أناقة، راحة،','hero.title.2':'أمان، سرعة،','hero.title.3':'<em>كفاءة ونظافة.</em>',
       'hero.lead':'يمسح الزبون رمز QR الخاص بطاولته ويصل فوراً إلى قائمة أنيقة على هاتفه، دون انتظار ودون لمس قوائم ورقية تداولها زبائن آخرون.',
@@ -3163,8 +5649,8 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
       'av.c3.h3':'متاح في كل مكان،<br><em>مثالي للسياح.</em>','av.c3.p':'متاح بعدة لغات، يسهّل القائمة استقبال السياح ويعزز الصورة الحديثة لمؤسستك. متاح على مدار الساعة وسهل المشاركة على وسائل التواصل الاجتماعي.','av.c3.t1':'متعدد اللغات','av.c3.t2':'24 ساعة',
       'av.c4.h3':'إدارة فورية<br><em>وتخصيص شخصي.</em>','av.c4.p':'عدّل أسعارك ومنتجاتك أو عروضك فوراً من صفحة إدارة بسيطة وسهلة الاستخدام. أضف الصور بسهولة وكيّف قائمتك حسب المواسم أو الأحداث.','av.c4.t1':'إدارة بسيطة','av.c4.t2':'وقت فعلي','av.c4.opt':'اختياري',
       'av.c5.h3':'طلب ذكي،<br><em>تصميم متقدم.</em>','av.c5.p':'يمكن للعملاء استدعاء نادل أو الطلب مباشرة من قائمة QR Code. يمكن للمالك أيضاً تغيير السمات والتصميم فوراً حسب تفضيلاته.','av.c5.t1':'استدعاء النادل','av.c5.t2':'طلب إلكتروني','av.c5.opt':'اختياري',
-      'fo.h2':'أربعة مستويات،<br><em>جميع الخيارات.</em>','fo.lead':'اختر باقتك حسب الجو المطلوب — مع أو بدون لوحة تحكم المشرف — وأضف الخيارات المناسبة لخدمتك.',
-      'fo.style.pages':'أسلوب Pages','fo.style.dynamic':'أسلوب Dynamic','fo.style.options':'خيارات',
+      'fo.h2':'خطتان،<br><em>جاهزتان لك.</em>','fo.lead':'اختر الخطة المناسبة لخدمتك. جاهز خلال 24 ساعة · 4 أيام تجربة مجانية · الدفع بعد الاختبار.',
+      'fo.style.pages':'Menu QR Code','fo.style.dynamic':'القائمة والطلبات',
       'fo.p0.feat.h3':'أسلوب Pages','fo.p0.feat.desc':'قائمة أنيقة بأسلوب الكتيب ذي الصفحات. مثالية للمؤسسات التي تريد حضوراً رقمياً راقياً دون تعقيد.',
       'fo.p0.f1':'قائمة QR code متاحة على الهاتف الذكي والجهاز اللوحي والكمبيوتر — دون تحميل أي تطبيق',
       'fo.p0.f2':'تصفح بالصفحات بأسلوب قائمة المطعم — عرض أنيق وسهل القراءة',
@@ -3190,8 +5676,7 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
       'fo.opt1.name':'خيار الجرس','fo.opt1.desc':'يستدعي الزبائن النادل بنقرة واحدة من طاولتهم. إشعار فوري يصل إلى هاتفك أو جهازك اللوحي — دون الحاجة لأي تطبيق من جانب الزبون.',
       'fo.opt2.name':'خيار الطلب','fo.opt2.desc':'يُسجّل الزبائن طلباتهم مباشرة من قائمة QR code. متابعة مباشرة لحالة التحضير تظهر للزبون، وسجل كامل لإدارة الطلبات من جانب المؤسسة.',
       'co.eyebrow':'تواصل معنا','co.h2':'لنتحدث عن<br><em>مشروعك.</em>','co.lead':'سؤال، عرض سعر، عرض توضيحي مخصص — نرد خلال 24 ساعة، بالغة التي تناسبك.',
-      'co.info1':'رد خلال 24 ساعة','co.info2':'Viber وWhatsApp · جميع اللغات','co.info3':'الهاتف · بالفرنسية أو الإنجليزية فقط',
-      'co.ph.label':'اتصل','co.ph.sub':'+30 694 399 5696 · بالفرنسية أو الإنجليزية',
+      'co.info1':'رد خلال 24 ساعة','co.info2':'Viber وWhatsApp · جميع اللغات',
       'co.wa.label':'WhatsApp','co.wa.sub':'+30 694 399 5696 · جميع اللغات',
       'co.vb.label':'Viber','co.vb.sub':'+30 694 399 5696 · جميع اللغات',
       'foot.copy':'© 2026 · مصمم بعناية','foot.home':'الرئيسية','foot.pricing':'الأسعار','foot.contact':'تواصل',
@@ -3236,7 +5721,7 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
       'dv.submit':'إرسال طلبي'
     },
     de:{
-      'brand':'Menu QR Code','page.title':'Menu QR Code — Eine neue Ära digitaler Speisekarten','nav.advantages':'Vorteile','nav.pricing':'Preise','nav.contact':'Kontakt','nav.start':'Kontakt',
+      'brand':'Menu QR Code','page.title':'Menu QR Code — Eine neue Ära digitaler Speisekarten','fo.card0.name':'Menu QR Code','fo.card0.subtitle':'Digitale Speisekarte per QR-Code — keine App erforderlich','fo.card0.f1':'Mehrsprachige QR-Speisekarte auf Smartphone oder Tablet','fo.card0.f2':'Vollständige Verwaltung — Speisekarte, Preise und Fotos in Echtzeit aktualisieren','fo.card0.f3':'Anpassbare Themen, Farben und Stile','fo.card1.name':'Menü &amp; Bestellungen','fo.card1.badge':'Am vollständigsten','fo.card1.subtitle':'Menu QR Code + Tischbestellungen und Kellnerruf','fo.card1.f1':'Alles aus Menu QR Code enthalten','fo.card1.f2':'🔴 Kellnerruf + 🟢 Tischbestellungen in Echtzeit','fo.card1.f3':'Android-Server-App mit Push-Benachrichtigungen','fo.card.months2':'2 Monate gratis','fo.card.then':'dann','fo.card.from3':'ab dem 3. Monat','fo.card.details':'Details anzeigen','fo.card.cmd':'Jetzt bestellen','fp.creation.label':'Einrichtung','fp.creation.sub':'2 Monate Nutzung kostenlos — Ihre Speisekarte ist innerhalb von 24h bereit','fp.monthly.sub':'ab dem 3. Monat · ohne Bindung','fp.annual.label':'Jahreszahlung (bei Erstellung)','fp.annual.desc':'+1 zusätzlicher Gratismonat · insgesamt 3 Gratismonate','fp.renewal.label':'Jährliche Verlängerung','fp.renewal.desc':'10 Monate zahlen, 12 Monate genießen','fp.test.desc':'4 kostenlose Testtage vor jeder Zahlung','fp.payment.desc':'Überweisung (ID in den Details angeben) · oder bar','fp.0.title':'Alles <em>inklusive.</em>','fp.0.f1':'Digitale QR-Speisekarte auf Smartphone, Tablet oder Computer — keine App nötig','fp.0.f2':'3 Anzeigestile — Klassische Karte, Buch und Dynamisch','fp.0.f3':'10 Themen pro Stil · 15+ Farben — Atmosphäre per Klick ändern','fp.0.f4':'Vollständige Verwaltung — Speisekarte, Preise und Fotos in Echtzeit aktualisieren','fp.0.f5':'Allgemeiner QR-Code für das gesamte Restaurant · mehrsprachig mit automatischer Erkennung','fp.0.f6':'Hosting, Veröffentlichung und Wartung inklusive — schlüsselfertig','fp.1.title':'Alles <em>inklusive.</em>','fp.1.f1':'Alles aus Menu QR Code — digitale Speisekarte, Verwaltung, Themen','fp.1.f2':'🔴 Kellnerruf vom Tisch — dedizierter Knopf, sofortige Push-Benachrichtigung','fp.1.f3':'🟢 Tischbestellungen — Warenkorb, Bestätigung, Live-Verfolgung','fp.1.f4':'Android-Server-App — Bestellungen und Rufe mit Benachrichtigungen verwalten','fp.1.f5':'Individueller QR-Code pro Tisch — jeder Tisch hat seinen eigenen einzigartigen QR-Code','fp.1.f6':'Bestell- und Rufstatistiken — Aktivität Ihres Restaurants verfolgen','nav.advantages':'Vorteile','nav.pricing':'Preise','nav.contact':'Kontakt','nav.start':'Kontakt',
       'hero.eyebrow':'Erstellen Sie eine elegante, sofort per QR-Code zugängliche Speisekarte',
       'hero.title.1':'Eleganz, Komfort,','hero.title.2':'Sicherheit, Schnelligkeit,','hero.title.3':'<em>Effizienz und Hygiene.</em>',
       'hero.lead':'Der Gast scannt den QR-Code seines Tisches und ruft sofort eine elegante Speisekarte direkt auf seinem Handy ab – ohne Wartezeit und ohne Berührung von Papierspeisekarten anderer Gäste.',
@@ -3250,8 +5735,8 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
       'av.c3.h3':'Überall zugänglich,<br><em>ideal für Touristen.</em>','av.c3.p':'In mehreren Sprachen verfügbar erleichtert die Speisekarte den Empfang von Touristen und wertet das moderne Image Ihres Betriebs auf. Rund um die Uhr zugänglich und leicht in sozialen Medien teilbar.','av.c3.t1':'Mehrsprachig','av.c3.t2':'24/7',
       'av.c4.h3':'Sofortige Verwaltung<br><em>und Personalisierung.</em>','av.c4.p':'Aktualisieren Sie sofort Ihre Preise, Produkte oder Aktionen über eine einfache Admin-Seite. Fügen Sie leicht Fotos hinzu und passen Sie Ihre Speisekarte je nach Saison oder Veranstaltung an.','av.c4.t1':'Einfache Verwaltung','av.c4.t2':'Echtzeit','av.c4.opt':'Optional',
       'av.c5.h3':'Intelligente Bestellung,<br><em>fortschrittliches Design.</em>','av.c5.p':'Gäste können einen Kellner rufen oder direkt über die QR-Code-Speisekarte bestellen. Der Eigentümer kann auch sofort Themen und Design der Speisekarte nach seinen Wünschen ändern.','av.c5.t1':'Tischservice','av.c5.t2':'Online-Bestellung','av.c5.opt':'Optional',
-      'fo.h2':'Vier Stufen,<br><em>alle Optionen.</em>','fo.lead':'Wählen Sie Ihr Paket nach der gewünschten Atmosphäre — mit oder ohne Admin-Zugang — und fügen Sie die passenden Optionen hinzu.',
-      'fo.style.pages':'Pages-Stil','fo.style.dynamic':'Dynamischer Stil','fo.style.options':'Optionen',
+      'fo.h2':'Zwei Pläne,<br><em>schlüsselfertig.</em>','fo.lead':'Wählen Sie den Plan, der zu Ihrem Service passt. Fertig in 24h · 4 Tage kostenlos testen · Zahlung nach dem Test.',
+      'fo.style.pages':'Menu QR Code','fo.style.dynamic':'Menü &amp; Bestellungen',
       'fo.p0.feat.h3':'Pages-Stil','fo.p0.feat.desc':'Ein elegantes Flipbook-Menü im Seitenstil. Ideal für Betriebe, die eine gepflegte digitale Präsenz ohne Komplexität wünschen.',
       'fo.p0.f1':'QR-Code-Menü abrufbar auf Smartphone, Tablet oder Computer — keine App erforderlich',
       'fo.p0.f2':'Seitenweise Navigation wie eine Restaurantkarte — klare und elegante Darstellung',
@@ -3277,8 +5762,7 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
       'fo.opt1.name':'Klingel-Option','fo.opt1.desc':'Gäste rufen den Kellner mit einem einzigen Tap von ihrem Tisch. Sofortige Push-Benachrichtigung auf Ihrem Telefon oder Tablet — ohne App auf Gästeseite.',
       'fo.opt2.name':'Bestell-Option','fo.opt2.desc':'Gäste geben ihre Bestellung direkt über das QR-Code-Menü auf. Live-Verfolgung der Zubereitung für den Gast, vollständige Bestellhistorie und -verwaltung auf Betriebsseite.',
       'co.eyebrow':'Kontakt','co.h2':'Sprechen wir über<br>Ihr <em>Projekt.</em>','co.lead':'Eine Frage, ein Angebot, eine persönliche Demo — wir antworten innerhalb von 24h, in der Sprache, die Ihnen passt.',
-      'co.info1':'Antwort innerhalb 24h','co.info2':'Viber & WhatsApp · alle Sprachen','co.info3':'Telefon · Französisch oder Englisch',
-      'co.ph.label':'Anrufen','co.ph.sub':'+30 694 399 5696 · Französisch oder Englisch',
+      'co.info1':'Antwort innerhalb 24h','co.info2':'Viber & WhatsApp · alle Sprachen',
       'co.wa.label':'WhatsApp','co.wa.sub':'+30 694 399 5696 · alle Sprachen',
       'co.vb.label':'Viber','co.vb.sub':'+30 694 399 5696 · alle Sprachen',
       'foot.copy':'© 2026 · Mit Sorgfalt gestaltet','foot.home':'Startseite','foot.pricing':'Preise','foot.contact':'Kontakt',
