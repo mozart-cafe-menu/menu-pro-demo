@@ -4760,6 +4760,7 @@ html.light .pm-cta-btn.pm-cta-gold{color:#1a1208}
     var commande = {
       forfait:     _cmdForfait,
       paymentMode: _cmdPayMode,
+      price:       (_cmdPayMode === 'annual' ? PM_ANNUAL[_cmdForfait] : PM_MONTHLY[_cmdForfait]),
       restaurant: rest,
       langue:     lang,
       ts:         ts,
