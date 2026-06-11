@@ -3636,7 +3636,12 @@ html.light .pm-cta-btn.pm-cta-gold{color:#1a1208}
       var foHead=document.querySelector('#forfaits .fo-head');
       if(foHead){
         var foHeadTop=foHead.getBoundingClientRect().top+window.scrollY;
-        window.scrollTo({top:Math.round(foHeadTop-_navH()-14),behavior:'smooth'});
+        var navEl=document.getElementById('nav');
+        var hadScrolled=navEl&&navEl.classList.contains('scrolled');
+        if(navEl&&!hadScrolled)navEl.classList.add('scrolled');
+        var foNh=_navH();
+        if(navEl&&!hadScrolled)navEl.classList.remove('scrolled');
+        window.scrollTo({top:Math.round(foHeadTop-foNh-14),behavior:'smooth'});
         return;
       }
     }
