@@ -4389,6 +4389,7 @@ html.light .pm-cta-btn.pm-cta-gold{color:#1a1208}
       'demo.back':'Zurück','android.tag':'Wichtiger Hinweis','android.title':'Server-App — Nur Android','android.body':'Der Plan <strong>Menü &amp; Bestellungen</strong> enthält eine dedizierte App für Ihr Personal, mit der sie Bestellungen und Rufe Ihrer Gäste in Echtzeit empfangen können.<br><br><strong>⚠️ Diese App ist derzeit nur auf Android verfügbar.</strong> Ihr Personal benötigt ein Android-Telefon zur Nutzung.<br><br>Die <strong>iOS (iPhone)</strong>-Version ist in Entwicklung und wird bald verfügbar sein.','android.btn':'Verstanden — Weiter →','pm.h3':'Zahlungs<em>methode</em>','pm.lead':'Wählen Sie, wie Sie Ihr Abonnement bezahlen möchten.','pm.monthly':'Monatlich','pm.per.month':'/Monat','pm.monthly.desc':'Ohne Bindung · monatliche Abrechnung','pm.monthly.sub2':'1 Gratismonat bei Erstellung','pm.choose':'Diese Option wählen','pm.badge':'Bestes Angebot','pm.annual':'Jährlich','pm.per.year':'/Jahr','pm.annual.desc':'10 Monate zahlen · 12 genießen','pm.annual.sub':'Insgesamt 2 Gratismonate','cmd.h3':'Starten Sie Ihr <em>Projekt.</em>','cmd.lead':'Füllen Sie das Formular aus und wir kontaktieren Sie innerhalb von 24h für Ihre Installation.','cmd.f1.label':'Name des Cafés oder Restaurants','cmd.f2.label':'Kommunikationssprache','cmd.f3.label':'E-Mail','cmd.f4.label':'WhatsApp','cmd.f5.label':'Viber','cmd.optional':'(optional)','cmd.hint':'Mindestens eine Kontaktmethode erforderlich — E-Mail, WhatsApp oder Viber.','cmd.submit':'Anfrage senden →','cmd.sending':'⏳ Wird gesendet…','cmd.sent':'✓ Anfrage gesendet — wir kontaktieren Sie innerhalb von 24h!','cmd.err.name':'⚠ Bitte geben Sie den Namen Ihres Cafés oder Restaurants ein.','cmd.err.contact':'⚠ Bitte geben Sie mindestens eine Kontaktmethode an: E-Mail, WhatsApp oder Viber.','cmd.err.network':'⚠ Netzwerkfehler: ','themes.prefix':'Themen','themes.explore':'Entdecken Sie die Themen','pm.note':'Einrichtungsgebühren werden separat und einmalig berechnet.','marquee.1':'Tischbestellungen','marquee.2':'Kellnerruf','marquee.3':'Server-App','marquee.4':'Einfache Verwaltung','marquee.5':'Echtzeit','fp.saving.0':'490€ statt 588€/Jahr','fp.saving.1':'990€ statt 1188€/Jahr','cmd.restaurant.ph':'z.B. Café Mozart','cmd.email.ph':'ihre@email.de','dv.submit':'Anfrage senden'
     }
   };
+  window._mqrT = T; // expose T for cross-script access
 
   // ── Lang config ────────────────────────────────────────
   var LANG_META={
@@ -4662,7 +4663,7 @@ html.light .pm-cta-btn.pm-cta-gold{color:#1a1208}
   function _prepareCommanderForm(idx) {
     _cmdForfait = idx === 1 ? 'commandes-services' : 'menu-qr';
     var _fLang = localStorage.getItem('mqr_lang')||'fr';
-    var _fT = (typeof T!=='undefined'&&T[_fLang])||{};
+    var _fT = (window._mqrT&&window._mqrT[_fLang])||{};
     var label = idx===1?(_fT['fo.card1.name']||'Commandes & Services'):(_fT['fo.card0.name']||'Menu QR');
     document.getElementById('pop-cmd-eyebrow').textContent = label;
     // Reset form
@@ -4692,7 +4693,7 @@ html.light .pm-cta-btn.pm-cta-gold{color:#1a1208}
     var monthly   = PM_MONTHLY[forfait];
     var annual    = PM_ANNUAL[forfait];
     var _pmLang = localStorage.getItem('mqr_lang')||'fr';
-    var _pmT = (typeof T!=='undefined'&&T[_pmLang])||{};
+    var _pmT = (window._mqrT&&window._mqrT[_pmLang])||{};
     var eyebrow = idx===1?(_pmT['fo.card1.name']||'Commandes & Services'):(_pmT['fo.card0.name']||'Menu QR Code');
     document.getElementById('pop-pm-eyebrow').textContent = eyebrow;
     document.getElementById('pm-price-monthly').textContent = monthly + '€';
@@ -4755,7 +4756,7 @@ html.light .pm-cta-btn.pm-cta-gold{color:#1a1208}
 
     fb.className = 'cmd-feedback'; fb.textContent = '';
     var _sLang=localStorage.getItem('mqr_lang')||'fr';
-    var _sT=(typeof T!=='undefined'&&T[_sLang])||{};
+    var _sT=(window._mqrT&&window._mqrT[_sLang])||{};
 
     // Validation
     if (!rest) {
