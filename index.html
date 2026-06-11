@@ -1889,7 +1889,7 @@ html.light .fo-sel-btn:hover:not(.fo-sel-active){background:rgba(200,164,78,.1);
 
 /* ── Forfait slider wrapper ── */
 .fo-slider-wrap{
-  overflow:hidden;
+  overflow-x:clip;
   border-radius:22px;
   margin-top:1.5rem;
   /* Center card on wide screens */
@@ -4825,6 +4825,16 @@ html.light .pm-cta-btn.pm-cta-gold{color:#1a1208}
     document.querySelectorAll('.fo-sel-btn').forEach(function(b,i){
       b.classList.toggle('fo-sel-active',i===idx);
     });
+    var wrap=track.parentElement;
+    if(wrap){
+      setTimeout(function(){
+        var rect=wrap.getBoundingClientRect();
+        var gap=16;
+        if(rect.bottom>window.innerHeight-gap){
+          window.scrollBy({top:Math.round(rect.bottom-(window.innerHeight-gap)),behavior:'smooth'});
+        }
+      },680);
+    }
   };
 
   track.addEventListener('touchstart',function(e){_foX=e.touches[0].clientX;},{passive:true});
