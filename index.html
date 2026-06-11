@@ -2802,7 +2802,7 @@ html.light .pm-cta-btn.pm-cta-gold{color:#1a1208}
 <script>
 (function(){
   var t=localStorage.getItem('mqr_theme');
-  if(t!=='dark'&&t!=='light')t='light';
+  if(t!=='dark'&&t!=='light')t='dark';
   if(t==='light')document.documentElement.classList.add('light');
 })();
 </script>
@@ -4544,7 +4544,7 @@ html.light .pm-cta-btn.pm-cta-gold{color:#1a1208}
   }
 
   var stored=localStorage.getItem(THEME_KEY);
-  var theme=(stored==='dark'||stored==='light')?stored:'light';
+  var theme=(stored==='dark'||stored==='light')?stored:'dark';
   // Class already applied by early script in <head> — just sync icons
   _applyThemeUI(theme);
 
