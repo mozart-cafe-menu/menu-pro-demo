@@ -3632,6 +3632,14 @@ html.light .pm-cta-btn.pm-cta-gold{color:#1a1208}
         return;
       }
     }
+    if(id==='forfaits'){
+      var foHead=document.querySelector('#forfaits .fo-head');
+      if(foHead){
+        var foHeadTop=foHead.getBoundingClientRect().top+window.scrollY;
+        window.scrollTo({top:Math.round(foHeadTop-_navH()-14),behavior:'smooth'});
+        return;
+      }
+    }
     window.scrollTo({top:Math.round(docTop-_navH()),behavior:'smooth'});
   };
 
