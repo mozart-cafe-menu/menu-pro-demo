@@ -37,7 +37,7 @@ module.exports = async (req, res) => {
   if (req.method !== 'POST')    { res.status(405).json({ error: 'Method not allowed' }); return; }
 
   try {
-    const { restaurant, forfait, paymentMode, langue } = req.body || {};
+    const { restaurant, forfait, paymentMode, langue, email } = req.body || {};
     if (!restaurant) { res.status(400).json({ error: 'Missing restaurant' }); return; }
 
     const rest     = String(restaurant).slice(0, 60);
