@@ -11,6 +11,10 @@
 const nodemailer = require('nodemailer');
 const https      = require('https');
 
+function escHtml(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
 const CONTROL_DB   = 'https://menu-pro-control-default-rtdb.europe-west1.firebasedatabase.app';
 const MAIN_DB      = 'https://menu-saas-platform-default-rtdb.europe-west1.firebasedatabase.app';
 const ADMIN_URL    = 'https://menu-saas-platform.vercel.app/admin.html';
@@ -97,12 +101,12 @@ function _footerHtml(text) {
 function _credentialsCard(labelId, rid, labelPwd, pwd) {
   return '<div style="background:#fdf9f0;border:1px solid #e8d8a0;border-radius:10px;padding:20px 24px;margin-bottom:20px">'
     + '<div style="margin-bottom:12px">'
-    + '<span style="font-size:0.75rem;color:#888;text-transform:uppercase;letter-spacing:0.08em">' + labelId + '</span><br>'
-    + '<code style="font-size:1.05rem;color:#1a1510;font-weight:600;background:#fff;padding:4px 10px;border-radius:6px;border:1px solid #e0d0a0">' + rid + '</code>'
+    + '<span style="font-size:0.75rem;color:#888;text-transform:uppercase;letter-spacing:0.08em">' + escHtml(labelId) + '</span><br>'
+    + '<code style="font-size:1.05rem;color:#1a1510;font-weight:600;background:#fff;padding:4px 10px;border-radius:6px;border:1px solid #e0d0a0">' + escHtml(rid) + '</code>'
     + '</div>'
     + '<div>'
-    + '<span style="font-size:0.75rem;color:#888;text-transform:uppercase;letter-spacing:0.08em">' + labelPwd + '</span><br>'
-    + '<code style="font-size:1.05rem;color:#1a1510;font-weight:600;background:#fff;padding:4px 10px;border-radius:6px;border:1px solid #e0d0a0">' + pwd + '</code>'
+    + '<span style="font-size:0.75rem;color:#888;text-transform:uppercase;letter-spacing:0.08em">' + escHtml(labelPwd) + '</span><br>'
+    + '<code style="font-size:1.05rem;color:#1a1510;font-weight:600;background:#fff;padding:4px 10px;border-radius:6px;border:1px solid #e0d0a0">' + escHtml(pwd) + '</code>'
     + '</div>'
     + '</div>';
 }
@@ -112,7 +116,8 @@ function _btnHtml(url, label, color) {
     + label + '</a>';
 }
 
-function deliveryHtml(name, rid, pwd, isCS, lang) {
+function deliveryHtml(rawName, rid, pwd, isCS, lang) {
+  const name = escHtml(rawName || '');
   const T = {
     fr: {
       subtitle: 'Menus digitaux &amp; Commandes',
@@ -221,12 +226,13 @@ function deliveryHtml(name, rid, pwd, isCS, lang) {
 // TEMPLATES EMAIL RAPPEL PAIEMENT (5 langues)
 // ════════════════════════════════════════════════════════════════════════════
 
-function reminderHtml(name, amount, mode, dateStr, lang) {
+function reminderHtml(rawName, amount, mode, dateStr, lang) {
+  const name = escHtml(rawName || '');
   const T = {
     fr: {
       subtitle: 'Rappel paiement',
       greeting: 'Bonjour,',
-      intro: 'Votre abonnement GeNext pour <strong style="color:#1a1510">' + name + '</strong> arrive à échéance le <strong>' + dateStr + '</strong>.',
+      intro: 'Votre abonnement GeNext pour <strong style="color:#1a1510">' + name + '</strong> arrive à échéance le <strong>' + escHtml(dateStr) + '</strong>.',
       amountLabel: 'Montant dû',
       modeLabel: 'Fréquence',
       instructions: 'Pour maintenir votre accès sans interruption, effectuez votre règlement avant cette date.',
@@ -331,6 +337,12 @@ function reminderSubject(name, lang) {
 // ── Handler principal ────────────────────────────────────────────────────────
 module.exports = async (req, res) => {
   res.setHeader('Content-Type', 'application/json');
+
+  // Protection cron : Vercel auto-set CRON_SECRET en production
+  const cronSecret = process.env.CRON_SECRET;
+  if (cronSecret && req.headers.authorization !== `Bearer ${cronSecret}`) {
+    return res.status(401).json({ error: 'Unauthorized' });
+  }
 
   const secret = process.env.FIREBASE_CONTROL_SECRET;
   if (!secret)                    return res.status(500).json({ error: 'FIREBASE_CONTROL_SECRET missing' });
