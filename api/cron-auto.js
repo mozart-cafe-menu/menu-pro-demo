@@ -420,7 +420,7 @@ module.exports = async (req, res) => {
     for (const [key, d] of Object.entries(commandes)) {
       if (!d || typeof d !== 'object') continue;
       if (!d.nextReminderAt || d.suspendu) continue;
-      const rid = d.clientCree?.rid;
+      const rid = (d.emailData && d.emailData.rid) || d.clientCree?.rid;
       if (!rid) continue;
       const overdue = now - d.nextReminderAt;
       if (overdue > 3 * 24 * 60 * 60 * 1000) {
@@ -443,7 +443,7 @@ module.exports = async (req, res) => {
       if (!d || typeof d !== 'object') continue;
       if (d.nextReminderAt) continue;
       if (!d.firstOpenAt)   continue;
-      const rid5 = d.clientCree?.rid;
+      const rid5 = (d.emailData && d.emailData.rid) || d.clientCree?.rid;
       const nrt5 = d.firstOpenAt + 7 * 24 * 60 * 60 * 1000;
       try {
         await fbPatch(CONTROL_DB, '/commandes/' + key, secret, { nextReminderAt: nrt5 });
@@ -463,7 +463,7 @@ module.exports = async (req, res) => {
       if (!d || typeof d !== 'object') continue;
       if (!d.pendingForfaitChange || !d.nextReminderAt) continue;
       if (now < d.nextReminderAt - 24 * 60 * 60 * 1000) continue;
-      const ridBP = d.clientCree?.rid;
+      const ridBP = (d.emailData && d.emailData.rid) || d.clientCree?.rid;
       if (!ridBP) continue;
       const pfc   = d.pendingForfaitChange;
       const isCS  = pfc.forfait === 'commandes-services';
@@ -471,7 +471,7 @@ module.exports = async (req, res) => {
       try {
         await fbPatch(MAIN_DB, '/restaurants/' + ridBP + '/config/features', mainSecret, feats);
         await fbPatch(MAIN_DB, '/restaurants/' + ridBP + '/config/subscription', mainSecret, {
-          forfait: pfc.forfait, price: pfc.price, pendingChange: null
+          forfait: pfc.forfait, price: pfc.price, pendingChange: null, lastForfaitChange: now
         });
         await fbPatch(CONTROL_DB, '/commandes/' + key, secret, {
           forfait: pfc.forfait, price: pfc.price, pendingForfaitChange: null
