@@ -73,6 +73,8 @@ function fbRequest(db, path, method, secret, body) {
       res.on('end', () => { try { resolve(JSON.parse(data)); } catch(e) { resolve(null); } });
     });
     req.on('error', reject);
+    const timer = setTimeout(() => { req.destroy(); reject(new Error('firebase timeout')); }, 7000);
+    req.on('close', () => clearTimeout(timer));
     if (bodyStr) req.write(bodyStr);
     req.end();
   });
@@ -92,6 +94,8 @@ function httpsRequest(url, options, body) {
       res.on('end', () => { try { resolve({ status: res.statusCode, body: JSON.parse(data) }); } catch(e) { resolve({ status: res.statusCode, body: data }); } });
     });
     req.on('error', reject);
+    const timer = setTimeout(() => { req.destroy(); reject(new Error('timeout')); }, 6000);
+    req.on('close', () => clearTimeout(timer));
     if (body) req.write(body);
     req.end();
   });
@@ -241,6 +245,7 @@ async function autoCreateRestaurant(restaurant, forfaitType, paymentMode, email,
 module.exports = async (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   res.setHeader('Content-Type', 'application/json');
 
   if (req.method === 'OPTIONS') { res.status(200).end(); return; }

@@ -175,16 +175,14 @@ button{background:none;border:none;color:inherit;font:inherit;cursor:pointer}
   font-family:var(--serif);font-size:1.18rem;font-weight:400;
   font-variation-settings:"opsz" 144;letter-spacing:-.02em;
 }
-.logo-mark{
-  width:30px;height:30px;border-radius:50%;
-  background:radial-gradient(circle at 30% 30%,var(--gold-2),var(--gold-3));
-  position:relative;flex-shrink:0;
-  box-shadow:0 0 0 1px rgba(255,255,255,.06),inset 0 1px 0 rgba(255,255,255,.18);
+.logo-mark{display:none}
+.gnd-nav-logo{
+  width:32px;height:32px;border-radius:50%;object-fit:cover;
+  flex-shrink:0;mix-blend-mode:screen;display:block;
 }
-.logo-mark::after{
-  content:'';position:absolute;inset:7px;border-radius:50%;
-  background:radial-gradient(circle at 35% 35%,rgba(255,255,255,.5),transparent 60%);
-}
+.gnd-nav-logo-lt{display:none;}
+html.light .gnd-nav-logo-dk{display:none!important;}
+html.light .gnd-nav-logo-lt{display:block!important;mix-blend-mode:multiply;}
 .nav-mid{
   display:flex;gap:2.5rem;align-items:center;
 }
@@ -1303,7 +1301,7 @@ footer .right a:hover{color:var(--gold-2)}
   #nav{padding:1rem var(--pad-x)}
   #nav.scrolled{padding:.65rem var(--pad-x)}
   .logo{font-size:1.05rem;gap:.4rem}
-  .logo-mark{width:26px;height:26px}
+  .gnd-nav-logo{width:28px;height:28px;}
 
   .hero-grid{padding:max(5rem,8vh) var(--pad-x) max(1.5rem,3vh)}
   .hero-title{font-size:clamp(1.75rem,7.5vw,2.8rem)}
@@ -2810,7 +2808,8 @@ html.light .pm-cta-btn.pm-cta-gold{color:#1a1208}
   background-size:cover;background-position:center;
 }
 html.light #gn-demo-splash{background-image:url(assets/gn-bg-light.jpg);}
-.gnd-logo-img{width:72vw;max-width:340px;height:auto;display:block;will-change:transform,opacity,filter;}
+.gnd-logo-img{width:72vw;max-width:340px;height:auto;display:block;will-change:transform,opacity,filter;border-radius:50%;mix-blend-mode:screen;}
+html.light .gnd-logo-img{mix-blend-mode:multiply;}
 #gnd-logo-lt{display:none;}
 html.light #gnd-logo-dk{display:none!important;}
 html.light #gnd-logo-lt{display:block!important;}
@@ -2934,7 +2933,8 @@ html.light #gnd-logo-lt{display:block!important;}
 <!-- ─── NAV ─── -->
 <nav id="nav">
   <a href="#hero" class="logo">
-    <span class="logo-mark"></span>
+    <img src="assets/gn-logo-dark.jpg" class="gnd-nav-logo gnd-nav-logo-dk" alt="GeNext" draggable="false">
+    <img src="assets/gn-logo-light.jpg" class="gnd-nav-logo gnd-nav-logo-lt" alt="GeNext" draggable="false">
     <span data-i18n="brand">GeNext</span>
   </a>
   <div class="nav-mid">
