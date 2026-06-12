@@ -67,7 +67,7 @@ function buildForfaitEmail(lang, name, oldForfait, newForfait, isUpgrade, paymen
 
   const newLabel = isCS ? forfaitLabel.cs : forfaitLabel.mq;
   const modeLabel = paymentMode === 'annual' ? forfaitLabel.annual : forfaitLabel.monthly;
-  const price = isCS ? (paymentMode === 'annual' ? 199 : 19) : (paymentMode === 'annual' ? 99 : 9);
+  const price = isCS ? (paymentMode === 'annual' ? 990 : 99) : (paymentMode === 'annual' ? 490 : 49);
   const isRTL = lang === 'ar';
 
   const subjects = {
