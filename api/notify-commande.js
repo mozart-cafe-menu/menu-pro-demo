@@ -103,29 +103,29 @@ function httpsRequest(url, options, body) {
 const WAITING_TPL = {
   fr: {
     subject: r => '✅ Demande reçue — ' + r,
-    html:    (r, f, m) => _wHtml(r, f, m, { sub:'Menus digitaux &amp; Commandes', gr:'Bonjour,', p1:'Nous avons bien reçu votre demande pour', p2:'Forfait sélectionné :', box:'⏳ Votre espace est en cours de préparation.<br>Vous recevrez un <strong>email avec vos identifiants de connexion</strong> dans les 24 heures.', contact:'N\'hésitez pas à nous répondre à cet email si vous avez des questions.', ft:'Menu Pro · Menus digitaux pour cafés et restaurants' })
+    html:    (r, f, m) => _wHtml(r, f, m, { sub:'Menus digitaux &amp; Commandes', gr:'Bonjour,', p1:'Nous avons bien reçu votre demande pour', p2:'Forfait sélectionné :', box:'⏳ Votre espace est en cours de préparation.<br>Vous recevrez un <strong>email avec vos identifiants de connexion</strong> dans les 24 heures.', contact:'N\'hésitez pas à nous répondre à cet email si vous avez des questions.', ft:'GeNext · Menus digitaux pour cafés et restaurants' })
   },
   en: {
     subject: r => '✅ Request received — ' + r,
-    html:    (r, f, m) => _wHtml(r, f, m, { sub:'Digital menus &amp; Orders', gr:'Hello,', p1:'We have received your request for', p2:'Selected plan:', box:'⏳ Your space is being prepared.<br>You will receive an <strong>email with your login credentials</strong> within 24 hours.', contact:'Feel free to reply to this email if you have any questions.', ft:'Menu Pro · Digital menus for cafés and restaurants' })
+    html:    (r, f, m) => _wHtml(r, f, m, { sub:'Digital menus &amp; Orders', gr:'Hello,', p1:'We have received your request for', p2:'Selected plan:', box:'⏳ Your space is being prepared.<br>You will receive an <strong>email with your login credentials</strong> within 24 hours.', contact:'Feel free to reply to this email if you have any questions.', ft:'GeNext · Digital menus for cafés and restaurants' })
   },
   el: {
     subject: r => '✅ Αίτημα παραλήφθηκε — ' + r,
-    html:    (r, f, m) => _wHtml(r, f, m, { sub:'Ψηφιακά μενού &amp; Παραγγελίες', gr:'Γεια σας,', p1:'Λάβαμε το αίτημά σας για', p2:'Επιλεγμένο πλάνο:', box:'⏳ Ο χώρος σας προετοιμάζεται.<br>Θα λάβετε <strong>email με τα στοιχεία σύνδεσής σας</strong> εντός 24 ωρών.', contact:'Μη διστάσετε να απαντήσετε σε αυτό το email αν έχετε απορίες.', ft:'Menu Pro · Ψηφιακά μενού για καφέ και εστιατόρια' })
+    html:    (r, f, m) => _wHtml(r, f, m, { sub:'Ψηφιακά μενού &amp; Παραγγελίες', gr:'Γεια σας,', p1:'Λάβαμε το αίτημά σας για', p2:'Επιλεγμένο πλάνο:', box:'⏳ Ο χώρος σας προετοιμάζεται.<br>Θα λάβετε <strong>email με τα στοιχεία σύνδεσής σας</strong> εντός 24 ωρών.', contact:'Μη διστάσετε να απαντήσετε σε αυτό το email αν έχετε απορίες.', ft:'GeNext · Ψηφιακά μενού για καφέ και εστιατόρια' })
   },
   ar: {
     subject: r => '✅ تم استلام طلبك — ' + r,
-    html:    (r, f, m) => _wHtml(r, f, m, { sub:'قوائم رقمية وطلبات', gr:'مرحباً،', p1:'تلقينا طلبك بخصوص', p2:'الخطة المختارة:', box:'⏳ يتم تحضير مساحتك الآن.<br>ستتلقى <strong>بريداً إلكترونياً ببيانات الدخول</strong> خلال 24 ساعة.', contact:'لا تتردد في الرد على هذا البريد إذا كان لديك أي سؤال.', ft:'Menu Pro · قوائم رقمية للمقاهي والمطاعم', rtl:true })
+    html:    (r, f, m) => _wHtml(r, f, m, { sub:'قوائم رقمية وطلبات', gr:'مرحباً،', p1:'تلقينا طلبك بخصوص', p2:'الخطة المختارة:', box:'⏳ يتم تحضير مساحتك الآن.<br>ستتلقى <strong>بريداً إلكترونياً ببيانات الدخول</strong> خلال 24 ساعة.', contact:'لا تتردد في الرد على هذا البريد إذا كان لديك أي سؤال.', ft:'GeNext · قوائم رقمية للمقاهي والمطاعم', rtl:true })
   },
   de: {
     subject: r => '✅ Anfrage erhalten — ' + r,
-    html:    (r, f, m) => _wHtml(r, f, m, { sub:'Digitale Speisekarten &amp; Bestellungen', gr:'Hallo,', p1:'Wir haben Ihre Anfrage für', p2:'Gewählter Plan:', box:'⏳ Ihr Bereich wird vorbereitet.<br>Sie erhalten eine <strong>E-Mail mit Ihren Zugangsdaten</strong> innerhalb von 24 Stunden.', contact:'Antworten Sie auf diese E-Mail, wenn Sie Fragen haben.', ft:'Menu Pro · Digitale Speisekarten für Cafés und Restaurants' })
+    html:    (r, f, m) => _wHtml(r, f, m, { sub:'Digitale Speisekarten &amp; Bestellungen', gr:'Hallo,', p1:'Wir haben Ihre Anfrage für', p2:'Gewählter Plan:', box:'⏳ Ihr Bereich wird vorbereitet.<br>Sie erhalten eine <strong>E-Mail mit Ihren Zugangsdaten</strong> innerhalb von 24 Stunden.', contact:'Antworten Sie auf diese E-Mail, wenn Sie Fragen haben.', ft:'GeNext · Digitale Speisekarten für Cafés und Restaurants' })
   }
 };
 function _wHtml(r, f, m, t) {
   const dir = t.rtl ? ' dir="rtl"' : '';
   return '<div' + dir + ' style="font-family:\'Segoe UI\',Arial,sans-serif;max-width:560px;margin:0 auto;background:#fff;border-radius:12px;overflow:hidden;border:1px solid #e8e0d0">'
-    + '<div style="background:linear-gradient(135deg,#1a1510,#2a2018);padding:28px 32px;text-align:center"><div style="font-size:1.7rem;font-weight:700;color:#c8a44e;letter-spacing:0.06em;font-family:Georgia,serif">Menu Pro</div><div style="font-size:0.8rem;color:rgba(200,164,78,0.6);margin-top:4px;letter-spacing:0.1em;text-transform:uppercase">' + t.sub + '</div></div>'
+    + '<div style="background:linear-gradient(135deg,#1a1510,#2a2018);padding:28px 32px;text-align:center"><div style="font-size:1.7rem;font-weight:700;color:#c8a44e;letter-spacing:0.06em;font-family:Georgia,serif">GeNext</div><div style="font-size:0.8rem;color:rgba(200,164,78,0.6);margin-top:4px;letter-spacing:0.1em;text-transform:uppercase">' + t.sub + '</div></div>'
     + '<div style="padding:32px"><h2 style="margin:0 0 8px;font-size:1.25rem;color:#1a1510">' + t.gr + '</h2>'
     + '<p style="color:#444;line-height:1.7;margin-bottom:20px">' + t.p1 + ' <strong style="color:#1a1510">' + escHtml(r) + '</strong>.<br>' + t.p2 + ' <strong style="color:#c8a44e">' + escHtml(f) + '</strong> (' + escHtml(m) + ').</p>'
     + '<div style="background:#fdf9f0;border-left:3px solid #c8a44e;border-radius:0 8px 8px 0;padding:16px 20px;margin-bottom:24px"><p style="margin:0;color:#5a4a2a;font-size:0.92rem;line-height:1.6">' + t.box + '</p></div>'
@@ -145,23 +145,23 @@ const MODE_LABEL = {
 };
 
 function deliverySubject(name, lang) {
-  const S = { fr:'🎉 ' + name + ' est prêt ! Voici vos accès Menu Pro', en:'🎉 ' + name + ' is ready! Here are your Menu Pro credentials', el:'🎉 ' + name + ' είναι έτοιμος! Οι κωδικοί σας', ar:'🎉 ' + name + ' جاهز! إليك بيانات دخول Menu Pro', de:'🎉 ' + name + ' ist bereit! Ihre Menu Pro Zugangsdaten' };
+  const S = { fr:'🎉 ' + name + ' est prêt ! Voici vos accès GeNext', en:'🎉 ' + name + ' is ready! Here are your GeNext credentials', el:'🎉 ' + name + ' είναι έτοιμος! Οι κωδικοί σας', ar:'🎉 ' + name + ' جاهز! إليك بيانات دخول GeNext', de:'🎉 ' + name + ' ist bereit! Ihre GeNext Zugangsdaten' };
   return S[lang] || S.fr;
 }
 
 function deliveryHtml(name, rid, pwd, isCS, lang) {
   const safeName = escHtml(name);
   const T = {
-    fr: { sub:'Menus digitaux &amp; Commandes', gr:'Bonjour,', intro:'Votre espace <strong style="color:#1a1510">' + safeName + '</strong> est prêt !', sub2:'Connectez-vous à votre tableau de bord pour personnaliser votre menu.', lid:'Identifiant (ID restaurant)', lpwd:'Mot de passe', btn:'🔑 Accéder au tableau de bord', apkT:'Application serveur', apkS:'Téléchargez cette application pour que votre personnel puisse recevoir les commandes.', apkBtn:'📱 Télécharger l\'application serveur', trial:'⏱ Vous bénéficiez de <strong>7 jours d\'essai gratuit</strong> à partir de votre première connexion.', contact:'N\'hésitez pas à nous répondre si vous avez des questions.', ft:'Menu Pro · Menus digitaux pour cafés et restaurants' },
-    en: { sub:'Digital menus &amp; Orders', gr:'Hello,', intro:'Your space <strong style="color:#1a1510">' + safeName + '</strong> is ready!', sub2:'Log in to your dashboard to customize your menu.', lid:'Restaurant ID', lpwd:'Password', btn:'🔑 Access dashboard', apkT:'Server application', apkS:'Download this app so your staff can receive orders.', apkBtn:'📱 Download server app', trial:'⏱ You have a <strong>7-day free trial</strong> starting from your first login.', contact:'Feel free to reply if you have any questions.', ft:'Menu Pro · Digital menus for cafés and restaurants' },
-    el: { sub:'Ψηφιακά μενού &amp; Παραγγελίες', gr:'Γεια σας,', intro:'Ο χώρος σας <strong style="color:#1a1510">' + safeName + '</strong> είναι έτοιμος!', sub2:'Συνδεθείτε στον πίνακα ελέγχου για να προσαρμόσετε το μενού σας.', lid:'Αναγνωριστικό εστιατορίου', lpwd:'Κωδικός', btn:'🔑 Πρόσβαση στον πίνακα ελέγχου', apkT:'Εφαρμογή σερβιτόρων', apkS:'Κατεβάστε αυτή την εφαρμογή για να λαμβάνει παραγγελίες το προσωπικό σας.', apkBtn:'📱 Λήψη εφαρμογής', trial:'⏱ Έχετε <strong>7 ημέρες δωρεάν δοκιμή</strong> από την πρώτη σύνδεσή σας.', contact:'Μη διστάσετε να μας απαντήσετε αν έχετε ερωτήσεις.', ft:'Menu Pro · Ψηφιακά μενού για καφέ και εστιατόρια' },
-    ar: { sub:'قوائم رقمية وطلبات', gr:'مرحباً،', intro:'مساحتك <strong style="color:#1a1510">' + safeName + '</strong> جاهزة!', sub2:'سجّل الدخول إلى لوحة التحكم لتخصيص قائمتك.', lid:'معرّف المطعم', lpwd:'كلمة المرور', btn:'🔑 الوصول إلى لوحة التحكم', apkT:'تطبيق النادلين', apkS:'نزّل هذا التطبيق ليستقبل موظفوك الطلبات.', apkBtn:'📱 تنزيل التطبيق', trial:'⏱ لديك <strong>7 أيام تجريبية مجانية</strong> من أول تسجيل دخول.', contact:'لا تتردد في الرد على هذا البريد إذا كان لديك أي سؤال.', ft:'Menu Pro · قوائم رقمية للمقاهي والمطاعم', rtl:true },
-    de: { sub:'Digitale Speisekarten &amp; Bestellungen', gr:'Hallo,', intro:'Ihr Bereich <strong style="color:#1a1510">' + safeName + '</strong> ist bereit!', sub2:'Melden Sie sich in Ihrem Dashboard an, um Ihre Speisekarte anzupassen.', lid:'Restaurant-ID', lpwd:'Passwort', btn:'🔑 Dashboard aufrufen', apkT:'Server-App', apkS:'Lassen Sie Ihr Personal diese App herunterladen, um Bestellungen zu erhalten.', apkBtn:'📱 Server-App herunterladen', trial:'⏱ Sie haben eine <strong>7-tägige kostenlose Testphase</strong> ab Ihrer ersten Anmeldung.', contact:'Antworten Sie auf diese E-Mail, wenn Sie Fragen haben.', ft:'Menu Pro · Digitale Speisekarten für Cafés und Restaurants' }
+    fr: { sub:'Menus digitaux &amp; Commandes', gr:'Bonjour,', intro:'Votre espace <strong style="color:#1a1510">' + safeName + '</strong> est prêt !', sub2:'Connectez-vous à votre tableau de bord pour personnaliser votre menu.', lid:'Identifiant (ID restaurant)', lpwd:'Mot de passe', btn:'🔑 Accéder au tableau de bord', apkT:'Application serveur', apkS:'Téléchargez cette application pour que votre personnel puisse recevoir les commandes.', apkBtn:'📱 Télécharger l\'application serveur', trial:'⏱ Vous bénéficiez de <strong>7 jours d\'essai gratuit</strong> à partir de votre première connexion.', contact:'N\'hésitez pas à nous répondre si vous avez des questions.', ft:'GeNext · Menus digitaux pour cafés et restaurants' },
+    en: { sub:'Digital menus &amp; Orders', gr:'Hello,', intro:'Your space <strong style="color:#1a1510">' + safeName + '</strong> is ready!', sub2:'Log in to your dashboard to customize your menu.', lid:'Restaurant ID', lpwd:'Password', btn:'🔑 Access dashboard', apkT:'Server application', apkS:'Download this app so your staff can receive orders.', apkBtn:'📱 Download server app', trial:'⏱ You have a <strong>7-day free trial</strong> starting from your first login.', contact:'Feel free to reply if you have any questions.', ft:'GeNext · Digital menus for cafés and restaurants' },
+    el: { sub:'Ψηφιακά μενού &amp; Παραγγελίες', gr:'Γεια σας,', intro:'Ο χώρος σας <strong style="color:#1a1510">' + safeName + '</strong> είναι έτοιμος!', sub2:'Συνδεθείτε στον πίνακα ελέγχου για να προσαρμόσετε το μενού σας.', lid:'Αναγνωριστικό εστιατορίου', lpwd:'Κωδικός', btn:'🔑 Πρόσβαση στον πίνακα ελέγχου', apkT:'Εφαρμογή σερβιτόρων', apkS:'Κατεβάστε αυτή την εφαρμογή για να λαμβάνει παραγγελίες το προσωπικό σας.', apkBtn:'📱 Λήψη εφαρμογής', trial:'⏱ Έχετε <strong>7 ημέρες δωρεάν δοκιμή</strong> από την πρώτη σύνδεσή σας.', contact:'Μη διστάσετε να μας απαντήσετε αν έχετε ερωτήσεις.', ft:'GeNext · Ψηφιακά μενού για καφέ και εστιατόρια' },
+    ar: { sub:'قوائم رقمية وطلبات', gr:'مرحباً،', intro:'مساحتك <strong style="color:#1a1510">' + safeName + '</strong> جاهزة!', sub2:'سجّل الدخول إلى لوحة التحكم لتخصيص قائمتك.', lid:'معرّف المطعم', lpwd:'كلمة المرور', btn:'🔑 الوصول إلى لوحة التحكم', apkT:'تطبيق النادلين', apkS:'نزّل هذا التطبيق ليستقبل موظفوك الطلبات.', apkBtn:'📱 تنزيل التطبيق', trial:'⏱ لديك <strong>7 أيام تجريبية مجانية</strong> من أول تسجيل دخول.', contact:'لا تتردد في الرد على هذا البريد إذا كان لديك أي سؤال.', ft:'GeNext · قوائم رقمية للمقاهي والمطاعم', rtl:true },
+    de: { sub:'Digitale Speisekarten &amp; Bestellungen', gr:'Hallo,', intro:'Ihr Bereich <strong style="color:#1a1510">' + safeName + '</strong> ist bereit!', sub2:'Melden Sie sich in Ihrem Dashboard an, um Ihre Speisekarte anzupassen.', lid:'Restaurant-ID', lpwd:'Passwort', btn:'🔑 Dashboard aufrufen', apkT:'Server-App', apkS:'Lassen Sie Ihr Personal diese App herunterladen, um Bestellungen zu erhalten.', apkBtn:'📱 Server-App herunterladen', trial:'⏱ Sie haben eine <strong>7-tägige kostenlose Testphase</strong> ab Ihrer ersten Anmeldung.', contact:'Antworten Sie auf diese E-Mail, wenn Sie Fragen haben.', ft:'GeNext · Digitale Speisekarten für Cafés und Restaurants' }
   };
   const t = T[lang] || T.fr;
   const dir = t.rtl ? ' dir="rtl"' : '';
   return '<div' + dir + ' style="font-family:\'Segoe UI\',Arial,sans-serif;max-width:580px;margin:0 auto;background:#fff;border-radius:12px;overflow:hidden;border:1px solid #e8e0d0">'
-    + '<div style="background:linear-gradient(135deg,#1a1510,#2a2018);padding:28px 32px;text-align:center"><div style="font-size:1.7rem;font-weight:700;color:#c8a44e;letter-spacing:0.06em;font-family:Georgia,serif">Menu Pro</div><div style="font-size:0.8rem;color:rgba(200,164,78,0.6);margin-top:4px;letter-spacing:0.1em;text-transform:uppercase">' + t.sub + '</div></div>'
+    + '<div style="background:linear-gradient(135deg,#1a1510,#2a2018);padding:28px 32px;text-align:center"><div style="font-size:1.7rem;font-weight:700;color:#c8a44e;letter-spacing:0.06em;font-family:Georgia,serif">GeNext</div><div style="font-size:0.8rem;color:rgba(200,164,78,0.6);margin-top:4px;letter-spacing:0.1em;text-transform:uppercase">' + t.sub + '</div></div>'
     + '<div style="padding:32px">'
     + '<h2 style="margin:0 0 8px;font-size:1.25rem;color:#1a1510">' + t.gr + '</h2>'
     + '<p style="color:#444;line-height:1.7;margin-bottom:20px">' + t.intro + '<br>' + t.sub2 + '</p>'
@@ -275,10 +275,10 @@ module.exports = async (req, res) => {
         const modes     = MODE_LABEL[lang] || MODE_LABEL.fr;
         const modeLabel = paymentMode === 'annual' ? modes.annual : modes.monthly;
         await createTransport().sendMail({
-          from:    '"Menu Pro" <' + process.env.GMAIL_USER + '>',
+          from:    '"GeNext" <' + process.env.GMAIL_USER + '>',
           to:      email,
           subject: tpl.subject(rest),
-          html:    tpl.html(rest, plan.split(' — ')[0] || 'Menu Pro', modeLabel)
+          html:    tpl.html(rest, plan.split(' — ')[0] || 'GeNext', modeLabel)
         });
         console.log('✅ Email attente envoyé à:', email);
       } catch(e) {
@@ -298,7 +298,7 @@ module.exports = async (req, res) => {
     if (created && email && process.env.GMAIL_USER && process.env.GMAIL_PASS) {
       try {
         await createTransport().sendMail({
-          from:    '"Menu Pro" <' + process.env.GMAIL_USER + '>',
+          from:    '"GeNext" <' + process.env.GMAIL_USER + '>',
           to:      email,
           subject: deliverySubject(rest, lang),
           html:    deliveryHtml(rest, created.rid, created.pwd, created.isCS, lang)

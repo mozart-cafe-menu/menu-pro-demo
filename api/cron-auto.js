@@ -83,7 +83,7 @@ function fmtDate(ts, lang) {
 
 function _headerHtml(subtitle) {
   return '<div style="background:linear-gradient(135deg,#1a1510,#2a2018);padding:28px 32px;text-align:center">'
-    + '<div style="font-size:1.7rem;font-weight:700;color:#c8a44e;letter-spacing:0.06em;font-family:Georgia,serif">Menu Pro</div>'
+    + '<div style="font-size:1.7rem;font-weight:700;color:#c8a44e;letter-spacing:0.06em;font-family:Georgia,serif">GeNext</div>'
     + '<div style="font-size:0.8rem;color:rgba(200,164,78,0.6);margin-top:4px;letter-spacing:0.1em;text-transform:uppercase">' + subtitle + '</div>'
     + '</div>';
 }
@@ -127,7 +127,7 @@ function deliveryHtml(name, rid, pwd, isCS, lang) {
       btnApk: '📱 Télécharger l\'application serveur',
       trial: '⏱ Vous bénéficiez de <strong>7 jours d\'essai gratuit</strong> à partir de votre première connexion.',
       contact: 'N\'hésitez pas à nous répondre si vous avez des questions.',
-      footer: 'Menu Pro · Menus digitaux pour cafés et restaurants'
+      footer: 'GeNext · Menus digitaux pour cafés et restaurants'
     },
     en: {
       subtitle: 'Digital menus &amp; Orders',
@@ -142,7 +142,7 @@ function deliveryHtml(name, rid, pwd, isCS, lang) {
       btnApk: '📱 Download server app',
       trial: '⏱ You have a <strong>7-day free trial</strong> starting from your first login.',
       contact: 'Feel free to reply to this email if you have any questions.',
-      footer: 'Menu Pro · Digital menus for cafés and restaurants'
+      footer: 'GeNext · Digital menus for cafés and restaurants'
     },
     el: {
       subtitle: 'Ψηφιακά μενού &amp; Παραγγελίες',
@@ -157,7 +157,7 @@ function deliveryHtml(name, rid, pwd, isCS, lang) {
       btnApk: '📱 Λήψη εφαρμογής σερβιτόρων',
       trial: '⏱ Έχετε <strong>7 ημέρες δωρεάν δοκιμή</strong> από την πρώτη σύνδεσή σας.',
       contact: 'Μη διστάσετε να μας απαντήσετε αν έχετε ερωτήσεις.',
-      footer: 'Menu Pro · Ψηφιακά μενού για καφέ και εστιατόρια'
+      footer: 'GeNext · Ψηφιακά μενού για καφέ και εστιατόρια'
     },
     ar: {
       subtitle: 'قوائم رقمية وطلبات',
@@ -172,7 +172,7 @@ function deliveryHtml(name, rid, pwd, isCS, lang) {
       btnApk: '📱 تنزيل تطبيق النادلين',
       trial: '⏱ لديك <strong>7 أيام تجريبية مجانية</strong> من أول تسجيل دخول.',
       contact: 'لا تتردد في الرد على هذا البريد إذا كان لديك أي سؤال.',
-      footer: 'Menu Pro · قوائم رقمية للمقاهي والمطاعم'
+      footer: 'GeNext · قوائم رقمية للمقاهي والمطاعم'
     },
     de: {
       subtitle: 'Digitale Speisekarten &amp; Bestellungen',
@@ -187,7 +187,7 @@ function deliveryHtml(name, rid, pwd, isCS, lang) {
       btnApk: '📱 Server-App herunterladen',
       trial: '⏱ Sie haben eine <strong>7-tägige kostenlose Testphase</strong> ab Ihrer ersten Anmeldung.',
       contact: 'Antworten Sie auf diese E-Mail, wenn Sie Fragen haben.',
-      footer: 'Menu Pro · Digitale Speisekarten für Cafés und Restaurants'
+      footer: 'GeNext · Digitale Speisekarten für Cafés und Restaurants'
     }
   };
   const t = T[lang] || T.fr;
@@ -226,57 +226,57 @@ function reminderHtml(name, amount, mode, dateStr, lang) {
     fr: {
       subtitle: 'Rappel paiement',
       greeting: 'Bonjour,',
-      intro: 'Votre abonnement Menu Pro pour <strong style="color:#1a1510">' + name + '</strong> arrive à échéance le <strong>' + dateStr + '</strong>.',
+      intro: 'Votre abonnement GeNext pour <strong style="color:#1a1510">' + name + '</strong> arrive à échéance le <strong>' + dateStr + '</strong>.',
       amountLabel: 'Montant dû',
       modeLabel: 'Fréquence',
       instructions: 'Pour maintenir votre accès sans interruption, effectuez votre règlement avant cette date.',
       payMethods: 'Virement bancaire ou espèces — nous vous contacterons pour les coordonnées.',
       contact: 'N\'hésitez pas à nous répondre si vous avez des questions.',
-      footer: 'Menu Pro · Menus digitaux pour cafés et restaurants'
+      footer: 'GeNext · Menus digitaux pour cafés et restaurants'
     },
     en: {
       subtitle: 'Payment reminder',
       greeting: 'Hello,',
-      intro: 'Your Menu Pro subscription for <strong style="color:#1a1510">' + name + '</strong> expires on <strong>' + dateStr + '</strong>.',
+      intro: 'Your GeNext subscription for <strong style="color:#1a1510">' + name + '</strong> expires on <strong>' + dateStr + '</strong>.',
       amountLabel: 'Amount due',
       modeLabel: 'Frequency',
       instructions: 'To maintain uninterrupted access, please make your payment before this date.',
       payMethods: 'Bank transfer or cash — we will contact you with payment details.',
       contact: 'Feel free to reply if you have any questions.',
-      footer: 'Menu Pro · Digital menus for cafés and restaurants'
+      footer: 'GeNext · Digital menus for cafés and restaurants'
     },
     el: {
       subtitle: 'Υπενθύμιση πληρωμής',
       greeting: 'Γεια σας,',
-      intro: 'Η συνδρομή Menu Pro για <strong style="color:#1a1510">' + name + '</strong> λήγει στις <strong>' + dateStr + '</strong>.',
+      intro: 'Η συνδρομή GeNext για <strong style="color:#1a1510">' + name + '</strong> λήγει στις <strong>' + dateStr + '</strong>.',
       amountLabel: 'Οφειλόμενο ποσό',
       modeLabel: 'Συχνότητα',
       instructions: 'Για να διατηρήσετε αδιάλειπτη πρόσβαση, πραγματοποιήστε την πληρωμή σας πριν από αυτήν την ημερομηνία.',
       payMethods: 'Τραπεζικό έμβασμα ή μετρητά — θα επικοινωνήσουμε μαζί σας.',
       contact: 'Μη διστάσετε να μας απαντήσετε αν έχετε ερωτήσεις.',
-      footer: 'Menu Pro · Ψηφιακά μενού για καφέ και εστιατόρια'
+      footer: 'GeNext · Ψηφιακά μενού για καφέ και εστιατόρια'
     },
     ar: {
       subtitle: 'تذكير بالدفع',
       greeting: 'مرحباً،',
-      intro: 'اشتراكك في Menu Pro لـ <strong style="color:#1a1510">' + name + '</strong> ينتهي في <strong>' + dateStr + '</strong>.',
+      intro: 'اشتراكك في GeNext لـ <strong style="color:#1a1510">' + name + '</strong> ينتهي في <strong>' + dateStr + '</strong>.',
       amountLabel: 'المبلغ المستحق',
       modeLabel: 'الدورية',
       instructions: 'للحفاظ على وصولك دون انقطاع، يرجى إتمام الدفع قبل هذا التاريخ.',
       payMethods: 'تحويل بنكي أو نقداً — سنتواصل معك لتفاصيل الدفع.',
       contact: 'لا تتردد في الرد على هذا البريد إذا كان لديك أي سؤال.',
-      footer: 'Menu Pro · قوائم رقمية للمقاهي والمطاعم'
+      footer: 'GeNext · قوائم رقمية للمقاهي والمطاعم'
     },
     de: {
       subtitle: 'Zahlungserinnerung',
       greeting: 'Hallo,',
-      intro: 'Ihr Menu Pro Abonnement für <strong style="color:#1a1510">' + name + '</strong> läuft am <strong>' + dateStr + '</strong> ab.',
+      intro: 'Ihr GeNext Abonnement für <strong style="color:#1a1510">' + name + '</strong> läuft am <strong>' + dateStr + '</strong> ab.',
       amountLabel: 'Fälliger Betrag',
       modeLabel: 'Häufigkeit',
       instructions: 'Um Ihren Zugang ohne Unterbrechung zu erhalten, leisten Sie bitte Ihre Zahlung vor diesem Datum.',
       payMethods: 'Banküberweisung oder Bargeld — wir kontaktieren Sie mit den Zahlungsdaten.',
       contact: 'Antworten Sie auf diese E-Mail, wenn Sie Fragen haben.',
-      footer: 'Menu Pro · Digitale Speisekarten für Cafés und Restaurants'
+      footer: 'GeNext · Digitale Speisekarten für Cafés und Restaurants'
     }
   };
   const t = T[lang] || T.fr;
@@ -308,22 +308,22 @@ function reminderHtml(name, amount, mode, dateStr, lang) {
 
 function deliverySubject(name, lang) {
   const S = {
-    fr: '🎉 ' + name + ' est prêt ! Voici vos accès Menu Pro',
-    en: '🎉 ' + name + ' is ready! Here are your Menu Pro credentials',
+    fr: '🎉 ' + name + ' est prêt ! Voici vos accès GeNext',
+    en: '🎉 ' + name + ' is ready! Here are your GeNext credentials',
     el: '🎉 ' + name + ' είναι έτοιμος! Οι κωδικοί σας',
-    ar: '🎉 ' + name + ' جاهز! إليك بيانات دخول Menu Pro',
-    de: '🎉 ' + name + ' ist bereit! Ihre Menu Pro Zugangsdaten'
+    ar: '🎉 ' + name + ' جاهز! إليك بيانات دخول GeNext',
+    de: '🎉 ' + name + ' ist bereit! Ihre GeNext Zugangsdaten'
   };
   return S[lang] || S.fr;
 }
 
 function reminderSubject(name, lang) {
   const S = {
-    fr: '⏰ Rappel paiement Menu Pro — ' + name,
-    en: '⏰ Menu Pro payment reminder — ' + name,
-    el: '⏰ Υπενθύμιση πληρωμής Menu Pro — ' + name,
-    ar: '⏰ تذكير بالدفع Menu Pro — ' + name,
-    de: '⏰ Menu Pro Zahlungserinnerung — ' + name
+    fr: '⏰ Rappel paiement GeNext — ' + name,
+    en: '⏰ GeNext payment reminder — ' + name,
+    el: '⏰ Υπενθύμιση πληρωμής GeNext — ' + name,
+    ar: '⏰ تذكير بالدفع GeNext — ' + name,
+    de: '⏰ GeNext Zahlungserinnerung — ' + name
   };
   return S[lang] || S.fr;
 }
@@ -368,7 +368,7 @@ module.exports = async (req, res) => {
         const lang = (ed.lang && ['fr','en','el','ar','de'].includes(ed.lang)) ? ed.lang : 'fr';
         const isCS = ed.forfait === 'commandes-services';
         await transport.sendMail({
-          from:    '"Menu Pro" <' + process.env.GMAIL_USER + '>',
+          from:    '"GeNext" <' + process.env.GMAIL_USER + '>',
           to:      ed.email,
           subject: deliverySubject(ed.name || d.restaurant || '', lang),
           html:    deliveryHtml(ed.name || d.restaurant || '', ed.rid, ed.pwd, isCS, lang)
@@ -398,7 +398,7 @@ module.exports = async (req, res) => {
         const mode    = isAnn ? modes.annual : modes.monthly;
         const dateStr = fmtDate(d.nextReminderAt, lang);
         await transport.sendMail({
-          from:    '"Menu Pro" <' + process.env.GMAIL_USER + '>',
+          from:    '"GeNext" <' + process.env.GMAIL_USER + '>',
           to:      d.email,
           subject: reminderSubject(d.restaurant || '', lang),
           html:    reminderHtml(d.restaurant || '', price + ' €', mode, dateStr, lang)

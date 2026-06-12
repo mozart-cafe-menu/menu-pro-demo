@@ -90,7 +90,7 @@ function buildForfaitEmail(lang, name, oldForfait, newForfait, isUpgrade, paymen
       features: isCS
         ? `Vos nouvelles fonctionnalités : prise de commandes en ligne, bouton d'appel, système de tables et QR ordering.`
         : `Votre menu digital reste actif. Les fonctionnalités de commande et d'appel ont été désactivées.`,
-      closing: `L'équipe Menu Pro`
+      closing: `L'équipe GeNext`
     },
     en: {
       greeting: `Hello ${name} 👋`,
@@ -101,7 +101,7 @@ function buildForfaitEmail(lang, name, oldForfait, newForfait, isUpgrade, paymen
       features: isCS
         ? `Your new features: online ordering, call button, table system and QR ordering.`
         : `Your digital menu remains active. Ordering and call features have been disabled.`,
-      closing: `The Menu Pro Team`
+      closing: `The GeNext Team`
     },
     el: {
       greeting: `Γεια σας ${name} 👋`,
@@ -112,7 +112,7 @@ function buildForfaitEmail(lang, name, oldForfait, newForfait, isUpgrade, paymen
       features: isCS
         ? `Νέες λειτουργίες: online παραγγελίες, κουμπί κλήσης, σύστημα τραπεζιών και QR παραγγελία.`
         : `Το ψηφιακό σας μενού παραμένει ενεργό. Οι λειτουργίες παραγγελίας και κλήσης έχουν απενεργοποιηθεί.`,
-      closing: `Η ομάδα Menu Pro`
+      closing: `Η ομάδα GeNext`
     },
     de: {
       greeting: `Guten Tag ${name} 👋`,
@@ -123,7 +123,7 @@ function buildForfaitEmail(lang, name, oldForfait, newForfait, isUpgrade, paymen
       features: isCS
         ? `Ihre neuen Funktionen: Online-Bestellungen, Anrufschaltfläche, Tischsystem und QR-Bestellung.`
         : `Ihr digitales Menü bleibt aktiv. Bestell- und Anruffunktionen wurden deaktiviert.`,
-      closing: `Das Menu Pro Team`
+      closing: `Das GeNext Team`
     },
     ar: {
       greeting: `مرحباً ${name} 👋`,
@@ -134,14 +134,14 @@ function buildForfaitEmail(lang, name, oldForfait, newForfait, isUpgrade, paymen
       features: isCS
         ? `مميزاتك الجديدة: الطلب عبر الإنترنت، زر الاستدعاء، نظام الطاولات وطلب QR.`
         : `قائمتك الرقمية تبقى نشطة. تم تعطيل ميزات الطلب والاستدعاء.`,
-      closing: `فريق Menu Pro`
+      closing: `فريق GeNext`
     }
   }[lang] || {
     greeting: `Bonjour ${name} 👋`,
     intro: isUpgrade ? `Votre forfait a été mis à niveau vers <strong>${newLabel}</strong> (${modeLabel} — ${price}€/mois).` : `Votre forfait a été modifié vers <strong>${newLabel}</strong> (${modeLabel} — ${price}€/mois).`,
     payment: isUpgrade ? `Vous avez <strong>7 jours</strong> pour effectuer votre paiement.` : null,
     features: isCS ? `Vos nouvelles fonctionnalités : prise de commandes en ligne, bouton d'appel, système de tables et QR ordering.` : `Votre menu digital reste actif. Les fonctionnalités de commande et d'appel ont été désactivées.`,
-    closing: `L'équipe Menu Pro`
+    closing: `L'équipe GeNext`
   };
 
   const dir = isRTL ? 'rtl' : 'ltr';
@@ -153,13 +153,13 @@ function buildForfaitEmail(lang, name, oldForfait, newForfait, isUpgrade, paymen
 
   const html = `<!DOCTYPE html><html dir="${dir}"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Menu Pro</title></head>
+<title>GeNext</title></head>
 <body style="margin:0;padding:0;background:#0f0f13;font-family:'Helvetica Neue',Arial,sans-serif">
 <table width="100%" cellpadding="0" cellspacing="0" style="background:#0f0f13;padding:32px 0">
 <tr><td align="center">
 <table width="560" cellpadding="0" cellspacing="0" style="background:#1a1a22;border-radius:16px;overflow:hidden;max-width:560px;width:100%">
 <tr><td style="background:linear-gradient(135deg,#1e1a10 0%,#2a2010 100%);padding:28px 32px;text-align:center">
-  <div style="font-size:1.6rem;font-weight:800;color:#c8a44e;letter-spacing:-0.02em">Menu Pro</div>
+  <div style="font-size:1.6rem;font-weight:800;color:#c8a44e;letter-spacing:-0.02em">GeNext</div>
   <div style="font-size:0.75rem;color:rgba(200,164,78,.6);margin-top:4px;letter-spacing:0.06em">DIGITAL MENU PLATFORM</div>
 </td></tr>
 <tr><td style="padding:28px 32px;text-align:${align}">
@@ -199,7 +199,7 @@ module.exports = async function handler(req, res) {
     try {
       const { subject, html } = buildForfaitEmail(safeLang, name || rid, oldForfait, newForfait, isUpgrade, safeMode);
       await createTransport().sendMail({
-        from: `"Menu Pro" <${process.env.GMAIL_USER}>`,
+        from: `"GeNext" <${process.env.GMAIL_USER}>`,
         to: email, subject, html
       });
       results.email = 'sent';

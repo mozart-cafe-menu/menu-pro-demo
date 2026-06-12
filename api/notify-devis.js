@@ -51,7 +51,7 @@ module.exports = async (req, res) => {
     const bodyText = BODY_TEXTS[langue] || BODY_TEXTS.fr;
 
     const payload = JSON.stringify({
-      title: '📋 Menu Pro — Devis',
+      title: '📋 GeNext — Devis',
       body:  bodyText,
       type:  'devis'
     });
