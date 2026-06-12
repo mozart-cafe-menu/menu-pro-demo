@@ -9,6 +9,7 @@ const nodemailer = require('nodemailer');
 const https      = require('https');
 
 const CONTROL_DB   = 'https://menu-pro-control-default-rtdb.europe-west1.firebasedatabase.app';
+const MAIN_DB      = 'https://menu-saas-platform-default-rtdb.europe-west1.firebasedatabase.app';
 const ADMIN_URL    = 'https://menu-saas-platform.vercel.app/admin.html';
 const APK_URL      = 'https://menu-saas-platform.vercel.app/MenuProServeur-SaaS-v1.0.apk';
 const FOUR_DAYS_MS = 4  * 24 * 60 * 60 * 1000;
@@ -23,9 +24,9 @@ function createTransport() {
 }
 
 // ── Firebase REST ───────────────────────────────────────────────────────────
-function fbRequest(path, method, secret, body) {
+function fbRequest(db, path, method, secret, body) {
   return new Promise((resolve, reject) => {
-    const url     = new URL(CONTROL_DB + path + '.json?auth=' + secret);
+    const url     = new URL(db + path + '.json?auth=' + secret);
     const bodyStr = body ? JSON.stringify(body) : null;
     const opts    = {
       hostname: url.hostname,
@@ -50,8 +51,8 @@ function fbRequest(path, method, secret, body) {
   });
 }
 
-const fbGet   = (path, secret)       => fbRequest(path, 'GET',   secret, null);
-const fbPatch = (path, secret, body) => fbRequest(path, 'PATCH', secret, body);
+const fbGet   = (db, path, secret)       => fbRequest(db, path, 'GET',   secret, null);
+const fbPatch = (db, path, secret, body) => fbRequest(db, path, 'PATCH', secret, body);
 
 // ── Prix par défaut ─────────────────────────────────────────────────────────
 const PM_MONTHLY = { 'menu-qr': 49, 'commandes-services': 99 };
@@ -338,7 +339,7 @@ module.exports = async (req, res) => {
 
   let commandes;
   try {
-    commandes = await fbGet('/commandes', secret);
+    commandes = await fbGet(CONTROL_DB, '/commandes', secret);
   } catch(e) {
     return res.status(500).json({ error: 'Firebase GET failed: ' + e.message });
   }
@@ -368,7 +369,7 @@ module.exports = async (req, res) => {
           subject: deliverySubject(ed.name || d.restaurant || '', lang),
           html:    deliveryHtml(ed.name || d.restaurant || '', ed.rid, ed.pwd, isCS, lang)
         });
-        await fbPatch('/commandes/' + key, secret, { emailLivraisonSent: now });
+        await fbPatch(CONTROL_DB, '/commandes/' + key, secret, { emailLivraisonSent: now });
         stats.delivery.sent++;
         console.log('✅ Livraison envoyée à ' + ed.email + ' pour ' + (ed.name || key));
       } catch(e) {
@@ -398,12 +399,36 @@ module.exports = async (req, res) => {
           subject: reminderSubject(d.restaurant || '', lang),
           html:    reminderHtml(d.restaurant || '', price + ' €', mode, dateStr, lang)
         });
-        await fbPatch('/commandes/' + key, secret, { lastReminderSent: now });
+        await fbPatch(CONTROL_DB, '/commandes/' + key, secret, { lastReminderSent: now });
         stats.reminders.sent++;
         console.log('✅ Rappel envoyé à ' + d.email + ' pour ' + (d.restaurant || key));
       } catch(e) {
         stats.reminders.errors++;
         console.error('⚠ Rappel erreur ' + key + ':', e.message);
+      }
+    }
+  }
+
+  // ── B4 : Suspension automatique ─────────────────────────────────────────────
+  // Si nextReminderAt est dépassé de plus de 3 jours et pas payé → suspendu
+  const mainSecret = process.env.FIREBASE_MAIN_SECRET;
+  stats.suspensions = 0;
+  if (mainSecret) {
+    for (const [key, d] of Object.entries(commandes)) {
+      if (!d || typeof d !== 'object') continue;
+      if (!d.nextReminderAt || d.suspendu) continue;
+      const rid = d.clientCree?.rid;
+      if (!rid) continue;
+      const overdue = now - d.nextReminderAt;
+      if (overdue > 3 * 24 * 60 * 60 * 1000) {
+        try {
+          await fbPatch(MAIN_DB, '/restaurants/' + rid + '/config', mainSecret, { active: false, suspendu: true });
+          await fbPatch(CONTROL_DB, '/commandes/' + key, secret, { suspendu: true });
+          stats.suspensions++;
+          console.log('⏸ Suspendu:', rid, '(commande ' + key + ')');
+        } catch(e) {
+          console.error('⚠ Suspension erreur ' + rid + ':', e.message);
+        }
       }
     }
   }

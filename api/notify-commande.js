@@ -219,11 +219,13 @@ async function autoCreateRestaurant(restaurant, forfaitType, paymentMode, email,
   // Mettre à jour la commande avec clientCree
   if (commandeKey) {
     const clientCreeData = { rid, pwd, name: restaurant, forfait: isCS ? 'Commandes & Services' : 'Menu QR' };
+    const nextReminderAt = ts + 7 * 24 * 60 * 60 * 1000;
     await fbPatch(CONTROL_DB, '/commandes/' + commandeKey, controlSecret, {
       statut: 'en_cours',
       lu: true,
       clientCree: clientCreeData,
       emailLivraisonSent: ts,
+      nextReminderAt,
       emailData: { email, rid, pwd, name: restaurant, forfait: forfaitType, lang, paymentMode }
     });
   }
