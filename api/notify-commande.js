@@ -229,10 +229,7 @@ module.exports = async (req, res) => {
     console.log('FCM response:', fcmResult.status, JSON.stringify(fcmResult.body));
 
     // ── 2. Email d'attente automatique ──────────────────────────────────────
-    let emailStatus = { attempted: false, success: false, error: null, to: email || null };
     if (email && process.env.GMAIL_USER && process.env.GMAIL_PASS) {
-      emailStatus.attempted = true;
-      emailStatus.gmailUser = process.env.GMAIL_USER;
       try {
         const tpl       = WAITING_TPL[lang];
         const modes     = MODE_LABEL[lang];
@@ -243,17 +240,13 @@ module.exports = async (req, res) => {
           subject: tpl.subject(rest),
           html:    tpl.html(rest, plan || 'Menu Pro', modeLabel)
         });
-        emailStatus.success = true;
         console.log('✅ Email d\'attente envoyé à:', email);
       } catch (mailErr) {
-        emailStatus.error = mailErr.message;
         console.error('⚠ Email error (non-blocking):', mailErr.message);
       }
-    } else {
-      emailStatus.reason = !email ? 'no_email' : !process.env.GMAIL_USER ? 'no_GMAIL_USER' : 'no_GMAIL_PASS';
     }
 
-    res.status(200).json({ ...(fcmResult.body || { sent: 0 }), emailStatus });
+    res.status(200).json(fcmResult.body || { sent: 0 });
 
   } catch (err) {
     console.error('Error:', err.message);

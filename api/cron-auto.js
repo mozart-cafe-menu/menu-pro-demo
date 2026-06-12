@@ -1,0 +1,413 @@
+/* ============================================================
+   Vercel Cron — Email livraison + Rappels paiement
+   Déclenché 1x/jour à 08:00 UTC (10h France)
+   B2 : email livraison dès que emailLivraisonProgramme <= now
+   B3 : rappel paiement 4 jours avant nextReminderAt
+============================================================ */
+
+const nodemailer = require('nodemailer');
+const https      = require('https');
+
+const CONTROL_DB   = 'https://menu-pro-control-default-rtdb.europe-west1.firebasedatabase.app';
+const ADMIN_URL    = 'https://menu-saas-platform.vercel.app/admin.html';
+const APK_URL      = 'https://menu-saas-platform.vercel.app/MenuProServeur-SaaS-v1.0.apk';
+const FOUR_DAYS_MS = 4  * 24 * 60 * 60 * 1000;
+const FIVE_DAYS_MS = 5  * 24 * 60 * 60 * 1000;
+
+// ── Transport Gmail ─────────────────────────────────────────────────────────
+function createTransport() {
+  return nodemailer.createTransport({
+    service: 'gmail',
+    auth: { user: process.env.GMAIL_USER, pass: process.env.GMAIL_PASS }
+  });
+}
+
+// ── Firebase REST ───────────────────────────────────────────────────────────
+function fbRequest(path, method, secret, body) {
+  return new Promise((resolve, reject) => {
+    const url     = new URL(CONTROL_DB + path + '.json?auth=' + secret);
+    const bodyStr = body ? JSON.stringify(body) : null;
+    const opts    = {
+      hostname: url.hostname,
+      path:     url.pathname + url.search,
+      method,
+      headers: {}
+    };
+    if (bodyStr) {
+      opts.headers['Content-Type']   = 'application/json';
+      opts.headers['Content-Length'] = Buffer.byteLength(bodyStr);
+    }
+    const req = https.request(opts, res => {
+      let data = '';
+      res.on('data', d => data += d);
+      res.on('end', () => {
+        try { resolve(JSON.parse(data)); } catch(e) { resolve(null); }
+      });
+    });
+    req.on('error', reject);
+    if (bodyStr) req.write(bodyStr);
+    req.end();
+  });
+}
+
+const fbGet   = (path, secret)       => fbRequest(path, 'GET',   secret, null);
+const fbPatch = (path, secret, body) => fbRequest(path, 'PATCH', secret, body);
+
+// ── Prix par défaut ─────────────────────────────────────────────────────────
+const PM_MONTHLY = { 'menu-qr': 49, 'commandes-services': 99 };
+const PM_ANNUAL  = { 'menu-qr': 490, 'commandes-services': 990 };
+
+// ── Libellés mode paiement ──────────────────────────────────────────────────
+const MODE_LABEL = {
+  fr: { monthly: 'Mensuel',   annual: 'Annuel'    },
+  en: { monthly: 'Monthly',   annual: 'Annual'    },
+  el: { monthly: 'Μηνιαία',   annual: 'Ετήσια'    },
+  ar: { monthly: 'شهري',      annual: 'سنوي'      },
+  de: { monthly: 'Monatlich', annual: 'Jährlich'  }
+};
+
+// ── Locale date ─────────────────────────────────────────────────────────────
+const DATE_LOCALE = { fr: 'fr-FR', en: 'en-GB', el: 'el-GR', ar: 'ar-MA', de: 'de-DE' };
+
+function fmtDate(ts, lang) {
+  return new Date(ts).toLocaleDateString(DATE_LOCALE[lang] || 'fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// TEMPLATES EMAIL LIVRAISON (5 langues)
+// ════════════════════════════════════════════════════════════════════════════
+
+function _headerHtml(subtitle) {
+  return '<div style="background:linear-gradient(135deg,#1a1510,#2a2018);padding:28px 32px;text-align:center">'
+    + '<div style="font-size:1.7rem;font-weight:700;color:#c8a44e;letter-spacing:0.06em;font-family:Georgia,serif">Menu Pro</div>'
+    + '<div style="font-size:0.8rem;color:rgba(200,164,78,0.6);margin-top:4px;letter-spacing:0.1em;text-transform:uppercase">' + subtitle + '</div>'
+    + '</div>';
+}
+
+function _footerHtml(text) {
+  return '<div style="background:#fafafa;border-top:1px solid #eee;padding:16px 32px;text-align:center">'
+    + '<span style="font-size:0.78rem;color:#aaa">' + text + '</span>'
+    + '</div>';
+}
+
+function _credentialsCard(labelId, rid, labelPwd, pwd) {
+  return '<div style="background:#fdf9f0;border:1px solid #e8d8a0;border-radius:10px;padding:20px 24px;margin-bottom:20px">'
+    + '<div style="margin-bottom:12px">'
+    + '<span style="font-size:0.75rem;color:#888;text-transform:uppercase;letter-spacing:0.08em">' + labelId + '</span><br>'
+    + '<code style="font-size:1.05rem;color:#1a1510;font-weight:600;background:#fff;padding:4px 10px;border-radius:6px;border:1px solid #e0d0a0">' + rid + '</code>'
+    + '</div>'
+    + '<div>'
+    + '<span style="font-size:0.75rem;color:#888;text-transform:uppercase;letter-spacing:0.08em">' + labelPwd + '</span><br>'
+    + '<code style="font-size:1.05rem;color:#1a1510;font-weight:600;background:#fff;padding:4px 10px;border-radius:6px;border:1px solid #e0d0a0">' + pwd + '</code>'
+    + '</div>'
+    + '</div>';
+}
+
+function _btnHtml(url, label, color) {
+  return '<a href="' + url + '" style="display:inline-block;background:' + (color || 'linear-gradient(135deg,#e2c278,#c8a44e,#9a7a35)') + ';color:' + (color ? '#fff' : '#1a1510') + ';text-decoration:none;padding:13px 28px;border-radius:10px;font-weight:700;font-size:0.95rem;margin:6px 4px">'
+    + label + '</a>';
+}
+
+function deliveryHtml(name, rid, pwd, isCS, lang) {
+  const T = {
+    fr: {
+      subtitle: 'Menus digitaux &amp; Commandes',
+      greeting: 'Bonjour,',
+      intro: 'Votre espace <strong style="color:#1a1510">' + name + '</strong> est prêt !',
+      sub: 'Connectez-vous dès maintenant à votre tableau de bord pour personnaliser votre menu.',
+      labelId: 'Identifiant (ID restaurant)',
+      labelPwd: 'Mot de passe',
+      btnAdmin: '🔑 Accéder au tableau de bord',
+      apkTitle: 'Application serveur',
+      apkSub: 'Faites télécharger cette application à votre personnel pour recevoir les commandes.',
+      btnApk: '📱 Télécharger l\'application serveur',
+      trial: '⏱ Vous bénéficiez de <strong>7 jours d\'essai gratuit</strong> à partir de votre première connexion.',
+      contact: 'N\'hésitez pas à nous répondre si vous avez des questions.',
+      footer: 'Menu Pro · Menus digitaux pour cafés et restaurants'
+    },
+    en: {
+      subtitle: 'Digital menus &amp; Orders',
+      greeting: 'Hello,',
+      intro: 'Your space <strong style="color:#1a1510">' + name + '</strong> is ready!',
+      sub: 'Log in to your dashboard now to customize your menu.',
+      labelId: 'Restaurant ID',
+      labelPwd: 'Password',
+      btnAdmin: '🔑 Access dashboard',
+      apkTitle: 'Server application',
+      apkSub: 'Have your staff download this app to receive orders.',
+      btnApk: '📱 Download server app',
+      trial: '⏱ You have a <strong>7-day free trial</strong> starting from your first login.',
+      contact: 'Feel free to reply to this email if you have any questions.',
+      footer: 'Menu Pro · Digital menus for cafés and restaurants'
+    },
+    el: {
+      subtitle: 'Ψηφιακά μενού &amp; Παραγγελίες',
+      greeting: 'Γεια σας,',
+      intro: 'Ο χώρος σας <strong style="color:#1a1510">' + name + '</strong> είναι έτοιμος!',
+      sub: 'Συνδεθείτε στον πίνακα ελέγχου για να προσαρμόσετε το μενού σας.',
+      labelId: 'Αναγνωριστικό εστιατορίου',
+      labelPwd: 'Κωδικός πρόσβασης',
+      btnAdmin: '🔑 Πρόσβαση στον πίνακα ελέγχου',
+      apkTitle: 'Εφαρμογή σερβιτόρων',
+      apkSub: 'Κάντε το προσωπικό σας να κατεβάσει αυτή την εφαρμογή για να λαμβάνουν παραγγελίες.',
+      btnApk: '📱 Λήψη εφαρμογής σερβιτόρων',
+      trial: '⏱ Έχετε <strong>7 ημέρες δωρεάν δοκιμή</strong> από την πρώτη σύνδεσή σας.',
+      contact: 'Μη διστάσετε να μας απαντήσετε αν έχετε ερωτήσεις.',
+      footer: 'Menu Pro · Ψηφιακά μενού για καφέ και εστιατόρια'
+    },
+    ar: {
+      subtitle: 'قوائم رقمية وطلبات',
+      greeting: 'مرحباً،',
+      intro: 'مساحتك <strong style="color:#1a1510">' + name + '</strong> جاهزة!',
+      sub: 'سجّل الدخول إلى لوحة التحكم لتخصيص قائمتك.',
+      labelId: 'معرّف المطعم',
+      labelPwd: 'كلمة المرور',
+      btnAdmin: '🔑 الوصول إلى لوحة التحكم',
+      apkTitle: 'تطبيق النادلين',
+      apkSub: 'اطلب من موظفيك تنزيل هذا التطبيق لاستقبال الطلبات.',
+      btnApk: '📱 تنزيل تطبيق النادلين',
+      trial: '⏱ لديك <strong>7 أيام تجريبية مجانية</strong> من أول تسجيل دخول.',
+      contact: 'لا تتردد في الرد على هذا البريد إذا كان لديك أي سؤال.',
+      footer: 'Menu Pro · قوائم رقمية للمقاهي والمطاعم'
+    },
+    de: {
+      subtitle: 'Digitale Speisekarten &amp; Bestellungen',
+      greeting: 'Hallo,',
+      intro: 'Ihr Bereich <strong style="color:#1a1510">' + name + '</strong> ist bereit!',
+      sub: 'Melden Sie sich jetzt in Ihrem Dashboard an, um Ihre Speisekarte anzupassen.',
+      labelId: 'Restaurant-ID',
+      labelPwd: 'Passwort',
+      btnAdmin: '🔑 Dashboard aufrufen',
+      apkTitle: 'Server-App',
+      apkSub: 'Lassen Sie Ihr Personal diese App herunterladen, um Bestellungen zu erhalten.',
+      btnApk: '📱 Server-App herunterladen',
+      trial: '⏱ Sie haben eine <strong>7-tägige kostenlose Testphase</strong> ab Ihrer ersten Anmeldung.',
+      contact: 'Antworten Sie auf diese E-Mail, wenn Sie Fragen haben.',
+      footer: 'Menu Pro · Digitale Speisekarten für Cafés und Restaurants'
+    }
+  };
+  const t = T[lang] || T.fr;
+  const dir = lang === 'ar' ? ' dir="rtl"' : '';
+  return '<div' + dir + ' style="font-family:\'Segoe UI\',Arial,sans-serif;max-width:580px;margin:0 auto;background:#fff;border-radius:12px;overflow:hidden;border:1px solid #e8e0d0">'
+    + _headerHtml(t.subtitle)
+    + '<div style="padding:32px">'
+    + '<h2 style="margin:0 0 8px;font-size:1.25rem;color:#1a1510">' + t.greeting + '</h2>'
+    + '<p style="color:#444;line-height:1.7;margin-bottom:20px">' + t.intro + '<br>' + t.sub + '</p>'
+    + _credentialsCard(t.labelId, rid, t.labelPwd, pwd)
+    + '<div style="text-align:center;margin-bottom:20px">'
+    + _btnHtml(ADMIN_URL + '?rid=' + rid, t.btnAdmin, null)
+    + '</div>'
+    + (isCS
+      ? '<div style="background:#f0f4ff;border:1px solid #c8d8f0;border-radius:10px;padding:16px 20px;margin-bottom:20px">'
+        + '<p style="margin:0 0 6px;font-weight:700;color:#1a1510">' + t.apkTitle + '</p>'
+        + '<p style="margin:0 0 12px;color:#555;font-size:0.88rem">' + t.apkSub + '</p>'
+        + '<div style="text-align:center">' + _btnHtml(APK_URL, t.btnApk, 'linear-gradient(135deg,#3a6fd8,#2456b8)') + '</div>'
+        + '</div>'
+      : '')
+    + '<div style="background:#fdf9f0;border-left:3px solid #c8a44e;border-radius:0 8px 8px 0;padding:14px 18px;margin-bottom:20px">'
+    + '<p style="margin:0;color:#5a4a2a;font-size:0.9rem;line-height:1.6">' + t.trial + '</p>'
+    + '</div>'
+    + '<p style="color:#888;font-size:0.85rem;line-height:1.6">' + t.contact + '</p>'
+    + '</div>'
+    + _footerHtml(t.footer)
+    + '</div>';
+}
+
+// ════════════════════════════════════════════════════════════════════════════
+// TEMPLATES EMAIL RAPPEL PAIEMENT (5 langues)
+// ════════════════════════════════════════════════════════════════════════════
+
+function reminderHtml(name, amount, mode, dateStr, lang) {
+  const T = {
+    fr: {
+      subtitle: 'Rappel paiement',
+      greeting: 'Bonjour,',
+      intro: 'Votre abonnement Menu Pro pour <strong style="color:#1a1510">' + name + '</strong> arrive à échéance le <strong>' + dateStr + '</strong>.',
+      amountLabel: 'Montant dû',
+      modeLabel: 'Fréquence',
+      instructions: 'Pour maintenir votre accès sans interruption, effectuez votre règlement avant cette date.',
+      payMethods: 'Virement bancaire ou espèces — nous vous contacterons pour les coordonnées.',
+      contact: 'N\'hésitez pas à nous répondre si vous avez des questions.',
+      footer: 'Menu Pro · Menus digitaux pour cafés et restaurants'
+    },
+    en: {
+      subtitle: 'Payment reminder',
+      greeting: 'Hello,',
+      intro: 'Your Menu Pro subscription for <strong style="color:#1a1510">' + name + '</strong> expires on <strong>' + dateStr + '</strong>.',
+      amountLabel: 'Amount due',
+      modeLabel: 'Frequency',
+      instructions: 'To maintain uninterrupted access, please make your payment before this date.',
+      payMethods: 'Bank transfer or cash — we will contact you with payment details.',
+      contact: 'Feel free to reply if you have any questions.',
+      footer: 'Menu Pro · Digital menus for cafés and restaurants'
+    },
+    el: {
+      subtitle: 'Υπενθύμιση πληρωμής',
+      greeting: 'Γεια σας,',
+      intro: 'Η συνδρομή Menu Pro για <strong style="color:#1a1510">' + name + '</strong> λήγει στις <strong>' + dateStr + '</strong>.',
+      amountLabel: 'Οφειλόμενο ποσό',
+      modeLabel: 'Συχνότητα',
+      instructions: 'Για να διατηρήσετε αδιάλειπτη πρόσβαση, πραγματοποιήστε την πληρωμή σας πριν από αυτήν την ημερομηνία.',
+      payMethods: 'Τραπεζικό έμβασμα ή μετρητά — θα επικοινωνήσουμε μαζί σας.',
+      contact: 'Μη διστάσετε να μας απαντήσετε αν έχετε ερωτήσεις.',
+      footer: 'Menu Pro · Ψηφιακά μενού για καφέ και εστιατόρια'
+    },
+    ar: {
+      subtitle: 'تذكير بالدفع',
+      greeting: 'مرحباً،',
+      intro: 'اشتراكك في Menu Pro لـ <strong style="color:#1a1510">' + name + '</strong> ينتهي في <strong>' + dateStr + '</strong>.',
+      amountLabel: 'المبلغ المستحق',
+      modeLabel: 'الدورية',
+      instructions: 'للحفاظ على وصولك دون انقطاع، يرجى إتمام الدفع قبل هذا التاريخ.',
+      payMethods: 'تحويل بنكي أو نقداً — سنتواصل معك لتفاصيل الدفع.',
+      contact: 'لا تتردد في الرد على هذا البريد إذا كان لديك أي سؤال.',
+      footer: 'Menu Pro · قوائم رقمية للمقاهي والمطاعم'
+    },
+    de: {
+      subtitle: 'Zahlungserinnerung',
+      greeting: 'Hallo,',
+      intro: 'Ihr Menu Pro Abonnement für <strong style="color:#1a1510">' + name + '</strong> läuft am <strong>' + dateStr + '</strong> ab.',
+      amountLabel: 'Fälliger Betrag',
+      modeLabel: 'Häufigkeit',
+      instructions: 'Um Ihren Zugang ohne Unterbrechung zu erhalten, leisten Sie bitte Ihre Zahlung vor diesem Datum.',
+      payMethods: 'Banküberweisung oder Bargeld — wir kontaktieren Sie mit den Zahlungsdaten.',
+      contact: 'Antworten Sie auf diese E-Mail, wenn Sie Fragen haben.',
+      footer: 'Menu Pro · Digitale Speisekarten für Cafés und Restaurants'
+    }
+  };
+  const t = T[lang] || T.fr;
+  const dir = lang === 'ar' ? ' dir="rtl"' : '';
+  return '<div' + dir + ' style="font-family:\'Segoe UI\',Arial,sans-serif;max-width:580px;margin:0 auto;background:#fff;border-radius:12px;overflow:hidden;border:1px solid #e8e0d0">'
+    + _headerHtml(t.subtitle)
+    + '<div style="padding:32px">'
+    + '<h2 style="margin:0 0 8px;font-size:1.25rem;color:#1a1510">' + t.greeting + '</h2>'
+    + '<p style="color:#444;line-height:1.7;margin-bottom:20px">' + t.intro + '</p>'
+    + '<div style="display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap">'
+    + '<div style="flex:1;min-width:140px;background:#fdf9f0;border:1px solid #e8d8a0;border-radius:10px;padding:14px 18px;text-align:center">'
+    + '<div style="font-size:0.72rem;color:#888;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px">' + t.amountLabel + '</div>'
+    + '<div style="font-size:1.5rem;font-weight:700;color:#c8a44e">' + amount + '</div>'
+    + '</div>'
+    + '<div style="flex:1;min-width:140px;background:#fdf9f0;border:1px solid #e8d8a0;border-radius:10px;padding:14px 18px;text-align:center">'
+    + '<div style="font-size:0.72rem;color:#888;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px">' + t.modeLabel + '</div>'
+    + '<div style="font-size:1.1rem;font-weight:600;color:#1a1510">' + mode + '</div>'
+    + '</div>'
+    + '</div>'
+    + '<div style="background:#fff8ee;border-left:3px solid #c8a44e;border-radius:0 8px 8px 0;padding:14px 18px;margin-bottom:16px">'
+    + '<p style="margin:0 0 6px;color:#5a4a2a;font-size:0.9rem;line-height:1.6">' + t.instructions + '</p>'
+    + '<p style="margin:0;color:#888;font-size:0.85rem">' + t.payMethods + '</p>'
+    + '</div>'
+    + '<p style="color:#888;font-size:0.85rem;line-height:1.6">' + t.contact + '</p>'
+    + '</div>'
+    + _footerHtml(t.footer)
+    + '</div>';
+}
+
+function deliverySubject(name, lang) {
+  const S = {
+    fr: '🎉 ' + name + ' est prêt ! Voici vos accès Menu Pro',
+    en: '🎉 ' + name + ' is ready! Here are your Menu Pro credentials',
+    el: '🎉 ' + name + ' είναι έτοιμος! Οι κωδικοί σας',
+    ar: '🎉 ' + name + ' جاهز! إليك بيانات دخول Menu Pro',
+    de: '🎉 ' + name + ' ist bereit! Ihre Menu Pro Zugangsdaten'
+  };
+  return S[lang] || S.fr;
+}
+
+function reminderSubject(name, lang) {
+  const S = {
+    fr: '⏰ Rappel paiement Menu Pro — ' + name,
+    en: '⏰ Menu Pro payment reminder — ' + name,
+    el: '⏰ Υπενθύμιση πληρωμής Menu Pro — ' + name,
+    ar: '⏰ تذكير بالدفع Menu Pro — ' + name,
+    de: '⏰ Menu Pro Zahlungserinnerung — ' + name
+  };
+  return S[lang] || S.fr;
+}
+
+// ── Handler principal ────────────────────────────────────────────────────────
+module.exports = async (req, res) => {
+  res.setHeader('Content-Type', 'application/json');
+
+  const secret = process.env.FIREBASE_CONTROL_SECRET;
+  if (!secret)                    return res.status(500).json({ error: 'FIREBASE_CONTROL_SECRET missing' });
+  if (!process.env.GMAIL_USER)    return res.status(500).json({ error: 'GMAIL_USER missing' });
+  if (!process.env.GMAIL_PASS)    return res.status(500).json({ error: 'GMAIL_PASS missing' });
+
+  const now   = Date.now();
+  const stats = { delivery: { sent: 0, errors: 0 }, reminders: { sent: 0, errors: 0 } };
+
+  let commandes;
+  try {
+    commandes = await fbGet('/commandes', secret);
+  } catch(e) {
+    return res.status(500).json({ error: 'Firebase GET failed: ' + e.message });
+  }
+
+  if (!commandes || typeof commandes !== 'object') {
+    return res.status(200).json({ message: 'No commandes', stats });
+  }
+
+  const transport = createTransport();
+
+  for (const [key, d] of Object.entries(commandes)) {
+    if (!d || typeof d !== 'object') continue;
+
+    // ── B2 : Email livraison ─────────────────────────────────────────────────
+    const dueDelivery = d.emailLivraisonProgramme && d.emailLivraisonProgramme <= now;
+    const notSentDlv  = !d.emailLivraisonSent;
+    const hasEmailDlv = d.emailData && d.emailData.email;
+
+    if (dueDelivery && notSentDlv && hasEmailDlv) {
+      try {
+        const ed   = d.emailData;
+        const lang = (ed.lang && ['fr','en','el','ar','de'].includes(ed.lang)) ? ed.lang : 'fr';
+        const isCS = ed.forfait === 'commandes-services';
+        await transport.sendMail({
+          from:    '"Menu Pro" <' + process.env.GMAIL_USER + '>',
+          to:      ed.email,
+          subject: deliverySubject(ed.name || d.restaurant || '', lang),
+          html:    deliveryHtml(ed.name || d.restaurant || '', ed.rid, ed.pwd, isCS, lang)
+        });
+        await fbPatch('/commandes/' + key, secret, { emailLivraisonSent: now });
+        stats.delivery.sent++;
+        console.log('✅ Livraison envoyée à ' + ed.email + ' pour ' + (ed.name || key));
+      } catch(e) {
+        stats.delivery.errors++;
+        console.error('⚠ Livraison erreur ' + key + ':', e.message);
+      }
+    }
+
+    // ── B3 : Rappel paiement ─────────────────────────────────────────────────
+    const hasNextReminder  = d.nextReminderAt && (d.nextReminderAt - now) < FOUR_DAYS_MS && (d.nextReminderAt - now) > -FIVE_DAYS_MS;
+    const notSentRecently  = !d.lastReminderSent || (now - d.lastReminderSent) > FIVE_DAYS_MS;
+    const hasEmailRmd      = d.email;
+    const notSuspended     = !d.suspendu;
+
+    if (hasNextReminder && notSentRecently && hasEmailRmd && notSuspended) {
+      try {
+        const lang    = (d.langue && ['fr','en','el','ar','de'].includes(d.langue)) ? d.langue : 'fr';
+        const forfait = d.forfait || 'menu-qr';
+        const isAnn   = d.paymentMode === 'annual';
+        const price   = d.price || (isAnn ? (PM_ANNUAL[forfait] || 490) : (PM_MONTHLY[forfait] || 49));
+        const modes   = MODE_LABEL[lang] || MODE_LABEL.fr;
+        const mode    = isAnn ? modes.annual : modes.monthly;
+        const dateStr = fmtDate(d.nextReminderAt, lang);
+        await transport.sendMail({
+          from:    '"Menu Pro" <' + process.env.GMAIL_USER + '>',
+          to:      d.email,
+          subject: reminderSubject(d.restaurant || '', lang),
+          html:    reminderHtml(d.restaurant || '', price + ' €', mode, dateStr, lang)
+        });
+        await fbPatch('/commandes/' + key, secret, { lastReminderSent: now });
+        stats.reminders.sent++;
+        console.log('✅ Rappel envoyé à ' + d.email + ' pour ' + (d.restaurant || key));
+      } catch(e) {
+        stats.reminders.errors++;
+        console.error('⚠ Rappel erreur ' + key + ':', e.message);
+      }
+    }
+  }
+
+  console.log('Cron done:', JSON.stringify(stats));
+  res.status(200).json({ message: 'Done', stats });
+};
