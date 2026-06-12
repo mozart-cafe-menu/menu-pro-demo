@@ -188,20 +188,19 @@ module.exports = async function handler(req, res) {
   const { rid, name, oldForfait, newForfait, email, lang, paymentMode } = req.body || {};
   if (!rid || !newForfait) return res.status(400).json({ error: 'Missing rid or newForfait' });
 
-  const safeLang = ['fr','en','el','de','ar'].includes(lang) ? lang : 'fr';
-  const isUpgrade = newForfait === 'commandes-services' && oldForfait !== 'commandes-services';
-  const results = { email: null, fcm: null, reminder: null };
+  const safeLang   = ['fr','en','el','de','ar'].includes(lang) ? lang : 'fr';
+  const safeMode   = paymentMode === 'annual' ? 'annual' : 'monthly';
+  const isUpgrade  = newForfait === 'commandes-services' && oldForfait !== 'commandes-services';
+  const price      = newForfait === 'commandes-services' ? (safeMode === 'annual' ? 990 : 99) : (safeMode === 'annual' ? 490 : 49);
+  const results    = { email: null, fcm: null, sync: null };
 
-  // 1. Send confirmation email to client
+  // 1. Email de confirmation au client
   if (email) {
     try {
-      const { subject, html } = buildForfaitEmail(safeLang, name || rid, oldForfait, newForfait, isUpgrade, paymentMode || 'monthly');
-      const transport = createTransport();
-      await transport.sendMail({
+      const { subject, html } = buildForfaitEmail(safeLang, name || rid, oldForfait, newForfait, isUpgrade, safeMode);
+      await createTransport().sendMail({
         from: `"Menu Pro" <${process.env.GMAIL_USER}>`,
-        to: email,
-        subject,
-        html
+        to: email, subject, html
       });
       results.email = 'sent';
     } catch(e) {
@@ -211,36 +210,34 @@ module.exports = async function handler(req, res) {
     results.email = 'no-email';
   }
 
-  // 2. If upgrade: update nextReminderAt in control Firebase
-  if (isUpgrade) {
-    const secret = process.env.FIREBASE_CONTROL_SECRET;
-    if (secret) {
-      try {
-        // Find commande by rid
-        const commandes = await fbGet(CONTROL_DB, '/commandes', secret);
-        if (commandes) {
-          const entry = Object.entries(commandes).find(([, d]) => d?.clientCree?.rid === rid);
-          if (entry) {
-            const [cmdKey] = entry;
-            const nextReminderAt = Date.now() + 7 * 24 * 3600 * 1000;
-            await fbPatch(CONTROL_DB, '/commandes/' + cmdKey, secret, {
-              nextReminderAt,
-              lastReminderSent: null
-            });
-            results.reminder = 'set';
-          } else {
-            results.reminder = 'commande-not-found';
+  // 2. Sync commande dans control Firebase (forfait + price + paymentMode)
+  const secret = process.env.FIREBASE_CONTROL_SECRET;
+  if (secret) {
+    try {
+      const commandes = await fbGet(CONTROL_DB, '/commandes', secret);
+      if (commandes) {
+        const entry = Object.entries(commandes).find(([, d]) => d?.clientCree?.rid === rid);
+        if (entry) {
+          const [cmdKey] = entry;
+          const update = { forfait: newForfait, price, paymentMode: safeMode };
+          if (isUpgrade) {
+            update.nextReminderAt = Date.now() + 7 * 24 * 3600 * 1000;
+            update.lastReminderSent = null;
           }
+          await fbPatch(CONTROL_DB, '/commandes/' + cmdKey, secret, update);
+          results.sync = 'ok';
+        } else {
+          results.sync = 'commande-not-found';
         }
-      } catch(e) {
-        results.reminder = 'error: ' + e.message;
       }
-    } else {
-      results.reminder = 'no-secret';
+    } catch(e) {
+      results.sync = 'error: ' + e.message;
     }
+  } else {
+    results.sync = 'no-secret';
   }
 
-  // 3. FCM push to Malek via internal notify-control endpoint
+  // 3. FCM push à Malek
   try {
     const forfaitLabel = newForfait === 'commandes-services' ? 'Commandes & Services' : 'Menu QR';
     await httpsPost('https://menu-saas-platform.vercel.app/api/notify-control', {}, {

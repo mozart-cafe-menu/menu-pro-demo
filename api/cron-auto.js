@@ -3,6 +3,9 @@
    Déclenché 1x/jour à 08:00 UTC (10h France)
    B2 : email livraison dès que emailLivraisonProgramme <= now
    B3 : rappel paiement 4 jours avant nextReminderAt
+   B4 : suspension automatique si nextReminderAt dépassé 3 jours
+   B5 : firstOpenAt détecté sans nextReminderAt → initialiser
+   BP : appliquer pendingForfaitChange en fin de période
 ============================================================ */
 
 const nodemailer = require('nodemailer');
@@ -334,7 +337,8 @@ module.exports = async (req, res) => {
   if (!process.env.GMAIL_USER)    return res.status(500).json({ error: 'GMAIL_USER missing' });
   if (!process.env.GMAIL_PASS)    return res.status(500).json({ error: 'GMAIL_PASS missing' });
 
-  const now   = Date.now();
+  const now        = Date.now();
+  const mainSecret = process.env.FIREBASE_MAIN_SECRET;
   const stats = { delivery: { sent: 0, errors: 0 }, reminders: { sent: 0, errors: 0 } };
 
   let commandes;
@@ -411,7 +415,6 @@ module.exports = async (req, res) => {
 
   // ── B4 : Suspension automatique ─────────────────────────────────────────────
   // Si nextReminderAt est dépassé de plus de 3 jours et pas payé → suspendu
-  const mainSecret = process.env.FIREBASE_MAIN_SECRET;
   stats.suspensions = 0;
   if (mainSecret) {
     for (const [key, d] of Object.entries(commandes)) {
@@ -429,6 +432,54 @@ module.exports = async (req, res) => {
         } catch(e) {
           console.error('⚠ Suspension erreur ' + rid + ':', e.message);
         }
+      }
+    }
+  }
+
+  // ── B5 : firstOpenAt détecté sans nextReminderAt → initialiser ───────────────
+  stats.firstOpenSet = 0;
+  if (mainSecret) {
+    for (const [key, d] of Object.entries(commandes)) {
+      if (!d || typeof d !== 'object') continue;
+      if (d.nextReminderAt) continue;
+      if (!d.firstOpenAt)   continue;
+      const rid5 = d.clientCree?.rid;
+      const nrt5 = d.firstOpenAt + 7 * 24 * 60 * 60 * 1000;
+      try {
+        await fbPatch(CONTROL_DB, '/commandes/' + key, secret, { nextReminderAt: nrt5 });
+        if (rid5) await fbPatch(MAIN_DB, '/restaurants/' + rid5 + '/config/subscription', mainSecret, { endDate: nrt5 });
+        stats.firstOpenSet++;
+        console.log('✅ B5 nextReminderAt posé:', key, '→', new Date(nrt5).toISOString());
+      } catch(e) {
+        console.error('⚠ B5 erreur ' + key + ':', e.message);
+      }
+    }
+  }
+
+  // ── BP : Appliquer pendingForfaitChange en fin de période ────────────────────
+  stats.pendingApplied = 0;
+  if (mainSecret) {
+    for (const [key, d] of Object.entries(commandes)) {
+      if (!d || typeof d !== 'object') continue;
+      if (!d.pendingForfaitChange || !d.nextReminderAt) continue;
+      if (now < d.nextReminderAt - 24 * 60 * 60 * 1000) continue;
+      const ridBP = d.clientCree?.rid;
+      if (!ridBP) continue;
+      const pfc   = d.pendingForfaitChange;
+      const isCS  = pfc.forfait === 'commandes-services';
+      const feats = { callBtn: isCS, orderUI: isCS, photos: true, tableSystem: isCS, qrOrdering: isCS, eventOverlay: true };
+      try {
+        await fbPatch(MAIN_DB, '/restaurants/' + ridBP + '/config/features', mainSecret, feats);
+        await fbPatch(MAIN_DB, '/restaurants/' + ridBP + '/config/subscription', mainSecret, {
+          forfait: pfc.forfait, price: pfc.price, pendingChange: null
+        });
+        await fbPatch(CONTROL_DB, '/commandes/' + key, secret, {
+          forfait: pfc.forfait, price: pfc.price, pendingForfaitChange: null
+        });
+        stats.pendingApplied++;
+        console.log('✅ BP forfait appliqué:', ridBP, '→', pfc.forfait);
+      } catch(e) {
+        console.error('⚠ BP erreur ' + ridBP + ':', e.message);
       }
     }
   }
