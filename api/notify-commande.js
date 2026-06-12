@@ -249,18 +249,20 @@ module.exports = async (req, res) => {
   if (req.method !== 'POST')    { res.status(405).json({ error: 'Method not allowed' }); return; }
 
   try {
-    const { restaurant, forfait, forfaitType, paymentMode, langue, email, commandeKey } = req.body || {};
+    const { restaurant, forfait, forfaitType, paymentMode, langue, email, commandeKey, source } = req.body || {};
     if (!restaurant) { res.status(400).json({ error: 'Missing restaurant' }); return; }
 
-    const rest     = String(restaurant).slice(0, 60);
-    const safeKey  = commandeKey ? String(commandeKey).replace(/[^a-zA-Z0-9_-]/g, '').slice(0, 40) : null;
-    const plan     = forfait ? String(forfait).slice(0, 60) : '';
-    const lang     = (langue && WAITING_TPL[langue]) ? langue : 'fr';
-    const modeStr  = paymentMode === 'annual' ? ' · Annuel' : ' · Mensuel';
-    const bodyText = plan ? rest + ' · ' + plan.split(' — ')[0] + modeStr : rest + modeStr;
+    const rest        = String(restaurant).slice(0, 60);
+    const safeKey     = commandeKey ? String(commandeKey).replace(/[^a-zA-Z0-9_-]/g, '').slice(0, 40) : null;
+    const plan        = forfait ? String(forfait).slice(0, 60) : '';
+    const lang        = (langue && WAITING_TPL[langue]) ? langue : 'fr';
+    const modeStr     = paymentMode === 'annual' ? ' · Annuel' : ' · Mensuel';
+    const bodyText    = plan ? rest + ' · ' + plan.split(' — ')[0] + modeStr : rest + modeStr;
+    const isAdminSrc  = String(source || '') === 'admin';
 
     // ── 1. Notification FCM ─────────────────────────────────────────────────
-    const fcmPayload = JSON.stringify({ title: '🆕 Nouvelle commande', body: bodyText, type: 'commande' });
+    const fcmTitle   = isAdminSrc ? '👤 Nouveau client créé' : '🆕 Nouvelle commande';
+    const fcmPayload = JSON.stringify({ title: fcmTitle, body: bodyText, type: 'commande' });
     const fcmResult  = await httpsRequest(
       'https://menu-saas-platform.vercel.app/api/notify-control',
       { method: 'POST', headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(fcmPayload) } },
@@ -268,8 +270,8 @@ module.exports = async (req, res) => {
     ).catch(e => { console.error('FCM error:', e.message); return { body: { sent: 0 } }; });
     console.log('FCM:', fcmResult.status, JSON.stringify(fcmResult.body));
 
-    // ── 2. Email d'attente ──────────────────────────────────────────────────
-    if (email && process.env.GMAIL_USER && process.env.GMAIL_PASS) {
+    // ── 2. Email d'attente (skippé si création admin) ───────────────────────
+    if (!isAdminSrc && email && process.env.GMAIL_USER && process.env.GMAIL_PASS) {
       try {
         const tpl       = WAITING_TPL[lang];
         const modes     = MODE_LABEL[lang] || MODE_LABEL.fr;
