@@ -177,7 +177,7 @@ button{background:none;border:none;color:inherit;font:inherit;cursor:pointer}
 }
 .logo-mark{display:none}
 .gnd-nav-logo{
-  width:32px;height:32px;border-radius:50%;object-fit:cover;
+  width:32px;height:32px;object-fit:cover;
   flex-shrink:0;mix-blend-mode:screen;display:block;
 }
 .gnd-nav-logo-lt{display:none;}
@@ -504,8 +504,9 @@ html.light .gnd-nav-logo-lt{display:block!important;mix-blend-mode:multiply;}
   position:relative;min-height:100svh;
   display:flex;flex-direction:column;justify-content:center;
   padding:0 0 7rem;overflow:hidden;
-  background:var(--ink-2);
+  background:rgba(16,14,10,0.82);
 }
+html.light #avantages{background:rgba(230,226,218,0.80);}
 
 /* Flow background — meshing blobs with grid */
 .flow-bg{position:absolute;inset:0;z-index:0;overflow:hidden}
@@ -668,8 +669,10 @@ html.light .gnd-nav-logo-lt{display:block!important;mix-blend-mode:multiply;}
    07 · FORFAITS
 ═══════════════════════════════════════════════════════════════ */
 #forfaits{
-  position:relative;padding:0 0 7rem;background:var(--ink);overflow:hidden;
+  position:relative;padding:0 0 7rem;overflow:hidden;
+  background:rgba(10,9,7,0.82);
 }
+html.light #forfaits{background:rgba(230,226,218,0.80);}
 .fo-shell{
   position:relative;z-index:1;max-width:var(--max);margin:0 auto;
   padding:0 var(--pad-x);
@@ -1061,10 +1064,18 @@ html.light .gnd-nav-logo-lt{display:block!important;mix-blend-mode:multiply;}
 .co-card{
   display:grid;grid-template-columns:auto 1fr auto;gap:1.2rem;align-items:center;
   padding:1.4rem 1.6rem;border-radius:18px;
-  border:1px solid var(--line-2);
-  background:linear-gradient(180deg,rgba(241,234,217,.02),transparent);
-  transition:transform .4s var(--e-back),border-color .4s,background .4s,box-shadow .4s;
+  border:1px solid rgba(200,164,78,0.28);
+  background-image:url(assets/gn-bg-dark.jpg);
+  background-size:cover;background-position:center;
+  box-shadow:0 0 0 1px rgba(200,164,78,0.10),0 16px 40px rgba(0,0,0,0.50);
+  transition:transform .4s var(--e-back),border-color .4s,box-shadow .4s;
   position:relative;overflow:hidden;
+}
+html.light .co-card{
+  background-image:url(assets/gn-bg-light.jpg);
+  background-size:cover;background-position:center;
+  border:1px solid rgba(200,164,78,0.22);
+  box-shadow:0 0 0 1px rgba(200,164,78,0.08),0 8px 24px rgba(0,0,0,0.12);
 }
 .co-card::before{
   content:'';position:absolute;inset:0;
@@ -2032,13 +2043,8 @@ html.light .flow-bg{display:none}
 
 /* ── Light mode: contact ── */
 html.light #contact{background:rgba(240,235,220,.6)}
-html.light .co-card{
-  background:rgba(255,255,255,.58);
-  box-shadow:0 2px 20px -6px rgba(0,0,0,.09),inset 0 1px 0 rgba(255,255,255,.8);
-}
 html.light .co-card:hover{
-  background:rgba(255,255,255,.82);
-  box-shadow:0 12px 40px -12px rgba(0,0,0,.13),0 0 0 1px rgba(200,164,78,.25);
+  box-shadow:0 0 0 1px rgba(200,164,78,.25),0 12px 40px -12px rgba(0,0,0,.18);
 }
 html.light .co-info-item{color:var(--bone-2)}
 
@@ -2317,13 +2323,8 @@ html.light .flow-bg{display:none}
 
 /* ── Light mode: contact ── */
 html.light #contact{background:rgba(240,235,220,.6)}
-html.light .co-card{
-  background:rgba(255,255,255,.58);
-  box-shadow:0 2px 20px -6px rgba(0,0,0,.09),inset 0 1px 0 rgba(255,255,255,.8);
-}
 html.light .co-card:hover{
-  background:rgba(255,255,255,.82);
-  box-shadow:0 12px 40px -12px rgba(0,0,0,.13),0 0 0 1px rgba(200,164,78,.25);
+  box-shadow:0 0 0 1px rgba(200,164,78,.25),0 12px 40px -12px rgba(0,0,0,.18);
 }
 html.light .co-info-item{color:var(--bone-2)}
 
@@ -2808,7 +2809,7 @@ html.light .pm-cta-btn.pm-cta-gold{color:#1a1208}
   background-size:cover;background-position:center;
 }
 html.light #gn-demo-splash{background-image:url(assets/gn-bg-light.jpg);}
-.gnd-logo-img{width:72vw;max-width:340px;height:auto;display:block;will-change:transform,opacity,filter;border-radius:50%;mix-blend-mode:screen;}
+.gnd-logo-img{width:72vw;max-width:340px;height:auto;display:block;will-change:transform,opacity,filter;mix-blend-mode:screen;}
 html.light .gnd-logo-img{mix-blend-mode:multiply;}
 #gnd-logo-lt{display:none;}
 html.light #gnd-logo-dk{display:none!important;}
