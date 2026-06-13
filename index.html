@@ -191,12 +191,12 @@ html.light #nav::before{
 }
 .logo-mark{display:none}
 .gnd-nav-logo{
-  width:32px;height:32px;object-fit:cover;
-  flex-shrink:0;mix-blend-mode:screen;display:block;
+  width:32px;height:32px;object-fit:contain;
+  flex-shrink:0;display:block;
 }
 .gnd-nav-logo-lt{display:none;}
 html.light .gnd-nav-logo-dk{display:none!important;}
-html.light .gnd-nav-logo-lt{display:block!important;mix-blend-mode:multiply;}
+html.light .gnd-nav-logo-lt{display:block!important;}
 .nav-mid{
   display:flex;gap:2.5rem;align-items:center;
 }
@@ -2847,15 +2847,7 @@ html.light #gn-demo-splash::before{
 .gnd-logo-img{
   width:72vw;max-width:340px;height:auto;display:block;
   will-change:transform,opacity,filter;
-  mix-blend-mode:screen;
   position:relative;z-index:1;
-  -webkit-mask:radial-gradient(ellipse 68% 68% at 50% 50%,black 32%,rgba(0,0,0,0.55) 55%,transparent 78%);
-  mask:radial-gradient(ellipse 68% 68% at 50% 50%,black 32%,rgba(0,0,0,0.55) 55%,transparent 78%);
-}
-html.light .gnd-logo-img{
-  mix-blend-mode:multiply;
-  -webkit-mask:radial-gradient(ellipse 65% 65% at 50% 50%,black 36%,rgba(0,0,0,0.5) 58%,transparent 80%);
-  mask:radial-gradient(ellipse 65% 65% at 50% 50%,black 36%,rgba(0,0,0,0.5) 58%,transparent 80%);
 }
 #gnd-logo-lt{display:none;}
 html.light #gnd-logo-dk{display:none!important;}
@@ -2883,8 +2875,8 @@ html.light #gnd-logo-lt{display:block!important;}
 </svg>
 <!-- ══ GeNext Splash ══ -->
 <div id="gn-demo-splash" aria-hidden="true">
-  <img id="gnd-logo-dk" src="assets/gn-logo-dark.jpg" class="gnd-logo-img" alt="GeNext" draggable="false">
-  <img id="gnd-logo-lt" src="assets/gn-logo-light.jpg" class="gnd-logo-img" alt="GeNext" draggable="false">
+  <img id="gnd-logo-dk" src="assets/gn-logo-dark.png" class="gnd-logo-img" alt="GeNext" draggable="false">
+  <img id="gnd-logo-lt" src="assets/gn-logo-light.png" class="gnd-logo-img" alt="GeNext" draggable="false">
 </div>
 <script>
 (function(){
@@ -2980,8 +2972,8 @@ html.light #gnd-logo-lt{display:block!important;}
 <!-- ─── NAV ─── -->
 <nav id="nav">
   <a href="#hero" class="logo">
-    <img src="assets/gn-logo-dark.jpg" class="gnd-nav-logo gnd-nav-logo-dk" alt="GeNext" draggable="false">
-    <img src="assets/gn-logo-light.jpg" class="gnd-nav-logo gnd-nav-logo-lt" alt="GeNext" draggable="false">
+    <img src="assets/gn-logo-dark.png" class="gnd-nav-logo gnd-nav-logo-dk" alt="GeNext" draggable="false">
+    <img src="assets/gn-logo-light.png" class="gnd-nav-logo gnd-nav-logo-lt" alt="GeNext" draggable="false">
     <span data-i18n="brand">GeNext</span>
   </a>
   <div class="nav-mid">
