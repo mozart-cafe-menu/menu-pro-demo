@@ -1035,8 +1035,9 @@ html.light #forfaits{background:rgba(230,226,218,0.80);}
 ═══════════════════════════════════════════════════════════════ */
 #contact{
   position:relative;padding:0 0 6rem;
-  background:var(--ink-2);overflow:hidden;
+  background:rgba(16,14,10,0.80);overflow:hidden;
 }
+html.light #contact{ background:rgba(230,226,218,0.78); }
 #contact::before{
   content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
   width:120%;height:120%;
@@ -1121,8 +1122,9 @@ footer{
   padding:2.5rem var(--pad-x);
   border-top:1px solid var(--line);
   display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5rem;align-items:center;
-  background:var(--ink);
+  background:rgba(10,9,7,0.88);
 }
+html.light footer{ background:rgba(230,226,218,0.88); }
 footer .left{font-family:var(--serif);font-weight:300;font-variation-settings:"opsz" 144;font-size:1rem;letter-spacing:-.01em}
 footer .left em{font-style:italic;color:var(--gold-2)}
 footer .center{text-align:center;font-size:.78rem;color:var(--mute);letter-spacing:.06em;text-transform:uppercase}
@@ -2042,7 +2044,7 @@ html.light .av-viewport{
 html.light .flow-bg{display:none}
 
 /* ── Light mode: contact ── */
-html.light #contact{background:rgba(240,235,220,.6)}
+/* html.light #contact — défini dans la règle principale */
 html.light .co-card:hover{
   box-shadow:0 0 0 1px rgba(200,164,78,.25),0 12px 40px -12px rgba(0,0,0,.18);
 }
@@ -2322,7 +2324,7 @@ html.light .av-card{
 html.light .flow-bg{display:none}
 
 /* ── Light mode: contact ── */
-html.light #contact{background:rgba(240,235,220,.6)}
+/* html.light #contact — défini dans la règle principale */
 html.light .co-card:hover{
   box-shadow:0 0 0 1px rgba(200,164,78,.25),0 12px 40px -12px rgba(0,0,0,.18);
 }
@@ -2802,15 +2804,45 @@ html.light .pm-cta-btn.pm-cta-gold{color:#1a1208}
 }
 
 /* ══ GeNext Splash ══ */
+@keyframes gnBarFlow {
+  0%   { transform: translateX(-100%); opacity: 0; }
+  15%  { opacity: 1; }
+  85%  { opacity: 1; }
+  100% { transform: translateX(100%); opacity: 0; }
+}
 #gn-demo-splash{
   position:fixed;inset:0;z-index:99999;
   display:flex;align-items:center;justify-content:center;
+  background-color:#080604;
   background-image:url(assets/gn-bg-dark.jpg);
   background-size:cover;background-position:center;
+  overflow:hidden;
 }
-html.light #gn-demo-splash{background-image:url(assets/gn-bg-light.jpg);}
-.gnd-logo-img{width:72vw;max-width:340px;height:auto;display:block;will-change:transform,opacity,filter;mix-blend-mode:screen;}
-html.light .gnd-logo-img{mix-blend-mode:multiply;}
+html.light #gn-demo-splash{
+  background-color:#f0ede8;
+  background-image:url(assets/gn-bg-light.jpg);
+}
+#gn-demo-splash::before{
+  content:'';position:absolute;inset:0;pointer-events:none;z-index:0;
+  background:linear-gradient(90deg,transparent 0%,rgba(200,164,78,0.08) 40%,rgba(200,164,78,0.14) 50%,rgba(200,164,78,0.08) 60%,transparent 100%);
+  animation:gnBarFlow 8s ease-in-out infinite;
+}
+html.light #gn-demo-splash::before{
+  background:linear-gradient(90deg,transparent 0%,rgba(200,164,78,0.05) 40%,rgba(200,164,78,0.09) 50%,rgba(200,164,78,0.05) 60%,transparent 100%);
+}
+.gnd-logo-img{
+  width:72vw;max-width:340px;height:auto;display:block;
+  will-change:transform,opacity,filter;
+  mix-blend-mode:screen;
+  position:relative;z-index:1;
+  -webkit-mask:radial-gradient(ellipse 68% 68% at 50% 50%,black 32%,rgba(0,0,0,0.55) 55%,transparent 78%);
+  mask:radial-gradient(ellipse 68% 68% at 50% 50%,black 32%,rgba(0,0,0,0.55) 55%,transparent 78%);
+}
+html.light .gnd-logo-img{
+  mix-blend-mode:multiply;
+  -webkit-mask:radial-gradient(ellipse 65% 65% at 50% 50%,black 36%,rgba(0,0,0,0.5) 58%,transparent 80%);
+  mask:radial-gradient(ellipse 65% 65% at 50% 50%,black 36%,rgba(0,0,0,0.5) 58%,transparent 80%);
+}
 #gnd-logo-lt{display:none;}
 html.light #gnd-logo-dk{display:none!important;}
 html.light #gnd-logo-lt{display:block!important;}
