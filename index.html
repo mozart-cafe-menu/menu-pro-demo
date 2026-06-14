@@ -3688,12 +3688,13 @@ html.light .fo-card-featured{
   let _fnCurrentSec='hero';
 
   function _forfaitsNavTop(){
-    // Always position button just below the style selector tab bar
     const sel=document.getElementById('foStyleSelector');
     if(!sel||!floatNav)return;
     const bottom=sel.getBoundingClientRect().bottom;
     const minTop=_navH()+8;
-    floatNav.style.top=Math.round(Math.max(bottom+12,minTop))+'px';
+    // Clamp max : bouton toujours entier dans le viewport (48px bouton + 20px clearance)
+    const maxTop=(window.visualViewport?window.visualViewport.height:window.innerHeight)-68;
+    floatNav.style.top=Math.round(Math.min(Math.max(bottom+12,minTop),maxTop))+'px';
   }
 
   function setFloatNavTop(sec){
