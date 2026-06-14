@@ -128,13 +128,25 @@ const WAITING_TPL = {
 };
 function _wHtml(r, f, m, t) {
   const dir = t.rtl ? ' dir="rtl"' : '';
-  return '<div' + dir + ' style="font-family:\'Segoe UI\',Arial,sans-serif;max-width:560px;margin:0 auto;background:#fff;border-radius:12px;overflow:hidden;border:1px solid #e8e0d0">'
-    + '<div style="background:linear-gradient(135deg,#1a1510,#2a2018);padding:28px 32px;text-align:center"><div style="font-size:1.7rem;font-weight:700;color:#c8a44e;letter-spacing:0.06em;font-family:Georgia,serif">GeNext</div><div style="font-size:0.8rem;color:rgba(200,164,78,0.6);margin-top:4px;letter-spacing:0.1em;text-transform:uppercase">' + t.sub + '</div></div>'
-    + '<div style="padding:32px"><h2 style="margin:0 0 8px;font-size:1.25rem;color:#1a1510">' + t.gr + '</h2>'
-    + '<p style="color:#444;line-height:1.7;margin-bottom:20px">' + t.p1 + ' <strong style="color:#1a1510">' + escHtml(r) + '</strong>.<br>' + t.p2 + ' <strong style="color:#c8a44e">' + escHtml(f) + '</strong> (' + escHtml(m) + ').</p>'
-    + '<div style="background:#fdf9f0;border-left:3px solid #c8a44e;border-radius:0 8px 8px 0;padding:16px 20px;margin-bottom:24px"><p style="margin:0;color:#5a4a2a;font-size:0.92rem;line-height:1.6">' + t.box + '</p></div>'
-    + '<p style="color:#888;font-size:0.85rem;line-height:1.6">' + t.contact + '</p></div>'
-    + '<div style="background:#fafafa;border-top:1px solid #eee;padding:16px 32px;text-align:center"><span style="font-size:0.78rem;color:#aaa">' + t.ft + '</span></div></div>';
+  return '<table' + dir + ' width="100%" cellpadding="0" cellspacing="0" bgcolor="#080604" style="background-color:#080604">'
+    + '<tr><td align="center" style="padding:16px 8px">'
+    + '<table width="560" cellpadding="0" cellspacing="0" bgcolor="#0a0804" style="max-width:560px;width:100%;background-color:#0a0804;font-family:\'Segoe UI\',Arial,sans-serif">'
+    + '<tr><td bgcolor="#0a0804" align="center" style="background-color:#0a0804;padding:26px 32px;border-bottom:1px solid #2e1e0a">'
+    + '<img src="https://menu-saas-platform.vercel.app/assets/gn-logo-dark.png" alt="GeNext" width="160" style="display:block;margin:0 auto;max-width:160px;border:0">'
+    + '<div style="font-size:0.72rem;color:#7a6040;letter-spacing:0.12em;text-transform:uppercase;margin-top:8px">' + t.sub + '</div>'
+    + '</td></tr>'
+    + '<tr><td bgcolor="#0a0804" style="background-color:#0a0804;padding:28px 32px">'
+    + '<h2 style="margin:0 0 12px;font-size:1.15rem;color:#c8a44e">' + t.gr + '</h2>'
+    + '<p style="color:#c8b890;line-height:1.7;margin-bottom:20px;font-size:0.92rem">' + t.p1 + ' <strong style="color:#f0e8c0">' + escHtml(r) + '</strong>.<br>' + t.p2 + ' <strong style="color:#c8a44e">' + escHtml(f) + '</strong> (' + escHtml(m) + ').</p>'
+    + '<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#150f08" style="background-color:#150f08;border:1px solid #2e1e0a;border-left:3px solid #c8a44e;border-radius:0 8px 8px 0;margin-bottom:20px"><tr><td style="padding:14px 18px;font-size:0.88rem;color:#c8b890;line-height:1.6">' + t.box + '</td></tr></table>'
+    + '<p style="color:#7a6040;font-size:0.83rem;line-height:1.6;margin:0">' + t.contact + '</p>'
+    + '</td></tr>'
+    + '<tr><td bgcolor="#080604" align="center" style="background-color:#080604;padding:14px 32px;border-top:1px solid #2e1e0a">'
+    + '<span style="font-size:0.75rem;color:#5a4a2a">' + t.ft + '</span>'
+    + '</td></tr>'
+    + '</table>'
+    + '</td></tr>'
+    + '</table>';
 }
 
 // ════════════════════════════════════════════════════════════════════════════
@@ -156,28 +168,52 @@ function deliverySubject(name, lang) {
 function deliveryHtml(name, rid, pwd, isCS, lang) {
   const safeName = escHtml(name);
   const T = {
-    fr: { sub:'Menus digitaux &amp; Commandes', gr:'Bonjour,', intro:'Votre espace <strong style="color:#1a1510">' + safeName + '</strong> est prêt !', sub2:'Connectez-vous à votre tableau de bord pour personnaliser votre menu.', lid:'Identifiant (ID restaurant)', lpwd:'Mot de passe', btn:'🔑 Accéder au tableau de bord', apkT:'Application serveur', apkS:'Téléchargez cette application pour que votre personnel puisse recevoir les commandes.', apkBtn:'📱 Télécharger l\'application serveur', trial:'⏱ Vous bénéficiez de <strong>7 jours d\'essai gratuit</strong> à partir de votre première connexion.', contact:'N\'hésitez pas à nous répondre si vous avez des questions.', ft:'GeNext · Menus digitaux pour cafés et restaurants' },
-    en: { sub:'Digital menus &amp; Orders', gr:'Hello,', intro:'Your space <strong style="color:#1a1510">' + safeName + '</strong> is ready!', sub2:'Log in to your dashboard to customize your menu.', lid:'Restaurant ID', lpwd:'Password', btn:'🔑 Access dashboard', apkT:'Server application', apkS:'Download this app so your staff can receive orders.', apkBtn:'📱 Download server app', trial:'⏱ You have a <strong>7-day free trial</strong> starting from your first login.', contact:'Feel free to reply if you have any questions.', ft:'GeNext · Digital menus for cafés and restaurants' },
-    el: { sub:'Ψηφιακά μενού &amp; Παραγγελίες', gr:'Γεια σας,', intro:'Ο χώρος σας <strong style="color:#1a1510">' + safeName + '</strong> είναι έτοιμος!', sub2:'Συνδεθείτε στον πίνακα ελέγχου για να προσαρμόσετε το μενού σας.', lid:'Αναγνωριστικό εστιατορίου', lpwd:'Κωδικός', btn:'🔑 Πρόσβαση στον πίνακα ελέγχου', apkT:'Εφαρμογή σερβιτόρων', apkS:'Κατεβάστε αυτή την εφαρμογή για να λαμβάνει παραγγελίες το προσωπικό σας.', apkBtn:'📱 Λήψη εφαρμογής', trial:'⏱ Έχετε <strong>7 ημέρες δωρεάν δοκιμή</strong> από την πρώτη σύνδεσή σας.', contact:'Μη διστάσετε να μας απαντήσετε αν έχετε ερωτήσεις.', ft:'GeNext · Ψηφιακά μενού για καφέ και εστιατόρια' },
-    ar: { sub:'قوائم رقمية وطلبات', gr:'مرحباً،', intro:'مساحتك <strong style="color:#1a1510">' + safeName + '</strong> جاهزة!', sub2:'سجّل الدخول إلى لوحة التحكم لتخصيص قائمتك.', lid:'معرّف المطعم', lpwd:'كلمة المرور', btn:'🔑 الوصول إلى لوحة التحكم', apkT:'تطبيق النادلين', apkS:'نزّل هذا التطبيق ليستقبل موظفوك الطلبات.', apkBtn:'📱 تنزيل التطبيق', trial:'⏱ لديك <strong>7 أيام تجريبية مجانية</strong> من أول تسجيل دخول.', contact:'لا تتردد في الرد على هذا البريد إذا كان لديك أي سؤال.', ft:'GeNext · قوائم رقمية للمقاهي والمطاعم', rtl:true },
-    de: { sub:'Digitale Speisekarten &amp; Bestellungen', gr:'Hallo,', intro:'Ihr Bereich <strong style="color:#1a1510">' + safeName + '</strong> ist bereit!', sub2:'Melden Sie sich in Ihrem Dashboard an, um Ihre Speisekarte anzupassen.', lid:'Restaurant-ID', lpwd:'Passwort', btn:'🔑 Dashboard aufrufen', apkT:'Server-App', apkS:'Lassen Sie Ihr Personal diese App herunterladen, um Bestellungen zu erhalten.', apkBtn:'📱 Server-App herunterladen', trial:'⏱ Sie haben eine <strong>7-tägige kostenlose Testphase</strong> ab Ihrer ersten Anmeldung.', contact:'Antworten Sie auf diese E-Mail, wenn Sie Fragen haben.', ft:'GeNext · Digitale Speisekarten für Cafés und Restaurants' }
+    fr: { sub:'Menus digitaux &amp; Commandes', gr:'Bonjour,', intro:'Votre espace <strong style="color:#f0e8c0">' + safeName + '</strong> est prêt !', sub2:'Connectez-vous à votre tableau de bord pour personnaliser votre menu.', lid:'Identifiant (ID restaurant)', lpwd:'Mot de passe', btn:'🔑 Accéder au tableau de bord', apkT:'Application serveur', apkS:'Téléchargez cette application pour que votre personnel puisse recevoir les commandes.', apkBtn:'📱 Télécharger l\'application serveur', trial:'⏱ Vous bénéficiez de <strong style="color:#c8a44e">7 jours d\'essai gratuit</strong> à partir de votre première connexion.', contact:'N\'hésitez pas à nous répondre si vous avez des questions.', ft:'GeNext · Menus digitaux pour cafés et restaurants' },
+    en: { sub:'Digital menus &amp; Orders', gr:'Hello,', intro:'Your space <strong style="color:#f0e8c0">' + safeName + '</strong> is ready!', sub2:'Log in to your dashboard to customize your menu.', lid:'Restaurant ID', lpwd:'Password', btn:'🔑 Access dashboard', apkT:'Server application', apkS:'Download this app so your staff can receive orders.', apkBtn:'📱 Download server app', trial:'⏱ You have a <strong style="color:#c8a44e">7-day free trial</strong> starting from your first login.', contact:'Feel free to reply if you have any questions.', ft:'GeNext · Digital menus for cafés and restaurants' },
+    el: { sub:'Ψηφιακά μενού &amp; Παραγγελίες', gr:'Γεια σας,', intro:'Ο χώρος σας <strong style="color:#f0e8c0">' + safeName + '</strong> είναι έτοιμος!', sub2:'Συνδεθείτε στον πίνακα ελέγχου για να προσαρμόσετε το μενού σας.', lid:'Αναγνωριστικό εστιατορίου', lpwd:'Κωδικός', btn:'🔑 Πρόσβαση στον πίνακα ελέγχου', apkT:'Εφαρμογή σερβιτόρων', apkS:'Κατεβάστε αυτή την εφαρμογή για να λαμβάνει παραγγελίες το προσωπικό σας.', apkBtn:'📱 Λήψη εφαρμογής', trial:'⏱ Έχετε <strong style="color:#c8a44e">7 ημέρες δωρεάν δοκιμή</strong> από την πρώτη σύνδεσή σας.', contact:'Μη διστάσετε να μας απαντήσετε αν έχετε ερωτήσεις.', ft:'GeNext · Ψηφιακά μενού για καφέ και εστιατόρια' },
+    ar: { sub:'قوائم رقمية وطلبات', gr:'مرحباً،', intro:'مساحتك <strong style="color:#f0e8c0">' + safeName + '</strong> جاهزة!', sub2:'سجّل الدخول إلى لوحة التحكم لتخصيص قائمتك.', lid:'معرّف المطعم', lpwd:'كلمة المرور', btn:'🔑 الوصول إلى لوحة التحكم', apkT:'تطبيق النادلين', apkS:'نزّل هذا التطبيق ليستقبل موظفوك الطلبات.', apkBtn:'📱 تنزيل التطبيق', trial:'⏱ لديك <strong style="color:#c8a44e">7 أيام تجريبية مجانية</strong> من أول تسجيل دخول.', contact:'لا تتردد في الرد على هذا البريد إذا كان لديك أي سؤال.', ft:'GeNext · قوائم رقمية للمقاهي والمطاعم', rtl:true },
+    de: { sub:'Digitale Speisekarten &amp; Bestellungen', gr:'Hallo,', intro:'Ihr Bereich <strong style="color:#f0e8c0">' + safeName + '</strong> ist bereit!', sub2:'Melden Sie sich in Ihrem Dashboard an, um Ihre Speisekarte anzupassen.', lid:'Restaurant-ID', lpwd:'Passwort', btn:'🔑 Dashboard aufrufen', apkT:'Server-App', apkS:'Lassen Sie Ihr Personal diese App herunterladen, um Bestellungen zu erhalten.', apkBtn:'📱 Server-App herunterladen', trial:'⏱ Sie haben eine <strong style="color:#c8a44e">7-tägige kostenlose Testphase</strong> ab Ihrer ersten Anmeldung.', contact:'Antworten Sie auf diese E-Mail, wenn Sie Fragen haben.', ft:'GeNext · Digitale Speisekarten für Cafés und Restaurants' }
   };
   const t = T[lang] || T.fr;
   const dir = t.rtl ? ' dir="rtl"' : '';
-  return '<div' + dir + ' style="font-family:\'Segoe UI\',Arial,sans-serif;max-width:580px;margin:0 auto;background:#fff;border-radius:12px;overflow:hidden;border:1px solid #e8e0d0">'
-    + '<div style="background:linear-gradient(135deg,#1a1510,#2a2018);padding:28px 32px;text-align:center"><div style="font-size:1.7rem;font-weight:700;color:#c8a44e;letter-spacing:0.06em;font-family:Georgia,serif">GeNext</div><div style="font-size:0.8rem;color:rgba(200,164,78,0.6);margin-top:4px;letter-spacing:0.1em;text-transform:uppercase">' + t.sub + '</div></div>'
-    + '<div style="padding:32px">'
-    + '<h2 style="margin:0 0 8px;font-size:1.25rem;color:#1a1510">' + t.gr + '</h2>'
-    + '<p style="color:#444;line-height:1.7;margin-bottom:20px">' + t.intro + '<br>' + t.sub2 + '</p>'
-    + '<div style="background:#fdf9f0;border:1px solid #e8d8a0;border-radius:10px;padding:20px 24px;margin-bottom:20px">'
-    + '<div style="margin-bottom:12px"><span style="font-size:0.72rem;color:#888;text-transform:uppercase;letter-spacing:0.08em">' + t.lid + '</span><br><code style="font-size:1rem;color:#1a1510;font-weight:700;background:#fff;padding:4px 10px;border-radius:6px;border:1px solid #e0d0a0">' + rid + '</code></div>'
-    + '<div><span style="font-size:0.72rem;color:#888;text-transform:uppercase;letter-spacing:0.08em">' + t.lpwd + '</span><br><code style="font-size:1rem;color:#1a1510;font-weight:700;background:#fff;padding:4px 10px;border-radius:6px;border:1px solid #e0d0a0">' + pwd + '</code></div>'
-    + '</div>'
-    + '<div style="text-align:center;margin-bottom:20px"><a href="' + ADMIN_URL + '?rid=' + rid + '" style="display:inline-block;background:linear-gradient(135deg,#e2c278,#c8a44e,#9a7a35);color:#1a1510;text-decoration:none;padding:13px 28px;border-radius:10px;font-weight:700;font-size:0.95rem">' + t.btn + '</a></div>'
-    + (isCS ? '<div style="background:#f0f4ff;border:1px solid #c8d8f0;border-radius:10px;padding:16px 20px;margin-bottom:20px"><p style="margin:0 0 6px;font-weight:700;color:#1a1510">' + t.apkT + '</p><p style="margin:0 0 12px;color:#555;font-size:0.88rem">' + t.apkS + '</p><div style="text-align:center"><a href="' + APK_URL + '" style="display:inline-block;background:linear-gradient(135deg,#3a6fd8,#2456b8);color:#fff;text-decoration:none;padding:11px 24px;border-radius:10px;font-weight:700;font-size:0.9rem">' + t.apkBtn + '</a></div></div>' : '')
-    + '<div style="background:#fdf9f0;border-left:3px solid #c8a44e;border-radius:0 8px 8px 0;padding:14px 18px;margin-bottom:20px"><p style="margin:0;color:#5a4a2a;font-size:0.9rem;line-height:1.6">' + t.trial + '</p></div>'
-    + '<p style="color:#888;font-size:0.85rem;line-height:1.6">' + t.contact + '</p>'
-    + '</div><div style="background:#fafafa;border-top:1px solid #eee;padding:16px 32px;text-align:center"><span style="font-size:0.78rem;color:#aaa">' + t.ft + '</span></div></div>';
+  return '<table' + dir + ' width="100%" cellpadding="0" cellspacing="0" bgcolor="#080604" style="background-color:#080604">'
+    + '<tr><td align="center" style="padding:16px 8px">'
+    + '<table width="580" cellpadding="0" cellspacing="0" bgcolor="#0a0804" style="max-width:580px;width:100%;background-color:#0a0804;font-family:\'Segoe UI\',Arial,sans-serif">'
+    + '<tr><td bgcolor="#0a0804" align="center" style="background-color:#0a0804;padding:26px 32px;border-bottom:1px solid #2e1e0a">'
+    + '<img src="https://menu-saas-platform.vercel.app/assets/gn-logo-dark.png" alt="GeNext" width="160" style="display:block;margin:0 auto;max-width:160px;border:0">'
+    + '<div style="font-size:0.72rem;color:#7a6040;letter-spacing:0.12em;text-transform:uppercase;margin-top:8px">' + t.sub + '</div>'
+    + '</td></tr>'
+    + '<tr><td bgcolor="#0a0804" style="background-color:#0a0804;padding:28px 32px">'
+    + '<h2 style="margin:0 0 8px;font-size:1.15rem;color:#c8a44e">' + t.gr + '</h2>'
+    + '<p style="color:#c8b890;line-height:1.7;margin-bottom:20px;font-size:0.92rem">' + t.intro + '<br>' + t.sub2 + '</p>'
+    + '<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#150f08" style="background-color:#150f08;border:1px solid #2e1e0a;border-radius:10px;margin-bottom:20px">'
+    + '<tr><td bgcolor="#150f08" style="background-color:#150f08;padding:16px 20px 10px">'
+    + '<span style="display:block;font-size:0.65rem;color:#7a6040;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:5px">' + t.lid + '</span>'
+    + '<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#0d0903" style="background-color:#0d0903;border-radius:6px"><tr><td bgcolor="#0d0903" style="background-color:#0d0903;padding:5px 10px;font-family:Courier,monospace;font-size:1rem;color:#c8a44e;font-weight:700;letter-spacing:0.06em">' + escHtml(rid) + '</td></tr></table>'
+    + '</td></tr>'
+    + '<tr><td bgcolor="#150f08" style="background-color:#150f08;padding:10px 20px 16px;border-top:1px solid #2e1e0a">'
+    + '<span style="display:block;font-size:0.65rem;color:#7a6040;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:5px">' + t.lpwd + '</span>'
+    + '<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#0d0903" style="background-color:#0d0903;border-radius:6px"><tr><td bgcolor="#0d0903" style="background-color:#0d0903;padding:5px 10px;font-family:Courier,monospace;font-size:1rem;color:#c8a44e;font-weight:700;letter-spacing:0.06em">' + escHtml(pwd) + '</td></tr></table>'
+    + '</td></tr></table>'
+    + '<table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:20px"><tr><td align="center" style="text-align:center">'
+    + '<a href="' + ADMIN_URL + '" style="display:inline-block;background-color:#c8a44e;color:#0a0804;text-decoration:none;padding:13px 28px;border-radius:10px;font-weight:700;font-size:0.95rem">' + t.btn + '</a>'
+    + '</td></tr></table>'
+    + (isCS ? '<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#150f08" style="background-color:#150f08;border:1px solid #2e1e0a;border-radius:10px;margin-bottom:20px">'
+    + '<tr><td bgcolor="#150f08" style="background-color:#150f08;padding:16px 20px">'
+    + '<p style="margin:0 0 4px;font-weight:700;color:#f0e8c0;font-size:0.92rem">' + t.apkT + '</p>'
+    + '<p style="margin:0 0 12px;color:#c8b890;font-size:0.85rem">' + t.apkS + '</p>'
+    + '<table width="100%" cellpadding="0" cellspacing="0"><tr><td align="center"><a href="' + APK_URL + '" style="display:inline-block;background-color:#2a5ab8;color:#fff;text-decoration:none;padding:11px 22px;border-radius:10px;font-weight:700;font-size:0.88rem">' + t.apkBtn + '</a></td></tr></table>'
+    + '</td></tr></table>' : '')
+    + '<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#150f08" style="background-color:#150f08;border:1px solid #2e1e0a;border-left:3px solid #c8a44e;border-radius:0 8px 8px 0;margin-bottom:20px">'
+    + '<tr><td bgcolor="#150f08" style="background-color:#150f08;padding:12px 16px;font-size:0.88rem;color:#c8b890;line-height:1.6">' + t.trial + '</td></tr></table>'
+    + '<p style="color:#7a6040;font-size:0.83rem;line-height:1.6;margin:0">' + t.contact + '</p>'
+    + '</td></tr>'
+    + '<tr><td bgcolor="#080604" align="center" style="background-color:#080604;padding:14px 32px;border-top:1px solid #2e1e0a">'
+    + '<span style="font-size:0.75rem;color:#5a4a2a">' + t.ft + '</span>'
+    + '</td></tr>'
+    + '</table>'
+    + '</td></tr>'
+    + '</table>';
 }
 
 // ── Auto-création restaurant ─────────────────────────────────────────────────
@@ -281,9 +317,12 @@ module.exports = async (req, res) => {
         const modeLabel = paymentMode === 'annual' ? modes.annual : modes.monthly;
         await createTransport().sendMail({
           from:    '"GeNext" <' + process.env.GMAIL_USER + '>',
+          replyTo: process.env.GMAIL_USER,
           to:      email,
           subject: tpl.subject(rest),
-          html:    tpl.html(rest, plan.split(' — ')[0] || 'GeNext', modeLabel)
+          html:    tpl.html(rest, plan.split(' — ')[0] || 'GeNext', modeLabel),
+          text:    rest + ' — Demande reçue\n\nNous avons bien reçu votre demande.\nForfait : ' + (plan.split(' — ')[0] || '') + ' (' + modeLabel + ')\n\nVous recevrez vos identifiants dans les 24 heures.\n\nGeNext — gennextcontact@gmail.com',
+          headers: { 'List-Unsubscribe': '<mailto:' + process.env.GMAIL_USER + '?subject=unsubscribe>' }
         });
         console.log('✅ Email attente envoyé à:', email);
       } catch(e) {
@@ -304,9 +343,12 @@ module.exports = async (req, res) => {
       try {
         await createTransport().sendMail({
           from:    '"GeNext" <' + process.env.GMAIL_USER + '>',
+          replyTo: process.env.GMAIL_USER,
           to:      email,
           subject: deliverySubject(rest, lang),
-          html:    deliveryHtml(rest, created.rid, created.pwd, created.isCS, lang)
+          html:    deliveryHtml(rest, created.rid, created.pwd, created.isCS, lang),
+          text:    rest + ' — Accès GeNext\n\nVotre espace est prêt.\nIdentifiant : ' + created.rid + '\nMot de passe : ' + created.pwd + '\n\nAccéder : ' + ADMIN_URL + '\n\n7 jours d\'essai gratuit à partir de votre première connexion.\n\nGeNext — gennextcontact@gmail.com',
+          headers: { 'List-Unsubscribe': '<mailto:' + process.env.GMAIL_USER + '?subject=unsubscribe>' }
         });
         console.log('✅ Email livraison envoyé à:', email, '— RID:', created.rid);
       } catch(e) {

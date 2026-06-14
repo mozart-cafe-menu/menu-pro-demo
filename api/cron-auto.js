@@ -86,34 +86,35 @@ function fmtDate(ts, lang) {
 // ════════════════════════════════════════════════════════════════════════════
 
 function _headerHtml(subtitle) {
-  return '<div style="background:linear-gradient(135deg,#1a1510,#2a2018);padding:28px 32px;text-align:center">'
-    + '<div style="font-size:1.7rem;font-weight:700;color:#c8a44e;letter-spacing:0.06em;font-family:Georgia,serif">GeNext</div>'
-    + '<div style="font-size:0.8rem;color:rgba(200,164,78,0.6);margin-top:4px;letter-spacing:0.1em;text-transform:uppercase">' + subtitle + '</div>'
-    + '</div>';
+  return '<tr><td bgcolor="#0a0804" align="center" style="background-color:#0a0804;padding:26px 32px;border-bottom:1px solid #2e1e0a">'
+    + '<img src="https://menu-saas-platform.vercel.app/assets/gn-logo-dark.png" alt="GeNext" width="160" style="display:block;margin:0 auto;max-width:160px;border:0">'
+    + '<div style="font-size:0.7rem;color:#7a6040;letter-spacing:0.12em;text-transform:uppercase;margin-top:10px">' + subtitle + '</div>'
+    + '</td></tr>';
 }
 
 function _footerHtml(text) {
-  return '<div style="background:#fafafa;border-top:1px solid #eee;padding:16px 32px;text-align:center">'
-    + '<span style="font-size:0.78rem;color:#aaa">' + text + '</span>'
-    + '</div>';
+  return '<tr><td bgcolor="#080604" align="center" style="background-color:#080604;padding:14px 32px;border-top:1px solid #2e1e0a">'
+    + '<span style="font-size:0.75rem;color:#5a4a2a">' + text + '</span>'
+    + '</td></tr>';
 }
 
 function _credentialsCard(labelId, rid, labelPwd, pwd) {
-  return '<div style="background:#fdf9f0;border:1px solid #e8d8a0;border-radius:10px;padding:20px 24px;margin-bottom:20px">'
-    + '<div style="margin-bottom:12px">'
-    + '<span style="font-size:0.75rem;color:#888;text-transform:uppercase;letter-spacing:0.08em">' + escHtml(labelId) + '</span><br>'
-    + '<code style="font-size:1.05rem;color:#1a1510;font-weight:600;background:#fff;padding:4px 10px;border-radius:6px;border:1px solid #e0d0a0">' + escHtml(rid) + '</code>'
-    + '</div>'
-    + '<div>'
-    + '<span style="font-size:0.75rem;color:#888;text-transform:uppercase;letter-spacing:0.08em">' + escHtml(labelPwd) + '</span><br>'
-    + '<code style="font-size:1.05rem;color:#1a1510;font-weight:600;background:#fff;padding:4px 10px;border-radius:6px;border:1px solid #e0d0a0">' + escHtml(pwd) + '</code>'
-    + '</div>'
-    + '</div>';
+  return '<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#150f08" style="background-color:#150f08;border:1px solid #2e1e0a;border-radius:10px;margin-bottom:20px">'
+    + '<tr><td style="padding:16px 20px 10px">'
+    + '<span style="display:block;font-size:0.65rem;color:#7a6040;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px">' + escHtml(labelId) + '</span>'
+    + '<span style="display:block;font-family:Courier,monospace;font-size:1rem;color:#c8a44e;font-weight:700;background-color:#0d0903;padding:6px 12px;border-radius:6px;letter-spacing:0.06em">' + escHtml(rid) + '</span>'
+    + '</td></tr>'
+    + '<tr><td style="padding:10px 20px 16px;border-top:1px solid #2e1e0a">'
+    + '<span style="display:block;font-size:0.65rem;color:#7a6040;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px">' + escHtml(labelPwd) + '</span>'
+    + '<span style="display:block;font-family:Courier,monospace;font-size:1rem;color:#c8a44e;font-weight:700;background-color:#0d0903;padding:6px 12px;border-radius:6px;letter-spacing:0.06em">' + escHtml(pwd) + '</span>'
+    + '</td></tr>'
+    + '</table>';
 }
 
 function _btnHtml(url, label, color) {
-  return '<a href="' + url + '" style="display:inline-block;background:' + (color || 'linear-gradient(135deg,#e2c278,#c8a44e,#9a7a35)') + ';color:' + (color ? '#fff' : '#1a1510') + ';text-decoration:none;padding:13px 28px;border-radius:10px;font-weight:700;font-size:0.95rem;margin:6px 4px">'
-    + label + '</a>';
+  const bg = color || 'linear-gradient(135deg,#e2c278,#c8a44e,#9a7a35)';
+  const fg = color ? '#fff' : '#0a0804';
+  return '<a href="' + url + '" style="display:inline-block;background:' + bg + ';color:' + fg + ';text-decoration:none;padding:13px 28px;border-radius:10px;font-weight:700;font-size:0.95rem">' + label + '</a>';
 }
 
 function deliveryHtml(rawName, rid, pwd, isCS, lang) {
@@ -122,7 +123,7 @@ function deliveryHtml(rawName, rid, pwd, isCS, lang) {
     fr: {
       subtitle: 'Menus digitaux &amp; Commandes',
       greeting: 'Bonjour,',
-      intro: 'Votre espace <strong style="color:#1a1510">' + name + '</strong> est prêt !',
+      intro: 'Votre espace <strong style="color:#f0e8c0">' + name + '</strong> est prêt !',
       sub: 'Connectez-vous dès maintenant à votre tableau de bord pour personnaliser votre menu.',
       labelId: 'Identifiant (ID restaurant)',
       labelPwd: 'Mot de passe',
@@ -130,14 +131,14 @@ function deliveryHtml(rawName, rid, pwd, isCS, lang) {
       apkTitle: 'Application serveur',
       apkSub: 'Faites télécharger cette application à votre personnel pour recevoir les commandes.',
       btnApk: '📱 Télécharger l\'application serveur',
-      trial: '⏱ Vous bénéficiez de <strong>7 jours d\'essai gratuit</strong> à partir de votre première connexion.',
+      trial: '⏱ Vous bénéficiez de <strong style="color:#c8a44e">7 jours d\'essai gratuit</strong> à partir de votre première connexion.',
       contact: 'N\'hésitez pas à nous répondre si vous avez des questions.',
       footer: 'GeNext · Menus digitaux pour cafés et restaurants'
     },
     en: {
       subtitle: 'Digital menus &amp; Orders',
       greeting: 'Hello,',
-      intro: 'Your space <strong style="color:#1a1510">' + name + '</strong> is ready!',
+      intro: 'Your space <strong style="color:#f0e8c0">' + name + '</strong> is ready!',
       sub: 'Log in to your dashboard now to customize your menu.',
       labelId: 'Restaurant ID',
       labelPwd: 'Password',
@@ -145,14 +146,14 @@ function deliveryHtml(rawName, rid, pwd, isCS, lang) {
       apkTitle: 'Server application',
       apkSub: 'Have your staff download this app to receive orders.',
       btnApk: '📱 Download server app',
-      trial: '⏱ You have a <strong>7-day free trial</strong> starting from your first login.',
+      trial: '⏱ You have a <strong style="color:#c8a44e">7-day free trial</strong> starting from your first login.',
       contact: 'Feel free to reply to this email if you have any questions.',
       footer: 'GeNext · Digital menus for cafés and restaurants'
     },
     el: {
       subtitle: 'Ψηφιακά μενού &amp; Παραγγελίες',
       greeting: 'Γεια σας,',
-      intro: 'Ο χώρος σας <strong style="color:#1a1510">' + name + '</strong> είναι έτοιμος!',
+      intro: 'Ο χώρος σας <strong style="color:#f0e8c0">' + name + '</strong> είναι έτοιμος!',
       sub: 'Συνδεθείτε στον πίνακα ελέγχου για να προσαρμόσετε το μενού σας.',
       labelId: 'Αναγνωριστικό εστιατορίου',
       labelPwd: 'Κωδικός πρόσβασης',
@@ -160,14 +161,14 @@ function deliveryHtml(rawName, rid, pwd, isCS, lang) {
       apkTitle: 'Εφαρμογή σερβιτόρων',
       apkSub: 'Κάντε το προσωπικό σας να κατεβάσει αυτή την εφαρμογή για να λαμβάνουν παραγγελίες.',
       btnApk: '📱 Λήψη εφαρμογής σερβιτόρων',
-      trial: '⏱ Έχετε <strong>7 ημέρες δωρεάν δοκιμή</strong> από την πρώτη σύνδεσή σας.',
+      trial: '⏱ Έχετε <strong style="color:#c8a44e">7 ημέρες δωρεάν δοκιμή</strong> από την πρώτη σύνδεσή σας.',
       contact: 'Μη διστάσετε να μας απαντήσετε αν έχετε ερωτήσεις.',
       footer: 'GeNext · Ψηφιακά μενού για καφέ και εστιατόρια'
     },
     ar: {
       subtitle: 'قوائم رقمية وطلبات',
       greeting: 'مرحباً،',
-      intro: 'مساحتك <strong style="color:#1a1510">' + name + '</strong> جاهزة!',
+      intro: 'مساحتك <strong style="color:#f0e8c0">' + name + '</strong> جاهزة!',
       sub: 'سجّل الدخول إلى لوحة التحكم لتخصيص قائمتك.',
       labelId: 'معرّف المطعم',
       labelPwd: 'كلمة المرور',
@@ -175,14 +176,14 @@ function deliveryHtml(rawName, rid, pwd, isCS, lang) {
       apkTitle: 'تطبيق النادلين',
       apkSub: 'اطلب من موظفيك تنزيل هذا التطبيق لاستقبال الطلبات.',
       btnApk: '📱 تنزيل تطبيق النادلين',
-      trial: '⏱ لديك <strong>7 أيام تجريبية مجانية</strong> من أول تسجيل دخول.',
+      trial: '⏱ لديك <strong style="color:#c8a44e">7 أيام تجريبية مجانية</strong> من أول تسجيل دخول.',
       contact: 'لا تتردد في الرد على هذا البريد إذا كان لديك أي سؤال.',
       footer: 'GeNext · قوائم رقمية للمقاهي والمطاعم'
     },
     de: {
       subtitle: 'Digitale Speisekarten &amp; Bestellungen',
       greeting: 'Hallo,',
-      intro: 'Ihr Bereich <strong style="color:#1a1510">' + name + '</strong> ist bereit!',
+      intro: 'Ihr Bereich <strong style="color:#f0e8c0">' + name + '</strong> ist bereit!',
       sub: 'Melden Sie sich jetzt in Ihrem Dashboard an, um Ihre Speisekarte anzupassen.',
       labelId: 'Restaurant-ID',
       labelPwd: 'Passwort',
@@ -190,36 +191,40 @@ function deliveryHtml(rawName, rid, pwd, isCS, lang) {
       apkTitle: 'Server-App',
       apkSub: 'Lassen Sie Ihr Personal diese App herunterladen, um Bestellungen zu erhalten.',
       btnApk: '📱 Server-App herunterladen',
-      trial: '⏱ Sie haben eine <strong>7-tägige kostenlose Testphase</strong> ab Ihrer ersten Anmeldung.',
+      trial: '⏱ Sie haben eine <strong style="color:#c8a44e">7-tägige kostenlose Testphase</strong> ab Ihrer ersten Anmeldung.',
       contact: 'Antworten Sie auf diese E-Mail, wenn Sie Fragen haben.',
       footer: 'GeNext · Digitale Speisekarten für Cafés und Restaurants'
     }
   };
-  const t = T[lang] || T.fr;
+  const t   = T[lang] || T.fr;
   const dir = lang === 'ar' ? ' dir="rtl"' : '';
-  return '<div' + dir + ' style="font-family:\'Segoe UI\',Arial,sans-serif;max-width:580px;margin:0 auto;background:#fff;border-radius:12px;overflow:hidden;border:1px solid #e8e0d0">'
+  return '<table' + dir + ' width="100%" cellpadding="0" cellspacing="0" bgcolor="#080604" style="background-color:#080604">'
+    + '<tr><td align="center" style="padding:16px 8px">'
+    + '<table width="580" cellpadding="0" cellspacing="0" bgcolor="#0a0804" style="max-width:580px;width:100%;background-color:#0a0804;font-family:\'Segoe UI\',Arial,sans-serif">'
     + _headerHtml(t.subtitle)
-    + '<div style="padding:32px">'
-    + '<h2 style="margin:0 0 8px;font-size:1.25rem;color:#1a1510">' + t.greeting + '</h2>'
-    + '<p style="color:#444;line-height:1.7;margin-bottom:20px">' + t.intro + '<br>' + t.sub + '</p>'
+    + '<tr><td bgcolor="#0a0804" style="background-color:#0a0804;padding:28px 32px">'
+    + '<h2 style="margin:0 0 12px;font-size:1.15rem;color:#c8a44e">' + t.greeting + '</h2>'
+    + '<p style="color:#c8b890;line-height:1.7;margin-bottom:20px;font-size:0.92rem">' + t.intro + '<br>' + t.sub + '</p>'
     + _credentialsCard(t.labelId, rid, t.labelPwd, pwd)
-    + '<div style="text-align:center;margin-bottom:20px">'
-    + _btnHtml(ADMIN_URL + '?rid=' + rid, t.btnAdmin, null)
-    + '</div>'
+    + '<table width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="padding-bottom:20px">'
+    + _btnHtml(ADMIN_URL, t.btnAdmin, null)
+    + '</td></tr></table>'
     + (isCS
-      ? '<div style="background:#f0f4ff;border:1px solid #c8d8f0;border-radius:10px;padding:16px 20px;margin-bottom:20px">'
-        + '<p style="margin:0 0 6px;font-weight:700;color:#1a1510">' + t.apkTitle + '</p>'
-        + '<p style="margin:0 0 12px;color:#555;font-size:0.88rem">' + t.apkSub + '</p>'
-        + '<div style="text-align:center">' + _btnHtml(APK_URL, t.btnApk, 'linear-gradient(135deg,#3a6fd8,#2456b8)') + '</div>'
-        + '</div>'
+      ? '<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#150f08" style="background-color:#150f08;border:1px solid #2e1e0a;border-radius:10px;margin-bottom:20px"><tr><td style="padding:16px 20px">'
+        + '<p style="margin:0 0 6px;font-weight:700;color:#f0e8c0;font-size:0.92rem">' + t.apkTitle + '</p>'
+        + '<p style="margin:0 0 14px;color:#c8b890;font-size:0.85rem">' + t.apkSub + '</p>'
+        + '<table width="100%" cellpadding="0" cellspacing="0"><tr><td align="center">'
+        + _btnHtml(APK_URL, t.btnApk, 'linear-gradient(135deg,#3a6fd8,#2456b8)')
+        + '</td></tr></table>'
+        + '</td></tr></table>'
       : '')
-    + '<div style="background:#fdf9f0;border-left:3px solid #c8a44e;border-radius:0 8px 8px 0;padding:14px 18px;margin-bottom:20px">'
-    + '<p style="margin:0;color:#5a4a2a;font-size:0.9rem;line-height:1.6">' + t.trial + '</p>'
-    + '</div>'
-    + '<p style="color:#888;font-size:0.85rem;line-height:1.6">' + t.contact + '</p>'
-    + '</div>'
+    + '<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#150f08" style="background-color:#150f08;border:1px solid #2e1e0a;border-left:3px solid #c8a44e;border-radius:0 8px 8px 0;margin-bottom:20px"><tr><td style="padding:12px 16px;font-size:0.88rem;color:#c8b890;line-height:1.6">' + t.trial + '</td></tr></table>'
+    + '<p style="color:#7a6040;font-size:0.83rem;line-height:1.6;margin:0">' + t.contact + '</p>'
+    + '</td></tr>'
     + _footerHtml(t.footer)
-    + '</div>';
+    + '</table>'
+    + '</td></tr>'
+    + '</table>';
 }
 
 // ════════════════════════════════════════════════════════════════════════════
@@ -232,7 +237,7 @@ function reminderHtml(rawName, amount, mode, dateStr, lang) {
     fr: {
       subtitle: 'Rappel paiement',
       greeting: 'Bonjour,',
-      intro: 'Votre abonnement GeNext pour <strong style="color:#1a1510">' + name + '</strong> arrive à échéance le <strong>' + escHtml(dateStr) + '</strong>.',
+      intro: 'Votre abonnement GeNext pour <strong style="color:#f0e8c0">' + name + '</strong> arrive à échéance le <strong style="color:#c8a44e">' + escHtml(dateStr) + '</strong>.',
       amountLabel: 'Montant dû',
       modeLabel: 'Fréquence',
       instructions: 'Pour maintenir votre accès sans interruption, effectuez votre règlement avant cette date.',
@@ -243,7 +248,7 @@ function reminderHtml(rawName, amount, mode, dateStr, lang) {
     en: {
       subtitle: 'Payment reminder',
       greeting: 'Hello,',
-      intro: 'Your GeNext subscription for <strong style="color:#1a1510">' + name + '</strong> expires on <strong>' + dateStr + '</strong>.',
+      intro: 'Your GeNext subscription for <strong style="color:#f0e8c0">' + name + '</strong> expires on <strong style="color:#c8a44e">' + escHtml(dateStr) + '</strong>.',
       amountLabel: 'Amount due',
       modeLabel: 'Frequency',
       instructions: 'To maintain uninterrupted access, please make your payment before this date.',
@@ -254,7 +259,7 @@ function reminderHtml(rawName, amount, mode, dateStr, lang) {
     el: {
       subtitle: 'Υπενθύμιση πληρωμής',
       greeting: 'Γεια σας,',
-      intro: 'Η συνδρομή GeNext για <strong style="color:#1a1510">' + name + '</strong> λήγει στις <strong>' + dateStr + '</strong>.',
+      intro: 'Η συνδρομή GeNext για <strong style="color:#f0e8c0">' + name + '</strong> λήγει στις <strong style="color:#c8a44e">' + escHtml(dateStr) + '</strong>.',
       amountLabel: 'Οφειλόμενο ποσό',
       modeLabel: 'Συχνότητα',
       instructions: 'Για να διατηρήσετε αδιάλειπτη πρόσβαση, πραγματοποιήστε την πληρωμή σας πριν από αυτήν την ημερομηνία.',
@@ -265,7 +270,7 @@ function reminderHtml(rawName, amount, mode, dateStr, lang) {
     ar: {
       subtitle: 'تذكير بالدفع',
       greeting: 'مرحباً،',
-      intro: 'اشتراكك في GeNext لـ <strong style="color:#1a1510">' + name + '</strong> ينتهي في <strong>' + dateStr + '</strong>.',
+      intro: 'اشتراكك في GeNext لـ <strong style="color:#f0e8c0">' + name + '</strong> ينتهي في <strong style="color:#c8a44e">' + escHtml(dateStr) + '</strong>.',
       amountLabel: 'المبلغ المستحق',
       modeLabel: 'الدورية',
       instructions: 'للحفاظ على وصولك دون انقطاع، يرجى إتمام الدفع قبل هذا التاريخ.',
@@ -276,7 +281,7 @@ function reminderHtml(rawName, amount, mode, dateStr, lang) {
     de: {
       subtitle: 'Zahlungserinnerung',
       greeting: 'Hallo,',
-      intro: 'Ihr GeNext Abonnement für <strong style="color:#1a1510">' + name + '</strong> läuft am <strong>' + dateStr + '</strong> ab.',
+      intro: 'Ihr GeNext Abonnement für <strong style="color:#f0e8c0">' + name + '</strong> läuft am <strong style="color:#c8a44e">' + escHtml(dateStr) + '</strong> ab.',
       amountLabel: 'Fälliger Betrag',
       modeLabel: 'Häufigkeit',
       instructions: 'Um Ihren Zugang ohne Unterbrechung zu erhalten, leisten Sie bitte Ihre Zahlung vor diesem Datum.',
@@ -285,31 +290,34 @@ function reminderHtml(rawName, amount, mode, dateStr, lang) {
       footer: 'GeNext · Digitale Speisekarten für Cafés und Restaurants'
     }
   };
-  const t = T[lang] || T.fr;
+  const t   = T[lang] || T.fr;
   const dir = lang === 'ar' ? ' dir="rtl"' : '';
-  return '<div' + dir + ' style="font-family:\'Segoe UI\',Arial,sans-serif;max-width:580px;margin:0 auto;background:#fff;border-radius:12px;overflow:hidden;border:1px solid #e8e0d0">'
+  return '<table' + dir + ' width="100%" cellpadding="0" cellspacing="0" bgcolor="#080604" style="background-color:#080604">'
+    + '<tr><td align="center" style="padding:16px 8px">'
+    + '<table width="580" cellpadding="0" cellspacing="0" bgcolor="#0a0804" style="max-width:580px;width:100%;background-color:#0a0804;font-family:\'Segoe UI\',Arial,sans-serif">'
     + _headerHtml(t.subtitle)
-    + '<div style="padding:32px">'
-    + '<h2 style="margin:0 0 8px;font-size:1.25rem;color:#1a1510">' + t.greeting + '</h2>'
-    + '<p style="color:#444;line-height:1.7;margin-bottom:20px">' + t.intro + '</p>'
-    + '<div style="display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap">'
-    + '<div style="flex:1;min-width:140px;background:#fdf9f0;border:1px solid #e8d8a0;border-radius:10px;padding:14px 18px;text-align:center">'
-    + '<div style="font-size:0.72rem;color:#888;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px">' + t.amountLabel + '</div>'
-    + '<div style="font-size:1.5rem;font-weight:700;color:#c8a44e">' + amount + '</div>'
-    + '</div>'
-    + '<div style="flex:1;min-width:140px;background:#fdf9f0;border:1px solid #e8d8a0;border-radius:10px;padding:14px 18px;text-align:center">'
-    + '<div style="font-size:0.72rem;color:#888;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px">' + t.modeLabel + '</div>'
-    + '<div style="font-size:1.1rem;font-weight:600;color:#1a1510">' + mode + '</div>'
-    + '</div>'
-    + '</div>'
-    + '<div style="background:#fff8ee;border-left:3px solid #c8a44e;border-radius:0 8px 8px 0;padding:14px 18px;margin-bottom:16px">'
-    + '<p style="margin:0 0 6px;color:#5a4a2a;font-size:0.9rem;line-height:1.6">' + t.instructions + '</p>'
-    + '<p style="margin:0;color:#888;font-size:0.85rem">' + t.payMethods + '</p>'
-    + '</div>'
-    + '<p style="color:#888;font-size:0.85rem;line-height:1.6">' + t.contact + '</p>'
-    + '</div>'
+    + '<tr><td bgcolor="#0a0804" style="background-color:#0a0804;padding:28px 32px">'
+    + '<h2 style="margin:0 0 12px;font-size:1.15rem;color:#c8a44e">' + t.greeting + '</h2>'
+    + '<p style="color:#c8b890;line-height:1.7;margin-bottom:20px;font-size:0.92rem">' + t.intro + '</p>'
+    + '<table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:20px"><tr>'
+    + '<td bgcolor="#150f08" style="background-color:#150f08;border:1px solid #2e1e0a;border-radius:10px;padding:14px 18px;text-align:center;width:48%">'
+    + '<div style="font-size:0.7rem;color:#7a6040;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px">' + t.amountLabel + '</div>'
+    + '<div style="font-size:1.5rem;font-weight:700;color:#c8a44e">' + escHtml(amount) + '</div>'
+    + '</td><td width="12"></td>'
+    + '<td bgcolor="#150f08" style="background-color:#150f08;border:1px solid #2e1e0a;border-radius:10px;padding:14px 18px;text-align:center;width:48%">'
+    + '<div style="font-size:0.7rem;color:#7a6040;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px">' + t.modeLabel + '</div>'
+    + '<div style="font-size:1.1rem;font-weight:600;color:#f0e8c0">' + escHtml(mode) + '</div>'
+    + '</td></tr></table>'
+    + '<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#150f08" style="background-color:#150f08;border:1px solid #2e1e0a;border-left:3px solid #c8a44e;border-radius:0 8px 8px 0;margin-bottom:20px"><tr><td style="padding:14px 18px">'
+    + '<p style="margin:0 0 6px;color:#c8b890;font-size:0.9rem;line-height:1.6">' + t.instructions + '</p>'
+    + '<p style="margin:0;color:#7a6040;font-size:0.85rem">' + t.payMethods + '</p>'
+    + '</td></tr></table>'
+    + '<p style="color:#7a6040;font-size:0.83rem;line-height:1.6;margin:0">' + t.contact + '</p>'
+    + '</td></tr>'
     + _footerHtml(t.footer)
-    + '</div>';
+    + '</table>'
+    + '</td></tr>'
+    + '</table>';
 }
 
 function deliverySubject(name, lang) {
@@ -381,9 +389,12 @@ module.exports = async (req, res) => {
         const isCS = ed.forfait === 'commandes-services';
         await transport.sendMail({
           from:    '"GeNext" <' + process.env.GMAIL_USER + '>',
+          replyTo: process.env.GMAIL_USER,
           to:      ed.email,
+          headers: { 'List-Unsubscribe': '<mailto:' + process.env.GMAIL_USER + '?subject=unsubscribe>' },
           subject: deliverySubject(ed.name || d.restaurant || '', lang),
-          html:    deliveryHtml(ed.name || d.restaurant || '', ed.rid, ed.pwd, isCS, lang)
+          html:    deliveryHtml(ed.name || d.restaurant || '', ed.rid, ed.pwd, isCS, lang),
+          text:    (ed.name || d.restaurant || '') + ' — Accès GeNext\n\nVotre espace est prêt.\nIdentifiant : ' + ed.rid + '\nMot de passe : ' + ed.pwd + '\n\nAccéder : ' + ADMIN_URL + '\n\n7 jours d\'essai gratuit à partir de votre première connexion.\n\nGeNext — ' + process.env.GMAIL_USER
         });
         await fbPatch(CONTROL_DB, '/commandes/' + key, secret, { emailLivraisonSent: now });
         stats.delivery.sent++;
@@ -411,9 +422,12 @@ module.exports = async (req, res) => {
         const dateStr = fmtDate(d.nextReminderAt, lang);
         await transport.sendMail({
           from:    '"GeNext" <' + process.env.GMAIL_USER + '>',
+          replyTo: process.env.GMAIL_USER,
           to:      d.email,
+          headers: { 'List-Unsubscribe': '<mailto:' + process.env.GMAIL_USER + '?subject=unsubscribe>' },
           subject: reminderSubject(d.restaurant || '', lang),
-          html:    reminderHtml(d.restaurant || '', price + ' €', mode, dateStr, lang)
+          html:    reminderHtml(d.restaurant || '', price + ' €', mode, dateStr, lang),
+          text:    'Rappel paiement GeNext\n\n' + (d.restaurant || '') + '\nMontant : ' + price + ' €\nÉchéance : ' + dateStr + '\n\nVirement bancaire ou espèces — contactez-nous.\n\nGeNext — ' + process.env.GMAIL_USER
         });
         await fbPatch(CONTROL_DB, '/commandes/' + key, secret, { lastReminderSent: now });
         stats.reminders.sent++;
