@@ -18,7 +18,7 @@ function escHtml(s) {
 const CONTROL_DB   = 'https://menu-pro-control-default-rtdb.europe-west1.firebasedatabase.app';
 const MAIN_DB      = 'https://menu-saas-platform-default-rtdb.europe-west1.firebasedatabase.app';
 const ADMIN_URL    = 'https://menu-saas-platform.vercel.app/admin.html';
-const APK_URL      = 'https://menu-saas-platform.vercel.app/MenuProServeur-SaaS-v1.0.apk';
+const APK_URL      = 'https://github.com/Cafe-elysee/menu-saas-platform/releases/download/apk-serveur-v1/MenuProServeur-SaaS-v1.0.apk';
 const FOUR_DAYS_MS = 4  * 24 * 60 * 60 * 1000;
 const FIVE_DAYS_MS = 5  * 24 * 60 * 60 * 1000;
 
@@ -86,34 +86,34 @@ function fmtDate(ts, lang) {
 // ════════════════════════════════════════════════════════════════════════════
 
 function _headerHtml(subtitle) {
-  return '<tr><td bgcolor="#0a0804" align="center" style="background-color:#0a0804;padding:26px 32px;border-bottom:1px solid #2e1e0a">'
-    + '<img src="https://menu-saas-platform.vercel.app/assets/gn-logo-dark.png" alt="GeNext" width="160" style="display:block;margin:0 auto;max-width:160px;border:0">'
-    + '<div style="font-size:0.7rem;color:#7a6040;letter-spacing:0.12em;text-transform:uppercase;margin-top:10px">' + subtitle + '</div>'
+  return '<tr><td bgcolor="#ffffff" align="center" style="background-color:#ffffff;padding:26px 32px;border-bottom:1px solid #ead9b8">'
+    + '<img src="https://menu-saas-platform.vercel.app/assets/gn-logo-light.png" alt="GeNext" width="140" style="display:block;margin:0 auto;max-width:140px;border:0">'
+    + '<div style="font-size:0.7rem;color:#9a8060;letter-spacing:0.12em;text-transform:uppercase;margin-top:10px">' + subtitle + '</div>'
     + '</td></tr>';
 }
 
 function _footerHtml(text) {
-  return '<tr><td bgcolor="#080604" align="center" style="background-color:#080604;padding:14px 32px;border-top:1px solid #2e1e0a">'
-    + '<span style="font-size:0.75rem;color:#5a4a2a">' + text + '</span>'
+  return '<tr><td bgcolor="#f2ece0" align="center" style="background-color:#f2ece0;padding:14px 32px;border-top:1px solid #ead9b8">'
+    + '<span style="font-size:0.75rem;color:#9a8060">' + text + '</span>'
     + '</td></tr>';
 }
 
 function _credentialsCard(labelId, rid, labelPwd, pwd) {
-  return '<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#150f08" style="background-color:#150f08;border:1px solid #2e1e0a;border-radius:10px;margin-bottom:20px">'
+  return '<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#f8f4ec" style="background-color:#f8f4ec;border:1px solid #e8dfc8;border-radius:10px;margin-bottom:20px">'
     + '<tr><td style="padding:16px 20px 10px">'
-    + '<span style="display:block;font-size:0.65rem;color:#7a6040;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px">' + escHtml(labelId) + '</span>'
-    + '<span style="display:block;font-family:Courier,monospace;font-size:1rem;color:#c8a44e;font-weight:700;background-color:#0d0903;padding:6px 12px;border-radius:6px;letter-spacing:0.06em">' + escHtml(rid) + '</span>'
+    + '<span style="display:block;font-size:0.65rem;color:#9a8060;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px">' + escHtml(labelId) + '</span>'
+    + '<span style="display:block;font-family:Courier,monospace;font-size:1rem;color:#c8a44e;font-weight:700;background-color:#ffffff;border:1px solid #e0d4b8;padding:6px 12px;border-radius:6px;letter-spacing:0.06em">' + escHtml(rid) + '</span>'
     + '</td></tr>'
-    + '<tr><td style="padding:10px 20px 16px;border-top:1px solid #2e1e0a">'
-    + '<span style="display:block;font-size:0.65rem;color:#7a6040;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px">' + escHtml(labelPwd) + '</span>'
-    + '<span style="display:block;font-family:Courier,monospace;font-size:1rem;color:#c8a44e;font-weight:700;background-color:#0d0903;padding:6px 12px;border-radius:6px;letter-spacing:0.06em">' + escHtml(pwd) + '</span>'
+    + '<tr><td style="padding:10px 20px 16px;border-top:1px solid #e8dfc8">'
+    + '<span style="display:block;font-size:0.65rem;color:#9a8060;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px">' + escHtml(labelPwd) + '</span>'
+    + '<span style="display:block;font-family:Courier,monospace;font-size:1rem;color:#2a1f10;font-weight:700;background-color:#ffffff;border:1px solid #e0d4b8;padding:6px 12px;border-radius:6px;letter-spacing:0.06em">' + escHtml(pwd) + '</span>'
     + '</td></tr>'
     + '</table>';
 }
 
 function _btnHtml(url, label, color) {
-  const bg = color || 'linear-gradient(135deg,#e2c278,#c8a44e,#9a7a35)';
-  const fg = color ? '#fff' : '#0a0804';
+  const bg = color || '#c8a44e';
+  const fg = color ? '#fff' : '#0c0a08';
   return '<a href="' + url + '" style="display:inline-block;background:' + bg + ';color:' + fg + ';text-decoration:none;padding:13px 28px;border-radius:10px;font-weight:700;font-size:0.95rem">' + label + '</a>';
 }
 
@@ -123,7 +123,7 @@ function deliveryHtml(rawName, rid, pwd, isCS, lang) {
     fr: {
       subtitle: 'Menus digitaux &amp; Commandes',
       greeting: 'Bonjour,',
-      intro: 'Votre espace <strong style="color:#f0e8c0">' + name + '</strong> est prêt !',
+      intro: 'Votre espace <strong style="color:#c8a44e">' + name + '</strong> est prêt !',
       sub: 'Connectez-vous dès maintenant à votre tableau de bord pour personnaliser votre menu.',
       labelId: 'Identifiant (ID restaurant)',
       labelPwd: 'Mot de passe',
@@ -138,7 +138,7 @@ function deliveryHtml(rawName, rid, pwd, isCS, lang) {
     en: {
       subtitle: 'Digital menus &amp; Orders',
       greeting: 'Hello,',
-      intro: 'Your space <strong style="color:#f0e8c0">' + name + '</strong> is ready!',
+      intro: 'Your space <strong style="color:#c8a44e">' + name + '</strong> is ready!',
       sub: 'Log in to your dashboard now to customize your menu.',
       labelId: 'Restaurant ID',
       labelPwd: 'Password',
@@ -153,7 +153,7 @@ function deliveryHtml(rawName, rid, pwd, isCS, lang) {
     el: {
       subtitle: 'Ψηφιακά μενού &amp; Παραγγελίες',
       greeting: 'Γεια σας,',
-      intro: 'Ο χώρος σας <strong style="color:#f0e8c0">' + name + '</strong> είναι έτοιμος!',
+      intro: 'Ο χώρος σας <strong style="color:#c8a44e">' + name + '</strong> είναι έτοιμος!',
       sub: 'Συνδεθείτε στον πίνακα ελέγχου για να προσαρμόσετε το μενού σας.',
       labelId: 'Αναγνωριστικό εστιατορίου',
       labelPwd: 'Κωδικός πρόσβασης',
@@ -168,7 +168,7 @@ function deliveryHtml(rawName, rid, pwd, isCS, lang) {
     ar: {
       subtitle: 'قوائم رقمية وطلبات',
       greeting: 'مرحباً،',
-      intro: 'مساحتك <strong style="color:#f0e8c0">' + name + '</strong> جاهزة!',
+      intro: 'مساحتك <strong style="color:#c8a44e">' + name + '</strong> جاهزة!',
       sub: 'سجّل الدخول إلى لوحة التحكم لتخصيص قائمتك.',
       labelId: 'معرّف المطعم',
       labelPwd: 'كلمة المرور',
@@ -183,7 +183,7 @@ function deliveryHtml(rawName, rid, pwd, isCS, lang) {
     de: {
       subtitle: 'Digitale Speisekarten &amp; Bestellungen',
       greeting: 'Hallo,',
-      intro: 'Ihr Bereich <strong style="color:#f0e8c0">' + name + '</strong> ist bereit!',
+      intro: 'Ihr Bereich <strong style="color:#c8a44e">' + name + '</strong> ist bereit!',
       sub: 'Melden Sie sich jetzt in Ihrem Dashboard an, um Ihre Speisekarte anzupassen.',
       labelId: 'Restaurant-ID',
       labelPwd: 'Passwort',
@@ -198,28 +198,28 @@ function deliveryHtml(rawName, rid, pwd, isCS, lang) {
   };
   const t   = T[lang] || T.fr;
   const dir = lang === 'ar' ? ' dir="rtl"' : '';
-  return '<table' + dir + ' width="100%" cellpadding="0" cellspacing="0" bgcolor="#080604" style="background-color:#080604">'
+  return '<table' + dir + ' width="100%" cellpadding="0" cellspacing="0" bgcolor="#f2ece0" style="background-color:#f2ece0">'
     + '<tr><td align="center" style="padding:16px 8px">'
-    + '<table width="580" cellpadding="0" cellspacing="0" bgcolor="#0a0804" style="max-width:580px;width:100%;background-color:#0a0804;font-family:\'Segoe UI\',Arial,sans-serif">'
+    + '<table width="580" cellpadding="0" cellspacing="0" bgcolor="#ffffff" style="max-width:580px;width:100%;background-color:#ffffff;font-family:\'Segoe UI\',Arial,sans-serif">'
     + _headerHtml(t.subtitle)
-    + '<tr><td bgcolor="#0a0804" style="background-color:#0a0804;padding:28px 32px">'
+    + '<tr><td bgcolor="#ffffff" style="background-color:#ffffff;padding:28px 32px">'
     + '<h2 style="margin:0 0 12px;font-size:1.15rem;color:#c8a44e">' + t.greeting + '</h2>'
-    + '<p style="color:#c8b890;line-height:1.7;margin-bottom:20px;font-size:0.92rem">' + t.intro + '<br>' + t.sub + '</p>'
+    + '<p style="color:#2a1f10;line-height:1.7;margin-bottom:20px;font-size:0.92rem">' + t.intro + '<br>' + t.sub + '</p>'
     + _credentialsCard(t.labelId, rid, t.labelPwd, pwd)
     + '<table width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="padding-bottom:20px">'
     + _btnHtml(ADMIN_URL, t.btnAdmin, null)
     + '</td></tr></table>'
     + (isCS
-      ? '<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#150f08" style="background-color:#150f08;border:1px solid #2e1e0a;border-radius:10px;margin-bottom:20px"><tr><td style="padding:16px 20px">'
-        + '<p style="margin:0 0 6px;font-weight:700;color:#f0e8c0;font-size:0.92rem">' + t.apkTitle + '</p>'
-        + '<p style="margin:0 0 14px;color:#c8b890;font-size:0.85rem">' + t.apkSub + '</p>'
+      ? '<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#f8f4ec" style="background-color:#f8f4ec;border:1px solid #e8dfc8;border-radius:10px;margin-bottom:20px"><tr><td style="padding:16px 20px">'
+        + '<p style="margin:0 0 6px;font-weight:700;color:#2a1f10;font-size:0.92rem">' + t.apkTitle + '</p>'
+        + '<p style="margin:0 0 14px;color:#6b5a3a;font-size:0.85rem">' + t.apkSub + '</p>'
         + '<table width="100%" cellpadding="0" cellspacing="0"><tr><td align="center">'
-        + _btnHtml(APK_URL, t.btnApk, 'linear-gradient(135deg,#3a6fd8,#2456b8)')
+        + _btnHtml(APK_URL, t.btnApk, '#2a5ab8')
         + '</td></tr></table>'
         + '</td></tr></table>'
       : '')
-    + '<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#150f08" style="background-color:#150f08;border:1px solid #2e1e0a;border-left:3px solid #c8a44e;border-radius:0 8px 8px 0;margin-bottom:20px"><tr><td style="padding:12px 16px;font-size:0.88rem;color:#c8b890;line-height:1.6">' + t.trial + '</td></tr></table>'
-    + '<p style="color:#7a6040;font-size:0.83rem;line-height:1.6;margin:0">' + t.contact + '</p>'
+    + '<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#fdf9f2" style="background-color:#fdf9f2;border:1px solid #e8dfc8;border-left:3px solid #c8a44e;border-radius:0 8px 8px 0;margin-bottom:20px"><tr><td style="padding:12px 16px;font-size:0.88rem;color:#2a1f10;line-height:1.6">' + t.trial + '</td></tr></table>'
+    + '<p style="color:#9a8060;font-size:0.83rem;line-height:1.6;margin:0">' + t.contact + '</p>'
     + '</td></tr>'
     + _footerHtml(t.footer)
     + '</table>'
@@ -237,7 +237,7 @@ function reminderHtml(rawName, amount, mode, dateStr, lang) {
     fr: {
       subtitle: 'Rappel paiement',
       greeting: 'Bonjour,',
-      intro: 'Votre abonnement GeNext pour <strong style="color:#f0e8c0">' + name + '</strong> arrive à échéance le <strong style="color:#c8a44e">' + escHtml(dateStr) + '</strong>.',
+      intro: 'Votre abonnement GeNext pour <strong style="color:#c8a44e">' + name + '</strong> arrive à échéance le <strong style="color:#c8a44e">' + escHtml(dateStr) + '</strong>.',
       amountLabel: 'Montant dû',
       modeLabel: 'Fréquence',
       instructions: 'Pour maintenir votre accès sans interruption, effectuez votre règlement avant cette date.',
@@ -248,7 +248,7 @@ function reminderHtml(rawName, amount, mode, dateStr, lang) {
     en: {
       subtitle: 'Payment reminder',
       greeting: 'Hello,',
-      intro: 'Your GeNext subscription for <strong style="color:#f0e8c0">' + name + '</strong> expires on <strong style="color:#c8a44e">' + escHtml(dateStr) + '</strong>.',
+      intro: 'Your GeNext subscription for <strong style="color:#c8a44e">' + name + '</strong> expires on <strong style="color:#c8a44e">' + escHtml(dateStr) + '</strong>.',
       amountLabel: 'Amount due',
       modeLabel: 'Frequency',
       instructions: 'To maintain uninterrupted access, please make your payment before this date.',
@@ -259,7 +259,7 @@ function reminderHtml(rawName, amount, mode, dateStr, lang) {
     el: {
       subtitle: 'Υπενθύμιση πληρωμής',
       greeting: 'Γεια σας,',
-      intro: 'Η συνδρομή GeNext για <strong style="color:#f0e8c0">' + name + '</strong> λήγει στις <strong style="color:#c8a44e">' + escHtml(dateStr) + '</strong>.',
+      intro: 'Η συνδρομή GeNext για <strong style="color:#c8a44e">' + name + '</strong> λήγει στις <strong style="color:#c8a44e">' + escHtml(dateStr) + '</strong>.',
       amountLabel: 'Οφειλόμενο ποσό',
       modeLabel: 'Συχνότητα',
       instructions: 'Για να διατηρήσετε αδιάλειπτη πρόσβαση, πραγματοποιήστε την πληρωμή σας πριν από αυτήν την ημερομηνία.',
@@ -270,7 +270,7 @@ function reminderHtml(rawName, amount, mode, dateStr, lang) {
     ar: {
       subtitle: 'تذكير بالدفع',
       greeting: 'مرحباً،',
-      intro: 'اشتراكك في GeNext لـ <strong style="color:#f0e8c0">' + name + '</strong> ينتهي في <strong style="color:#c8a44e">' + escHtml(dateStr) + '</strong>.',
+      intro: 'اشتراكك في GeNext لـ <strong style="color:#c8a44e">' + name + '</strong> ينتهي في <strong style="color:#c8a44e">' + escHtml(dateStr) + '</strong>.',
       amountLabel: 'المبلغ المستحق',
       modeLabel: 'الدورية',
       instructions: 'للحفاظ على وصولك دون انقطاع، يرجى إتمام الدفع قبل هذا التاريخ.',
@@ -281,7 +281,7 @@ function reminderHtml(rawName, amount, mode, dateStr, lang) {
     de: {
       subtitle: 'Zahlungserinnerung',
       greeting: 'Hallo,',
-      intro: 'Ihr GeNext Abonnement für <strong style="color:#f0e8c0">' + name + '</strong> läuft am <strong style="color:#c8a44e">' + escHtml(dateStr) + '</strong> ab.',
+      intro: 'Ihr GeNext Abonnement für <strong style="color:#c8a44e">' + name + '</strong> läuft am <strong style="color:#c8a44e">' + escHtml(dateStr) + '</strong> ab.',
       amountLabel: 'Fälliger Betrag',
       modeLabel: 'Häufigkeit',
       instructions: 'Um Ihren Zugang ohne Unterbrechung zu erhalten, leisten Sie bitte Ihre Zahlung vor diesem Datum.',
@@ -292,27 +292,27 @@ function reminderHtml(rawName, amount, mode, dateStr, lang) {
   };
   const t   = T[lang] || T.fr;
   const dir = lang === 'ar' ? ' dir="rtl"' : '';
-  return '<table' + dir + ' width="100%" cellpadding="0" cellspacing="0" bgcolor="#080604" style="background-color:#080604">'
+  return '<table' + dir + ' width="100%" cellpadding="0" cellspacing="0" bgcolor="#f2ece0" style="background-color:#f2ece0">'
     + '<tr><td align="center" style="padding:16px 8px">'
-    + '<table width="580" cellpadding="0" cellspacing="0" bgcolor="#0a0804" style="max-width:580px;width:100%;background-color:#0a0804;font-family:\'Segoe UI\',Arial,sans-serif">'
+    + '<table width="580" cellpadding="0" cellspacing="0" bgcolor="#ffffff" style="max-width:580px;width:100%;background-color:#ffffff;font-family:\'Segoe UI\',Arial,sans-serif">'
     + _headerHtml(t.subtitle)
-    + '<tr><td bgcolor="#0a0804" style="background-color:#0a0804;padding:28px 32px">'
+    + '<tr><td bgcolor="#ffffff" style="background-color:#ffffff;padding:28px 32px">'
     + '<h2 style="margin:0 0 12px;font-size:1.15rem;color:#c8a44e">' + t.greeting + '</h2>'
-    + '<p style="color:#c8b890;line-height:1.7;margin-bottom:20px;font-size:0.92rem">' + t.intro + '</p>'
+    + '<p style="color:#2a1f10;line-height:1.7;margin-bottom:20px;font-size:0.92rem">' + t.intro + '</p>'
     + '<table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:20px"><tr>'
-    + '<td bgcolor="#150f08" style="background-color:#150f08;border:1px solid #2e1e0a;border-radius:10px;padding:14px 18px;text-align:center;width:48%">'
-    + '<div style="font-size:0.7rem;color:#7a6040;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px">' + t.amountLabel + '</div>'
+    + '<td bgcolor="#f8f4ec" style="background-color:#f8f4ec;border:1px solid #e8dfc8;border-radius:10px;padding:14px 18px;text-align:center;width:48%">'
+    + '<div style="font-size:0.7rem;color:#9a8060;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px">' + t.amountLabel + '</div>'
     + '<div style="font-size:1.5rem;font-weight:700;color:#c8a44e">' + escHtml(amount) + '</div>'
     + '</td><td width="12"></td>'
-    + '<td bgcolor="#150f08" style="background-color:#150f08;border:1px solid #2e1e0a;border-radius:10px;padding:14px 18px;text-align:center;width:48%">'
-    + '<div style="font-size:0.7rem;color:#7a6040;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px">' + t.modeLabel + '</div>'
-    + '<div style="font-size:1.1rem;font-weight:600;color:#f0e8c0">' + escHtml(mode) + '</div>'
+    + '<td bgcolor="#f8f4ec" style="background-color:#f8f4ec;border:1px solid #e8dfc8;border-radius:10px;padding:14px 18px;text-align:center;width:48%">'
+    + '<div style="font-size:0.7rem;color:#9a8060;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px">' + t.modeLabel + '</div>'
+    + '<div style="font-size:1.1rem;font-weight:600;color:#2a1f10">' + escHtml(mode) + '</div>'
     + '</td></tr></table>'
-    + '<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#150f08" style="background-color:#150f08;border:1px solid #2e1e0a;border-left:3px solid #c8a44e;border-radius:0 8px 8px 0;margin-bottom:20px"><tr><td style="padding:14px 18px">'
-    + '<p style="margin:0 0 6px;color:#c8b890;font-size:0.9rem;line-height:1.6">' + t.instructions + '</p>'
-    + '<p style="margin:0;color:#7a6040;font-size:0.85rem">' + t.payMethods + '</p>'
+    + '<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#fdf9f2" style="background-color:#fdf9f2;border:1px solid #e8dfc8;border-left:3px solid #c8a44e;border-radius:0 8px 8px 0;margin-bottom:20px"><tr><td style="padding:14px 18px">'
+    + '<p style="margin:0 0 6px;color:#2a1f10;font-size:0.9rem;line-height:1.6">' + t.instructions + '</p>'
+    + '<p style="margin:0;color:#6b5a3a;font-size:0.85rem">' + t.payMethods + '</p>'
     + '</td></tr></table>'
-    + '<p style="color:#7a6040;font-size:0.83rem;line-height:1.6;margin:0">' + t.contact + '</p>'
+    + '<p style="color:#9a8060;font-size:0.83rem;line-height:1.6;margin:0">' + t.contact + '</p>'
     + '</td></tr>'
     + _footerHtml(t.footer)
     + '</table>'

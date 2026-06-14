@@ -11,7 +11,7 @@ const crypto     = require('crypto');
 const MAIN_DB    = 'https://menu-saas-platform-default-rtdb.europe-west1.firebasedatabase.app';
 const CONTROL_DB = 'https://menu-pro-control-default-rtdb.europe-west1.firebasedatabase.app';
 const ADMIN_URL  = 'https://menu-saas-platform.vercel.app/admin.html';
-const APK_URL    = 'https://menu-saas-platform.vercel.app/MenuProServeur-SaaS-v1.0.apk';
+const APK_URL    = 'https://github.com/Cafe-elysee/menu-saas-platform/releases/download/apk-serveur-v1/MenuProServeur-SaaS-v1.0.apk';
 
 // ── Transport Gmail ─────────────────────────────────────────────────────────
 function createTransport() {
@@ -128,21 +128,21 @@ const WAITING_TPL = {
 };
 function _wHtml(r, f, m, t) {
   const dir = t.rtl ? ' dir="rtl"' : '';
-  return '<table' + dir + ' width="100%" cellpadding="0" cellspacing="0" bgcolor="#080604" style="background-color:#080604">'
+  return '<table' + dir + ' width="100%" cellpadding="0" cellspacing="0" bgcolor="#f2ece0" style="background-color:#f2ece0">'
     + '<tr><td align="center" style="padding:16px 8px">'
-    + '<table width="560" cellpadding="0" cellspacing="0" bgcolor="#0a0804" style="max-width:560px;width:100%;background-color:#0a0804;font-family:\'Segoe UI\',Arial,sans-serif">'
-    + '<tr><td bgcolor="#0a0804" align="center" style="background-color:#0a0804;padding:26px 32px;border-bottom:1px solid #2e1e0a">'
-    + '<img src="https://menu-saas-platform.vercel.app/assets/gn-logo-dark.png" alt="GeNext" width="160" style="display:block;margin:0 auto;max-width:160px;border:0">'
-    + '<div style="font-size:0.72rem;color:#7a6040;letter-spacing:0.12em;text-transform:uppercase;margin-top:8px">' + t.sub + '</div>'
+    + '<table width="560" cellpadding="0" cellspacing="0" bgcolor="#ffffff" style="max-width:560px;width:100%;background-color:#ffffff;font-family:\'Segoe UI\',Arial,sans-serif">'
+    + '<tr><td bgcolor="#ffffff" align="center" style="background-color:#ffffff;padding:26px 32px;border-bottom:1px solid #ead9b8">'
+    + '<img src="https://menu-saas-platform.vercel.app/assets/gn-logo-light.png" alt="GeNext" width="140" style="display:block;margin:0 auto;max-width:140px;border:0">'
+    + '<div style="font-size:0.72rem;color:#9a8060;letter-spacing:0.12em;text-transform:uppercase;margin-top:8px">' + t.sub + '</div>'
     + '</td></tr>'
-    + '<tr><td bgcolor="#0a0804" style="background-color:#0a0804;padding:28px 32px">'
+    + '<tr><td bgcolor="#ffffff" style="background-color:#ffffff;padding:28px 32px">'
     + '<h2 style="margin:0 0 12px;font-size:1.15rem;color:#c8a44e">' + t.gr + '</h2>'
-    + '<p style="color:#c8b890;line-height:1.7;margin-bottom:20px;font-size:0.92rem">' + t.p1 + ' <strong style="color:#f0e8c0">' + escHtml(r) + '</strong>.<br>' + t.p2 + ' <strong style="color:#c8a44e">' + escHtml(f) + '</strong> (' + escHtml(m) + ').</p>'
-    + '<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#150f08" style="background-color:#150f08;border:1px solid #2e1e0a;border-left:3px solid #c8a44e;border-radius:0 8px 8px 0;margin-bottom:20px"><tr><td style="padding:14px 18px;font-size:0.88rem;color:#c8b890;line-height:1.6">' + t.box + '</td></tr></table>'
-    + '<p style="color:#7a6040;font-size:0.83rem;line-height:1.6;margin:0">' + t.contact + '</p>'
+    + '<p style="color:#2a1f10;line-height:1.7;margin-bottom:20px;font-size:0.92rem">' + t.p1 + ' <strong style="color:#c8a44e">' + escHtml(r) + '</strong>.<br>' + t.p2 + ' <strong style="color:#c8a44e">' + escHtml(f) + '</strong> (' + escHtml(m) + ').</p>'
+    + '<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#fdf9f2" style="background-color:#fdf9f2;border:1px solid #e8dfc8;border-left:3px solid #c8a44e;border-radius:0 8px 8px 0;margin-bottom:20px"><tr><td style="padding:14px 18px;font-size:0.88rem;color:#2a1f10;line-height:1.6">' + t.box + '</td></tr></table>'
+    + '<p style="color:#9a8060;font-size:0.83rem;line-height:1.6;margin:0">' + t.contact + '</p>'
     + '</td></tr>'
-    + '<tr><td bgcolor="#080604" align="center" style="background-color:#080604;padding:14px 32px;border-top:1px solid #2e1e0a">'
-    + '<span style="font-size:0.75rem;color:#5a4a2a">' + t.ft + '</span>'
+    + '<tr><td bgcolor="#f2ece0" align="center" style="background-color:#f2ece0;padding:14px 32px;border-top:1px solid #ead9b8">'
+    + '<span style="font-size:0.75rem;color:#9a8060">' + t.ft + '</span>'
     + '</td></tr>'
     + '</table>'
     + '</td></tr>'
@@ -168,48 +168,48 @@ function deliverySubject(name, lang) {
 function deliveryHtml(name, rid, pwd, isCS, lang) {
   const safeName = escHtml(name);
   const T = {
-    fr: { sub:'Menus digitaux &amp; Commandes', gr:'Bonjour,', intro:'Votre espace <strong style="color:#f0e8c0">' + safeName + '</strong> est prêt !', sub2:'Connectez-vous à votre tableau de bord pour personnaliser votre menu.', lid:'Identifiant (ID restaurant)', lpwd:'Mot de passe', btn:'🔑 Accéder au tableau de bord', apkT:'Application serveur', apkS:'Téléchargez cette application pour que votre personnel puisse recevoir les commandes.', apkBtn:'📱 Télécharger l\'application serveur', trial:'⏱ Vous bénéficiez de <strong style="color:#c8a44e">7 jours d\'essai gratuit</strong> à partir de votre première connexion.', contact:'N\'hésitez pas à nous répondre si vous avez des questions.', ft:'GeNext · Menus digitaux pour cafés et restaurants' },
-    en: { sub:'Digital menus &amp; Orders', gr:'Hello,', intro:'Your space <strong style="color:#f0e8c0">' + safeName + '</strong> is ready!', sub2:'Log in to your dashboard to customize your menu.', lid:'Restaurant ID', lpwd:'Password', btn:'🔑 Access dashboard', apkT:'Server application', apkS:'Download this app so your staff can receive orders.', apkBtn:'📱 Download server app', trial:'⏱ You have a <strong style="color:#c8a44e">7-day free trial</strong> starting from your first login.', contact:'Feel free to reply if you have any questions.', ft:'GeNext · Digital menus for cafés and restaurants' },
-    el: { sub:'Ψηφιακά μενού &amp; Παραγγελίες', gr:'Γεια σας,', intro:'Ο χώρος σας <strong style="color:#f0e8c0">' + safeName + '</strong> είναι έτοιμος!', sub2:'Συνδεθείτε στον πίνακα ελέγχου για να προσαρμόσετε το μενού σας.', lid:'Αναγνωριστικό εστιατορίου', lpwd:'Κωδικός', btn:'🔑 Πρόσβαση στον πίνακα ελέγχου', apkT:'Εφαρμογή σερβιτόρων', apkS:'Κατεβάστε αυτή την εφαρμογή για να λαμβάνει παραγγελίες το προσωπικό σας.', apkBtn:'📱 Λήψη εφαρμογής', trial:'⏱ Έχετε <strong style="color:#c8a44e">7 ημέρες δωρεάν δοκιμή</strong> από την πρώτη σύνδεσή σας.', contact:'Μη διστάσετε να μας απαντήσετε αν έχετε ερωτήσεις.', ft:'GeNext · Ψηφιακά μενού για καφέ και εστιατόρια' },
-    ar: { sub:'قوائم رقمية وطلبات', gr:'مرحباً،', intro:'مساحتك <strong style="color:#f0e8c0">' + safeName + '</strong> جاهزة!', sub2:'سجّل الدخول إلى لوحة التحكم لتخصيص قائمتك.', lid:'معرّف المطعم', lpwd:'كلمة المرور', btn:'🔑 الوصول إلى لوحة التحكم', apkT:'تطبيق النادلين', apkS:'نزّل هذا التطبيق ليستقبل موظفوك الطلبات.', apkBtn:'📱 تنزيل التطبيق', trial:'⏱ لديك <strong style="color:#c8a44e">7 أيام تجريبية مجانية</strong> من أول تسجيل دخول.', contact:'لا تتردد في الرد على هذا البريد إذا كان لديك أي سؤال.', ft:'GeNext · قوائم رقمية للمقاهي والمطاعم', rtl:true },
-    de: { sub:'Digitale Speisekarten &amp; Bestellungen', gr:'Hallo,', intro:'Ihr Bereich <strong style="color:#f0e8c0">' + safeName + '</strong> ist bereit!', sub2:'Melden Sie sich in Ihrem Dashboard an, um Ihre Speisekarte anzupassen.', lid:'Restaurant-ID', lpwd:'Passwort', btn:'🔑 Dashboard aufrufen', apkT:'Server-App', apkS:'Lassen Sie Ihr Personal diese App herunterladen, um Bestellungen zu erhalten.', apkBtn:'📱 Server-App herunterladen', trial:'⏱ Sie haben eine <strong style="color:#c8a44e">7-tägige kostenlose Testphase</strong> ab Ihrer ersten Anmeldung.', contact:'Antworten Sie auf diese E-Mail, wenn Sie Fragen haben.', ft:'GeNext · Digitale Speisekarten für Cafés und Restaurants' }
+    fr: { sub:'Menus digitaux &amp; Commandes', gr:'Bonjour,', intro:'Votre espace <strong style="color:#c8a44e">' + safeName + '</strong> est prêt !', sub2:'Connectez-vous à votre tableau de bord pour personnaliser votre menu.', lid:'Identifiant (ID restaurant)', lpwd:'Mot de passe', btn:'🔑 Accéder au tableau de bord', apkT:'Application serveur', apkS:'Téléchargez cette application pour que votre personnel puisse recevoir les commandes.', apkBtn:'📱 Télécharger l\'application serveur', trial:'⏱ Vous bénéficiez de <strong style="color:#c8a44e">7 jours d\'essai gratuit</strong> à partir de votre première connexion.', contact:'N\'hésitez pas à nous répondre si vous avez des questions.', ft:'GeNext · Menus digitaux pour cafés et restaurants' },
+    en: { sub:'Digital menus &amp; Orders', gr:'Hello,', intro:'Your space <strong style="color:#c8a44e">' + safeName + '</strong> is ready!', sub2:'Log in to your dashboard to customize your menu.', lid:'Restaurant ID', lpwd:'Password', btn:'🔑 Access dashboard', apkT:'Server application', apkS:'Download this app so your staff can receive orders.', apkBtn:'📱 Download server app', trial:'⏱ You have a <strong style="color:#c8a44e">7-day free trial</strong> starting from your first login.', contact:'Feel free to reply if you have any questions.', ft:'GeNext · Digital menus for cafés and restaurants' },
+    el: { sub:'Ψηφιακά μενού &amp; Παραγγελίες', gr:'Γεια σας,', intro:'Ο χώρος σας <strong style="color:#c8a44e">' + safeName + '</strong> είναι έτοιμος!', sub2:'Συνδεθείτε στον πίνακα ελέγχου για να προσαρμόσετε το μενού σας.', lid:'Αναγνωριστικό εστιατορίου', lpwd:'Κωδικός', btn:'🔑 Πρόσβαση στον πίνακα ελέγχου', apkT:'Εφαρμογή σερβιτόρων', apkS:'Κατεβάστε αυτή την εφαρμογή για να λαμβάνει παραγγελίες το προσωπικό σας.', apkBtn:'📱 Λήψη εφαρμογής', trial:'⏱ Έχετε <strong style="color:#c8a44e">7 ημέρες δωρεάν δοκιμή</strong> από την πρώτη σύνδεσή σας.', contact:'Μη διστάσετε να μας απαντήσετε αν έχετε ερωτήσεις.', ft:'GeNext · Ψηφιακά μενού για καφέ και εστιατόρια' },
+    ar: { sub:'قوائم رقمية وطلبات', gr:'مرحباً،', intro:'مساحتك <strong style="color:#c8a44e">' + safeName + '</strong> جاهزة!', sub2:'سجّل الدخول إلى لوحة التحكم لتخصيص قائمتك.', lid:'معرّف المطعم', lpwd:'كلمة المرور', btn:'🔑 الوصول إلى لوحة التحكم', apkT:'تطبيق النادلين', apkS:'نزّل هذا التطبيق ليستقبل موظفوك الطلبات.', apkBtn:'📱 تنزيل التطبيق', trial:'⏱ لديك <strong style="color:#c8a44e">7 أيام تجريبية مجانية</strong> من أول تسجيل دخول.', contact:'لا تتردد في الرد على هذا البريد إذا كان لديك أي سؤال.', ft:'GeNext · قوائم رقمية للمقاهي والمطاعم', rtl:true },
+    de: { sub:'Digitale Speisekarten &amp; Bestellungen', gr:'Hallo,', intro:'Ihr Bereich <strong style="color:#c8a44e">' + safeName + '</strong> ist bereit!', sub2:'Melden Sie sich in Ihrem Dashboard an, um Ihre Speisekarte anzupassen.', lid:'Restaurant-ID', lpwd:'Passwort', btn:'🔑 Dashboard aufrufen', apkT:'Server-App', apkS:'Lassen Sie Ihr Personal diese App herunterladen, um Bestellungen zu erhalten.', apkBtn:'📱 Server-App herunterladen', trial:'⏱ Sie haben eine <strong style="color:#c8a44e">7-tägige kostenlose Testphase</strong> ab Ihrer ersten Anmeldung.', contact:'Antworten Sie auf diese E-Mail, wenn Sie Fragen haben.', ft:'GeNext · Digitale Speisekarten für Cafés und Restaurants' }
   };
   const t = T[lang] || T.fr;
   const dir = t.rtl ? ' dir="rtl"' : '';
-  return '<table' + dir + ' width="100%" cellpadding="0" cellspacing="0" bgcolor="#080604" style="background-color:#080604">'
+  return '<table' + dir + ' width="100%" cellpadding="0" cellspacing="0" bgcolor="#f2ece0" style="background-color:#f2ece0">'
     + '<tr><td align="center" style="padding:16px 8px">'
-    + '<table width="580" cellpadding="0" cellspacing="0" bgcolor="#0a0804" style="max-width:580px;width:100%;background-color:#0a0804;font-family:\'Segoe UI\',Arial,sans-serif">'
-    + '<tr><td bgcolor="#0a0804" align="center" style="background-color:#0a0804;padding:26px 32px;border-bottom:1px solid #2e1e0a">'
-    + '<img src="https://menu-saas-platform.vercel.app/assets/gn-logo-dark.png" alt="GeNext" width="160" style="display:block;margin:0 auto;max-width:160px;border:0">'
-    + '<div style="font-size:0.72rem;color:#7a6040;letter-spacing:0.12em;text-transform:uppercase;margin-top:8px">' + t.sub + '</div>'
+    + '<table width="580" cellpadding="0" cellspacing="0" bgcolor="#ffffff" style="max-width:580px;width:100%;background-color:#ffffff;font-family:\'Segoe UI\',Arial,sans-serif">'
+    + '<tr><td bgcolor="#ffffff" align="center" style="background-color:#ffffff;padding:26px 32px;border-bottom:1px solid #ead9b8">'
+    + '<img src="https://menu-saas-platform.vercel.app/assets/gn-logo-light.png" alt="GeNext" width="140" style="display:block;margin:0 auto;max-width:140px;border:0">'
+    + '<div style="font-size:0.72rem;color:#9a8060;letter-spacing:0.12em;text-transform:uppercase;margin-top:8px">' + t.sub + '</div>'
     + '</td></tr>'
-    + '<tr><td bgcolor="#0a0804" style="background-color:#0a0804;padding:28px 32px">'
+    + '<tr><td bgcolor="#ffffff" style="background-color:#ffffff;padding:28px 32px">'
     + '<h2 style="margin:0 0 8px;font-size:1.15rem;color:#c8a44e">' + t.gr + '</h2>'
-    + '<p style="color:#c8b890;line-height:1.7;margin-bottom:20px;font-size:0.92rem">' + t.intro + '<br>' + t.sub2 + '</p>'
-    + '<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#150f08" style="background-color:#150f08;border:1px solid #2e1e0a;border-radius:10px;margin-bottom:20px">'
-    + '<tr><td bgcolor="#150f08" style="background-color:#150f08;padding:16px 20px 10px">'
-    + '<span style="display:block;font-size:0.65rem;color:#7a6040;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:5px">' + t.lid + '</span>'
-    + '<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#0d0903" style="background-color:#0d0903;border-radius:6px"><tr><td bgcolor="#0d0903" style="background-color:#0d0903;padding:5px 10px;font-family:Courier,monospace;font-size:1rem;color:#c8a44e;font-weight:700;letter-spacing:0.06em">' + escHtml(rid) + '</td></tr></table>'
+    + '<p style="color:#2a1f10;line-height:1.7;margin-bottom:20px;font-size:0.92rem">' + t.intro + '<br>' + t.sub2 + '</p>'
+    + '<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#f8f4ec" style="background-color:#f8f4ec;border:1px solid #e8dfc8;border-radius:10px;margin-bottom:20px">'
+    + '<tr><td bgcolor="#f8f4ec" style="background-color:#f8f4ec;padding:16px 20px 10px">'
+    + '<span style="display:block;font-size:0.65rem;color:#9a8060;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:5px">' + t.lid + '</span>'
+    + '<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#ffffff" style="background-color:#ffffff;border:1px solid #e0d4b8;border-radius:6px"><tr><td bgcolor="#ffffff" style="background-color:#ffffff;padding:5px 10px;font-family:Courier,monospace;font-size:1rem;color:#c8a44e;font-weight:700;letter-spacing:0.06em">' + escHtml(rid) + '</td></tr></table>'
     + '</td></tr>'
-    + '<tr><td bgcolor="#150f08" style="background-color:#150f08;padding:10px 20px 16px;border-top:1px solid #2e1e0a">'
-    + '<span style="display:block;font-size:0.65rem;color:#7a6040;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:5px">' + t.lpwd + '</span>'
-    + '<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#0d0903" style="background-color:#0d0903;border-radius:6px"><tr><td bgcolor="#0d0903" style="background-color:#0d0903;padding:5px 10px;font-family:Courier,monospace;font-size:1rem;color:#c8a44e;font-weight:700;letter-spacing:0.06em">' + escHtml(pwd) + '</td></tr></table>'
+    + '<tr><td bgcolor="#f8f4ec" style="background-color:#f8f4ec;padding:10px 20px 16px;border-top:1px solid #e8dfc8">'
+    + '<span style="display:block;font-size:0.65rem;color:#9a8060;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:5px">' + t.lpwd + '</span>'
+    + '<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#ffffff" style="background-color:#ffffff;border:1px solid #e0d4b8;border-radius:6px"><tr><td bgcolor="#ffffff" style="background-color:#ffffff;padding:5px 10px;font-family:Courier,monospace;font-size:1rem;color:#2a1f10;font-weight:700;letter-spacing:0.06em">' + escHtml(pwd) + '</td></tr></table>'
     + '</td></tr></table>'
     + '<table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:20px"><tr><td align="center" style="text-align:center">'
-    + '<a href="' + ADMIN_URL + '" style="display:inline-block;background-color:#c8a44e;color:#0a0804;text-decoration:none;padding:13px 28px;border-radius:10px;font-weight:700;font-size:0.95rem">' + t.btn + '</a>'
+    + '<a href="' + ADMIN_URL + '" style="display:inline-block;background-color:#c8a44e;color:#0c0a08;text-decoration:none;padding:13px 28px;border-radius:10px;font-weight:700;font-size:0.95rem">' + t.btn + '</a>'
     + '</td></tr></table>'
-    + (isCS ? '<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#150f08" style="background-color:#150f08;border:1px solid #2e1e0a;border-radius:10px;margin-bottom:20px">'
-    + '<tr><td bgcolor="#150f08" style="background-color:#150f08;padding:16px 20px">'
-    + '<p style="margin:0 0 4px;font-weight:700;color:#f0e8c0;font-size:0.92rem">' + t.apkT + '</p>'
-    + '<p style="margin:0 0 12px;color:#c8b890;font-size:0.85rem">' + t.apkS + '</p>'
+    + (isCS ? '<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#f8f4ec" style="background-color:#f8f4ec;border:1px solid #e8dfc8;border-radius:10px;margin-bottom:20px">'
+    + '<tr><td bgcolor="#f8f4ec" style="background-color:#f8f4ec;padding:16px 20px">'
+    + '<p style="margin:0 0 4px;font-weight:700;color:#2a1f10;font-size:0.92rem">' + t.apkT + '</p>'
+    + '<p style="margin:0 0 12px;color:#6b5a3a;font-size:0.85rem">' + t.apkS + '</p>'
     + '<table width="100%" cellpadding="0" cellspacing="0"><tr><td align="center"><a href="' + APK_URL + '" style="display:inline-block;background-color:#2a5ab8;color:#fff;text-decoration:none;padding:11px 22px;border-radius:10px;font-weight:700;font-size:0.88rem">' + t.apkBtn + '</a></td></tr></table>'
     + '</td></tr></table>' : '')
-    + '<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#150f08" style="background-color:#150f08;border:1px solid #2e1e0a;border-left:3px solid #c8a44e;border-radius:0 8px 8px 0;margin-bottom:20px">'
-    + '<tr><td bgcolor="#150f08" style="background-color:#150f08;padding:12px 16px;font-size:0.88rem;color:#c8b890;line-height:1.6">' + t.trial + '</td></tr></table>'
-    + '<p style="color:#7a6040;font-size:0.83rem;line-height:1.6;margin:0">' + t.contact + '</p>'
+    + '<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#fdf9f2" style="background-color:#fdf9f2;border:1px solid #e8dfc8;border-left:3px solid #c8a44e;border-radius:0 8px 8px 0;margin-bottom:20px">'
+    + '<tr><td bgcolor="#fdf9f2" style="background-color:#fdf9f2;padding:12px 16px;font-size:0.88rem;color:#2a1f10;line-height:1.6">' + t.trial + '</td></tr></table>'
+    + '<p style="color:#9a8060;font-size:0.83rem;line-height:1.6;margin:0">' + t.contact + '</p>'
     + '</td></tr>'
-    + '<tr><td bgcolor="#080604" align="center" style="background-color:#080604;padding:14px 32px;border-top:1px solid #2e1e0a">'
-    + '<span style="font-size:0.75rem;color:#5a4a2a">' + t.ft + '</span>'
+    + '<tr><td bgcolor="#f2ece0" align="center" style="background-color:#f2ece0;padding:14px 32px;border-top:1px solid #ead9b8">'
+    + '<span style="font-size:0.75rem;color:#9a8060">' + t.ft + '</span>'
     + '</td></tr>'
     + '</table>'
     + '</td></tr>'
