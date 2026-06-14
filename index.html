@@ -2856,30 +2856,27 @@ html.light #gnd-logo-dk{display:none!important;}
 html.light #gnd-logo-lt{display:block!important;}
 
 /* ═══════════════════════════════════════════════
-   DESIGN UNIFIÉ CARTES — v2 (2026-06-14)
-   Référence : .fo-card (style original conservé)
-   co-card / av-card adoptent le même style
+   DESIGN UNIFIÉ CARTES — v3 (2026-06-14)
+   Dark  : rgba(20,15,8,.55) — verre sombre visible
+   Light : rgba(255,255,255,.55) — verre blanc (fo-card ref)
    ═══════════════════════════════════════════════ */
-.co-card{
-  background-image:none;
-  background:linear-gradient(180deg,rgba(241,234,217,.02),transparent);
+.fo-card,.co-card,.av-card{
+  background:rgba(20,15,8,.55);
   border-color:rgba(231,206,151,.18);
+  box-shadow:0 2px 24px -8px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.04);
 }
-html.light .co-card{
+.fo-card{ background-image:none; }
+.co-card{ background-image:none; }
+.av-card{ border:1px solid rgba(231,206,151,.18); border-radius:24px; }
+html.light .fo-card,html.light .co-card,html.light .av-card{
+  background:rgba(255,255,255,.55);
   background-image:none;
-  background:rgba(255,255,255,.55);
   box-shadow:0 2px 24px -8px rgba(0,0,0,.09),inset 0 1px 0 rgba(255,255,255,.85);
   border-color:rgba(140,110,45,.28);
 }
-.av-card{
-  border:1px solid rgba(231,206,151,.18);
-  border-radius:24px;
-  background:linear-gradient(180deg,rgba(241,234,217,.02),transparent);
-}
-html.light .av-card{
-  background:rgba(255,255,255,.55);
-  box-shadow:0 2px 24px -8px rgba(0,0,0,.09),inset 0 1px 0 rgba(255,255,255,.85);
-  border-color:rgba(140,110,45,.28);
+html.light .fo-card-featured{
+  background:linear-gradient(160deg,rgba(200,164,78,.12),rgba(255,255,255,.55));
+  border-color:rgba(200,164,78,.4);
 }
 
 </style>
