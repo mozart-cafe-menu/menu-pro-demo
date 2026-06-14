@@ -191,7 +191,7 @@ html.light #nav::before{
 }
 .logo-mark{display:none}
 .gnd-nav-logo{
-  width:48px;height:48px;object-fit:contain;
+  width:60px;height:60px;object-fit:contain;
   flex-shrink:0;display:block;
   background:transparent;
 }
@@ -1329,7 +1329,7 @@ footer .right a:hover{color:var(--gold-2)}
   #nav{padding:1rem var(--pad-x)}
   #nav.scrolled{padding:.65rem var(--pad-x)}
   .logo{font-size:1.05rem;gap:.4rem}
-  .gnd-nav-logo{width:40px;height:40px;}
+  .gnd-nav-logo{width:50px;height:50px;}
 
   .hero-grid{padding:max(5rem,8vh) var(--pad-x) max(1.5rem,3vh)}
   .hero-title{font-size:clamp(1.75rem,7.5vw,2.8rem)}
@@ -2856,33 +2856,30 @@ html.light #gnd-logo-dk{display:none!important;}
 html.light #gnd-logo-lt{display:block!important;}
 
 /* ═══════════════════════════════════════════════
-   DESIGN UNIFIÉ CARTES — v1 (2026-06-14)
-   Dark  : rgba(8,6,4,0.72) + bord gold 0.18 + blur 12px
-   Light : rgba(255,255,255,0.85) + ombre légère + blur 12px
+   DESIGN UNIFIÉ CARTES — v2 (2026-06-14)
+   Référence : .fo-card (style original conservé)
+   co-card / av-card adoptent le même style
    ═══════════════════════════════════════════════ */
-.fo-card,.fo-feat,.co-card,.av-card{
-  background:rgba(8,6,4,0.72);
+.co-card{
   background-image:none;
-  border:1px solid rgba(200,164,78,0.18);
-  border-radius:20px;
-  box-shadow:0 4px 28px rgba(0,0,0,0.48);
-  backdrop-filter:blur(12px);
-  -webkit-backdrop-filter:blur(12px);
+  background:linear-gradient(180deg,rgba(241,234,217,.02),transparent);
+  border-color:rgba(231,206,151,.18);
 }
-.fo-card-featured{
-  border-color:rgba(200,164,78,0.40);
-  background:rgba(8,6,4,0.72);
+html.light .co-card{
   background-image:none;
+  background:rgba(255,255,255,.55);
+  box-shadow:0 2px 24px -8px rgba(0,0,0,.09),inset 0 1px 0 rgba(255,255,255,.85);
+  border-color:rgba(140,110,45,.28);
 }
-html.light .fo-card,html.light .fo-feat,html.light .co-card,html.light .av-card{
-  background:rgba(255,255,255,0.85);
-  background-image:none;
-  border-color:rgba(255,255,255,0.92);
-  box-shadow:0 4px 24px rgba(0,0,0,0.08),0 1px 3px rgba(0,0,0,0.04);
+.av-card{
+  border:1px solid rgba(231,206,151,.18);
+  border-radius:24px;
+  background:linear-gradient(180deg,rgba(241,234,217,.02),transparent);
 }
-html.light .fo-card-featured{
-  border-color:rgba(200,164,78,0.35);
-  background:rgba(255,255,255,0.85);
+html.light .av-card{
+  background:rgba(255,255,255,.55);
+  box-shadow:0 2px 24px -8px rgba(0,0,0,.09),inset 0 1px 0 rgba(255,255,255,.85);
+  border-color:rgba(140,110,45,.28);
 }
 
 </style>
