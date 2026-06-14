@@ -191,7 +191,7 @@ html.light #nav::before{
 }
 .logo-mark{display:none}
 .gnd-nav-logo{
-  width:32px;height:32px;object-fit:contain;
+  width:48px;height:48px;object-fit:contain;
   flex-shrink:0;display:block;
   background:transparent;
 }
@@ -1329,7 +1329,7 @@ footer .right a:hover{color:var(--gold-2)}
   #nav{padding:1rem var(--pad-x)}
   #nav.scrolled{padding:.65rem var(--pad-x)}
   .logo{font-size:1.05rem;gap:.4rem}
-  .gnd-nav-logo{width:28px;height:28px;}
+  .gnd-nav-logo{width:40px;height:40px;}
 
   .hero-grid{padding:max(5rem,8vh) var(--pad-x) max(1.5rem,3vh)}
   .hero-title{font-size:clamp(1.75rem,7.5vw,2.8rem)}
@@ -2854,6 +2854,36 @@ html.light #gn-demo-splash::before{
 #gnd-logo-lt{display:none;}
 html.light #gnd-logo-dk{display:none!important;}
 html.light #gnd-logo-lt{display:block!important;}
+
+/* ═══════════════════════════════════════════════
+   DESIGN UNIFIÉ CARTES — v1 (2026-06-14)
+   Dark  : rgba(8,6,4,0.72) + bord gold 0.18 + blur 12px
+   Light : rgba(255,255,255,0.85) + ombre légère + blur 12px
+   ═══════════════════════════════════════════════ */
+.fo-card,.fo-feat,.co-card,.av-card{
+  background:rgba(8,6,4,0.72);
+  background-image:none;
+  border:1px solid rgba(200,164,78,0.18);
+  border-radius:20px;
+  box-shadow:0 4px 28px rgba(0,0,0,0.48);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+}
+.fo-card-featured{
+  border-color:rgba(200,164,78,0.40);
+  background:rgba(8,6,4,0.72);
+  background-image:none;
+}
+html.light .fo-card,html.light .fo-feat,html.light .co-card,html.light .av-card{
+  background:rgba(255,255,255,0.85);
+  background-image:none;
+  border-color:rgba(255,255,255,0.92);
+  box-shadow:0 4px 24px rgba(0,0,0,0.08),0 1px 3px rgba(0,0,0,0.04);
+}
+html.light .fo-card-featured{
+  border-color:rgba(200,164,78,0.35);
+  background:rgba(255,255,255,0.85);
+}
 
 </style>
 <script>
