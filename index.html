@@ -2861,19 +2861,21 @@ html.light #gnd-logo-lt{display:block!important;}
    Light : rgba(255,255,255,.55) — verre blanc (fo-card ref)
    ═══════════════════════════════════════════════ */
 .fo-card,.co-card,.av-card{
-  background:rgba(20,15,8,.55);
+  background:rgba(20,15,8,.72);
   border-color:rgba(231,206,151,.18);
   box-shadow:0 2px 24px -8px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.04);
 }
 .fo-card{ background-image:none; }
 .co-card{ background-image:none; }
 .av-card{ border:1px solid rgba(231,206,151,.18); border-radius:24px; }
+.av-card::before{ background:none; }
 html.light .fo-card,html.light .co-card,html.light .av-card{
   background:rgba(255,255,255,.55);
   background-image:none;
   box-shadow:0 2px 24px -8px rgba(0,0,0,.09),inset 0 1px 0 rgba(255,255,255,.85);
   border-color:rgba(140,110,45,.28);
 }
+html.light .av-card::before{ background:none; }
 html.light .fo-card-featured{
   background:linear-gradient(160deg,rgba(200,164,78,.12),rgba(255,255,255,.55));
   border-color:rgba(200,164,78,.4);
