@@ -2750,8 +2750,8 @@ html.light .pm-cta-btn.pm-cta-gold{color:#1a1208}
   /* Footer */
   footer{padding:1.5rem var(--pad-x);gap:.8rem}
 
-  /* Float nav */
-  #float-nav{right:.9rem;top:auto;bottom:5rem}
+  /* Float nav — bottom retiré : conflit avec top JS → container hauteur négative */
+  #float-nav{right:.9rem}
   #float-nav-trigger{width:44px;height:44px}
 }
 
@@ -3700,6 +3700,7 @@ html.light .fo-card-featured{
   function setFloatNavTop(sec){
     if(!floatNav)return;
     _fnCurrentSec=sec;
+    floatNav.style.bottom='auto'; // évite tout conflit CSS bottom+top
     if(sec==='forfaits'){
       _forfaitsNavTop();
     } else {
