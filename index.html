@@ -159,8 +159,8 @@ button{background:none;border:none;color:inherit;font:inherit;cursor:pointer}
 #nav{
   position:fixed;top:0;left:0;right:0;z-index:200;
   display:flex;align-items:center;justify-content:space-between;
-  padding:0.55rem var(--pad-x);
-  transition:border-color .55s;
+  padding:0.65rem var(--pad-x);
+  transition:padding .55s var(--e-out),border-color .55s;
   background-image:url(assets/gn-bg-dark.jpg);
   background-size:cover;
   background-position:center top;
@@ -182,7 +182,7 @@ html.light #nav::before{
   background:linear-gradient(90deg,transparent 0%,rgba(200,164,78,0.05) 40%,rgba(200,164,78,0.12) 50%,rgba(200,164,78,0.05) 60%,transparent 100%);
 }
 #nav.scrolled{
-  padding:0.55rem var(--pad-x);
+  padding:.45rem var(--pad-x);
 }
 .logo{
   display:flex;align-items:center;gap:.55rem;
@@ -1324,12 +1324,12 @@ footer .right a:hover{color:var(--gold-2)}
 @media(max-width:600px){
   :root{--pad-x:1rem;--radius:14px}
 
-  #nav{padding:0.5rem var(--pad-x)}
-  #nav.scrolled{padding:0.5rem var(--pad-x)}
+  #nav{padding:0.6rem var(--pad-x)}
+  #nav.scrolled{padding:.4rem var(--pad-x)}
   .logo{font-size:1.05rem;gap:.4rem}
   .gnd-nav-logo{width:50px;height:50px;}
 
-  .hero-grid{padding:max(5.5rem,9vh) var(--pad-x) max(1.5rem,3vh)}
+  .hero-grid{padding:max(5rem,8vh) var(--pad-x) max(1.5rem,3vh)}
   .hero-title{font-size:clamp(1.75rem,7.5vw,2.8rem)}
   .hero-lead{font-size:.9rem;max-width:100%}
   .hero-cta-row{flex-direction:column;align-items:stretch;width:100%}
