@@ -1,7 +1,8 @@
 /* ============================================================
    Vercel Function — FCM + Email attente + Auto-création client
    B1 : email d'attente immédiat
-   Auto : création compte restaurant + email livraison immédiat
+   Auto : création compte restaurant + emailLivraisonProgramme (now+2h)
+   → Email livraison envoyé par cron-auto.js après 2h (B2)
 ============================================================ */
 
 const https      = require('https');
@@ -269,7 +270,7 @@ async function autoCreateRestaurant(restaurant, forfaitType, paymentMode, email,
       statut: 'en_cours',
       lu: true,
       clientCree: clientCreeData,
-      emailLivraisonSent: ts,
+      emailLivraisonProgramme: ts + 2 * 60 * 60 * 1000,
       emailData: { email, rid, pwd, name: restaurant, forfait: forfaitType, lang, paymentMode }
     });
   }
@@ -336,24 +337,6 @@ module.exports = async (req, res) => {
       created = await autoCreateRestaurant(rest, forfaitType || 'menu-qr', paymentMode || 'monthly', email, lang, safeKey);
     } catch(e) {
       console.error('⚠ Auto-création error:', e.message);
-    }
-
-    // ── 4. Email livraison immédiat ─────────────────────────────────────────
-    if (created && email && process.env.GMAIL_USER && process.env.GMAIL_PASS) {
-      try {
-        await createTransport().sendMail({
-          from:    '"GeNext" <' + process.env.GMAIL_USER + '>',
-          replyTo: process.env.GMAIL_USER,
-          to:      email,
-          subject: deliverySubject(rest, lang),
-          html:    deliveryHtml(rest, created.rid, created.pwd, created.isCS, lang),
-          text:    rest + ' — Accès GeNext\n\nVotre espace est prêt.\nIdentifiant : ' + created.rid + '\nMot de passe : ' + created.pwd + '\n\nAccéder : ' + ADMIN_URL + '\n\n7 jours d\'essai gratuit à partir de votre première connexion.\n\nGeNext — gennextcontact@gmail.com',
-          headers: { 'List-Unsubscribe': '<mailto:' + process.env.GMAIL_USER + '?subject=unsubscribe>' }
-        });
-        console.log('✅ Email livraison envoyé à:', email, '— RID:', created.rid);
-      } catch(e) {
-        console.error('⚠ Email livraison error:', e.message);
-      }
     }
 
     res.status(200).json({ ...(fcmResult.body || { sent: 0 }), created: created ? { rid: created.rid } : null });
