@@ -6,10 +6,9 @@
 
 const https      = require('https');
 const nodemailer = require('nodemailer');
-const path       = require('path');
 
 const CONTROL_DB = 'https://menu-pro-control-default-rtdb.europe-west1.firebasedatabase.app';
-const LOGO_ATTACHMENT = { filename: 'gn-logo-light.png', path: path.join(__dirname, '../assets/gn-logo-light.png'), cid: 'gnlogo' };
+const LOGO_ATTACHMENT = { filename: 'gn-logo-light.png', path: 'https://menu-saas-platform.vercel.app/assets/gn-logo-light.png', cid: 'gnlogo' };
 
 function createTransport() {
   return nodemailer.createTransport({

@@ -10,9 +10,8 @@
 
 const nodemailer = require('nodemailer');
 const https      = require('https');
-const path       = require('path');
 
-const LOGO_ATTACHMENT = { filename: 'gn-logo-light.png', path: path.join(__dirname, '../assets/gn-logo-light.png'), cid: 'gnlogo' };
+const LOGO_ATTACHMENT = { filename: 'gn-logo-light.png', path: 'https://menu-saas-platform.vercel.app/assets/gn-logo-light.png', cid: 'gnlogo' };
 
 function escHtml(s) {
   return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
