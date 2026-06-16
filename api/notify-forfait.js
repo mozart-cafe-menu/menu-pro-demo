@@ -6,8 +6,10 @@
 
 const https      = require('https');
 const nodemailer = require('nodemailer');
+const path       = require('path');
 
 const CONTROL_DB = 'https://menu-pro-control-default-rtdb.europe-west1.firebasedatabase.app';
+const LOGO_ATTACHMENT = { filename: 'gn-logo-light.png', path: path.join(__dirname, '../assets/gn-logo-light.png'), cid: 'gnlogo' };
 
 function createTransport() {
   return nodemailer.createTransport({
@@ -158,17 +160,17 @@ function buildForfaitEmail(lang, name, oldForfait, newForfait, isUpgrade, paymen
     + '<table' + dirAttr + ' width="100%" cellpadding="0" cellspacing="0" bgcolor="#f2ece0" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="background-color:#f2ece0;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center;background-repeat:no-repeat">'
     + '<tr><td align="center" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="padding:24px 0;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center">'
     + '<table width="580" cellpadding="0" cellspacing="0" bgcolor="#ffffff" style="max-width:580px;width:100%;background-color:#ffffff;font-family:\'Segoe UI\',Arial,sans-serif">'
-    + '<tr><td bgcolor="#ffffff" align="center" style="background-color:#ffffff;padding:26px 32px;border-bottom:1px solid #ead9b8">'
-    + '<img src="https://menu-saas-platform.vercel.app/assets/gn-logo-light.png" alt="GeNext" width="140" height="147" style="display:block;margin:0 auto;max-width:140px;border:0">'
+    + '<tr><td bgcolor="#ffffff" align="center" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="background-color:#ffffff;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center;padding:26px 32px;border-bottom:1px solid #ead9b8">'
+    + '<img src="cid:gnlogo" alt="GeNext" width="140" height="147" style="display:block;margin:0 auto;max-width:140px;border:0">'
     + '<div style="font-size:0.75rem;color:#9a8060;margin-top:8px;letter-spacing:0.06em">DIGITAL MENU PLATFORM</div>'
     + '</td></tr>'
-    + '<tr><td bgcolor="#ffffff" style="background-color:#ffffff;padding:28px 32px;text-align:' + align + '">'
+    + '<tr><td bgcolor="#ffffff" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="background-color:#ffffff;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center;padding:28px 32px;text-align:' + align + '">'
     + '<p style="color:#2a1f10;font-size:1rem;margin:0 0 12px;font-weight:600">' + bodyText.greeting + '</p>'
     + '<p style="color:#4a3728;font-size:0.9rem;line-height:1.6;margin:0 0 4px">' + bodyText.intro + '</p>'
     + paymentBlock
     + '<p style="color:#7a6555;font-size:0.88rem;line-height:1.6;margin:12px 0 0">' + bodyText.features + '</p>'
     + '</td></tr>'
-    + '<tr><td bgcolor="#f2ece0" align="center" style="background-color:#f2ece0;padding:14px 32px;border-top:1px solid #ead9b8">'
+    + '<tr><td bgcolor="#f2ece0" align="center" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="background-color:#f2ece0;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center;padding:14px 32px;border-top:1px solid #ead9b8">'
     + '<p style="color:#9a8060;font-size:0.78rem;margin:0">' + bodyText.closing + ' · GeNext</p>'
     + '</td></tr>'
     + '</table>'
@@ -200,7 +202,8 @@ module.exports = async function handler(req, res) {
       const { subject, html } = buildForfaitEmail(safeLang, name || rid, oldForfait, newForfait, isUpgrade, safeMode);
       await createTransport().sendMail({
         from: `"GeNext" <${process.env.GMAIL_USER}>`,
-        to: email, subject, html
+        to: email, subject, html,
+        attachments: [LOGO_ATTACHMENT]
       });
       results.email = 'sent';
     } catch(e) {

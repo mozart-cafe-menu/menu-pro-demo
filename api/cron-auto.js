@@ -10,6 +10,9 @@
 
 const nodemailer = require('nodemailer');
 const https      = require('https');
+const path       = require('path');
+
+const LOGO_ATTACHMENT = { filename: 'gn-logo-light.png', path: path.join(__dirname, '../assets/gn-logo-light.png'), cid: 'gnlogo' };
 
 function escHtml(s) {
   return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
@@ -86,14 +89,14 @@ function fmtDate(ts, lang) {
 // ════════════════════════════════════════════════════════════════════════════
 
 function _headerHtml(subtitle) {
-  return '<tr><td bgcolor="#ffffff" align="center" style="background-color:#ffffff;padding:26px 32px;border-bottom:1px solid #ead9b8">'
-    + '<img src="https://menu-saas-platform.vercel.app/assets/gn-logo-light.png" alt="GeNext" width="140" height="147" style="display:block;margin:0 auto;max-width:140px;border:0">'
+  return '<tr><td bgcolor="#ffffff" align="center" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="background-color:#ffffff;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center;padding:26px 32px;border-bottom:1px solid #ead9b8">'
+    + '<img src="cid:gnlogo" alt="GeNext" width="140" height="147" style="display:block;margin:0 auto;max-width:140px;border:0">'
     + '<div style="font-size:0.7rem;color:#9a8060;letter-spacing:0.12em;text-transform:uppercase;margin-top:10px">' + subtitle + '</div>'
     + '</td></tr>';
 }
 
 function _footerHtml(text) {
-  return '<tr><td bgcolor="#f2ece0" align="center" style="background-color:#f2ece0;padding:14px 32px;border-top:1px solid #ead9b8">'
+  return '<tr><td bgcolor="#f2ece0" align="center" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="background-color:#f2ece0;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center;padding:14px 32px;border-top:1px solid #ead9b8">'
     + '<span style="font-size:0.75rem;color:#9a8060">' + text + '</span>'
     + '</td></tr>';
 }
@@ -202,7 +205,7 @@ function deliveryHtml(rawName, rid, pwd, isCS, lang) {
     + '<tr><td align="center" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="padding:16px 8px;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center">'
     + '<table width="580" cellpadding="0" cellspacing="0" bgcolor="#ffffff" style="max-width:580px;width:100%;background-color:#ffffff;font-family:\'Segoe UI\',Arial,sans-serif">'
     + _headerHtml(t.subtitle)
-    + '<tr><td bgcolor="#ffffff" style="background-color:#ffffff;padding:28px 32px">'
+    + '<tr><td bgcolor="#ffffff" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="background-color:#ffffff;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center;padding:28px 32px">'
     + '<h2 style="margin:0 0 12px;font-size:1.15rem;color:#c8a44e">' + t.greeting + '</h2>'
     + '<p style="color:#2a1f10;line-height:1.7;margin-bottom:20px;font-size:0.92rem">' + t.intro + '<br>' + t.sub + '</p>'
     + _credentialsCard(t.labelId, rid, t.labelPwd, pwd)
@@ -296,7 +299,7 @@ function reminderHtml(rawName, amount, mode, dateStr, lang) {
     + '<tr><td align="center" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="padding:16px 8px;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center">'
     + '<table width="580" cellpadding="0" cellspacing="0" bgcolor="#ffffff" style="max-width:580px;width:100%;background-color:#ffffff;font-family:\'Segoe UI\',Arial,sans-serif">'
     + _headerHtml(t.subtitle)
-    + '<tr><td bgcolor="#ffffff" style="background-color:#ffffff;padding:28px 32px">'
+    + '<tr><td bgcolor="#ffffff" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="background-color:#ffffff;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center;padding:28px 32px">'
     + '<h2 style="margin:0 0 12px;font-size:1.15rem;color:#c8a44e">' + t.greeting + '</h2>'
     + '<p style="color:#2a1f10;line-height:1.7;margin-bottom:20px;font-size:0.92rem">' + t.intro + '</p>'
     + '<table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:20px"><tr>'
@@ -394,7 +397,8 @@ module.exports = async (req, res) => {
           headers: { 'List-Unsubscribe': '<mailto:' + process.env.GMAIL_USER + '?subject=unsubscribe>' },
           subject: deliverySubject(ed.name || d.restaurant || '', lang),
           html:    deliveryHtml(ed.name || d.restaurant || '', ed.rid, ed.pwd, isCS, lang),
-          text:    (ed.name || d.restaurant || '') + ' — Accès GeNext\n\nVotre espace est prêt.\nIdentifiant : ' + ed.rid + '\nMot de passe : ' + ed.pwd + '\n\nAccéder : ' + ADMIN_URL + '\n\n7 jours d\'essai gratuit à partir de votre première connexion.\n\nGeNext — ' + process.env.GMAIL_USER
+          text:    (ed.name || d.restaurant || '') + ' — Accès GeNext\n\nVotre espace est prêt.\nIdentifiant : ' + ed.rid + '\nMot de passe : ' + ed.pwd + '\n\nAccéder : ' + ADMIN_URL + '\n\n7 jours d\'essai gratuit à partir de votre première connexion.\n\nGeNext — ' + process.env.GMAIL_USER,
+          attachments: [LOGO_ATTACHMENT]
         });
         await fbPatch(CONTROL_DB, '/commandes/' + key, secret, { emailLivraisonSent: now });
         stats.delivery.sent++;
@@ -427,7 +431,8 @@ module.exports = async (req, res) => {
           headers: { 'List-Unsubscribe': '<mailto:' + process.env.GMAIL_USER + '?subject=unsubscribe>' },
           subject: reminderSubject(d.restaurant || '', lang),
           html:    reminderHtml(d.restaurant || '', price + ' €', mode, dateStr, lang),
-          text:    'Rappel paiement GeNext\n\n' + (d.restaurant || '') + '\nMontant : ' + price + ' €\nÉchéance : ' + dateStr + '\n\nVirement bancaire ou espèces — contactez-nous.\n\nGeNext — ' + process.env.GMAIL_USER
+          text:    'Rappel paiement GeNext\n\n' + (d.restaurant || '') + '\nMontant : ' + price + ' €\nÉchéance : ' + dateStr + '\n\nVirement bancaire ou espèces — contactez-nous.\n\nGeNext — ' + process.env.GMAIL_USER,
+          attachments: [LOGO_ATTACHMENT]
         });
         await fbPatch(CONTROL_DB, '/commandes/' + key, secret, { lastReminderSent: now });
         stats.reminders.sent++;

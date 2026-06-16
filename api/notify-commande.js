@@ -8,6 +8,9 @@
 const https      = require('https');
 const nodemailer = require('nodemailer');
 const crypto     = require('crypto');
+const path       = require('path');
+
+const LOGO_ATTACHMENT = { filename: 'gn-logo-light.png', path: path.join(__dirname, '../assets/gn-logo-light.png'), cid: 'gnlogo' };
 
 const MAIN_DB    = 'https://menu-saas-platform-default-rtdb.europe-west1.firebasedatabase.app';
 const CONTROL_DB = 'https://menu-pro-control-default-rtdb.europe-west1.firebasedatabase.app';
@@ -132,17 +135,17 @@ function _wHtml(r, f, m, t) {
   return '<table' + dir + ' width="100%" cellpadding="0" cellspacing="0" bgcolor="#f2ece0" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="background-color:#f2ece0;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center;background-repeat:no-repeat">'
     + '<tr><td align="center" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="padding:16px 8px;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center">'
     + '<table width="580" cellpadding="0" cellspacing="0" bgcolor="#ffffff" style="max-width:580px;width:100%;background-color:#ffffff;font-family:\'Segoe UI\',Arial,sans-serif">'
-    + '<tr><td bgcolor="#ffffff" align="center" style="background-color:#ffffff;padding:26px 32px;border-bottom:1px solid #ead9b8">'
-    + '<img src="https://menu-saas-platform.vercel.app/assets/gn-logo-light.png" alt="GeNext" width="140" height="147" style="display:block;margin:0 auto;max-width:140px;border:0">'
+    + '<tr><td bgcolor="#ffffff" align="center" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="background-color:#ffffff;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center;padding:26px 32px;border-bottom:1px solid #ead9b8">'
+    + '<img src="cid:gnlogo" alt="GeNext" width="140" height="147" style="display:block;margin:0 auto;max-width:140px;border:0">'
     + '<div style="font-size:0.72rem;color:#9a8060;letter-spacing:0.12em;text-transform:uppercase;margin-top:8px">' + t.sub + '</div>'
     + '</td></tr>'
-    + '<tr><td bgcolor="#ffffff" style="background-color:#ffffff;padding:28px 32px">'
+    + '<tr><td bgcolor="#ffffff" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="background-color:#ffffff;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center;padding:28px 32px">'
     + '<h2 style="margin:0 0 12px;font-size:1.15rem;color:#c8a44e">' + t.gr + '</h2>'
     + '<p style="color:#2a1f10;line-height:1.7;margin-bottom:20px;font-size:0.92rem">' + t.p1 + ' <strong style="color:#c8a44e">' + escHtml(r) + '</strong>.<br>' + t.p2 + ' <strong style="color:#c8a44e">' + escHtml(f) + '</strong> (' + escHtml(m) + ').</p>'
     + '<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#fdf9f2" style="background-color:#fdf9f2;border:1px solid #e8dfc8;border-left:3px solid #c8a44e;border-radius:0 8px 8px 0;margin-bottom:20px"><tr><td style="padding:14px 18px;font-size:0.88rem;color:#2a1f10;line-height:1.6">' + t.box + '</td></tr></table>'
     + '<p style="color:#9a8060;font-size:0.83rem;line-height:1.6;margin:0">' + t.contact + '</p>'
     + '</td></tr>'
-    + '<tr><td bgcolor="#f2ece0" align="center" style="background-color:#f2ece0;padding:14px 32px;border-top:1px solid #ead9b8">'
+    + '<tr><td bgcolor="#f2ece0" align="center" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="background-color:#f2ece0;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center;padding:14px 32px;border-top:1px solid #ead9b8">'
     + '<span style="font-size:0.75rem;color:#9a8060">' + t.ft + '</span>'
     + '</td></tr>'
     + '</table>'
@@ -180,11 +183,11 @@ function deliveryHtml(name, rid, pwd, isCS, lang) {
   return '<table' + dir + ' width="100%" cellpadding="0" cellspacing="0" bgcolor="#f2ece0" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="background-color:#f2ece0;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center;background-repeat:no-repeat">'
     + '<tr><td align="center" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="padding:16px 8px;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center">'
     + '<table width="580" cellpadding="0" cellspacing="0" bgcolor="#ffffff" style="max-width:580px;width:100%;background-color:#ffffff;font-family:\'Segoe UI\',Arial,sans-serif">'
-    + '<tr><td bgcolor="#ffffff" align="center" style="background-color:#ffffff;padding:26px 32px;border-bottom:1px solid #ead9b8">'
-    + '<img src="https://menu-saas-platform.vercel.app/assets/gn-logo-light.png" alt="GeNext" width="140" height="147" style="display:block;margin:0 auto;max-width:140px;border:0">'
+    + '<tr><td bgcolor="#ffffff" align="center" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="background-color:#ffffff;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center;padding:26px 32px;border-bottom:1px solid #ead9b8">'
+    + '<img src="cid:gnlogo" alt="GeNext" width="140" height="147" style="display:block;margin:0 auto;max-width:140px;border:0">'
     + '<div style="font-size:0.72rem;color:#9a8060;letter-spacing:0.12em;text-transform:uppercase;margin-top:8px">' + t.sub + '</div>'
     + '</td></tr>'
-    + '<tr><td bgcolor="#ffffff" style="background-color:#ffffff;padding:28px 32px">'
+    + '<tr><td bgcolor="#ffffff" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="background-color:#ffffff;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center;padding:28px 32px">'
     + '<h2 style="margin:0 0 8px;font-size:1.15rem;color:#c8a44e">' + t.gr + '</h2>'
     + '<p style="color:#2a1f10;line-height:1.7;margin-bottom:20px;font-size:0.92rem">' + t.intro + '<br>' + t.sub2 + '</p>'
     + '<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#f8f4ec" style="background-color:#f8f4ec;border:1px solid #e8dfc8;border-radius:10px;margin-bottom:20px">'
@@ -209,7 +212,7 @@ function deliveryHtml(name, rid, pwd, isCS, lang) {
     + '<tr><td bgcolor="#fdf9f2" style="background-color:#fdf9f2;padding:12px 16px;font-size:0.88rem;color:#2a1f10;line-height:1.6">' + t.trial + '</td></tr></table>'
     + '<p style="color:#9a8060;font-size:0.83rem;line-height:1.6;margin:0">' + t.contact + '</p>'
     + '</td></tr>'
-    + '<tr><td bgcolor="#f2ece0" align="center" style="background-color:#f2ece0;padding:14px 32px;border-top:1px solid #ead9b8">'
+    + '<tr><td bgcolor="#f2ece0" align="center" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="background-color:#f2ece0;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center;padding:14px 32px;border-top:1px solid #ead9b8">'
     + '<span style="font-size:0.75rem;color:#9a8060">' + t.ft + '</span>'
     + '</td></tr>'
     + '</table>'
@@ -323,7 +326,8 @@ module.exports = async (req, res) => {
           subject: tpl.subject(rest),
           html:    tpl.html(rest, plan.split(' — ')[0] || 'GeNext', modeLabel),
           text:    rest + ' — Demande reçue\n\nNous avons bien reçu votre demande.\nForfait : ' + (plan.split(' — ')[0] || '') + ' (' + modeLabel + ')\n\nVous recevrez vos identifiants dans les 24 heures.\n\nGeNext — gennextcontact@gmail.com',
-          headers: { 'List-Unsubscribe': '<mailto:' + process.env.GMAIL_USER + '?subject=unsubscribe>' }
+          headers: { 'List-Unsubscribe': '<mailto:' + process.env.GMAIL_USER + '?subject=unsubscribe>' },
+          attachments: [LOGO_ATTACHMENT]
         });
         console.log('✅ Email attente envoyé à:', email);
       } catch(e) {
