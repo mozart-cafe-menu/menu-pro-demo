@@ -4,6 +4,6 @@
     { "source": "/(.*)", "destination": "/index.html" }
   ],
   "crons": [
-    { "path": "/api/cron-auto", "schedule": "@daily" }
+    { "path": "/api/cron-auto", "schedule": "0 0 * * *" }
   ]
 }
