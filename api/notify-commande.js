@@ -129,11 +129,11 @@ const WAITING_TPL = {
 };
 function _wHtml(r, f, m, t) {
   const dir = t.rtl ? ' dir="rtl"' : '';
-  return '<table' + dir + ' width="100%" cellpadding="0" cellspacing="0" bgcolor="#f2ece0" style="background-color:#f2ece0">'
-    + '<tr><td align="center" style="padding:16px 8px">'
-    + '<table width="560" cellpadding="0" cellspacing="0" bgcolor="#ffffff" style="max-width:560px;width:100%;background-color:#ffffff;font-family:\'Segoe UI\',Arial,sans-serif">'
+  return '<table' + dir + ' width="100%" cellpadding="0" cellspacing="0" bgcolor="#f2ece0" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="background-color:#f2ece0;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center;background-repeat:no-repeat">'
+    + '<tr><td align="center" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="padding:16px 8px;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center">'
+    + '<table width="580" cellpadding="0" cellspacing="0" bgcolor="#ffffff" style="max-width:580px;width:100%;background-color:#ffffff;font-family:\'Segoe UI\',Arial,sans-serif">'
     + '<tr><td bgcolor="#ffffff" align="center" style="background-color:#ffffff;padding:26px 32px;border-bottom:1px solid #ead9b8">'
-    + '<img src="https://menu-saas-platform.vercel.app/assets/gn-logo-light.png" alt="GeNext" width="140" style="display:block;margin:0 auto;max-width:140px;border:0">'
+    + '<img src="https://menu-saas-platform.vercel.app/assets/gn-logo-light.png" alt="GeNext" width="140" height="147" style="display:block;margin:0 auto;max-width:140px;border:0">'
     + '<div style="font-size:0.72rem;color:#9a8060;letter-spacing:0.12em;text-transform:uppercase;margin-top:8px">' + t.sub + '</div>'
     + '</td></tr>'
     + '<tr><td bgcolor="#ffffff" style="background-color:#ffffff;padding:28px 32px">'
@@ -177,11 +177,11 @@ function deliveryHtml(name, rid, pwd, isCS, lang) {
   };
   const t = T[lang] || T.fr;
   const dir = t.rtl ? ' dir="rtl"' : '';
-  return '<table' + dir + ' width="100%" cellpadding="0" cellspacing="0" bgcolor="#f2ece0" style="background-color:#f2ece0">'
-    + '<tr><td align="center" style="padding:16px 8px">'
+  return '<table' + dir + ' width="100%" cellpadding="0" cellspacing="0" bgcolor="#f2ece0" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="background-color:#f2ece0;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center;background-repeat:no-repeat">'
+    + '<tr><td align="center" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="padding:16px 8px;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center">'
     + '<table width="580" cellpadding="0" cellspacing="0" bgcolor="#ffffff" style="max-width:580px;width:100%;background-color:#ffffff;font-family:\'Segoe UI\',Arial,sans-serif">'
     + '<tr><td bgcolor="#ffffff" align="center" style="background-color:#ffffff;padding:26px 32px;border-bottom:1px solid #ead9b8">'
-    + '<img src="https://menu-saas-platform.vercel.app/assets/gn-logo-light.png" alt="GeNext" width="140" style="display:block;margin:0 auto;max-width:140px;border:0">'
+    + '<img src="https://menu-saas-platform.vercel.app/assets/gn-logo-light.png" alt="GeNext" width="140" height="147" style="display:block;margin:0 auto;max-width:140px;border:0">'
     + '<div style="font-size:0.72rem;color:#9a8060;letter-spacing:0.12em;text-transform:uppercase;margin-top:8px">' + t.sub + '</div>'
     + '</td></tr>'
     + '<tr><td bgcolor="#ffffff" style="background-color:#ffffff;padding:28px 32px">'
@@ -189,12 +189,12 @@ function deliveryHtml(name, rid, pwd, isCS, lang) {
     + '<p style="color:#2a1f10;line-height:1.7;margin-bottom:20px;font-size:0.92rem">' + t.intro + '<br>' + t.sub2 + '</p>'
     + '<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#f8f4ec" style="background-color:#f8f4ec;border:1px solid #e8dfc8;border-radius:10px;margin-bottom:20px">'
     + '<tr><td bgcolor="#f8f4ec" style="background-color:#f8f4ec;padding:16px 20px 10px">'
-    + '<span style="display:block;font-size:0.65rem;color:#9a8060;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:5px">' + t.lid + '</span>'
-    + '<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#ffffff" style="background-color:#ffffff;border:1px solid #e0d4b8;border-radius:6px"><tr><td bgcolor="#ffffff" style="background-color:#ffffff;padding:5px 10px;font-family:Courier,monospace;font-size:1rem;color:#c8a44e;font-weight:700;letter-spacing:0.06em">' + escHtml(rid) + '</td></tr></table>'
+    + '<span style="display:block;font-size:0.65rem;color:#9a8060;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px">' + t.lid + '</span>'
+    + '<span style="display:block;font-family:Courier,monospace;font-size:1rem;color:#c8a44e;font-weight:700;background-color:#ffffff;border:1px solid #e0d4b8;padding:6px 12px;border-radius:6px;letter-spacing:0.06em">' + escHtml(rid) + '</span>'
     + '</td></tr>'
     + '<tr><td bgcolor="#f8f4ec" style="background-color:#f8f4ec;padding:10px 20px 16px;border-top:1px solid #e8dfc8">'
-    + '<span style="display:block;font-size:0.65rem;color:#9a8060;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:5px">' + t.lpwd + '</span>'
-    + '<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#ffffff" style="background-color:#ffffff;border:1px solid #e0d4b8;border-radius:6px"><tr><td bgcolor="#ffffff" style="background-color:#ffffff;padding:5px 10px;font-family:Courier,monospace;font-size:1rem;color:#2a1f10;font-weight:700;letter-spacing:0.06em">' + escHtml(pwd) + '</td></tr></table>'
+    + '<span style="display:block;font-size:0.65rem;color:#9a8060;text-transform:uppercase;letter-spacing:0.1em;margin-bottom:6px">' + t.lpwd + '</span>'
+    + '<span style="display:block;font-family:Courier,monospace;font-size:1rem;color:#2a1f10;font-weight:700;background-color:#ffffff;border:1px solid #e0d4b8;padding:6px 12px;border-radius:6px;letter-spacing:0.06em">' + escHtml(pwd) + '</span>'
     + '</td></tr></table>'
     + '<table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:20px"><tr><td align="center" style="text-align:center">'
     + '<a href="' + ADMIN_URL + '" style="display:inline-block;background-color:#c8a44e;color:#0c0a08;text-decoration:none;padding:13px 28px;border-radius:10px;font-weight:700;font-size:0.95rem">' + t.btn + '</a>'

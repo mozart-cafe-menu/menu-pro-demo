@@ -87,7 +87,7 @@ function fmtDate(ts, lang) {
 
 function _headerHtml(subtitle) {
   return '<tr><td bgcolor="#ffffff" align="center" style="background-color:#ffffff;padding:26px 32px;border-bottom:1px solid #ead9b8">'
-    + '<img src="https://menu-saas-platform.vercel.app/assets/gn-logo-light.png" alt="GeNext" width="140" style="display:block;margin:0 auto;max-width:140px;border:0">'
+    + '<img src="https://menu-saas-platform.vercel.app/assets/gn-logo-light.png" alt="GeNext" width="140" height="147" style="display:block;margin:0 auto;max-width:140px;border:0">'
     + '<div style="font-size:0.7rem;color:#9a8060;letter-spacing:0.12em;text-transform:uppercase;margin-top:10px">' + subtitle + '</div>'
     + '</td></tr>';
 }
@@ -198,8 +198,8 @@ function deliveryHtml(rawName, rid, pwd, isCS, lang) {
   };
   const t   = T[lang] || T.fr;
   const dir = lang === 'ar' ? ' dir="rtl"' : '';
-  return '<table' + dir + ' width="100%" cellpadding="0" cellspacing="0" bgcolor="#f2ece0" style="background-color:#f2ece0">'
-    + '<tr><td align="center" style="padding:16px 8px">'
+  return '<table' + dir + ' width="100%" cellpadding="0" cellspacing="0" bgcolor="#f2ece0" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="background-color:#f2ece0;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center;background-repeat:no-repeat">'
+    + '<tr><td align="center" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="padding:16px 8px;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center">'
     + '<table width="580" cellpadding="0" cellspacing="0" bgcolor="#ffffff" style="max-width:580px;width:100%;background-color:#ffffff;font-family:\'Segoe UI\',Arial,sans-serif">'
     + _headerHtml(t.subtitle)
     + '<tr><td bgcolor="#ffffff" style="background-color:#ffffff;padding:28px 32px">'
@@ -292,8 +292,8 @@ function reminderHtml(rawName, amount, mode, dateStr, lang) {
   };
   const t   = T[lang] || T.fr;
   const dir = lang === 'ar' ? ' dir="rtl"' : '';
-  return '<table' + dir + ' width="100%" cellpadding="0" cellspacing="0" bgcolor="#f2ece0" style="background-color:#f2ece0">'
-    + '<tr><td align="center" style="padding:16px 8px">'
+  return '<table' + dir + ' width="100%" cellpadding="0" cellspacing="0" bgcolor="#f2ece0" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="background-color:#f2ece0;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center;background-repeat:no-repeat">'
+    + '<tr><td align="center" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="padding:16px 8px;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center">'
     + '<table width="580" cellpadding="0" cellspacing="0" bgcolor="#ffffff" style="max-width:580px;width:100%;background-color:#ffffff;font-family:\'Segoe UI\',Arial,sans-serif">'
     + _headerHtml(t.subtitle)
     + '<tr><td bgcolor="#ffffff" style="background-color:#ffffff;padding:28px 32px">'
