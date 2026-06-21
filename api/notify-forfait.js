@@ -8,7 +8,22 @@ const https      = require('https');
 const nodemailer = require('nodemailer');
 
 const CONTROL_DB = 'https://menu-pro-control-default-rtdb.europe-west1.firebasedatabase.app';
+const MAIN_DB    = 'https://menu-saas-platform-default-rtdb.europe-west1.firebasedatabase.app';
 const LOGO_ATTACHMENT = { filename: 'gn-logo-email.png', path: 'https://menu-saas-platform.vercel.app/assets/gn-logo-email.png', cid: 'gnlogo' };
+
+// ── Prix par défaut ─────────────────────────────────────────────────────────
+const PM_MONTHLY_F = { 'menu-qr': 49, 'commandes-services': 99 };
+const PM_ANNUAL_F  = { 'menu-qr': 490, 'commandes-services': 990 };
+
+// ── Prix effectif (combo) ───────────────────────────────────────────────────
+function _effectivePriceF(sub, forfait, mode) {
+  const f  = (forfait === 'commandes-services') ? 'srv' : 'qr';
+  const m  = (mode === 'annual') ? 'annual' : 'monthly';
+  const ck = f + '-' + m;
+  if (sub && sub.prices && sub.prices[ck] != null) return sub.prices[ck];
+  if (sub && sub.price != null && sub.price >= 0) return sub.price;
+  return mode === 'annual' ? (PM_ANNUAL_F[forfait] || 490) : (PM_MONTHLY_F[forfait] || 49);
+}
 
 function createTransport() {
   return nodemailer.createTransport({
@@ -56,7 +71,7 @@ function httpsPost(url, headers, body) {
 }
 
 // ── Email templates 5 langues ───────────────────────────────────────────────
-function buildForfaitEmail(lang, name, oldForfait, newForfait, isUpgrade, paymentMode) {
+function buildForfaitEmail(lang, name, oldForfait, newForfait, isUpgrade, paymentMode, price) {
   const isCS = newForfait === 'commandes-services';
   const forfaitLabel = {
     fr: { mq: 'Menu QR', cs: 'Commandes & Services', monthly: 'mensuel', annual: 'annuel' },
@@ -68,7 +83,7 @@ function buildForfaitEmail(lang, name, oldForfait, newForfait, isUpgrade, paymen
 
   const newLabel = isCS ? forfaitLabel.cs : forfaitLabel.mq;
   const modeLabel = paymentMode === 'annual' ? forfaitLabel.annual : forfaitLabel.monthly;
-  const price = isCS ? (paymentMode === 'annual' ? 990 : 99) : (paymentMode === 'annual' ? 490 : 49);
+  // price est passé depuis le handler (prix réel du client, ou défaut si inconnu)
   const isRTL = lang === 'ar';
 
   const subjects = {
@@ -192,13 +207,27 @@ module.exports = async function handler(req, res) {
   const safeLang   = ['fr','en','el','de','ar'].includes(lang) ? lang : 'fr';
   const safeMode   = paymentMode === 'annual' ? 'annual' : 'monthly';
   const isUpgrade  = newForfait === 'commandes-services' && oldForfait !== 'commandes-services';
-  const price      = newForfait === 'commandes-services' ? (safeMode === 'annual' ? 990 : 99) : (safeMode === 'annual' ? 490 : 49);
   const results    = { email: null, fcm: null, sync: null };
+
+  // Lire le prix réel du client depuis Firebase (prices combo > price custom > défaut)
+  let effectivePrice;
+  try {
+    const mainSecret = process.env.FIREBASE_MAIN_SECRET;
+    if (mainSecret && rid) {
+      const sub = await fbGet(MAIN_DB, '/restaurants/' + rid + '/config/subscription', mainSecret);
+      effectivePrice = _effectivePriceF(sub, newForfait, safeMode);
+    }
+  } catch(e) {}
+  if (effectivePrice == null) {
+    effectivePrice = newForfait === 'commandes-services'
+      ? (safeMode === 'annual' ? 990 : 99)
+      : (safeMode === 'annual' ? 490 : 49);
+  }
 
   // 1. Email de confirmation au client
   if (email) {
     try {
-      const { subject, html } = buildForfaitEmail(safeLang, name || rid, oldForfait, newForfait, isUpgrade, safeMode);
+      const { subject, html } = buildForfaitEmail(safeLang, name || rid, oldForfait, newForfait, isUpgrade, safeMode, effectivePrice);
       await createTransport().sendMail({
         from: `"GeNext" <${process.env.GMAIL_USER}>`,
         to: email, subject, html,
@@ -221,7 +250,7 @@ module.exports = async function handler(req, res) {
         const entry = Object.entries(commandes).find(([, d]) => d?.clientCree?.rid === rid);
         if (entry) {
           const [cmdKey] = entry;
-          const update = { forfait: newForfait, price, paymentMode: safeMode };
+          const update = { forfait: newForfait, paymentMode: safeMode };
           if (isUpgrade) {
             update.nextReminderAt = Date.now() + 7 * 24 * 3600 * 1000;
             update.lastReminderSent = null;
