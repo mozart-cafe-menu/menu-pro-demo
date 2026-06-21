@@ -88,6 +88,41 @@ const MODE_LABEL = {
   de: { monthly: 'Monatlich', annual: 'Jährlich'  }
 };
 
+// ── Libellés forfait ─────────────────────────────────────────────────────────
+const FORFAIT_LABEL = {
+  fr: { 'menu-qr': 'Menu QR Code', 'commandes-services': 'Commandes &amp; Services' },
+  en: { 'menu-qr': 'Menu QR Code', 'commandes-services': 'Orders &amp; Services' },
+  el: { 'menu-qr': 'Menu QR Code', 'commandes-services': 'Παραγγελίες &amp; Υπηρεσίες' },
+  ar: { 'menu-qr': 'Menu QR Code', 'commandes-services': 'الطلبات والخدمات' },
+  de: { 'menu-qr': 'Menu QR Code', 'commandes-services': 'Bestellungen &amp; Services' }
+};
+
+const REVOLUT_URL = 'https://revolut.me/malekhkk7';
+
+// ── Bloc paiement unifié (delivery + reminder) — 5 langues ──────────────────
+const PAY_INFO = {
+  fr: {
+    trial: '⏱ Vous bénéficiez de <strong style="color:#c8a44e">7 jours d\'essai gratuit</strong> à partir de votre <strong>première connexion</strong>. Le paiement est attendu dans ce délai.',
+    methods: '💳 Revolut : <a href="' + REVOLUT_URL + '" style="color:#c8a44e">' + REVOLUT_URL + '</a> (mentionnez votre ID dans les détails) · 💵 Espèces (Athènes) · Envoyez la preuve de paiement par email, WhatsApp ou Viber avec votre ID.'
+  },
+  en: {
+    trial: '⏱ You have a <strong style="color:#c8a44e">7-day free trial</strong> starting from your <strong>first login</strong>. Payment is expected within this period.',
+    methods: '💳 Revolut: <a href="' + REVOLUT_URL + '" style="color:#c8a44e">' + REVOLUT_URL + '</a> (add your ID in the details) · 💵 Cash (Athens) · Send proof of payment by email, WhatsApp or Viber with your ID.'
+  },
+  el: {
+    trial: '⏱ Έχετε <strong style="color:#c8a44e">7 ημέρες δωρεάν δοκιμή</strong> από την <strong>πρώτη σύνδεσή σας</strong>. Η πληρωμή αναμένεται εντός αυτής της περιόδου.',
+    methods: '💳 Revolut: <a href="' + REVOLUT_URL + '" style="color:#c8a44e">' + REVOLUT_URL + '</a> (αναφέρετε το ID σας στις λεπτομέρειες) · 💵 Μετρητά (Αθήνα) · Στείλτε απόδειξη πληρωμής μέσω email, WhatsApp ή Viber με το ID σας.'
+  },
+  ar: {
+    trial: '⏱ لديك <strong style="color:#c8a44e">7 أيام تجريبية مجانية</strong> من <strong>أول تسجيل دخول</strong>. الدفع متوقع خلال هذه الفترة.',
+    methods: '💳 Revolut: <a href="' + REVOLUT_URL + '" style="color:#c8a44e">' + REVOLUT_URL + '</a> (اذكر ID في التفاصيل) · 💵 نقداً (أثينا) · أرسل إيصال الدفع عبر البريد أو WhatsApp أو Viber مع ID.'
+  },
+  de: {
+    trial: '⏱ Sie haben eine <strong style="color:#c8a44e">7-tägige kostenlose Testphase</strong> ab Ihrer <strong>ersten Anmeldung</strong>. Die Zahlung wird innerhalb dieser Frist erwartet.',
+    methods: '💳 Revolut: <a href="' + REVOLUT_URL + '" style="color:#c8a44e">' + REVOLUT_URL + '</a> (ID in den Details angeben) · 💵 Barzahlung (Athen) · Zahlungsnachweis per E-Mail, WhatsApp oder Viber mit Ihrer ID senden.'
+  }
+};
+
 // ── Locale date ─────────────────────────────────────────────────────────────
 const DATE_LOCALE = { fr: 'fr-FR', en: 'en-GB', el: 'el-GR', ar: 'ar-MA', de: 'de-DE' };
 
@@ -131,8 +166,11 @@ function _btnHtml(url, label, color) {
   return '<a href="' + url + '" style="display:inline-block;background:' + bg + ';color:' + fg + ';text-decoration:none;padding:13px 28px;border-radius:10px;font-weight:700;font-size:0.95rem">' + label + '</a>';
 }
 
-function deliveryHtml(rawName, rid, pwd, isCS, lang) {
+function deliveryHtml(rawName, rid, pwd, isCS, lang, sub) {
   const name = escHtml(rawName || '');
+  const pi   = PAY_INFO[lang] || PAY_INFO.fr;
+  const fl   = FORFAIT_LABEL[lang] || FORFAIT_LABEL.fr;
+  const ml   = MODE_LABEL[lang]    || MODE_LABEL.fr;
   const T = {
     fr: {
       subtitle: 'Menus digitaux &amp; Commandes',
@@ -142,10 +180,11 @@ function deliveryHtml(rawName, rid, pwd, isCS, lang) {
       labelId: 'Identifiant (ID restaurant)',
       labelPwd: 'Mot de passe',
       btnAdmin: '🔑 Accéder au tableau de bord',
+      subTitle: 'Votre abonnement',
+      subForfait: 'Forfait', subMode: 'Mode', subPrice: 'Prix',
       apkTitle: 'Application serveur',
       apkSub: 'Faites télécharger cette application à votre personnel pour recevoir les commandes.',
       btnApk: '📱 Télécharger l\'application serveur',
-      trial: '⏱ Vous bénéficiez de <strong style="color:#c8a44e">7 jours d\'essai gratuit</strong> à partir de votre première connexion.',
       contact: 'N\'hésitez pas à nous répondre si vous avez des questions.',
       footer: 'GeNext · Menus digitaux pour cafés et restaurants'
     },
@@ -157,10 +196,11 @@ function deliveryHtml(rawName, rid, pwd, isCS, lang) {
       labelId: 'Restaurant ID',
       labelPwd: 'Password',
       btnAdmin: '🔑 Access dashboard',
+      subTitle: 'Your subscription',
+      subForfait: 'Plan', subMode: 'Billing', subPrice: 'Price',
       apkTitle: 'Server application',
       apkSub: 'Have your staff download this app to receive orders.',
       btnApk: '📱 Download server app',
-      trial: '⏱ You have a <strong style="color:#c8a44e">7-day free trial</strong> starting from your first login.',
       contact: 'Feel free to reply to this email if you have any questions.',
       footer: 'GeNext · Digital menus for cafés and restaurants'
     },
@@ -172,10 +212,11 @@ function deliveryHtml(rawName, rid, pwd, isCS, lang) {
       labelId: 'Αναγνωριστικό εστιατορίου',
       labelPwd: 'Κωδικός πρόσβασης',
       btnAdmin: '🔑 Πρόσβαση στον πίνακα ελέγχου',
+      subTitle: 'Η συνδρομή σας',
+      subForfait: 'Πλάνο', subMode: 'Τρόπος', subPrice: 'Τιμή',
       apkTitle: 'Εφαρμογή σερβιτόρων',
       apkSub: 'Κάντε το προσωπικό σας να κατεβάσει αυτή την εφαρμογή για να λαμβάνουν παραγγελίες.',
       btnApk: '📱 Λήψη εφαρμογής σερβιτόρων',
-      trial: '⏱ Έχετε <strong style="color:#c8a44e">7 ημέρες δωρεάν δοκιμή</strong> από την πρώτη σύνδεσή σας.',
       contact: 'Μη διστάσετε να μας απαντήσετε αν έχετε ερωτήσεις.',
       footer: 'GeNext · Ψηφιακά μενού για καφέ και εστιατόρια'
     },
@@ -187,10 +228,11 @@ function deliveryHtml(rawName, rid, pwd, isCS, lang) {
       labelId: 'معرّف المطعم',
       labelPwd: 'كلمة المرور',
       btnAdmin: '🔑 الوصول إلى لوحة التحكم',
+      subTitle: 'اشتراكك',
+      subForfait: 'الخطة', subMode: 'الدورية', subPrice: 'السعر',
       apkTitle: 'تطبيق النادلين',
       apkSub: 'اطلب من موظفيك تنزيل هذا التطبيق لاستقبال الطلبات.',
       btnApk: '📱 تنزيل تطبيق النادلين',
-      trial: '⏱ لديك <strong style="color:#c8a44e">7 أيام تجريبية مجانية</strong> من أول تسجيل دخول.',
       contact: 'لا تتردد في الرد على هذا البريد إذا كان لديك أي سؤال.',
       footer: 'GeNext · قوائم رقمية للمقاهي والمطاعم'
     },
@@ -202,16 +244,35 @@ function deliveryHtml(rawName, rid, pwd, isCS, lang) {
       labelId: 'Restaurant-ID',
       labelPwd: 'Passwort',
       btnAdmin: '🔑 Dashboard aufrufen',
+      subTitle: 'Ihr Abonnement',
+      subForfait: 'Plan', subMode: 'Abrechnung', subPrice: 'Preis',
       apkTitle: 'Server-App',
       apkSub: 'Lassen Sie Ihr Personal diese App herunterladen, um Bestellungen zu erhalten.',
       btnApk: '📱 Server-App herunterladen',
-      trial: '⏱ Sie haben eine <strong style="color:#c8a44e">7-tägige kostenlose Testphase</strong> ab Ihrer ersten Anmeldung.',
       contact: 'Antworten Sie auf diese E-Mail, wenn Sie Fragen haben.',
       footer: 'GeNext · Digitale Speisekarten für Cafés und Restaurants'
     }
   };
-  const t   = T[lang] || T.fr;
+  const t = T[lang] || T.fr;
   const dir = lang === 'ar' ? ' dir="rtl"' : '';
+
+  // Carte détails abonnement
+  const subCard = sub
+    ? '<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#f8f4ec" style="background-color:#f8f4ec;border:1px solid #e8dfc8;border-radius:10px;margin-bottom:20px"><tr><td style="padding:14px 20px">'
+      + '<p style="margin:0 0 10px;font-weight:700;color:#2a1f10;font-size:0.9rem">' + t.subTitle + '</p>'
+      + '<table width="100%" cellpadding="0" cellspacing="0"><tr>'
+      + '<td style="padding:4px 0;font-size:0.8rem;color:#9a8060;width:35%">' + t.subForfait + '</td>'
+      + '<td style="padding:4px 0;font-size:0.85rem;color:#2a1f10;font-weight:600">' + escHtml(fl[sub.forfait] || sub.forfait) + '</td>'
+      + '</tr><tr>'
+      + '<td style="padding:4px 0;font-size:0.8rem;color:#9a8060">' + t.subMode + '</td>'
+      + '<td style="padding:4px 0;font-size:0.85rem;color:#2a1f10;font-weight:600">' + escHtml(ml[sub.paymentMode === 'annual' ? 'annual' : 'monthly']) + '</td>'
+      + '</tr><tr>'
+      + '<td style="padding:4px 0;font-size:0.8rem;color:#9a8060">' + t.subPrice + '</td>'
+      + '<td style="padding:4px 0;font-size:1rem;color:#c8a44e;font-weight:700">' + escHtml(sub.priceStr) + '</td>'
+      + '</tr></table>'
+      + '</td></tr></table>'
+    : '';
+
   return '<table' + dir + ' width="100%" cellpadding="0" cellspacing="0" bgcolor="#f2ece0" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="background-color:#f2ece0;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center;background-repeat:no-repeat">'
     + '<tr><td align="center" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="padding:16px 8px;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center">'
     + '<table width="580" cellpadding="0" cellspacing="0" bgcolor="#ffffff" style="max-width:580px;width:100%;background-color:#ffffff;font-family:\'Segoe UI\',Arial,sans-serif">'
@@ -220,6 +281,7 @@ function deliveryHtml(rawName, rid, pwd, isCS, lang) {
     + '<h2 style="margin:0 0 12px;font-size:1.15rem;color:#c8a44e">' + t.greeting + '</h2>'
     + '<p style="color:#2a1f10;line-height:1.7;margin-bottom:20px;font-size:0.92rem">' + t.intro + '<br>' + t.sub + '</p>'
     + _credentialsCard(t.labelId, rid, t.labelPwd, pwd)
+    + subCard
     + '<table width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="padding-bottom:20px">'
     + _btnHtml(ADMIN_URL, t.btnAdmin, null)
     + '</td></tr></table>'
@@ -232,7 +294,8 @@ function deliveryHtml(rawName, rid, pwd, isCS, lang) {
         + '</td></tr></table>'
         + '</td></tr></table>'
       : '')
-    + '<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#fdf9f2" style="background-color:#fdf9f2;border:1px solid #e8dfc8;border-left:3px solid #c8a44e;border-radius:0 8px 8px 0;margin-bottom:20px"><tr><td style="padding:12px 16px;font-size:0.88rem;color:#2a1f10;line-height:1.6">' + t.trial + '</td></tr></table>'
+    + '<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#fdf9f2" style="background-color:#fdf9f2;border:1px solid #e8dfc8;border-left:3px solid #c8a44e;border-radius:0 8px 8px 0;margin-bottom:12px"><tr><td style="padding:12px 16px;font-size:0.88rem;color:#2a1f10;line-height:1.6">' + pi.trial + '</td></tr></table>'
+    + '<p style="color:#6b5a3a;font-size:0.83rem;line-height:1.7;margin:0 0 16px">' + pi.methods + '</p>'
     + '<p style="color:#9a8060;font-size:0.83rem;line-height:1.6;margin:0">' + t.contact + '</p>'
     + '</td></tr>'
     + _footerHtml(t.footer)
@@ -247,6 +310,7 @@ function deliveryHtml(rawName, rid, pwd, isCS, lang) {
 
 function reminderHtml(rawName, amount, mode, dateStr, lang) {
   const name = escHtml(rawName || '');
+  const pi   = PAY_INFO[lang] || PAY_INFO.fr;
   const T = {
     fr: {
       subtitle: 'Rappel paiement',
@@ -255,7 +319,6 @@ function reminderHtml(rawName, amount, mode, dateStr, lang) {
       amountLabel: 'Montant dû',
       modeLabel: 'Fréquence',
       instructions: 'Pour maintenir votre accès sans interruption, effectuez votre règlement avant cette date.',
-      payMethods: 'Virement bancaire ou espèces — nous vous contacterons pour les coordonnées.',
       contact: 'N\'hésitez pas à nous répondre si vous avez des questions.',
       footer: 'GeNext · Menus digitaux pour cafés et restaurants'
     },
@@ -266,7 +329,6 @@ function reminderHtml(rawName, amount, mode, dateStr, lang) {
       amountLabel: 'Amount due',
       modeLabel: 'Frequency',
       instructions: 'To maintain uninterrupted access, please make your payment before this date.',
-      payMethods: 'Bank transfer or cash — we will contact you with payment details.',
       contact: 'Feel free to reply if you have any questions.',
       footer: 'GeNext · Digital menus for cafés and restaurants'
     },
@@ -277,7 +339,6 @@ function reminderHtml(rawName, amount, mode, dateStr, lang) {
       amountLabel: 'Οφειλόμενο ποσό',
       modeLabel: 'Συχνότητα',
       instructions: 'Για να διατηρήσετε αδιάλειπτη πρόσβαση, πραγματοποιήστε την πληρωμή σας πριν από αυτήν την ημερομηνία.',
-      payMethods: 'Τραπεζικό έμβασμα ή μετρητά — θα επικοινωνήσουμε μαζί σας.',
       contact: 'Μη διστάσετε να μας απαντήσετε αν έχετε ερωτήσεις.',
       footer: 'GeNext · Ψηφιακά μενού για καφέ και εστιατόρια'
     },
@@ -288,7 +349,6 @@ function reminderHtml(rawName, amount, mode, dateStr, lang) {
       amountLabel: 'المبلغ المستحق',
       modeLabel: 'الدورية',
       instructions: 'للحفاظ على وصولك دون انقطاع، يرجى إتمام الدفع قبل هذا التاريخ.',
-      payMethods: 'تحويل بنكي أو نقداً — سنتواصل معك لتفاصيل الدفع.',
       contact: 'لا تتردد في الرد على هذا البريد إذا كان لديك أي سؤال.',
       footer: 'GeNext · قوائم رقمية للمقاهي والمطاعم'
     },
@@ -299,7 +359,6 @@ function reminderHtml(rawName, amount, mode, dateStr, lang) {
       amountLabel: 'Fälliger Betrag',
       modeLabel: 'Häufigkeit',
       instructions: 'Um Ihren Zugang ohne Unterbrechung zu erhalten, leisten Sie bitte Ihre Zahlung vor diesem Datum.',
-      payMethods: 'Banküberweisung oder Bargeld — wir kontaktieren Sie mit den Zahlungsdaten.',
       contact: 'Antworten Sie auf diese E-Mail, wenn Sie Fragen haben.',
       footer: 'GeNext · Digitale Speisekarten für Cafés und Restaurants'
     }
@@ -323,8 +382,8 @@ function reminderHtml(rawName, amount, mode, dateStr, lang) {
     + '<div style="font-size:1.1rem;font-weight:600;color:#2a1f10">' + escHtml(mode) + '</div>'
     + '</td></tr></table>'
     + '<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#fdf9f2" style="background-color:#fdf9f2;border:1px solid #e8dfc8;border-left:3px solid #c8a44e;border-radius:0 8px 8px 0;margin-bottom:20px"><tr><td style="padding:14px 18px">'
-    + '<p style="margin:0 0 6px;color:#2a1f10;font-size:0.9rem;line-height:1.6">' + t.instructions + '</p>'
-    + '<p style="margin:0;color:#6b5a3a;font-size:0.85rem">' + t.payMethods + '</p>'
+    + '<p style="margin:0 0 8px;color:#2a1f10;font-size:0.9rem;line-height:1.6">' + t.instructions + '</p>'
+    + '<p style="margin:0;color:#6b5a3a;font-size:0.85rem;line-height:1.7">' + pi.methods + '</p>'
     + '</td></tr></table>'
     + '<p style="color:#9a8060;font-size:0.83rem;line-height:1.6;margin:0">' + t.contact + '</p>'
     + '</td></tr>'
@@ -398,17 +457,23 @@ module.exports = async (req, res) => {
 
     if (dueDelivery && notSentDlv && hasEmailDlv) {
       try {
-        const ed   = d.emailData;
-        const lang = (ed.lang && ['fr','en','el','ar','de'].includes(ed.lang)) ? ed.lang : 'fr';
-        const isCS = ed.forfait === 'commandes-services';
+        const ed      = d.emailData;
+        const lang    = (ed.lang && ['fr','en','el','ar','de'].includes(ed.lang)) ? ed.lang : 'fr';
+        const isCS    = (d.forfait || ed.forfait) === 'commandes-services';
+        const forfait = d.forfait || ed.forfait || 'menu-qr';
+        const payMode = d.paymentMode || ed.paymentMode || 'monthly';
+        const price   = _effectivePrice(d);
+        const isAnn   = payMode === 'annual';
+        const priceStr = price + ' €/' + (isAnn ? 'an' : 'mois');
+        const subDetails = { forfait, paymentMode: payMode, priceStr };
         await transport.sendMail({
           from:    '"GeNext" <' + process.env.GMAIL_USER + '>',
           replyTo: process.env.GMAIL_USER,
           to:      ed.email,
           headers: { 'List-Unsubscribe': '<mailto:' + process.env.GMAIL_USER + '?subject=unsubscribe>' },
           subject: deliverySubject(ed.name || d.restaurant || '', lang),
-          html:    deliveryHtml(ed.name || d.restaurant || '', ed.rid, ed.pwd, isCS, lang),
-          text:    (ed.name || d.restaurant || '') + ' — Accès GeNext\n\nVotre espace est prêt.\nIdentifiant : ' + ed.rid + '\nMot de passe : ' + ed.pwd + '\n\nAccéder : ' + ADMIN_URL + '\n\n7 jours d\'essai gratuit à partir de votre première connexion.\n\nGeNext — ' + process.env.GMAIL_USER,
+          html:    deliveryHtml(ed.name || d.restaurant || '', ed.rid, ed.pwd, isCS, lang, subDetails),
+          text:    (ed.name || d.restaurant || '') + ' — Accès GeNext\n\nVotre espace est prêt.\nIdentifiant : ' + ed.rid + '\nMot de passe : ' + ed.pwd + '\nForfait : ' + forfait + ' · ' + (isAnn ? 'Annuel' : 'Mensuel') + ' · ' + priceStr + '\n\nAccéder : ' + ADMIN_URL + '\n\n7 jours d\'essai à partir de la première connexion — paiement attendu dans ce délai.\n\nRevolut : ' + REVOLUT_URL + '\n\nGeNext — ' + process.env.GMAIL_USER,
           attachments: [LOGO_ATTACHMENT]
         });
         await fbPatch(CONTROL_DB, '/commandes/' + key, secret, { emailLivraisonSent: now });
