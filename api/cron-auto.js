@@ -67,6 +67,18 @@ const fbPatch = (db, path, secret, body) => fbRequest(db, path, 'PATCH', secret,
 const PM_MONTHLY = { 'menu-qr': 49, 'commandes-services': 99 };
 const PM_ANNUAL  = { 'menu-qr': 490, 'commandes-services': 990 };
 
+// ── Lire le prix effectif d'une commande (priorité : prices[combo] → price → défaut) ─
+function _effectivePrice(d) {
+  const forfait = d.forfait || 'menu-qr';
+  const isAnn   = d.paymentMode === 'annual';
+  const f = forfait === 'commandes-services' ? 'srv' : 'qr';
+  const m = isAnn ? 'annual' : 'monthly';
+  const ck = f + '-' + m;
+  if (d.prices && d.prices[ck] != null) return d.prices[ck];
+  if (d.price != null && d.price >= 0) return d.price;
+  return isAnn ? (PM_ANNUAL[forfait] || 490) : (PM_MONTHLY[forfait] || 49);
+}
+
 // ── Libellés mode paiement ──────────────────────────────────────────────────
 const MODE_LABEL = {
   fr: { monthly: 'Mensuel',   annual: 'Annuel'    },
@@ -419,7 +431,7 @@ module.exports = async (req, res) => {
         const lang    = (d.langue && ['fr','en','el','ar','de'].includes(d.langue)) ? d.langue : 'fr';
         const forfait = d.forfait || 'menu-qr';
         const isAnn   = d.paymentMode === 'annual';
-        const price   = d.price || (isAnn ? (PM_ANNUAL[forfait] || 490) : (PM_MONTHLY[forfait] || 49));
+        const price   = _effectivePrice(d);
         const modes   = MODE_LABEL[lang] || MODE_LABEL.fr;
         const mode    = isAnn ? modes.annual : modes.monthly;
         const dateStr = fmtDate(d.nextReminderAt, lang);
