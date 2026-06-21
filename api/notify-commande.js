@@ -9,7 +9,7 @@ const https      = require('https');
 const nodemailer = require('nodemailer');
 const crypto     = require('crypto');
 
-const LOGO_ATTACHMENT = { filename: 'gn-logo-light.png', path: 'https://menu-saas-platform.vercel.app/assets/gn-logo-light.png', cid: 'gnlogo' };
+const LOGO_ATTACHMENT = { filename: 'gn-logo-email.png', path: 'https://menu-saas-platform.vercel.app/assets/gn-logo-email.png', cid: 'gnlogo' };
 
 const MAIN_DB    = 'https://menu-saas-platform-default-rtdb.europe-west1.firebasedatabase.app';
 const CONTROL_DB = 'https://menu-pro-control-default-rtdb.europe-west1.firebasedatabase.app';
