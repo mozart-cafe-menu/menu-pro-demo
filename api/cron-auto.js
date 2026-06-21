@@ -1,6 +1,6 @@
 /* ============================================================
    Vercel Cron — Email livraison + Rappels paiement
-   Déclenché 1x/jour à 08:00 UTC (10h France)
+   Déclenché toutes les heures (0 * * * *)
    B2 : email livraison dès que emailLivraisonProgramme <= now
    B3 : rappel paiement 4 jours avant nextReminderAt
    B4 : suspension automatique si nextReminderAt dépassé 3 jours
