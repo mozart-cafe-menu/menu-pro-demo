@@ -4824,14 +4824,15 @@ html.light .fo-card-featured{
 
   db.ref('globalSettings/pricing').on('value', function(snap){
     var s  = snap.val() || {};
-    var cf = s.creationFee != null ? Number(s.creationFee) : 149;
+    function _gdValidPrice(val, def) { var n = Math.max(0, parseInt(Number(val), 10) || 0); return n > 0 ? n : def; }
+    var cf = s.creationFee != null ? _gdValidPrice(s.creationFee, 149) : 149;
     var p  = s.prices || {};
     window._gdPricing = {
       creationFee:   cf,
-      'qr-monthly':  p['qr-monthly']  != null ? Number(p['qr-monthly'])  : 49,
-      'qr-annual':   p['qr-annual']   != null ? Number(p['qr-annual'])   : 490,
-      'srv-monthly': p['srv-monthly'] != null ? Number(p['srv-monthly']) : 99,
-      'srv-annual':  p['srv-annual']  != null ? Number(p['srv-annual'])  : 990
+      'qr-monthly':  p['qr-monthly']  != null ? _gdValidPrice(p['qr-monthly'],  49)  : 49,
+      'qr-annual':   p['qr-annual']   != null ? _gdValidPrice(p['qr-annual'],   490) : 490,
+      'srv-monthly': p['srv-monthly'] != null ? _gdValidPrice(p['srv-monthly'], 99)  : 99,
+      'srv-annual':  p['srv-annual']  != null ? _gdValidPrice(p['srv-annual'],  990) : 990
     };
     function _gdSet(id, val) { var el = document.getElementById(id); if (el) el.textContent = val + '€'; }
     _gdSet('gd-price-creation-0', cf);
