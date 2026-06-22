@@ -102,24 +102,44 @@ const REVOLUT_URL = 'https://revolut.me/malekhkk7';
 // ── Bloc paiement unifié (delivery + reminder) — 5 langues ──────────────────
 const PAY_INFO = {
   fr: {
-    trial: '⏱ Vous bénéficiez de <strong style="color:#c8a44e">7 jours d\'essai gratuit</strong> à partir de votre <strong>première connexion</strong>. Le paiement est attendu dans ce délai.',
-    methods: '💳 Revolut : <a href="' + REVOLUT_URL + '" style="color:#c8a44e">' + REVOLUT_URL + '</a> (mentionnez votre ID dans les détails) · 💵 Espèces (Athènes) · Envoyez la preuve de paiement par email, WhatsApp ou Viber avec votre ID.'
+    trial: '🎁 <strong style="color:#c8a44e">1 mois d\'essai</strong> offert dès votre première connexion.<br>'
+      + '· <strong>Frais de création</strong> (paiement unique) : à régler dans les <strong>7 premiers jours</strong>.<br>'
+      + '· <strong>Abonnement</strong> (mensuel ou annuel) : démarre à partir du 2ème mois, selon la formule choisie. Changement de formule libre pendant le mois d\'essai.',
+    methods: '💳 <strong>Revolut :</strong> <a href="' + REVOLUT_URL + '" style="color:#c8a44e">' + REVOLUT_URL + '</a><br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Indiquez votre <strong>ID restaurant</strong> dans les détails de la transaction.</span><br>'
+      + '💵 <strong>Espèces (Athènes) :</strong> contactez-nous par WhatsApp / email avec votre ID pour convenir d\'un rendez-vous.<br>'
+      + '<span style="font-size:0.82em;color:#6b5a3a">Envoyez la preuve de paiement (capture Revolut ou photo) par email ou WhatsApp avec votre ID.</span>'
   },
   en: {
-    trial: '⏱ You have a <strong style="color:#c8a44e">7-day free trial</strong> starting from your <strong>first login</strong>. Payment is expected within this period.',
-    methods: '💳 Revolut: <a href="' + REVOLUT_URL + '" style="color:#c8a44e">' + REVOLUT_URL + '</a> (add your ID in the details) · 💵 Cash (Athens) · Send proof of payment by email, WhatsApp or Viber with your ID.'
+    trial: '🎁 <strong style="color:#c8a44e">1-month free trial</strong> from your first login.<br>'
+      + '· <strong>Creation fee</strong> (one-time): due within the <strong>first 7 days</strong>.<br>'
+      + '· <strong>Subscription</strong> (monthly or annual): starts from the 2nd month, based on the plan chosen. You can freely change your plan during the trial month.',
+    methods: '💳 <strong>Revolut:</strong> <a href="' + REVOLUT_URL + '" style="color:#c8a44e">' + REVOLUT_URL + '</a><br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Include your <strong>restaurant ID</strong> in the transaction details.</span><br>'
+      + '💵 <strong>Cash (Athens):</strong> contact us via WhatsApp / email with your ID to arrange a meeting.<br>'
+      + '<span style="font-size:0.82em;color:#6b5a3a">Send payment proof (Revolut screenshot or photo) by email or WhatsApp with your ID.</span>'
   },
   el: {
-    trial: '⏱ Έχετε <strong style="color:#c8a44e">7 ημέρες δωρεάν δοκιμή</strong> από την <strong>πρώτη σύνδεσή σας</strong>. Η πληρωμή αναμένεται εντός αυτής της περιόδου.',
-    methods: '💳 Revolut: <a href="' + REVOLUT_URL + '" style="color:#c8a44e">' + REVOLUT_URL + '</a> (αναφέρετε το ID σας στις λεπτομέρειες) · 💵 Μετρητά (Αθήνα) · Στείλτε απόδειξη πληρωμής μέσω email, WhatsApp ή Viber με το ID σας.'
+    trial: '🎁 <strong style="color:#c8a44e">1 μήνας δωρεάν δοκιμή</strong> από την πρώτη σύνδεσή σας.<br>'
+      + '· <strong>Έξοδα δημιουργίας</strong> (εφάπαξ): καταβάλλονται εντός των πρώτων <strong>7 ημερών</strong>.<br>'
+      + '· <strong>Συνδρομή</strong> (μηνιαία ή ετήσια): ξεκινά από τον 2ο μήνα, βάσει του πλάνου που θα επιλέξετε. Ελεύθερη αλλαγή πλάνου κατά τον μήνα δοκιμής.',
+    methods: '💳 <strong>Revolut:</strong> <a href="' + REVOLUT_URL + '" style="color:#c8a44e">' + REVOLUT_URL + '</a><br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Αναφέρετε το <strong>ID εστιατορίου</strong> στις λεπτομέρειες συναλλαγής.</span><br>'
+      + '💵 <strong>Μετρητά (Αθήνα):</strong> επικοινωνήστε μαζί μας μέσω WhatsApp / email με το ID σας για ραντεβού.<br>'
+      + '<span style="font-size:0.82em;color:#6b5a3a">Στείλτε απόδειξη πληρωμής (στιγμιότυπο Revolut ή φωτογραφία) μέσω email ή WhatsApp με το ID σας.</span>'
   },
   ar: {
-    trial: '⏱ لديك <strong style="color:#c8a44e">7 أيام تجريبية مجانية</strong> من <strong>أول تسجيل دخول</strong>. الدفع متوقع خلال هذه الفترة.',
-    methods: '💳 Revolut: <a href="' + REVOLUT_URL + '" style="color:#c8a44e">' + REVOLUT_URL + '</a> (اذكر ID في التفاصيل) · 💵 نقداً (أثينا) · أرسل إيصال الدفع عبر البريد أو WhatsApp أو Viber مع ID.'
+    trial: '🎁 <strong style="color:#c8a44e">شهر تجريبي مجاني</strong> من أول تسجيل دخول.<br>'
+      + '· <strong>رسوم الإنشاء</strong> (مرة واحدة): تُدفع خلال <strong>أول 7 أيام</strong>.<br>'
+      + '· <strong>الاشتراك</strong> (شهري أو سنوي): يبدأ من الشهر الثاني، وفق الخطة المختارة. تغيير الخطة حر طوال شهر التجربة.',
+    methods: '💳 <strong>Revolut:</strong> <a href="' + REVOLUT_URL + '" style="color:#c8a44e">' + REVOLUT_URL + '</a><br><span style="font-size:0.82em;color:#6b5a3a">⚠️ اذكر <strong>معرّف مطعمك</strong> في تفاصيل المعاملة.</span><br>'
+      + '💵 <strong>نقداً (أثينا):</strong> تواصل معنا عبر WhatsApp / البريد مع المعرّف لترتيب موعد.<br>'
+      + '<span style="font-size:0.82em;color:#6b5a3a">أرسل إيصال الدفع (لقطة Revolut أو صورة) عبر البريد أو WhatsApp مع المعرّف.</span>'
   },
   de: {
-    trial: '⏱ Sie haben eine <strong style="color:#c8a44e">7-tägige kostenlose Testphase</strong> ab Ihrer <strong>ersten Anmeldung</strong>. Die Zahlung wird innerhalb dieser Frist erwartet.',
-    methods: '💳 Revolut: <a href="' + REVOLUT_URL + '" style="color:#c8a44e">' + REVOLUT_URL + '</a> (ID in den Details angeben) · 💵 Barzahlung (Athen) · Zahlungsnachweis per E-Mail, WhatsApp oder Viber mit Ihrer ID senden.'
+    trial: '🎁 <strong style="color:#c8a44e">1 Monat kostenlose Testphase</strong> ab Ihrer ersten Anmeldung.<br>'
+      + '· <strong>Erstellungsgebühr</strong> (einmalig): innerhalb der ersten <strong>7 Tage</strong> zu zahlen.<br>'
+      + '· <strong>Abonnement</strong> (monatlich oder jährlich): beginnt ab dem 2. Monat, je nach gewähltem Plan. Planwechsel während des Testmonats frei möglich.',
+    methods: '💳 <strong>Revolut:</strong> <a href="' + REVOLUT_URL + '" style="color:#c8a44e">' + REVOLUT_URL + '</a><br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Geben Sie Ihre <strong>Restaurant-ID</strong> in den Transaktionsdetails an.</span><br>'
+      + '💵 <strong>Barzahlung (Athen):</strong> kontaktieren Sie uns per WhatsApp / E-Mail mit Ihrer ID für einen Termin.<br>'
+      + '<span style="font-size:0.82em;color:#6b5a3a">Senden Sie den Zahlungsnachweis (Revolut-Screenshot oder Foto) per E-Mail oder WhatsApp mit Ihrer ID.</span>'
   }
 };
 
@@ -473,7 +493,7 @@ module.exports = async (req, res) => {
           headers: { 'List-Unsubscribe': '<mailto:' + process.env.GMAIL_USER + '?subject=unsubscribe>' },
           subject: deliverySubject(ed.name || d.restaurant || '', lang),
           html:    deliveryHtml(ed.name || d.restaurant || '', ed.rid, ed.pwd, isCS, lang, subDetails),
-          text:    (ed.name || d.restaurant || '') + ' — Accès GeNext\n\nVotre espace est prêt.\nIdentifiant : ' + ed.rid + '\nMot de passe : ' + ed.pwd + '\nForfait : ' + forfait + ' · ' + (isAnn ? 'Annuel' : 'Mensuel') + ' · ' + priceStr + '\n\nAccéder : ' + ADMIN_URL + '\n\n7 jours d\'essai à partir de la première connexion — paiement attendu dans ce délai.\n\nRevolut : ' + REVOLUT_URL + '\n\nGeNext — ' + process.env.GMAIL_USER,
+          text:    (ed.name || d.restaurant || '') + ' — Accès GeNext\n\nVotre espace est prêt.\nIdentifiant : ' + ed.rid + '\nMot de passe : ' + ed.pwd + '\nForfait : ' + forfait + ' · ' + (isAnn ? 'Annuel' : 'Mensuel') + ' · ' + priceStr + '\n\nAccéder : ' + ADMIN_URL + '\n\n1 mois d\'essai à partir de la première connexion.\n- Frais de création (unique) : à régler dans les 7 premiers jours.\n- Abonnement : démarre au 2ème mois selon formule choisie.\n\nPaiement : Revolut ' + REVOLUT_URL + ' (indiquez votre ID dans les détails) · Espèces Athènes.\n\nGeNext — ' + process.env.GMAIL_USER,
           attachments: [LOGO_ATTACHMENT]
         });
         await fbPatch(CONTROL_DB, '/commandes/' + key, secret, { emailLivraisonSent: now });
@@ -498,7 +518,8 @@ module.exports = async (req, res) => {
         const isAnn   = d.paymentMode === 'annual';
         const price   = _effectivePrice(d);
         const modes   = MODE_LABEL[lang] || MODE_LABEL.fr;
-        const mode    = isAnn ? modes.annual : modes.monthly;
+        const forLabels = FORFAIT_LABEL[lang] || FORFAIT_LABEL.fr;
+        const mode    = (forLabels[forfait] || forfait) + ' · ' + (isAnn ? modes.annual : modes.monthly);
         const dateStr = fmtDate(d.nextReminderAt, lang);
         await transport.sendMail({
           from:    '"GeNext" <' + process.env.GMAIL_USER + '>',
@@ -507,7 +528,7 @@ module.exports = async (req, res) => {
           headers: { 'List-Unsubscribe': '<mailto:' + process.env.GMAIL_USER + '?subject=unsubscribe>' },
           subject: reminderSubject(d.restaurant || '', lang),
           html:    reminderHtml(d.restaurant || '', price + ' €', mode, dateStr, lang),
-          text:    'Rappel paiement GeNext\n\n' + (d.restaurant || '') + '\nMontant : ' + price + ' €\nÉchéance : ' + dateStr + '\n\nVirement bancaire ou espèces — contactez-nous.\n\nGeNext — ' + process.env.GMAIL_USER,
+          text:    'Rappel paiement GeNext\n\n' + (d.restaurant || '') + '\nForfait : ' + forfait + ' · ' + (isAnn ? 'Annuel' : 'Mensuel') + '\nMontant : ' + price + ' €\nÉchéance : ' + dateStr + '\n\nRevolut : ' + REVOLUT_URL + ' (indiquez votre ID) · Espèces Athènes.\n\nGeNext — ' + process.env.GMAIL_USER,
           attachments: [LOGO_ATTACHMENT]
         });
         await fbPatch(CONTROL_DB, '/commandes/' + key, secret, { lastReminderSent: now });
@@ -552,9 +573,10 @@ module.exports = async (req, res) => {
       if (!d.firstOpenAt)   continue;
       const rid5 = (d.emailData && d.emailData.rid) || d.clientCree?.rid;
       const nrt5 = d.firstOpenAt + 7 * 24 * 60 * 60 * 1000;
+      const trl5 = (() => { const dt = new Date(d.firstOpenAt); dt.setMonth(dt.getMonth() + 1); return dt.getTime(); })();
       try {
-        await fbPatch(CONTROL_DB, '/commandes/' + key, secret, { nextReminderAt: nrt5 });
-        if (rid5) await fbPatch(MAIN_DB, '/restaurants/' + rid5 + '/config/subscription', mainSecret, { endDate: nrt5 });
+        await fbPatch(CONTROL_DB, '/commandes/' + key, secret, { nextReminderAt: nrt5, trialEndAt: trl5 });
+        if (rid5) await fbPatch(MAIN_DB, '/restaurants/' + rid5 + '/config/subscription', mainSecret, { endDate: nrt5, trialEndAt: trl5 });
         stats.firstOpenSet++;
         console.log('✅ B5 nextReminderAt posé:', key, '→', new Date(nrt5).toISOString());
       } catch(e) {
