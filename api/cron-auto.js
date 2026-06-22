@@ -64,10 +64,11 @@ const fbGet   = (db, path, secret)       => fbRequest(db, path, 'GET',   secret,
 const fbPatch = (db, path, secret, body) => fbRequest(db, path, 'PATCH', secret, body);
 
 // ── Prix par défaut ─────────────────────────────────────────────────────────
-const PM_MONTHLY = { 'menu-qr': 49, 'commandes-services': 99 };
-const PM_ANNUAL  = { 'menu-qr': 490, 'commandes-services': 990 };
+const PM_MONTHLY  = { 'menu-qr': 49, 'commandes-services': 99 };
+const PM_ANNUAL   = { 'menu-qr': 490, 'commandes-services': 990 };
+const PM_CREATION = { 'menu-qr': 149, 'commandes-services': 299 };
 
-// ── Lire le prix effectif d'une commande (priorité : prices[combo] → price → défaut) ─
+// ── Lire le prix effectif abonnement (priorité : prices[combo] → price → défaut) ─
 function _effectivePrice(d) {
   const forfait = d.forfait || 'menu-qr';
   const isAnn   = d.paymentMode === 'annual';
@@ -77,6 +78,17 @@ function _effectivePrice(d) {
   if (d.prices && d.prices[ck] != null) return d.prices[ck];
   if (d.price != null && d.price >= 0) return d.price;
   return isAnn ? (PM_ANNUAL[forfait] || 490) : (PM_MONTHLY[forfait] || 49);
+}
+
+// ── Lire le prix des frais de création (custom possible via prices.creation) ─
+function _effectiveCreationFee(d) {
+  if (d.prices && d.prices['creation'] != null) return d.prices['creation'];
+  return PM_CREATION[d.forfait || 'menu-qr'] || 149;
+}
+
+// ── Détecter si le paiement en attente est un frais de création ─────────────
+function _isCreationPhase(d) {
+  return d.firstOpenAt && !d.creationFeePaid;
 }
 
 // ── Libellés mode paiement ──────────────────────────────────────────────────
@@ -435,6 +447,26 @@ function reminderSubject(name, lang) {
   return S[lang] || S.fr;
 }
 
+function creationFeeSubject(name, lang) {
+  const S = {
+    fr: '🏷 Frais de création GeNext — ' + name,
+    en: '🏷 GeNext creation fee — ' + name,
+    el: '🏷 Τέλη δημιουργίας GeNext — ' + name,
+    ar: '🏷 رسوم الإنشاء GeNext — ' + name,
+    de: '🏷 GeNext Einrichtungsgebühr — ' + name
+  };
+  return S[lang] || S.fr;
+}
+
+// Libellé mode pour frais de création (5 langues)
+const CREATION_MODE_LABEL = {
+  fr: 'Frais de création',
+  en: 'Creation fee',
+  el: 'Τέλη δημιουργίας',
+  ar: 'رسوم الإنشاء',
+  de: 'Einrichtungsgebühr'
+};
+
 // ── Handler principal ────────────────────────────────────────────────────────
 module.exports = async (req, res) => {
   res.setHeader('Content-Type', 'application/json');
@@ -513,22 +545,28 @@ module.exports = async (req, res) => {
 
     if (hasNextReminder && notSentRecently && hasEmailRmd && notSuspended) {
       try {
-        const lang    = (d.langue && ['fr','en','el','ar','de'].includes(d.langue)) ? d.langue : 'fr';
-        const forfait = d.forfait || 'menu-qr';
-        const isAnn   = d.paymentMode === 'annual';
-        const price   = _effectivePrice(d);
-        const modes   = MODE_LABEL[lang] || MODE_LABEL.fr;
-        const forLabels = FORFAIT_LABEL[lang] || FORFAIT_LABEL.fr;
-        const mode    = (forLabels[forfait] || forfait) + ' · ' + (isAnn ? modes.annual : modes.monthly);
-        const dateStr = fmtDate(d.nextReminderAt, lang);
+        const lang       = (d.langue && ['fr','en','el','ar','de'].includes(d.langue)) ? d.langue : 'fr';
+        const forfait    = d.forfait || 'menu-qr';
+        const isAnn      = d.paymentMode === 'annual';
+        const isCreation = _isCreationPhase(d);
+        const price      = isCreation ? _effectiveCreationFee(d) : _effectivePrice(d);
+        const modes      = MODE_LABEL[lang] || MODE_LABEL.fr;
+        const forLabels  = FORFAIT_LABEL[lang] || FORFAIT_LABEL.fr;
+        const mode       = isCreation
+          ? (CREATION_MODE_LABEL[lang] || CREATION_MODE_LABEL.fr) + ' · ' + (forLabels[forfait] || forfait)
+          : (forLabels[forfait] || forfait) + ' · ' + (isAnn ? modes.annual : modes.monthly);
+        const dateStr    = fmtDate(d.nextReminderAt, lang);
+        const subject    = isCreation
+          ? creationFeeSubject(d.restaurant || '', lang)
+          : reminderSubject(d.restaurant || '', lang);
         await transport.sendMail({
           from:    '"GeNext" <' + process.env.GMAIL_USER + '>',
           replyTo: process.env.GMAIL_USER,
           to:      d.email,
           headers: { 'List-Unsubscribe': '<mailto:' + process.env.GMAIL_USER + '?subject=unsubscribe>' },
-          subject: reminderSubject(d.restaurant || '', lang),
+          subject,
           html:    reminderHtml(d.restaurant || '', price + ' €', mode, dateStr, lang),
-          text:    'Rappel paiement GeNext\n\n' + (d.restaurant || '') + '\nForfait : ' + forfait + ' · ' + (isAnn ? 'Annuel' : 'Mensuel') + '\nMontant : ' + price + ' €\nÉchéance : ' + dateStr + '\n\nRevolut : ' + REVOLUT_URL + ' (indiquez votre ID) · Espèces Athènes.\n\nGeNext — ' + process.env.GMAIL_USER,
+          text:    (isCreation ? 'Frais de création GeNext' : 'Rappel paiement GeNext') + '\n\n' + (d.restaurant || '') + '\n' + mode + '\nMontant : ' + price + ' €\nÉchéance : ' + dateStr + '\n\nRevolut : ' + REVOLUT_URL + ' (indiquez votre ID) · Espèces Athènes.\n\nGeNext — ' + process.env.GMAIL_USER,
           attachments: [LOGO_ATTACHMENT]
         });
         await fbPatch(CONTROL_DB, '/commandes/' + key, secret, { lastReminderSent: now });
