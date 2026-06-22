@@ -1,4 +1,4 @@
-/* ============================================================
+﻿/* ============================================================
    Vercel Cron — Email livraison + Rappels paiement
    Déclenché toutes les heures (0 * * * *)
    B2 : email livraison dès que emailLivraisonProgramme <= now
@@ -461,6 +461,58 @@ function creationFeeSubject(name, lang) {
   return S[lang] || S.fr;
 }
 
+// ── Email notification suspension automatique (5 langues) ─────────────────────
+function suspensionSubject(name, lang) {
+  const S = {
+    fr: '⛔ Compte suspendu — GeNext · ' + name,
+    en: '⛔ Account suspended — GeNext · ' + name,
+    el: '⛔ Λογαριασμός ανεστάλη — GeNext · ' + name,
+    ar: '⛔ تم تعليق الحساب — GeNext · ' + name,
+    de: '⛔ Konto gesperrt — GeNext · ' + name
+  };
+  return S[lang] || S.fr;
+}
+
+function suspensionHtml(rawName, amount, mode, lang) {
+  const name = escHtml(rawName || '');
+  const pi   = PAY_INFO[lang] || PAY_INFO.fr;
+  const T = {
+    fr: { subtitle: 'Compte suspendu', greeting: 'Bonjour,', intro: 'Votre compte GeNext pour <strong style="color:#c8a44e">' + name + '</strong> a été <strong style="color:#d94040">suspendu</strong> en raison d\'un paiement en attente.', amountLabel: 'Montant dû', modeLabel: 'Type', instructions: 'Pour rétablir l\'accès à votre espace, effectuez votre règlement dès que possible.', contact: 'Répondez à cet email ou contactez-nous si vous avez des questions.', footer: 'GeNext · Menus digitaux pour cafés et restaurants' },
+    en: { subtitle: 'Account suspended', greeting: 'Hello,', intro: 'Your GeNext account for <strong style="color:#c8a44e">' + name + '</strong> has been <strong style="color:#d94040">suspended</strong> due to a pending payment.', amountLabel: 'Amount due', modeLabel: 'Type', instructions: 'To restore access to your space, please make your payment as soon as possible.', contact: 'Reply to this email or contact us if you have any questions.', footer: 'GeNext · Digital menus for cafés and restaurants' },
+    el: { subtitle: 'Λογαριασμός ανεστάλη', greeting: 'Γεια σας,', intro: 'Ο λογαριασμός GeNext για <strong style="color:#c8a44e">' + name + '</strong> έχει <strong style="color:#d94040">ανασταλεί</strong> λόγω εκκρεμούς πληρωμής.', amountLabel: 'Οφειλόμενο ποσό', modeLabel: 'Τύπος', instructions: 'Για να επαναφέρετε την πρόσβασή σας, πραγματοποιήστε την πληρωμή σας το συντομότερο δυνατόν.', contact: 'Απαντήστε σε αυτό το email αν έχετε ερωτήσεις.', footer: 'GeNext · Ψηφιακά μενού για καφέ και εστιατόρια' },
+    ar: { subtitle: 'تم تعليق الحساب', greeting: 'مرحباً،', intro: 'تم <strong style="color:#d94040">تعليق</strong> حساب GeNext الخاص بـ <strong style="color:#c8a44e">' + name + '</strong> بسبب دفعة معلقة.', amountLabel: 'المبلغ المستحق', modeLabel: 'النوع', instructions: 'لاستعادة الوصول إلى مساحتك، يرجى إتمام الدفع في أقرب وقت ممكن.', contact: 'الرجاء الرد على هذا البريد إذا كان لديك أي سؤال.', footer: 'GeNext · قوائم رقمية للمقاهي والمطاعم' },
+    de: { subtitle: 'Konto gesperrt', greeting: 'Hallo,', intro: 'Ihr GeNext-Konto für <strong style="color:#c8a44e">' + name + '</strong> wurde aufgrund einer ausstehenden Zahlung <strong style="color:#d94040">gesperrt</strong>.', amountLabel: 'Fälliger Betrag', modeLabel: 'Typ', instructions: 'Um den Zugang zu Ihrem Bereich wiederherzustellen, leisten Sie bitte Ihre Zahlung so bald wie möglich.', contact: 'Antworten Sie auf diese E-Mail, wenn Sie Fragen haben.', footer: 'GeNext · Digitale Speisekarten für Cafés und Restaurants' }
+  };
+  const t   = T[lang] || T.fr;
+  const dir = lang === 'ar' ? ' dir="rtl"' : '';
+  return '<table' + dir + ' width="100%" cellpadding="0" cellspacing="0" bgcolor="#f2ece0" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="background-color:#f2ece0;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center;background-repeat:no-repeat">'
+    + '<tr><td align="center" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="padding:16px 8px;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center">'
+    + '<table width="580" cellpadding="0" cellspacing="0" bgcolor="#ffffff" style="max-width:580px;width:100%;background-color:#ffffff;font-family:\'Segoe UI\',Arial,sans-serif">'
+    + _headerHtml(t.subtitle)
+    + '<tr><td bgcolor="#ffffff" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="background-color:#ffffff;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center;padding:28px 32px">'
+    + '<h2 style="margin:0 0 12px;font-size:1.15rem;color:#c8a44e">' + t.greeting + '</h2>'
+    + '<p style="color:#2a1f10;line-height:1.7;margin-bottom:20px;font-size:0.92rem">' + t.intro + '</p>'
+    + '<table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:20px"><tr>'
+    + '<td bgcolor="#fff0f0" style="background-color:#fff0f0;border:1px solid #f5c2c2;border-radius:10px;padding:14px 18px;text-align:center;width:48%">'
+    + '<div style="font-size:0.7rem;color:#9a8060;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px">' + t.amountLabel + '</div>'
+    + '<div style="font-size:1.5rem;font-weight:700;color:#d94040">' + escHtml(amount) + '</div>'
+    + '</td><td width="12"></td>'
+    + '<td bgcolor="#f8f4ec" style="background-color:#f8f4ec;border:1px solid #e8dfc8;border-radius:10px;padding:14px 18px;text-align:center;width:48%">'
+    + '<div style="font-size:0.7rem;color:#9a8060;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px">' + t.modeLabel + '</div>'
+    + '<div style="font-size:1.1rem;font-weight:600;color:#2a1f10">' + escHtml(mode) + '</div>'
+    + '</td></tr></table>'
+    + '<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#fdf9f2" style="background-color:#fdf9f2;border:1px solid #e8dfc8;border-left:3px solid #d94040;border-radius:0 8px 8px 0;margin-bottom:20px"><tr><td style="padding:14px 18px">'
+    + '<p style="margin:0 0 8px;color:#2a1f10;font-size:0.9rem;line-height:1.6">' + t.instructions + '</p>'
+    + '<p style="margin:0;color:#6b5a3a;font-size:0.85rem;line-height:1.7">' + pi.methods + '</p>'
+    + '</td></tr></table>'
+    + '<p style="color:#9a8060;font-size:0.83rem;line-height:1.6;margin:0">' + t.contact + '</p>'
+    + '</td></tr>'
+    + _footerHtml(t.footer)
+    + '</table>'
+    + '</td></tr>'
+    + '</table>';
+}
+
 // Libellé mode pour frais de création (5 langues)
 const CREATION_MODE_LABEL = {
   fr: 'Frais de création',
@@ -599,6 +651,31 @@ module.exports = async (req, res) => {
           await fbPatch(CONTROL_DB, '/commandes/' + key, secret, { suspendu: true });
           stats.suspensions++;
           console.log('⏸ Suspendu:', rid, '(commande ' + key + ')');
+          if (d.email) {
+            const lang4     = (['fr','en','el','ar','de'].includes(d.langue)) ? d.langue : 'fr';
+            const forfait4  = d.forfait || 'menu-qr';
+            const isCreation4 = _isCreationPhase(d);
+            const price4    = isCreation4 ? _effectiveCreationFee(d) : _effectivePrice(d);
+            const modes4    = MODE_LABEL[lang4] || MODE_LABEL.fr;
+            const forLbls4  = FORFAIT_LABEL[lang4] || FORFAIT_LABEL.fr;
+            const mode4     = isCreation4
+              ? (CREATION_MODE_LABEL[lang4] || CREATION_MODE_LABEL.fr) + ' · ' + (forLbls4[forfait4] || forfait4)
+              : (forLbls4[forfait4] || forfait4) + ' · ' + (d.paymentMode === 'annual' ? (modes4.annual) : (modes4.monthly));
+            try {
+              await transport.sendMail({
+                from:    '"GeNext" <' + process.env.GMAIL_USER + '>',
+                replyTo: process.env.GMAIL_USER,
+                to:      d.email,
+                subject: suspensionSubject(d.restaurant || '', lang4),
+                html:    suspensionHtml(d.restaurant || '', price4 + ' €', mode4, lang4),
+                text:    'Compte GeNext suspendu\n\n' + (d.restaurant || '') + '\nMontant dû : ' + price4 + ' €\n\nPour réactiver : Revolut ' + REVOLUT_URL + ' (indiquez votre ID) · Espèces Athènes.\n\nGeNext — ' + process.env.GMAIL_USER,
+                attachments: [LOGO_ATTACHMENT]
+              });
+              console.log('📧 Email suspension envoyé à ' + d.email);
+            } catch(emailErr) {
+              console.error('⚠ Email suspension erreur ' + rid + ':', emailErr.message);
+            }
+          }
         } catch(e) {
           console.error('⚠ Suspension erreur ' + rid + ':', e.message);
         }
