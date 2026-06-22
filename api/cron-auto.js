@@ -64,9 +64,9 @@ const fbGet   = (db, path, secret)       => fbRequest(db, path, 'GET',   secret,
 const fbPatch = (db, path, secret, body) => fbRequest(db, path, 'PATCH', secret, body);
 
 // ── Prix par défaut ─────────────────────────────────────────────────────────
-const PM_MONTHLY  = { 'menu-qr': 49, 'commandes-services': 99 };
-const PM_ANNUAL   = { 'menu-qr': 490, 'commandes-services': 990 };
-const PM_CREATION = { 'menu-qr': 149, 'commandes-services': 299 };
+const PM_MONTHLY      = { 'menu-qr': 49, 'commandes-services': 99 };
+const PM_ANNUAL       = { 'menu-qr': 490, 'commandes-services': 990 };
+const PM_CREATION_FEE = 149; // frais de création unifiés (même prix pour les 2 forfaits)
 
 // ── Lire le prix effectif abonnement (priorité : prices[combo] → price → défaut) ─
 function _effectivePrice(d) {
@@ -83,7 +83,7 @@ function _effectivePrice(d) {
 // ── Lire le prix des frais de création (custom possible via prices.creation) ─
 function _effectiveCreationFee(d) {
   if (d.prices && d.prices['creation'] != null) return d.prices['creation'];
-  return PM_CREATION[d.forfait || 'menu-qr'] || 149;
+  return PM_CREATION_FEE;
 }
 
 // ── Détecter si le paiement en attente est un frais de création ─────────────
@@ -213,7 +213,7 @@ function deliveryHtml(rawName, rid, pwd, isCS, lang, sub) {
       labelPwd: 'Mot de passe',
       btnAdmin: '🔑 Accéder au tableau de bord',
       subTitle: 'Votre abonnement',
-      subForfait: 'Forfait', subMode: 'Mode', subPrice: 'Prix',
+      subForfait: 'Forfait', subMode: 'Mode', subPrice: 'Prix (abonnement)', subCreation: 'Frais de création',
       apkTitle: 'Application serveur',
       apkSub: 'Faites télécharger cette application à votre personnel pour recevoir les commandes.',
       btnApk: '📱 Télécharger l\'application serveur',
@@ -229,7 +229,7 @@ function deliveryHtml(rawName, rid, pwd, isCS, lang, sub) {
       labelPwd: 'Password',
       btnAdmin: '🔑 Access dashboard',
       subTitle: 'Your subscription',
-      subForfait: 'Plan', subMode: 'Billing', subPrice: 'Price',
+      subForfait: 'Plan', subMode: 'Billing', subPrice: 'Subscription price', subCreation: 'Setup fee',
       apkTitle: 'Server application',
       apkSub: 'Have your staff download this app to receive orders.',
       btnApk: '📱 Download server app',
@@ -245,7 +245,7 @@ function deliveryHtml(rawName, rid, pwd, isCS, lang, sub) {
       labelPwd: 'Κωδικός πρόσβασης',
       btnAdmin: '🔑 Πρόσβαση στον πίνακα ελέγχου',
       subTitle: 'Η συνδρομή σας',
-      subForfait: 'Πλάνο', subMode: 'Τρόπος', subPrice: 'Τιμή',
+      subForfait: 'Πλάνο', subMode: 'Τρόπος', subPrice: 'Τιμή συνδρομής', subCreation: 'Τέλη δημιουργίας',
       apkTitle: 'Εφαρμογή σερβιτόρων',
       apkSub: 'Κάντε το προσωπικό σας να κατεβάσει αυτή την εφαρμογή για να λαμβάνουν παραγγελίες.',
       btnApk: '📱 Λήψη εφαρμογής σερβιτόρων',
@@ -261,7 +261,7 @@ function deliveryHtml(rawName, rid, pwd, isCS, lang, sub) {
       labelPwd: 'كلمة المرور',
       btnAdmin: '🔑 الوصول إلى لوحة التحكم',
       subTitle: 'اشتراكك',
-      subForfait: 'الخطة', subMode: 'الدورية', subPrice: 'السعر',
+      subForfait: 'الخطة', subMode: 'الدورية', subPrice: 'سعر الاشتراك', subCreation: 'رسوم الإنشاء',
       apkTitle: 'تطبيق النادلين',
       apkSub: 'اطلب من موظفيك تنزيل هذا التطبيق لاستقبال الطلبات.',
       btnApk: '📱 تنزيل تطبيق النادلين',
@@ -277,7 +277,7 @@ function deliveryHtml(rawName, rid, pwd, isCS, lang, sub) {
       labelPwd: 'Passwort',
       btnAdmin: '🔑 Dashboard aufrufen',
       subTitle: 'Ihr Abonnement',
-      subForfait: 'Plan', subMode: 'Abrechnung', subPrice: 'Preis',
+      subForfait: 'Plan', subMode: 'Abrechnung', subPrice: 'Abonnementpreis', subCreation: 'Einrichtungsgebühr',
       apkTitle: 'Server-App',
       apkSub: 'Lassen Sie Ihr Personal diese App herunterladen, um Bestellungen zu erhalten.',
       btnApk: '📱 Server-App herunterladen',
@@ -295,6 +295,9 @@ function deliveryHtml(rawName, rid, pwd, isCS, lang, sub) {
       + '<table width="100%" cellpadding="0" cellspacing="0"><tr>'
       + '<td style="padding:4px 0;font-size:0.8rem;color:#9a8060;width:35%">' + t.subForfait + '</td>'
       + '<td style="padding:4px 0;font-size:0.85rem;color:#2a1f10;font-weight:600">' + escHtml(fl[sub.forfait] || sub.forfait) + '</td>'
+      + '</tr><tr>'
+      + '<td style="padding:4px 0;font-size:0.8rem;color:#9a8060">' + (t.subCreation || 'Frais de création') + '</td>'
+      + '<td style="padding:4px 0;font-size:0.95rem;color:#c8a44e;font-weight:700">' + escHtml(String(sub.creationFee != null ? sub.creationFee : 149)) + ' €</td>'
       + '</tr><tr>'
       + '<td style="padding:4px 0;font-size:0.8rem;color:#9a8060">' + t.subMode + '</td>'
       + '<td style="padding:4px 0;font-size:0.85rem;color:#2a1f10;font-weight:600">' + escHtml(ml[sub.paymentMode === 'annual' ? 'annual' : 'monthly']) + '</td>'
@@ -514,10 +517,11 @@ module.exports = async (req, res) => {
         const isCS    = (d.forfait || ed.forfait) === 'commandes-services';
         const forfait = d.forfait || ed.forfait || 'menu-qr';
         const payMode = d.paymentMode || ed.paymentMode || 'monthly';
-        const price   = _effectivePrice(d);
-        const isAnn   = payMode === 'annual';
-        const priceStr = price + ' €/' + (isAnn ? 'an' : 'mois');
-        const subDetails = { forfait, paymentMode: payMode, priceStr };
+        const price      = _effectivePrice(d);
+        const creationFee = _effectiveCreationFee(d);
+        const isAnn      = payMode === 'annual';
+        const priceStr   = price + ' €/' + (isAnn ? 'an' : 'mois');
+        const subDetails = { forfait, paymentMode: payMode, priceStr, creationFee };
         await transport.sendMail({
           from:    '"GeNext" <' + process.env.GMAIL_USER + '>',
           replyTo: process.env.GMAIL_USER,
