@@ -216,7 +216,7 @@ function buildForfaitEmail(lang, name, oldForfait, newForfait, isUpgrade, paymen
 module.exports = async function handler(req, res) {
   const _orig = req.headers['origin'] || '';
   const _okOrig = _orig === 'https://menu-pro-demo.vercel.app' ||
-    /^https:\/\/menu-pro-demo-[a-z0-9]+-mozart-cafe-menus-projects\.vercel\.app$/.test(_orig);
+    /^https:\/\/menu-pro-demo-[a-z0-9-]+-mozart-cafe-menus-projects\.vercel\.app$/.test(_orig);
   res.setHeader('Access-Control-Allow-Origin', _okOrig ? _orig : 'https://menu-pro-demo.vercel.app');
   res.setHeader('Vary', 'Origin');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');

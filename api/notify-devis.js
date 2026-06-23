@@ -32,10 +32,11 @@ function httpsRequest(url, options, body) {
 module.exports = async (req, res) => {
   const _orig = req.headers['origin'] || '';
   const _okOrig = _orig === 'https://menu-pro-demo.vercel.app' ||
-    /^https:\/\/menu-pro-demo-[a-z0-9]+-mozart-cafe-menus-projects\.vercel\.app$/.test(_orig);
+    /^https:\/\/menu-pro-demo-[a-z0-9-]+-mozart-cafe-menus-projects\.vercel\.app$/.test(_orig);
   res.setHeader('Access-Control-Allow-Origin', _okOrig ? _orig : 'https://menu-pro-demo.vercel.app');
   res.setHeader('Vary', 'Origin');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
   res.setHeader('Content-Type', 'application/json');
 
   if (req.method === 'OPTIONS') { res.status(200).end(); return; }
