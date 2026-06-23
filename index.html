@@ -4830,7 +4830,7 @@ html.light .fo-card-featured{
     });
   });
 
-  db.ref('globalSettings/pricing').on('value', function(snap){
+  db.ref('demoPage/pricing').on('value', function(snap){
     var s  = snap.val() || {};
     function _gdValidPrice(val, def) { var n = Math.max(0, parseInt(Number(val), 10) || 0); return n > 0 ? n : def; }
     var cf = s.creationFee != null ? _gdValidPrice(s.creationFee, 149) : 149;
