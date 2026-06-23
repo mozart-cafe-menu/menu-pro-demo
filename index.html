@@ -4085,7 +4085,12 @@ html.light .fo-card-featured{
     var _tT=(typeof T!=='undefined'&&T[_tLang])||{};
     var _tLabel=(_tLang==='fr'?(tier==='0'?'Menu QR Code':'Commandes &amp; Services'):((_tT['fo.card0.name']&&tier==='0')?_tT['fo.card0.name']:(_tT['fo.card1.name']||data.label)));
     document.getElementById('pop-themes-eyebrow').textContent=(_tT['themes.prefix']||'Thèmes')+' '+_tLabel.replace(/&amp;/g,'&');
-    document.getElementById('pop-themes-title').innerHTML=(_tT['themes.explore']||'Explorez les thèmes')+' <em>'+_tLabel+'.</em>';
+    var _titleEl=document.getElementById('pop-themes-title');
+    _titleEl.textContent='';
+    _titleEl.appendChild(document.createTextNode((_tT['themes.explore']||'Explorez les thèmes')+' '));
+    var _titleEm=document.createElement('em');
+    _titleEm.textContent=_tLabel.replace(/&amp;/g,'&')+'.';
+    _titleEl.appendChild(_titleEm);
     document.getElementById('pop-themes-lead').textContent=_tT['pp.themes.lead']||data.desc;
     const _btnLabel=_tT['fo.btn.demo']||'Voir un exemple';
     const grid=document.getElementById('pop-themes-grid');
@@ -4093,9 +4098,12 @@ html.light .fo-card-featured{
       <div class="pop-theme-item">
         <div class="pop-theme-icon">${t.icon}</div>
         <div class="pop-theme-meta"><strong>${t.name}</strong><small>${t.sub}</small></div>
-        <button class="fo-btn fo-btn-test" style="flex:none;padding:.5rem 1rem;font-size:.8rem;border-radius:10px" onclick="openDemoFs('${t.url}','${t.name}')">${_btnLabel}</button>
+        <button class="fo-btn fo-btn-test" style="flex:none;padding:.5rem 1rem;font-size:.8rem;border-radius:10px" data-url="${t.url}" data-dname="${t.name.replace(/"/g,'&quot;')}">${_btnLabel}</button>
       </div>
     `).join('');
+    grid.querySelectorAll('.fo-btn-test').forEach(function(btn){
+      btn.addEventListener('click',function(){openDemoFs(this.dataset.url,this.dataset.dname);});
+    });
     openPopup('pop-themes-tier');
   };
 
@@ -4923,11 +4931,6 @@ html.light .fo-card-featured{
   // ── État ──────────────────────────────────────────────
   var _cmdForfait = 'menu-qr';
   var _cmdPayMode  = 'monthly';  // 'monthly' | 'annual'
-  var FORFAIT_LABELS = {
-    'menu-qr':            'Menu QR — 49 €/mois',
-    'commandes-services': 'Commandes & Services — 99 €/mois'
-  };
-
   // ── Préparer le formulaire Commander (appelé aussi depuis le notice) ──
   function _prepareCommanderForm(idx) {
     _cmdForfait = idx === 1 ? 'commandes-services' : 'menu-qr';
