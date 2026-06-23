@@ -5051,7 +5051,7 @@ html.light .fo-card-featured{
     var commande = {
       forfait:     _cmdForfait,
       paymentMode: _cmdPayMode,
-      price:       (_cmdPayMode === 'annual' ? PM_ANNUAL[_cmdForfait] : PM_MONTHLY[_cmdForfait]),
+      price:       _gdGetPm(_cmdForfait, _cmdPayMode),
       restaurant: rest,
       langue:     lang,
       ts:         ts,
@@ -5072,7 +5072,7 @@ html.light .fo-card-featured{
           body: JSON.stringify({
             restaurant: rest,
             forfait: (_cmdForfait === 'commandes-services' ? 'Commandes & Services' : 'Menu QR')
-                   + ' — ' + (_cmdPayMode === 'annual' ? PM_ANNUAL[_cmdForfait] + ' €/an' : PM_MONTHLY[_cmdForfait] + ' €/mois'),
+                   + ' — ' + _gdGetPm(_cmdForfait, _cmdPayMode) + ' €/' + (_cmdPayMode === 'annual' ? 'an' : 'mois'),
             forfaitType: _cmdForfait,
             paymentMode: _cmdPayMode,
             langue: lang,
