@@ -83,6 +83,7 @@ function _effectivePrice(d) {
 // ── Lire le prix des frais de création (custom possible via prices.creation) ─
 function _effectiveCreationFee(d) {
   if (d.prices && d.prices['creation'] != null) return d.prices['creation'];
+  if (d.creationFee != null) return d.creationFee;
   return PM_CREATION_FEE;
 }
 
@@ -581,7 +582,7 @@ module.exports = async (req, res) => {
           headers: { 'List-Unsubscribe': '<mailto:' + process.env.GMAIL_USER + '?subject=unsubscribe>' },
           subject: deliverySubject(ed.name || d.restaurant || '', lang),
           html:    deliveryHtml(ed.name || d.restaurant || '', ed.rid, ed.pwd, isCS, lang, subDetails),
-          text:    (ed.name || d.restaurant || '') + ' — Accès GeNext\n\nVotre espace est prêt.\nIdentifiant : ' + ed.rid + '\nMot de passe : ' + ed.pwd + '\nForfait : ' + forfait + ' · ' + (isAnn ? 'Annuel' : 'Mensuel') + ' · ' + priceStr + '\n\nAccéder : ' + ADMIN_URL + '\n\n1 mois d\'essai à partir de la première connexion.\n- Frais de création (unique) : à régler dans les 7 premiers jours.\n- Abonnement : démarre au 2ème mois selon formule choisie.\n\nPaiement : Revolut ' + REVOLUT_URL + ' (indiquez votre ID dans les détails) · Espèces Athènes.\n\nGeNext — ' + process.env.GMAIL_USER,
+          text:    (ed.name || d.restaurant || '') + ' — Accès GeNext\n\nVotre espace est prêt.\nIdentifiant : ' + ed.rid + '\nMot de passe : ' + ed.pwd + '\nForfait : ' + forfait + ' · ' + (isAnn ? 'Annuel' : 'Mensuel') + ' · ' + priceStr + '\n\nAccéder : ' + ADMIN_URL + '\n\n1 mois d\'essai à partir de la première connexion.\n- Frais de création (unique, ' + creationFee + ' €) : à régler dans les 7 premiers jours.\n- Abonnement (' + priceStr + ') : démarre au 2ème mois selon formule choisie.\n\nPaiement :\n💳 Revolut : ' + REVOLUT_URL + '\n   ⚠️ Indiquez votre ID restaurant dans les détails de la transaction.\n💵 Espèces (Athènes) : contactez-nous par email / WhatsApp avec votre ID.\n\nGeNext — ' + process.env.GMAIL_USER,
           attachments: [LOGO_ATTACHMENT]
         });
         await fbPatch(CONTROL_DB, '/commandes/' + key, secret, { emailLivraisonSent: now });

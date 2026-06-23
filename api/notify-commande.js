@@ -244,9 +244,14 @@ async function autoCreateRestaurant(restaurant, forfaitType, paymentMode, email,
   const hash = sha256(pwd);
   const ts   = Date.now();
   const isCS = forfaitType === 'commandes-services';
-  const price = paymentMode === 'annual'
-    ? (isCS ? 990 : 490)
-    : (isCS ? 99  : 49);
+
+  // Lire les prix globaux depuis demoPage/pricing (configurés dans Réglages control-app)
+  const _gdPricing  = await fbGet(MAIN_DB, '/demoPage/pricing', mainSecret).catch(() => null) || {};
+  const _gdPrices   = _gdPricing.prices || {};
+  const _comboKey   = (isCS ? 'srv' : 'qr') + '-' + (paymentMode === 'annual' ? 'annual' : 'monthly');
+  const _fallback   = paymentMode === 'annual' ? (isCS ? 990 : 490) : (isCS ? 99 : 49);
+  const price       = (_gdPrices[_comboKey] != null) ? Number(_gdPrices[_comboKey]) : _fallback;
+  const creationFee = (_gdPricing.creationFee != null) ? Number(_gdPricing.creationFee) : 149;
 
   // Créer restaurant dans Firebase principal
   await fbPut(MAIN_DB, '/restaurants/' + rid, mainSecret, {
@@ -258,7 +263,7 @@ async function autoCreateRestaurant(restaurant, forfaitType, paymentMode, email,
       active: true,
       features: { callBtn: isCS, orderUI: isCS, photos: true, tableSystem: isCS, qrOrdering: isCS, eventOverlay: true },
       retention: { calls: 2592000000, orders: 2592000000 },
-      subscription: { forfait: forfaitType, paymentMode, price, email: email || null }
+      subscription: { forfait: forfaitType, paymentMode, price, creationFee, email: email || null }
     },
     menu: { menuTheme: 'carte-classique', menuStyle: 'simple' },
     firstOpen: false
@@ -273,7 +278,9 @@ async function autoCreateRestaurant(restaurant, forfaitType, paymentMode, email,
       lu: true,
       clientCree: clientCreeData,
       emailLivraisonProgramme: ts + 2 * 60 * 60 * 1000,
-      emailData: { email, rid, pwd, name: restaurant, forfait: forfaitType, lang, paymentMode }
+      emailData: { email, rid, pwd, name: restaurant, forfait: forfaitType, lang, paymentMode },
+      price,       // prix abonnement pour cron _effectivePrice avant firstOpen
+      creationFee  // frais création pour cron _effectiveCreationFee avant firstOpen
     });
   }
 
