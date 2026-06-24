@@ -13,5 +13,5 @@ jobs:
         run: |
           response=$(curl -s --max-time 55 \
             -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
-            "https://menu-saas-platform.vercel.app/api/cron-auto")
+            "https://menu-pro-demo.vercel.app/api/cron-auto")
           echo "Cron response: $response"
