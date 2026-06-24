@@ -11,6 +11,7 @@ jobs:
     steps:
       - name: Déclencher cron-auto (B2 livraison + B3 rappels + B4 suspension)
         run: |
-          curl -sf -X GET \
+          response=$(curl -s --max-time 55 \
             -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
-            "https://menu-saas-platform.vercel.app/api/cron-auto"
+            "https://menu-saas-platform.vercel.app/api/cron-auto")
+          echo "Cron response: $response"
