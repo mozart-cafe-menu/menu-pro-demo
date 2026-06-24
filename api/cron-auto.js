@@ -1,6 +1,6 @@
 ﻿/* ============================================================
    Vercel Cron — Email livraison + Rappels paiement
-   Déclenché toutes les heures (0 * * * *)
+   Déclenché quotidiennement à minuit UTC (0 0 * * *) — plan Vercel Hobby
    B2 : email livraison dès que emailLivraisonProgramme <= now
    B3 : rappel paiement 4 jours avant nextReminderAt
    B4 : suspension automatique si nextReminderAt dépassé 3 jours
