@@ -199,8 +199,11 @@ html.light #nav::before{
 .gnd-nav-logo-lt{display:none;}
 html.light .gnd-nav-logo-dk{display:none!important;}
 html.light .gnd-nav-logo-lt{display:block!important;}
-/* E-1 fix barre : halo doré visible contre fond nav sombre */
+/* E-1 fix barre : halo doré visible contre fond nav dark + light */
 .gnd-nav-logo-dk{
+  filter:drop-shadow(0 0 8px rgba(200,164,78,0.4)) drop-shadow(0 0 3px rgba(200,164,78,0.25));
+}
+.gnd-nav-logo-lt{
   filter:drop-shadow(0 0 8px rgba(200,164,78,0.4)) drop-shadow(0 0 3px rgba(200,164,78,0.25));
 }
 .nav-mid{
@@ -2912,9 +2915,12 @@ html.light #gn-demo-splash::before{
 #gnd-logo-lt{display:none;}
 html.light #gnd-logo-dk{display:none!important;}
 html.light #gnd-logo-lt{display:block!important;}
-/* E-1 fix : halo doré pour faire ressortir le disque sombre du logo sur fond bokeh noir */
+/* E-1 fix : halo doré sur logos splash dark + light */
 #gnd-logo-dk{
   filter:drop-shadow(0 0 18px rgba(200,164,78,0.45)) drop-shadow(0 0 5px rgba(200,164,78,0.3));
+}
+#gnd-logo-lt{
+  filter:drop-shadow(0 0 14px rgba(200,164,78,0.4)) drop-shadow(0 0 4px rgba(200,164,78,0.25));
 }
 
 /* ═══════════════════════════════════════════════
