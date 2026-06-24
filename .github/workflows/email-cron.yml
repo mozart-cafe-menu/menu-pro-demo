@@ -1,0 +1,16 @@
+name: Email Cron — B2/B3/B4
+
+on:
+  schedule:
+    - cron: '*/30 * * * *'
+  workflow_dispatch:
+
+jobs:
+  trigger-cron:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Déclencher cron-auto (B2 livraison + B3 rappels + B4 suspension)
+        run: |
+          curl -sf -X GET \
+            -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
+            "https://menu-saas-platform.vercel.app/api/cron-auto"
