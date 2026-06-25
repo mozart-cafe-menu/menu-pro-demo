@@ -120,9 +120,9 @@ const WAITING_TPL = {
     subject: r => '✅ Αίτημα παραλήφθηκε — ' + r,
     html:    (r, f, m) => _wHtml(r, f, m, { sub:'Ψηφιακά μενού &amp; Παραγγελίες', gr:'Γεια σας,', p1:'Λάβαμε το αίτημά σας για', p2:'Επιλεγμένο πλάνο:', box:'⏳ Ο χώρος σας προετοιμάζεται.<br>Θα λάβετε <strong>email με τα στοιχεία σύνδεσής σας</strong> εντός 24 ωρών.', contact:'Μη διστάσετε να απαντήσετε σε αυτό το email αν έχετε απορίες.', ft:'GeNext · Ψηφιακά μενού για καφέ και εστιατόρια' })
   },
-  ar: {
-    subject: r => '✅ تم استلام طلبك — ' + r,
-    html:    (r, f, m) => _wHtml(r, f, m, { sub:'قوائم رقمية وطلبات', gr:'مرحباً،', p1:'تلقينا طلبك بخصوص', p2:'الخطة المختارة:', box:'⏳ يتم تحضير مساحتك الآن.<br>ستتلقى <strong>بريداً إلكترونياً ببيانات الدخول</strong> خلال 24 ساعة.', contact:'لا تتردد في الرد على هذا البريد إذا كان لديك أي سؤال.', ft:'GeNext · قوائم رقمية للمقاهي والمطاعم', rtl:true })
+  es: {
+    subject: r => '✅ Solicitud recibida — ' + r,
+    html:    (r, f, m) => _wHtml(r, f, m, { sub:'Menús digitales &amp; Pedidos', gr:'¡Hola,', p1:'Hemos recibido su solicitud para', p2:'Plan seleccionado:', box:'⏳ Su espacio está siendo preparado.<br>Recibirá un <strong>correo con sus credenciales de acceso</strong> en 24 horas.', contact:'No dude en responder a este correo si tiene alguna pregunta.', ft:'GeNext · Menús digitales para cafés y restaurantes' })
   },
   de: {
     subject: r => '✅ Anfrage erhalten — ' + r,
@@ -159,12 +159,12 @@ const MODE_LABEL = {
   fr: { monthly:'Mensuel',   annual:'Annuel'    },
   en: { monthly:'Monthly',   annual:'Annual'    },
   el: { monthly:'Μηνιαία',   annual:'Ετήσια'    },
-  ar: { monthly:'شهري',      annual:'سنوي'      },
+  es: { monthly:'Mensual',   annual:'Anual'     },
   de: { monthly:'Monatlich', annual:'Jährlich'  }
 };
 
 function deliverySubject(name, lang) {
-  const S = { fr:'🎉 ' + name + ' est prêt ! Voici vos accès GeNext', en:'🎉 ' + name + ' is ready! Here are your GeNext credentials', el:'🎉 ' + name + ' είναι έτοιμος! Οι κωδικοί σας', ar:'🎉 ' + name + ' جاهز! إليك بيانات دخول GeNext', de:'🎉 ' + name + ' ist bereit! Ihre GeNext Zugangsdaten' };
+  const S = { fr:'🎉 ' + name + ' est prêt ! Voici vos accès GeNext', en:'🎉 ' + name + ' is ready! Here are your GeNext credentials', el:'🎉 ' + name + ' είναι έτοιμος! Οι κωδικοί σας', es:'🎉 ' + name + ' ¡está listo! Sus credenciales GeNext', de:'🎉 ' + name + ' ist bereit! Ihre GeNext Zugangsdaten' };
   return S[lang] || S.fr;
 }
 
@@ -174,7 +174,7 @@ function deliveryHtml(name, rid, pwd, isCS, lang) {
     fr: { sub:'Menus digitaux &amp; Commandes', gr:'Bonjour,', intro:'Votre espace <strong style="color:#c8a44e">' + safeName + '</strong> est prêt !', sub2:'Connectez-vous à votre tableau de bord pour personnaliser votre menu.', lid:'Identifiant (ID restaurant)', lpwd:'Mot de passe', btn:'🔑 Accéder au tableau de bord', apkT:'Application serveur', apkS:'Téléchargez cette application pour que votre personnel puisse recevoir les commandes.', apkBtn:'📱 Télécharger l\'application serveur', trial:'⏱ Vous bénéficiez de <strong style="color:#c8a44e">7 jours d\'essai gratuit</strong> à partir de votre première connexion.', contact:'N\'hésitez pas à nous répondre si vous avez des questions.', ft:'GeNext · Menus digitaux pour cafés et restaurants' },
     en: { sub:'Digital menus &amp; Orders', gr:'Hello,', intro:'Your space <strong style="color:#c8a44e">' + safeName + '</strong> is ready!', sub2:'Log in to your dashboard to customize your menu.', lid:'Restaurant ID', lpwd:'Password', btn:'🔑 Access dashboard', apkT:'Server application', apkS:'Download this app so your staff can receive orders.', apkBtn:'📱 Download server app', trial:'⏱ You have a <strong style="color:#c8a44e">7-day free trial</strong> starting from your first login.', contact:'Feel free to reply if you have any questions.', ft:'GeNext · Digital menus for cafés and restaurants' },
     el: { sub:'Ψηφιακά μενού &amp; Παραγγελίες', gr:'Γεια σας,', intro:'Ο χώρος σας <strong style="color:#c8a44e">' + safeName + '</strong> είναι έτοιμος!', sub2:'Συνδεθείτε στον πίνακα ελέγχου για να προσαρμόσετε το μενού σας.', lid:'Αναγνωριστικό εστιατορίου', lpwd:'Κωδικός', btn:'🔑 Πρόσβαση στον πίνακα ελέγχου', apkT:'Εφαρμογή σερβιτόρων', apkS:'Κατεβάστε αυτή την εφαρμογή για να λαμβάνει παραγγελίες το προσωπικό σας.', apkBtn:'📱 Λήψη εφαρμογής', trial:'⏱ Έχετε <strong style="color:#c8a44e">7 ημέρες δωρεάν δοκιμή</strong> από την πρώτη σύνδεσή σας.', contact:'Μη διστάσετε να μας απαντήσετε αν έχετε ερωτήσεις.', ft:'GeNext · Ψηφιακά μενού για καφέ και εστιατόρια' },
-    ar: { sub:'قوائم رقمية وطلبات', gr:'مرحباً،', intro:'مساحتك <strong style="color:#c8a44e">' + safeName + '</strong> جاهزة!', sub2:'سجّل الدخول إلى لوحة التحكم لتخصيص قائمتك.', lid:'معرّف المطعم', lpwd:'كلمة المرور', btn:'🔑 الوصول إلى لوحة التحكم', apkT:'تطبيق النادلين', apkS:'نزّل هذا التطبيق ليستقبل موظفوك الطلبات.', apkBtn:'📱 تنزيل التطبيق', trial:'⏱ لديك <strong style="color:#c8a44e">7 أيام تجريبية مجانية</strong> من أول تسجيل دخول.', contact:'لا تتردد في الرد على هذا البريد إذا كان لديك أي سؤال.', ft:'GeNext · قوائم رقمية للمقاهي والمطاعم', rtl:true },
+    es: { sub:'Menús digitales &amp; Pedidos', gr:'¡Hola,', intro:'Su espacio <strong style="color:#c8a44e">' + safeName + '</strong> ¡está listo!', sub2:'Acceda a su panel de control para personalizar su menú.', lid:'Identificador (ID restaurante)', lpwd:'Contraseña', btn:'🔑 Acceder al panel de control', apkT:'Aplicación de camareros', apkS:'Descargue esta aplicación para que su personal pueda recibir pedidos.', apkBtn:'📱 Descargar aplicación', trial:'⏱ Dispone de <strong style="color:#c8a44e">7 días de prueba gratuita</strong> a partir de su primer inicio de sesión.', contact:'No dude en respondernos si tiene alguna pregunta.', ft:'GeNext · Menús digitales para cafés y restaurantes' },
     de: { sub:'Digitale Speisekarten &amp; Bestellungen', gr:'Hallo,', intro:'Ihr Bereich <strong style="color:#c8a44e">' + safeName + '</strong> ist bereit!', sub2:'Melden Sie sich in Ihrem Dashboard an, um Ihre Speisekarte anzupassen.', lid:'Restaurant-ID', lpwd:'Passwort', btn:'🔑 Dashboard aufrufen', apkT:'Server-App', apkS:'Lassen Sie Ihr Personal diese App herunterladen, um Bestellungen zu erhalten.', apkBtn:'📱 Server-App herunterladen', trial:'⏱ Sie haben eine <strong style="color:#c8a44e">7-tägige kostenlose Testphase</strong> ab Ihrer ersten Anmeldung.', contact:'Antworten Sie auf diese E-Mail, wenn Sie Fragen haben.', ft:'GeNext · Digitale Speisekarten für Cafés und Restaurants' }
   };
   const t = T[lang] || T.fr;
@@ -255,7 +255,7 @@ async function autoCreateRestaurant(restaurant, forfaitType, paymentMode, email,
 
   // Créer restaurant dans Firebase principal
   await fbPut(MAIN_DB, '/restaurants/' + rid, mainSecret, {
-    profile: { name: restaurant, createdAt: ts, langs: ['fr','en','el','de','ar'] },
+    profile: { name: restaurant, createdAt: ts, langs: ['fr','en','el','de','es'] },
     config: {
       adminHash: hash,
       adminPwd:  pwd,
@@ -277,7 +277,7 @@ async function autoCreateRestaurant(restaurant, forfaitType, paymentMode, email,
       statut: 'en_cours',
       lu: true,
       clientCree: clientCreeData,
-      emailLivraisonProgramme: ts + 2 * 60 * 60 * 1000,
+      emailLivraisonProgramme: ts,
       emailData: { email, rid, pwd, name: restaurant, forfait: forfaitType, lang, paymentMode },
       price,       // prix abonnement pour cron _effectivePrice avant firstOpen
       creationFee  // frais création pour cron _effectiveCreationFee avant firstOpen
@@ -323,25 +323,21 @@ module.exports = async (req, res) => {
     ).catch(e => { console.error('FCM error:', e.message); return { body: { sent: 0 } }; });
     console.log('FCM:', fcmResult.status, JSON.stringify(fcmResult.body));
 
-    // ── 2. Email d'attente (skippé si création admin) ───────────────────────
-    if (!isAdminSrc && email && process.env.GMAIL_USER && process.env.GMAIL_PASS) {
+    // ── 2. Vérification limite 3 clients actifs par email ────────────────────
+    if (email && process.env.FIREBASE_MAIN_SECRET) {
       try {
-        const tpl       = WAITING_TPL[lang];
-        const modes     = MODE_LABEL[lang] || MODE_LABEL.fr;
-        const modeLabel = paymentMode === 'annual' ? modes.annual : modes.monthly;
-        await createTransport().sendMail({
-          from:    '"GeNext" <' + process.env.GMAIL_USER + '>',
-          replyTo: process.env.GMAIL_USER,
-          to:      email,
-          subject: tpl.subject(rest),
-          html:    tpl.html(rest, plan.split(' — ')[0] || 'GeNext', modeLabel),
-          text:    rest + ' — Demande reçue\n\nNous avons bien reçu votre demande.\nForfait : ' + (plan.split(' — ')[0] || '') + ' (' + modeLabel + ')\n\nVous recevrez vos identifiants dans les 24 heures.\n\nGeNext — gennextcontact@gmail.com',
-          headers: { 'List-Unsubscribe': '<mailto:' + process.env.GMAIL_USER + '?subject=unsubscribe>' },
-          attachments: [LOGO_ATTACHMENT]
-        });
-        console.log('✅ Email attente envoyé à:', email);
+        const allRestaurants = await fbGet(MAIN_DB, '/restaurants', process.env.FIREBASE_MAIN_SECRET);
+        if (allRestaurants) {
+          const activeCount = Object.values(allRestaurants).filter(r =>
+            r && r.config && r.config.subscription && r.config.subscription.email === email
+          ).length;
+          if (activeCount >= 3) {
+            res.status(429).json({ error: 'MAX_CLIENTS_REACHED' });
+            return;
+          }
+        }
       } catch(e) {
-        console.error('⚠ Email attente error:', e.message);
+        console.error('⚠ Vérif limite clients:', e.message);
       }
     }
 
@@ -351,6 +347,28 @@ module.exports = async (req, res) => {
       created = await autoCreateRestaurant(rest, forfaitType || 'menu-qr', paymentMode || 'monthly', email, lang, safeKey);
     } catch(e) {
       console.error('⚠ Auto-création error:', e.message);
+    }
+
+    // ── 4. Email identifiants immédiat ───────────────────────────────────────
+    if (created && email && process.env.GMAIL_USER && process.env.GMAIL_PASS) {
+      try {
+        await createTransport().sendMail({
+          from:    '"GeNext" <' + process.env.GMAIL_USER + '>',
+          replyTo: process.env.GMAIL_USER,
+          to:      email,
+          subject: deliverySubject(rest, lang),
+          html:    deliveryHtml(rest, created.rid, created.pwd, created.isCS, lang),
+          text:    rest + '\nID: ' + created.rid + '\nMot de passe: ' + created.pwd + '\n\nGeNext — gennextcontact@gmail.com',
+          headers: { 'List-Unsubscribe': '<mailto:' + process.env.GMAIL_USER + '?subject=unsubscribe>' },
+          attachments: [LOGO_ATTACHMENT]
+        });
+        console.log('✅ Email identifiants envoyé à:', email);
+        if (safeKey && process.env.FIREBASE_CONTROL_SECRET) {
+          await fbPatch(CONTROL_DB, '/commandes/' + safeKey, process.env.FIREBASE_CONTROL_SECRET, { emailLivraisonSent: Date.now() }).catch(() => {});
+        }
+      } catch(e) {
+        console.error('⚠ Email identifiants error:', e.message);
+      }
     }
 
     res.status(200).json({ ...(fcmResult.body || { sent: 0 }), created: created ? { rid: created.rid } : null });

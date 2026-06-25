@@ -97,7 +97,7 @@ const MODE_LABEL = {
   fr: { monthly: 'Mensuel',   annual: 'Annuel'    },
   en: { monthly: 'Monthly',   annual: 'Annual'    },
   el: { monthly: 'Μηνιαία',   annual: 'Ετήσια'    },
-  ar: { monthly: 'شهري',      annual: 'سنوي'      },
+  es: { monthly: 'Mensual',   annual: 'Anual'     },
   de: { monthly: 'Monatlich', annual: 'Jährlich'  }
 };
 
@@ -106,7 +106,7 @@ const FORFAIT_LABEL = {
   fr: { 'menu-qr': 'Menu QR Code', 'commandes-services': 'Commandes &amp; Services' },
   en: { 'menu-qr': 'Menu QR Code', 'commandes-services': 'Orders &amp; Services' },
   el: { 'menu-qr': 'Menu QR Code', 'commandes-services': 'Παραγγελίες &amp; Υπηρεσίες' },
-  ar: { 'menu-qr': 'Menu QR Code', 'commandes-services': 'الطلبات والخدمات' },
+  es: { 'menu-qr': 'Menu QR Code', 'commandes-services': 'Pedidos &amp; Servicios' },
   de: { 'menu-qr': 'Menu QR Code', 'commandes-services': 'Bestellungen &amp; Services' }
 };
 
@@ -138,13 +138,13 @@ const PAY_INFO = {
       + '💵 <strong>Μετρητά (Αθήνα):</strong> επικοινωνήστε μαζί μας μέσω WhatsApp / email με το ID σας για ραντεβού.<br>'
       + '<span style="font-size:0.82em;color:#6b5a3a">Στείλτε απόδειξη πληρωμής (στιγμιότυπο Revolut ή φωτογραφία) μέσω email ή WhatsApp με το ID σας.</span>'
   },
-  ar: {
-    trial: '🎁 <strong style="color:#c8a44e">شهر تجريبي مجاني</strong> من أول تسجيل دخول.<br>'
-      + '· <strong>رسوم الإنشاء</strong> (مرة واحدة): تُدفع خلال <strong>أول 7 أيام</strong>.<br>'
-      + '· <strong>الاشتراك</strong> (شهري أو سنوي): يبدأ من الشهر الثاني، وفق الخطة المختارة. تغيير الخطة حر طوال شهر التجربة.',
-    methods: '💳 <strong>Revolut:</strong> <a href="' + REVOLUT_URL + '" style="color:#c8a44e">' + REVOLUT_URL + '</a><br><span style="font-size:0.82em;color:#6b5a3a">⚠️ اذكر <strong>معرّف مطعمك</strong> في تفاصيل المعاملة.</span><br>'
-      + '💵 <strong>نقداً (أثينا):</strong> تواصل معنا عبر WhatsApp / البريد مع المعرّف لترتيب موعد.<br>'
-      + '<span style="font-size:0.82em;color:#6b5a3a">أرسل إيصال الدفع (لقطة Revolut أو صورة) عبر البريد أو WhatsApp مع المعرّف.</span>'
+  es: {
+    trial: '🎁 <strong style="color:#c8a44e">1 mes de prueba gratuita</strong> desde su primer inicio de sesión.<br>'
+      + '· <strong>Tarifa de creación</strong> (pago único): a abonar en los <strong>primeros 7 días</strong>.<br>'
+      + '· <strong>Suscripción</strong> (mensual o anual): comienza a partir del 2º mes, según el plan elegido. Cambio de plan libre durante el mes de prueba.',
+    methods: '💳 <strong>Revolut:</strong> <a href="' + REVOLUT_URL + '" style="color:#c8a44e">' + REVOLUT_URL + '</a><br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Indique su <strong>ID de restaurante</strong> en los detalles de la transacción.</span><br>'
+      + '💵 <strong>Efectivo (Atenas):</strong> contáctenos por WhatsApp / email con su ID para concertar una cita.<br>'
+      + '<span style="font-size:0.82em;color:#6b5a3a">Envíe el comprobante de pago (captura Revolut o foto) por email o WhatsApp con su ID.</span>'
   },
   de: {
     trial: '🎁 <strong style="color:#c8a44e">1 Monat kostenlose Testphase</strong> ab Ihrer ersten Anmeldung.<br>'
@@ -157,7 +157,7 @@ const PAY_INFO = {
 };
 
 // ── Locale date ─────────────────────────────────────────────────────────────
-const DATE_LOCALE = { fr: 'fr-FR', en: 'en-GB', el: 'el-GR', ar: 'ar-MA', de: 'de-DE' };
+const DATE_LOCALE = { fr: 'fr-FR', en: 'en-GB', el: 'el-GR', es: 'es-ES', de: 'de-DE' };
 
 function fmtDate(ts, lang) {
   return new Date(ts).toLocaleDateString(DATE_LOCALE[lang] || 'fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
@@ -253,21 +253,21 @@ function deliveryHtml(rawName, rid, pwd, isCS, lang, sub) {
       contact: 'Μη διστάσετε να μας απαντήσετε αν έχετε ερωτήσεις.',
       footer: 'GeNext · Ψηφιακά μενού για καφέ και εστιατόρια'
     },
-    ar: {
-      subtitle: 'قوائم رقمية وطلبات',
-      greeting: 'مرحباً،',
-      intro: 'مساحتك <strong style="color:#c8a44e">' + name + '</strong> جاهزة!',
-      sub: 'سجّل الدخول إلى لوحة التحكم لتخصيص قائمتك.',
-      labelId: 'معرّف المطعم',
-      labelPwd: 'كلمة المرور',
-      btnAdmin: '🔑 الوصول إلى لوحة التحكم',
-      subTitle: 'اشتراكك',
-      subForfait: 'الخطة', subMode: 'الدورية', subPrice: 'سعر الاشتراك', subCreation: 'رسوم الإنشاء',
-      apkTitle: 'تطبيق النادلين',
-      apkSub: 'اطلب من موظفيك تنزيل هذا التطبيق لاستقبال الطلبات.',
-      btnApk: '📱 تنزيل تطبيق النادلين',
-      contact: 'لا تتردد في الرد على هذا البريد إذا كان لديك أي سؤال.',
-      footer: 'GeNext · قوائم رقمية للمقاهي والمطاعم'
+    es: {
+      subtitle: 'Menús digitales &amp; Pedidos',
+      greeting: '¡Hola,',
+      intro: 'Su espacio <strong style="color:#c8a44e">' + name + '</strong> ¡está listo!',
+      sub: 'Acceda a su panel de control para personalizar su menú.',
+      labelId: 'Identificador (ID restaurante)',
+      labelPwd: 'Contraseña',
+      btnAdmin: '🔑 Acceder al panel de control',
+      subTitle: 'Su suscripción',
+      subForfait: 'Plan', subMode: 'Facturación', subPrice: 'Precio suscripción', subCreation: 'Tarifa de creación',
+      apkTitle: 'Aplicación de camareros',
+      apkSub: 'Pida a su personal que descargue esta aplicación para recibir pedidos.',
+      btnApk: '📱 Descargar aplicación',
+      contact: 'No dude en respondernos si tiene alguna pregunta.',
+      footer: 'GeNext · Menús digitales para cafés y restaurantes'
     },
     de: {
       subtitle: 'Digitale Speisekarten &amp; Bestellungen',
@@ -287,7 +287,7 @@ function deliveryHtml(rawName, rid, pwd, isCS, lang, sub) {
     }
   };
   const t = T[lang] || T.fr;
-  const dir = lang === 'ar' ? ' dir="rtl"' : '';
+  const dir = '';
 
   // Carte détails abonnement
   const subCard = sub
@@ -378,15 +378,15 @@ function reminderHtml(rawName, amount, mode, dateStr, lang) {
       contact: 'Μη διστάσετε να μας απαντήσετε αν έχετε ερωτήσεις.',
       footer: 'GeNext · Ψηφιακά μενού για καφέ και εστιατόρια'
     },
-    ar: {
-      subtitle: 'تذكير بالدفع',
-      greeting: 'مرحباً،',
-      intro: 'اشتراكك في GeNext لـ <strong style="color:#c8a44e">' + name + '</strong> ينتهي في <strong style="color:#c8a44e">' + escHtml(dateStr) + '</strong>.',
-      amountLabel: 'المبلغ المستحق',
-      modeLabel: 'الدورية',
-      instructions: 'للحفاظ على وصولك دون انقطاع، يرجى إتمام الدفع قبل هذا التاريخ.',
-      contact: 'لا تتردد في الرد على هذا البريد إذا كان لديك أي سؤال.',
-      footer: 'GeNext · قوائم رقمية للمقاهي والمطاعم'
+    es: {
+      subtitle: 'Recordatorio de pago',
+      greeting: '¡Hola,',
+      intro: 'Su suscripción GeNext para <strong style="color:#c8a44e">' + name + '</strong> vence el <strong style="color:#c8a44e">' + escHtml(dateStr) + '</strong>.',
+      amountLabel: 'Importe a pagar',
+      modeLabel: 'Frecuencia',
+      instructions: 'Para mantener su acceso sin interrupciones, realice su pago antes de esta fecha.',
+      contact: 'No dude en respondernos si tiene alguna pregunta.',
+      footer: 'GeNext · Menús digitales para cafés y restaurantes'
     },
     de: {
       subtitle: 'Zahlungserinnerung',
@@ -400,7 +400,7 @@ function reminderHtml(rawName, amount, mode, dateStr, lang) {
     }
   };
   const t   = T[lang] || T.fr;
-  const dir = lang === 'ar' ? ' dir="rtl"' : '';
+  const dir = '';
   return '<table' + dir + ' width="100%" cellpadding="0" cellspacing="0" bgcolor="#f2ece0" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="background-color:#f2ece0;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center;background-repeat:no-repeat">'
     + '<tr><td align="center" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="padding:16px 8px;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center">'
     + '<table width="580" cellpadding="0" cellspacing="0" bgcolor="#ffffff" style="max-width:580px;width:100%;background-color:#ffffff;font-family:\'Segoe UI\',Arial,sans-serif">'
@@ -434,7 +434,7 @@ function deliverySubject(name, lang) {
     fr: '🎉 ' + name + ' est prêt ! Voici vos accès GeNext',
     en: '🎉 ' + name + ' is ready! Here are your GeNext credentials',
     el: '🎉 ' + name + ' είναι έτοιμος! Οι κωδικοί σας',
-    ar: '🎉 ' + name + ' جاهز! إليك بيانات دخول GeNext',
+    es: '🎉 ' + name + ' ¡está listo! Sus credenciales GeNext',
     de: '🎉 ' + name + ' ist bereit! Ihre GeNext Zugangsdaten'
   };
   return S[lang] || S.fr;
@@ -445,7 +445,7 @@ function reminderSubject(name, lang) {
     fr: '⏰ Rappel paiement GeNext — ' + name,
     en: '⏰ GeNext payment reminder — ' + name,
     el: '⏰ Υπενθύμιση πληρωμής GeNext — ' + name,
-    ar: '⏰ تذكير بالدفع GeNext — ' + name,
+    es: '⏰ Recordatorio de pago GeNext — ' + name,
     de: '⏰ GeNext Zahlungserinnerung — ' + name
   };
   return S[lang] || S.fr;
@@ -456,7 +456,7 @@ function creationFeeSubject(name, lang) {
     fr: '🏷 Frais de création GeNext — ' + name,
     en: '🏷 GeNext creation fee — ' + name,
     el: '🏷 Τέλη δημιουργίας GeNext — ' + name,
-    ar: '🏷 رسوم الإنشاء GeNext — ' + name,
+    es: '🏷 Tarifa de creación GeNext — ' + name,
     de: '🏷 GeNext Einrichtungsgebühr — ' + name
   };
   return S[lang] || S.fr;
@@ -468,7 +468,7 @@ function suspensionSubject(name, lang) {
     fr: '⛔ Compte suspendu — GeNext · ' + name,
     en: '⛔ Account suspended — GeNext · ' + name,
     el: '⛔ Λογαριασμός ανεστάλη — GeNext · ' + name,
-    ar: '⛔ تم تعليق الحساب — GeNext · ' + name,
+    es: '⛔ Cuenta suspendida — GeNext · ' + name,
     de: '⛔ Konto gesperrt — GeNext · ' + name
   };
   return S[lang] || S.fr;
@@ -481,11 +481,11 @@ function suspensionHtml(rawName, amount, mode, lang) {
     fr: { subtitle: 'Compte suspendu', greeting: 'Bonjour,', intro: 'Votre compte GeNext pour <strong style="color:#c8a44e">' + name + '</strong> a été <strong style="color:#d94040">suspendu</strong> en raison d\'un paiement en attente.', amountLabel: 'Montant dû', modeLabel: 'Type', instructions: 'Pour rétablir l\'accès à votre espace, effectuez votre règlement dès que possible.', contact: 'Répondez à cet email ou contactez-nous si vous avez des questions.', footer: 'GeNext · Menus digitaux pour cafés et restaurants' },
     en: { subtitle: 'Account suspended', greeting: 'Hello,', intro: 'Your GeNext account for <strong style="color:#c8a44e">' + name + '</strong> has been <strong style="color:#d94040">suspended</strong> due to a pending payment.', amountLabel: 'Amount due', modeLabel: 'Type', instructions: 'To restore access to your space, please make your payment as soon as possible.', contact: 'Reply to this email or contact us if you have any questions.', footer: 'GeNext · Digital menus for cafés and restaurants' },
     el: { subtitle: 'Λογαριασμός ανεστάλη', greeting: 'Γεια σας,', intro: 'Ο λογαριασμός GeNext για <strong style="color:#c8a44e">' + name + '</strong> έχει <strong style="color:#d94040">ανασταλεί</strong> λόγω εκκρεμούς πληρωμής.', amountLabel: 'Οφειλόμενο ποσό', modeLabel: 'Τύπος', instructions: 'Για να επαναφέρετε την πρόσβασή σας, πραγματοποιήστε την πληρωμή σας το συντομότερο δυνατόν.', contact: 'Απαντήστε σε αυτό το email αν έχετε ερωτήσεις.', footer: 'GeNext · Ψηφιακά μενού για καφέ και εστιατόρια' },
-    ar: { subtitle: 'تم تعليق الحساب', greeting: 'مرحباً،', intro: 'تم <strong style="color:#d94040">تعليق</strong> حساب GeNext الخاص بـ <strong style="color:#c8a44e">' + name + '</strong> بسبب دفعة معلقة.', amountLabel: 'المبلغ المستحق', modeLabel: 'النوع', instructions: 'لاستعادة الوصول إلى مساحتك، يرجى إتمام الدفع في أقرب وقت ممكن.', contact: 'الرجاء الرد على هذا البريد إذا كان لديك أي سؤال.', footer: 'GeNext · قوائم رقمية للمقاهي والمطاعم' },
+    es: { subtitle: 'Cuenta suspendida', greeting: '¡Hola,', intro: 'Su cuenta GeNext para <strong style="color:#c8a44e">' + name + '</strong> ha sido <strong style="color:#d94040">suspendida</strong> por un pago pendiente.', amountLabel: 'Importe a pagar', modeLabel: 'Tipo', instructions: 'Para restablecer el acceso a su espacio, realice su pago lo antes posible.', contact: 'No dude en respondernos si tiene alguna pregunta.', footer: 'GeNext · Menús digitales para cafés y restaurantes' },
     de: { subtitle: 'Konto gesperrt', greeting: 'Hallo,', intro: 'Ihr GeNext-Konto für <strong style="color:#c8a44e">' + name + '</strong> wurde aufgrund einer ausstehenden Zahlung <strong style="color:#d94040">gesperrt</strong>.', amountLabel: 'Fälliger Betrag', modeLabel: 'Typ', instructions: 'Um den Zugang zu Ihrem Bereich wiederherzustellen, leisten Sie bitte Ihre Zahlung so bald wie möglich.', contact: 'Antworten Sie auf diese E-Mail, wenn Sie Fragen haben.', footer: 'GeNext · Digitale Speisekarten für Cafés und Restaurants' }
   };
   const t   = T[lang] || T.fr;
-  const dir = lang === 'ar' ? ' dir="rtl"' : '';
+  const dir = '';
   return '<table' + dir + ' width="100%" cellpadding="0" cellspacing="0" bgcolor="#f2ece0" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="background-color:#f2ece0;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center;background-repeat:no-repeat">'
     + '<tr><td align="center" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="padding:16px 8px;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center">'
     + '<table width="580" cellpadding="0" cellspacing="0" bgcolor="#ffffff" style="max-width:580px;width:100%;background-color:#ffffff;font-family:\'Segoe UI\',Arial,sans-serif">'
@@ -519,7 +519,7 @@ const CREATION_MODE_LABEL = {
   fr: 'Frais de création',
   en: 'Creation fee',
   el: 'Τέλη δημιουργίας',
-  ar: 'رسوم الإنشاء',
+  es: 'Tarifa de creación',
   de: 'Einrichtungsgebühr'
 };
 
@@ -566,7 +566,7 @@ module.exports = async (req, res) => {
     if (dueDelivery && notSentDlv && hasEmailDlv) {
       try {
         const ed      = d.emailData;
-        const lang    = (ed.lang && ['fr','en','el','ar','de'].includes(ed.lang)) ? ed.lang : 'fr';
+        const lang    = (ed.lang && ['fr','en','el','es','de'].includes(ed.lang)) ? ed.lang : 'fr';
         const isCS    = (d.forfait || ed.forfait) === 'commandes-services';
         const forfait = d.forfait || ed.forfait || 'menu-qr';
         const payMode = d.paymentMode || ed.paymentMode || 'monthly';
@@ -602,7 +602,7 @@ module.exports = async (req, res) => {
 
     if (hasNextReminder && notSentRecently && hasEmailRmd && notSuspended) {
       try {
-        const lang       = (d.langue && ['fr','en','el','ar','de'].includes(d.langue)) ? d.langue : 'fr';
+        const lang       = (d.langue && ['fr','en','el','es','de'].includes(d.langue)) ? d.langue : 'fr';
         const forfait    = d.forfait || 'menu-qr';
         const isAnn      = d.paymentMode === 'annual';
         const isCreation = _isCreationPhase(d);
@@ -653,7 +653,7 @@ module.exports = async (req, res) => {
           stats.suspensions++;
           console.log('⏸ Suspendu:', rid, '(commande ' + key + ')');
           if (d.email) {
-            const lang4     = (['fr','en','el','ar','de'].includes(d.langue)) ? d.langue : 'fr';
+            const lang4     = (['fr','en','el','es','de'].includes(d.langue)) ? d.langue : 'fr';
             const forfait4  = d.forfait || 'menu-qr';
             const isCreation4 = _isCreationPhase(d);
             const price4    = isCreation4 ? _effectiveCreationFee(d) : _effectivePrice(d);
