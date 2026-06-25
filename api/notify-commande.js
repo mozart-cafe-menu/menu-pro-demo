@@ -265,7 +265,7 @@ async function autoCreateRestaurant(restaurant, forfaitType, paymentMode, email,
       retention: { calls: 2592000000, orders: 2592000000 },
       subscription: { forfait: forfaitType, paymentMode, price, creationFee, email: email || null }
     },
-    menu: { menuTheme: 'carte-classique', menuStyle: 'simple' },
+    menu: { menuTheme: 'genext', menuStyle: 'simple' },
     firstOpen: false
   });
   console.log('✅ Restaurant créé:', rid);
