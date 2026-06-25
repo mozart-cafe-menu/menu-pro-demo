@@ -168,14 +168,42 @@ function deliverySubject(name, lang) {
   return S[lang] || S.fr;
 }
 
-function deliveryHtml(name, rid, pwd, isCS, lang) {
+const REVOLUT_URL = 'https://revolut.me/malekhkk7';
+
+function deliveryHtml(name, rid, pwd, isCS, lang, creationFee) {
   const safeName = escHtml(name);
+  const cf = creationFee != null ? creationFee : 149;
   const T = {
-    fr: { sub:'Menus digitaux &amp; Commandes', gr:'Bonjour,', intro:'Votre espace <strong style="color:#c8a44e">' + safeName + '</strong> est prêt !', sub2:'Connectez-vous à votre tableau de bord pour personnaliser votre menu.', lid:'Identifiant (ID restaurant)', lpwd:'Mot de passe', btn:'🔑 Accéder au tableau de bord', apkT:'Application serveur', apkS:'Téléchargez cette application pour que votre personnel puisse recevoir les commandes.', apkBtn:'📱 Télécharger l\'application serveur', trial:'⏱ Vous bénéficiez de <strong style="color:#c8a44e">7 jours d\'essai gratuit</strong> à partir de votre première connexion.', contact:'N\'hésitez pas à nous répondre si vous avez des questions.', ft:'GeNext · Menus digitaux pour cafés et restaurants' },
-    en: { sub:'Digital menus &amp; Orders', gr:'Hello,', intro:'Your space <strong style="color:#c8a44e">' + safeName + '</strong> is ready!', sub2:'Log in to your dashboard to customize your menu.', lid:'Restaurant ID', lpwd:'Password', btn:'🔑 Access dashboard', apkT:'Server application', apkS:'Download this app so your staff can receive orders.', apkBtn:'📱 Download server app', trial:'⏱ You have a <strong style="color:#c8a44e">7-day free trial</strong> starting from your first login.', contact:'Feel free to reply if you have any questions.', ft:'GeNext · Digital menus for cafés and restaurants' },
-    el: { sub:'Ψηφιακά μενού &amp; Παραγγελίες', gr:'Γεια σας,', intro:'Ο χώρος σας <strong style="color:#c8a44e">' + safeName + '</strong> είναι έτοιμος!', sub2:'Συνδεθείτε στον πίνακα ελέγχου για να προσαρμόσετε το μενού σας.', lid:'Αναγνωριστικό εστιατορίου', lpwd:'Κωδικός', btn:'🔑 Πρόσβαση στον πίνακα ελέγχου', apkT:'Εφαρμογή σερβιτόρων', apkS:'Κατεβάστε αυτή την εφαρμογή για να λαμβάνει παραγγελίες το προσωπικό σας.', apkBtn:'📱 Λήψη εφαρμογής', trial:'⏱ Έχετε <strong style="color:#c8a44e">7 ημέρες δωρεάν δοκιμή</strong> από την πρώτη σύνδεσή σας.', contact:'Μη διστάσετε να μας απαντήσετε αν έχετε ερωτήσεις.', ft:'GeNext · Ψηφιακά μενού για καφέ και εστιατόρια' },
-    es: { sub:'Menús digitales &amp; Pedidos', gr:'¡Hola,', intro:'Su espacio <strong style="color:#c8a44e">' + safeName + '</strong> ¡está listo!', sub2:'Acceda a su panel de control para personalizar su menú.', lid:'Identificador (ID restaurante)', lpwd:'Contraseña', btn:'🔑 Acceder al panel de control', apkT:'Aplicación de camareros', apkS:'Descargue esta aplicación para que su personal pueda recibir pedidos.', apkBtn:'📱 Descargar aplicación', trial:'⏱ Dispone de <strong style="color:#c8a44e">7 días de prueba gratuita</strong> a partir de su primer inicio de sesión.', contact:'No dude en respondernos si tiene alguna pregunta.', ft:'GeNext · Menús digitales para cafés y restaurantes' },
-    de: { sub:'Digitale Speisekarten &amp; Bestellungen', gr:'Hallo,', intro:'Ihr Bereich <strong style="color:#c8a44e">' + safeName + '</strong> ist bereit!', sub2:'Melden Sie sich in Ihrem Dashboard an, um Ihre Speisekarte anzupassen.', lid:'Restaurant-ID', lpwd:'Passwort', btn:'🔑 Dashboard aufrufen', apkT:'Server-App', apkS:'Lassen Sie Ihr Personal diese App herunterladen, um Bestellungen zu erhalten.', apkBtn:'📱 Server-App herunterladen', trial:'⏱ Sie haben eine <strong style="color:#c8a44e">7-tägige kostenlose Testphase</strong> ab Ihrer ersten Anmeldung.', contact:'Antworten Sie auf diese E-Mail, wenn Sie Fragen haben.', ft:'GeNext · Digitale Speisekarten für Cafés und Restaurants' }
+    fr: { sub:'Menus digitaux &amp; Commandes', gr:'Bonjour,', intro:'Votre espace <strong style="color:#c8a44e">' + safeName + '</strong> est prêt !', sub2:'Connectez-vous à votre tableau de bord pour personnaliser votre menu.', lid:'Identifiant (ID restaurant)', lpwd:'Mot de passe', btn:'🔑 Accéder au tableau de bord', apkT:'Application serveur', apkS:'Téléchargez cette application pour que votre personnel puisse recevoir les commandes.', apkBtn:'📱 Télécharger l\'application serveur',
+      payTitle:'💶 Frais de création',
+      payBody:'<strong style="color:#c8a44e">' + cf + ' €</strong> (paiement unique) — à régler dans les <strong>7 premiers jours</strong> suivant votre <strong>première connexion</strong> au tableau de bord.',
+      payMethods:'💳 <strong>Virement bancaire :</strong> <a href="' + REVOLUT_URL + '" style="color:#c8a44e">' + REVOLUT_URL + '</a><br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Indiquez votre <strong>ID restaurant (' + escHtml(rid) + ')</strong> dans le libellé du virement.</span><br>'
+        + '💵 <strong>Espèces (Athènes) :</strong> contactez-nous par WhatsApp / email avec votre ID pour convenir d\'un rendez-vous.',
+      contact:'N\'hésitez pas à nous répondre si vous avez des questions.', ft:'GeNext · Menus digitaux pour cafés et restaurants' },
+    en: { sub:'Digital menus &amp; Orders', gr:'Hello,', intro:'Your space <strong style="color:#c8a44e">' + safeName + '</strong> is ready!', sub2:'Log in to your dashboard to customize your menu.', lid:'Restaurant ID', lpwd:'Password', btn:'🔑 Access dashboard', apkT:'Server application', apkS:'Download this app so your staff can receive orders.', apkBtn:'📱 Download server app',
+      payTitle:'💶 Creation fee',
+      payBody:'<strong style="color:#c8a44e">' + cf + ' €</strong> (one-time) — due within the <strong>first 7 days</strong> after your <strong>first login</strong> to the dashboard.',
+      payMethods:'💳 <strong>Bank transfer:</strong> <a href="' + REVOLUT_URL + '" style="color:#c8a44e">' + REVOLUT_URL + '</a><br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Include your <strong>restaurant ID (' + escHtml(rid) + ')</strong> in the transfer reference.</span><br>'
+        + '💵 <strong>Cash (Athens):</strong> contact us via WhatsApp / email with your ID to arrange a meeting.',
+      contact:'Feel free to reply if you have any questions.', ft:'GeNext · Digital menus for cafés and restaurants' },
+    el: { sub:'Ψηφιακά μενού &amp; Παραγγελίες', gr:'Γεια σας,', intro:'Ο χώρος σας <strong style="color:#c8a44e">' + safeName + '</strong> είναι έτοιμος!', sub2:'Συνδεθείτε στον πίνακα ελέγχου για να προσαρμόσετε το μενού σας.', lid:'Αναγνωριστικό εστιατορίου', lpwd:'Κωδικός', btn:'🔑 Πρόσβαση στον πίνακα ελέγχου', apkT:'Εφαρμογή σερβιτόρων', apkS:'Κατεβάστε αυτή την εφαρμογή για να λαμβάνει παραγγελίες το προσωπικό σας.', apkBtn:'📱 Λήψη εφαρμογής',
+      payTitle:'💶 Έξοδα δημιουργίας',
+      payBody:'<strong style="color:#c8a44e">' + cf + ' €</strong> (εφάπαξ) — καταβάλλονται εντός των <strong>πρώτων 7 ημερών</strong> από την <strong>πρώτη σύνδεσή σας</strong> στον πίνακα ελέγχου.',
+      payMethods:'💳 <strong>Τραπεζικό έμβασμα:</strong> <a href="' + REVOLUT_URL + '" style="color:#c8a44e">' + REVOLUT_URL + '</a><br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Αναφέρετε το <strong>ID εστιατορίου (' + escHtml(rid) + ')</strong> στην αιτιολογία εμβάσματος.</span><br>'
+        + '💵 <strong>Μετρητά (Αθήνα):</strong> επικοινωνήστε μαζί μας μέσω WhatsApp / email με το ID σας για ραντεβού.',
+      contact:'Μη διστάσετε να μας απαντήσετε αν έχετε ερωτήσεις.', ft:'GeNext · Ψηφιακά μενού για καφέ και εστιατόρια' },
+    es: { sub:'Menús digitales &amp; Pedidos', gr:'¡Hola,', intro:'Su espacio <strong style="color:#c8a44e">' + safeName + '</strong> ¡está listo!', sub2:'Acceda a su panel de control para personalizar su menú.', lid:'Identificador (ID restaurante)', lpwd:'Contraseña', btn:'🔑 Acceder al panel de control', apkT:'Aplicación de camareros', apkS:'Descargue esta aplicación para que su personal pueda recibir pedidos.', apkBtn:'📱 Descargar aplicación',
+      payTitle:'💶 Tarifa de creación',
+      payBody:'<strong style="color:#c8a44e">' + cf + ' €</strong> (pago único) — a abonar en los <strong>primeros 7 días</strong> tras su <strong>primer inicio de sesión</strong> en el panel de control.',
+      payMethods:'💳 <strong>Transferencia bancaria:</strong> <a href="' + REVOLUT_URL + '" style="color:#c8a44e">' + REVOLUT_URL + '</a><br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Indique su <strong>ID de restaurante (' + escHtml(rid) + ')</strong> en el concepto de la transferencia.</span><br>'
+        + '💵 <strong>Efectivo (Atenas):</strong> contáctenos por WhatsApp / email con su ID para concertar una cita.',
+      contact:'No dude en respondernos si tiene alguna pregunta.', ft:'GeNext · Menús digitales para cafés y restaurantes' },
+    de: { sub:'Digitale Speisekarten &amp; Bestellungen', gr:'Hallo,', intro:'Ihr Bereich <strong style="color:#c8a44e">' + safeName + '</strong> ist bereit!', sub2:'Melden Sie sich in Ihrem Dashboard an, um Ihre Speisekarte anzupassen.', lid:'Restaurant-ID', lpwd:'Passwort', btn:'🔑 Dashboard aufrufen', apkT:'Server-App', apkS:'Lassen Sie Ihr Personal diese App herunterladen, um Bestellungen zu erhalten.', apkBtn:'📱 Server-App herunterladen',
+      payTitle:'💶 Erstellungsgebühr',
+      payBody:'<strong style="color:#c8a44e">' + cf + ' €</strong> (einmalig) — innerhalb der <strong>ersten 7 Tage</strong> nach Ihrer <strong>ersten Anmeldung</strong> im Dashboard zu zahlen.',
+      payMethods:'💳 <strong>Banküberweisung:</strong> <a href="' + REVOLUT_URL + '" style="color:#c8a44e">' + REVOLUT_URL + '</a><br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Geben Sie Ihre <strong>Restaurant-ID (' + escHtml(rid) + ')</strong> im Verwendungszweck an.</span><br>'
+        + '💵 <strong>Barzahlung (Athen):</strong> kontaktieren Sie uns per WhatsApp / E-Mail mit Ihrer ID für einen Termin.',
+      contact:'Antworten Sie auf diese E-Mail, wenn Sie Fragen haben.', ft:'GeNext · Digitale Speisekarten für Cafés und Restaurants' }
   };
   const t = T[lang] || T.fr;
   const dir = t.rtl ? ' dir="rtl"' : '';
@@ -207,8 +235,13 @@ function deliveryHtml(name, rid, pwd, isCS, lang) {
     + '<p style="margin:0 0 12px;color:#6b5a3a;font-size:0.85rem">' + t.apkS + '</p>'
     + '<table width="100%" cellpadding="0" cellspacing="0"><tr><td align="center"><a href="' + APK_URL + '" style="display:inline-block;background-color:#2a5ab8;color:#fff;text-decoration:none;padding:11px 22px;border-radius:10px;font-weight:700;font-size:0.88rem">' + t.apkBtn + '</a></td></tr></table>'
     + '</td></tr></table>' : '')
-    + '<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#fdf9f2" style="background-color:#fdf9f2;border:1px solid #e8dfc8;border-left:3px solid #c8a44e;border-radius:0 8px 8px 0;margin-bottom:20px">'
-    + '<tr><td bgcolor="#fdf9f2" style="background-color:#fdf9f2;padding:12px 16px;font-size:0.88rem;color:#2a1f10;line-height:1.6">' + t.trial + '</td></tr></table>'
+    + '<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#fdf9f2" style="background-color:#fdf9f2;border:1px solid #e8dfc8;border-left:3px solid #c8a44e;border-radius:0 8px 8px 0;margin-bottom:8px">'
+    + '<tr><td bgcolor="#fdf9f2" style="background-color:#fdf9f2;padding:12px 16px">'
+    + '<p style="margin:0 0 4px;font-weight:700;color:#2a1f10;font-size:0.9rem">' + t.payTitle + '</p>'
+    + '<p style="margin:0;font-size:0.88rem;color:#2a1f10;line-height:1.6">' + t.payBody + '</p>'
+    + '</td></tr></table>'
+    + '<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#f8f4ec" style="background-color:#f8f4ec;border:1px solid #e8dfc8;border-radius:0 8px 8px 0;margin-bottom:20px">'
+    + '<tr><td bgcolor="#f8f4ec" style="background-color:#f8f4ec;padding:12px 16px;font-size:0.85rem;color:#2a1f10;line-height:1.8">' + t.payMethods + '</td></tr></table>'
     + '<p style="color:#9a8060;font-size:0.83rem;line-height:1.6;margin:0">' + t.contact + '</p>'
     + '</td></tr>'
     + '<tr><td bgcolor="#f2ece0" align="center" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="background-color:#f2ece0;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center;padding:14px 32px;border-top:1px solid #ead9b8">'
@@ -284,7 +317,7 @@ async function autoCreateRestaurant(restaurant, forfaitType, paymentMode, email,
     });
   }
 
-  return { rid, pwd, isCS };
+  return { rid, pwd, isCS, creationFee };
 }
 
 // ── Handler principal ────────────────────────────────────────────────────────
@@ -357,7 +390,7 @@ module.exports = async (req, res) => {
           replyTo: process.env.GMAIL_USER,
           to:      email,
           subject: deliverySubject(rest, lang),
-          html:    deliveryHtml(rest, created.rid, created.pwd, created.isCS, lang),
+          html:    deliveryHtml(rest, created.rid, created.pwd, created.isCS, lang, created.creationFee),
           text:    rest + '\nID: ' + created.rid + '\nMot de passe: ' + created.pwd + '\n\nGeNext — gennextcontact@gmail.com',
           headers: { 'List-Unsubscribe': '<mailto:' + process.env.GMAIL_USER + '?subject=unsubscribe>' },
           attachments: [LOGO_ATTACHMENT]

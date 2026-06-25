@@ -118,41 +118,41 @@ const PAY_INFO = {
     trial: '🎁 <strong style="color:#c8a44e">1 mois d\'essai</strong> offert dès votre première connexion.<br>'
       + '· <strong>Frais de création</strong> (paiement unique) : à régler dans les <strong>7 premiers jours</strong>.<br>'
       + '· <strong>Abonnement</strong> (mensuel ou annuel) : démarre à partir du 2ème mois, selon la formule choisie. Changement de formule libre pendant le mois d\'essai.',
-    methods: '💳 <strong>Revolut :</strong> <a href="' + REVOLUT_URL + '" style="color:#c8a44e">' + REVOLUT_URL + '</a><br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Indiquez votre <strong>ID restaurant</strong> dans les détails de la transaction.</span><br>'
+    methods: '💳 <strong>Virement bancaire :</strong> <a href="' + REVOLUT_URL + '" style="color:#c8a44e">' + REVOLUT_URL + '</a><br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Indiquez votre <strong>ID restaurant</strong> dans les détails de la transaction.</span><br>'
       + '💵 <strong>Espèces (Athènes) :</strong> contactez-nous par WhatsApp / email avec votre ID pour convenir d\'un rendez-vous.<br>'
-      + '<span style="font-size:0.82em;color:#6b5a3a">Envoyez la preuve de paiement (capture Revolut ou photo) par email ou WhatsApp avec votre ID.</span>'
+      + '<span style="font-size:0.82em;color:#6b5a3a">Envoyez la preuve de paiement (justificatif de paiement par email ou WhatsApp avec votre ID.</span>'
   },
   en: {
     trial: '🎁 <strong style="color:#c8a44e">1-month free trial</strong> from your first login.<br>'
       + '· <strong>Creation fee</strong> (one-time): due within the <strong>first 7 days</strong>.<br>'
       + '· <strong>Subscription</strong> (monthly or annual): starts from the 2nd month, based on the plan chosen. You can freely change your plan during the trial month.',
-    methods: '💳 <strong>Revolut:</strong> <a href="' + REVOLUT_URL + '" style="color:#c8a44e">' + REVOLUT_URL + '</a><br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Include your <strong>restaurant ID</strong> in the transaction details.</span><br>'
+    methods: '💳 <strong>Bank transfer:</strong> <a href="' + REVOLUT_URL + '" style="color:#c8a44e">' + REVOLUT_URL + '</a><br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Include your <strong>restaurant ID</strong> in the transaction details.</span><br>'
       + '💵 <strong>Cash (Athens):</strong> contact us via WhatsApp / email with your ID to arrange a meeting.<br>'
-      + '<span style="font-size:0.82em;color:#6b5a3a">Send payment proof (Revolut screenshot or photo) by email or WhatsApp with your ID.</span>'
+      + '<span style="font-size:0.82em;color:#6b5a3a">Send payment proof (screenshot or photo) by email or WhatsApp with your ID.</span>'
   },
   el: {
     trial: '🎁 <strong style="color:#c8a44e">1 μήνας δωρεάν δοκιμή</strong> από την πρώτη σύνδεσή σας.<br>'
       + '· <strong>Έξοδα δημιουργίας</strong> (εφάπαξ): καταβάλλονται εντός των πρώτων <strong>7 ημερών</strong>.<br>'
       + '· <strong>Συνδρομή</strong> (μηνιαία ή ετήσια): ξεκινά από τον 2ο μήνα, βάσει του πλάνου που θα επιλέξετε. Ελεύθερη αλλαγή πλάνου κατά τον μήνα δοκιμής.',
-    methods: '💳 <strong>Revolut:</strong> <a href="' + REVOLUT_URL + '" style="color:#c8a44e">' + REVOLUT_URL + '</a><br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Αναφέρετε το <strong>ID εστιατορίου</strong> στις λεπτομέρειες συναλλαγής.</span><br>'
+    methods: '💳 <strong>Τραπεζικό έμβασμα:</strong> <a href="' + REVOLUT_URL + '" style="color:#c8a44e">' + REVOLUT_URL + '</a><br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Αναφέρετε το <strong>ID εστιατορίου</strong> στις λεπτομέρειες συναλλαγής.</span><br>'
       + '💵 <strong>Μετρητά (Αθήνα):</strong> επικοινωνήστε μαζί μας μέσω WhatsApp / email με το ID σας για ραντεβού.<br>'
-      + '<span style="font-size:0.82em;color:#6b5a3a">Στείλτε απόδειξη πληρωμής (στιγμιότυπο Revolut ή φωτογραφία) μέσω email ή WhatsApp με το ID σας.</span>'
+      + '<span style="font-size:0.82em;color:#6b5a3a">Στείλτε απόδειξη πληρωμής (αποδεικτικό εμβάσματος ή φωτογραφία) μέσω email ή WhatsApp με το ID σας.</span>'
   },
   es: {
     trial: '🎁 <strong style="color:#c8a44e">1 mes de prueba gratuita</strong> desde su primer inicio de sesión.<br>'
       + '· <strong>Tarifa de creación</strong> (pago único): a abonar en los <strong>primeros 7 días</strong>.<br>'
       + '· <strong>Suscripción</strong> (mensual o anual): comienza a partir del 2º mes, según el plan elegido. Cambio de plan libre durante el mes de prueba.',
-    methods: '💳 <strong>Revolut:</strong> <a href="' + REVOLUT_URL + '" style="color:#c8a44e">' + REVOLUT_URL + '</a><br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Indique su <strong>ID de restaurante</strong> en los detalles de la transacción.</span><br>'
+    methods: '💳 <strong>Transferencia bancaria:</strong> <a href="' + REVOLUT_URL + '" style="color:#c8a44e">' + REVOLUT_URL + '</a><br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Indique su <strong>ID de restaurante</strong> en el concepto de la transferencia.</span><br>'
       + '💵 <strong>Efectivo (Atenas):</strong> contáctenos por WhatsApp / email con su ID para concertar una cita.<br>'
-      + '<span style="font-size:0.82em;color:#6b5a3a">Envíe el comprobante de pago (captura Revolut o foto) por email o WhatsApp con su ID.</span>'
+      + '<span style="font-size:0.82em;color:#6b5a3a">Envíe el comprobante de transferencia o foto por email o WhatsApp con su ID.</span>'
   },
   de: {
     trial: '🎁 <strong style="color:#c8a44e">1 Monat kostenlose Testphase</strong> ab Ihrer ersten Anmeldung.<br>'
       + '· <strong>Erstellungsgebühr</strong> (einmalig): innerhalb der ersten <strong>7 Tage</strong> zu zahlen.<br>'
       + '· <strong>Abonnement</strong> (monatlich oder jährlich): beginnt ab dem 2. Monat, je nach gewähltem Plan. Planwechsel während des Testmonats frei möglich.',
-    methods: '💳 <strong>Revolut:</strong> <a href="' + REVOLUT_URL + '" style="color:#c8a44e">' + REVOLUT_URL + '</a><br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Geben Sie Ihre <strong>Restaurant-ID</strong> in den Transaktionsdetails an.</span><br>'
+    methods: '💳 <strong>Banküberweisung:</strong> <a href="' + REVOLUT_URL + '" style="color:#c8a44e">' + REVOLUT_URL + '</a><br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Geben Sie Ihre <strong>Restaurant-ID</strong> im Verwendungszweck an.</span><br>'
       + '💵 <strong>Barzahlung (Athen):</strong> kontaktieren Sie uns per WhatsApp / E-Mail mit Ihrer ID für einen Termin.<br>'
-      + '<span style="font-size:0.82em;color:#6b5a3a">Senden Sie den Zahlungsnachweis (Revolut-Screenshot oder Foto) per E-Mail oder WhatsApp mit Ihrer ID.</span>'
+      + '<span style="font-size:0.82em;color:#6b5a3a">Senden Sie den Überweisungsbeleg oder ein Foto per E-Mail oder WhatsApp mit Ihrer ID.</span>'
   }
 };
 
@@ -623,7 +623,7 @@ module.exports = async (req, res) => {
           headers: { 'List-Unsubscribe': '<mailto:' + process.env.GMAIL_USER + '?subject=unsubscribe>' },
           subject,
           html:    reminderHtml(d.restaurant || '', price + ' €', mode, dateStr, lang),
-          text:    (isCreation ? 'Frais de création GeNext' : 'Rappel paiement GeNext') + '\n\n' + (d.restaurant || '') + '\n' + mode + '\nMontant : ' + price + ' €\nÉchéance : ' + dateStr + '\n\nRevolut : ' + REVOLUT_URL + ' (indiquez votre ID) · Espèces Athènes.\n\nGeNext — ' + process.env.GMAIL_USER,
+          text:    (isCreation ? 'Frais de création GeNext' : 'Rappel paiement GeNext') + '\n\n' + (d.restaurant || '') + '\n' + mode + '\nMontant : ' + price + ' €\nÉchéance : ' + dateStr + '\n\nVirement bancaire : ' + REVOLUT_URL + ' (indiquez votre ID) · Espèces Athènes.\n\nGeNext — ' + process.env.GMAIL_USER,
           attachments: [LOGO_ATTACHMENT]
         });
         await fbPatch(CONTROL_DB, '/commandes/' + key, secret, { lastReminderSent: now });
@@ -669,7 +669,7 @@ module.exports = async (req, res) => {
                 to:      d.email,
                 subject: suspensionSubject(d.restaurant || '', lang4),
                 html:    suspensionHtml(d.restaurant || '', price4 + ' €', mode4, lang4),
-                text:    'Compte GeNext suspendu\n\n' + (d.restaurant || '') + '\nMontant dû : ' + price4 + ' €\n\nPour réactiver : Revolut ' + REVOLUT_URL + ' (indiquez votre ID) · Espèces Athènes.\n\nGeNext — ' + process.env.GMAIL_USER,
+                text:    'Compte GeNext suspendu\n\n' + (d.restaurant || '') + '\nMontant dû : ' + price4 + ' €\n\nPour réactiver : Virement bancaire ' + REVOLUT_URL + ' (indiquez votre ID) · Espèces Athènes.\n\nGeNext — ' + process.env.GMAIL_USER,
                 attachments: [LOGO_ATTACHMENT]
               });
               console.log('📧 Email suspension envoyé à ' + d.email);
