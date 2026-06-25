@@ -168,8 +168,6 @@ function deliverySubject(name, lang) {
   return S[lang] || S.fr;
 }
 
-const REVOLUT_URL = 'https://revolut.me/malekhkk7';
-
 function deliveryHtml(name, rid, pwd, isCS, lang, creationFee) {
   const safeName = escHtml(name);
   const cf = creationFee != null ? creationFee : 149;
@@ -177,32 +175,32 @@ function deliveryHtml(name, rid, pwd, isCS, lang, creationFee) {
     fr: { sub:'Menus digitaux &amp; Commandes', gr:'Bonjour,', intro:'Votre espace <strong style="color:#c8a44e">' + safeName + '</strong> est prêt !', sub2:'Connectez-vous à votre tableau de bord pour personnaliser votre menu.', lid:'Identifiant (ID restaurant)', lpwd:'Mot de passe', btn:'🔑 Accéder au tableau de bord', apkT:'Application serveur', apkS:'Téléchargez cette application pour que votre personnel puisse recevoir les commandes.', apkBtn:'📱 Télécharger l\'application serveur',
       payTitle:'💶 Frais de création',
       payBody:'<strong style="color:#c8a44e">' + cf + ' €</strong> (paiement unique) — à régler dans les <strong>7 premiers jours</strong> suivant votre <strong>première connexion</strong> au tableau de bord.',
-      payMethods:'💳 <strong>Virement bancaire :</strong> <a href="' + REVOLUT_URL + '" style="color:#c8a44e">' + REVOLUT_URL + '</a><br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Indiquez votre <strong>ID restaurant (' + escHtml(rid) + ')</strong> dans le libellé du virement.</span><br>'
-        + '💵 <strong>Espèces (Athènes) :</strong> contactez-nous par WhatsApp / email avec votre ID pour convenir d\'un rendez-vous.',
+      payMethods:'💳 <strong>Virement bancaire :</strong> IBAN <strong>LT37 3250 0708 2924 4591</strong> — BIC : REVOLT21 — Titulaire : Malek Jalel<br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Indiquez votre <strong>ID restaurant (' + escHtml(rid) + ')</strong> dans le libellé du virement.</span><br>'
+        + '💵 <strong>Espèces :</strong> contactez-nous par WhatsApp / email avec votre ID pour convenir d\'un rendez-vous.',
       contact:'N\'hésitez pas à nous répondre si vous avez des questions.', ft:'GeNext · Menus digitaux pour cafés et restaurants' },
     en: { sub:'Digital menus &amp; Orders', gr:'Hello,', intro:'Your space <strong style="color:#c8a44e">' + safeName + '</strong> is ready!', sub2:'Log in to your dashboard to customize your menu.', lid:'Restaurant ID', lpwd:'Password', btn:'🔑 Access dashboard', apkT:'Server application', apkS:'Download this app so your staff can receive orders.', apkBtn:'📱 Download server app',
       payTitle:'💶 Creation fee',
       payBody:'<strong style="color:#c8a44e">' + cf + ' €</strong> (one-time) — due within the <strong>first 7 days</strong> after your <strong>first login</strong> to the dashboard.',
-      payMethods:'💳 <strong>Bank transfer:</strong> <a href="' + REVOLUT_URL + '" style="color:#c8a44e">' + REVOLUT_URL + '</a><br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Include your <strong>restaurant ID (' + escHtml(rid) + ')</strong> in the transfer reference.</span><br>'
-        + '💵 <strong>Cash (Athens):</strong> contact us via WhatsApp / email with your ID to arrange a meeting.',
+      payMethods:'💳 <strong>Bank transfer:</strong> IBAN <strong>LT37 3250 0708 2924 4591</strong> — BIC: REVOLT21 — Holder: Malek Jalel<br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Include your <strong>restaurant ID (' + escHtml(rid) + ')</strong> in the transfer reference.</span><br>'
+        + '💵 <strong>Cash:</strong> contact us via WhatsApp / email with your ID to arrange a meeting.',
       contact:'Feel free to reply if you have any questions.', ft:'GeNext · Digital menus for cafés and restaurants' },
     el: { sub:'Ψηφιακά μενού &amp; Παραγγελίες', gr:'Γεια σας,', intro:'Ο χώρος σας <strong style="color:#c8a44e">' + safeName + '</strong> είναι έτοιμος!', sub2:'Συνδεθείτε στον πίνακα ελέγχου για να προσαρμόσετε το μενού σας.', lid:'Αναγνωριστικό εστιατορίου', lpwd:'Κωδικός', btn:'🔑 Πρόσβαση στον πίνακα ελέγχου', apkT:'Εφαρμογή σερβιτόρων', apkS:'Κατεβάστε αυτή την εφαρμογή για να λαμβάνει παραγγελίες το προσωπικό σας.', apkBtn:'📱 Λήψη εφαρμογής',
       payTitle:'💶 Έξοδα δημιουργίας',
       payBody:'<strong style="color:#c8a44e">' + cf + ' €</strong> (εφάπαξ) — καταβάλλονται εντός των <strong>πρώτων 7 ημερών</strong> από την <strong>πρώτη σύνδεσή σας</strong> στον πίνακα ελέγχου.',
-      payMethods:'💳 <strong>Τραπεζικό έμβασμα:</strong> <a href="' + REVOLUT_URL + '" style="color:#c8a44e">' + REVOLUT_URL + '</a><br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Αναφέρετε το <strong>ID εστιατορίου (' + escHtml(rid) + ')</strong> στην αιτιολογία εμβάσματος.</span><br>'
-        + '💵 <strong>Μετρητά (Αθήνα):</strong> επικοινωνήστε μαζί μας μέσω WhatsApp / email με το ID σας για ραντεβού.',
+      payMethods:'💳 <strong>Τραπεζικό έμβασμα:</strong> IBAN <strong>LT37 3250 0708 2924 4591</strong> — BIC: REVOLT21 — Δικαιούχος: Malek Jalel<br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Αναφέρετε το <strong>ID εστιατορίου (' + escHtml(rid) + ')</strong> στην αιτιολογία εμβάσματος.</span><br>'
+        + '💵 <strong>Μετρητά:</strong> επικοινωνήστε μαζί μας μέσω WhatsApp / email με το ID σας για ραντεβού.',
       contact:'Μη διστάσετε να μας απαντήσετε αν έχετε ερωτήσεις.', ft:'GeNext · Ψηφιακά μενού για καφέ και εστιατόρια' },
     es: { sub:'Menús digitales &amp; Pedidos', gr:'¡Hola,', intro:'Su espacio <strong style="color:#c8a44e">' + safeName + '</strong> ¡está listo!', sub2:'Acceda a su panel de control para personalizar su menú.', lid:'Identificador (ID restaurante)', lpwd:'Contraseña', btn:'🔑 Acceder al panel de control', apkT:'Aplicación de camareros', apkS:'Descargue esta aplicación para que su personal pueda recibir pedidos.', apkBtn:'📱 Descargar aplicación',
       payTitle:'💶 Tarifa de creación',
       payBody:'<strong style="color:#c8a44e">' + cf + ' €</strong> (pago único) — a abonar en los <strong>primeros 7 días</strong> tras su <strong>primer inicio de sesión</strong> en el panel de control.',
-      payMethods:'💳 <strong>Transferencia bancaria:</strong> <a href="' + REVOLUT_URL + '" style="color:#c8a44e">' + REVOLUT_URL + '</a><br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Indique su <strong>ID de restaurante (' + escHtml(rid) + ')</strong> en el concepto de la transferencia.</span><br>'
-        + '💵 <strong>Efectivo (Atenas):</strong> contáctenos por WhatsApp / email con su ID para concertar una cita.',
+      payMethods:'💳 <strong>Transferencia bancaria:</strong> IBAN <strong>LT37 3250 0708 2924 4591</strong> — BIC: REVOLT21 — Titular: Malek Jalel<br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Indique su <strong>ID de restaurante (' + escHtml(rid) + ')</strong> en el concepto de la transferencia.</span><br>'
+        + '💵 <strong>Efectivo:</strong> contáctenos por WhatsApp / email con su ID para concertar una cita.',
       contact:'No dude en respondernos si tiene alguna pregunta.', ft:'GeNext · Menús digitales para cafés y restaurantes' },
     de: { sub:'Digitale Speisekarten &amp; Bestellungen', gr:'Hallo,', intro:'Ihr Bereich <strong style="color:#c8a44e">' + safeName + '</strong> ist bereit!', sub2:'Melden Sie sich in Ihrem Dashboard an, um Ihre Speisekarte anzupassen.', lid:'Restaurant-ID', lpwd:'Passwort', btn:'🔑 Dashboard aufrufen', apkT:'Server-App', apkS:'Lassen Sie Ihr Personal diese App herunterladen, um Bestellungen zu erhalten.', apkBtn:'📱 Server-App herunterladen',
       payTitle:'💶 Erstellungsgebühr',
       payBody:'<strong style="color:#c8a44e">' + cf + ' €</strong> (einmalig) — innerhalb der <strong>ersten 7 Tage</strong> nach Ihrer <strong>ersten Anmeldung</strong> im Dashboard zu zahlen.',
-      payMethods:'💳 <strong>Banküberweisung:</strong> <a href="' + REVOLUT_URL + '" style="color:#c8a44e">' + REVOLUT_URL + '</a><br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Geben Sie Ihre <strong>Restaurant-ID (' + escHtml(rid) + ')</strong> im Verwendungszweck an.</span><br>'
-        + '💵 <strong>Barzahlung (Athen):</strong> kontaktieren Sie uns per WhatsApp / E-Mail mit Ihrer ID für einen Termin.',
+      payMethods:'💳 <strong>Banküberweisung:</strong> IBAN <strong>LT37 3250 0708 2924 4591</strong> — BIC: REVOLT21 — Inhaber: Malek Jalel<br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Geben Sie Ihre <strong>Restaurant-ID (' + escHtml(rid) + ')</strong> als Verwendungszweck an.</span><br>'
+        + '💵 <strong>Barzahlung:</strong> kontaktieren Sie uns per WhatsApp / E-Mail mit Ihrer ID für einen Termin.',
       contact:'Antworten Sie auf diese E-Mail, wenn Sie Fragen haben.', ft:'GeNext · Digitale Speisekarten für Cafés und Restaurants' }
   };
   const t = T[lang] || T.fr;

@@ -110,7 +110,7 @@ const FORFAIT_LABEL = {
   de: { 'menu-qr': 'Menu QR Code', 'commandes-services': 'Bestellungen &amp; Services' }
 };
 
-const REVOLUT_URL = 'https://revolut.me/malekhkk7';
+const IBAN_INFO = 'IBAN LT37 3250 0708 2924 4591 — BIC : REVOLT21 — Titulaire : Malek Jalel';
 
 // ── Bloc paiement unifié (delivery + reminder) — 5 langues ──────────────────
 const PAY_INFO = {
@@ -118,41 +118,41 @@ const PAY_INFO = {
     trial: '🎁 <strong style="color:#c8a44e">1 mois d\'essai</strong> offert dès votre première connexion.<br>'
       + '· <strong>Frais de création</strong> (paiement unique) : à régler dans les <strong>7 premiers jours</strong>.<br>'
       + '· <strong>Abonnement</strong> (mensuel ou annuel) : démarre à partir du 2ème mois, selon la formule choisie. Changement de formule libre pendant le mois d\'essai.',
-    methods: '💳 <strong>Virement bancaire :</strong> <a href="' + REVOLUT_URL + '" style="color:#c8a44e">' + REVOLUT_URL + '</a><br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Indiquez votre <strong>ID restaurant</strong> dans les détails de la transaction.</span><br>'
-      + '💵 <strong>Espèces (Athènes) :</strong> contactez-nous par WhatsApp / email avec votre ID pour convenir d\'un rendez-vous.<br>'
-      + '<span style="font-size:0.82em;color:#6b5a3a">Envoyez la preuve de paiement (justificatif de paiement par email ou WhatsApp avec votre ID.</span>'
+    methods: '💳 <strong>Virement bancaire :</strong> IBAN <strong>LT37 3250 0708 2924 4591</strong> — BIC : REVOLT21 — Titulaire : Malek Jalel<br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Indiquez votre <strong>ID restaurant</strong> dans le libellé du virement.</span><br>'
+      + '💵 <strong>Espèces :</strong> contactez-nous par WhatsApp / email avec votre ID pour convenir d\'un rendez-vous.<br>'
+      + '<span style="font-size:0.82em;color:#6b5a3a">Envoyez la preuve de paiement par email ou WhatsApp avec votre ID.</span>'
   },
   en: {
     trial: '🎁 <strong style="color:#c8a44e">1-month free trial</strong> from your first login.<br>'
       + '· <strong>Creation fee</strong> (one-time): due within the <strong>first 7 days</strong>.<br>'
       + '· <strong>Subscription</strong> (monthly or annual): starts from the 2nd month, based on the plan chosen. You can freely change your plan during the trial month.',
-    methods: '💳 <strong>Bank transfer:</strong> <a href="' + REVOLUT_URL + '" style="color:#c8a44e">' + REVOLUT_URL + '</a><br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Include your <strong>restaurant ID</strong> in the transaction details.</span><br>'
-      + '💵 <strong>Cash (Athens):</strong> contact us via WhatsApp / email with your ID to arrange a meeting.<br>'
+    methods: '💳 <strong>Bank transfer:</strong> IBAN <strong>LT37 3250 0708 2924 4591</strong> — BIC: REVOLT21 — Holder: Malek Jalel<br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Include your <strong>restaurant ID</strong> in the transfer reference.</span><br>'
+      + '💵 <strong>Cash:</strong> contact us via WhatsApp / email with your ID to arrange a meeting.<br>'
       + '<span style="font-size:0.82em;color:#6b5a3a">Send payment proof (screenshot or photo) by email or WhatsApp with your ID.</span>'
   },
   el: {
     trial: '🎁 <strong style="color:#c8a44e">1 μήνας δωρεάν δοκιμή</strong> από την πρώτη σύνδεσή σας.<br>'
       + '· <strong>Έξοδα δημιουργίας</strong> (εφάπαξ): καταβάλλονται εντός των πρώτων <strong>7 ημερών</strong>.<br>'
       + '· <strong>Συνδρομή</strong> (μηνιαία ή ετήσια): ξεκινά από τον 2ο μήνα, βάσει του πλάνου που θα επιλέξετε. Ελεύθερη αλλαγή πλάνου κατά τον μήνα δοκιμής.',
-    methods: '💳 <strong>Τραπεζικό έμβασμα:</strong> <a href="' + REVOLUT_URL + '" style="color:#c8a44e">' + REVOLUT_URL + '</a><br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Αναφέρετε το <strong>ID εστιατορίου</strong> στις λεπτομέρειες συναλλαγής.</span><br>'
-      + '💵 <strong>Μετρητά (Αθήνα):</strong> επικοινωνήστε μαζί μας μέσω WhatsApp / email με το ID σας για ραντεβού.<br>'
-      + '<span style="font-size:0.82em;color:#6b5a3a">Στείλτε απόδειξη πληρωμής (αποδεικτικό εμβάσματος ή φωτογραφία) μέσω email ή WhatsApp με το ID σας.</span>'
+    methods: '💳 <strong>Τραπεζικό έμβασμα:</strong> IBAN <strong>LT37 3250 0708 2924 4591</strong> — BIC: REVOLT21 — Δικαιούχος: Malek Jalel<br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Αναφέρετε το <strong>ID εστιατορίου</strong> στην αιτιολογία εμβάσματος.</span><br>'
+      + '💵 <strong>Μετρητά:</strong> επικοινωνήστε μαζί μας μέσω WhatsApp / email με το ID σας για ραντεβού.<br>'
+      + '<span style="font-size:0.82em;color:#6b5a3a">Στείλτε απόδειξη πληρωμής μέσω email ή WhatsApp με το ID σας.</span>'
   },
   es: {
     trial: '🎁 <strong style="color:#c8a44e">1 mes de prueba gratuita</strong> desde su primer inicio de sesión.<br>'
       + '· <strong>Tarifa de creación</strong> (pago único): a abonar en los <strong>primeros 7 días</strong>.<br>'
       + '· <strong>Suscripción</strong> (mensual o anual): comienza a partir del 2º mes, según el plan elegido. Cambio de plan libre durante el mes de prueba.',
-    methods: '💳 <strong>Transferencia bancaria:</strong> <a href="' + REVOLUT_URL + '" style="color:#c8a44e">' + REVOLUT_URL + '</a><br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Indique su <strong>ID de restaurante</strong> en el concepto de la transferencia.</span><br>'
-      + '💵 <strong>Efectivo (Atenas):</strong> contáctenos por WhatsApp / email con su ID para concertar una cita.<br>'
-      + '<span style="font-size:0.82em;color:#6b5a3a">Envíe el comprobante de transferencia o foto por email o WhatsApp con su ID.</span>'
+    methods: '💳 <strong>Transferencia bancaria:</strong> IBAN <strong>LT37 3250 0708 2924 4591</strong> — BIC: REVOLT21 — Titular: Malek Jalel<br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Indique su <strong>ID de restaurante</strong> en el concepto de la transferencia.</span><br>'
+      + '💵 <strong>Efectivo:</strong> contáctenos por WhatsApp / email con su ID para concertar una cita.<br>'
+      + '<span style="font-size:0.82em;color:#6b5a3a">Envíe el comprobante por email o WhatsApp con su ID.</span>'
   },
   de: {
     trial: '🎁 <strong style="color:#c8a44e">1 Monat kostenlose Testphase</strong> ab Ihrer ersten Anmeldung.<br>'
       + '· <strong>Erstellungsgebühr</strong> (einmalig): innerhalb der ersten <strong>7 Tage</strong> zu zahlen.<br>'
       + '· <strong>Abonnement</strong> (monatlich oder jährlich): beginnt ab dem 2. Monat, je nach gewähltem Plan. Planwechsel während des Testmonats frei möglich.',
-    methods: '💳 <strong>Banküberweisung:</strong> <a href="' + REVOLUT_URL + '" style="color:#c8a44e">' + REVOLUT_URL + '</a><br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Geben Sie Ihre <strong>Restaurant-ID</strong> im Verwendungszweck an.</span><br>'
-      + '💵 <strong>Barzahlung (Athen):</strong> kontaktieren Sie uns per WhatsApp / E-Mail mit Ihrer ID für einen Termin.<br>'
-      + '<span style="font-size:0.82em;color:#6b5a3a">Senden Sie den Überweisungsbeleg oder ein Foto per E-Mail oder WhatsApp mit Ihrer ID.</span>'
+    methods: '💳 <strong>Banküberweisung:</strong> IBAN <strong>LT37 3250 0708 2924 4591</strong> — BIC: REVOLT21 — Inhaber: Malek Jalel<br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Geben Sie Ihre <strong>Restaurant-ID</strong> als Verwendungszweck an.</span><br>'
+      + '💵 <strong>Barzahlung:</strong> kontaktieren Sie uns per WhatsApp / E-Mail mit Ihrer ID für einen Termin.<br>'
+      + '<span style="font-size:0.82em;color:#6b5a3a">Senden Sie den Zahlungsnachweis per E-Mail oder WhatsApp mit Ihrer ID.</span>'
   }
 };
 
@@ -582,7 +582,7 @@ module.exports = async (req, res) => {
           headers: { 'List-Unsubscribe': '<mailto:' + process.env.GMAIL_USER + '?subject=unsubscribe>' },
           subject: deliverySubject(ed.name || d.restaurant || '', lang),
           html:    deliveryHtml(ed.name || d.restaurant || '', ed.rid, ed.pwd, isCS, lang, subDetails),
-          text:    (ed.name || d.restaurant || '') + ' — Accès GeNext\n\nVotre espace est prêt.\nIdentifiant : ' + ed.rid + '\nMot de passe : ' + ed.pwd + '\nForfait : ' + forfait + ' · ' + (isAnn ? 'Annuel' : 'Mensuel') + ' · ' + priceStr + '\n\nAccéder : ' + ADMIN_URL + '\n\n1 mois d\'essai à partir de la première connexion.\n- Frais de création (unique, ' + creationFee + ' €) : à régler dans les 7 premiers jours.\n- Abonnement (' + priceStr + ') : démarre au 2ème mois selon formule choisie.\n\nPaiement :\n💳 Revolut : ' + REVOLUT_URL + '\n   ⚠️ Indiquez votre ID restaurant dans les détails de la transaction.\n💵 Espèces (Athènes) : contactez-nous par email / WhatsApp avec votre ID.\n\nGeNext — ' + process.env.GMAIL_USER,
+          text:    (ed.name || d.restaurant || '') + ' — Accès GeNext\n\nVotre espace est prêt.\nIdentifiant : ' + ed.rid + '\nMot de passe : ' + ed.pwd + '\nForfait : ' + forfait + ' · ' + (isAnn ? 'Annuel' : 'Mensuel') + ' · ' + priceStr + '\n\nAccéder : ' + ADMIN_URL + '\n\n1 mois d\'essai à partir de la première connexion.\n- Frais de création (unique, ' + creationFee + ' €) : à régler dans les 7 premiers jours.\n- Abonnement (' + priceStr + ') : démarre au 2ème mois selon formule choisie.\n\nPaiement :\n💳 Virement bancaire : IBAN LT37 3250 0708 2924 4591 — BIC : REVOLT21 — Titulaire : Malek Jalel\n   ⚠️ Indiquez votre ID restaurant dans le libellé du virement.\n💵 Espèces : contactez-nous par email / WhatsApp avec votre ID.\n\nGeNext — ' + process.env.GMAIL_USER,
           attachments: [LOGO_ATTACHMENT]
         });
         await fbPatch(CONTROL_DB, '/commandes/' + key, secret, { emailLivraisonSent: now });
@@ -623,7 +623,7 @@ module.exports = async (req, res) => {
           headers: { 'List-Unsubscribe': '<mailto:' + process.env.GMAIL_USER + '?subject=unsubscribe>' },
           subject,
           html:    reminderHtml(d.restaurant || '', price + ' €', mode, dateStr, lang),
-          text:    (isCreation ? 'Frais de création GeNext' : 'Rappel paiement GeNext') + '\n\n' + (d.restaurant || '') + '\n' + mode + '\nMontant : ' + price + ' €\nÉchéance : ' + dateStr + '\n\nVirement bancaire : ' + REVOLUT_URL + ' (indiquez votre ID) · Espèces Athènes.\n\nGeNext — ' + process.env.GMAIL_USER,
+          text:    (isCreation ? 'Frais de création GeNext' : 'Rappel paiement GeNext') + '\n\n' + (d.restaurant || '') + '\n' + mode + '\nMontant : ' + price + ' €\nÉchéance : ' + dateStr + '\n\nVirement bancaire : IBAN LT37 3250 0708 2924 4591 — BIC : REVOLT21 — Titulaire : Malek Jalel (indiquez votre ID dans le libellé) · Espèces.\n\nGeNext — ' + process.env.GMAIL_USER,
           attachments: [LOGO_ATTACHMENT]
         });
         await fbPatch(CONTROL_DB, '/commandes/' + key, secret, { lastReminderSent: now });
@@ -669,7 +669,7 @@ module.exports = async (req, res) => {
                 to:      d.email,
                 subject: suspensionSubject(d.restaurant || '', lang4),
                 html:    suspensionHtml(d.restaurant || '', price4 + ' €', mode4, lang4),
-                text:    'Compte GeNext suspendu\n\n' + (d.restaurant || '') + '\nMontant dû : ' + price4 + ' €\n\nPour réactiver : Virement bancaire ' + REVOLUT_URL + ' (indiquez votre ID) · Espèces Athènes.\n\nGeNext — ' + process.env.GMAIL_USER,
+                text:    'Compte GeNext suspendu\n\n' + (d.restaurant || '') + '\nMontant dû : ' + price4 + ' €\n\nPour réactiver : Virement bancaire IBAN LT37 3250 0708 2924 4591 — BIC : REVOLT21 — Titulaire : Malek Jalel (indiquez votre ID dans le libellé) · Espèces.\n\nGeNext — ' + process.env.GMAIL_USER,
                 attachments: [LOGO_ATTACHMENT]
               });
               console.log('📧 Email suspension envoyé à ' + d.email);

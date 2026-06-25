@@ -9,14 +9,12 @@ const nodemailer = require('nodemailer');
 
 const CONTROL_DB   = 'https://menu-pro-control-default-rtdb.europe-west1.firebasedatabase.app';
 const MAIN_DB      = 'https://menu-saas-platform-default-rtdb.europe-west1.firebasedatabase.app';
-const REVOLUT_URL  = 'https://revolut.me/malekhkk7';
-
 const PAY_METHODS_F = {
-  fr: '💳 Revolut : <a href="' + 'https://revolut.me/malekhkk7' + '" style="color:#c8a44e">revolut.me/malekhkk7</a> (mentionnez votre ID dans les détails) · 💵 Espèces (Athènes) · Preuve de paiement par email, WhatsApp ou Viber avec votre ID.',
-  en: '💳 Revolut: <a href="' + 'https://revolut.me/malekhkk7' + '" style="color:#c8a44e">revolut.me/malekhkk7</a> (add your ID in details) · 💵 Cash (Athens) · Send proof by email, WhatsApp or Viber with your ID.',
-  el: '💳 Revolut: <a href="' + 'https://revolut.me/malekhkk7' + '" style="color:#c8a44e">revolut.me/malekhkk7</a> (αναφέρετε το ID σας) · 💵 Μετρητά (Αθήνα) · Στείλτε απόδειξη μέσω email, WhatsApp ή Viber με το ID σας.',
-  es: '💳 Revolut: <a href="' + 'https://revolut.me/malekhkk7' + '" style="color:#c8a44e">revolut.me/malekhkk7</a> (indica tu ID en los detalles) · 💵 Efectivo (Atenas) · Envía el comprobante por email, WhatsApp o Viber con tu ID.',
-  de: '💳 Revolut: <a href="' + 'https://revolut.me/malekhkk7' + '" style="color:#c8a44e">revolut.me/malekhkk7</a> (ID in den Details) · 💵 Barzahlung (Athen) · Nachweis per E-Mail, WhatsApp oder Viber mit Ihrer ID.'
+  fr: '💳 <strong>Virement bancaire :</strong> IBAN <strong>LT37 3250 0708 2924 4591</strong> — BIC : REVOLT21 — Titulaire : Malek Jalel (indiquez votre ID dans le libellé) · 💵 Espèces · Preuve de paiement par email, WhatsApp ou Viber avec votre ID.',
+  en: '💳 <strong>Bank transfer:</strong> IBAN <strong>LT37 3250 0708 2924 4591</strong> — BIC: REVOLT21 — Holder: Malek Jalel (include your ID in the reference) · 💵 Cash · Send proof by email, WhatsApp or Viber with your ID.',
+  el: '💳 <strong>Τραπεζικό έμβασμα:</strong> IBAN <strong>LT37 3250 0708 2924 4591</strong> — BIC: REVOLT21 — Δικαιούχος: Malek Jalel (αναφέρετε το ID σας στην αιτιολογία) · 💵 Μετρητά · Στείλτε απόδειξη μέσω email, WhatsApp ή Viber με το ID σας.',
+  es: '💳 <strong>Transferencia bancaria:</strong> IBAN <strong>LT37 3250 0708 2924 4591</strong> — BIC: REVOLT21 — Titular: Malek Jalel (indica tu ID en el concepto) · 💵 Efectivo · Envía el comprobante por email, WhatsApp o Viber con tu ID.',
+  de: '💳 <strong>Banküberweisung:</strong> IBAN <strong>LT37 3250 0708 2924 4591</strong> — BIC: REVOLT21 — Inhaber: Malek Jalel (ID als Verwendungszweck) · 💵 Barzahlung · Nachweis per E-Mail, WhatsApp oder Viber mit Ihrer ID.'
 };
 
 const WEEK_PAYMENT_F = {
