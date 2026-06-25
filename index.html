@@ -4960,7 +4960,7 @@ html.light .fo-card-featured{
     var langSel = document.getElementById('cmd-langue');
     if (langSel) langSel.value = storedLang;
     // Pays par défaut selon langue
-    var defaultCodes = {fr:'+33',en:'+44',el:'+30',ar:'+216',de:'+49'};
+    var defaultCodes = {fr:'+33',en:'+44',el:'+30',es:'+34',de:'+49'};
     var defCode = defaultCodes[storedLang] || '+33';
     buildCountryOptions('cmd-wa-country', defCode);
     buildCountryOptions('cmd-vb-country', defCode);
