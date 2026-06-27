@@ -1441,7 +1441,8 @@ footer .right a:hover{color:var(--gold-2)}
 }
 #lang-picker.is-gone{display:none}
 
-.lp-bg{position:absolute;inset:0;background:var(--ink);z-index:0}
+.lp-bg{position:absolute;inset:0;background:var(--ink) url(assets/gn-bg-dark.jpg) center/cover no-repeat;z-index:0}
+html.light .lp-bg{background:var(--ink) url(assets/gn-bg-light.jpg) center/cover no-repeat}
 .lp-flow{position:absolute;inset:0;z-index:1;overflow:hidden}
 .lp-blob{
   position:absolute;border-radius:50%;filter:blur(90px);
@@ -1485,14 +1486,17 @@ footer .right a:hover{color:var(--gold-2)}
 @keyframes lpIn{from{opacity:0;transform:translateY(32px)}to{opacity:1;transform:none}}
 
 .lp-logo{
-  display:flex;align-items:center;gap:.55rem;margin-bottom:2.8rem;
-  font-family:var(--serif);font-size:1.1rem;font-weight:300;
-  font-variation-settings:"opsz" 144;color:var(--mute);letter-spacing:.02em;
+  display:flex;align-items:center;justify-content:center;margin-bottom:2.4rem;
 }
-.lp-logo-mark{
-  width:28px;height:28px;border-radius:50%;flex-shrink:0;
-  background:radial-gradient(circle at 30% 30%,var(--gold-2),var(--gold-3));
-  box-shadow:0 0 0 1px rgba(255,255,255,.06),inset 0 1px 0 rgba(255,255,255,.18);
+.lp-logo-img{
+  width:100px;height:auto;object-fit:contain;
+  filter:drop-shadow(0 0 18px rgba(200,164,78,.45)) drop-shadow(0 0 5px rgba(200,164,78,.3));
+}
+.lp-logo-lt{display:none}
+html.light .lp-logo-dk{display:none}
+html.light .lp-logo-lt{display:block}
+html.light .lp-logo-img{
+  filter:drop-shadow(0 0 14px rgba(200,164,78,.4)) drop-shadow(0 0 4px rgba(200,164,78,.25));
 }
 .lp-eyebrow{
   font-size:.7rem;font-weight:500;letter-spacing:.22em;text-transform:uppercase;
@@ -3011,8 +3015,8 @@ html.light .fo-card-featured{
   <div class="lp-grain"></div>
   <div class="lp-inner">
     <div class="lp-logo">
-      <div class="lp-logo-mark"></div>
-      <span data-i18n="brand">GeNext</span>
+      <img class="lp-logo-img lp-logo-dk" src="assets/gn-logo-dark.png" alt="GeNext">
+      <img class="lp-logo-img lp-logo-lt" src="assets/gn-logo-light.png" alt="GeNext">
     </div>
     <div class="lp-eyebrow">Καλώς ήρθατε · Welcome · Bienvenue · ¡Hola! · Willkommen</div>
     <h1 class="lp-title" id="lp-title-text">Επιλέξτε τη γλώσσα σας</h1>
