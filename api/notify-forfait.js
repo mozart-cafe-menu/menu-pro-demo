@@ -86,7 +86,7 @@ function httpsPost(url, headers, body) {
 }
 
 // ── Email templates 5 langues ───────────────────────────────────────────────
-function buildForfaitEmail(lang, name, oldForfait, newForfait, isUpgrade, paymentMode, price) {
+function buildForfaitEmail(lang, name, oldForfait, newForfait, isUpgrade, paymentMode, price, isTrial = false) {
   const isCS = newForfait === 'commandes-services';
   const payM = PAY_METHODS_F[lang] || PAY_METHODS_F.fr;
   const weekP = WEEK_PAYMENT_F[lang] || WEEK_PAYMENT_F.fr;
@@ -119,7 +119,7 @@ function buildForfaitEmail(lang, name, oldForfait, newForfait, isUpgrade, paymen
       intro: isUpgrade
         ? `Votre forfait a été mis à niveau vers <strong>${newLabel}</strong> (${modeLabel} — ${price}€/mois).`
         : `Votre forfait a été modifié vers <strong>${newLabel}</strong> (${modeLabel} — ${price}€/mois).`,
-      payment: weekP + '<br><span style="color:#6b5a3a;font-size:0.85rem">' + payM + '</span>',
+      payment: isTrial ? null : weekP + '<br><span style="color:#6b5a3a;font-size:0.85rem">' + payM + '</span>',
       features: isCS
         ? `Vos nouvelles fonctionnalités : prise de commandes en ligne, bouton d'appel, système de tables et QR ordering.`
         : `Votre menu digital reste actif. Les fonctionnalités de commande et d'appel ont été désactivées.`,
@@ -130,7 +130,7 @@ function buildForfaitEmail(lang, name, oldForfait, newForfait, isUpgrade, paymen
       intro: isUpgrade
         ? `Your plan has been upgraded to <strong>${newLabel}</strong> (${modeLabel} — €${price}/month).`
         : `Your plan has been changed to <strong>${newLabel}</strong> (${modeLabel} — €${price}/month).`,
-      payment: weekP + '<br><span style="color:#6b5a3a;font-size:0.85rem">' + payM + '</span>',
+      payment: isTrial ? null : weekP + '<br><span style="color:#6b5a3a;font-size:0.85rem">' + payM + '</span>',
       features: isCS
         ? `Your new features: online ordering, call button, table system and QR ordering.`
         : `Your digital menu remains active. Ordering and call features have been disabled.`,
@@ -141,7 +141,7 @@ function buildForfaitEmail(lang, name, oldForfait, newForfait, isUpgrade, paymen
       intro: isUpgrade
         ? `Η συνδρομή σας αναβαθμίστηκε σε <strong>${newLabel}</strong> (${modeLabel} — ${price}€/μήνα).`
         : `Η συνδρομή σας άλλαξε σε <strong>${newLabel}</strong> (${modeLabel} — ${price}€/μήνα).`,
-      payment: weekP + '<br><span style="color:#6b5a3a;font-size:0.85rem">' + payM + '</span>',
+      payment: isTrial ? null : weekP + '<br><span style="color:#6b5a3a;font-size:0.85rem">' + payM + '</span>',
       features: isCS
         ? `Νέες λειτουργίες: online παραγγελίες, κουμπί κλήσης, σύστημα τραπεζιών και QR παραγγελία.`
         : `Το ψηφιακό σας μενού παραμένει ενεργό. Οι λειτουργίες παραγγελίας και κλήσης έχουν απενεργοποιηθεί.`,
@@ -152,7 +152,7 @@ function buildForfaitEmail(lang, name, oldForfait, newForfait, isUpgrade, paymen
       intro: isUpgrade
         ? `Ihr Plan wurde auf <strong>${newLabel}</strong> aktualisiert (${modeLabel} — ${price}€/Monat).`
         : `Ihr Plan wurde auf <strong>${newLabel}</strong> geändert (${modeLabel} — ${price}€/Monat).`,
-      payment: weekP + '<br><span style="color:#6b5a3a;font-size:0.85rem">' + payM + '</span>',
+      payment: isTrial ? null : weekP + '<br><span style="color:#6b5a3a;font-size:0.85rem">' + payM + '</span>',
       features: isCS
         ? `Ihre neuen Funktionen: Online-Bestellungen, Anrufschaltfläche, Tischsystem und QR-Bestellung.`
         : `Ihr digitales Menü bleibt aktiv. Bestell- und Anruffunktionen wurden deaktiviert.`,
@@ -163,7 +163,7 @@ function buildForfaitEmail(lang, name, oldForfait, newForfait, isUpgrade, paymen
       intro: isUpgrade
         ? `Su plan ha sido actualizado a <strong>${newLabel}</strong> (${modeLabel} — ${price}€/mes).`
         : `Su plan ha cambiado a <strong>${newLabel}</strong> (${modeLabel} — ${price}€/mes).`,
-      payment: weekP + '<br><span style="color:#6b5a3a;font-size:0.85rem">' + payM + '</span>',
+      payment: isTrial ? null : weekP + '<br><span style="color:#6b5a3a;font-size:0.85rem">' + payM + '</span>',
       features: isCS
         ? `Sus nuevas funciones: pedidos en línea, botón de llamada, sistema de mesas y pedido QR.`
         : `Su menú digital sigue activo. Las funciones de pedido y llamada han sido desactivadas.`,
@@ -248,7 +248,8 @@ module.exports = async function handler(req, res) {
   // 1. Email de confirmation au client
   if (email) {
     try {
-      const { subject, html } = buildForfaitEmail(safeLang, name || rid, oldForfait, newForfait, isUpgrade, safeMode, effectivePrice);
+      const isTrial = !!(sub && sub.trialEndAt && Date.now() < sub.trialEndAt);
+      const { subject, html } = buildForfaitEmail(safeLang, name || rid, oldForfait, newForfait, isUpgrade, safeMode, effectivePrice, isTrial);
       await createTransport().sendMail({
         from: `"GeNext" <${process.env.GMAIL_USER}>`,
         to: email, subject, html,
