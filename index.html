@@ -1441,8 +1441,12 @@ footer .right a:hover{color:var(--gold-2)}
 }
 #lang-picker.is-gone{display:none}
 
-.lp-bg{position:absolute;inset:0;background:var(--ink) url(assets/gn-bg-dark.jpg) center/cover no-repeat;z-index:0}
-html.light .lp-bg{background:var(--ink) url(assets/gn-bg-light.jpg) center/cover no-repeat}
+.lp-bg{position:absolute;inset:0;background:var(--ink);z-index:0;overflow:hidden}
+.lp-bg::before{
+  content:'';position:absolute;inset:-35%;
+  background:url(assets/gn-bg-dark.jpg) center/cover no-repeat;
+}
+html.light .lp-bg::before{background:url(assets/gn-bg-light.jpg) center/cover no-repeat}
 .lp-flow{position:absolute;inset:0;z-index:1;overflow:hidden}
 .lp-blob{
   position:absolute;border-radius:50%;filter:blur(90px);
