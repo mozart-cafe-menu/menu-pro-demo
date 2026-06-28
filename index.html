@@ -519,43 +519,13 @@ html.light .gnd-nav-logo-lt{display:block!important;}
    06 · AVANTAGES
 ═══════════════════════════════════════════════════════════════ */
 #avantages{
-  position:relative;min-height:100svh;
-  display:flex;flex-direction:column;justify-content:center;
-  padding:0 0 7rem;overflow:hidden;
+  position:relative;padding:6rem 0 7rem;overflow:hidden;
   background:transparent;
 }
 html.light #avantages{background:transparent;}
 
-/* Flow background — meshing blobs with grid */
+/* Flow background — subtle grid texture */
 .flow-bg{position:absolute;inset:0;z-index:0;overflow:hidden}
-.flow-blob{
-  position:absolute;border-radius:50%;
-  filter:blur(80px);
-  mix-blend-mode:screen;
-  animation:flowMove 22s ease-in-out infinite;
-  will-change:transform;
-}
-.flow-blob.b1{
-  width:55vw;height:55vw;left:-15vw;top:-15vw;
-  background:radial-gradient(circle,rgba(200,164,78,.45),transparent 60%);
-  animation-delay:0s;
-}
-.flow-blob.b2{
-  width:45vw;height:45vw;right:-10vw;top:30%;
-  background:radial-gradient(circle,rgba(140,111,48,.45),transparent 60%);
-  animation-delay:-7s;
-}
-.flow-blob.b3{
-  width:40vw;height:40vw;left:35%;bottom:-10vw;
-  background:radial-gradient(circle,rgba(230,201,137,.35),transparent 60%);
-  animation-delay:-14s;
-}
-@keyframes flowMove{
-  0%,100%{transform:translate(0,0) scale(1) rotate(0deg)}
-  25%{transform:translate(8vw,-5vw) scale(1.15) rotate(40deg)}
-  50%{transform:translate(-6vw,4vw) scale(.92) rotate(80deg)}
-  75%{transform:translate(4vw,8vw) scale(1.08) rotate(160deg)}
-}
 .flow-grid{
   position:absolute;inset:0;
   background-image:
@@ -567,7 +537,7 @@ html.light #avantages{background:transparent;}
 }
 .flow-vignette{
   position:absolute;inset:0;
-  background:radial-gradient(80% 60% at 50% 50%,transparent,rgba(10,9,7,.7) 90%);
+  background:radial-gradient(80% 60% at 50% 50%,transparent,rgba(10,9,7,.65) 90%);
 }
 
 .av-shell{
@@ -576,7 +546,7 @@ html.light #avantages{background:transparent;}
 }
 .av-head{
   display:grid;grid-template-columns:1fr auto;align-items:end;
-  gap:2rem;margin-bottom:4rem;
+  gap:2rem;margin-bottom:2.5rem;
 }
 .av-head h2{
   font-size:clamp(2.2rem,5.5vw,4.4rem);
@@ -584,102 +554,111 @@ html.light #avantages{background:transparent;}
 }
 .av-head .lead{max-width:380px}
 
-/* Swiper viewport */
-.av-viewport{
-  position:relative;
-  border:1px solid rgba(231,206,151,.18);
-  border-radius:24px;
-  background:linear-gradient(180deg,rgba(241,234,217,.02),transparent);
-  overflow:hidden;
+/* ── Stats bar ── */
+.av-stats{
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1px;background:rgba(231,206,151,.1);
+  border:1px solid rgba(231,206,151,.12);
+  border-radius:18px;overflow:hidden;
+  margin-bottom:2.5rem;
 }
-.av-viewport::before{
-  content:'';position:absolute;top:-1px;left:-1px;right:-1px;height:1px;
-  background:linear-gradient(90deg,transparent,var(--gold),transparent);
-  opacity:.3;pointer-events:none;
+.av-stat{
+  padding:1.35rem 1.6rem;
+  background:rgba(10,9,7,.55);
+  display:flex;flex-direction:column;gap:.3rem;
+  backdrop-filter:blur(12px);
 }
-.av-track{
-  display:flex;transition:transform .9s var(--e-in-out);
-  will-change:transform;
-}
-.av-card{
-  flex:0 0 100%;
-  display:grid;grid-template-columns:1.05fr 1fr;
-  gap:3rem;align-items:center;
-  padding:clamp(2rem,5vw,4.5rem);
-  min-height:0;transform:translateZ(0);
-  position:relative;
-}
-.av-card::before{
-  content:'';
-  position:absolute;inset:0;pointer-events:none;
-  background:radial-gradient(ellipse 80% 60% at 20% 50%,rgba(200,164,78,.07),transparent);
-}
-.av-numwrap{position:relative}
-.av-bignum{
-  font-family:var(--serif);font-weight:200;
-  font-variation-settings:"opsz" 144;
-  font-size:clamp(8rem,18vw,16rem);
-  line-height:.85;letter-spacing:-.05em;
-  background:linear-gradient(180deg,rgba(241,234,217,.18),rgba(241,234,217,.02));
-  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
-  user-select:none;pointer-events:none;
-}
-.av-bignum em{font-style:italic;font-variation-settings:"opsz" 144,"SOFT" 100}
-.av-symbol{
-  position:absolute;left:0;bottom:1rem;
-  width:64px;height:64px;border-radius:18px;
-  background:linear-gradient(140deg,var(--ink-3),var(--ink-2));
-  border:1px solid var(--line-2);
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:0 16px 40px -12px rgba(0,0,0,.6);
-}
-.av-symbol svg{width:30px;height:30px;color:var(--gold-2)}
-.av-body h3{
+.av-stat-num{
   font-family:var(--serif);font-weight:300;
-  font-variation-settings:"opsz" 144;
-  font-size:clamp(1.7rem,3.2vw,2.6rem);
-  line-height:1.05;letter-spacing:-.025em;
-  color:var(--bone);margin-bottom:1.2rem;
+  font-size:clamp(1.5rem,2.5vw,2.2rem);
+  line-height:1;color:var(--gold);
+  font-variation-settings:"opsz" 48;
 }
-.av-body h3 em{
-  font-style:italic;font-variation-settings:"opsz" 144,"SOFT" 100;
-  color:var(--gold-2);
+.av-stat-label{
+  font-size:.7rem;font-weight:500;
+  letter-spacing:.06em;text-transform:uppercase;
+  color:var(--bone-2);line-height:1.35;
 }
-.av-body p{
-  font-size:1.02rem;font-weight:300;line-height:1.7;color:var(--bone-2);
-  max-width:480px;margin-bottom:1.6rem;
-}
-.av-tag-row{
-  display:flex;flex-wrap:wrap;gap:.5rem;
-}
-.av-tag{
-  display:inline-flex;align-items:center;gap:.45rem;
-  padding:.35rem .85rem;border-radius:99px;
-  border:1px solid var(--line-2);background:rgba(241,234,217,.03);
-  font-size:.74rem;font-weight:500;color:var(--bone-2);
-  letter-spacing:.02em;
-}
-.av-tag::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--gold)}
 
-.av-controls{
-  display:flex;align-items:center;justify-content:space-between;
-  margin-top:2rem;gap:1.2rem;
+/* ── Bento grid ── */
+.av-bento{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  grid-template-areas:"a b c" "d e e";
+  gap:1.1rem;
 }
-.av-numbers{
-  display:flex;align-items:baseline;gap:.5rem;
-  font-family:var(--serif);font-variation-settings:"opsz" 144;
+.av-item{
+  position:relative;overflow:hidden;
+  border-radius:20px;
+  border:1px solid rgba(231,206,151,.12);
+  background:rgba(14,11,7,.55);
+  backdrop-filter:blur(16px);
+  padding:1.75rem;
+  display:flex;flex-direction:column;gap:1rem;
+  transition:border-color .3s ease,transform .3s ease,box-shadow .3s ease;
 }
-.av-numbers .now{font-size:1.6rem;font-weight:300;color:var(--bone)}
-.av-numbers .sep{color:var(--line-2);font-size:1.1rem}
-.av-numbers .total{font-size:1.1rem;color:var(--mute)}
-.av-progress{
-  flex:1;height:1px;background:var(--line);position:relative;max-width:420px;
+.av-item:hover{
+  border-color:rgba(200,164,78,.3);
+  transform:translateY(-3px);
+  box-shadow:0 16px 40px -12px rgba(0,0,0,.4);
 }
-.av-progress-fill{
-  position:absolute;inset:0;background:linear-gradient(90deg,var(--gold),var(--gold-2));
-  transform-origin:left;transform:scaleX(0);transition:transform .9s var(--e-in-out);
+.av-item::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 65% 55% at 0% 0%,rgba(200,164,78,.055),transparent 70%);
 }
-.av-arrows{display:flex;gap:.5rem}
+.av-item:nth-child(1){grid-area:a}
+.av-item:nth-child(2){grid-area:b}
+.av-item:nth-child(3){grid-area:c}
+.av-item:nth-child(4){grid-area:d}
+.av-item:nth-child(5){grid-area:e}
+.av-item:nth-child(5){
+  flex-direction:row;gap:2rem;align-items:flex-start;
+  background:linear-gradient(135deg,rgba(200,164,78,.08) 0%,rgba(14,11,7,.55) 60%);
+  border-color:rgba(200,164,78,.2);
+}
+.av-item:nth-child(5)::before{
+  background:radial-gradient(ellipse 70% 65% at 100% 100%,rgba(200,164,78,.09),transparent 70%);
+}
+.av-item-top{
+  display:flex;align-items:flex-start;justify-content:space-between;
+}
+.av-icon{
+  width:50px;height:50px;border-radius:13px;flex-shrink:0;
+  background:linear-gradient(140deg,rgba(200,164,78,.15),rgba(200,164,78,.04));
+  border:1px solid rgba(200,164,78,.22);
+  display:flex;align-items:center;justify-content:center;
+}
+.av-icon svg{width:22px;height:22px;color:var(--gold)}
+.av-num{
+  font-family:var(--serif);font-weight:200;font-size:1.2rem;
+  color:rgba(200,164,78,.22);letter-spacing:-.01em;
+  font-variation-settings:"opsz" 48;user-select:none;
+}
+.av-item-body{display:flex;flex-direction:column;gap:.75rem;flex:1}
+.av-item h3{
+  font-family:var(--serif);font-weight:300;
+  font-size:clamp(1.05rem,1.8vw,1.3rem);
+  line-height:1.2;color:var(--bone);
+  letter-spacing:-.02em;
+}
+.av-item h3 em{
+  font-style:italic;color:var(--gold-2);
+  font-variation-settings:"opsz" 48,"SOFT" 100;
+}
+.av-item p{
+  font-size:.85rem;font-weight:300;line-height:1.7;
+  color:var(--bone-2);
+}
+.av-tag-row{display:flex;flex-wrap:wrap;gap:.4rem}
+.av-tag{
+  display:inline-flex;align-items:center;gap:.4rem;
+  padding:.28rem .72rem;border-radius:99px;
+  border:1px solid rgba(231,206,151,.12);
+  background:rgba(241,234,217,.03);
+  font-size:.69rem;font-weight:500;
+  letter-spacing:.03em;color:var(--bone-2);
+}
+.av-tag::before{content:'';width:4px;height:4px;border-radius:50%;background:var(--gold)}
 
 /* ═══════════════════════════════════════════════════════════════
    07 · FORFAITS
@@ -995,24 +974,10 @@ html.light #forfaits{background:transparent;}
 .fo-opts-head-inner p{font-size:.88rem;color:var(--bone-2);line-height:1.55}
 
 /* Desktop: sub-pages side by side (feat left, side right) */
-/* ── Avantages desktop compact ── */
+/* ── Avantages desktop ── */
 @media(min-width:1025px){
-  #avantages{padding:0 0 2rem}
-  .av-head{margin-bottom:1.6rem}
-  .av-head h2{font-size:clamp(1.5rem,3vw,2.4rem)}
-  .av-head .lead{font-size:.82rem}
-  .av-card{
-    padding:clamp(1rem,2vw,1.8rem);
-    gap:1.8rem;
-  }
-  .av-bignum{font-size:clamp(4.5rem,9vw,8rem)}
-  .av-symbol{width:44px;height:44px;border-radius:12px}
-  .av-symbol svg{width:22px;height:22px}
-  .av-body h3{font-size:clamp(1.1rem,1.8vw,1.6rem);margin-bottom:.6rem}
-  .av-body p{font-size:.85rem;margin-bottom:.8rem;line-height:1.55}
-  .av-controls{margin-top:.8rem}
-  .av-numbers .now{font-size:1.1rem}
-  .av-numbers .total{font-size:.85rem}
+  #avantages{padding:5rem 0 6rem}
+  .av-head{margin-bottom:2rem}
 }
 
 @media(min-width:1025px){
@@ -1302,10 +1267,8 @@ footer .right a:hover{color:var(--gold-2)}
   .marquee{font-size:12vw;bottom:3rem}
 
   .av-head{grid-template-columns:1fr}
-  .av-card{grid-template-columns:1fr;gap:1.2rem;padding:1.8rem;min-height:auto}
-  .av-numwrap{display:flex;align-items:center;gap:1rem}
-  .av-bignum{font-size:4.5rem}
-  .av-symbol{position:static;width:50px;height:50px;border-radius:14px}
+
+
 
   .fo-head{grid-template-columns:1fr}
   .fo-style-selector{margin-bottom:1.5rem}
@@ -1344,19 +1307,17 @@ footer .right a:hover{color:var(--gold-2)}
   .hud-arrow{width:34px;height:34px}
   .marquee{display:none}
 
-  #avantages{padding:4rem 0;min-height:auto}
+  #avantages{padding:3.5rem 0 4.5rem}
+  .av-bento{grid-template-columns:1fr 1fr;grid-template-areas:"a b" "c d" "e e"}
+  .av-stats{grid-template-columns:repeat(2,1fr)}
+  .av-item:nth-child(5){flex-direction:column;gap:1rem}
   .av-head{margin-bottom:2.5rem}
   .av-head h2{font-size:clamp(1.8rem,7vw,2.6rem)}
   .av-head .lead{font-size:.88rem}
-  .av-viewport{border-radius:16px}
-  .av-card{padding:1.4rem;gap:1rem}
-  .av-bignum{font-size:3rem}
-  .av-symbol{width:42px;height:42px;border-radius:11px}
-  .av-symbol svg{width:22px;height:22px}
+
   .av-body h3{font-size:1.2rem;margin-bottom:.7rem}
   .av-body p{font-size:.88rem;margin-bottom:1rem;line-height:1.6}
   .av-tag{font-size:.68rem;padding:.3rem .7rem}
-  .av-controls{flex-wrap:wrap;margin-top:1.2rem;gap:.8rem}
   .av-progress{order:3;flex:1 1 100%}
   .av-numbers .now{font-size:1.3rem}
   .av-numbers .total{font-size:.95rem}
@@ -1375,6 +1336,8 @@ footer .right a:hover{color:var(--gold-2)}
   .fo-feat{padding:1.2rem;border-radius:14px}
   .fo-feat-head{flex-direction:column;gap:.6rem;margin-bottom:1.2rem}
   .fo-feat-icon{width:44px;height:44px}
+  .av-bento{grid-template-columns:1fr;grid-template-areas:"a" "b" "c" "d" "e"}
+  .av-item:nth-child(5){flex-direction:column;gap:1rem}
   .fo-feat-head h3{font-size:1.2rem}
   .fo-feat-head p{font-size:.85rem}
   .fo-feat-item{font-size:.84rem;gap:.7rem;padding:.75rem 0;line-height:1.5}
@@ -1409,7 +1372,6 @@ footer .right a:hover{color:var(--gold-2)}
   :root{--pad-x:.8rem}
   .hero-title{font-size:clamp(1.5rem,7vw,2.2rem)}
   .hero-lead{font-size:.84rem}
-  .av-bignum{font-size:2.5rem}
   .fo-tab{padding:.45rem .3rem;font-size:.65rem}
   .fo-tab small{font-size:.52rem}
   .fo-side-price{font-size:1.9rem}
@@ -1866,7 +1828,7 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
 /* ══════════════════════════════════════════════════════
    07b · FORFAIT CARDS + POPUP PRICING
 ══════════════════════════════════════════════════════ */
-.fo-cards{display:flex;transition:transform .65s var(--e-in-out);will-change:transform}
+.fo-cards{display:grid;grid-template-columns:1fr 1fr;gap:1.75rem}
 .fo-card{
   flex:0 0 100%;min-width:0;
   border:1px solid var(--line-2);border-radius:24px;
@@ -1959,14 +1921,7 @@ html.light .fo-sel-btn:hover:not(.fo-sel-active){background:rgba(200,164,78,.1);
 
 
 /* ── Forfait slider wrapper ── */
-.fo-slider-wrap{
-  overflow:hidden;
-  border-radius:22px;
-  margin-top:1.5rem;
-  /* Center card on wide screens */
-  max-width:520px;
-  margin-left:auto;margin-right:auto;
-}
+.fo-slider-wrap{margin-top:1.5rem;}
 .fo-card-btn-detail{
   padding:.7rem 1.2rem;border-radius:99px;
   border:1px solid var(--line-2);background:rgba(241,234,217,.02);
@@ -1982,7 +1937,7 @@ html.light .fo-sel-btn:hover:not(.fo-sel-active){background:rgba(200,164,78,.1);
   box-shadow:0 4px 16px -6px rgba(200,164,78,.55);
 }
 .fo-card-btn-cmd:hover{transform:translateY(-2px);box-shadow:0 8px 24px -8px rgba(200,164,78,.65)}
-@media(max-width:800px){.fo-cards{grid-template-columns:1fr}}
+@media(max-width:700px){.fo-cards{grid-template-columns:1fr}}
 
 /* ── Popup forfait pricing ── */
 .popup-card-wide{max-width:640px}
@@ -2100,15 +2055,26 @@ html.light .fp-row-main,html.light .fp-row-month{border-bottom-color:rgba(140,11
 html.light .fp-promise{color:var(--mute)}
 
 /* ── Light mode: avantages ── */
-html.light .av-card{
-  background:transparent;
+html.light .av-item{
+  background:rgba(255,255,255,.88);
+  border-color:rgba(200,164,78,.13);
+  box-shadow:0 2px 18px rgba(0,0,0,.05);
 }
-html.light .av-viewport{
-  background:rgba(255,255,255,.55);
-  border-color:rgba(140,110,45,.28);
-  box-shadow:0 2px 24px -8px rgba(0,0,0,.09),inset 0 1px 0 rgba(255,255,255,.85);
+html.light .av-item:hover{
+  box-shadow:0 10px 36px rgba(0,0,0,.1);
+  border-color:rgba(200,164,78,.3);
 }
-html.light .av-body h3 em{color:var(--gold);}
+html.light .av-item:nth-child(5){
+  background:linear-gradient(135deg,rgba(200,164,78,.06),rgba(255,255,255,.92));
+  border-color:rgba(200,164,78,.22);
+}
+html.light .av-item h3{color:#1a1208}
+html.light .av-item p{color:rgba(26,18,8,.6)}
+html.light .av-tag{background:rgba(200,164,78,.07);border-color:rgba(200,164,78,.18);color:rgba(26,18,8,.55)}
+html.light .av-stat{background:rgba(250,247,242,.94)}
+html.light .av-stats{background:rgba(200,164,78,.07);border-color:rgba(200,164,78,.18)}
+html.light .av-stat-num{color:#c8a44e}
+html.light .av-stat-label{color:rgba(26,18,8,.5)}
 html.light .flow-bg{display:none}
 
 /* ── Light mode: contact ── */
@@ -2285,6 +2251,15 @@ html.light .s-dot{background:rgba(26,18,8,.16)}
 .reveal.delay-1{transition-delay:.12s}
 .reveal.delay-2{transition-delay:.24s}
 .reveal.delay-3{transition-delay:.36s}
+
+/* Mobile: disable backdrop-filter for smooth scroll */
+@media (max-width:767px){
+  .av-stat{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(10,9,7,.82)}
+  .av-card{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(14,11,7,.82)}
+  .fo-side{backdrop-filter:none;-webkit-backdrop-filter:none}
+  html.light .av-stat{background:rgba(245,240,228,.94)}
+  html.light .av-card{background:rgba(245,240,228,.92)}
+}
 
 /* Focus ring */
 :focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
@@ -2566,6 +2541,15 @@ html.light .s-dot{background:rgba(26,18,8,.16)}
 .reveal.delay-2{transition-delay:.24s}
 .reveal.delay-3{transition-delay:.36s}
 
+/* Mobile: disable backdrop-filter for smooth scroll */
+@media (max-width:767px){
+  .av-stat{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(10,9,7,.82)}
+  .av-card{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(14,11,7,.82)}
+  .fo-side{backdrop-filter:none;-webkit-backdrop-filter:none}
+  html.light .av-stat{background:rgba(245,240,228,.94)}
+  html.light .av-card{background:rgba(245,240,228,.92)}
+}
+
 /* Focus ring */
 :focus-visible{outline:2px solid var(--gold);outline-offset:3px;border-radius:4px}
 
@@ -2726,10 +2710,7 @@ html.light .pm-cta-btn.pm-cta-gold{color:#1a1208}
   .av-head{margin-bottom:1.6rem}
   .av-head h2{font-size:clamp(1.7rem,7vw,2.4rem)}
   .av-head .lead{font-size:.86rem}
-  .av-card{padding:1.2rem;gap:.85rem}
-  .av-bignum{font-size:2.6rem}
-  .av-body h3{font-size:1.1rem;margin-bottom:.4rem}
-  .av-body p{font-size:.84rem;margin-bottom:.7rem;line-height:1.55}
+
 
   /* Forfaits — compact cards */
   #forfaits{padding:3rem 0 2.5rem}
@@ -2942,8 +2923,7 @@ html.light .fo-card-featured{
 <script>
 (function(){
   var t=localStorage.getItem('mqr_theme');
-  if(t!=='dark'&&t!=='light')t='dark';
-  if(t==='light')document.documentElement.classList.add('light');
+  if(t!=='dark')document.documentElement.classList.add('light');
 })();
 </script>
 </head>
@@ -3203,9 +3183,6 @@ html.light .fo-card-featured{
 ════════════════════════════════════════════════════════════ -->
 <section id="avantages">
   <div class="flow-bg">
-    <div class="flow-blob b1"></div>
-    <div class="flow-blob b2"></div>
-    <div class="flow-blob b3"></div>
     <div class="flow-grid"></div>
     <div class="flow-vignette"></div>
   </div>
@@ -3216,120 +3193,121 @@ html.light .fo-card-featured{
       <p class="lead" data-i18n="av.lead">Chaque avantage a été pensé pour améliorer l'expérience de vos clients et simplifier la gestion de votre établissement.</p>
     </header>
 
-    <div class="av-viewport reveal delay-1">
-      <div class="av-track" id="avTrack">
+    <!-- Stats bar -->
+    <div class="av-stats reveal delay-1">
+      <div class="av-stat">
+        <div class="av-stat-num">100%</div>
+        <div class="av-stat-label" data-i18n="av.stat1.l">Sans frais de création</div>
+      </div>
+      <div class="av-stat">
+        <div class="av-stat-num">5</div>
+        <div class="av-stat-label" data-i18n="av.stat2.l">Langues disponibles</div>
+      </div>
+      <div class="av-stat">
+        <div class="av-stat-num">+15</div>
+        <div class="av-stat-label" data-i18n="av.stat3.l">Thèmes de design</div>
+      </div>
+      <div class="av-stat">
+        <div class="av-stat-num">1</div>
+        <div class="av-stat-label" data-i18n="av.stat4.l">Mois d'essai gratuit</div>
+      </div>
+    </div>
 
-        <!-- Avantage 1 -->
-        <article class="av-card">
-          <div class="av-numwrap">
-            <div class="av-bignum">0<em>1</em></div>
-            <div class="av-symbol">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM18 17h3M14 21h3M21 14v7"/></svg>
-            </div>
-          </div>
-          <div class="av-body">
-            <h3 data-i18n-html="av.c1.h3">Hygiène, rapidité<br><em>et confort client.</em></h3>
-            <p data-i18n="av.c1.p">Le client scanne le QR Code et accède instantanément au menu depuis son téléphone, sans attente ni contact avec des menus papier. Une solution moderne, rapide et plus hygiénique qui améliore l'expérience client.</p>
-            <div class="av-tag-row">
-              <span class="av-tag" data-i18n="av.c1.t1">Hygiène</span>
-              <span class="av-tag" data-i18n="av.c1.t2">Confort client</span>
-            </div>
-          </div>
-        </article>
+    <!-- Bento grid : 5 avantages statiques -->
+    <div class="av-bento reveal delay-2">
 
-        <!-- Avantage 2 -->
-        <article class="av-card">
-          <div class="av-numwrap">
-            <div class="av-bignum">0<em>2</em></div>
-            <div class="av-symbol">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-            </div>
+      <!-- 01 · QR Code -->
+      <article class="av-item">
+        <div class="av-item-top">
+          <div class="av-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM18 17h3M14 21h3M21 14v7"/></svg>
           </div>
-          <div class="av-body">
-            <h3 data-i18n-html="av.c2.h3">Zéro erreur de commande,<br><em>service plus fluide.</em></h3>
-            <p data-i18n="av.c2.p">Quand les clients commandent depuis leur téléphone, les malentendus disparaissent. Plus de plats mal notés, plus de barrières de langue. Votre équipe se concentre sur le service, vos clients repartent avec exactement ce qu'ils voulaient.</p>
-            <div class="av-tag-row">
-              <span class="av-tag" data-i18n="av.c2.t1">Sans erreur</span>
-              <span class="av-tag" data-i18n="av.c2.t2">Service fluide</span>
-            </div>
+          <span class="av-num">01</span>
+        </div>
+        <div class="av-item-body">
+          <h3 data-i18n-html="av.c1.h3">Hygiène, rapidité<br><em>et confort client.</em></h3>
+          <p data-i18n="av.c1.p">Le client scanne le QR Code et accède instantanément au menu depuis son téléphone, sans attente ni contact avec des menus papier. Une solution moderne et plus hygiénique.</p>
+          <div class="av-tag-row">
+            <span class="av-tag" data-i18n="av.c1.t1">Hygiène</span>
+            <span class="av-tag" data-i18n="av.c1.t2">Confort client</span>
           </div>
-        </article>
+        </div>
+      </article>
 
-        <!-- Avantage 3 -->
-        <article class="av-card">
-          <div class="av-numwrap">
-            <div class="av-bignum">0<em>3</em></div>
-            <div class="av-symbol">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
-            </div>
+      <!-- 02 · Zéro erreur -->
+      <article class="av-item">
+        <div class="av-item-top">
+          <div class="av-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
           </div>
-          <div class="av-body">
-            <h3 data-i18n-html="av.c3.h3">Accessible partout,<br><em>idéal pour les touristes.</em></h3>
-            <p data-i18n="av.c3.p">Disponible en plusieurs langues, le menu facilite l'accueil des touristes et valorise l'image moderne de votre établissement. Accessible 24h/24 et facile à partager sur les réseaux sociaux.</p>
-            <div class="av-tag-row">
-              <span class="av-tag" data-i18n="av.c3.t1">Multilingue</span>
-              <span class="av-tag" data-i18n="av.c3.t2">24h/24</span>
-            </div>
+          <span class="av-num">02</span>
+        </div>
+        <div class="av-item-body">
+          <h3 data-i18n-html="av.c2.h3">Zéro erreur de commande,<br><em>service plus fluide.</em></h3>
+          <p data-i18n="av.c2.p">Quand les clients commandent depuis leur téléphone, les malentendus disparaissent. Votre équipe se concentre sur le service, vos clients repartent satisfaits.</p>
+          <div class="av-tag-row">
+            <span class="av-tag" data-i18n="av.c2.t1">Sans erreur</span>
+            <span class="av-tag" data-i18n="av.c2.t2">Service fluide</span>
           </div>
-        </article>
+        </div>
+      </article>
 
-        <!-- Avantage 4 -->
-        <article class="av-card">
-          <div class="av-numwrap">
-            <div class="av-bignum">0<em>4</em></div>
-            <div class="av-symbol">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg>
-            </div>
+      <!-- 03 · Multilingue -->
+      <article class="av-item">
+        <div class="av-item-top">
+          <div class="av-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
           </div>
-          <div class="av-body">
-            <h3 data-i18n-html="av.c4.h3">Gestion instantanée<br><em>et personnalisation.</em></h3>
-            <p data-i18n="av.c4.p">Modifiez immédiatement vos prix, produits ou promotions depuis une page d'administration simple et intuitive. Ajoutez facilement des photos et adaptez votre menu selon les saisons ou événements.</p>
-            <div class="av-tag-row">
-              <span class="av-tag" data-i18n="av.c4.t1">Admin simple</span>
-              <span class="av-tag" data-i18n="av.c4.t2">Temps réel</span>
-              <span class="av-tag" data-i18n="av.c4.opt">Optionnel</span>
-            </div>
+          <span class="av-num">03</span>
+        </div>
+        <div class="av-item-body">
+          <h3 data-i18n-html="av.c3.h3">Accessible partout,<br><em>idéal pour les touristes.</em></h3>
+          <p data-i18n="av.c3.p">Disponible en 5 langues, le menu facilite l'accueil des touristes. Accessible 24h/24, partageable sur les réseaux sociaux.</p>
+          <div class="av-tag-row">
+            <span class="av-tag" data-i18n="av.c3.t1">Multilingue</span>
+            <span class="av-tag" data-i18n="av.c3.t2">24h/24</span>
           </div>
-        </article>
+        </div>
+      </article>
 
-        <!-- Avantage 5 -->
-        <article class="av-card">
-          <div class="av-numwrap">
-            <div class="av-bignum">0<em>5</em></div>
-            <div class="av-symbol">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>
-            </div>
+      <!-- 04 · Gestion -->
+      <article class="av-item">
+        <div class="av-item-top">
+          <div class="av-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg>
           </div>
-          <div class="av-body">
+          <span class="av-num">04</span>
+        </div>
+        <div class="av-item-body">
+          <h3 data-i18n-html="av.c4.h3">Gestion instantanée<br><em>et personnalisation.</em></h3>
+          <p data-i18n="av.c4.p">Modifiez vos prix, produits ou promotions en temps réel. Ajoutez des photos, adaptez votre menu selon les saisons ou événements.</p>
+          <div class="av-tag-row">
+            <span class="av-tag" data-i18n="av.c4.t1">Admin simple</span>
+            <span class="av-tag" data-i18n="av.c4.t2">Temps réel</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- 05 · Commande intelligente (featured wide) -->
+      <article class="av-item">
+        <div class="av-icon" style="width:54px;height:54px;border-radius:15px;margin-top:.15rem;flex-shrink:0">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>
+        </div>
+        <div class="av-item-body">
+          <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:1rem">
             <h3 data-i18n-html="av.c5.h3">Commande intelligente,<br><em>design avancé.</em></h3>
-            <p data-i18n="av.c5.p">Les clients peuvent appeler un serveur ou commander directement depuis le menu QR Code. Le propriétaire peut également changer instantanément les thèmes et le design du menu selon ses préférences.</p>
-            <div class="av-tag-row">
-              <span class="av-tag" data-i18n="av.c5.t1">Appel serveur</span>
-              <span class="av-tag" data-i18n="av.c5.t2">Commande en ligne</span>
-              <span class="av-tag" data-i18n="av.c5.opt">Optionnel</span>
-            </div>
+            <span class="av-num" style="font-size:1.5rem;flex-shrink:0">05</span>
           </div>
-        </article>
+          <p data-i18n="av.c5.p">Les clients peuvent appeler un serveur ou commander directement depuis le menu. Le propriétaire peut changer instantanément les thèmes et le design — plus de 15 thèmes disponibles.</p>
+          <div class="av-tag-row">
+            <span class="av-tag" data-i18n="av.c5.t1">Appel serveur</span>
+            <span class="av-tag" data-i18n="av.c5.t2">Commande en ligne</span>
+            <span class="av-tag" data-i18n="av.c5.opt">Optionnel</span>
+          </div>
+        </div>
+      </article>
 
-      </div>
-    </div>
-
-    <div class="av-controls reveal delay-2">
-      <div class="av-numbers">
-        <span class="now" id="avNow">01</span>
-        <span class="sep">/</span>
-        <span class="total">05</span>
-      </div>
-      <div class="av-progress"><div class="av-progress-fill" id="avFill"></div></div>
-      <div class="av-arrows">
-        <button class="hud-arrow" onclick="avPrev()" aria-label="Précédent">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-        </button>
-        <button class="hud-arrow" onclick="avNext()" aria-label="Suivant">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        </button>
-      </div>
-    </div>
+    </div><!-- .av-bento -->
   </div>
 </section>
 
@@ -3344,10 +3322,6 @@ html.light .fo-card-featured{
     </header>
 
 
-    <div class="fo-selector reveal" id="foStyleSelector">
-      <button class="fo-sel-btn fo-sel-active" onclick="foSelect(0)" data-i18n="fo.card0.name">Menu QR Code</button>
-      <button class="fo-sel-btn" onclick="foSelect(1)" data-i18n="fo.card1.name">Menu et Commandes</button>
-    </div>
     <div class="fo-slider-wrap">
     <div class="fo-cards" id="foTrack">
 
@@ -3360,9 +3334,9 @@ html.light .fo-card-featured{
         <p class="fo-card-subtitle" data-i18n="fo.card0.subtitle">Menu digital accessible par QR code — sans application à télécharger</p>
         <div class="fo-card-divider"></div>
         <div class="fo-card-price-row">
-          <span class="fo-card-price-num" id="gd-price-qr-monthly-card">49€</span>
+          <span class="fo-card-price-num" id="gd-price-qr-card">490€</span>
           <div class="fo-card-price-meta">
-            <span class="fo-card-price-label" data-i18n="pm.per.month">/mois</span>
+            <span class="fo-card-price-label" data-i18n="pm.per.year">/an</span>
             <span class="fo-card-price-months" data-i18n="fo.card.from3">après 1 mois d'essai gratuit</span>
           </div>
         </div>
@@ -3383,9 +3357,9 @@ html.light .fo-card-featured{
         <p class="fo-card-subtitle" data-i18n="fo.card1.subtitle">Menu QR Code + commandes à table et appel serveur</p>
         <div class="fo-card-divider"></div>
         <div class="fo-card-price-row">
-          <span class="fo-card-price-num" id="gd-price-srv-monthly-card">99€</span>
+          <span class="fo-card-price-num" id="gd-price-srv-card">990€</span>
           <div class="fo-card-price-meta">
-            <span class="fo-card-price-label" data-i18n="pm.per.month">/mois</span>
+            <span class="fo-card-price-label" data-i18n="pm.per.year">/an</span>
             <span class="fo-card-price-months" data-i18n="fo.card.from3">après 1 mois d'essai gratuit</span>
           </div>
         </div>
@@ -3414,7 +3388,7 @@ html.light .fo-card-featured{
     <div class="co-left reveal">
       <div class="eyebrow" style="margin-bottom:1.4rem" data-i18n="co.eyebrow">Nous contacter</div>
       <h2 class="display" data-i18n-html="co.h2">Parlons de<br>votre <em>projet.</em></h2>
-      <p class="lead" data-i18n="co.lead">Une question, un devis, une démo personnalisée — nous répondons sous 24h, dans la langue qui vous convient. Choisissez le canal qui vous arrange.</p>
+      <p class="lead" data-i18n="co.lead">Une question, une demande, une suggestion — nous répondons sous 24h, dans la langue qui vous convient. Choisissez le canal qui vous arrange.</p>
       <div class="co-info">
         <div class="co-info-item">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
@@ -3518,13 +3492,11 @@ html.light .fo-card-featured{
       <div class="fp-step">
         <div class="fp-step-num">3</div>
         <div class="fp-step-body">
-          <div class="fp-step-label" data-i18n="fp.step3.label">Abonnement <span class="fp-step-tag" data-i18n="fp.step3.tag">à partir du 2ème mois</span></div>
+          <div class="fp-step-label" data-i18n="fp.step3.label">Abonnement <span class="fp-step-tag" data-i18n="fp.step3.tag">après votre mois d'essai</span></div>
           <div class="fp-step-price">
-            <strong><span id="gd-pp0-monthly">49€</span><span style="font-size:.7em;font-weight:500;color:var(--mute)" data-i18n="pm.per.month">/mois</span></strong>
-            <span style="color:var(--mute);font-size:.82em;margin-left:8px">ou</span>
             <strong><span id="gd-pp0-annual">490€</span><span style="font-size:.7em;font-weight:500;color:var(--mute)" data-i18n="pm.per.year">/an</span></strong>
           </div>
-          <div class="fp-step-sub" data-i18n="fp.step3.sub">Mensuel sans engagement · Annuel = 10 mois payés, 2 mois offerts. Changement libre pendant le mois d'essai.</div>
+          <div class="fp-step-sub" data-i18n="fp.step3.sub">Abonnement annuel = 10 mois payés, 2 mois offerts. Renouvellement automatique chaque année.</div>
         </div>
       </div>
     </div>
@@ -3580,14 +3552,11 @@ html.light .fo-card-featured{
       <div class="fp-step">
         <div class="fp-step-num">3</div>
         <div class="fp-step-body">
-          <div class="fp-step-label" data-i18n="fp.step3.label">Abonnement <span class="fp-step-tag" data-i18n="fp.step3.tag">à partir du 2ème mois</span></div>
+          <div class="fp-step-label" data-i18n="fp.step3.label">Abonnement <span class="fp-step-tag" data-i18n="fp.step3.tag">après votre mois d'essai</span></div>
           <div class="fp-step-price">
-            <strong><span id="gd-pp1-monthly">99€</span><span style="font-size:.7em;font-weight:500;color:var(--mute)" data-i18n="pm.per.month">/mois</span></strong>
-            <span style="color:var(--mute);font-size:.82em;margin-left:8px">ou</span>
             <strong><span id="gd-pp1-annual">990€</span><span style="font-size:.7em;font-weight:500;color:var(--mute)" data-i18n="pm.per.year">/an</span></strong>
           </div>
-          <div class="fp-step-sub" data-i18n="fp.step3b.sub">Mensuel sans engagement · Annuel = 10 mois payés, 2 mois offerts. Changement libre pendant le mois d'essai.</div>
-          <span id="gd-pp1-saving-note" style="display:block;font-size:0.78em;color:var(--mute);margin-top:3px"></span>
+          <div class="fp-step-sub" data-i18n="fp.step3b.sub">Abonnement annuel = 10 mois payés, 2 mois offerts. Renouvellement automatique chaque année.</div>
         </div>
       </div>
     </div>
@@ -3703,26 +3672,16 @@ html.light .fo-card-featured{
       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
     </button>
     <div class="eyebrow popup-eyebrow" id="pop-pm-eyebrow">Commander</div>
-    <h3 data-i18n-html="pm.h3">Mode d'<em>abonnement</em></h3>
-    <p class="popup-lead" data-i18n="pm.lead">Après votre mois d'essai gratuit — choisissez votre mode de facturation.</p>
-    <!-- Rappel étape 1 -->
+    <h3 data-i18n-html="pm.h3">Abonnement <em>annuel</em></h3>
+    <p class="popup-lead" data-i18n="pm.lead">1 mois d'essai gratuit, puis facturation annuelle automatique.</p>
+    <!-- Rappel essai gratuit -->
     <div style="background:rgba(200,164,78,.08);border:1px solid rgba(200,164,78,.2);border-radius:10px;padding:10px 14px;margin-bottom:1rem;font-size:.8rem;line-height:1.6;color:var(--bone-2)" data-i18n-html="pm.trial.reminder">
       🎁 <strong>1 mois d'essai offert</strong> dès votre première connexion — explorez tout gratuitement, sans frais de création.<br>
-      <strong>Mois 2+ :</strong> abonnement selon le mode choisi ci-dessous, facturé automatiquement.
+      <strong>Mois 2+ :</strong> abonnement annuel facturé automatiquement.
     </div>
-    <div class="pm-options">
-      <div class="pm-opt">
-        <div class="pm-opt-label" data-i18n="pm.monthly">Mensuel</div>
-        <div class="pm-price-wrap">
-          <span class="pm-price-main" id="pm-price-monthly">49€</span>
-          <span class="pm-price-period" data-i18n="pm.per.month">/mois</span>
-        </div>
-        <div class="pm-opt-desc" data-i18n="pm.monthly.desc">Sans engagement · résiliez à tout moment</div>
-        <div class="pm-opt-sub" data-i18n="pm.monthly.sub2">Flexible · changement 1×/mois</div>
-        <button class="pm-cta-btn" onclick="openCommanderWithMode('monthly')" data-i18n="pm.choose">Choisir ce mode</button>
-      </div>
-      <div class="pm-opt pm-opt-featured">
-        <div class="pm-opt-badge" data-i18n="pm.badge">Meilleure valeur</div>
+    <div class="pm-options" style="display:block">
+      <div class="pm-opt pm-opt-featured" style="max-width:100%">
+        <div class="pm-opt-badge" data-i18n="pm.badge">Inclut 2 mois offerts</div>
         <div class="pm-opt-label" data-i18n="pm.annual">Annuel</div>
         <div class="pm-price-wrap">
           <span class="pm-price-main" id="pm-price-annual">490€</span>
@@ -3730,7 +3689,7 @@ html.light .fo-card-featured{
         </div>
         <div class="pm-opt-desc" data-i18n="pm.annual.desc">Payez 10 mois · profitez de 12</div>
         <div class="pm-opt-sub" data-i18n="pm.annual.sub">2 mois offerts · soit −17%</div>
-        <button class="pm-cta-btn pm-cta-gold" onclick="openCommanderWithMode('annual')" data-i18n="pm.choose">Choisir ce mode</button>
+        <button class="pm-cta-btn pm-cta-gold" onclick="openCommanderWithMode('annual')" data-i18n="pm.choose">Continuer →</button>
       </div>
     </div>
     <p class="pm-note" data-i18n="pm.note">Aucun frais de création — la mise en ligne est incluse dans votre abonnement.</p>
@@ -3854,15 +3813,6 @@ html.light .fo-card-featured{
   window.scrollTo_=function(id){
     const sec=document.getElementById(id);if(!sec)return;
     const docTop=sec.getBoundingClientRect().top+window.scrollY;
-    if(id==='avantages'){
-      var ctrl=document.querySelector('.av-controls');
-      if(ctrl){
-        var ctrlBottom=ctrl.getBoundingClientRect().bottom+window.scrollY;
-        var byCtrl=ctrlBottom-window.innerHeight+24;
-        window.scrollTo({top:Math.round(Math.max(docTop-_navH(),byCtrl)),behavior:'smooth'});
-        return;
-      }
-    }
     if(id==='forfaits'){
       var foHead=document.querySelector('#forfaits .fo-head');
       if(foHead){
@@ -3931,44 +3881,7 @@ html.light .fo-card-featured{
     },{passive:true});
   })();
 
-  // ── AVANTAGES swiper ───────────────────────────────────
-  const avTrack=document.getElementById('avTrack');
-  const avCards=avTrack.querySelectorAll('.av-card');
-  const avNow=document.getElementById('avNow');
-  const avFill=document.getElementById('avFill');
-  let ai=0;
-  function avGo(n){
-    ai=(n+avCards.length)%avCards.length;
-    avTrack.style.transform=`translateX(-${ai*100}%)`;
-    avNow.textContent=String(ai+1).padStart(2,'0');
-    avFill.style.transform=`scaleX(${(ai+1)/avCards.length})`;
-  }
-  // Auto-cycle toutes les 5s
-  let avTimer=setInterval(()=>avGo(ai+1),5000);
-  function avResetTimer(){clearInterval(avTimer);avTimer=setInterval(()=>avGo(ai+1),5000);}
-  window.avNext=()=>{avGo(ai+1);avResetTimer();};
-  window.avPrev=()=>{avGo(ai-1);avResetTimer();};
-  avFill.style.transform=`scaleX(${1/avCards.length})`;
 
-  // Touch swipe avantages
-  (function(){
-    let sx=0;
-    avTrack.addEventListener('touchstart',e=>sx=e.touches[0].clientX,{passive:true});
-    avTrack.addEventListener('touchend',e=>{
-      const dx=e.changedTouches[0].clientX-sx;
-      if(Math.abs(dx)>50){dx<0?avGo(ai+1):avGo(ai-1);avResetTimer();}
-    },{passive:true});
-  })();
-
-  // Keyboard arrows when avantages in view
-  window.addEventListener('keydown',e=>{
-    const av=document.getElementById('avantages');
-    const r=av.getBoundingClientRect();
-    if(r.top<window.innerHeight*0.5&&r.bottom>window.innerHeight*0.5){
-      if(e.key==='ArrowRight')avGo(ai+1);
-      if(e.key==='ArrowLeft')avGo(ai-1);
-    }
-  });
 
   // ── FORFAITS style selector ────────────────────────────
   const styleBtns=document.querySelectorAll('.fo-style-btn');
@@ -4205,7 +4118,7 @@ html.light .fo-card-featured{
   // ── Translations ──────────────────────────────────────
   var T={
     fr:{
-      'brand':'GeNext','page.title':'GeNext — Une nouvelle ère du menu digital','fo.card0.name':'Menu QR Code','fo.card0.subtitle':'Menu digital accessible par QR code — sans application à télécharger','fo.card0.f1':'Menu QR multilingue accessible depuis smartphone ou tablette','fo.card0.f2':'Administration complète — modifiez menu, prix et photos en temps réel','fo.card0.f3':'Thèmes, couleurs et styles personnalisables','fo.card1.name':'Menu et Commandes','fo.card1.badge':'Le plus complet','fo.card1.subtitle':'Menu QR Code + commandes à table et appel serveur','fo.card1.f1':'Tout ce qui est inclus dans Menu QR Code','fo.card1.f2':'🔴 Appel serveur + 🟢 commandes à table en temps réel','fo.card1.f3':'Application serveur Android avec notifications push','fo.card.months2':'dans les 7 premiers jours','fo.card.then':'puis','fo.card.from3':'après 1 mois d\'essai gratuit','fo.card.details':'Voir les détails','fo.card.cmd':'Commander','fp.creation.label':'Démarrage gratuit','fp.creation.sub':'Espace créé instantanément · aucun frais de création','fp.monthly.sub':'à partir du 2ème mois · sans engagement','fp.annual.label':'Mode annuel','fp.annual.desc':'490€/an · payez 10 mois, profitez de 12','fp.renewal.label':'Renouvellement annuel','fp.renewal.desc':'Payez 10 mois, profitez de 12 mois','fp.test.desc':'1 mois d\'essai gratuit · aucun frais de création · démarrage offert','fp.payment.desc':'Virement bancaire · Espèces (Athènes) — mentionnez votre ID dans les détails','fp.steps.title':'Comment ça fonctionne','fp.step1.label':'Démarrage 100% gratuit','fp.step1.tag':'création incluse','fp.step1.sub':'Commandez maintenant — vous recevez vos identifiants par email instantanément. Aucun frais de création, mise en ligne offerte.','fp.step1.sub.card':'🎁 Démarrage 100% gratuit · aucun frais de création','fp.step2.label':'1 mois d\'essai','fp.step2.tag':'offert','fp.step2.sub':'Personnalisez votre menu, testez toutes les fonctionnalités, changez de formule librement.','fp.step3.label':'Abonnement','fp.step3.tag':'après votre mois d\'essai','fp.step3.sub':'Mensuel sans engagement · Annuel = 10 mois payés, 2 mois offerts. Changement libre pendant le mois d\'essai.','fp.step3b.sub':'Mensuel sans engagement · Annuel = 10 mois payés, 2 mois offerts. Changement libre pendant le mois d\'essai.','pm.trial.reminder':'🎁 <strong>1 mois d\'essai offert</strong> dès votre première connexion — explorez tout gratuitement, sans frais de création.<br><strong>Mois 2+ :</strong> abonnement selon le mode choisi ci-dessous, facturé automatiquement.','fp.0.title':'Tout ce qui est <em>inclus.</em>','fp.0.f1':'Menu QR digital accessible depuis smartphone, tablette ou ordinateur — sans application à télécharger','fp.0.f2':"3 styles d'affichage — Carte classique, Livre et Dynamique",'fp.0.f3':"10 thèmes par style · 15+ couleurs par thème — changez l'ambiance en un clic",'fp.0.f4':'Administration complète — modifiez votre menu, vos prix et vos photos en temps réel','fp.0.f5':"QR code général pour l'ensemble du restaurant · multilingue avec détection automatique",'fp.0.f6':'Hébergement, mise en ligne et maintenance inclus — clé en main','fp.1.title':'Tout ce qui est <em>inclus.</em>','fp.1.f1':'Tout ce qui est inclus dans Menu QR Code — menu digital, admin, thèmes et couleurs','fp.1.f2':'🔴 Appel serveur depuis la table — bouton dédié, notification push instantanée','fp.1.f3':'🟢 Commandes à table depuis le menu — panier, validation, suivi en temps réel','fp.1.f4':'Application serveur Android — gestion des commandes et appels avec notifications','fp.1.f5':'QR code individuel par table — chaque table a son propre QR code unique','fp.1.f6':"Statistiques commandes et appels — suivez l'activité de votre établissement",'nav.advantages':'Avantages','nav.pricing':'Tarifs','nav.contact':'Contact','nav.start':'Démarrer',
+      'brand':'GeNext','page.title':'GeNext — Une nouvelle ère du menu digital','fo.card0.name':'Menu QR Code','fo.card0.subtitle':'Menu digital accessible par QR code — sans application à télécharger','fo.card0.f1':'Menu QR multilingue accessible depuis smartphone ou tablette','fo.card0.f2':'Administration complète — modifiez menu, prix et photos en temps réel','fo.card0.f3':'Thèmes, couleurs et styles personnalisables','fo.card1.name':'Menu et Commandes','fo.card1.badge':'Le plus complet','fo.card1.subtitle':'Menu QR Code + commandes à table et appel serveur','fo.card1.f1':'Tout ce qui est inclus dans Menu QR Code','fo.card1.f2':'🔴 Appel serveur + 🟢 commandes à table en temps réel','fo.card1.f3':'Application serveur Android avec notifications push','fo.card.months2':'dans les 7 premiers jours','fo.card.then':'puis','fo.card.from3':'après 1 mois d\'essai gratuit','fo.card.details':'Voir les détails','fo.card.cmd':'Commander','fp.creation.label':'Démarrage gratuit','fp.creation.sub':'Espace créé instantanément · aucun frais de création','fp.monthly.sub':'abonnement annuel dès le 2ème mois','fp.annual.label':'Mode annuel','fp.annual.desc':'490€/an · payez 10 mois, profitez de 12','fp.renewal.label':'Renouvellement annuel','fp.renewal.desc':'Payez 10 mois, profitez de 12 mois','fp.test.desc':'1 mois d\'essai gratuit · aucun frais de création · démarrage offert','fp.payment.desc':'Virement bancaire · Espèces (Athènes) — mentionnez votre ID dans les détails','fp.steps.title':'Comment ça fonctionne','fp.step1.label':'Démarrage 100% gratuit','fp.step1.tag':'création incluse','fp.step1.sub':'Commandez maintenant — vous recevez vos identifiants par email instantanément. Aucun frais de création, mise en ligne offerte.','fp.step1.sub.card':'🎁 Démarrage 100% gratuit · aucun frais de création','fp.step2.label':'1 mois d\'essai','fp.step2.tag':'offert','fp.step2.sub':'Personnalisez votre menu, testez toutes les fonctionnalités, changez de formule librement.','fp.step3.label':'Abonnement','fp.step3.tag':'après votre mois d\'essai','fp.step3.sub':'Abonnement annuel = 10 mois payés, 2 mois offerts. Renouvellement automatique chaque année.','fp.step3b.sub':'Abonnement annuel = 10 mois payés, 2 mois offerts. Renouvellement automatique chaque année.','pm.trial.reminder':'🎁 <strong>1 mois d\'essai offert</strong> dès votre première connexion — explorez tout gratuitement, sans frais de création.<br><strong>Mois 2+ :</strong> abonnement annuel facturé automatiquement.','fp.0.title':'Tout ce qui est <em>inclus.</em>','fp.0.f1':'Menu QR digital accessible depuis smartphone, tablette ou ordinateur — sans application à télécharger','fp.0.f2':"3 styles d'affichage — Carte classique, Livre et Dynamique",'fp.0.f3':"10 thèmes par style · 15+ couleurs par thème — changez l'ambiance en un clic",'fp.0.f4':'Administration complète — modifiez votre menu, vos prix et vos photos en temps réel','fp.0.f5':"QR code général pour l'ensemble du restaurant · multilingue avec détection automatique",'fp.0.f6':'Hébergement, mise en ligne et maintenance inclus — clé en main','fp.1.title':'Tout ce qui est <em>inclus.</em>','fp.1.f1':'Tout ce qui est inclus dans Menu QR Code — menu digital, admin, thèmes et couleurs','fp.1.f2':'🔴 Appel serveur depuis la table — bouton dédié, notification push instantanée','fp.1.f3':'🟢 Commandes à table depuis le menu — panier, validation, suivi en temps réel','fp.1.f4':'Application serveur Android — gestion des commandes et appels avec notifications','fp.1.f5':'QR code individuel par table — chaque table a son propre QR code unique','fp.1.f6':"Statistiques commandes et appels — suivez l'activité de votre établissement",'nav.advantages':'Avantages','nav.pricing':'Tarifs','nav.contact':'Contact','nav.start':'Démarrer',
       'hero.eyebrow':'Système restaurant complet — menu QR, commandes à table et appel serveur',
       'hero.title.1':'Les clients scannent un QR,','hero.title.2':'commandent, ou appellent','hero.title.3':'le serveur <em>— en un tap.</em>',
       'hero.lead':'Vos clients scannent, consultent votre menu et commandent — ou appellent votre équipe en un tap. Sans application à télécharger, sans attente, depuis n\'importe quel téléphone.',
@@ -4214,6 +4127,7 @@ html.light .fo-card-featured{
       'hero.hud.label':'Aperçu du menu',
       'av.h2':'Cinq raisons de<br><em>passer au digital.</em>',
       'av.lead':'Moins de friction pour vos clients, moins de charge pour votre équipe — et une image qui inspire confiance dès la première seconde.',
+      'av.stat1.l':'Sans frais de création','av.stat2.l':'Langues disponibles','av.stat3.l':'Thèmes de design','av.stat4.l':'Mois d\'essai gratuit',
       'av.c1.h3':'Accès instantané,<br><em>sans contact ni attente.</em>','av.c1.p':'Dès qu\'il s\'assoit, votre client scanne et accède immédiatement à votre menu depuis son propre téléphone — sans attendre qu\'on lui apporte une carte, sans toucher des supports partagés. Une première impression soignée, dès la première seconde.','av.c1.t1':'Zéro attente','av.c1.t2':'Sans contact',
       'av.c2.h3':'Image soignée, ambiance premium,<br><em>clients qui reviennent.</em>','av.c2.p':'Un menu digital moderne avec thèmes, couleurs et photos de vos plats envoie un signal fort : votre établissement fait attention à chaque détail. Vos clients le ressentent dès le premier regard — et c\'est ce qui les pousse à revenir et à vous recommander.','av.c2.t1':'Image premium','av.c2.t2':'Fidélisation',
       'av.c3.h3':'5 langues, sans effort,<br><em>idéal pour les touristes.</em>','av.c3.p':'Votre menu s\'affiche dans la langue du visiteur — français, anglais, allemand, grec, arabe — sans aucune action de votre part. Accueillez touristes et expatriés sans friction. Un avantage décisif dans les destinations touristiques.','av.c3.t1':'Multilingue','av.c3.t2':'24h/24',
@@ -4240,7 +4154,7 @@ html.light .fo-card-featured{
       'fo.opt0.name':'Option Thèmes','fo.opt0.desc':'Accès à plus de 20 thèmes visuels premium (Gold Noir, Neon, Botanical, Rose Parisien…) avec variantes de couleurs — changez l\'ambiance de votre menu à tout moment depuis l\'admin.',
       'fo.opt1.name':'Option Sonnette','fo.opt1.desc':'Vos clients appellent le serveur en un tap depuis leur table. Notification push instantanée reçue sur votre téléphone ou tablette — sans application à installer côté client.',
       'fo.opt2.name':'Option Commande','fo.opt2.desc':'Vos clients passent leur commande directement depuis le menu QR code. Suivi live de la préparation affiché côté client, historique et gestion des commandes côté établissement.',
-      'co.eyebrow':'Nous contacter','co.h2':'Parlons de<br>votre <em>projet.</em>','co.lead':'Une question, un devis, une démo personnalisée — nous répondons sous 24h, dans la langue qui vous convient. Choisissez le canal qui vous arrange.',
+      'co.eyebrow':'Nous contacter','co.h2':'Parlons de<br>votre <em>projet.</em>','co.lead':'Une question, une demande, une suggestion — nous répondons sous 24h, dans la langue qui vous convient. Choisissez le canal qui vous arrange.',
       'co.info1':'Réponse sous 24h','co.info2':'Viber & WhatsApp · toutes langues',
       
       'co.wa.label':'WhatsApp','co.wa.sub':'+30 694 399 5696 · toutes langues',
@@ -4283,11 +4197,11 @@ html.light .fo-card-featured{
       'dv.sum.admin':'Admin',
       'dv.sum.options':'Options',
       'dv.sum.creation':'Création',
-      'dv.sum.mensuel':'Mensuel',
-      'demo.back':'Retour','android.tag':'Information importante','android.title':'Application serveur — Android uniquement','android.body':'Le forfait <strong>Commandes &amp; Services</strong> inclut une application dédiée pour vos serveurs, leur permettant de recevoir les commandes et appels de vos clients en temps réel.<br><br><strong>⚠️ Cette application est actuellement disponible sur Android uniquement.</strong> Vos serveurs devront disposer d\'un téléphone Android pour l\'utiliser.<br><br>La version <strong>iOS (iPhone)</strong> est en cours de développement et sera disponible prochainement.','android.btn':'J\'ai compris — Continuer →','pm.h3':'Mode d\'<em>abonnement</em>','pm.lead':'Après votre mois d\'essai gratuit — choisissez votre mode de facturation.','pm.trial.reminder':'🎁 <strong>1 mois d\'essai offert</strong> dès votre première connexion — explorez tout gratuitement, sans frais de création.<br><strong>Mois 2+ :</strong> abonnement selon le mode choisi ci-dessous, facturé automatiquement.','pm.monthly':'Mensuel','pm.per.month':'/mois','pm.monthly.desc':'Sans engagement · résiliez à tout moment','pm.monthly.sub2':'Flexible · changement 1×/mois','pm.choose':'Choisir ce mode','pm.badge':'Meilleure valeur','pm.annual':'Annuel','pm.per.year':'/an','pm.annual.desc':'Payez 10 mois · profitez de 12','pm.annual.sub':'2 mois offerts · soit −17%','cmd.h3':'Démarrer votre <em>projet.</em>','cmd.lead':'Remplissez le formulaire — vous recevrez vos identifiants par email instantanément, sans frais d\'installation.','cmd.f1.label':'Nom du café ou restaurant','cmd.f2.label':'Langue de communication','cmd.f3.label':'Email','cmd.f4.label':'WhatsApp','cmd.f5.label':'Viber','cmd.optional':'(optionnel)','cmd.hint':'L\'email est obligatoire — vos informations vous seront envoyées par email.','cmd.submit':'Envoyer ma demande →','cmd.sending':'⏳ Envoi en cours…','cmd.sent':'✓ Demande envoyée — vos identifiants arrivent dans votre email !','cmd.err.name':'⚠ Veuillez indiquer le nom de votre café ou restaurant.','cmd.err.contact':'⚠ Veuillez saisir votre adresse email — elle est obligatoire pour vous contacter.','cmd.err.network':'⚠ Erreur réseau : ','cmd.ok.title':'Demande reçue !','cmd.ok.body':'Votre espace GeNext est créé ! Vos identifiants vous sont envoyés par email dans les prochaines minutes.','cmd.ok.spam':'💡 Si vous ne trouvez pas l\'email, vérifiez vos spams ou courriers indésirables.','cmd.ok.close':'Fermer','themes.prefix':'Thèmes','themes.explore':'Explorez les thèmes','pm.note':'Aucun frais de création — la mise en ligne est incluse dans votre abonnement.','marquee.1':'Commandes à table','marquee.2':'Appel serveur','marquee.3':'Application serveur','marquee.4':'Administration simple','marquee.5':'Temps réel','fp.saving.0':'490€ au lieu de 588€/an','fp.saving.1':'990€ au lieu de 1188€/an','cmd.restaurant.ph': '','cmd.email.ph':'votre@email.com','dv.submit':'Envoyer ma demande','cmd.err.max_clients':'⚠ Cette adresse email a déjà 3 comptes actifs. Veuillez utiliser une adresse différente.'
+      'dv.sum.mensuel':'Annuel',
+      'demo.back':'Retour','android.tag':'Information importante','android.title':'Application serveur — Android uniquement','android.body':'Le forfait <strong>Commandes &amp; Services</strong> inclut une application dédiée pour vos serveurs, leur permettant de recevoir les commandes et appels de vos clients en temps réel.<br><br><strong>⚠️ Cette application est actuellement disponible sur Android uniquement.</strong> Vos serveurs devront disposer d\'un téléphone Android pour l\'utiliser.<br><br>La version <strong>iOS (iPhone)</strong> est en cours de développement et sera disponible prochainement.','android.btn':'J\'ai compris — Continuer →','pm.h3':'Abonnement <em>annuel</em>','pm.lead':'1 mois d\'essai gratuit, puis abonnement annuel automatique.','pm.trial.reminder':'🎁 <strong>1 mois d\'essai offert</strong> dès votre première connexion — explorez tout gratuitement, sans frais de création.<br><strong>Mois 2+ :</strong> abonnement annuel facturé automatiquement.','pm.monthly':'Mensuel','pm.per.month':'/mois','pm.monthly.desc':'Sans engagement · résiliez à tout moment','pm.monthly.sub2':'Flexible · changement 1×/mois','pm.choose':'Choisir ce mode','pm.badge':'Meilleure valeur','pm.annual':'Annuel','pm.per.year':'/an','pm.annual.desc':'Payez 10 mois · profitez de 12','pm.annual.sub':'2 mois offerts · soit −17%','cmd.h3':'Démarrer votre <em>projet.</em>','cmd.lead':'Remplissez le formulaire — vous recevrez vos identifiants par email instantanément, sans frais d\'installation.','cmd.f1.label':'Nom du café ou restaurant','cmd.f2.label':'Langue de communication','cmd.f3.label':'Email','cmd.f4.label':'WhatsApp','cmd.f5.label':'Viber','cmd.optional':'(optionnel)','cmd.hint':'L\'email est obligatoire — vos informations vous seront envoyées par email.','cmd.submit':'Envoyer ma demande →','cmd.sending':'⏳ Envoi en cours…','cmd.sent':'✓ Demande envoyée — vos identifiants arrivent dans votre email !','cmd.err.name':'⚠ Veuillez indiquer le nom de votre café ou restaurant.','cmd.err.contact':'⚠ Veuillez saisir votre adresse email — elle est obligatoire pour vous contacter.','cmd.err.network':'⚠ Erreur réseau : ','cmd.ok.title':'Demande reçue !','cmd.ok.body':'Votre espace est créé ! Vos identifiants vous sont envoyés par email dans les prochaines minutes.','cmd.ok.spam':'💡 Si vous ne trouvez pas l\'email, vérifiez vos spams ou courriers indésirables.','cmd.ok.close':'Fermer','themes.prefix':'Thèmes','themes.explore':'Explorez les thèmes','pm.note':'Aucun frais de création — la mise en ligne est incluse dans votre abonnement.','marquee.1':'Commandes à table','marquee.2':'Appel serveur','marquee.3':'Application serveur','marquee.4':'Administration simple','marquee.5':'Temps réel','fp.saving.0':'490€ au lieu de 588€/an','fp.saving.1':'990€ au lieu de 1188€/an','cmd.restaurant.ph': '','cmd.email.ph':'votre@email.com','dv.submit':'Envoyer ma demande','cmd.err.max_clients':'⚠ Cette adresse email a déjà 3 comptes actifs. Veuillez utiliser une adresse différente.'
     },
     en:{
-      'brand':'GeNext','page.title':'GeNext — A new era of digital menus','fo.card0.name':'Menu QR Code','fo.card0.subtitle':'Digital menu accessible via QR code — no app to download','fo.card0.f1':'Multilingual QR menu on smartphone or tablet','fo.card0.f2':'Full admin — update menu, prices and photos in real time','fo.card0.f3':'Customizable themes, colors and styles','fo.card1.name':'Menu & Orders','fo.card1.badge':'Most complete','fo.card1.subtitle':'Menu QR Code + table orders and waiter call','fo.card1.f1':'Everything included in Menu QR Code','fo.card1.f2':'🔴 Waiter call + 🟢 table orders in real time','fo.card1.f3':'Android server app with push notifications','fo.card.months2':'within the first 7 days','fo.card.then':'then','fo.card.from3':'after 1 free trial month','fo.card.details':'View details','fo.card.cmd':'Order now','fp.creation.label':'Free start','fp.creation.sub':'Space created instantly · no setup fee','fp.monthly.sub':'from month 2 · no commitment','fp.annual.label':'Annual plan','fp.annual.desc':'490€/year · pay 10 months, enjoy 12','fp.renewal.label':'Annual renewal','fp.renewal.desc':'Pay 10 months, enjoy 12 months','fp.test.desc':'1-month free trial · no setup fee · free start included','fp.payment.desc':'Bank transfer · Cash (Athens) — include your ID in the details','fp.steps.title':'How it works','fp.step1.label':'100% free start','fp.step1.tag':'setup included','fp.step1.sub':'Order now — you receive your credentials by email instantly. No setup fee, onboarding included.','fp.step1.sub.card':'🎁 100% free start · no setup fee','fp.step2.label':'1-month free trial','fp.step2.tag':'included','fp.step2.sub':'Customize your menu, test all features, change your plan freely.','fp.step3.label':'Subscription','fp.step3.tag':'after your free trial','fp.step3.sub':'Monthly with no commitment · Annual = 10 months paid, 2 months free. Switch plans freely during your trial.','fp.step3b.sub':'Monthly with no commitment · Annual = 10 months paid, 2 months free. Switch plans freely during your trial.','pm.trial.reminder':'🎁 <strong>1-month free trial</strong> from your first login — explore everything for free, no setup fee.<br><strong>Month 2+:</strong> subscription based on the plan chosen below, billed automatically.','fp.0.title':'Everything <em>included.</em>','fp.0.f1':'QR digital menu on smartphone, tablet or computer — no app to download','fp.0.f2':'3 display styles — Classic card, Book and Dynamic','fp.0.f3':'10 themes per style · 15+ colors — change the atmosphere in one click','fp.0.f4':'Full admin — update your menu, prices and photos in real time','fp.0.f5':'General QR code for the entire restaurant · multilingual with automatic detection','fp.0.f6':'Hosting, deployment and maintenance included — turnkey','fp.1.title':'Everything <em>included.</em>','fp.1.f1':'Everything included in Menu QR Code — digital menu, admin, themes','fp.1.f2':'🔴 Waiter call from the table — dedicated button, instant push notification','fp.1.f3':'🟢 Table orders from the menu — cart, checkout, live tracking','fp.1.f4':'Android server app — manage orders and calls with notifications','fp.1.f5':'Individual QR code per table — each table has its own unique QR code','fp.1.f6':"Order and call statistics — track your establishment's activity",'nav.advantages':'Benefits','nav.pricing':'Pricing','nav.contact':'Contact','nav.start':'Contact',
+      'brand':'GeNext','page.title':'GeNext — A new era of digital menus','fo.card0.name':'Menu QR Code','fo.card0.subtitle':'Digital menu accessible via QR code — no app to download','fo.card0.f1':'Multilingual QR menu on smartphone or tablet','fo.card0.f2':'Full admin — update menu, prices and photos in real time','fo.card0.f3':'Customizable themes, colors and styles','fo.card1.name':'Menu & Orders','fo.card1.badge':'Most complete','fo.card1.subtitle':'Menu QR Code + table orders and waiter call','fo.card1.f1':'Everything included in Menu QR Code','fo.card1.f2':'🔴 Waiter call + 🟢 table orders in real time','fo.card1.f3':'Android server app with push notifications','fo.card.months2':'within the first 7 days','fo.card.then':'then','fo.card.from3':'after 1 free trial month','fo.card.details':'View details','fo.card.cmd':'Order now','fp.creation.label':'Free start','fp.creation.sub':'Space created instantly · no setup fee','fp.monthly.sub':'annual subscription from month 2','fp.annual.label':'Annual plan','fp.annual.desc':'490€/year · pay 10 months, enjoy 12','fp.renewal.label':'Annual renewal','fp.renewal.desc':'Pay 10 months, enjoy 12 months','fp.test.desc':'1-month free trial · no setup fee · free start included','fp.payment.desc':'Bank transfer · Cash (Athens) — include your ID in the details','fp.steps.title':'How it works','fp.step1.label':'100% free start','fp.step1.tag':'setup included','fp.step1.sub':'Order now — you receive your credentials by email instantly. No setup fee, onboarding included.','fp.step1.sub.card':'🎁 100% free start · no setup fee','fp.step2.label':'1-month free trial','fp.step2.tag':'included','fp.step2.sub':'Customize your menu, test all features, change your plan freely.','fp.step3.label':'Subscription','fp.step3.tag':'after your free trial','fp.step3.sub':'Annual subscription = 10 months paid, 2 months free. Automatic renewal each year.','fp.step3b.sub':'Annual subscription = 10 months paid, 2 months free. Automatic renewal each year.','pm.trial.reminder':'🎁 <strong>1-month free trial</strong> from your first login — explore everything for free, no setup fee.<br><strong>Month 2+:</strong> annual subscription billed automatically.','fp.0.title':'Everything <em>included.</em>','fp.0.f1':'QR digital menu on smartphone, tablet or computer — no app to download','fp.0.f2':'3 display styles — Classic card, Book and Dynamic','fp.0.f3':'10 themes per style · 15+ colors — change the atmosphere in one click','fp.0.f4':'Full admin — update your menu, prices and photos in real time','fp.0.f5':'General QR code for the entire restaurant · multilingual with automatic detection','fp.0.f6':'Hosting, deployment and maintenance included — turnkey','fp.1.title':'Everything <em>included.</em>','fp.1.f1':'Everything included in Menu QR Code — digital menu, admin, themes','fp.1.f2':'🔴 Waiter call from the table — dedicated button, instant push notification','fp.1.f3':'🟢 Table orders from the menu — cart, checkout, live tracking','fp.1.f4':'Android server app — manage orders and calls with notifications','fp.1.f5':'Individual QR code per table — each table has its own unique QR code','fp.1.f6':"Order and call statistics — track your establishment's activity",'nav.advantages':'Benefits','nav.pricing':'Pricing','nav.contact':'Contact','nav.start':'Contact',
       'hero.eyebrow':'Complete restaurant system — QR menu, table orders and waiter call',
       'hero.title.1':'Customers scan a QR code,','hero.title.2':'order their food,','hero.title.3':'or call the waiter <em>— in one tap.</em>',
       'hero.lead':'Your customers scan, browse your menu and order — or call your team in one tap. No app to download, no waiting, from any phone.',
@@ -4296,6 +4210,7 @@ html.light .fo-card-featured{
       'hero.hud.label':'Menu preview',
       'av.h2':'Five reasons to<br><em>go digital.</em>',
       'av.lead':'Less friction for your customers, less load on your team — and an image that builds trust from the very first second.',
+      'av.stat1.l':'No setup fee','av.stat2.l':'Languages available','av.stat3.l':'Design themes','av.stat4.l':'Month free trial',
       'av.c1.h3':'Instant access,<br><em>no contact, no wait.</em>','av.c1.p':'The moment they sit down, your customer scans and instantly accesses your menu on their own phone — no waiting for someone to bring a menu, no touching shared items. A polished first impression, right from the first second.','av.c1.t1':'Zero wait','av.c1.t2':'No contact',
       'av.c2.h3':'Premium image, polished feel,<br><em>customers who return.</em>','av.c2.p':'A modern digital menu with themes, colors and dish photos sends a clear signal: your establishment cares about every detail. Your customers feel it from the very first look — and that\'s what brings them back and makes them recommend you.','av.c2.t1':'Premium image','av.c2.t2':'Customer loyalty',
       'av.c3.h3':'5 languages, effortlessly,<br><em>ideal for tourists.</em>','av.c3.p':'Your menu appears in the visitor\'s language — French, English, German, Greek, Arabic — with no action needed on your part. Welcome tourists and expats without friction. A decisive advantage in tourist destinations.','av.c3.t1':'Multilingual','av.c3.t2':'24/7',
@@ -4327,7 +4242,7 @@ html.light .fo-card-featured{
       'fo.opt0.name':'Themes Option','fo.opt0.desc':'Access to 20+ premium visual themes (Gold Noir, Neon, Botanical, Rose Parisian…) with color variants — change your menu\'s look at any time from the admin panel.',
       'fo.opt1.name':'Bell Option','fo.opt1.desc':'Customers call the waiter with a single tap from their table. Instant push notification on your phone or tablet — no app needed on the customer side.',
       'fo.opt2.name':'Order Option','fo.opt2.desc':'Customers place their order directly from the QR code menu. Live preparation tracking shown to the customer, full order history and management on the venue side.',
-      'co.eyebrow':'Contact us','co.h2':'Let\'s talk about<br>your <em>project.</em>','co.lead':'A question, a quote, a personalized demo — we respond within 24h, in the language that suits you. Choose the channel that works for you.',
+      'co.eyebrow':'Contact us','co.h2':'Let\'s talk about<br>your <em>project.</em>','co.lead':'A question, a request, a suggestion — we respond within 24h, in the language that suits you. Choose the channel that works for you.',
       'co.info1':'Response within 24h','co.info2':'Viber & WhatsApp · all languages',
       'co.wa.label':'WhatsApp','co.wa.sub':'+30 694 399 5696 · all languages',
       'co.vb.label':'Viber','co.vb.sub':'+30 694 399 5696 · all languages',
@@ -4369,11 +4284,11 @@ html.light .fo-card-featured{
       'dv.sum.admin':'Admin',
       'dv.sum.options':'Options',
       'dv.sum.creation':'Setup',
-      'dv.sum.mensuel':'Monthly',
-      'demo.back':'Back','android.tag':'Important notice','android.title':'Server app — Android only','android.body':'The <strong>Menu &amp; Orders</strong> plan includes a dedicated app for your staff, allowing them to receive orders and calls from your customers in real time.<br><br><strong>⚠️ This app is currently available on Android only.</strong> Your staff will need an Android phone to use it.<br><br>The <strong>iOS (iPhone)</strong> version is in development and will be available soon.','android.btn':'Got it — Continue →','pm.h3':'<em>Subscription</em> plan','pm.lead':'After your free trial month — choose your billing mode.','pm.trial.reminder':'🎁 <strong>1-month free trial</strong> from your first login — explore everything for free, no setup fee.<br><strong>Month 2+:</strong> subscription based on the plan chosen below, billed automatically.','pm.monthly':'Monthly','pm.per.month':'/month','pm.monthly.desc':'No commitment · cancel anytime','pm.monthly.sub2':'Flexible · change plan once/month','pm.choose':'Choose this option','pm.badge':'Best value','pm.annual':'Annual','pm.per.year':'/year','pm.annual.desc':'Pay 10 months · enjoy 12','pm.annual.sub':'2 months free · −17%','cmd.h3':'Start your <em>project.</em>','cmd.lead':'Fill in the form — you will receive your credentials by email instantly, with no installation fee.','cmd.f1.label':'Name of your café or restaurant','cmd.f2.label':'Communication language','cmd.f3.label':'Email','cmd.f4.label':'WhatsApp','cmd.f5.label':'Viber','cmd.optional':'(optional)','cmd.hint':'Email is required — your information will be sent to you by email.','cmd.submit':'Send my request →','cmd.sending':'⏳ Sending…','cmd.sent':'✓ Request sent — your credentials are on their way to your email!','cmd.err.name':'⚠ Please enter the name of your café or restaurant.','cmd.err.contact':'⚠ Please enter your email address — it is required to contact you.','cmd.err.network':'⚠ Network error: ','cmd.ok.title':'Request received!','cmd.ok.body':'Your GeNext space is created! Your credentials will be sent to you by email within the next few minutes.','cmd.ok.spam':'💡 If you don\'t see the email, please check your spam or junk folder.','cmd.ok.close':'Close','themes.prefix':'Themes','themes.explore':'Explore themes','pm.note':'No setup fee — onboarding is included in your subscription.','marquee.1':'Table orders','marquee.2':'Waiter call','marquee.3':'Server app','marquee.4':'Simple admin','marquee.5':'Real time','fp.saving.0':'490€ instead of 588€/year','fp.saving.1':'990€ instead of 1188€/year','cmd.restaurant.ph': '','cmd.email.ph':'your@email.com','dv.submit':'Send my request','cmd.err.max_clients':'⚠ This email already has 3 active accounts. Please use a different address.'
+      'dv.sum.mensuel':'Annual',
+      'demo.back':'Back','android.tag':'Important notice','android.title':'Server app — Android only','android.body':'The <strong>Menu &amp; Orders</strong> plan includes a dedicated app for your staff, allowing them to receive orders and calls from your customers in real time.<br><br><strong>⚠️ This app is currently available on Android only.</strong> Your staff will need an Android phone to use it.<br><br>The <strong>iOS (iPhone)</strong> version is in development and will be available soon.','android.btn':'Got it — Continue →','pm.h3':'Annual <em>subscription</em>','pm.lead':'1 free trial month, then automatic annual subscription.','pm.trial.reminder':'🎁 <strong>1-month free trial</strong> from your first login — explore everything for free, no setup fee.<br><strong>Month 2+:</strong> annual subscription billed automatically.','pm.monthly':'Monthly','pm.per.month':'/month','pm.monthly.desc':'No commitment · cancel anytime','pm.monthly.sub2':'Flexible · change plan once/month','pm.choose':'Choose this option','pm.badge':'Best value','pm.annual':'Annual','pm.per.year':'/year','pm.annual.desc':'Pay 10 months · enjoy 12','pm.annual.sub':'2 months free · −17%','cmd.h3':'Start your <em>project.</em>','cmd.lead':'Fill in the form — you will receive your credentials by email instantly, with no installation fee.','cmd.f1.label':'Name of your café or restaurant','cmd.f2.label':'Communication language','cmd.f3.label':'Email','cmd.f4.label':'WhatsApp','cmd.f5.label':'Viber','cmd.optional':'(optional)','cmd.hint':'Email is required — your information will be sent to you by email.','cmd.submit':'Send my request →','cmd.sending':'⏳ Sending…','cmd.sent':'✓ Request sent — your credentials are on their way to your email!','cmd.err.name':'⚠ Please enter the name of your café or restaurant.','cmd.err.contact':'⚠ Please enter your email address — it is required to contact you.','cmd.err.network':'⚠ Network error: ','cmd.ok.title':'Request received!','cmd.ok.body':'Your space is created! Your credentials will be sent to you by email within the next few minutes.','cmd.ok.spam':'💡 If you don\'t see the email, please check your spam or junk folder.','cmd.ok.close':'Close','themes.prefix':'Themes','themes.explore':'Explore themes','pm.note':'No setup fee — onboarding is included in your subscription.','marquee.1':'Table orders','marquee.2':'Waiter call','marquee.3':'Server app','marquee.4':'Simple admin','marquee.5':'Real time','fp.saving.0':'490€ instead of 588€/year','fp.saving.1':'990€ instead of 1188€/year','cmd.restaurant.ph': '','cmd.email.ph':'your@email.com','dv.submit':'Send my request','cmd.err.max_clients':'⚠ This email already has 3 active accounts. Please use a different address.'
     },
     el:{
-      'brand':'GeNext','page.title':'GeNext — Μια νέα εποχή ψηφιακών μενού','fo.card0.name':'Μενού QR Code','fo.card0.subtitle':'Ψηφιακό μενού προσβάσιμο μέσω QR code — χωρίς εφαρμογή','fo.card0.f1':'Πολύγλωσσο μενού QR σε smartphone ή tablet','fo.card0.f2':'Πλήρης διαχείριση — αλλάξτε τιμές και φωτογραφίες σε πραγματικό χρόνο','fo.card0.f3':'Θέματα, χρώματα και στυλ — εξατομικεύσιμα','fo.card1.name':'Μενού & Παραγγελίες','fo.card1.badge':'Πιο ολοκληρωμένο','fo.card1.subtitle':'Menu QR Code + παραγγελίες τραπεζιού και κλήση σερβιτόρου','fo.card1.f1':'Όλα όσα περιλαμβάνει το Menu QR Code','fo.card1.f2':'🔴 Κλήση σερβιτόρου + 🟢 παραγγελίες τραπεζιού σε πραγματικό χρόνο','fo.card1.f3':'Android εφαρμογή σερβιτόρου με push ειδοποιήσεις','fo.card.months2':'εντός των πρώτων 7 ημερών','fo.card.then':'έπειτα','fo.card.from3':'μετά από 1 μήνα δωρεάν δοκιμή','fo.card.details':'Λεπτομέρειες','fo.card.cmd':'Παραγγείλτε','fp.creation.label':'Δωρεάν εκκίνηση','fp.creation.sub':'Έτοιμο αμέσως · χωρίς τέλη δημιουργίας','fp.monthly.sub':'από τον 2ο μήνα · χωρίς δέσμευση','fp.annual.label':'Ετήσιο πλάνο','fp.annual.desc':'490€/έτος · πληρώνετε 10, απολαμβάνετε 12 μήνες','fp.renewal.label':'Ετήσια ανανέωση','fp.renewal.desc':'Πληρώνετε 10 μήνες, έχετε 12 μήνες','fp.test.desc':'1 μήνας δωρεάν δοκιμή · χωρίς τέλη δημιουργίας · δωρεάν εκκίνηση','fp.payment.desc':'Τραπεζικό έμβασμα · Μετρητά (Αθήνα) — αναφέρετε το ID σας','fp.steps.title':'Πώς λειτουργεί','fp.step1.label':'100% δωρεάν εκκίνηση','fp.step1.tag':'η δημιουργία συμπεριλαμβάνεται','fp.step1.sub':'Παραγγείλτε τώρα — λαμβάνετε τα στοιχεία σας μέσω email άμεσα. Χωρίς τέλη δημιουργίας, η εγκατάσταση περιλαμβάνεται.','fp.step1.sub.card':'🎁 100% δωρεάν εκκίνηση · χωρίς τέλη δημιουργίας','fp.step2.label':'1 μήνας δωρεάν δοκιμής','fp.step2.tag':'δωρεάν','fp.step2.sub':'Προσαρμόστε το μενού σας, δοκιμάστε όλες τις λειτουργίες, αλλάξτε πλάνο ελεύθερα.','fp.step3.label':'Συνδρομή','fp.step3.tag':'μετά τον δωρεάν μήνα','fp.step3.sub':'Μηνιαία χωρίς δέσμευση · Ετήσια = 10 μήνες πληρωμή, 2 δωρεάν. Ελεύθερη αλλαγή πλάνου κατά τη δοκιμή.','fp.step3b.sub':'Μηνιαία χωρίς δέσμευση · Ετήσια = 10 μήνες πληρωμή, 2 δωρεάν. Ελεύθερη αλλαγή πλάνου κατά τη δοκιμή.','pm.trial.reminder':'🎁 <strong>1 μήνας δωρεάν δοκιμή</strong> από την πρώτη σύνδεση — εξερευνήστε τα πάντα δωρεάν, χωρίς τέλη δημιουργίας.<br><strong>Μήνας 2+:</strong> συνδρομή βάσει του πλάνου που επιλέγετε, αυτόματα.','fp.0.title':'Όλα όσα <em>περιλαμβάνονται.</em>','fp.0.f1':'Ψηφιακό μενού QR σε smartphone, tablet ή υπολογιστή — χωρίς εφαρμογή','fp.0.f2':'3 στυλ εμφάνισης — Κλασική κάρτα, Βιβλίο και Δυναμικό','fp.0.f3':'10 θέματα ανά στυλ · 15+ χρώματα — αλλάξτε την ατμόσφαιρα με ένα κλικ','fp.0.f4':'Πλήρης διαχείριση — αλλάξτε μενού, τιμές και φωτογραφίες σε πραγματικό χρόνο','fp.0.f5':'Γενικός QR code για το εστιατόριο · πολύγλωσσο με αυτόματη ανίχνευση','fp.0.f6':'Φιλοξενία, δημοσίευση και συντήρηση — όλα συμπεριλαμβάνονται','fp.1.title':'Όλα όσα <em>περιλαμβάνονται.</em>','fp.1.f1':'Όλα όσα περιλαμβάνει το Menu QR Code — μενού, admin, θέματα','fp.1.f2':'🔴 Κλήση σερβιτόρου — αφιερωμένο κουμπί, άμεση push ειδοποίηση','fp.1.f3':'🟢 Παραγγελίες τραπεζιού — καλάθι, επιβεβαίωση, παρακολούθηση σε πραγματικό χρόνο','fp.1.f4':'Android εφαρμογή σερβιτόρου — διαχείριση παραγγελιών και κλήσεων','fp.1.f5':'Μεμονωμένος QR code ανά τραπέζι — κάθε τραπέζι έχει τον δικό του QR','fp.1.f6':'Στατιστικά παραγγελιών και κλήσεων — παρακολουθήστε την κίνηση','nav.advantages':'Πλεονεκτήματα','nav.pricing':'Τιμές','nav.contact':'Επικοινωνία','nav.start':'Επικοινωνία',
+      'brand':'GeNext','page.title':'GeNext — Μια νέα εποχή ψηφιακών μενού','fo.card0.name':'Μενού QR Code','fo.card0.subtitle':'Ψηφιακό μενού προσβάσιμο μέσω QR code — χωρίς εφαρμογή','fo.card0.f1':'Πολύγλωσσο μενού QR σε smartphone ή tablet','fo.card0.f2':'Πλήρης διαχείριση — αλλάξτε τιμές και φωτογραφίες σε πραγματικό χρόνο','fo.card0.f3':'Θέματα, χρώματα και στυλ — εξατομικεύσιμα','fo.card1.name':'Μενού & Παραγγελίες','fo.card1.badge':'Πιο ολοκληρωμένο','fo.card1.subtitle':'Menu QR Code + παραγγελίες τραπεζιού και κλήση σερβιτόρου','fo.card1.f1':'Όλα όσα περιλαμβάνει το Menu QR Code','fo.card1.f2':'🔴 Κλήση σερβιτόρου + 🟢 παραγγελίες τραπεζιού σε πραγματικό χρόνο','fo.card1.f3':'Android εφαρμογή σερβιτόρου με push ειδοποιήσεις','fo.card.months2':'εντός των πρώτων 7 ημερών','fo.card.then':'έπειτα','fo.card.from3':'μετά από 1 μήνα δωρεάν δοκιμή','fo.card.details':'Λεπτομέρειες','fo.card.cmd':'Παραγγείλτε','fp.creation.label':'Δωρεάν εκκίνηση','fp.creation.sub':'Έτοιμο αμέσως · χωρίς τέλη δημιουργίας','fp.monthly.sub':'ετήσια συνδρομή από τον 2ο μήνα','fp.annual.label':'Ετήσιο πλάνο','fp.annual.desc':'490€/έτος · πληρώνετε 10, απολαμβάνετε 12 μήνες','fp.renewal.label':'Ετήσια ανανέωση','fp.renewal.desc':'Πληρώνετε 10 μήνες, έχετε 12 μήνες','fp.test.desc':'1 μήνας δωρεάν δοκιμή · χωρίς τέλη δημιουργίας · δωρεάν εκκίνηση','fp.payment.desc':'Τραπεζικό έμβασμα · Μετρητά (Αθήνα) — αναφέρετε το ID σας','fp.steps.title':'Πώς λειτουργεί','fp.step1.label':'100% δωρεάν εκκίνηση','fp.step1.tag':'η δημιουργία συμπεριλαμβάνεται','fp.step1.sub':'Παραγγείλτε τώρα — λαμβάνετε τα στοιχεία σας μέσω email άμεσα. Χωρίς τέλη δημιουργίας, η εγκατάσταση περιλαμβάνεται.','fp.step1.sub.card':'🎁 100% δωρεάν εκκίνηση · χωρίς τέλη δημιουργίας','fp.step2.label':'1 μήνας δωρεάν δοκιμής','fp.step2.tag':'δωρεάν','fp.step2.sub':'Προσαρμόστε το μενού σας, δοκιμάστε όλες τις λειτουργίες, αλλάξτε πλάνο ελεύθερα.','fp.step3.label':'Συνδρομή','fp.step3.tag':'μετά τον δωρεάν μήνα','fp.step3.sub':'Ετήσια συνδρομή = 10 μήνες πληρωμής, 2 δωρεάν. Αυτόματη ανανέωση κάθε χρόνο.','fp.step3b.sub':'Ετήσια συνδρομή = 10 μήνες πληρωμής, 2 δωρεάν. Αυτόματη ανανέωση κάθε χρόνο.','pm.trial.reminder':'🎁 <strong>1 μήνας δωρεάν δοκιμή</strong> από την πρώτη σύνδεση — εξερευνήστε τα πάντα δωρεάν, χωρίς τέλη δημιουργίας.<br><strong>Μήνας 2+:</strong> ετήσια συνδρομή, αυτόματη χρέωση.','fp.0.title':'Όλα όσα <em>περιλαμβάνονται.</em>','fp.0.f1':'Ψηφιακό μενού QR σε smartphone, tablet ή υπολογιστή — χωρίς εφαρμογή','fp.0.f2':'3 στυλ εμφάνισης — Κλασική κάρτα, Βιβλίο και Δυναμικό','fp.0.f3':'10 θέματα ανά στυλ · 15+ χρώματα — αλλάξτε την ατμόσφαιρα με ένα κλικ','fp.0.f4':'Πλήρης διαχείριση — αλλάξτε μενού, τιμές και φωτογραφίες σε πραγματικό χρόνο','fp.0.f5':'Γενικός QR code για το εστιατόριο · πολύγλωσσο με αυτόματη ανίχνευση','fp.0.f6':'Φιλοξενία, δημοσίευση και συντήρηση — όλα συμπεριλαμβάνονται','fp.1.title':'Όλα όσα <em>περιλαμβάνονται.</em>','fp.1.f1':'Όλα όσα περιλαμβάνει το Menu QR Code — μενού, admin, θέματα','fp.1.f2':'🔴 Κλήση σερβιτόρου — αφιερωμένο κουμπί, άμεση push ειδοποίηση','fp.1.f3':'🟢 Παραγγελίες τραπεζιού — καλάθι, επιβεβαίωση, παρακολούθηση σε πραγματικό χρόνο','fp.1.f4':'Android εφαρμογή σερβιτόρου — διαχείριση παραγγελιών και κλήσεων','fp.1.f5':'Μεμονωμένος QR code ανά τραπέζι — κάθε τραπέζι έχει τον δικό του QR','fp.1.f6':'Στατιστικά παραγγελιών και κλήσεων — παρακολουθήστε την κίνηση','nav.advantages':'Πλεονεκτήματα','nav.pricing':'Τιμές','nav.contact':'Επικοινωνία','nav.start':'Επικοινωνία',
       'hero.eyebrow':'Πλήρες σύστημα εστιατορίου — μενού QR, παραγγελίες τραπεζιού και κλήση σερβιτόρου',
       'hero.title.1':'Οι πελάτες σαρώνουν ένα QR,','hero.title.2':'παραγγέλνουν ή καλούν','hero.title.3':'τον σερβιτόρο <em>— με ένα tap.</em>',
       'hero.lead':'Οι πελάτες σας σαρώνουν, βλέπουν το μενού και παραγγέλνουν — ή καλούν την ομάδα σας με ένα tap. Χωρίς εφαρμογή, χωρίς αναμονή, από οποιοδήποτε τηλέφωνο.',
@@ -4382,6 +4297,7 @@ html.light .fo-card-featured{
       'hero.hud.label':'Προεπισκόπηση μενού',
       'av.h2':'Πέντε λόγοι για να<br><em>πάτε ψηφιακά.</em>',
       'av.lead':'Λιγότερη ταλαιπωρία για τους πελάτες σας, λιγότερη πίεση για την ομάδα σας — και μια εικόνα που εμπνέει εμπιστοσύνη από το πρώτο δευτερόλεπτο.',
+      'av.stat1.l':'Χωρίς χρεώσεις εγγραφής','av.stat2.l':'Διαθέσιμες γλώσσες','av.stat3.l':'Θέματα σχεδιασμού','av.stat4.l':'Μήνας δωρεάν δοκιμή',
       'av.c1.h3':'Άμεση πρόσβαση,<br><em>χωρίς επαφή ή αναμονή.</em>','av.c1.p':'Μόλις καθίσουν, οι πελάτες σας σαρώνουν και έχουν άμεσα πρόσβαση στο μενού σας από το δικό τους τηλέφωνο — χωρίς να περιμένουν να τους φέρουν κατάλογο, χωρίς να αγγίξουν κοινόχρηστα αντικείμενα. Μια άψογη πρώτη εντύπωση, από το πρώτο δευτερόλεπτο.','av.c1.t1':'Μηδέν αναμονή','av.c1.t2':'Χωρίς επαφή',
       'av.c2.h3':'Premium εικόνα, κομψή ατμόσφαιρα,<br><em>πελάτες που επιστρέφουν.</em>','av.c2.p':'Ένα σύγχρονο ψηφιακό μενού με θέματα, χρώματα και φωτογραφίες των πιάτων σας στέλνει ένα ξεκάθαρο μήνυμα: η επιχείρησή σας φροντίζει κάθε λεπτομέρεια. Οι πελάτες σας το αισθάνονται από την πρώτη ματιά — και αυτό είναι που τους κάνει να επιστρέφουν και να σας συστήνουν.','av.c2.t1':'Premium εικόνα','av.c2.t2':'Πιστοί πελάτες',
       'av.c3.h3':'5 γλώσσες, αβίαστα,<br><em>ιδανικό για τουρίστες.</em>','av.c3.p':'Το μενού σας εμφανίζεται στη γλώσσα του επισκέπτη — γαλλικά, αγγλικά, γερμανικά, ελληνικά, αραβικά — χωρίς καμία ενέργεια από μέρους σας. Υποδεχτείτε τουρίστες και ξενόγλωσσους χωρίς τριβές. Αποφασιστικό πλεονέκτημα σε τουριστικούς προορισμούς.','av.c3.t1':'Πολύγλωσσο','av.c3.t2':'24ω/24',
@@ -4414,7 +4330,7 @@ html.light .fo-card-featured{
       'fo.opt0.name':'Επιλογή Θεμάτων','fo.opt0.desc':'Πρόσβαση σε 20+ premium οπτικά θέματα (Gold Noir, Neon, Botanical, Rose Parisien…) με παραλλαγές χρωμάτων — αλλάξτε την εμφάνιση του μενού σας οποιαδήποτε στιγμή από τον πίνακα admin.',
       'fo.opt1.name':'Επιλογή Κουδουνιού','fo.opt1.desc':'Οι πελάτες καλούν τον σερβιτόρο με ένα tap από το τραπέζι τους. Άμεση push ειδοποίηση στο κινητό ή tablet σας — χωρίς εφαρμογή από την πλευρά του πελάτη.',
       'fo.opt2.name':'Επιλογή Παραγγελίας','fo.opt2.desc':'Οι πελάτες παραγγέλνουν απευθείας από το μενού QR code. Live παρακολούθηση παρασκευής για τον πελάτη, πλήρες ιστορικό και διαχείριση παραγγελιών για την επιχείρηση.',
-      'co.eyebrow':'Επικοινωνία','co.h2':'Ας μιλήσουμε για<br>το <em>έργο σας.</em>','co.lead':'Μια ερώτηση, μια προσφορά, μια εξατομικευμένη επίδειξη — απαντάμε εντός 24 ωρών, στη γλώσσα που σας εξυπηρετεί.',
+      'co.eyebrow':'Επικοινωνία','co.h2':'Ας μιλήσουμε για<br>το <em>έργο σας.</em>','co.lead':'Μια ερώτηση, ένα αίτημα, μια πρόταση — απαντάμε εντός 24 ωρών, στη γλώσσα που σας εξυπηρετεί.',
       'co.info1':'Απάντηση εντός 24 ωρών','co.info2':'Viber & WhatsApp · όλες οι γλώσσες',
       'co.wa.label':'WhatsApp','co.wa.sub':'+30 694 399 5696 · όλες οι γλώσσες',
       'co.vb.label':'Viber','co.vb.sub':'+30 694 399 5696 · όλες οι γλώσσες',
@@ -4457,10 +4373,10 @@ html.light .fo-card-featured{
       'dv.sum.options':'Επιλογές',
       'dv.sum.creation':'Δημιουργία',
       'dv.sum.mensuel':'Μηνιαίως',
-      'demo.back':'Πίσω','android.tag':'Σημαντική πληροφορία','android.title':'Εφαρμογή σερβιτόρου — Μόνο Android','android.body':'Το πλάνο <strong>Μενού &amp; Παραγγελίες</strong> περιλαμβάνει μια αποκλειστική εφαρμογή για το προσωπικό σας, που του επιτρέπει να λαμβάνει παραγγελίες και κλήσεις από τους πελάτες σας σε πραγματικό χρόνο.<br><br><strong>⚠️ Αυτή η εφαρμογή είναι διαθέσιμη μόνο σε Android προς το παρόν.</strong> Το προσωπικό σας θα χρειαστεί Android τηλέφωνο για να τη χρησιμοποιήσει.<br><br>Η έκδοση για <strong>iOS (iPhone)</strong> βρίσκεται σε ανάπτυξη και θα είναι διαθέσιμη σύντομα.','android.btn':'Κατάλαβα — Συνέχεια →','pm.h3':'<em>Συνδρομή</em>','pm.lead':'Μετά τον δωρεάν μήνα δοκιμής — επιλέξτε τον τρόπο χρέωσής σας.','pm.trial.reminder':'🎁 <strong>1 μήνας δωρεάν δοκιμή</strong> από την πρώτη σύνδεση — εξερευνήστε τα πάντα δωρεάν, χωρίς τέλη δημιουργίας.<br><strong>Μήνας 2+:</strong> συνδρομή βάσει του πλάνου που επιλέγετε, αυτόματα.','pm.monthly':'Μηνιαία','pm.per.month':'/μήνα','pm.monthly.desc':'Χωρίς δέσμευση · ακύρωση ανά πάσα στιγμή','pm.monthly.sub2':'Ευέλικτη · αλλαγή πλάνου 1×/μήνα','pm.choose':'Επιλέξτε αυτή τη λύση','pm.badge':'Καλύτερη αξία','pm.annual':'Ετήσια','pm.per.year':'/έτος','pm.annual.desc':'Πληρώνετε 10 μήνες · έχετε 12','pm.annual.sub':'2 δωρεάν μήνες · −17%','cmd.h3':'Ξεκινήστε το <em>project σας.</em>','cmd.lead':'Συμπληρώστε τη φόρμα — θα λάβετε τα στοιχεία σας μέσω email αμέσως, χωρίς χρεώσεις εγκατάστασης.','cmd.f1.label':'Όνομα καφέ ή εστιατορίου','cmd.f2.label':'Γλώσσα επικοινωνίας','cmd.f3.label':'Email','cmd.f4.label':'WhatsApp','cmd.f5.label':'Viber','cmd.optional':'(προαιρετικό)','cmd.hint':'Το email είναι υποχρεωτικό — οι πληροφορίες σας θα σας αποστέλλονται μέσω email.','cmd.submit':'Αποστολή αιτήματος →','cmd.sending':'⏳ Αποστολή…','cmd.sent':'✓ Αίτημα στάλθηκε — τα στοιχεία σας στέλνονται στο email σας!','cmd.err.name':'⚠ Παρακαλώ εισάγετε το όνομα του καφέ ή εστιατορίου σας.','cmd.err.contact':'⚠ Παρακαλώ εισάγετε το email σας — είναι υποχρεωτικό για να επικοινωνήσουμε μαζί σας.','cmd.err.network':'⚠ Σφάλμα δικτύου: ','cmd.ok.title':'Αίτημα ελήφθη!','cmd.ok.body':'Ο χώρος GeNext σας δημιουργήθηκε! Τα στοιχεία σύνδεσης θα σας αποσταλούν μέσω email σε λίγα λεπτά.','cmd.ok.spam':'💡 Αν δεν λάβετε το email, ελέγξτε τον φάκελο ανεπιθύμητης αλληλογραφίας.','cmd.ok.close':'Κλείσιμο','themes.prefix':'Θέματα','themes.explore':'Εξερευνήστε τα θέματα','pm.note':'Χωρίς τέλη δημιουργίας — η ενεργοποίηση συμπεριλαμβάνεται στη συνδρομή σας.','marquee.1':'Παραγγελίες τραπεζιού','marquee.2':'Κλήση σερβιτόρου','marquee.3':'Εφαρμογή σερβιτόρου','marquee.4':'Απλή διαχείριση','marquee.5':'Πραγματικός χρόνος','fp.saving.0':'490€ αντί 588€/έτος','fp.saving.1':'990€ αντί 1188€/έτος','cmd.restaurant.ph': '','cmd.email.ph':'your@email.com','dv.submit':'Αποστολή αιτήματος','cmd.err.max_clients':'⚠ Αυτό το email έχει ήδη 3 ενεργούς λογαριασμούς. Παρακαλώ χρησιμοποιήστε διαφορετική διεύθυνση.'
+      'demo.back':'Πίσω','android.tag':'Σημαντική πληροφορία','android.title':'Εφαρμογή σερβιτόρου — Μόνο Android','android.body':'Το πλάνο <strong>Μενού &amp; Παραγγελίες</strong> περιλαμβάνει μια αποκλειστική εφαρμογή για το προσωπικό σας, που του επιτρέπει να λαμβάνει παραγγελίες και κλήσεις από τους πελάτες σας σε πραγματικό χρόνο.<br><br><strong>⚠️ Αυτή η εφαρμογή είναι διαθέσιμη μόνο σε Android προς το παρόν.</strong> Το προσωπικό σας θα χρειαστεί Android τηλέφωνο για να τη χρησιμοποιήσει.<br><br>Η έκδοση για <strong>iOS (iPhone)</strong> βρίσκεται σε ανάπτυξη και θα είναι διαθέσιμη σύντομα.','android.btn':'Κατάλαβα — Συνέχεια →','pm.h3':'Ετήσια <em>συνδρομή</em>','pm.lead':'1 μήνας δωρεάν δοκιμή, μετά αυτόματη ετήσια συνδρομή.','pm.trial.reminder':'🎁 <strong>1 μήνας δωρεάν δοκιμή</strong> από την πρώτη σύνδεση — εξερευνήστε τα πάντα δωρεάν, χωρίς τέλη δημιουργίας.<br><strong>Μήνας 2+:</strong> ετήσια συνδρομή, αυτόματη χρέωση.','pm.monthly':'Μηνιαία','pm.per.month':'/μήνα','pm.monthly.desc':'Χωρίς δέσμευση · ακύρωση ανά πάσα στιγμή','pm.monthly.sub2':'Ευέλικτη · αλλαγή πλάνου 1×/μήνα','pm.choose':'Επιλέξτε αυτή τη λύση','pm.badge':'Καλύτερη αξία','pm.annual':'Ετήσια','pm.per.year':'/έτος','pm.annual.desc':'Πληρώνετε 10 μήνες · έχετε 12','pm.annual.sub':'2 δωρεάν μήνες · −17%','cmd.h3':'Ξεκινήστε το <em>project σας.</em>','cmd.lead':'Συμπληρώστε τη φόρμα — θα λάβετε τα στοιχεία σας μέσω email αμέσως, χωρίς χρεώσεις εγκατάστασης.','cmd.f1.label':'Όνομα καφέ ή εστιατορίου','cmd.f2.label':'Γλώσσα επικοινωνίας','cmd.f3.label':'Email','cmd.f4.label':'WhatsApp','cmd.f5.label':'Viber','cmd.optional':'(προαιρετικό)','cmd.hint':'Το email είναι υποχρεωτικό — οι πληροφορίες σας θα σας αποστέλλονται μέσω email.','cmd.submit':'Αποστολή αιτήματος →','cmd.sending':'⏳ Αποστολή…','cmd.sent':'✓ Αίτημα στάλθηκε — τα στοιχεία σας στέλνονται στο email σας!','cmd.err.name':'⚠ Παρακαλώ εισάγετε το όνομα του καφέ ή εστιατορίου σας.','cmd.err.contact':'⚠ Παρακαλώ εισάγετε το email σας — είναι υποχρεωτικό για να επικοινωνήσουμε μαζί σας.','cmd.err.network':'⚠ Σφάλμα δικτύου: ','cmd.ok.title':'Αίτημα ελήφθη!','cmd.ok.body':'Ο χώρος σας δημιουργήθηκε! Τα στοιχεία σύνδεσης θα σας αποσταλούν μέσω email σε λίγα λεπτά.','cmd.ok.spam':'💡 Αν δεν λάβετε το email, ελέγξτε τον φάκελο ανεπιθύμητης αλληλογραφίας.','cmd.ok.close':'Κλείσιμο','themes.prefix':'Θέματα','themes.explore':'Εξερευνήστε τα θέματα','pm.note':'Χωρίς τέλη δημιουργίας — η ενεργοποίηση συμπεριλαμβάνεται στη συνδρομή σας.','marquee.1':'Παραγγελίες τραπεζιού','marquee.2':'Κλήση σερβιτόρου','marquee.3':'Εφαρμογή σερβιτόρου','marquee.4':'Απλή διαχείριση','marquee.5':'Πραγματικός χρόνος','fp.saving.0':'490€ αντί 588€/έτος','fp.saving.1':'990€ αντί 1188€/έτος','cmd.restaurant.ph': '','cmd.email.ph':'your@email.com','dv.submit':'Αποστολή αιτήματος','cmd.err.max_clients':'⚠ Αυτό το email έχει ήδη 3 ενεργούς λογαριασμούς. Παρακαλώ χρησιμοποιήστε διαφορετική διεύθυνση.'
     },
     es:{
-      'brand':'GeNext','page.title':'GeNext — Una nueva era del menú digital','fo.card0.name':'Menu QR Code','fo.card0.subtitle':'Menú digital accesible por QR — sin aplicación que descargar','fo.card0.f1':'Menú QR multilingüe accesible desde smartphone, tablet u ordenador — sin descargar aplicación','fo.card0.f2':'Administración completa — actualice el menú, precios y fotos en tiempo real','fo.card0.f3':'Plantillas, colores y estilos personalizables','fo.card1.name':'Menú y Pedidos','fo.card1.badge':'El más completo','fo.card1.subtitle':'Menu QR Code + pedidos de mesa y llamada al camarero','fo.card1.f1':'Todo lo incluido en Menu QR Code','fo.card1.f2':'🔴 Llamada al camarero + 🟢 Pedidos de mesa en tiempo real','fo.card1.f3':'Aplicación Android para camareros con notificaciones push','fo.card.months2':'en los primeros 7 días','fo.card.then':'luego','fo.card.from3':'tras el mes de prueba gratuito','fo.card.details':'Ver detalles','fo.card.cmd':'Pedir ahora','fp.creation.label':'Inicio gratuito','fp.creation.sub':'Listo al instante · sin tarifa de creación','fp.monthly.sub':'Desde el 2º mes · sin compromiso','fp.annual.label':'Plan anual','fp.annual.desc':'490€/año · Paga 10 meses, disfruta 12','fp.renewal.label':'Renovación anual','fp.renewal.desc':'Paga 10 meses, disfruta 12 meses','fp.test.desc':'1 mes de prueba gratis · sin tarifa de creación · inicio gratuito incluido','fp.payment.desc':'Transferencia bancaria · efectivo (Atenas) — mencione su ID en los detalles','fp.steps.title':'Cómo funciona','fp.step1.label':'Inicio 100% gratuito','fp.step1.tag':'creación incluida','fp.step1.sub':'Pida ahora — recibe sus credenciales por email al instante. Sin tarifa de creación, puesta en línea incluida.','fp.step1.sub.card':'🎁 Inicio 100% gratuito · sin tarifa de creación','fp.step2.label':'Mes de prueba gratuito','fp.step2.tag':'gratuito','fp.step2.sub':'Personalice su menú, pruebe todas las funciones, cambie de plan libremente.','fp.step3.label':'Suscripción','fp.step3.tag':'tras su mes de prueba','fp.step3.sub':'Mensual sin compromiso · Anual = 10 meses pagados, 2 meses gratis. Cambio libre durante el mes de prueba.','fp.step3b.sub':'Mensual sin compromiso · Anual = 10 meses pagados, 2 meses gratis. Cambio libre durante el mes de prueba.','pm.trial.reminder':'🎁 <strong>1 mes de prueba gratis</strong> desde su primer inicio de sesión — explore todo gratuitamente, sin tarifa de creación.<br><strong>Mes 2+:</strong> suscripción según el plan elegido, facturada automáticamente.','fp.0.title':'Todo lo <em>incluido.</em>','fp.0.f1':'Menú QR digital en smartphone, tablet u ordenador — sin descargar aplicación','fp.0.f2':'3 estilos de visualización — Carta clásica, Libro y Dinámico','fp.0.f3':'10 plantillas por estilo · más de 15 colores por plantilla — cambie el ambiente en un clic','fp.0.f4':'Administración completa — actualice su menú, precios y fotos en tiempo real','fp.0.f5':'Alojamiento, publicación y mantenimiento incluidos — llave en mano','fp.1.title':'Todo lo <em>incluido.</em>','fp.1.f1':'Todo lo incluido en Menu QR Code — menú digital, admin, plantillas y colores','fp.1.f2':'🔴 Llamada al camarero desde la mesa — botón dedicado, notificación push instantánea','fp.1.f3':'🟢 Pedidos de mesa desde el menú — cesta, validación, seguimiento en tiempo real','fp.1.f4':'Aplicación Android para camareros — gestión de pedidos y llamadas con notificaciones','fp.1.f5':'QR individual por mesa · estadísticas de pedidos y llamadas','nav.advantages':'Ventajas','nav.pricing':'Precios','nav.contact':'Contacto','nav.start':'Empezar',
+      'brand':'GeNext','page.title':'GeNext — Una nueva era del menú digital','fo.card0.name':'Menu QR Code','fo.card0.subtitle':'Menú digital accesible por QR — sin aplicación que descargar','fo.card0.f1':'Menú QR multilingüe accesible desde smartphone, tablet u ordenador — sin descargar aplicación','fo.card0.f2':'Administración completa — actualice el menú, precios y fotos en tiempo real','fo.card0.f3':'Plantillas, colores y estilos personalizables','fo.card1.name':'Menú y Pedidos','fo.card1.badge':'El más completo','fo.card1.subtitle':'Menu QR Code + pedidos de mesa y llamada al camarero','fo.card1.f1':'Todo lo incluido en Menu QR Code','fo.card1.f2':'🔴 Llamada al camarero + 🟢 Pedidos de mesa en tiempo real','fo.card1.f3':'Aplicación Android para camareros con notificaciones push','fo.card.months2':'en los primeros 7 días','fo.card.then':'luego','fo.card.from3':'tras el mes de prueba gratuito','fo.card.details':'Ver detalles','fo.card.cmd':'Pedir ahora','fp.creation.label':'Inicio gratuito','fp.creation.sub':'Listo al instante · sin tarifa de creación','fp.monthly.sub':'Suscripción anual desde el 2º mes','fp.annual.label':'Plan anual','fp.annual.desc':'490€/año · Paga 10 meses, disfruta 12','fp.renewal.label':'Renovación anual','fp.renewal.desc':'Paga 10 meses, disfruta 12 meses','fp.test.desc':'1 mes de prueba gratis · sin tarifa de creación · inicio gratuito incluido','fp.payment.desc':'Transferencia bancaria · efectivo (Atenas) — mencione su ID en los detalles','fp.steps.title':'Cómo funciona','fp.step1.label':'Inicio 100% gratuito','fp.step1.tag':'creación incluida','fp.step1.sub':'Pida ahora — recibe sus credenciales por email al instante. Sin tarifa de creación, puesta en línea incluida.','fp.step1.sub.card':'🎁 Inicio 100% gratuito · sin tarifa de creación','fp.step2.label':'Mes de prueba gratuito','fp.step2.tag':'gratuito','fp.step2.sub':'Personalice su menú, pruebe todas las funciones, cambie de plan libremente.','fp.step3.label':'Suscripción','fp.step3.tag':'tras su mes de prueba','fp.step3.sub':'Suscripción anual = 10 meses pagados, 2 meses gratis. Renovación automática cada año.','fp.step3b.sub':'Suscripción anual = 10 meses pagados, 2 meses gratis. Renovación automática cada año.','pm.trial.reminder':'🎁 <strong>1 mes de prueba gratis</strong> desde su primer inicio de sesión — explore todo gratuitamente, sin tarifa de creación.<br><strong>Mes 2+:</strong> suscripción según el plan elegido, facturada automáticamente.','fp.0.title':'Todo lo <em>incluido.</em>','fp.0.f1':'Menú QR digital en smartphone, tablet u ordenador — sin descargar aplicación','fp.0.f2':'3 estilos de visualización — Carta clásica, Libro y Dinámico','fp.0.f3':'10 plantillas por estilo · más de 15 colores por plantilla — cambie el ambiente en un clic','fp.0.f4':'Administración completa — actualice su menú, precios y fotos en tiempo real','fp.0.f5':'Alojamiento, publicación y mantenimiento incluidos — llave en mano','fp.1.title':'Todo lo <em>incluido.</em>','fp.1.f1':'Todo lo incluido en Menu QR Code — menú digital, admin, plantillas y colores','fp.1.f2':'🔴 Llamada al camarero desde la mesa — botón dedicado, notificación push instantánea','fp.1.f3':'🟢 Pedidos de mesa desde el menú — cesta, validación, seguimiento en tiempo real','fp.1.f4':'Aplicación Android para camareros — gestión de pedidos y llamadas con notificaciones','fp.1.f5':'QR individual por mesa · estadísticas de pedidos y llamadas','nav.advantages':'Ventajas','nav.pricing':'Precios','nav.contact':'Contacto','nav.start':'Empezar',
       'hero.eyebrow':'Sistema completo para restaurantes — menú QR, pedidos de mesa y llamada al camarero',
       'hero.title.1':'Los clientes escanean un QR,','hero.title.2':'hacen pedidos o llaman','hero.title.3':'al camarero <em>— con un toque.</em>',
       'hero.lead':'Sus clientes escanean, consultan su menú y hacen pedidos — o llaman a su equipo con un toque. Sin aplicación, sin esperas, desde cualquier teléfono.',
@@ -4469,6 +4385,7 @@ html.light .fo-card-featured{
       'hero.hud.label':'Vista previa del menú',
       'av.h2':'Cinco razones para<br><em>pasarse al digital.</em>',
       'av.lead':'Menos fricción para sus clientes, menos carga para su equipo — y una imagen que inspira confianza desde el primer segundo.',
+      'av.stat1.l':'Sin tarifa de creación','av.stat2.l':'Idiomas disponibles','av.stat3.l':'Temas de diseño','av.stat4.l':'Mes de prueba gratuito',
       'av.c1.h3':'Acceso instantáneo,<br><em>sin contacto ni espera.</em>','av.c1.p':'Nada más sentarse, su cliente escanea y accede inmediatamente a su menú desde su propio teléfono — sin esperar que le traigan la carta, sin tocar ninguna superficie compartida. La experiencia empieza en el momento de sentarse.',
       'av.c2.h3':'Imagen cuidada, ambiente premium,<br><em>clientes que vuelven.</em>','av.c2.p':'Un menú digital moderno con temas, colores y fotos de sus platos envía una señal clara: su establecimiento cuida cada detalle. Sus clientes lo perciben, hablan de ello y vuelven.',
       'av.c3.h3':'5 idiomas, sin esfuerzo,<br><em>ideal para turistas.</em>','av.c3.p':'Su menú se muestra en el idioma del visitante — francés, inglés, alemán, griego, español — sin ninguna acción de su parte. Acoja a turistas y expatriados con una experiencia fluida.',
@@ -4495,7 +4412,7 @@ html.light .fo-card-featured{
       'fo.opt0.name':'Opción Temas','fo.opt0.desc':'Acceso a más de 20 temas visuales premium (Gold Negro, Neon, Botanical, Rosa Parisino…) con variantes de color — cambie el ambiente de su menú en cualquier momento desde el admin.',
       'fo.opt1.name':'Opción Timbre','fo.opt1.desc':'Sus clientes llaman al camarero con un toque desde su mesa. Notificación push instantánea recibida en su teléfono o tablet — sin aplicación que instalar en el lado del cliente.',
       'fo.opt2.name':'Opción Pedido','fo.opt2.desc':'Sus clientes hacen su pedido directamente desde el menú QR. Seguimiento en directo de la preparación mostrado al cliente, historial y gestión de pedidos en el establecimiento.',
-      'co.eyebrow':'Contáctenos','co.h2':'Hablemos de<br>su <em>proyecto.</em>','co.lead':'Una pregunta, un presupuesto, una demo personalizada — respondemos en 24h, en el idioma que prefiera. Elija el canal que más le convenga.',
+      'co.eyebrow':'Contáctenos','co.h2':'Hablemos de<br>su <em>proyecto.</em>','co.lead':'Una pregunta, una solicitud, una sugerencia — respondemos en 24h, en el idioma que prefiera. Elija el canal que más le convenga.',
       'co.info1':'Respuesta en 24h','co.info2':'Viber & WhatsApp · todos los idiomas',
 
       'co.wa.label':'WhatsApp','co.wa.sub':'+30 694 399 5696 · todos los idiomas',
@@ -4538,18 +4455,18 @@ html.light .fo-card-featured{
       'dv.sum.admin':'Admin',
       'dv.sum.options':'Opciones',
       'dv.sum.creation':'Creación',
-      'dv.sum.mensuel':'Mensual',
-      'demo.back':'Volver','android.tag':'Información importante','android.title':'Aplicación de camareros — Solo Android','android.body':'El plan <strong>Pedidos &amp; Servicios</strong> incluye una aplicación dedicada para sus camareros, que les permite recibir pedidos y llamadas de sus clientes en tiempo real.<br><br><strong>⚠️ Esta aplicación solo está disponible en Android por el momento.</strong> Su personal necesitará un teléfono Android para usarla.<br><br>La versión para <strong>iOS (iPhone)</strong> está en desarrollo y estará disponible próximamente.','android.btn':'Entendido — Continuar →','pm.h3':'<em>Suscripción</em>','pm.lead':'Tras su mes de prueba gratuito — elija su modo de facturación.','pm.monthly':'Mensual','pm.per.month':'/mes','pm.monthly.desc':'Sin compromiso · cancele en cualquier momento','pm.monthly.sub2':'Flexible · cambie de plan 1×/mes','pm.choose':'Elegir esta opción','pm.badge':'Mejor valor','pm.annual':'Anual','pm.per.year':'/año','pm.annual.desc':'Pague 10 meses · disfrute 12','pm.annual.sub':'2 meses gratis · −17%','cmd.h3':'Empiece su <em>proyecto.</em>','cmd.lead':'Rellene el formulario — recibirá sus credenciales por email al instante, sin gastos de instalación.','cmd.f1.label':'Nombre del café o restaurante','cmd.f2.label':'Idioma de comunicación','cmd.f3.label':'Email','cmd.f4.label':'WhatsApp','cmd.f5.label':'Viber','cmd.optional':'(opcional)','cmd.hint':'El email es obligatorio — su información le será enviada por email.','cmd.submit':'Enviar solicitud →','cmd.sending':'⏳ Enviando…','cmd.sent':'✓ Solicitud enviada — sus credenciales llegan a su email!','cmd.err.name':'⚠ Por favor introduzca el nombre de su café o restaurante.','cmd.err.contact':'⚠ Por favor introduzca su email — es obligatorio para contactarle.','cmd.err.network':'⚠ Error de red: ','cmd.ok.title':'¡Solicitud recibida!','cmd.ok.body':'¡Su espacio GeNext está creado! Sus credenciales le serán enviadas por email en los próximos minutos.','cmd.ok.spam':'💡 Si no recibe el email, compruebe su carpeta de spam.','cmd.ok.close':'Cerrar','themes.prefix':'Temas','themes.explore':'Explorar los temas','pm.note':'Sin tarifa de creación — la puesta en línea está incluida en su suscripción.','marquee.1':'Pedidos de mesa','marquee.2':'Llamada al camarero','marquee.3':'App de camareros','marquee.4':'Gestión sencilla','marquee.5':'Tiempo real','fp.saving.0':'490€ en lugar de 588€/año','fp.saving.1':'990€ en lugar de 1188€/año','cmd.restaurant.ph': '','cmd.email.ph':'your@email.com','dv.submit':'Enviar solicitud',
+      'dv.sum.mensuel':'Anual',
+      'demo.back':'Volver','android.tag':'Información importante','android.title':'Aplicación de camareros — Solo Android','android.body':'El plan <strong>Pedidos &amp; Servicios</strong> incluye una aplicación dedicada para sus camareros, que les permite recibir pedidos y llamadas de sus clientes en tiempo real.<br><br><strong>⚠️ Esta aplicación solo está disponible en Android por el momento.</strong> Su personal necesitará un teléfono Android para usarla.<br><br>La versión para <strong>iOS (iPhone)</strong> está en desarrollo y estará disponible próximamente.','android.btn':'Entendido — Continuar →','pm.h3':'Suscripción <em>anual</em>','pm.lead':'1 mes de prueba gratuito, luego suscripción anual automática.','pm.trial.reminder':'🎁 <strong>1 mes de prueba gratuito</strong> desde su primer inicio de sesión — explore todo gratis, sin cargo de instalación.<br><strong>Mes 2+:</strong> suscripción anual facturada automáticamente.','pm.monthly':'Mensual','pm.per.month':'/mes','pm.monthly.desc':'Sin compromiso · cancele en cualquier momento','pm.monthly.sub2':'Flexible · cambie de plan 1×/mes','pm.choose':'Elegir esta opción','pm.badge':'Mejor valor','pm.annual':'Anual','pm.per.year':'/año','pm.annual.desc':'Pague 10 meses · disfrute 12','pm.annual.sub':'2 meses gratis · −17%','cmd.h3':'Empiece su <em>proyecto.</em>','cmd.lead':'Rellene el formulario — recibirá sus credenciales por email al instante, sin gastos de instalación.','cmd.f1.label':'Nombre del café o restaurante','cmd.f2.label':'Idioma de comunicación','cmd.f3.label':'Email','cmd.f4.label':'WhatsApp','cmd.f5.label':'Viber','cmd.optional':'(opcional)','cmd.hint':'El email es obligatorio — su información le será enviada por email.','cmd.submit':'Enviar solicitud →','cmd.sending':'⏳ Enviando…','cmd.sent':'✓ Solicitud enviada — sus credenciales llegan a su email!','cmd.err.name':'⚠ Por favor introduzca el nombre de su café o restaurante.','cmd.err.contact':'⚠ Por favor introduzca su email — es obligatorio para contactarle.','cmd.err.network':'⚠ Error de red: ','cmd.ok.title':'¡Solicitud recibida!','cmd.ok.body':'¡Su espacio está creado! Sus credenciales le serán enviadas por email en los próximos minutos.','cmd.ok.spam':'💡 Si no recibe el email, compruebe su carpeta de spam.','cmd.ok.close':'Cerrar','themes.prefix':'Temas','themes.explore':'Explorar los temas','pm.note':'Sin tarifa de creación — la puesta en línea está incluida en su suscripción.','marquee.1':'Pedidos de mesa','marquee.2':'Llamada al camarero','marquee.3':'App de camareros','marquee.4':'Gestión sencilla','marquee.5':'Tiempo real','fp.saving.0':'490€ en lugar de 588€/año','fp.saving.1':'990€ en lugar de 1188€/año','cmd.restaurant.ph': '','cmd.email.ph':'your@email.com','dv.submit':'Enviar solicitud',
       'fo.admin.sans':'sin admin','fo.admin.avec':'con admin',
       'fo.p0.admin.price.label':'/ mes · administre su menú usted mismo',
       'fo.p0.modif.html':'<strong>Modificaciones a demanda:</strong><br>Contenido (productos, precios…) — <strong style="color:var(--gold)">incluido</strong><br>Estilo (template, colores) — <strong style="color:var(--gold)">incluido</strong><br>Opciones y funcionalidades — <strong style="color:var(--gold)">incluido</strong>',
       'fo.p1.admin.price.label':'/ mes · administre su menú usted mismo',
       'fo.p1.modif.html':'<strong>Modificaciones a demanda:</strong><br>Contenido (productos, precios…) — <strong style="color:var(--gold)">incluido</strong><br>Estilo (template, colores) — <strong style="color:var(--gold)">incluido</strong><br>Opciones y funcionalidades — <strong style="color:var(--gold)">incluido</strong>',
       'cmd.err.max_clients':'⚠ Esta dirección email ya tiene 3 cuentas activas. Por favor utilice una dirección diferente.',
-      'dv.sum.mensuel':'Mensual'
+      'dv.sum.mensuel':'Anual'
     },
     de:{
-      'brand':'GeNext','page.title':'GeNext — Eine neue Ära digitaler Speisekarten','fo.card0.name':'Menü QR Code','fo.card0.subtitle':'Digitale Speisekarte per QR-Code — keine App erforderlich','fo.card0.f1':'Mehrsprachige QR-Speisekarte auf Smartphone oder Tablet','fo.card0.f2':'Vollständige Verwaltung — Speisekarte, Preise und Fotos in Echtzeit aktualisieren','fo.card0.f3':'Anpassbare Themen, Farben und Stile','fo.card1.name':'Menü & Bestellungen','fo.card1.badge':'Am vollständigsten','fo.card1.subtitle':'Menu QR Code + Tischbestellungen und Kellnerruf','fo.card1.f1':'Alles aus Menu QR Code enthalten','fo.card1.f2':'🔴 Kellnerruf + 🟢 Tischbestellungen in Echtzeit','fo.card1.f3':'Android-Server-App mit Push-Benachrichtigungen','fo.card.months2':'innerhalb der ersten 7 Tage','fo.card.then':'dann','fo.card.from3':'nach 1 Monat kostenloser Testphase','fo.card.details':'Details anzeigen','fo.card.cmd':'Jetzt bestellen','fp.creation.label':'Kostenloser Start','fp.creation.sub':'Sofort einsatzbereit · keine Einrichtungsgebühr','fp.monthly.sub':'ab Monat 2 · ohne Bindung','fp.annual.label':'Jahresplan','fp.annual.desc':'490€/Jahr · 10 Monate zahlen, 12 genießen','fp.renewal.label':'Jährliche Verlängerung','fp.renewal.desc':'10 Monate zahlen, 12 Monate genießen','fp.test.desc':'1 Monat kostenlos testen · keine Einrichtungsgebühr · kostenloser Start inklusive','fp.payment.desc':'Überweisung · Bar (Athen) — geben Sie Ihre ID in den Details an','fp.steps.title':'So funktioniert es','fp.step1.label':'100% kostenloser Start','fp.step1.tag':'Einrichtung inklusive','fp.step1.sub':'Bestellen Sie jetzt — Sie erhalten Ihre Zugangsdaten sofort per E-Mail. Keine Einrichtungsgebühr, Inbetriebnahme inklusive.','fp.step1.sub.card':'🎁 100% kostenloser Start · keine Einrichtungsgebühr','fp.step2.label':'1 Monat kostenlos','fp.step2.tag':'inklusive','fp.step2.sub':'Passen Sie Ihre Speisekarte an, testen Sie alle Funktionen, wechseln Sie den Plan.','fp.step3.label':'Abonnement','fp.step3.tag':'nach Ihrem Testzeitraum','fp.step3.sub':'Monatlich ohne Bindung · Jährlich = 10 Monate zahlen, 2 Monate gratis. Freier Planwechsel während der Testphase.','fp.step3b.sub':'Monatlich ohne Bindung · Jährlich = 10 Monate zahlen, 2 Monate gratis. Freier Planwechsel während der Testphase.','pm.trial.reminder':'🎁 <strong>1 Monat kostenlose Testphase</strong> ab Ihrer ersten Anmeldung — testen Sie alles kostenlos, keine Einrichtungsgebühr.<br><strong>Monat 2+:</strong> Abonnement gemäß dem gewählten Plan, automatisch abgerechnet.','fp.0.title':'Alles <em>inklusive.</em>','fp.0.f1':'Digitale QR-Speisekarte auf Smartphone, Tablet oder Computer — keine App nötig','fp.0.f2':'3 Anzeigestile — Klassische Karte, Buch und Dynamisch','fp.0.f3':'10 Themen pro Stil · 15+ Farben — Atmosphäre per Klick ändern','fp.0.f4':'Vollständige Verwaltung — Speisekarte, Preise und Fotos in Echtzeit aktualisieren','fp.0.f5':'Allgemeiner QR-Code für das gesamte Restaurant · mehrsprachig mit automatischer Erkennung','fp.0.f6':'Hosting, Veröffentlichung und Wartung inklusive — schlüsselfertig','fp.1.title':'Alles <em>inklusive.</em>','fp.1.f1':'Alles aus Menu QR Code — digitale Speisekarte, Verwaltung, Themen','fp.1.f2':'🔴 Kellnerruf vom Tisch — dedizierter Knopf, sofortige Push-Benachrichtigung','fp.1.f3':'🟢 Tischbestellungen — Warenkorb, Bestätigung, Live-Verfolgung','fp.1.f4':'Android-Server-App — Bestellungen und Rufe mit Benachrichtigungen verwalten','fp.1.f5':'Individueller QR-Code pro Tisch — jeder Tisch hat seinen eigenen einzigartigen QR-Code','fp.1.f6':'Bestell- und Rufstatistiken — Aktivität Ihres Restaurants verfolgen','nav.advantages':'Vorteile','nav.pricing':'Preise','nav.contact':'Kontakt','nav.start':'Kontakt',
+      'brand':'GeNext','page.title':'GeNext — Eine neue Ära digitaler Speisekarten','fo.card0.name':'Menü QR Code','fo.card0.subtitle':'Digitale Speisekarte per QR-Code — keine App erforderlich','fo.card0.f1':'Mehrsprachige QR-Speisekarte auf Smartphone oder Tablet','fo.card0.f2':'Vollständige Verwaltung — Speisekarte, Preise und Fotos in Echtzeit aktualisieren','fo.card0.f3':'Anpassbare Themen, Farben und Stile','fo.card1.name':'Menü & Bestellungen','fo.card1.badge':'Am vollständigsten','fo.card1.subtitle':'Menu QR Code + Tischbestellungen und Kellnerruf','fo.card1.f1':'Alles aus Menu QR Code enthalten','fo.card1.f2':'🔴 Kellnerruf + 🟢 Tischbestellungen in Echtzeit','fo.card1.f3':'Android-Server-App mit Push-Benachrichtigungen','fo.card.months2':'innerhalb der ersten 7 Tage','fo.card.then':'dann','fo.card.from3':'nach 1 Monat kostenloser Testphase','fo.card.details':'Details anzeigen','fo.card.cmd':'Jetzt bestellen','fp.creation.label':'Kostenloser Start','fp.creation.sub':'Sofort einsatzbereit · keine Einrichtungsgebühr','fp.monthly.sub':'Jahresabonnement ab Monat 2','fp.annual.label':'Jahresplan','fp.annual.desc':'490€/Jahr · 10 Monate zahlen, 12 genießen','fp.renewal.label':'Jährliche Verlängerung','fp.renewal.desc':'10 Monate zahlen, 12 Monate genießen','fp.test.desc':'1 Monat kostenlos testen · keine Einrichtungsgebühr · kostenloser Start inklusive','fp.payment.desc':'Überweisung · Bar (Athen) — geben Sie Ihre ID in den Details an','fp.steps.title':'So funktioniert es','fp.step1.label':'100% kostenloser Start','fp.step1.tag':'Einrichtung inklusive','fp.step1.sub':'Bestellen Sie jetzt — Sie erhalten Ihre Zugangsdaten sofort per E-Mail. Keine Einrichtungsgebühr, Inbetriebnahme inklusive.','fp.step1.sub.card':'🎁 100% kostenloser Start · keine Einrichtungsgebühr','fp.step2.label':'1 Monat kostenlos','fp.step2.tag':'inklusive','fp.step2.sub':'Passen Sie Ihre Speisekarte an, testen Sie alle Funktionen, wechseln Sie den Plan.','fp.step3.label':'Abonnement','fp.step3.tag':'nach Ihrem Testzeitraum','fp.step3.sub':'Jahresabonnement = 10 Monate zahlen, 2 Monate gratis. Automatische Verlängerung jedes Jahr.','fp.step3b.sub':'Jahresabonnement = 10 Monate zahlen, 2 Monate gratis. Automatische Verlängerung jedes Jahr.','pm.trial.reminder':'🎁 <strong>1 Monat kostenlose Testphase</strong> ab Ihrer ersten Anmeldung — testen Sie alles kostenlos, keine Einrichtungsgebühr.<br><strong>Monat 2+:</strong> jährliches Abonnement, automatisch abgerechnet.','fp.0.title':'Alles <em>inklusive.</em>','fp.0.f1':'Digitale QR-Speisekarte auf Smartphone, Tablet oder Computer — keine App nötig','fp.0.f2':'3 Anzeigestile — Klassische Karte, Buch und Dynamisch','fp.0.f3':'10 Themen pro Stil · 15+ Farben — Atmosphäre per Klick ändern','fp.0.f4':'Vollständige Verwaltung — Speisekarte, Preise und Fotos in Echtzeit aktualisieren','fp.0.f5':'Allgemeiner QR-Code für das gesamte Restaurant · mehrsprachig mit automatischer Erkennung','fp.0.f6':'Hosting, Veröffentlichung und Wartung inklusive — schlüsselfertig','fp.1.title':'Alles <em>inklusive.</em>','fp.1.f1':'Alles aus Menu QR Code — digitale Speisekarte, Verwaltung, Themen','fp.1.f2':'🔴 Kellnerruf vom Tisch — dedizierter Knopf, sofortige Push-Benachrichtigung','fp.1.f3':'🟢 Tischbestellungen — Warenkorb, Bestätigung, Live-Verfolgung','fp.1.f4':'Android-Server-App — Bestellungen und Rufe mit Benachrichtigungen verwalten','fp.1.f5':'Individueller QR-Code pro Tisch — jeder Tisch hat seinen eigenen einzigartigen QR-Code','fp.1.f6':'Bestell- und Rufstatistiken — Aktivität Ihres Restaurants verfolgen','nav.advantages':'Vorteile','nav.pricing':'Preise','nav.contact':'Kontakt','nav.start':'Kontakt',
       'hero.eyebrow':'Komplettes Restaurantsystem — QR-Speisekarte, Tischbestellungen und Kellnerruf',
       'hero.title.1':'Gäste scannen einen QR-Code,','hero.title.2':'bestellen ihr Essen','hero.title.3':'oder rufen den Kellner <em>— in einem Tap.</em>',
       'hero.lead':'Ihre Gäste scannen, rufen Ihre Speisekarte auf und bestellen — oder rufen Ihr Team mit einem Tap. Keine App nötig, keine Wartezeit, von jedem Handy aus.',
@@ -4558,6 +4475,7 @@ html.light .fo-card-featured{
       'hero.hud.label':'Menüvorschau',
       'av.h2':'Fünf Gründe für den<br><em>digitalen Wandel.</em>',
       'av.lead':'Weniger Aufwand für Ihre Gäste, weniger Belastung für Ihr Team — und ein Image, das vom ersten Moment an Vertrauen schafft.',
+      'av.stat1.l':'Keine Einrichtungsgebühr','av.stat2.l':'Verfügbare Sprachen','av.stat3.l':'Design-Themen','av.stat4.l':'Monat Testzeitraum gratis',
       'av.c1.h3':'Sofortiger Zugriff,<br><em>kein Kontakt, kein Warten.</em>','av.c1.p':'Sobald Ihre Gäste sitzen, scannen sie und rufen sofort Ihre Speisekarte auf ihrem eigenen Handy auf — ohne auf jemanden zu warten, ohne geteilte Gegenstände zu berühren. Ein gepflegter erster Eindruck, von der ersten Sekunde an.','av.c1.t1':'Null Wartezeit','av.c1.t2':'Kein Kontakt',
       'av.c2.h3':'Professionelles Image, Premium-Atmosphäre,<br><em>Gäste, die wiederkommen.</em>','av.c2.p':'Eine moderne digitale Speisekarte mit Themes, Farben und Fotos Ihrer Gerichte sendet ein klares Signal: Ihr Betrieb achtet auf jedes Detail. Ihre Gäste spüren das auf den ersten Blick — und genau das bringt sie zurück und lässt sie Sie weiterempfehlen.','av.c2.t1':'Premium-Image','av.c2.t2':'Gästetreue',
       'av.c3.h3':'5 Sprachen, mühelos,<br><em>ideal für Touristen.</em>','av.c3.p':'Ihre Speisekarte erscheint in der Sprache des Besuchers — Französisch, Englisch, Deutsch, Griechisch, Arabisch — ganz ohne Ihr Zutun. Empfangen Sie Touristen und Expats ohne Hürden. Ein entscheidender Vorteil in touristischen Regionen.','av.c3.t1':'Mehrsprachig','av.c3.t2':'24/7',
@@ -4589,7 +4507,7 @@ html.light .fo-card-featured{
       'fo.opt0.name':'Themes-Option','fo.opt0.desc':'Zugang zu über 20 Premium-Themes (Gold Noir, Neon, Botanical, Rose Parisien…) mit Farbvarianten — ändern Sie das Erscheinungsbild Ihres Menüs jederzeit über das Admin-Panel.',
       'fo.opt1.name':'Klingel-Option','fo.opt1.desc':'Gäste rufen den Kellner mit einem einzigen Tap von ihrem Tisch. Sofortige Push-Benachrichtigung auf Ihrem Telefon oder Tablet — ohne App auf Gästeseite.',
       'fo.opt2.name':'Bestell-Option','fo.opt2.desc':'Gäste geben ihre Bestellung direkt über das QR-Code-Menü auf. Live-Verfolgung der Zubereitung für den Gast, vollständige Bestellhistorie und -verwaltung auf Betriebsseite.',
-      'co.eyebrow':'Kontakt','co.h2':'Sprechen wir über<br>Ihr <em>Projekt.</em>','co.lead':'Eine Frage, ein Angebot, eine persönliche Demo — wir antworten innerhalb von 24h, in der Sprache, die Ihnen passt.',
+      'co.eyebrow':'Kontakt','co.h2':'Sprechen wir über<br>Ihr <em>Projekt.</em>','co.lead':'Eine Frage, eine Anfrage, ein Vorschlag — wir antworten innerhalb von 24h, in der Sprache, die Ihnen passt.',
       'co.info1':'Antwort innerhalb 24h','co.info2':'Viber & WhatsApp · alle Sprachen',
       'co.wa.label':'WhatsApp','co.wa.sub':'+30 694 399 5696 · alle Sprachen',
       'co.vb.label':'Viber','co.vb.sub':'+30 694 399 5696 · alle Sprachen',
@@ -4631,8 +4549,8 @@ html.light .fo-card-featured{
       'dv.sum.admin':'Admin',
       'dv.sum.options':'Optionen',
       'dv.sum.creation':'Einrichtung',
-      'dv.sum.mensuel':'Monatlich',
-      'demo.back':'Zurück','android.tag':'Wichtiger Hinweis','android.title':'Server-App — Nur Android','android.body':'Der Plan <strong>Menü &amp; Bestellungen</strong> enthält eine dedizierte App für Ihr Personal, mit der sie Bestellungen und Rufe Ihrer Gäste in Echtzeit empfangen können.<br><br><strong>⚠️ Diese App ist derzeit nur auf Android verfügbar.</strong> Ihr Personal benötigt ein Android-Telefon zur Nutzung.<br><br>Die <strong>iOS (iPhone)</strong>-Version ist in Entwicklung und wird bald verfügbar sein.','android.btn':'Verstanden — Weiter →','pm.h3':'<em>Abonnement</em>','pm.lead':'Nach Ihrem kostenlosen Testmonat — wählen Sie Ihren Abrechnungsmodus.','pm.trial.reminder':'🎁 <strong>1 Monat kostenlose Testphase</strong> ab Ihrer ersten Anmeldung — testen Sie alles kostenlos, keine Einrichtungsgebühr.<br><strong>Monat 2+:</strong> Abonnement gemäß dem gewählten Plan, automatisch abgerechnet.','pm.monthly':'Monatlich','pm.per.month':'/Monat','pm.monthly.desc':'Ohne Bindung · jederzeit kündbar','pm.monthly.sub2':'Flexibel · Planwechsel 1×/Monat','pm.choose':'Diese Option wählen','pm.badge':'Bestes Preis-Leistungs-Verhältnis','pm.annual':'Jährlich','pm.per.year':'/Jahr','pm.annual.desc':'10 Monate zahlen · 12 genießen','pm.annual.sub':'2 Gratismonate · −17%','cmd.h3':'Starten Sie Ihr <em>Projekt.</em>','cmd.lead':'Füllen Sie das Formular aus — Sie erhalten Ihre Zugangsdaten sofort per E-Mail, ohne Installationsgebühr.','cmd.f1.label':'Name des Cafés oder Restaurants','cmd.f2.label':'Kommunikationssprache','cmd.f3.label':'E-Mail','cmd.f4.label':'WhatsApp','cmd.f5.label':'Viber','cmd.optional':'(optional)','cmd.hint':'E-Mail ist Pflichtfeld — Ihre Informationen werden per E-Mail an Sie gesendet.','cmd.submit':'Anfrage senden →','cmd.sending':'⏳ Wird gesendet…','cmd.sent':'✓ Anfrage gesendet — Ihre Zugangsdaten kommen per E-Mail!','cmd.err.name':'⚠ Bitte geben Sie den Namen Ihres Cafés oder Restaurants ein.','cmd.err.contact':'⚠ Bitte geben Sie Ihre E-Mail-Adresse ein — sie ist für die Kontaktaufnahme erforderlich.','cmd.err.network':'⚠ Netzwerkfehler: ','cmd.ok.title':'Anfrage erhalten!','cmd.ok.body':'Ihr GeNext-Bereich ist erstellt! Ihre Zugangsdaten werden Ihnen in wenigen Minuten per E-Mail zugesandt.','cmd.ok.spam':'💡 Falls Sie die E-Mail nicht finden, prüfen Sie bitte Ihren Spam-Ordner.','cmd.ok.close':'Schließen','themes.prefix':'Themen','themes.explore':'Entdecken Sie die Themen','pm.note':'Keine Einrichtungsgebühr — die Inbetriebnahme ist in Ihrem Abonnement enthalten.','marquee.1':'Tischbestellungen','marquee.2':'Kellnerruf','marquee.3':'Server-App','marquee.4':'Einfache Verwaltung','marquee.5':'Echtzeit','fp.saving.0':'490€ statt 588€/Jahr','fp.saving.1':'990€ statt 1188€/Jahr','cmd.restaurant.ph': '','cmd.email.ph':'ihre@email.de','dv.submit':'Anfrage senden','cmd.err.max_clients':'⚠ Diese E-Mail-Adresse hat bereits 3 aktive Konten. Bitte verwenden Sie eine andere Adresse.'
+      'dv.sum.mensuel':'Jährlich',
+      'demo.back':'Zurück','android.tag':'Wichtiger Hinweis','android.title':'Server-App — Nur Android','android.body':'Der Plan <strong>Menü &amp; Bestellungen</strong> enthält eine dedizierte App für Ihr Personal, mit der sie Bestellungen und Rufe Ihrer Gäste in Echtzeit empfangen können.<br><br><strong>⚠️ Diese App ist derzeit nur auf Android verfügbar.</strong> Ihr Personal benötigt ein Android-Telefon zur Nutzung.<br><br>Die <strong>iOS (iPhone)</strong>-Version ist in Entwicklung und wird bald verfügbar sein.','android.btn':'Verstanden — Weiter →','pm.h3':'Jährliches <em>Abonnement</em>','pm.lead':'1 kostenloser Testmonat, dann automatisches Jahresabo.','pm.trial.reminder':'🎁 <strong>1 Monat kostenlose Testphase</strong> ab Ihrer ersten Anmeldung — testen Sie alles kostenlos, keine Einrichtungsgebühr.<br><strong>Monat 2+:</strong> jährliches Abonnement, automatisch abgerechnet.','pm.monthly':'Monatlich','pm.per.month':'/Monat','pm.monthly.desc':'Ohne Bindung · jederzeit kündbar','pm.monthly.sub2':'Flexibel · Planwechsel 1×/Monat','pm.choose':'Diese Option wählen','pm.badge':'Bestes Preis-Leistungs-Verhältnis','pm.annual':'Jährlich','pm.per.year':'/Jahr','pm.annual.desc':'10 Monate zahlen · 12 genießen','pm.annual.sub':'2 Gratismonate · −17%','cmd.h3':'Starten Sie Ihr <em>Projekt.</em>','cmd.lead':'Füllen Sie das Formular aus — Sie erhalten Ihre Zugangsdaten sofort per E-Mail, ohne Installationsgebühr.','cmd.f1.label':'Name des Cafés oder Restaurants','cmd.f2.label':'Kommunikationssprache','cmd.f3.label':'E-Mail','cmd.f4.label':'WhatsApp','cmd.f5.label':'Viber','cmd.optional':'(optional)','cmd.hint':'E-Mail ist Pflichtfeld — Ihre Informationen werden per E-Mail an Sie gesendet.','cmd.submit':'Anfrage senden →','cmd.sending':'⏳ Wird gesendet…','cmd.sent':'✓ Anfrage gesendet — Ihre Zugangsdaten kommen per E-Mail!','cmd.err.name':'⚠ Bitte geben Sie den Namen Ihres Cafés oder Restaurants ein.','cmd.err.contact':'⚠ Bitte geben Sie Ihre E-Mail-Adresse ein — sie ist für die Kontaktaufnahme erforderlich.','cmd.err.network':'⚠ Netzwerkfehler: ','cmd.ok.title':'Anfrage erhalten!','cmd.ok.body':'Ihr Bereich ist erstellt! Ihre Zugangsdaten werden Ihnen in wenigen Minuten per E-Mail zugesandt.','cmd.ok.spam':'💡 Falls Sie die E-Mail nicht finden, prüfen Sie bitte Ihren Spam-Ordner.','cmd.ok.close':'Schließen','themes.prefix':'Themen','themes.explore':'Entdecken Sie die Themen','pm.note':'Keine Einrichtungsgebühr — die Inbetriebnahme ist in Ihrem Abonnement enthalten.','marquee.1':'Tischbestellungen','marquee.2':'Kellnerruf','marquee.3':'Server-App','marquee.4':'Einfache Verwaltung','marquee.5':'Echtzeit','fp.saving.0':'490€ statt 588€/Jahr','fp.saving.1':'990€ statt 1188€/Jahr','cmd.restaurant.ph': '','cmd.email.ph':'ihre@email.de','dv.submit':'Anfrage senden','cmd.err.max_clients':'⚠ Diese E-Mail-Adresse hat bereits 3 aktive Konten. Bitte verwenden Sie eine andere Adresse.'
     }
   };
   window._mqrT = T; // expose T for cross-script access
@@ -4759,6 +4677,21 @@ html.light .fo-card-featured{
     }
   });
 
+  // ── Reveal observer (sections avantages/forfaits/contact) ──
+  (function(){
+    var els=document.querySelectorAll('.reveal');
+    if(!els.length)return;
+    var obs=new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){
+          e.target.classList.add('is-visible');
+          obs.unobserve(e.target);
+        }
+      });
+    },{threshold:0.08,rootMargin:'0px 0px -30px 0px'});
+    els.forEach(function(el){obs.observe(el);});
+  })();
+
   // Expose placeStylePill for lang recalc
   (function waitPill(){
     if(window.placeStylePillPublic)return;
@@ -4847,22 +4780,14 @@ html.light .fo-card-featured{
     function _gdValidPrice(val, def) { var n = Math.max(0, parseInt(Number(val), 10) || 0); return n > 0 ? n : def; }
     var p  = s.prices || {};
     window._gdPricing = {
-      'qr-monthly':  p['qr-monthly']  != null ? _gdValidPrice(p['qr-monthly'],  49)  : 49,
       'qr-annual':   p['qr-annual']   != null ? _gdValidPrice(p['qr-annual'],   490) : 490,
-      'srv-monthly': p['srv-monthly'] != null ? _gdValidPrice(p['srv-monthly'], 99)  : 99,
       'srv-annual':  p['srv-annual']  != null ? _gdValidPrice(p['srv-annual'],  990) : 990
     };
     function _gdSet(id, val) { var el = document.getElementById(id); if (el) el.textContent = val + '€'; }
-    _gdSet('gd-price-qr-monthly-card',  window._gdPricing['qr-monthly']);
-    _gdSet('gd-price-srv-monthly-card', window._gdPricing['srv-monthly']);
-    _gdSet('gd-pp0-monthly', window._gdPricing['qr-monthly']);
+    _gdSet('gd-price-qr-card',  window._gdPricing['qr-annual']);
+    _gdSet('gd-price-srv-card', window._gdPricing['srv-annual']);
     _gdSet('gd-pp0-annual',  window._gdPricing['qr-annual']);
-    _gdSet('gd-pp1-monthly', window._gdPricing['srv-monthly']);
     _gdSet('gd-pp1-annual',  window._gdPricing['srv-annual']);
-    var _srvM = window._gdPricing['srv-monthly'];
-    var _srvA = window._gdPricing['srv-annual'];
-    var _elSaving = document.getElementById('gd-pp1-saving-note');
-    if (_elSaving) _elSaving.textContent = '(' + _srvA + '€/an · 10 × ' + _srvM + '€/mois)';
   });
 })();
 </script>
@@ -4964,20 +4889,17 @@ html.light .fo-card-featured{
   }
   function _preparePaymodePopup(idx) {
     var forfait   = idx === 1 ? 'commandes-services' : 'menu-qr';
-    var monthly   = _gdGetPm(forfait, 'monthly');
     var annual    = _gdGetPm(forfait, 'annual');
     var _pmLang = localStorage.getItem('mqr_lang')||'fr';
     var _pmT = (window._mqrT&&window._mqrT[_pmLang])||{};
     var eyebrow = idx===1?(_pmT['fo.card1.name']||'Commandes & Services'):(_pmT['fo.card0.name']||'Menu QR Code');
     document.getElementById('pop-pm-eyebrow').textContent = eyebrow;
-    document.getElementById('pm-price-monthly').textContent = monthly + '€';
     document.getElementById('pm-price-annual').textContent  = annual  + '€';
   }
 
   // ── Valider le mode de paiement et ouvrir le popup suivant ──
   window.openCommanderWithMode = function(mode) {
-    if (mode !== 'monthly' && mode !== 'annual') return; // whitelist guard
-    _cmdPayMode = mode;
+    _cmdPayMode = 'annual';
     closePopup('pop-paymode');
     var _cidx = _cmdForfait === 'commandes-services' ? 1 : 0;
     if (_cmdForfait === 'commandes-services') {
@@ -4998,6 +4920,7 @@ html.light .fo-card-featured{
   window.openCommanderPopup = function(idx) {
     _prepareCommanderForm(idx);
     _preparePaymodePopup(idx);
+    _cmdPayMode = 'annual';
     openPopup('pop-paymode');
   };
 
@@ -5114,44 +5037,6 @@ html.light .fo-card-featured{
 
 <script>
 
-// ── Forfait slider ──────────────────────────────────────────────
-;(function(){
-  var _foIdx=0, _foX=null;
-  var track=document.getElementById('foTrack');
-  if(!track)return;
-
-  window.foSelect=function(idx){
-    _foIdx=idx;
-    track.style.transform='translateX(-'+(idx*100)+'%)';
-    document.querySelectorAll('.fo-sel-btn').forEach(function(b,i){
-      b.classList.toggle('fo-sel-active',i===idx);
-    });
-    var wrap=track.parentElement;
-    if(wrap){
-      setTimeout(function(){
-        var rect=wrap.getBoundingClientRect();
-        var over=rect.bottom-(window.innerHeight-12);
-        if(over>0) window.scrollBy({top:Math.ceil(over)});
-      },50);
-    }
-  };
-
-  track.addEventListener('touchstart',function(e){_foX=e.touches[0].clientX;},{passive:true});
-  track.addEventListener('touchend',function(e){
-    if(_foX===null)return;
-    var dx=e.changedTouches[0].clientX-_foX; _foX=null;
-    if(Math.abs(dx)>48) foSelect(dx<0?Math.min(1,_foIdx+1):Math.max(0,_foIdx-1));
-  },{passive:true});
-
-  // Mouse drag (desktop)
-  var _mX=null,_dragging=false;
-  track.addEventListener('mousedown',function(e){_mX=e.clientX;_dragging=true;});
-  document.addEventListener('mouseup',function(e){
-    if(!_dragging||_mX===null)return;
-    var dx=e.clientX-_mX; _mX=null;_dragging=false;
-    if(Math.abs(dx)>60) foSelect(dx<0?Math.min(1,_foIdx+1):Math.max(0,_foIdx-1));
-  });
-})();
 </script>
 
 </body>
