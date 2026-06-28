@@ -59,7 +59,7 @@ html.light{
   --mute:rgba(26,18,8,.65);
   --mute-2:rgba(26,18,8,.42);
 }
-html.light body{background-image:url(assets/gn-bg-light.jpg);}
+html.light body{background-color:#fdfaf5;}
 html.light body::before{opacity:.07;mix-blend-mode:multiply}
 html.light ::selection{color:#fdfaf5}
 html.light #nav.scrolled{border-bottom-color:rgba(140,110,45,.28)}
@@ -97,10 +97,7 @@ button,a{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
 html{font-size:16px;-webkit-text-size-adjust:100%;scroll-behavior:smooth;background:var(--ink)}
 body{
   font-family:var(--sans);
-  background-image:url(assets/gn-bg-dark.jpg);
-  background-size:cover;
-  background-position:center;
-  background-attachment:fixed;
+  background-color:#0a0907;
   color:var(--bone);
   font-weight:400;
   line-height:1.5;
@@ -162,9 +159,7 @@ button{background:none;border:none;color:inherit;font:inherit;cursor:pointer}
   display:flex;align-items:center;justify-content:space-between;
   padding:0.45rem var(--pad-x);
   transition:border-color .55s;
-  background-image:url(assets/gn-bg-dark.jpg);
-  background-size:cover;
-  background-position:center top;
+  background:rgba(10,9,7,0.92);
   border-bottom:1px solid rgba(200,164,78,0.28);
   box-shadow:0 0 0 1px rgba(200,164,78,0.10),0 4px 20px rgba(0,0,0,0.35);
   overflow:hidden;
@@ -175,7 +170,7 @@ button{background:none;border:none;color:inherit;font:inherit;cursor:pointer}
   animation:gnBarFlow 8s ease-in-out infinite;
 }
 html.light #nav{
-  background-image:url(assets/gn-bg-light.jpg);
+  background:rgba(253,250,245,0.95);
   border-bottom-color:rgba(200,164,78,0.28);
   box-shadow:0 0 0 1px rgba(200,164,78,0.10),0 4px 16px rgba(0,0,0,0.05);
 }
@@ -1087,15 +1082,13 @@ html.light #contact{ background:transparent; }
   display:grid;grid-template-columns:auto 1fr auto;gap:1.2rem;align-items:center;
   padding:1.4rem 1.6rem;border-radius:18px;
   border:1px solid rgba(200,164,78,0.28);
-  background-image:url(assets/gn-bg-dark.jpg);
-  background-size:cover;background-position:center;
+  background:rgba(20,16,10,0.72);
   box-shadow:0 0 0 1px rgba(200,164,78,0.10),0 16px 40px rgba(0,0,0,0.50);
   transition:transform .4s var(--e-back),border-color .4s,box-shadow .4s;
   position:relative;overflow:hidden;
 }
 html.light .co-card{
-  background-image:url(assets/gn-bg-light.jpg);
-  background-size:cover;background-position:center;
+  background:rgba(253,250,245,0.85);
   border:1px solid rgba(200,164,78,0.22);
   box-shadow:0 0 0 1px rgba(200,164,78,0.08),0 8px 24px rgba(0,0,0,0.12);
 }
@@ -2889,13 +2882,10 @@ html.light .pm-cta-btn.pm-cta-gold{color:#1a1208}
   position:fixed;inset:0;z-index:99999;
   display:flex;align-items:center;justify-content:center;
   background-color:#080604;
-  background-image:url(assets/gn-bg-dark.jpg);
-  background-size:cover;background-position:center;
   overflow:hidden;
 }
 html.light #gn-demo-splash{
   background-color:#f0ede8;
-  background-image:url(assets/gn-bg-light.jpg);
 }
 #gn-demo-splash::before{
   content:'';position:absolute;inset:0;pointer-events:none;z-index:0;
