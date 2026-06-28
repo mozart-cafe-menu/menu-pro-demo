@@ -104,31 +104,8 @@ function httpsRequest(url, options, body) {
   });
 }
 
-// ════════════════════════════════════════════════════════════════════════════
-// TEMPLATES EMAIL ATTENTE (5 langues)
-// ════════════════════════════════════════════════════════════════════════════
-const WAITING_TPL = {
-  fr: {
-    subject: r => '✅ Demande reçue — ' + r,
-    html:    (r, f, m) => _wHtml(r, f, m, { sub:'Menus digitaux &amp; Commandes', gr:'Bonjour,', p1:'Nous avons bien reçu votre demande pour', p2:'Forfait sélectionné :', box:'⏳ Votre espace est en cours de préparation.<br>Vous recevrez un <strong>email avec vos identifiants de connexion</strong> dans les 24 heures.', contact:'N\'hésitez pas à nous répondre à cet email si vous avez des questions.', ft:'GeNext · Menus digitaux pour cafés et restaurants' })
-  },
-  en: {
-    subject: r => '✅ Request received — ' + r,
-    html:    (r, f, m) => _wHtml(r, f, m, { sub:'Digital menus &amp; Orders', gr:'Hello,', p1:'We have received your request for', p2:'Selected plan:', box:'⏳ Your space is being prepared.<br>You will receive an <strong>email with your login credentials</strong> within 24 hours.', contact:'Feel free to reply to this email if you have any questions.', ft:'GeNext · Digital menus for cafés and restaurants' })
-  },
-  el: {
-    subject: r => '✅ Αίτημα παραλήφθηκε — ' + r,
-    html:    (r, f, m) => _wHtml(r, f, m, { sub:'Ψηφιακά μενού &amp; Παραγγελίες', gr:'Γεια σας,', p1:'Λάβαμε το αίτημά σας για', p2:'Επιλεγμένο πλάνο:', box:'⏳ Ο χώρος σας προετοιμάζεται.<br>Θα λάβετε <strong>email με τα στοιχεία σύνδεσής σας</strong> εντός 24 ωρών.', contact:'Μη διστάσετε να απαντήσετε σε αυτό το email αν έχετε απορίες.', ft:'GeNext · Ψηφιακά μενού για καφέ και εστιατόρια' })
-  },
-  es: {
-    subject: r => '✅ Solicitud recibida — ' + r,
-    html:    (r, f, m) => _wHtml(r, f, m, { sub:'Menús digitales &amp; Pedidos', gr:'¡Hola,', p1:'Hemos recibido su solicitud para', p2:'Plan seleccionado:', box:'⏳ Su espacio está siendo preparado.<br>Recibirá un <strong>correo con sus credenciales de acceso</strong> en 24 horas.', contact:'No dude en responder a este correo si tiene alguna pregunta.', ft:'GeNext · Menús digitales para cafés y restaurantes' })
-  },
-  de: {
-    subject: r => '✅ Anfrage erhalten — ' + r,
-    html:    (r, f, m) => _wHtml(r, f, m, { sub:'Digitale Speisekarten &amp; Bestellungen', gr:'Hallo,', p1:'Wir haben Ihre Anfrage für', p2:'Gewählter Plan:', box:'⏳ Ihr Bereich wird vorbereitet.<br>Sie erhalten eine <strong>E-Mail mit Ihren Zugangsdaten</strong> innerhalb von 24 Stunden.', contact:'Antworten Sie auf diese E-Mail, wenn Sie Fragen haben.', ft:'GeNext · Digitale Speisekarten für Cafés und Restaurants' })
-  }
-};
+// Langues supportées (validateur)
+const WAITING_TPL = { fr:1, en:1, el:1, es:1, de:1 };
 function _wHtml(r, f, m, t) {
   const dir = t.rtl ? ' dir="rtl"' : '';
   return '<table' + dir + ' width="100%" cellpadding="0" cellspacing="0" bgcolor="#f2ece0" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="background-color:#f2ece0;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center;background-repeat:no-repeat">'
