@@ -4710,15 +4710,16 @@ html.light .fo-card-featured{
   var _navType=(performance.getEntriesByType('navigation')[0]||{}).type||'';
   var _isReload=(_navType==='reload'||_navType==='back_forward');
 
-  if(savedLang&&T[savedLang]&&!_isReload){
-    // Already chose + pas un refresh → hide all pickers immediately, apply lang
+  if(savedLang&&T[savedLang]){
+    // Langue déjà choisie → skip picker, appliquer la langue
     _allPickers().forEach(function(p){p.classList.add('is-gone')});
     applyLang(savedLang);
+    // Refresh → retour en haut de page (section accueil)
+    if(_isReload)window.scrollTo(0,0);
   } else {
-    // Show picker : premier accès OU refresh → retour à l'accueil
+    // Premier accès → afficher le picker
     window.scrollTo(0,0);
     document.body.style.overflow='hidden';
-    if(savedLang&&T[savedLang])applyLang(savedLang); // appliquer la langue derrière le picker
     // Cycle title through all languages (Greek first)
     var titleEl=document.getElementById('lp-title-text');
     var titleCycle=['Επιλέξτε τη γλώσσα σας','Choose your language','Choisissez votre langue','Elige tu idioma','Wählen Sie Ihre Sprache'];
