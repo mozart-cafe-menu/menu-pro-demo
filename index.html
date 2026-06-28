@@ -4708,14 +4708,18 @@ html.light .fo-card-featured{
   function _allPickers(){return document.querySelectorAll('#lang-picker')}
   var STORAGE_KEY='mqr_lang';
   var savedLang=localStorage.getItem(STORAGE_KEY);
+  var _navType=(performance.getEntriesByType('navigation')[0]||{}).type||'';
+  var _isReload=(_navType==='reload'||_navType==='back_forward');
 
-  if(savedLang&&T[savedLang]){
-    // Already chose → hide all pickers immediately, apply lang
+  if(savedLang&&T[savedLang]&&!_isReload){
+    // Already chose + pas un refresh → hide all pickers immediately, apply lang
     _allPickers().forEach(function(p){p.classList.add('is-gone')});
     applyLang(savedLang);
   } else {
-    // Show picker on load
+    // Show picker : premier accès OU refresh → retour à l'accueil
+    window.scrollTo(0,0);
     document.body.style.overflow='hidden';
+    if(savedLang&&T[savedLang])applyLang(savedLang); // appliquer la langue derrière le picker
     // Cycle title through all languages (Greek first)
     var titleEl=document.getElementById('lp-title-text');
     var titleCycle=['Επιλέξτε τη γλώσσα σας','Choose your language','Choisissez votre langue','Elige tu idioma','Wählen Sie Ihre Sprache'];
