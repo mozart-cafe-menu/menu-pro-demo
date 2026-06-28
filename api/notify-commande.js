@@ -168,38 +168,37 @@ function deliverySubject(name, lang) {
   return S[lang] || S.fr;
 }
 
-function deliveryHtml(name, rid, pwd, isCS, lang, creationFee) {
+function deliveryHtml(name, rid, pwd, isCS, lang) {
   const safeName = escHtml(name);
-  const cf = creationFee != null ? creationFee : 149;
   const T = {
     fr: { sub:'Menus digitaux &amp; Commandes', gr:'Bonjour,', intro:'Votre espace <strong style="color:#c8a44e">' + safeName + '</strong> est prêt !', sub2:'Connectez-vous à votre tableau de bord pour personnaliser votre menu.', lid:'Identifiant (ID restaurant)', lpwd:'Mot de passe', btn:'🔑 Accéder au tableau de bord', apkT:'Application serveur', apkS:'Téléchargez cette application pour que votre personnel puisse recevoir les commandes.', apkBtn:'📱 Télécharger l\'application serveur',
-      payTitle:'💶 Frais de création',
-      payBody:'<strong style="color:#c8a44e">' + cf + ' €</strong> (paiement unique) — à régler dans les <strong>7 premiers jours</strong> suivant votre <strong>première connexion</strong> au tableau de bord.',
-      payMethods:'💳 <strong>Virement bancaire :</strong> IBAN <strong>LT37 3250 0708 2924 4591</strong> — BIC : REVOLT21 — Titulaire : Malek Jalel<br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Indiquez votre <strong>ID restaurant (' + escHtml(rid) + ')</strong> dans le libellé du virement.</span><br>'
+      payTitle:'🎁 1 mois d\'essai gratuit',
+      payBody:'Dès votre <strong>première connexion</strong>, votre mois d\'essai démarre automatiquement. <strong>Aucun frais de création</strong> — la mise en ligne est incluse dans votre abonnement.',
+      payMethods:'<strong style="color:#c8a44e">Après le mois d\'essai</strong>, votre abonnement démarrera automatiquement.<br><br>💳 <strong>Virement bancaire :</strong> IBAN <strong>LT37 3250 0708 2924 4591</strong> — BIC : REVOLT21 — Titulaire : Malek Jalel<br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Indiquez votre <strong>ID restaurant (' + escHtml(rid) + ')</strong> dans le libellé du virement.</span><br>'
         + '💵 <strong>Espèces :</strong> contactez-nous par WhatsApp / email avec votre ID pour convenir d\'un rendez-vous.',
       contact:'N\'hésitez pas à nous répondre si vous avez des questions.', ft:'GeNext · Menus digitaux pour cafés et restaurants' },
     en: { sub:'Digital menus &amp; Orders', gr:'Hello,', intro:'Your space <strong style="color:#c8a44e">' + safeName + '</strong> is ready!', sub2:'Log in to your dashboard to customize your menu.', lid:'Restaurant ID', lpwd:'Password', btn:'🔑 Access dashboard', apkT:'Server application', apkS:'Download this app so your staff can receive orders.', apkBtn:'📱 Download server app',
-      payTitle:'💶 Creation fee',
-      payBody:'<strong style="color:#c8a44e">' + cf + ' €</strong> (one-time) — due within the <strong>first 7 days</strong> after your <strong>first login</strong> to the dashboard.',
-      payMethods:'💳 <strong>Bank transfer:</strong> IBAN <strong>LT37 3250 0708 2924 4591</strong> — BIC: REVOLT21 — Holder: Malek Jalel<br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Include your <strong>restaurant ID (' + escHtml(rid) + ')</strong> in the transfer reference.</span><br>'
+      payTitle:'🎁 1-month free trial',
+      payBody:'Your trial starts automatically on your <strong>first login</strong>. <strong>No setup fee</strong> — onboarding is included in your subscription.',
+      payMethods:'<strong style="color:#c8a44e">After your free trial</strong>, your subscription will start automatically.<br><br>💳 <strong>Bank transfer:</strong> IBAN <strong>LT37 3250 0708 2924 4591</strong> — BIC: REVOLT21 — Holder: Malek Jalel<br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Include your <strong>restaurant ID (' + escHtml(rid) + ')</strong> in the transfer reference.</span><br>'
         + '💵 <strong>Cash:</strong> contact us via WhatsApp / email with your ID to arrange a meeting.',
       contact:'Feel free to reply if you have any questions.', ft:'GeNext · Digital menus for cafés and restaurants' },
     el: { sub:'Ψηφιακά μενού &amp; Παραγγελίες', gr:'Γεια σας,', intro:'Ο χώρος σας <strong style="color:#c8a44e">' + safeName + '</strong> είναι έτοιμος!', sub2:'Συνδεθείτε στον πίνακα ελέγχου για να προσαρμόσετε το μενού σας.', lid:'Αναγνωριστικό εστιατορίου', lpwd:'Κωδικός', btn:'🔑 Πρόσβαση στον πίνακα ελέγχου', apkT:'Εφαρμογή σερβιτόρων', apkS:'Κατεβάστε αυτή την εφαρμογή για να λαμβάνει παραγγελίες το προσωπικό σας.', apkBtn:'📱 Λήψη εφαρμογής',
-      payTitle:'💶 Έξοδα δημιουργίας',
-      payBody:'<strong style="color:#c8a44e">' + cf + ' €</strong> (εφάπαξ) — καταβάλλονται εντός των <strong>πρώτων 7 ημερών</strong> από την <strong>πρώτη σύνδεσή σας</strong> στον πίνακα ελέγχου.',
-      payMethods:'💳 <strong>Τραπεζικό έμβασμα:</strong> IBAN <strong>LT37 3250 0708 2924 4591</strong> — BIC: REVOLT21 — Δικαιούχος: Malek Jalel<br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Αναφέρετε το <strong>ID εστιατορίου (' + escHtml(rid) + ')</strong> στην αιτιολογία εμβάσματος.</span><br>'
+      payTitle:'🎁 1 μήνας δωρεάν δοκιμή',
+      payBody:'Η δοκιμαστική περίοδος ξεκινά αυτόματα από την <strong>πρώτη σύνδεσή σας</strong>. <strong>Χωρίς τέλη δημιουργίας</strong> — η ενεργοποίηση περιλαμβάνεται στη συνδρομή σας.',
+      payMethods:'<strong style="color:#c8a44e">Μετά τη δωρεάν δοκιμή</strong>, η συνδρομή σας θα ξεκινήσει αυτόματα.<br><br>💳 <strong>Τραπεζικό έμβασμα:</strong> IBAN <strong>LT37 3250 0708 2924 4591</strong> — BIC: REVOLT21 — Δικαιούχος: Malek Jalel<br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Αναφέρετε το <strong>ID εστιατορίου (' + escHtml(rid) + ')</strong> στην αιτιολογία εμβάσματος.</span><br>'
         + '💵 <strong>Μετρητά:</strong> επικοινωνήστε μαζί μας μέσω WhatsApp / email με το ID σας για ραντεβού.',
       contact:'Μη διστάσετε να μας απαντήσετε αν έχετε ερωτήσεις.', ft:'GeNext · Ψηφιακά μενού για καφέ και εστιατόρια' },
     es: { sub:'Menús digitales &amp; Pedidos', gr:'¡Hola,', intro:'Su espacio <strong style="color:#c8a44e">' + safeName + '</strong> ¡está listo!', sub2:'Acceda a su panel de control para personalizar su menú.', lid:'Identificador (ID restaurante)', lpwd:'Contraseña', btn:'🔑 Acceder al panel de control', apkT:'Aplicación de camareros', apkS:'Descargue esta aplicación para que su personal pueda recibir pedidos.', apkBtn:'📱 Descargar aplicación',
-      payTitle:'💶 Tarifa de creación',
-      payBody:'<strong style="color:#c8a44e">' + cf + ' €</strong> (pago único) — a abonar en los <strong>primeros 7 días</strong> tras su <strong>primer inicio de sesión</strong> en el panel de control.',
-      payMethods:'💳 <strong>Transferencia bancaria:</strong> IBAN <strong>LT37 3250 0708 2924 4591</strong> — BIC: REVOLT21 — Titular: Malek Jalel<br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Indique su <strong>ID de restaurante (' + escHtml(rid) + ')</strong> en el concepto de la transferencia.</span><br>'
+      payTitle:'🎁 1 mes de prueba gratis',
+      payBody:'Su prueba comienza automáticamente desde su <strong>primer inicio de sesión</strong>. <strong>Sin tarifa de creación</strong> — la puesta en línea está incluida en su suscripción.',
+      payMethods:'<strong style="color:#c8a44e">Tras el mes de prueba</strong>, su suscripción comenzará automáticamente.<br><br>💳 <strong>Transferencia bancaria:</strong> IBAN <strong>LT37 3250 0708 2924 4591</strong> — BIC: REVOLT21 — Titular: Malek Jalel<br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Indique su <strong>ID de restaurante (' + escHtml(rid) + ')</strong> en el concepto de la transferencia.</span><br>'
         + '💵 <strong>Efectivo:</strong> contáctenos por WhatsApp / email con su ID para concertar una cita.',
       contact:'No dude en respondernos si tiene alguna pregunta.', ft:'GeNext · Menús digitales para cafés y restaurantes' },
     de: { sub:'Digitale Speisekarten &amp; Bestellungen', gr:'Hallo,', intro:'Ihr Bereich <strong style="color:#c8a44e">' + safeName + '</strong> ist bereit!', sub2:'Melden Sie sich in Ihrem Dashboard an, um Ihre Speisekarte anzupassen.', lid:'Restaurant-ID', lpwd:'Passwort', btn:'🔑 Dashboard aufrufen', apkT:'Server-App', apkS:'Lassen Sie Ihr Personal diese App herunterladen, um Bestellungen zu erhalten.', apkBtn:'📱 Server-App herunterladen',
-      payTitle:'💶 Erstellungsgebühr',
-      payBody:'<strong style="color:#c8a44e">' + cf + ' €</strong> (einmalig) — innerhalb der <strong>ersten 7 Tage</strong> nach Ihrer <strong>ersten Anmeldung</strong> im Dashboard zu zahlen.',
-      payMethods:'💳 <strong>Banküberweisung:</strong> IBAN <strong>LT37 3250 0708 2924 4591</strong> — BIC: REVOLT21 — Inhaber: Malek Jalel<br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Geben Sie Ihre <strong>Restaurant-ID (' + escHtml(rid) + ')</strong> als Verwendungszweck an.</span><br>'
+      payTitle:'🎁 1 Monat kostenlose Testphase',
+      payBody:'Ihr Testzeitraum startet automatisch mit Ihrer <strong>ersten Anmeldung</strong>. <strong>Keine Einrichtungsgebühr</strong> — die Inbetriebnahme ist in Ihrem Abonnement enthalten.',
+      payMethods:'<strong style="color:#c8a44e">Nach der kostenlosen Testphase</strong> startet Ihr Abonnement automatisch.<br><br>💳 <strong>Banküberweisung:</strong> IBAN <strong>LT37 3250 0708 2924 4591</strong> — BIC: REVOLT21 — Inhaber: Malek Jalel<br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Geben Sie Ihre <strong>Restaurant-ID (' + escHtml(rid) + ')</strong> als Verwendungszweck an.</span><br>'
         + '💵 <strong>Barzahlung:</strong> kontaktieren Sie uns per WhatsApp / E-Mail mit Ihrer ID für einen Termin.',
       contact:'Antworten Sie auf diese E-Mail, wenn Sie Fragen haben.', ft:'GeNext · Digitale Speisekarten für Cafés und Restaurants' }
   };
@@ -282,7 +281,6 @@ async function autoCreateRestaurant(restaurant, forfaitType, paymentMode, email,
   const _comboKey   = (isCS ? 'srv' : 'qr') + '-' + (paymentMode === 'annual' ? 'annual' : 'monthly');
   const _fallback   = paymentMode === 'annual' ? (isCS ? 990 : 490) : (isCS ? 99 : 49);
   const price       = (_gdPrices[_comboKey] != null) ? Number(_gdPrices[_comboKey]) : _fallback;
-  const creationFee = (_gdPricing.creationFee != null) ? Number(_gdPricing.creationFee) : 149;
 
   // Créer restaurant dans Firebase principal
   await fbPut(MAIN_DB, '/restaurants/' + rid, mainSecret, {
@@ -294,7 +292,7 @@ async function autoCreateRestaurant(restaurant, forfaitType, paymentMode, email,
       active: true,
       features: { callBtn: isCS, orderUI: isCS, photos: true, tableSystem: isCS, qrOrdering: isCS, eventOverlay: true },
       retention: { calls: 2592000000, orders: 2592000000 },
-      subscription: { forfait: forfaitType, paymentMode, price, creationFee, email: email || null }
+      subscription: { forfait: forfaitType, paymentMode, price, email: email || null }
     },
     menu: { menuTheme: 'genext', menuStyle: 'simple' },
     firstOpen: false
@@ -310,12 +308,11 @@ async function autoCreateRestaurant(restaurant, forfaitType, paymentMode, email,
       clientCree: clientCreeData,
       emailLivraisonProgramme: ts,
       emailData: { email, rid, pwd, name: restaurant, forfait: forfaitType, lang, paymentMode },
-      price,       // prix abonnement pour cron _effectivePrice avant firstOpen
-      creationFee  // frais création pour cron _effectiveCreationFee avant firstOpen
+      price        // prix abonnement pour cron _effectivePrice
     });
   }
 
-  return { rid, pwd, isCS, creationFee };
+  return { rid, pwd, isCS };
 }
 
 // ── Handler principal ────────────────────────────────────────────────────────
@@ -388,7 +385,7 @@ module.exports = async (req, res) => {
           replyTo: process.env.GMAIL_USER,
           to:      email,
           subject: deliverySubject(rest, lang),
-          html:    deliveryHtml(rest, created.rid, created.pwd, created.isCS, lang, created.creationFee),
+          html:    deliveryHtml(rest, created.rid, created.pwd, created.isCS, lang),
           text:    rest + '\nID: ' + created.rid + '\nMot de passe: ' + created.pwd + '\n\nGeNext — gennextcontact@gmail.com',
           headers: { 'List-Unsubscribe': '<mailto:' + process.env.GMAIL_USER + '?subject=unsubscribe>' },
           attachments: [LOGO_ATTACHMENT]

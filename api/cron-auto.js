@@ -2,9 +2,11 @@
    Vercel Cron — Email livraison + Rappels paiement
    Déclenché quotidiennement à minuit UTC (0 0 * * *) — plan Vercel Hobby
    B2 : email livraison dès que emailLivraisonProgramme <= now
-   B3 : rappel paiement 4 jours avant nextReminderAt
-   B4 : suspension automatique si nextReminderAt dépassé 3 jours
-   B5 : firstOpenAt détecté sans nextReminderAt → initialiser
+   B_PAY : email paiement dès que nextReminderAt atteint (essai terminé / nouveau cycle)
+   B3 : rappel paiement 4 jours APRÈS nextReminderAt
+   B4 : suspension automatique 7 jours après nextReminderAt
+   B5 : firstOpenAt détecté sans nextReminderAt → initialiser (= trialEndAt)
+   B_DEL : auto-supprimer IDs jamais utilisés après 7 jours
    BP : appliquer pendingForfaitChange en fin de période
 ============================================================ */
 
@@ -21,8 +23,9 @@ const CONTROL_DB   = 'https://menu-pro-control-default-rtdb.europe-west1.firebas
 const MAIN_DB      = 'https://menu-saas-platform-default-rtdb.europe-west1.firebasedatabase.app';
 const ADMIN_URL    = 'https://menu-saas-platform.vercel.app/admin.html';
 const APK_URL      = 'https://github.com/Cafe-elysee/menu-saas-platform/releases/download/apk-serveur-v1/MenuProServeur-SaaS-v1.0.apk';
-const FOUR_DAYS_MS = 4  * 24 * 60 * 60 * 1000;
-const FIVE_DAYS_MS = 5  * 24 * 60 * 60 * 1000;
+const FOUR_DAYS_MS  = 4  * 24 * 60 * 60 * 1000;
+const FIVE_DAYS_MS  = 5  * 24 * 60 * 60 * 1000;
+const SEVEN_DAYS_MS = 7  * 24 * 60 * 60 * 1000;
 
 // ── Transport Gmail ─────────────────────────────────────────────────────────
 function createTransport() {
@@ -66,8 +69,6 @@ const fbPatch = (db, path, secret, body) => fbRequest(db, path, 'PATCH', secret,
 // ── Prix par défaut ─────────────────────────────────────────────────────────
 const PM_MONTHLY      = { 'menu-qr': 49, 'commandes-services': 99 };
 const PM_ANNUAL       = { 'menu-qr': 490, 'commandes-services': 990 };
-const PM_CREATION_FEE = 149; // frais de création unifiés (même prix pour les 2 forfaits)
-
 // ── Lire le prix effectif abonnement (priorité : prices[combo] → price → défaut) ─
 function _effectivePrice(d) {
   const forfait = d.forfait || 'menu-qr';
@@ -78,18 +79,6 @@ function _effectivePrice(d) {
   if (d.prices && d.prices[ck] != null) return d.prices[ck];
   if (d.price != null && d.price >= 0) return d.price;
   return isAnn ? (PM_ANNUAL[forfait] || 490) : (PM_MONTHLY[forfait] || 49);
-}
-
-// ── Lire le prix des frais de création (custom possible via prices.creation) ─
-function _effectiveCreationFee(d) {
-  if (d.prices && d.prices['creation'] != null) return d.prices['creation'];
-  if (d.creationFee != null) return d.creationFee;
-  return PM_CREATION_FEE;
-}
-
-// ── Détecter si le paiement en attente est un frais de création ─────────────
-function _isCreationPhase(d) {
-  return d.firstOpenAt && !d.creationFeePaid;
 }
 
 // ── Libellés mode paiement ──────────────────────────────────────────────────
@@ -115,41 +104,41 @@ const IBAN_INFO = 'IBAN LT37 3250 0708 2924 4591 — BIC : REVOLT21 — Titulair
 // ── Bloc paiement unifié (delivery + reminder) — 5 langues ──────────────────
 const PAY_INFO = {
   fr: {
-    trial: '🎁 <strong style="color:#c8a44e">1 mois d\'essai</strong> offert dès votre première connexion.<br>'
-      + '· <strong>Frais de création</strong> (paiement unique) : à régler dans les <strong>7 premiers jours</strong>.<br>'
-      + '· <strong>Abonnement</strong> (mensuel ou annuel) : démarre à partir du 2ème mois, selon la formule choisie. Changement de formule libre pendant le mois d\'essai.',
+    trial: '🎁 <strong style="color:#c8a44e">1 mois d\'essai gratuit</strong> dès votre première connexion — explorez toutes les fonctionnalités librement.<br>'
+      + '· <strong>Aucun frais de création</strong> — démarrage 100% gratuit, inclus dans l\'abonnement.<br>'
+      + '· <strong>Abonnement</strong> (mensuel ou annuel) : démarre automatiquement 1 mois après votre première connexion. Changement de formule libre pendant l\'essai.',
     methods: '💳 <strong>Virement bancaire :</strong> IBAN <strong>LT37 3250 0708 2924 4591</strong> — BIC : REVOLT21 — Titulaire : Malek Jalel<br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Indiquez votre <strong>ID restaurant</strong> dans le libellé du virement.</span><br>'
       + '💵 <strong>Espèces :</strong> contactez-nous par WhatsApp / email avec votre ID pour convenir d\'un rendez-vous.<br>'
       + '<span style="font-size:0.82em;color:#6b5a3a">Envoyez la preuve de paiement par email ou WhatsApp avec votre ID.</span>'
   },
   en: {
-    trial: '🎁 <strong style="color:#c8a44e">1-month free trial</strong> from your first login.<br>'
-      + '· <strong>Creation fee</strong> (one-time): due within the <strong>first 7 days</strong>.<br>'
-      + '· <strong>Subscription</strong> (monthly or annual): starts from the 2nd month, based on the plan chosen. You can freely change your plan during the trial month.',
+    trial: '🎁 <strong style="color:#c8a44e">1-month free trial</strong> from your first login — explore all features freely.<br>'
+      + '· <strong>No setup fee</strong> — 100% free start, included in the subscription.<br>'
+      + '· <strong>Subscription</strong> (monthly or annual): starts automatically 1 month after your first login. You can freely switch plans during the trial.',
     methods: '💳 <strong>Bank transfer:</strong> IBAN <strong>LT37 3250 0708 2924 4591</strong> — BIC: REVOLT21 — Holder: Malek Jalel<br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Include your <strong>restaurant ID</strong> in the transfer reference.</span><br>'
       + '💵 <strong>Cash:</strong> contact us via WhatsApp / email with your ID to arrange a meeting.<br>'
       + '<span style="font-size:0.82em;color:#6b5a3a">Send payment proof (screenshot or photo) by email or WhatsApp with your ID.</span>'
   },
   el: {
-    trial: '🎁 <strong style="color:#c8a44e">1 μήνας δωρεάν δοκιμή</strong> από την πρώτη σύνδεσή σας.<br>'
-      + '· <strong>Έξοδα δημιουργίας</strong> (εφάπαξ): καταβάλλονται εντός των πρώτων <strong>7 ημερών</strong>.<br>'
-      + '· <strong>Συνδρομή</strong> (μηνιαία ή ετήσια): ξεκινά από τον 2ο μήνα, βάσει του πλάνου που θα επιλέξετε. Ελεύθερη αλλαγή πλάνου κατά τον μήνα δοκιμής.',
+    trial: '🎁 <strong style="color:#c8a44e">1 μήνας δωρεάν δοκιμή</strong> από την πρώτη σύνδεσή σας — εξερευνήστε όλες τις λειτουργίες ελεύθερα.<br>'
+      + '· <strong>Χωρίς έξοδα δημιουργίας</strong> — 100% δωρεάν εκκίνηση, συμπεριλαμβάνεται στη συνδρομή.<br>'
+      + '· <strong>Συνδρομή</strong> (μηνιαία ή ετήσια): ξεκινά αυτόματα 1 μήνα μετά την πρώτη σύνδεση. Ελεύθερη αλλαγή πλάνου κατά τη δοκιμή.',
     methods: '💳 <strong>Τραπεζικό έμβασμα:</strong> IBAN <strong>LT37 3250 0708 2924 4591</strong> — BIC: REVOLT21 — Δικαιούχος: Malek Jalel<br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Αναφέρετε το <strong>ID εστιατορίου</strong> στην αιτιολογία εμβάσματος.</span><br>'
       + '💵 <strong>Μετρητά:</strong> επικοινωνήστε μαζί μας μέσω WhatsApp / email με το ID σας για ραντεβού.<br>'
       + '<span style="font-size:0.82em;color:#6b5a3a">Στείλτε απόδειξη πληρωμής μέσω email ή WhatsApp με το ID σας.</span>'
   },
   es: {
-    trial: '🎁 <strong style="color:#c8a44e">1 mes de prueba gratuita</strong> desde su primer inicio de sesión.<br>'
-      + '· <strong>Tarifa de creación</strong> (pago único): a abonar en los <strong>primeros 7 días</strong>.<br>'
-      + '· <strong>Suscripción</strong> (mensual o anual): comienza a partir del 2º mes, según el plan elegido. Cambio de plan libre durante el mes de prueba.',
+    trial: '🎁 <strong style="color:#c8a44e">1 mes de prueba gratuita</strong> desde su primer inicio de sesión — explore todas las funciones libremente.<br>'
+      + '· <strong>Sin tarifa de creación</strong> — inicio 100% gratuito, incluido en la suscripción.<br>'
+      + '· <strong>Suscripción</strong> (mensual o anual): comienza automáticamente 1 mes después de su primer inicio de sesión. Cambio de plan libre durante la prueba.',
     methods: '💳 <strong>Transferencia bancaria:</strong> IBAN <strong>LT37 3250 0708 2924 4591</strong> — BIC: REVOLT21 — Titular: Malek Jalel<br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Indique su <strong>ID de restaurante</strong> en el concepto de la transferencia.</span><br>'
       + '💵 <strong>Efectivo:</strong> contáctenos por WhatsApp / email con su ID para concertar una cita.<br>'
       + '<span style="font-size:0.82em;color:#6b5a3a">Envíe el comprobante por email o WhatsApp con su ID.</span>'
   },
   de: {
-    trial: '🎁 <strong style="color:#c8a44e">1 Monat kostenlose Testphase</strong> ab Ihrer ersten Anmeldung.<br>'
-      + '· <strong>Erstellungsgebühr</strong> (einmalig): innerhalb der ersten <strong>7 Tage</strong> zu zahlen.<br>'
-      + '· <strong>Abonnement</strong> (monatlich oder jährlich): beginnt ab dem 2. Monat, je nach gewähltem Plan. Planwechsel während des Testmonats frei möglich.',
+    trial: '🎁 <strong style="color:#c8a44e">1 Monat kostenlose Testphase</strong> ab Ihrer ersten Anmeldung — entdecken Sie alle Funktionen kostenlos.<br>'
+      + '· <strong>Keine Einrichtungsgebühr</strong> — 100% kostenloser Start, im Abonnement enthalten.<br>'
+      + '· <strong>Abonnement</strong> (monatlich oder jährlich): startet automatisch 1 Monat nach Ihrer ersten Anmeldung. Planwechsel während der Testphase frei möglich.',
     methods: '💳 <strong>Banküberweisung:</strong> IBAN <strong>LT37 3250 0708 2924 4591</strong> — BIC: REVOLT21 — Inhaber: Malek Jalel<br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Geben Sie Ihre <strong>Restaurant-ID</strong> als Verwendungszweck an.</span><br>'
       + '💵 <strong>Barzahlung:</strong> kontaktieren Sie uns per WhatsApp / E-Mail mit Ihrer ID für einen Termin.<br>'
       + '<span style="font-size:0.82em;color:#6b5a3a">Senden Sie den Zahlungsnachweis per E-Mail oder WhatsApp mit Ihrer ID.</span>'
@@ -296,9 +285,6 @@ function deliveryHtml(rawName, rid, pwd, isCS, lang, sub) {
       + '<table width="100%" cellpadding="0" cellspacing="0"><tr>'
       + '<td style="padding:4px 0;font-size:0.8rem;color:#9a8060;width:35%">' + t.subForfait + '</td>'
       + '<td style="padding:4px 0;font-size:0.85rem;color:#2a1f10;font-weight:600">' + escHtml(fl[sub.forfait] || sub.forfait) + '</td>'
-      + '</tr><tr>'
-      + '<td style="padding:4px 0;font-size:0.8rem;color:#9a8060">' + (t.subCreation || 'Frais de création') + '</td>'
-      + '<td style="padding:4px 0;font-size:0.95rem;color:#c8a44e;font-weight:700">' + escHtml(String(sub.creationFee != null ? sub.creationFee : 149)) + ' €</td>'
       + '</tr><tr>'
       + '<td style="padding:4px 0;font-size:0.8rem;color:#9a8060">' + t.subMode + '</td>'
       + '<td style="padding:4px 0;font-size:0.85rem;color:#2a1f10;font-weight:600">' + escHtml(ml[sub.paymentMode === 'annual' ? 'annual' : 'monthly']) + '</td>'
@@ -451,13 +437,13 @@ function reminderSubject(name, lang) {
   return S[lang] || S.fr;
 }
 
-function creationFeeSubject(name, lang) {
+function paymentDueSubject(name, lang) {
   const S = {
-    fr: '🏷 Frais de création GeNext — ' + name,
-    en: '🏷 GeNext creation fee — ' + name,
-    el: '🏷 Τέλη δημιουργίας GeNext — ' + name,
-    es: '🏷 Tarifa de creación GeNext — ' + name,
-    de: '🏷 GeNext Einrichtungsgebühr — ' + name
+    fr: '💳 Votre abonnement GeNext commence — ' + name,
+    en: '💳 Your GeNext subscription starts — ' + name,
+    el: '💳 Η συνδρομή GeNext ξεκινά — ' + name,
+    es: '💳 Su suscripción GeNext comienza — ' + name,
+    de: '💳 Ihr GeNext-Abonnement beginnt — ' + name
   };
   return S[lang] || S.fr;
 }
@@ -514,15 +500,6 @@ function suspensionHtml(rawName, amount, mode, lang) {
     + '</table>';
 }
 
-// Libellé mode pour frais de création (5 langues)
-const CREATION_MODE_LABEL = {
-  fr: 'Frais de création',
-  en: 'Creation fee',
-  el: 'Τέλη δημιουργίας',
-  es: 'Tarifa de creación',
-  de: 'Einrichtungsgebühr'
-};
-
 // ── Handler principal ────────────────────────────────────────────────────────
 module.exports = async (req, res) => {
   res.setHeader('Content-Type', 'application/json');
@@ -540,7 +517,7 @@ module.exports = async (req, res) => {
 
   const now        = Date.now();
   const mainSecret = process.env.FIREBASE_MAIN_SECRET;
-  const stats = { delivery: { sent: 0, errors: 0 }, reminders: { sent: 0, errors: 0 } };
+  const stats = { delivery: { sent: 0, errors: 0 }, paymentDue: { sent: 0, errors: 0 }, reminders: { sent: 0, errors: 0 } };
 
   let commandes;
   try {
@@ -571,10 +548,9 @@ module.exports = async (req, res) => {
         const forfait = d.forfait || ed.forfait || 'menu-qr';
         const payMode = d.paymentMode || ed.paymentMode || 'monthly';
         const price      = _effectivePrice(d);
-        const creationFee = _effectiveCreationFee(d);
         const isAnn      = payMode === 'annual';
         const priceStr   = price + ' €/' + (isAnn ? 'an' : 'mois');
-        const subDetails = { forfait, paymentMode: payMode, priceStr, creationFee };
+        const subDetails = { forfait, paymentMode: payMode, priceStr };
         await transport.sendMail({
           from:    '"GeNext" <' + process.env.GMAIL_USER + '>',
           replyTo: process.env.GMAIL_USER,
@@ -582,7 +558,7 @@ module.exports = async (req, res) => {
           headers: { 'List-Unsubscribe': '<mailto:' + process.env.GMAIL_USER + '?subject=unsubscribe>' },
           subject: deliverySubject(ed.name || d.restaurant || '', lang),
           html:    deliveryHtml(ed.name || d.restaurant || '', ed.rid, ed.pwd, isCS, lang, subDetails),
-          text:    (ed.name || d.restaurant || '') + ' — Accès GeNext\n\nVotre espace est prêt.\nIdentifiant : ' + ed.rid + '\nMot de passe : ' + ed.pwd + '\nForfait : ' + forfait + ' · ' + (isAnn ? 'Annuel' : 'Mensuel') + ' · ' + priceStr + '\n\nAccéder : ' + ADMIN_URL + '\n\n1 mois d\'essai à partir de la première connexion.\n- Frais de création (unique, ' + creationFee + ' €) : à régler dans les 7 premiers jours.\n- Abonnement (' + priceStr + ') : démarre au 2ème mois selon formule choisie.\n\nPaiement :\n💳 Virement bancaire : IBAN LT37 3250 0708 2924 4591 — BIC : REVOLT21 — Titulaire : Malek Jalel\n   ⚠️ Indiquez votre ID restaurant dans le libellé du virement.\n💵 Espèces : contactez-nous par email / WhatsApp avec votre ID.\n\nGeNext — ' + process.env.GMAIL_USER,
+          text:    (ed.name || d.restaurant || '') + ' — Accès GeNext\n\nVotre espace est prêt.\nIdentifiant : ' + ed.rid + '\nMot de passe : ' + ed.pwd + '\nForfait : ' + forfait + ' · ' + (isAnn ? 'Annuel' : 'Mensuel') + ' · ' + priceStr + '\n\nAccéder : ' + ADMIN_URL + '\n\n🎁 1 mois d\'essai gratuit à partir de votre première connexion — aucun frais de création.\nAbonnement (' + priceStr + ') : démarre automatiquement 1 mois après votre première connexion.\n\nPaiement :\n💳 Virement bancaire : IBAN LT37 3250 0708 2924 4591 — BIC : REVOLT21 — Titulaire : Malek Jalel\n   ⚠️ Indiquez votre ID restaurant dans le libellé du virement.\n💵 Espèces : contactez-nous par email / WhatsApp avec votre ID.\n\nGeNext — ' + process.env.GMAIL_USER,
           attachments: [LOGO_ATTACHMENT]
         });
         await fbPatch(CONTROL_DB, '/commandes/' + key, secret, { emailLivraisonSent: now });
@@ -594,36 +570,61 @@ module.exports = async (req, res) => {
       }
     }
 
-    // ── B3 : Rappel paiement ─────────────────────────────────────────────────
-    const hasNextReminder  = d.nextReminderAt && (d.nextReminderAt - now) < FOUR_DAYS_MS && (d.nextReminderAt - now) > -FIVE_DAYS_MS;
-    const notSentRecently  = !d.lastReminderSent || (now - d.lastReminderSent) > FIVE_DAYS_MS;
-    const hasEmailRmd      = d.email;
-    const notSuspended     = !d.suspendu;
-
-    if (hasNextReminder && notSentRecently && hasEmailRmd && notSuspended) {
+    // ── B_PAY : Email paiement dû (essai terminé / nouveau cycle) ───────────
+    const _isPaidThisCycle = d.paidAt && d.paidAt >= d.nextReminderAt;
+    const _paymentDue = d.nextReminderAt && now >= d.nextReminderAt && !_isPaidThisCycle && !d.suspendu;
+    const _payEmailNotSent = !d.lastPaymentEmailSent || d.lastPaymentEmailSent < d.nextReminderAt;
+    if (_paymentDue && _payEmailNotSent && d.email && mainSecret) {
       try {
-        const lang       = (d.langue && ['fr','en','el','es','de'].includes(d.langue)) ? d.langue : 'fr';
-        const forfait    = d.forfait || 'menu-qr';
-        const isAnn      = d.paymentMode === 'annual';
-        const isCreation = _isCreationPhase(d);
-        const price      = isCreation ? _effectiveCreationFee(d) : _effectivePrice(d);
-        const modes      = MODE_LABEL[lang] || MODE_LABEL.fr;
-        const forLabels  = FORFAIT_LABEL[lang] || FORFAIT_LABEL.fr;
-        const mode       = isCreation
-          ? (CREATION_MODE_LABEL[lang] || CREATION_MODE_LABEL.fr) + ' · ' + (forLabels[forfait] || forfait)
-          : (forLabels[forfait] || forfait) + ' · ' + (isAnn ? modes.annual : modes.monthly);
-        const dateStr    = fmtDate(d.nextReminderAt, lang);
-        const subject    = isCreation
-          ? creationFeeSubject(d.restaurant || '', lang)
-          : reminderSubject(d.restaurant || '', lang);
+        const langP     = (d.langue && ['fr','en','el','es','de'].includes(d.langue)) ? d.langue : 'fr';
+        const forfaitP  = d.forfait || 'menu-qr';
+        const isAnnP    = d.paymentMode === 'annual';
+        const priceP    = _effectivePrice(d);
+        const modesP    = MODE_LABEL[langP] || MODE_LABEL.fr;
+        const forLabP   = FORFAIT_LABEL[langP] || FORFAIT_LABEL.fr;
+        const modeP     = (forLabP[forfaitP] || forfaitP) + ' · ' + (isAnnP ? modesP.annual : modesP.monthly);
+        const deadlineP = d.nextReminderAt + SEVEN_DAYS_MS;
+        const dateStrP  = fmtDate(deadlineP, langP);
         await transport.sendMail({
           from:    '"GeNext" <' + process.env.GMAIL_USER + '>',
           replyTo: process.env.GMAIL_USER,
           to:      d.email,
           headers: { 'List-Unsubscribe': '<mailto:' + process.env.GMAIL_USER + '?subject=unsubscribe>' },
-          subject,
+          subject: paymentDueSubject(d.restaurant || '', langP),
+          html:    reminderHtml(d.restaurant || '', priceP + ' €', modeP, dateStrP, langP),
+          text:    'Paiement GeNext\n\n' + (d.restaurant || '') + '\n' + modeP + '\nMontant : ' + priceP + ' €\nÀ régler avant le : ' + dateStrP + '\n\nVirement bancaire : IBAN LT37 3250 0708 2924 4591 — BIC : REVOLT21 — Titulaire : Malek Jalel (indiquez votre ID dans le libellé) · Espèces.\n\nGeNext — ' + process.env.GMAIL_USER,
+          attachments: [LOGO_ATTACHMENT]
+        });
+        await fbPatch(CONTROL_DB, '/commandes/' + key, secret, { lastPaymentEmailSent: now });
+        stats.paymentDue.sent++;
+        console.log('💳 Email paiement envoyé à ' + d.email + ' pour ' + (d.restaurant || key));
+      } catch(e) {
+        stats.paymentDue.errors++;
+        console.error('⚠ B_PAY erreur ' + key + ':', e.message);
+      }
+    }
+
+    // ── B3 : Rappel paiement (4 jours après nextReminderAt) ─────────────────
+    const _reminderDue    = d.nextReminderAt && (now - d.nextReminderAt) >= FOUR_DAYS_MS && !_isPaidThisCycle && !d.suspendu;
+    const _reminderNotSent = !d.lastReminderSent || d.lastReminderSent < d.nextReminderAt;
+    if (_reminderDue && _reminderNotSent && d.email) {
+      try {
+        const lang       = (d.langue && ['fr','en','el','es','de'].includes(d.langue)) ? d.langue : 'fr';
+        const forfait    = d.forfait || 'menu-qr';
+        const isAnn      = d.paymentMode === 'annual';
+        const price      = _effectivePrice(d);
+        const modes      = MODE_LABEL[lang] || MODE_LABEL.fr;
+        const forLabels  = FORFAIT_LABEL[lang] || FORFAIT_LABEL.fr;
+        const mode       = (forLabels[forfait] || forfait) + ' · ' + (isAnn ? modes.annual : modes.monthly);
+        const dateStr    = fmtDate(d.nextReminderAt + SEVEN_DAYS_MS, lang);
+        await transport.sendMail({
+          from:    '"GeNext" <' + process.env.GMAIL_USER + '>',
+          replyTo: process.env.GMAIL_USER,
+          to:      d.email,
+          headers: { 'List-Unsubscribe': '<mailto:' + process.env.GMAIL_USER + '?subject=unsubscribe>' },
+          subject: reminderSubject(d.restaurant || '', lang),
           html:    reminderHtml(d.restaurant || '', price + ' €', mode, dateStr, lang),
-          text:    (isCreation ? 'Frais de création GeNext' : 'Rappel paiement GeNext') + '\n\n' + (d.restaurant || '') + '\n' + mode + '\nMontant : ' + price + ' €\nÉchéance : ' + dateStr + '\n\nVirement bancaire : IBAN LT37 3250 0708 2924 4591 — BIC : REVOLT21 — Titulaire : Malek Jalel (indiquez votre ID dans le libellé) · Espèces.\n\nGeNext — ' + process.env.GMAIL_USER,
+          text:    'Rappel paiement GeNext\n\n' + (d.restaurant || '') + '\n' + mode + '\nMontant : ' + price + ' €\nDernière chance avant le : ' + dateStr + '\n\nVirement bancaire : IBAN LT37 3250 0708 2924 4591 — BIC : REVOLT21 — Titulaire : Malek Jalel (indiquez votre ID dans le libellé) · Espèces.\n\nGeNext — ' + process.env.GMAIL_USER,
           attachments: [LOGO_ATTACHMENT]
         });
         await fbPatch(CONTROL_DB, '/commandes/' + key, secret, { lastReminderSent: now });
@@ -636,8 +637,7 @@ module.exports = async (req, res) => {
     }
   }
 
-  // ── B4 : Suspension automatique ─────────────────────────────────────────────
-  // Si nextReminderAt est dépassé de plus de 3 jours et pas payé → suspendu
+  // ── B4 : Suspension automatique (7 jours après nextReminderAt) ──────────────
   stats.suspensions = 0;
   if (mainSecret) {
     for (const [key, d] of Object.entries(commandes)) {
@@ -646,22 +646,20 @@ module.exports = async (req, res) => {
       const rid = (d.emailData && d.emailData.rid) || d.clientCree?.rid;
       if (!rid) continue;
       const overdue = now - d.nextReminderAt;
-      if (overdue > 3 * 24 * 60 * 60 * 1000) {
+      const isPaidB4 = d.paidAt && d.paidAt >= d.nextReminderAt;
+      if (overdue >= SEVEN_DAYS_MS && !isPaidB4) {
         try {
           await fbPatch(MAIN_DB, '/restaurants/' + rid + '/config', mainSecret, { active: false, suspendu: true });
           await fbPatch(CONTROL_DB, '/commandes/' + key, secret, { suspendu: true });
           stats.suspensions++;
           console.log('⏸ Suspendu:', rid, '(commande ' + key + ')');
           if (d.email) {
-            const lang4     = (['fr','en','el','es','de'].includes(d.langue)) ? d.langue : 'fr';
-            const forfait4  = d.forfait || 'menu-qr';
-            const isCreation4 = _isCreationPhase(d);
-            const price4    = isCreation4 ? _effectiveCreationFee(d) : _effectivePrice(d);
-            const modes4    = MODE_LABEL[lang4] || MODE_LABEL.fr;
-            const forLbls4  = FORFAIT_LABEL[lang4] || FORFAIT_LABEL.fr;
-            const mode4     = isCreation4
-              ? (CREATION_MODE_LABEL[lang4] || CREATION_MODE_LABEL.fr) + ' · ' + (forLbls4[forfait4] || forfait4)
-              : (forLbls4[forfait4] || forfait4) + ' · ' + (d.paymentMode === 'annual' ? (modes4.annual) : (modes4.monthly));
+            const lang4    = (['fr','en','el','es','de'].includes(d.langue)) ? d.langue : 'fr';
+            const forfait4 = d.forfait || 'menu-qr';
+            const price4   = _effectivePrice(d);
+            const modes4   = MODE_LABEL[lang4] || MODE_LABEL.fr;
+            const forLbls4 = FORFAIT_LABEL[lang4] || FORFAIT_LABEL.fr;
+            const mode4    = (forLbls4[forfait4] || forfait4) + ' · ' + (d.paymentMode === 'annual' ? modes4.annual : modes4.monthly);
             try {
               await transport.sendMail({
                 from:    '"GeNext" <' + process.env.GMAIL_USER + '>',
@@ -692,15 +690,47 @@ module.exports = async (req, res) => {
       if (d.nextReminderAt) continue;
       if (!d.firstOpenAt)   continue;
       const rid5 = (d.emailData && d.emailData.rid) || d.clientCree?.rid;
-      const nrt5 = d.firstOpenAt + 7 * 24 * 60 * 60 * 1000;
       const trl5 = (() => { const dt = new Date(d.firstOpenAt); dt.setMonth(dt.getMonth() + 1); return dt.getTime(); })();
+      // nextReminderAt = trialEndAt : premier paiement au bout d'1 mois d'essai
       try {
-        await fbPatch(CONTROL_DB, '/commandes/' + key, secret, { nextReminderAt: nrt5, trialEndAt: trl5 });
-        if (rid5) await fbPatch(MAIN_DB, '/restaurants/' + rid5 + '/config/subscription', mainSecret, { endDate: nrt5, trialEndAt: trl5 });
+        await fbPatch(CONTROL_DB, '/commandes/' + key, secret, { nextReminderAt: trl5, trialEndAt: trl5 });
+        if (rid5) await fbPatch(MAIN_DB, '/restaurants/' + rid5 + '/config/subscription', mainSecret, { endDate: trl5, trialEndAt: trl5 });
         stats.firstOpenSet++;
-        console.log('✅ B5 nextReminderAt posé:', key, '→', new Date(nrt5).toISOString());
+        console.log('✅ B5 nextReminderAt posé:', key, '→', new Date(trl5).toISOString());
       } catch(e) {
         console.error('⚠ B5 erreur ' + key + ':', e.message);
+      }
+    }
+  }
+
+  // ── B_DEL : Auto-supprimer IDs jamais utilisés (>7j sans firstOpenAt) ────────
+  stats.autoDeleted = 0;
+  if (mainSecret) {
+    for (const [key, d] of Object.entries(commandes)) {
+      if (!d || typeof d !== 'object') continue;
+      if (d.firstOpenAt || d.clientDeleted) continue;
+      const slug_del = (d.emailData && d.emailData.rid) || (d.clientCree && d.clientCree.rid);
+      if (!slug_del) continue;
+      const cmdTs = d.ts ? Number(d.ts) : 0;
+      if (!cmdTs || (now - cmdTs) < SEVEN_DAYS_MS) continue;
+      try {
+        const archiveData = {
+          name: d.restaurant || slug_del,
+          forfait: d.forfait || 'menu-qr',
+          paymentMode: d.paymentMode || 'monthly',
+          email: d.email || (d.emailData && d.emailData.email) || '',
+          deletedAt: now,
+          deletedBy: 'auto_7j',
+          rid: slug_del,
+          cmdKey: key
+        };
+        await fbPatch(MAIN_DB, '/archivedClients/' + slug_del, mainSecret, archiveData);
+        await fbRequest(MAIN_DB, '/restaurants/' + slug_del, 'DELETE', mainSecret, null);
+        await fbPatch(CONTROL_DB, '/commandes/' + key, secret, { clientDeleted: true, clientDeletedAt: now });
+        stats.autoDeleted++;
+        console.log('🗑 B_DEL supprimé:', slug_del, '(commande ' + key + ') — jamais utilisé depuis ' + Math.floor((now - cmdTs) / 86400000) + 'j');
+      } catch(e) {
+        console.error('⚠ B_DEL erreur ' + slug_del + ':', e.message);
       }
     }
   }
