@@ -106,7 +106,7 @@ const PAY_INFO = {
   fr: {
     trial: '🎁 <strong style="color:#c8a44e">1 mois d\'essai gratuit</strong> dès votre première connexion — explorez toutes les fonctionnalités librement.<br>'
       + '· <strong>Aucun frais de création</strong> — démarrage 100% gratuit, inclus dans l\'abonnement.<br>'
-      + '· <strong>Abonnement</strong> (mensuel ou annuel) : démarre automatiquement 1 mois après votre première connexion. Changement de formule libre pendant l\'essai.',
+      + '· <strong>Abonnement annuel</strong> : démarre automatiquement 1 mois après votre première connexion.',
     methods: '💳 <strong>Virement bancaire :</strong> IBAN <strong>LT37 3250 0708 2924 4591</strong> — BIC : REVOLT21 — Titulaire : Malek Jalel<br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Indiquez votre <strong>ID restaurant</strong> dans le libellé du virement.</span><br>'
       + '💵 <strong>Espèces :</strong> contactez-nous par WhatsApp / email avec votre ID pour convenir d\'un rendez-vous.<br>'
       + '<span style="font-size:0.82em;color:#6b5a3a">Envoyez la preuve de paiement par email ou WhatsApp avec votre ID.</span>'
@@ -114,7 +114,7 @@ const PAY_INFO = {
   en: {
     trial: '🎁 <strong style="color:#c8a44e">1-month free trial</strong> from your first login — explore all features freely.<br>'
       + '· <strong>No setup fee</strong> — 100% free start, included in the subscription.<br>'
-      + '· <strong>Subscription</strong> (monthly or annual): starts automatically 1 month after your first login. You can freely switch plans during the trial.',
+      + '· <strong>Annual subscription</strong>: starts automatically 1 month after your first login.',
     methods: '💳 <strong>Bank transfer:</strong> IBAN <strong>LT37 3250 0708 2924 4591</strong> — BIC: REVOLT21 — Holder: Malek Jalel<br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Include your <strong>restaurant ID</strong> in the transfer reference.</span><br>'
       + '💵 <strong>Cash:</strong> contact us via WhatsApp / email with your ID to arrange a meeting.<br>'
       + '<span style="font-size:0.82em;color:#6b5a3a">Send payment proof (screenshot or photo) by email or WhatsApp with your ID.</span>'
@@ -122,7 +122,7 @@ const PAY_INFO = {
   el: {
     trial: '🎁 <strong style="color:#c8a44e">1 μήνας δωρεάν δοκιμή</strong> από την πρώτη σύνδεσή σας — εξερευνήστε όλες τις λειτουργίες ελεύθερα.<br>'
       + '· <strong>Χωρίς έξοδα δημιουργίας</strong> — 100% δωρεάν εκκίνηση, συμπεριλαμβάνεται στη συνδρομή.<br>'
-      + '· <strong>Συνδρομή</strong> (μηνιαία ή ετήσια): ξεκινά αυτόματα 1 μήνα μετά την πρώτη σύνδεση. Ελεύθερη αλλαγή πλάνου κατά τη δοκιμή.',
+      + '· <strong>Ετήσια συνδρομή</strong>: ξεκινά αυτόματα 1 μήνα μετά την πρώτη σύνδεση.',
     methods: '💳 <strong>Τραπεζικό έμβασμα:</strong> IBAN <strong>LT37 3250 0708 2924 4591</strong> — BIC: REVOLT21 — Δικαιούχος: Malek Jalel<br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Αναφέρετε το <strong>ID εστιατορίου</strong> στην αιτιολογία εμβάσματος.</span><br>'
       + '💵 <strong>Μετρητά:</strong> επικοινωνήστε μαζί μας μέσω WhatsApp / email με το ID σας για ραντεβού.<br>'
       + '<span style="font-size:0.82em;color:#6b5a3a">Στείλτε απόδειξη πληρωμής μέσω email ή WhatsApp με το ID σας.</span>'
@@ -130,7 +130,7 @@ const PAY_INFO = {
   es: {
     trial: '🎁 <strong style="color:#c8a44e">1 mes de prueba gratuita</strong> desde su primer inicio de sesión — explore todas las funciones libremente.<br>'
       + '· <strong>Sin tarifa de creación</strong> — inicio 100% gratuito, incluido en la suscripción.<br>'
-      + '· <strong>Suscripción</strong> (mensual o anual): comienza automáticamente 1 mes después de su primer inicio de sesión. Cambio de plan libre durante la prueba.',
+      + '· <strong>Suscripción anual</strong>: comienza automáticamente 1 mes después de su primer inicio de sesión.',
     methods: '💳 <strong>Transferencia bancaria:</strong> IBAN <strong>LT37 3250 0708 2924 4591</strong> — BIC: REVOLT21 — Titular: Malek Jalel<br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Indique su <strong>ID de restaurante</strong> en el concepto de la transferencia.</span><br>'
       + '💵 <strong>Efectivo:</strong> contáctenos por WhatsApp / email con su ID para concertar una cita.<br>'
       + '<span style="font-size:0.82em;color:#6b5a3a">Envíe el comprobante por email o WhatsApp con su ID.</span>'
@@ -138,7 +138,7 @@ const PAY_INFO = {
   de: {
     trial: '🎁 <strong style="color:#c8a44e">1 Monat kostenlose Testphase</strong> ab Ihrer ersten Anmeldung — entdecken Sie alle Funktionen kostenlos.<br>'
       + '· <strong>Keine Einrichtungsgebühr</strong> — 100% kostenloser Start, im Abonnement enthalten.<br>'
-      + '· <strong>Abonnement</strong> (monatlich oder jährlich): startet automatisch 1 Monat nach Ihrer ersten Anmeldung. Planwechsel während der Testphase frei möglich.',
+      + '· <strong>Jahresabonnement</strong>: startet automatisch 1 Monat nach Ihrer ersten Anmeldung.',
     methods: '💳 <strong>Banküberweisung:</strong> IBAN <strong>LT37 3250 0708 2924 4591</strong> — BIC: REVOLT21 — Inhaber: Malek Jalel<br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Geben Sie Ihre <strong>Restaurant-ID</strong> als Verwendungszweck an.</span><br>'
       + '💵 <strong>Barzahlung:</strong> kontaktieren Sie uns per WhatsApp / E-Mail mit Ihrer ID für einen Termin.<br>'
       + '<span style="font-size:0.82em;color:#6b5a3a">Senden Sie den Zahlungsnachweis per E-Mail oder WhatsApp mit Ihrer ID.</span>'
@@ -157,14 +157,14 @@ function fmtDate(ts, lang) {
 // ════════════════════════════════════════════════════════════════════════════
 
 function _headerHtml(subtitle) {
-  return '<tr><td bgcolor="#ffffff" align="center" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="background-color:#ffffff;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center;padding:26px 32px;border-bottom:1px solid #ead9b8">'
+  return '<tr><td bgcolor="#ffffff" align="center" style="background-color:#ffffff;padding:26px 32px;border-bottom:1px solid #ead9b8">'
     + '<img src="cid:gnlogo" alt="GeNext" width="140" height="147" style="display:block;margin:0 auto;max-width:140px;border:0">'
     + '<div style="font-size:0.7rem;color:#9a8060;letter-spacing:0.12em;text-transform:uppercase;margin-top:10px">' + subtitle + '</div>'
     + '</td></tr>';
 }
 
 function _footerHtml(text) {
-  return '<tr><td bgcolor="#f2ece0" align="center" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="background-color:#f2ece0;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center;padding:14px 32px;border-top:1px solid #ead9b8">'
+  return '<tr><td bgcolor="#f2ece0" align="center" style="background-color:#f2ece0;padding:14px 32px;border-top:1px solid #ead9b8">'
     + '<span style="font-size:0.75rem;color:#9a8060">' + text + '</span>'
     + '</td></tr>';
 }
@@ -295,11 +295,11 @@ function deliveryHtml(rawName, rid, pwd, isCS, lang, sub) {
       + '</td></tr></table>'
     : '';
 
-  return '<table' + dir + ' width="100%" cellpadding="0" cellspacing="0" bgcolor="#f2ece0" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="background-color:#f2ece0;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center;background-repeat:no-repeat">'
-    + '<tr><td align="center" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="padding:16px 8px;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center">'
+  return '<table' + dir + ' width="100%" cellpadding="0" cellspacing="0" bgcolor="#f2ece0" style="background-color:#f2ece0">'
+    + '<tr><td align="center" style="padding:16px 8px">'
     + '<table width="580" cellpadding="0" cellspacing="0" bgcolor="#ffffff" style="max-width:580px;width:100%;background-color:#ffffff;font-family:\'Segoe UI\',Arial,sans-serif">'
     + _headerHtml(t.subtitle)
-    + '<tr><td bgcolor="#ffffff" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="background-color:#ffffff;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center;padding:28px 32px">'
+    + '<tr><td bgcolor="#ffffff" style="background-color:#ffffff;padding:28px 32px">'
     + '<h2 style="margin:0 0 12px;font-size:1.15rem;color:#c8a44e">' + t.greeting + '</h2>'
     + '<p style="color:#2a1f10;line-height:1.7;margin-bottom:20px;font-size:0.92rem">' + t.intro + '<br>' + t.sub + '</p>'
     + _credentialsCard(t.labelId, rid, t.labelPwd, pwd)
@@ -387,11 +387,11 @@ function reminderHtml(rawName, amount, mode, dateStr, lang) {
   };
   const t   = T[lang] || T.fr;
   const dir = '';
-  return '<table' + dir + ' width="100%" cellpadding="0" cellspacing="0" bgcolor="#f2ece0" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="background-color:#f2ece0;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center;background-repeat:no-repeat">'
-    + '<tr><td align="center" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="padding:16px 8px;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center">'
+  return '<table' + dir + ' width="100%" cellpadding="0" cellspacing="0" bgcolor="#f2ece0" style="background-color:#f2ece0">'
+    + '<tr><td align="center" style="padding:16px 8px">'
     + '<table width="580" cellpadding="0" cellspacing="0" bgcolor="#ffffff" style="max-width:580px;width:100%;background-color:#ffffff;font-family:\'Segoe UI\',Arial,sans-serif">'
     + _headerHtml(t.subtitle)
-    + '<tr><td bgcolor="#ffffff" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="background-color:#ffffff;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center;padding:28px 32px">'
+    + '<tr><td bgcolor="#ffffff" style="background-color:#ffffff;padding:28px 32px">'
     + '<h2 style="margin:0 0 12px;font-size:1.15rem;color:#c8a44e">' + t.greeting + '</h2>'
     + '<p style="color:#2a1f10;line-height:1.7;margin-bottom:20px;font-size:0.92rem">' + t.intro + '</p>'
     + '<table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:20px"><tr>'
@@ -472,11 +472,11 @@ function suspensionHtml(rawName, amount, mode, lang) {
   };
   const t   = T[lang] || T.fr;
   const dir = '';
-  return '<table' + dir + ' width="100%" cellpadding="0" cellspacing="0" bgcolor="#f2ece0" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="background-color:#f2ece0;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center;background-repeat:no-repeat">'
-    + '<tr><td align="center" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="padding:16px 8px;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center">'
+  return '<table' + dir + ' width="100%" cellpadding="0" cellspacing="0" bgcolor="#f2ece0" style="background-color:#f2ece0">'
+    + '<tr><td align="center" style="padding:16px 8px">'
     + '<table width="580" cellpadding="0" cellspacing="0" bgcolor="#ffffff" style="max-width:580px;width:100%;background-color:#ffffff;font-family:\'Segoe UI\',Arial,sans-serif">'
     + _headerHtml(t.subtitle)
-    + '<tr><td bgcolor="#ffffff" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="background-color:#ffffff;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center;padding:28px 32px">'
+    + '<tr><td bgcolor="#ffffff" style="background-color:#ffffff;padding:28px 32px">'
     + '<h2 style="margin:0 0 12px;font-size:1.15rem;color:#c8a44e">' + t.greeting + '</h2>'
     + '<p style="color:#2a1f10;line-height:1.7;margin-bottom:20px;font-size:0.92rem">' + t.intro + '</p>'
     + '<table width="100%" cellpadding="0" cellspacing="0" style="margin-bottom:20px"><tr>'
@@ -546,7 +546,7 @@ module.exports = async (req, res) => {
         const lang    = (ed.lang && ['fr','en','el','es','de'].includes(ed.lang)) ? ed.lang : 'fr';
         const isCS    = (d.forfait || ed.forfait) === 'commandes-services';
         const forfait = d.forfait || ed.forfait || 'menu-qr';
-        const payMode = d.paymentMode || ed.paymentMode || 'monthly';
+        const payMode = d.paymentMode || ed.paymentMode || 'annual';
         const price      = _effectivePrice(d);
         const isAnn      = payMode === 'annual';
         const priceStr   = price + ' €/' + (isAnn ? 'an' : 'mois');
@@ -717,7 +717,7 @@ module.exports = async (req, res) => {
         const archiveData = {
           name: d.restaurant || slug_del,
           forfait: d.forfait || 'menu-qr',
-          paymentMode: d.paymentMode || 'monthly',
+          paymentMode: d.paymentMode || 'annual',
           email: d.email || (d.emailData && d.emailData.email) || '',
           deletedAt: now,
           deletedBy: 'auto_7j',

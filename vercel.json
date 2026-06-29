@@ -6,5 +6,10 @@
   ],
   "crons": [
     { "path": "/api/cron-auto", "schedule": "0 0 * * *" }
-  ]
+  ],
+  "functions": {
+    "api/menu-upload.js": {
+      "maxDuration": 30
+    }
+  }
 }

@@ -108,20 +108,20 @@ function httpsRequest(url, options, body) {
 const WAITING_TPL = { fr:1, en:1, el:1, es:1, de:1 };
 function _wHtml(r, f, m, t) {
   const dir = t.rtl ? ' dir="rtl"' : '';
-  return '<table' + dir + ' width="100%" cellpadding="0" cellspacing="0" bgcolor="#f2ece0" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="background-color:#f2ece0;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center;background-repeat:no-repeat">'
-    + '<tr><td align="center" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="padding:16px 8px;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center">'
+  return '<table' + dir + ' width="100%" cellpadding="0" cellspacing="0" bgcolor="#f2ece0" style="background-color:#f2ece0">'
+    + '<tr><td align="center" style="padding:16px 8px">'
     + '<table width="580" cellpadding="0" cellspacing="0" bgcolor="#ffffff" style="max-width:580px;width:100%;background-color:#ffffff;font-family:\'Segoe UI\',Arial,sans-serif">'
-    + '<tr><td bgcolor="#ffffff" align="center" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="background-color:#ffffff;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center;padding:26px 32px;border-bottom:1px solid #ead9b8">'
+    + '<tr><td bgcolor="#ffffff" align="center" style="background-color:#ffffff;padding:26px 32px;border-bottom:1px solid #ead9b8">'
     + '<img src="cid:gnlogo" alt="GeNext" width="140" height="147" style="display:block;margin:0 auto;max-width:140px;border:0">'
     + '<div style="font-size:0.72rem;color:#9a8060;letter-spacing:0.12em;text-transform:uppercase;margin-top:8px">' + t.sub + '</div>'
     + '</td></tr>'
-    + '<tr><td bgcolor="#ffffff" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="background-color:#ffffff;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center;padding:28px 32px">'
+    + '<tr><td bgcolor="#ffffff" style="background-color:#ffffff;padding:28px 32px">'
     + '<h2 style="margin:0 0 12px;font-size:1.15rem;color:#c8a44e">' + t.gr + '</h2>'
     + '<p style="color:#2a1f10;line-height:1.7;margin-bottom:20px;font-size:0.92rem">' + t.p1 + ' <strong style="color:#c8a44e">' + escHtml(r) + '</strong>.<br>' + t.p2 + ' <strong style="color:#c8a44e">' + escHtml(f) + '</strong> (' + escHtml(m) + ').</p>'
     + '<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#fdf9f2" style="background-color:#fdf9f2;border:1px solid #e8dfc8;border-left:3px solid #c8a44e;border-radius:0 8px 8px 0;margin-bottom:20px"><tr><td style="padding:14px 18px;font-size:0.88rem;color:#2a1f10;line-height:1.6">' + t.box + '</td></tr></table>'
     + '<p style="color:#9a8060;font-size:0.83rem;line-height:1.6;margin:0">' + t.contact + '</p>'
     + '</td></tr>'
-    + '<tr><td bgcolor="#f2ece0" align="center" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="background-color:#f2ece0;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center;padding:14px 32px;border-top:1px solid #ead9b8">'
+    + '<tr><td bgcolor="#f2ece0" align="center" style="background-color:#f2ece0;padding:14px 32px;border-top:1px solid #ead9b8">'
     + '<span style="font-size:0.75rem;color:#9a8060">' + t.ft + '</span>'
     + '</td></tr>'
     + '</table>'
@@ -148,31 +148,31 @@ function deliverySubject(name, lang) {
 function deliveryHtml(name, rid, pwd, isCS, lang) {
   const safeName = escHtml(name);
   const T = {
-    fr: { sub:'Menus digitaux &amp; Commandes', gr:'Bonjour,', intro:'Votre espace <strong style="color:#c8a44e">' + safeName + '</strong> est prêt !', sub2:'Connectez-vous à votre tableau de bord pour personnaliser votre menu.', lid:'Identifiant (ID restaurant)', lpwd:'Mot de passe', btn:'🔑 Accéder au tableau de bord', apkT:'Application serveur', apkS:'Téléchargez cette application pour que votre personnel puisse recevoir les commandes.', apkBtn:'📱 Télécharger l\'application serveur',
+    fr: { sub:'Menus digitaux &amp; Commandes', gr:'Bonjour,', intro:'Votre espace <strong style="color:#c8a44e">' + safeName + '</strong> est prêt !', sub2:'Vos identifiants sont ci-dessous. Notre équipe configurera votre menu <strong>sous 24 heures</strong>.', lid:'Identifiant (ID restaurant)', lpwd:'Mot de passe', btn:'🔑 Accéder au tableau de bord', apkT:'Application serveur', apkS:'Téléchargez cette application pour que votre personnel puisse recevoir les commandes.', apkBtn:'📱 Télécharger l\'application serveur',
       payTitle:'🎁 1 mois d\'essai gratuit',
       payBody:'Dès votre <strong>première connexion</strong>, votre mois d\'essai démarre automatiquement. <strong>Aucun frais de création</strong> — la mise en ligne est incluse dans votre abonnement.',
       payMethods:'<strong style="color:#c8a44e">Après le mois d\'essai</strong>, votre abonnement démarrera automatiquement.<br><br>💳 <strong>Virement bancaire :</strong> IBAN <strong>LT37 3250 0708 2924 4591</strong> — BIC : REVOLT21 — Titulaire : Malek Jalel<br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Indiquez votre <strong>ID restaurant (' + escHtml(rid) + ')</strong> dans le libellé du virement.</span><br>'
         + '💵 <strong>Espèces :</strong> contactez-nous par WhatsApp / email avec votre ID pour convenir d\'un rendez-vous.',
       contact:'N\'hésitez pas à nous répondre si vous avez des questions.', ft:'GeNext · Menus digitaux pour cafés et restaurants' },
-    en: { sub:'Digital menus &amp; Orders', gr:'Hello,', intro:'Your space <strong style="color:#c8a44e">' + safeName + '</strong> is ready!', sub2:'Log in to your dashboard to customize your menu.', lid:'Restaurant ID', lpwd:'Password', btn:'🔑 Access dashboard', apkT:'Server application', apkS:'Download this app so your staff can receive orders.', apkBtn:'📱 Download server app',
+    en: { sub:'Digital menus &amp; Orders', gr:'Hello,', intro:'Your space <strong style="color:#c8a44e">' + safeName + '</strong> is ready!', sub2:'Your credentials are below. Our team will set up your menu <strong>within 24 hours</strong>.', lid:'Restaurant ID', lpwd:'Password', btn:'🔑 Access dashboard', apkT:'Server application', apkS:'Download this app so your staff can receive orders.', apkBtn:'📱 Download server app',
       payTitle:'🎁 1-month free trial',
       payBody:'Your trial starts automatically on your <strong>first login</strong>. <strong>No setup fee</strong> — onboarding is included in your subscription.',
       payMethods:'<strong style="color:#c8a44e">After your free trial</strong>, your subscription will start automatically.<br><br>💳 <strong>Bank transfer:</strong> IBAN <strong>LT37 3250 0708 2924 4591</strong> — BIC: REVOLT21 — Holder: Malek Jalel<br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Include your <strong>restaurant ID (' + escHtml(rid) + ')</strong> in the transfer reference.</span><br>'
         + '💵 <strong>Cash:</strong> contact us via WhatsApp / email with your ID to arrange a meeting.',
       contact:'Feel free to reply if you have any questions.', ft:'GeNext · Digital menus for cafés and restaurants' },
-    el: { sub:'Ψηφιακά μενού &amp; Παραγγελίες', gr:'Γεια σας,', intro:'Ο χώρος σας <strong style="color:#c8a44e">' + safeName + '</strong> είναι έτοιμος!', sub2:'Συνδεθείτε στον πίνακα ελέγχου για να προσαρμόσετε το μενού σας.', lid:'Αναγνωριστικό εστιατορίου', lpwd:'Κωδικός', btn:'🔑 Πρόσβαση στον πίνακα ελέγχου', apkT:'Εφαρμογή σερβιτόρων', apkS:'Κατεβάστε αυτή την εφαρμογή για να λαμβάνει παραγγελίες το προσωπικό σας.', apkBtn:'📱 Λήψη εφαρμογής',
+    el: { sub:'Ψηφιακά μενού &amp; Παραγγελίες', gr:'Γεια σας,', intro:'Ο χώρος σας <strong style="color:#c8a44e">' + safeName + '</strong> είναι έτοιμος!', sub2:'Τα στοιχεία πρόσβασής σας βρίσκονται παρακάτω. Η ομάδα μας θα διαμορφώσει το μενού σας <strong>εντός 24 ωρών</strong>.', lid:'Αναγνωριστικό εστιατορίου', lpwd:'Κωδικός', btn:'🔑 Πρόσβαση στον πίνακα ελέγχου', apkT:'Εφαρμογή σερβιτόρων', apkS:'Κατεβάστε αυτή την εφαρμογή για να λαμβάνει παραγγελίες το προσωπικό σας.', apkBtn:'📱 Λήψη εφαρμογής',
       payTitle:'🎁 1 μήνας δωρεάν δοκιμή',
       payBody:'Η δοκιμαστική περίοδος ξεκινά αυτόματα από την <strong>πρώτη σύνδεσή σας</strong>. <strong>Χωρίς τέλη δημιουργίας</strong> — η ενεργοποίηση περιλαμβάνεται στη συνδρομή σας.',
       payMethods:'<strong style="color:#c8a44e">Μετά τη δωρεάν δοκιμή</strong>, η συνδρομή σας θα ξεκινήσει αυτόματα.<br><br>💳 <strong>Τραπεζικό έμβασμα:</strong> IBAN <strong>LT37 3250 0708 2924 4591</strong> — BIC: REVOLT21 — Δικαιούχος: Malek Jalel<br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Αναφέρετε το <strong>ID εστιατορίου (' + escHtml(rid) + ')</strong> στην αιτιολογία εμβάσματος.</span><br>'
         + '💵 <strong>Μετρητά:</strong> επικοινωνήστε μαζί μας μέσω WhatsApp / email με το ID σας για ραντεβού.',
       contact:'Μη διστάσετε να μας απαντήσετε αν έχετε ερωτήσεις.', ft:'GeNext · Ψηφιακά μενού για καφέ και εστιατόρια' },
-    es: { sub:'Menús digitales &amp; Pedidos', gr:'¡Hola,', intro:'Su espacio <strong style="color:#c8a44e">' + safeName + '</strong> ¡está listo!', sub2:'Acceda a su panel de control para personalizar su menú.', lid:'Identificador (ID restaurante)', lpwd:'Contraseña', btn:'🔑 Acceder al panel de control', apkT:'Aplicación de camareros', apkS:'Descargue esta aplicación para que su personal pueda recibir pedidos.', apkBtn:'📱 Descargar aplicación',
+    es: { sub:'Menús digitales &amp; Pedidos', gr:'¡Hola,', intro:'Su espacio <strong style="color:#c8a44e">' + safeName + '</strong> ¡está listo!', sub2:'Sus credenciales están a continuación. Nuestro equipo configurará su menú <strong>en 24 horas</strong>.', lid:'Identificador (ID restaurante)', lpwd:'Contraseña', btn:'🔑 Acceder al panel de control', apkT:'Aplicación de camareros', apkS:'Descargue esta aplicación para que su personal pueda recibir pedidos.', apkBtn:'📱 Descargar aplicación',
       payTitle:'🎁 1 mes de prueba gratis',
       payBody:'Su prueba comienza automáticamente desde su <strong>primer inicio de sesión</strong>. <strong>Sin tarifa de creación</strong> — la puesta en línea está incluida en su suscripción.',
       payMethods:'<strong style="color:#c8a44e">Tras el mes de prueba</strong>, su suscripción comenzará automáticamente.<br><br>💳 <strong>Transferencia bancaria:</strong> IBAN <strong>LT37 3250 0708 2924 4591</strong> — BIC: REVOLT21 — Titular: Malek Jalel<br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Indique su <strong>ID de restaurante (' + escHtml(rid) + ')</strong> en el concepto de la transferencia.</span><br>'
         + '💵 <strong>Efectivo:</strong> contáctenos por WhatsApp / email con su ID para concertar una cita.',
       contact:'No dude en respondernos si tiene alguna pregunta.', ft:'GeNext · Menús digitales para cafés y restaurantes' },
-    de: { sub:'Digitale Speisekarten &amp; Bestellungen', gr:'Hallo,', intro:'Ihr Bereich <strong style="color:#c8a44e">' + safeName + '</strong> ist bereit!', sub2:'Melden Sie sich in Ihrem Dashboard an, um Ihre Speisekarte anzupassen.', lid:'Restaurant-ID', lpwd:'Passwort', btn:'🔑 Dashboard aufrufen', apkT:'Server-App', apkS:'Lassen Sie Ihr Personal diese App herunterladen, um Bestellungen zu erhalten.', apkBtn:'📱 Server-App herunterladen',
+    de: { sub:'Digitale Speisekarten &amp; Bestellungen', gr:'Hallo,', intro:'Ihr Bereich <strong style="color:#c8a44e">' + safeName + '</strong> ist bereit!', sub2:'Ihre Zugangsdaten stehen unten. Unser Team richtet Ihre Speisekarte <strong>innerhalb von 24 Stunden</strong> ein.', lid:'Restaurant-ID', lpwd:'Passwort', btn:'🔑 Dashboard aufrufen', apkT:'Server-App', apkS:'Lassen Sie Ihr Personal diese App herunterladen, um Bestellungen zu erhalten.', apkBtn:'📱 Server-App herunterladen',
       payTitle:'🎁 1 Monat kostenlose Testphase',
       payBody:'Ihr Testzeitraum startet automatisch mit Ihrer <strong>ersten Anmeldung</strong>. <strong>Keine Einrichtungsgebühr</strong> — die Inbetriebnahme ist in Ihrem Abonnement enthalten.',
       payMethods:'<strong style="color:#c8a44e">Nach der kostenlosen Testphase</strong> startet Ihr Abonnement automatisch.<br><br>💳 <strong>Banküberweisung:</strong> IBAN <strong>LT37 3250 0708 2924 4591</strong> — BIC: REVOLT21 — Inhaber: Malek Jalel<br><span style="font-size:0.82em;color:#6b5a3a">⚠️ Geben Sie Ihre <strong>Restaurant-ID (' + escHtml(rid) + ')</strong> als Verwendungszweck an.</span><br>'
@@ -181,14 +181,14 @@ function deliveryHtml(name, rid, pwd, isCS, lang) {
   };
   const t = T[lang] || T.fr;
   const dir = t.rtl ? ' dir="rtl"' : '';
-  return '<table' + dir + ' width="100%" cellpadding="0" cellspacing="0" bgcolor="#f2ece0" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="background-color:#f2ece0;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center;background-repeat:no-repeat">'
-    + '<tr><td align="center" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="padding:16px 8px;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center">'
+  return '<table' + dir + ' width="100%" cellpadding="0" cellspacing="0" bgcolor="#f2ece0" style="background-color:#f2ece0">'
+    + '<tr><td align="center" style="padding:16px 8px">'
     + '<table width="580" cellpadding="0" cellspacing="0" bgcolor="#ffffff" style="max-width:580px;width:100%;background-color:#ffffff;font-family:\'Segoe UI\',Arial,sans-serif">'
-    + '<tr><td bgcolor="#ffffff" align="center" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="background-color:#ffffff;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center;padding:26px 32px;border-bottom:1px solid #ead9b8">'
+    + '<tr><td bgcolor="#ffffff" align="center" style="background-color:#ffffff;padding:26px 32px;border-bottom:1px solid #ead9b8">'
     + '<img src="cid:gnlogo" alt="GeNext" width="140" height="147" style="display:block;margin:0 auto;max-width:140px;border:0">'
     + '<div style="font-size:0.72rem;color:#9a8060;letter-spacing:0.12em;text-transform:uppercase;margin-top:8px">' + t.sub + '</div>'
     + '</td></tr>'
-    + '<tr><td bgcolor="#ffffff" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="background-color:#ffffff;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center;padding:28px 32px">'
+    + '<tr><td bgcolor="#ffffff" style="background-color:#ffffff;padding:28px 32px">'
     + '<h2 style="margin:0 0 8px;font-size:1.15rem;color:#c8a44e">' + t.gr + '</h2>'
     + '<p style="color:#2a1f10;line-height:1.7;margin-bottom:20px;font-size:0.92rem">' + t.intro + '<br>' + t.sub2 + '</p>'
     + '<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#f8f4ec" style="background-color:#f8f4ec;border:1px solid #e8dfc8;border-radius:10px;margin-bottom:20px">'
@@ -218,7 +218,7 @@ function deliveryHtml(name, rid, pwd, isCS, lang) {
     + '<tr><td bgcolor="#f8f4ec" style="background-color:#f8f4ec;padding:12px 16px;font-size:0.85rem;color:#2a1f10;line-height:1.8">' + t.payMethods + '</td></tr></table>'
     + '<p style="color:#9a8060;font-size:0.83rem;line-height:1.6;margin:0">' + t.contact + '</p>'
     + '</td></tr>'
-    + '<tr><td bgcolor="#f2ece0" align="center" background="https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg" style="background-color:#f2ece0;background-image:url(\'https://menu-saas-platform.vercel.app/assets/gn-bg-light.jpg\');background-size:cover;background-position:center;padding:14px 32px;border-top:1px solid #ead9b8">'
+    + '<tr><td bgcolor="#f2ece0" align="center" style="background-color:#f2ece0;padding:14px 32px;border-top:1px solid #ead9b8">'
     + '<span style="font-size:0.75rem;color:#9a8060">' + t.ft + '</span>'
     + '</td></tr>'
     + '</table>'
@@ -271,7 +271,7 @@ async function autoCreateRestaurant(restaurant, forfaitType, paymentMode, email,
       retention: { calls: 2592000000, orders: 2592000000 },
       subscription: { forfait: forfaitType, paymentMode, price, email: email || null }
     },
-    menu: { menuTheme: 'genext', menuStyle: 'simple' },
+    menu: { menuTheme: 'gold-noir', menuStyle: 'simple' },
     firstOpen: false
   });
   console.log('✅ Restaurant créé:', rid);
@@ -349,7 +349,7 @@ module.exports = async (req, res) => {
     // ── 3. Auto-création restaurant ─────────────────────────────────────────
     let created = null;
     try {
-      created = await autoCreateRestaurant(rest, forfaitType || 'menu-qr', paymentMode || 'monthly', email, lang, safeKey);
+      created = await autoCreateRestaurant(rest, forfaitType || 'menu-qr', paymentMode || 'annual', email, lang, safeKey);
     } catch(e) {
       console.error('⚠ Auto-création error:', e.message);
     }
