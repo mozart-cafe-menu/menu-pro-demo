@@ -33,6 +33,11 @@ function _appendPhotoSuffix(name, wantsPhotoHelp) {
   return dot > 0 ? name.slice(0, dot) + suffix + name.slice(dot) : name + suffix;
 }
 
+// Apps Script (Web App) répond au POST par une redirection 302 vers
+// script.googleusercontent.com pour livrer le contenu réel — sans suivre ces
+// redirections (jusqu'à 2, même schéma que client/api/diag.js), la réponse
+// obtenue est la page HTML "Moved Temporarily" elle-même, jamais le JSON
+// {ok:true,...} attendu, même quand l'enregistrement Drive a réussi côté script.
 function httpsPost(url, payload) {
   const https = require('https');
   const body  = JSON.stringify(payload);
@@ -40,10 +45,27 @@ function httpsPost(url, payload) {
     const u    = new URL(url);
     const opts = { hostname: u.hostname, path: u.pathname + u.search, method: 'POST',
                    headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(body) } };
-    const req  = https.request(opts, res => {
+    const handleRes = (res) => {
       let d = '';
       res.on('data', c => d += c);
       res.on('end', () => { try { resolve(JSON.parse(d)); } catch(e) { resolve({ ok: false, raw: d }); } });
+    };
+    const req = https.request(opts, res => {
+      if (res.statusCode >= 300 && res.statusCode < 400 && res.headers.location) {
+        res.resume();
+        const loc  = new URL(res.headers.location);
+        const req2 = https.request({ hostname: loc.hostname, path: loc.pathname + loc.search, method: 'GET' }, res2 => {
+          if (res2.statusCode >= 300 && res2.statusCode < 400 && res2.headers.location) {
+            res2.resume();
+            const loc2  = new URL(res2.headers.location);
+            const req3  = https.request({ hostname: loc2.hostname, path: loc2.pathname + loc2.search, method: 'GET' }, handleRes);
+            req3.on('error', reject);
+            req3.end();
+          } else handleRes(res2);
+        });
+        req2.on('error', reject);
+        req2.end();
+      } else handleRes(res);
     });
     req.on('error', reject);
     req.write(body);
