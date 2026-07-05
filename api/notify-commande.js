@@ -260,8 +260,12 @@ async function autoCreateRestaurant(restaurant, forfaitType, paymentMode, email,
   const price       = (_gdPrices[_comboKey] != null) ? Number(_gdPrices[_comboKey]) : _fallback;
 
   // Créer restaurant dans Firebase principal
+  // orderLang : langue choisie par le client à la commande (variable `lang` ci-dessus,
+  // déjà utilisée pour l'email d'identifiants) — persistée pour que l'admin.html puisse
+  // afficher son tout premier écran (ex: overlay "menu en cours de création") dans la
+  // bonne langue avant même que le client n'ait configuré config/primaryLang lui-même.
   await fbPut(MAIN_DB, '/restaurants/' + rid, mainSecret, {
-    profile: { name: restaurant, createdAt: ts, langs: ['fr','en','el','de','es'] },
+    profile: { name: restaurant, createdAt: ts, langs: ['fr','en','el','de','es'], orderLang: lang },
     config: {
       adminHash: hash,
       adminPwd:  pwd,
