@@ -4928,6 +4928,11 @@ html.light .fo-card-featured{
   // ── État ──────────────────────────────────────────────
   var _cmdForfait = 'menu-qr';
   var _cmdPayMode  = 'monthly';  // 'monthly' | 'annual'
+  // true dès que le client modifie lui-même le sélecteur de langue de commande —
+  // évite qu'un retour en arrière (changement de forfait/mode de paiement, qui
+  // ré-ouvre ce même formulaire) écrase silencieusement son choix explicite en
+  // le remettant à la langue d'affichage du site (Fix #227).
+  var _cmdLangTouched = false;
   // ── Préparer le formulaire Commander (appelé aussi depuis le notice) ──
   function _prepareCommanderForm(idx) {
     _cmdForfait = idx === 1 ? 'commandes-services' : 'menu-qr';
@@ -4943,13 +4948,16 @@ html.light .fo-card-featured{
     fb.className = 'cmd-feedback'; fb.textContent = '';
     var btn = document.getElementById('cmd-submit');
     btn.disabled = false; btn.textContent = _fT['cmd.submit']||'Envoyer ma demande →';
-    // Langue : pré-selectionner la langue de la page
+    // Langue : pré-selectionner la langue de la page — SAUF si le client a déjà
+    // modifié lui-même ce champ (Fix #227) : rouvrir ce formulaire (retour en
+    // arrière pour changer de forfait/mode de paiement, etc.) ne doit jamais
+    // écraser un choix de langue de commande déjà fait explicitement.
     var storedLang = localStorage.getItem('mqr_lang') || 'fr';
     var langSel = document.getElementById('cmd-langue');
-    if (langSel) langSel.value = storedLang;
-    // Pays par défaut selon langue
+    if (langSel && !_cmdLangTouched) langSel.value = storedLang;
+    // Pays par défaut selon la langue réellement affichée dans le champ
     var defaultCodes = {fr:'+33',en:'+44',el:'+30',es:'+34',de:'+49'};
-    var defCode = defaultCodes[storedLang] || '+33';
+    var defCode = defaultCodes[(langSel && langSel.value) || storedLang] || '+33';
     buildCountryOptions('cmd-wa-country', defCode);
     buildCountryOptions('cmd-vb-country', defCode);
   }
@@ -5013,6 +5021,14 @@ html.light .fo-card-featured{
     _controlDb = firebase.database(app);
     return _controlDb;
   }
+
+  // Marque le choix de langue de commande comme explicite dès que le client
+  // touche lui-même le champ — voir _cmdLangTouched (Fix #227).
+  (function() {
+    var langSel = document.getElementById('cmd-langue');
+    if (!langSel) return;
+    langSel.addEventListener('change', function() { _cmdLangTouched = true; });
+  })();
 
   // ── Menu files (upload optionnel après commande) ────────────────────────────
   var _cmdMenuFiles = [];
@@ -5264,6 +5280,7 @@ html.light .fo-card-featured{
         closePopup('pop-commander');
         setTimeout(function(){ openPopup('pop-success'); }, 280);
         // Réinitialiser
+        _cmdLangTouched = false;
         _cmdMenuFiles = [];
         if (window._refreshMenuFilesBtn) window._refreshMenuFilesBtn();
         var _menuToggleEl  = document.getElementById('cmd-menu-toggle');
