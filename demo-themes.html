@@ -193,7 +193,8 @@ const EVENTS = [
 
 const BASE_URL = 'menu-demo.html?demo_style=simple&demo_bell=0&demo_order=0&demo_theme=';
 
-let activeTheme = 'gold-noir';
+let activeTheme = (new URLSearchParams(location.search).get('theme')) || 'gold-noir';
+if (!THEMES.some(t => t.id === activeTheme)) activeTheme = 'gold-noir';
 let activeEvent = 'none';
 let _iframeLoaded = false;
 

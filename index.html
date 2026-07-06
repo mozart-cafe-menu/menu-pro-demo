@@ -2968,6 +2968,158 @@ html.light .fo-card-featured{
   border-color:rgba(200,164,78,.4);
 }
 
+/* ═══════════════════════════════════════════════════════════════
+   NEW · 05b · THEME GALLERY (marquee) — section #themes
+═══════════════════════════════════════════════════════════════ */
+#themes{position:relative;padding:6rem 0 5.5rem;overflow:hidden}
+.tg-shell{position:relative;z-index:2;width:100%;max-width:var(--max);margin:0 auto;padding:0 var(--pad-x)}
+.tg-head{max-width:640px;margin:0 auto 3.2rem;text-align:center}
+.tg-head .eyebrow{justify-content:center;margin:0 auto 1rem}
+.tg-head h2{font-size:clamp(2rem,4.6vw,3.4rem);margin-bottom:.9rem}
+.tg-head .lead{max-width:520px;margin:0 auto}
+.tg-marquee-wrap{position:relative;margin:0 calc(var(--pad-x) * -1)}
+.tg-marquee-wrap::before,.tg-marquee-wrap::after{
+  content:'';position:absolute;top:0;bottom:0;width:min(16vw,180px);z-index:3;pointer-events:none;
+}
+.tg-marquee-wrap::before{left:0;background:linear-gradient(90deg,var(--ink) 15%,transparent)}
+.tg-marquee-wrap::after{right:0;background:linear-gradient(270deg,var(--ink) 15%,transparent)}
+.tg-track{overflow:hidden}
+.tg-row{display:flex;gap:1.5rem;width:max-content;will-change:transform}
+.tg-row+.tg-row{margin-top:1.5rem}
+.tg-row-1{animation:tgScrollL 50s linear infinite}
+.tg-row-2{animation:tgScrollR 58s linear infinite}
+.tg-marquee-wrap:hover .tg-row,.tg-marquee-wrap:focus-within .tg-row{animation-play-state:paused}
+@keyframes tgScrollL{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes tgScrollR{from{transform:translateX(-50%)}to{transform:translateX(0)}}
+.tg-card{display:flex;flex-direction:column;align-items:center;flex:0 0 auto;width:172px;cursor:pointer;background:none;border:none;padding:0;font:inherit;color:inherit;text-align:center}
+.tg-phone{
+  display:block;position:relative;width:100%;aspect-ratio:9/19.3;border-radius:26px;
+  background:#0e0c09;border:5px solid #1c1712;
+  box-shadow:0 26px 60px -22px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.05);
+  overflow:hidden;transition:transform .5s var(--e-back),box-shadow .45s,border-color .35s;
+}
+.tg-card:hover .tg-phone,.tg-card:focus-visible .tg-phone{
+  transform:translateY(-9px) scale(1.02);
+  box-shadow:0 40px 84px -24px rgba(200,164,78,.4),0 0 0 1px rgba(200,164,78,.3);
+  border-color:#2a2216;
+}
+.tg-phone-notch{
+  position:absolute;top:6px;left:50%;transform:translateX(-50%);
+  width:36%;height:15px;background:#1c1712;border-radius:10px;z-index:2;
+}
+.tg-phone img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
+.tg-card-label{display:block;margin-top:.9rem}
+.tg-card-name{display:block;font-family:var(--serif);font-size:.92rem;color:var(--bone);letter-spacing:.01em}
+.tg-card-family{display:block;font-size:.66rem;color:var(--mute-2);letter-spacing:.08em;text-transform:uppercase;margin-top:3px}
+.tg-cta{display:flex;justify-content:center;margin-top:2.8rem}
+@media(max-width:700px){.tg-card{width:138px}.tg-marquee-wrap::before,.tg-marquee-wrap::after{width:10vw}}
+@media(prefers-reduced-motion:reduce){
+  .tg-row{animation:none!important}
+  .tg-track{overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:thin}
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   NEW · 05c · ACCORDIONS — #pourquoi-qr + #avantages (features)
+═══════════════════════════════════════════════════════════════ */
+.xacc-shell{position:relative;z-index:2;width:100%;max-width:var(--max);margin:0 auto;padding:0 var(--pad-x)}
+.xacc-head{max-width:680px;margin:0 auto 3rem;text-align:center}
+.xacc-head .eyebrow{justify-content:center;margin:0 auto 1rem}
+.xacc-head h2{font-size:clamp(2.1rem,5vw,3.8rem);margin-bottom:.9rem}
+.xacc-head .lead{max-width:560px;margin:0 auto}
+.xacc-list{display:flex;flex-direction:column;gap:.85rem;max-width:980px;margin:0 auto}
+.xacc-item{
+  border:1px solid var(--line-2);border-radius:20px;background:var(--ink-2);
+  overflow:hidden;transition:border-color .4s,box-shadow .4s,background .4s;
+}
+.xacc-item.is-open{
+  border-color:rgba(200,164,78,.42);
+  box-shadow:0 28px 68px -30px rgba(200,164,78,.24);
+}
+.xacc-head-btn{
+  width:100%;display:flex;align-items:center;gap:1.1rem;padding:1.25rem 1.5rem;
+  text-align:left;cursor:pointer;background:none;border:none;font:inherit;color:inherit;
+}
+.xacc-num{font-family:var(--serif);font-size:.82rem;color:var(--mute-2);flex-shrink:0;width:1.5rem}
+.xacc-icon{
+  width:42px;height:42px;border-radius:12px;flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  background:rgba(200,164,78,.1);border:1px solid var(--line-2);color:var(--gold);
+  transition:background .4s,border-color .4s,transform .45s var(--e-back),color .4s;
+}
+.xacc-icon svg{width:19px;height:19px}
+.xacc-item.is-open .xacc-icon{
+  background:linear-gradient(135deg,var(--gold-2),var(--gold),var(--gold-3));
+  color:#0c0a08;transform:scale(1.08) rotate(-4deg);border-color:transparent;
+}
+.xacc-title{flex:1;font-family:var(--serif);font-size:clamp(1rem,2vw,1.22rem);font-weight:500;color:var(--bone);letter-spacing:-.01em}
+.xacc-chev{
+  width:32px;height:32px;border-radius:50%;border:1px solid var(--line-2);flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  transition:transform .5s var(--e-out),border-color .3s,background .3s;
+}
+.xacc-item.is-open .xacc-chev{transform:rotate(180deg);border-color:var(--gold);background:rgba(200,164,78,.12)}
+.xacc-chev svg{width:13px;height:13px;color:var(--mute);transition:color .3s}
+.xacc-item.is-open .xacc-chev svg{color:var(--gold)}
+.xacc-panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .55s var(--e-out)}
+.xacc-item.is-open .xacc-panel{grid-template-rows:1fr}
+.xacc-panel-inner{overflow:hidden}
+.xacc-panel-body{
+  display:grid;grid-template-columns:1.05fr 1fr;gap:2.6rem;align-items:center;
+  padding:.3rem 1.5rem 2.3rem;
+}
+.xacc-desc{color:var(--mute);font-size:.95rem;line-height:1.72}
+.xacc-tags{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.15rem}
+.xacc-tag{
+  font-size:.7rem;letter-spacing:.03em;padding:.35rem .75rem;border-radius:20px;
+  background:rgba(200,164,78,.1);border:1px solid var(--line-2);color:var(--gold-2);
+}
+@media(max-width:860px){
+  .xacc-panel-body{grid-template-columns:1fr;gap:1.5rem}
+  .xacc-head-btn{padding:1.05rem 1.1rem}
+  .xacc-num{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+  .xacc-panel,.xacc-icon,.xacc-chev,.xacc-chev svg{transition:none}
+}
+
+/* ── Device mockup (bureau + mobile) used inside accordion panels ── */
+.dmk{position:relative;width:100%;min-height:230px;display:flex;align-items:flex-end;justify-content:center;padding:1rem 0 1.6rem}
+.dmk-desktop{
+  position:relative;width:88%;max-width:360px;border-radius:9px 9px 2px 2px;
+  background:#17140f;border:1px solid rgba(255,255,255,.08);
+  box-shadow:0 32px 64px -26px rgba(0,0,0,.6);overflow:hidden;aspect-ratio:16/10.2;
+}
+.dmk-desktop::after{
+  content:'';position:absolute;left:36%;right:36%;bottom:-7px;height:7px;
+  background:#221e16;border-radius:0 0 7px 7px;
+}
+.dmk-desktop-bar{height:8.5%;background:#0c0a07;display:flex;align-items:center;gap:5px;padding:0 10px;flex-shrink:0}
+.dmk-desktop-bar span{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.16)}
+.dmk-desktop-screen{position:relative;width:100%;height:91.5%;overflow:hidden}
+.dmk-mobile{
+  position:absolute;right:1%;bottom:-8%;width:76px;border-radius:15px;
+  background:#17140f;border:1px solid rgba(255,255,255,.1);
+  box-shadow:0 26px 52px -20px rgba(0,0,0,.65);overflow:hidden;aspect-ratio:9/19.4;
+}
+.dmk-mobile-notch{
+  position:absolute;top:5px;left:50%;transform:translateX(-50%);
+  width:26px;height:4px;border-radius:3px;background:rgba(255,255,255,.16);z-index:2;
+}
+.dmk-mobile-screen{position:relative;width:100%;height:100%;overflow:hidden}
+.dmk-img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block;opacity:0;transition:opacity .5s var(--e-out)}
+.dmk-img.is-loaded{opacity:1}
+.dmk-placeholder{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(160deg,rgba(200,164,78,.16),rgba(20,17,12,.7));color:rgba(200,164,78,.5);
+}
+.dmk-placeholder svg{width:26%;height:26%}
+.dmk-mobile .dmk-placeholder svg{width:32%;height:32%}
+html.light .dmk-desktop,html.light .dmk-mobile{background:#e9e1cc;border-color:rgba(26,18,8,.14)}
+html.light .dmk-desktop-bar{background:#ddd2b4}
+html.light .dmk-desktop-bar span{background:rgba(26,18,8,.2)}
+html.light .dmk-mobile-notch{background:rgba(26,18,8,.22)}
+html.light .dmk-placeholder{background:linear-gradient(160deg,rgba(200,164,78,.24),rgba(233,225,204,.75));color:rgba(140,110,45,.55)}
+@media(max-width:860px){.dmk{min-height:200px}.dmk-desktop{max-width:300px}.dmk-mobile{width:66px}}
+
 </style>
 <script>
 (function(){
@@ -3099,6 +3251,7 @@ html.light .fo-card-featured{
     <span data-i18n="brand">GeNext</span>
   </a>
   <div class="nav-mid">
+    <a href="#themes" onclick="event.preventDefault();scrollTo_('themes')" data-i18n="nav.themes">Thèmes</a>
     <a href="#avantages" onclick="event.preventDefault();scrollTo_('avantages')" data-i18n="nav.advantages">Avantages</a>
     <a href="#forfaits" onclick="event.preventDefault();scrollTo_('forfaits')" data-i18n="nav.pricing">Tarifs</a>
   </div>
@@ -3121,6 +3274,8 @@ html.light .fo-card-featured{
 <!-- ─── SIDE DOTS ─── -->
 <nav id="side-dots" aria-label="Sections">
   <button class="s-dot active" data-label="Accueil" data-i18n-label="foot.home" onclick="scrollTo_('hero')"></button>
+  <button class="s-dot" data-label="Thèmes" data-i18n-label="nav.themes" onclick="scrollTo_('themes')"></button>
+  <button class="s-dot" data-label="Menu QR Code" data-i18n-label="qr.eyebrow" onclick="scrollTo_('pourquoi-qr')"></button>
   <button class="s-dot" data-label="Avantages" data-i18n-label="nav.advantages" onclick="scrollTo_('avantages')"></button>
   <button class="s-dot" data-label="Tarifs" data-i18n-label="nav.pricing" onclick="scrollTo_('forfaits')"></button>
   <button class="s-dot" data-label="Contact" data-i18n-label="nav.contact" onclick="scrollTo_('contact')"></button>
@@ -3135,6 +3290,14 @@ html.light .fo-card-featured{
     <a href="#hero" class="fnl-item" onclick="event.preventDefault();closeFloatNav();scrollTo_('hero')">
       <span class="fnl-label" data-i18n="foot.home">Accueil</span>
       <span class="fnl-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span>
+    </a>
+    <a href="#themes" class="fnl-item" onclick="event.preventDefault();closeFloatNav();scrollTo_('themes')">
+      <span class="fnl-label" data-i18n="nav.themes">Thèmes</span>
+      <span class="fnl-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.9 0 1.5-.7 1.5-1.5 0-.4-.15-.75-.4-1.03-.24-.28-.4-.63-.4-1.03 0-.83.68-1.44 1.5-1.44H16c3.3 0 6-2.7 6-6 0-5-4.5-9-10-9z"/></svg></span>
+    </a>
+    <a href="#pourquoi-qr" class="fnl-item" onclick="event.preventDefault();closeFloatNav();scrollTo_('pourquoi-qr')">
+      <span class="fnl-label" data-i18n="qr.eyebrow">Le constat</span>
+      <span class="fnl-dot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11z"/><path d="M9 12l2 2 4-4"/></svg></span>
     </a>
     <a href="#avantages" class="fnl-item" onclick="event.preventDefault();closeFloatNav();scrollTo_('avantages')">
       <span class="fnl-label" data-i18n="nav.advantages">Avantages</span>
@@ -3236,6 +3399,170 @@ html.light .fo-card-featured{
 </section>
 
 <!-- ════════════════════════════════════════════════════════════
+     SECTION 1b · GALERIE DE THÈMES (carrousel — cadre mobile)
+════════════════════════════════════════════════════════════ -->
+<section id="themes">
+  <div class="tg-shell">
+    <header class="tg-head reveal">
+      <div class="eyebrow" data-i18n="tg.eyebrow">Personnalisation</div>
+      <h2 class="display" data-i18n-html="tg.h2">Plus de 15 thèmes,<br><em>un seul menu.</em></h2>
+      <p class="lead" data-i18n="tg.lead">Changez d'ambiance en un clic depuis votre administration — chaque thème garde toutes les fonctionnalités, seul le style change.</p>
+    </header>
+
+    <div class="tg-marquee-wrap reveal delay-1">
+      <div class="tg-track">
+        <div class="tg-row tg-row-1" id="tgRow1"></div>
+        <div class="tg-row tg-row-2" id="tgRow2"></div>
+      </div>
+    </div>
+
+    <div class="tg-cta reveal delay-2">
+      <a href="demo-themes.html" target="_blank" rel="noopener" class="btn btn-outline">
+        <span data-i18n="tg.cta">Explorer la galerie complète</span>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
+     SECTION 1c · POURQUOI PASSER AU MENU QR CODE (accordéon)
+════════════════════════════════════════════════════════════ -->
+<section id="pourquoi-qr">
+  <div class="xacc-shell">
+    <header class="xacc-head reveal">
+      <div class="eyebrow" data-i18n="qr.eyebrow">Le constat</div>
+      <h2 class="display" data-i18n-html="qr.h2">Pourquoi passer<br>au <em>Menu QR Code.</em></h2>
+      <p class="lead" data-i18n="qr.lead">Le menu papier a fait son temps. Voici ce que change concrètement un menu digital pour votre établissement et vos clients.</p>
+    </header>
+
+    <div class="xacc-list reveal delay-1" id="qrAccList">
+
+      <!-- 01 · Hygiène -->
+      <div class="xacc-item is-open" data-acc-group="qr" data-acc-key="qr-hygiene">
+        <button class="xacc-head-btn" onclick="toggleAcc(this)">
+          <span class="xacc-num">01</span>
+          <span class="xacc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11z"/><path d="M9 12l2 2 4-4"/></svg></span>
+          <span class="xacc-title" data-i18n="qr.i1.h">Hygiène et zéro contact</span>
+          <span class="xacc-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
+        </button>
+        <div class="xacc-panel"><div class="xacc-panel-inner"><div class="xacc-panel-body">
+          <div>
+            <p class="xacc-desc" data-i18n="qr.i1.p">Fini les menus papier plastifiés touchés par des dizaines de mains chaque jour. Le client scanne avec son propre téléphone et consulte votre carte sans aucun contact partagé — une image de propreté et de sérieux dès la première seconde.</p>
+            <div class="xacc-tags">
+              <span class="xacc-tag" data-i18n="qr.i1.t1">Sans contact</span>
+              <span class="xacc-tag" data-i18n="qr.i1.t2">Image professionnelle</span>
+            </div>
+          </div>
+          <div class="dmk" data-dmk="qr-hygiene"></div>
+        </div></div></div>
+      </div>
+
+      <!-- 02 · Mise à jour instantanée -->
+      <div class="xacc-item" data-acc-group="qr" data-acc-key="qr-instant">
+        <button class="xacc-head-btn" onclick="toggleAcc(this)">
+          <span class="xacc-num">02</span>
+          <span class="xacc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z"/></svg></span>
+          <span class="xacc-title" data-i18n="qr.i2.h">Mise à jour instantanée</span>
+          <span class="xacc-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
+        </button>
+        <div class="xacc-panel"><div class="xacc-panel-inner"><div class="xacc-panel-body">
+          <div>
+            <p class="xacc-desc" data-i18n="qr.i2.p">Un prix qui change, un plat en rupture, une promotion du jour — tout se met à jour en quelques secondes, sans réimpression ni délai. Votre menu reflète toujours exactement la réalité de votre cuisine.</p>
+            <div class="xacc-tags">
+              <span class="xacc-tag" data-i18n="qr.i2.t1">Zéro réimpression</span>
+              <span class="xacc-tag" data-i18n="qr.i2.t2">Temps réel</span>
+            </div>
+          </div>
+          <div class="dmk" data-dmk="qr-instant"></div>
+        </div></div></div>
+      </div>
+
+      <!-- 03 · Multilingue -->
+      <div class="xacc-item" data-acc-group="qr" data-acc-key="qr-multilang">
+        <button class="xacc-head-btn" onclick="toggleAcc(this)">
+          <span class="xacc-num">03</span>
+          <span class="xacc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></span>
+          <span class="xacc-title" data-i18n="qr.i3.h">Accessible dans leur langue</span>
+          <span class="xacc-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
+        </button>
+        <div class="xacc-panel"><div class="xacc-panel-inner"><div class="xacc-panel-body">
+          <div>
+            <p class="xacc-desc" data-i18n="qr.i3.p">Votre menu s'affiche automatiquement dans la langue de votre visiteur. Un avantage décisif dans les zones touristiques — vos clients comprennent chaque plat, sans effort de votre part.</p>
+            <div class="xacc-tags">
+              <span class="xacc-tag" data-i18n="qr.i3.t1">Touristes bienvenus</span>
+              <span class="xacc-tag" data-i18n="qr.i3.t2">24h/24</span>
+            </div>
+          </div>
+          <div class="dmk" data-dmk="qr-multilang"></div>
+        </div></div></div>
+      </div>
+
+      <!-- 04 · Économique & écologique -->
+      <div class="xacc-item" data-acc-group="qr" data-acc-key="qr-eco">
+        <button class="xacc-head-btn" onclick="toggleAcc(this)">
+          <span class="xacc-num">04</span>
+          <span class="xacc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 019.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 11 13.24 11 11"/></svg></span>
+          <span class="xacc-title" data-i18n="qr.i4.h">Économique et écologique</span>
+          <span class="xacc-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
+        </button>
+        <div class="xacc-panel"><div class="xacc-panel-inner"><div class="xacc-panel-body">
+          <div>
+            <p class="xacc-desc" data-i18n="qr.i4.p">Plus aucun frais d'impression, de plastification ou de réimpression à chaque changement de carte. Zéro gaspillage papier — une démarche plus responsable, et des économies réelles chaque mois.</p>
+            <div class="xacc-tags">
+              <span class="xacc-tag" data-i18n="qr.i4.t1">Zéro papier</span>
+              <span class="xacc-tag" data-i18n="qr.i4.t2">Économies réelles</span>
+            </div>
+          </div>
+          <div class="dmk" data-dmk="qr-eco"></div>
+        </div></div></div>
+      </div>
+
+      <!-- 05 · Image moderne -->
+      <div class="xacc-item" data-acc-group="qr" data-acc-key="qr-image">
+        <button class="xacc-head-btn" onclick="toggleAcc(this)">
+          <span class="xacc-num">05</span>
+          <span class="xacc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.4 7.2H22l-6 4.6 2.3 7.2-6.3-4.6L5.7 21l2.3-7.2-6-4.6h7.6z"/></svg></span>
+          <span class="xacc-title" data-i18n="qr.i5.h">Image moderne, confiance immédiate</span>
+          <span class="xacc-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
+        </button>
+        <div class="xacc-panel"><div class="xacc-panel-inner"><div class="xacc-panel-body">
+          <div>
+            <p class="xacc-desc" data-i18n="qr.i5.p">Un menu digital soigné, avec photos et design premium, envoie un signal fort avant même la première bouchée : votre établissement fait attention à chaque détail. Une première impression qui inspire confiance.</p>
+            <div class="xacc-tags">
+              <span class="xacc-tag" data-i18n="qr.i5.t1">Image premium</span>
+              <span class="xacc-tag" data-i18n="qr.i5.t2">Fidélisation</span>
+            </div>
+          </div>
+          <div class="dmk" data-dmk="qr-image"></div>
+        </div></div></div>
+      </div>
+
+      <!-- 06 · Autonomie du client -->
+      <div class="xacc-item" data-acc-group="qr" data-acc-key="qr-autonomy">
+        <button class="xacc-head-btn" onclick="toggleAcc(this)">
+          <span class="xacc-num">06</span>
+          <span class="xacc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2.5"/><line x1="11" y1="18" x2="13" y2="18"/></svg></span>
+          <span class="xacc-title" data-i18n="qr.i6.h">Autonomie client, service plus fluide</span>
+          <span class="xacc-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
+        </button>
+        <div class="xacc-panel"><div class="xacc-panel-inner"><div class="xacc-panel-body">
+          <div>
+            <p class="xacc-desc" data-i18n="qr.i6.p">Votre client consulte la carte à son rythme, sans attendre qu'on la lui apporte. Votre équipe se concentre sur le service plutôt que sur la récitation du menu — une expérience plus fluide, des deux côtés.</p>
+            <div class="xacc-tags">
+              <span class="xacc-tag" data-i18n="qr.i6.t1">Zéro attente</span>
+              <span class="xacc-tag" data-i18n="qr.i6.t2">Équipe plus efficace</span>
+            </div>
+          </div>
+          <div class="dmk" data-dmk="qr-autonomy"></div>
+        </div></div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════════════════════════
      SECTION 2 · AVANTAGES
 ════════════════════════════════════════════════════════════ -->
 <section id="avantages">
@@ -3246,8 +3573,8 @@ html.light .fo-card-featured{
 
   <div class="av-shell">
     <header class="av-head reveal">
-      <h2 class="display" data-i18n-html="av.h2">Cinq raisons de<br><em>passer au digital.</em></h2>
-      <p class="lead" data-i18n="av.lead">Chaque avantage a été pensé pour améliorer l'expérience de vos clients et simplifier la gestion de votre établissement.</p>
+      <h2 class="display" data-i18n-html="av.h2">Pourquoi choisir<br><em>GeNext.</em></h2>
+      <p class="lead" data-i18n="av.lead">Un système complet pensé pour l'expérience de vos clients et la simplicité de votre gestion, au quotidien.</p>
     </header>
 
     <!-- Stats bar -->
@@ -3270,101 +3597,131 @@ html.light .fo-card-featured{
       </div>
     </div>
 
-    <!-- Bento grid : 5 avantages statiques -->
-    <div class="av-bento reveal delay-2">
+    <!-- Accordéon : 6 fonctionnalités GeNext -->
+    <div class="xacc-list reveal delay-2" id="gxAccList">
 
-      <!-- 01 · QR Code -->
-      <article class="av-item">
-        <div class="av-item-top">
-          <div class="av-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM18 17h3M14 21h3M21 14v7"/></svg>
+      <!-- 01 · Thèmes -->
+      <div class="xacc-item is-open" data-acc-group="gx" data-acc-key="gx-themes">
+        <button class="xacc-head-btn" onclick="toggleAcc(this)">
+          <span class="xacc-num">01</span>
+          <span class="xacc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.9 0 1.5-.7 1.5-1.5 0-.4-.15-.75-.4-1.03-.24-.28-.4-.63-.4-1.03 0-.83.68-1.44 1.5-1.44H16c3.3 0 6-2.7 6-6 0-5-4.5-9-10-9z"/></svg></span>
+          <span class="xacc-title" data-i18n="gx.i1.h">Plus de 15 thèmes, votre image sur-mesure</span>
+          <span class="xacc-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
+        </button>
+        <div class="xacc-panel"><div class="xacc-panel-inner"><div class="xacc-panel-body">
+          <div>
+            <p class="xacc-desc" data-i18n="gx.i1.p">Choisissez un style qui vous ressemble parmi plus de 15 thèmes — classique, moderne, romantique, nature ou méditerranéen — puis ajustez la couleur d'accent en un clic. Toutes les fonctionnalités restent identiques, seule l'ambiance change.</p>
+            <div class="xacc-tags">
+              <span class="xacc-tag" data-i18n="gx.i1.t1">+15 thèmes</span>
+              <span class="xacc-tag" data-i18n="gx.i1.t2">Couleurs personnalisables</span>
+            </div>
           </div>
-          <span class="av-num">01</span>
-        </div>
-        <div class="av-item-body">
-          <h3 data-i18n-html="av.c1.h3">Hygiène, rapidité<br><em>et confort client.</em></h3>
-          <p data-i18n="av.c1.p">Le client scanne le QR Code et accède instantanément au menu depuis son téléphone, sans attente ni contact avec des menus papier. Une solution moderne et plus hygiénique.</p>
-          <div class="av-tag-row">
-            <span class="av-tag" data-i18n="av.c1.t1">Hygiène</span>
-            <span class="av-tag" data-i18n="av.c1.t2">Confort client</span>
-          </div>
-        </div>
-      </article>
+          <div class="dmk" data-dmk="gx-themes"></div>
+        </div></div></div>
+      </div>
 
-      <!-- 02 · Zéro erreur -->
-      <article class="av-item">
-        <div class="av-item-top">
-          <div class="av-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      <!-- 02 · Commande & appel serveur -->
+      <div class="xacc-item" data-acc-group="gx" data-acc-key="gx-order">
+        <button class="xacc-head-btn" onclick="toggleAcc(this)">
+          <span class="xacc-num">02</span>
+          <span class="xacc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg></span>
+          <span class="xacc-title" data-i18n="gx.i2.h">Commande à table et appel serveur en un tap</span>
+          <span class="xacc-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
+        </button>
+        <div class="xacc-panel"><div class="xacc-panel-inner"><div class="xacc-panel-body">
+          <div>
+            <p class="xacc-desc" data-i18n="gx.i2.p">Vos clients commandent directement depuis le menu ou appellent un serveur d'un simple tap, sans se lever ni chercher du regard. Option activable ou non selon le forfait choisi.</p>
+            <div class="xacc-tags">
+              <span class="xacc-tag" data-i18n="gx.i2.t1">Appel serveur</span>
+              <span class="xacc-tag" data-i18n="gx.i2.t2">Commande en ligne</span>
+              <span class="xacc-tag" data-i18n="gx.i2.opt">Optionnel</span>
+            </div>
           </div>
-          <span class="av-num">02</span>
-        </div>
-        <div class="av-item-body">
-          <h3 data-i18n-html="av.c2.h3">Zéro erreur de commande,<br><em>service plus fluide.</em></h3>
-          <p data-i18n="av.c2.p">Quand les clients commandent depuis leur téléphone, les malentendus disparaissent. Votre équipe se concentre sur le service, vos clients repartent satisfaits.</p>
-          <div class="av-tag-row">
-            <span class="av-tag" data-i18n="av.c2.t1">Sans erreur</span>
-            <span class="av-tag" data-i18n="av.c2.t2">Service fluide</span>
-          </div>
-        </div>
-      </article>
+          <div class="dmk" data-dmk="gx-order"></div>
+        </div></div></div>
+      </div>
 
-      <!-- 03 · Multilingue -->
-      <article class="av-item">
-        <div class="av-item-top">
-          <div class="av-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>
+      <!-- 03 · Application serveur -->
+      <div class="xacc-item" data-acc-group="gx" data-acc-key="gx-server">
+        <button class="xacc-head-btn" onclick="toggleAcc(this)">
+          <span class="xacc-num">03</span>
+          <span class="xacc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2.5"/><line x1="11" y1="18" x2="13" y2="18"/></svg></span>
+          <span class="xacc-title" data-i18n="gx.i3.h">Application serveur en temps réel</span>
+          <span class="xacc-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
+        </button>
+        <div class="xacc-panel"><div class="xacc-panel-inner"><div class="xacc-panel-body">
+          <div>
+            <p class="xacc-desc" data-i18n="gx.i3.p">Votre équipe reçoit chaque commande et chaque appel instantanément sur son téléphone, avec notification. Aucune formation nécessaire — l'interface est pensée pour un usage immédiat pendant le service.</p>
+            <div class="xacc-tags">
+              <span class="xacc-tag" data-i18n="gx.i3.t1">Notifications instantanées</span>
+              <span class="xacc-tag" data-i18n="gx.i3.t2">Application Android</span>
+            </div>
           </div>
-          <span class="av-num">03</span>
-        </div>
-        <div class="av-item-body">
-          <h3 data-i18n-html="av.c3.h3">Accessible partout,<br><em>idéal pour les touristes.</em></h3>
-          <p data-i18n="av.c3.p">Disponible en 5 langues, le menu facilite l'accueil des touristes. Accessible 24h/24, partageable sur les réseaux sociaux.</p>
-          <div class="av-tag-row">
-            <span class="av-tag" data-i18n="av.c3.t1">Multilingue</span>
-            <span class="av-tag" data-i18n="av.c3.t2">24h/24</span>
-          </div>
-        </div>
-      </article>
+          <div class="dmk" data-dmk="gx-server"></div>
+        </div></div></div>
+      </div>
 
-      <!-- 04 · Gestion -->
-      <article class="av-item">
-        <div class="av-item-top">
-          <div class="av-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg>
+      <!-- 04 · Administration -->
+      <div class="xacc-item" data-acc-group="gx" data-acc-key="gx-admin">
+        <button class="xacc-head-btn" onclick="toggleAcc(this)">
+          <span class="xacc-num">04</span>
+          <span class="xacc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.12 2.12 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg></span>
+          <span class="xacc-title" data-i18n="gx.i4.h">Administration simple, tout se modifie en direct</span>
+          <span class="xacc-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
+        </button>
+        <div class="xacc-panel"><div class="xacc-panel-inner"><div class="xacc-panel-body">
+          <div>
+            <p class="xacc-desc" data-i18n="gx.i4.p">Modifiez vos prix, vos produits, vos photos ou vos promotions en quelques secondes, depuis votre téléphone ou votre ordinateur. Aucune compétence technique requise.</p>
+            <div class="xacc-tags">
+              <span class="xacc-tag" data-i18n="gx.i4.t1">Admin simple</span>
+              <span class="xacc-tag" data-i18n="gx.i4.t2">Temps réel</span>
+            </div>
           </div>
-          <span class="av-num">04</span>
-        </div>
-        <div class="av-item-body">
-          <h3 data-i18n-html="av.c4.h3">Gestion instantanée<br><em>et personnalisation.</em></h3>
-          <p data-i18n="av.c4.p">Modifiez vos prix, produits ou promotions en temps réel. Ajoutez des photos, adaptez votre menu selon les saisons ou événements.</p>
-          <div class="av-tag-row">
-            <span class="av-tag" data-i18n="av.c4.t1">Admin simple</span>
-            <span class="av-tag" data-i18n="av.c4.t2">Temps réel</span>
-          </div>
-        </div>
-      </article>
+          <div class="dmk" data-dmk="gx-admin"></div>
+        </div></div></div>
+      </div>
 
-      <!-- 05 · Commande intelligente (featured wide) -->
-      <article class="av-item">
-        <div class="av-icon" style="width:54px;height:54px;border-radius:15px;margin-top:.15rem;flex-shrink:0">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>
-        </div>
-        <div class="av-item-body">
-          <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:1rem">
-            <h3 data-i18n-html="av.c5.h3">Commande intelligente,<br><em>design avancé.</em></h3>
-            <span class="av-num" style="font-size:1.5rem;flex-shrink:0">05</span>
+      <!-- 05 · Multilingue -->
+      <div class="xacc-item" data-acc-group="gx" data-acc-key="gx-lang">
+        <button class="xacc-head-btn" onclick="toggleAcc(this)">
+          <span class="xacc-num">05</span>
+          <span class="xacc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></span>
+          <span class="xacc-title" data-i18n="gx.i5.h">Votre menu, disponible en 5 langues</span>
+          <span class="xacc-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
+        </button>
+        <div class="xacc-panel"><div class="xacc-panel-inner"><div class="xacc-panel-body">
+          <div>
+            <p class="xacc-desc" data-i18n="gx.i5.p">Français, anglais, allemand, grec, espagnol — votre menu, votre administration et votre application serveur sont déjà traduits. Chaque client voit le menu dans sa propre langue, automatiquement.</p>
+            <div class="xacc-tags">
+              <span class="xacc-tag" data-i18n="gx.i5.t1">5 langues incluses</span>
+              <span class="xacc-tag" data-i18n="gx.i5.t2">Détection automatique</span>
+            </div>
           </div>
-          <p data-i18n="av.c5.p">Les clients peuvent appeler un serveur ou commander directement depuis le menu. Le propriétaire peut changer instantanément les thèmes et le design — plus de 15 thèmes disponibles.</p>
-          <div class="av-tag-row">
-            <span class="av-tag" data-i18n="av.c5.t1">Appel serveur</span>
-            <span class="av-tag" data-i18n="av.c5.t2">Commande en ligne</span>
-            <span class="av-tag" data-i18n="av.c5.opt">Optionnel</span>
-          </div>
-        </div>
-      </article>
+          <div class="dmk" data-dmk="gx-lang"></div>
+        </div></div></div>
+      </div>
 
-    </div><!-- .av-bento -->
+      <!-- 06 · Statistiques -->
+      <div class="xacc-item" data-acc-group="gx" data-acc-key="gx-stats">
+        <button class="xacc-head-btn" onclick="toggleAcc(this)">
+          <span class="xacc-num">06</span>
+          <span class="xacc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg></span>
+          <span class="xacc-title" data-i18n="gx.i6.h">Statistiques et suivi de votre activité</span>
+          <span class="xacc-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
+        </button>
+        <div class="xacc-panel"><div class="xacc-panel-inner"><div class="xacc-panel-body">
+          <div>
+            <p class="xacc-desc" data-i18n="gx.i6.p">Visualisez vos commandes, vos appels et vos produits les plus consultés directement depuis votre administration. Une vision claire de l'activité de votre établissement, jour après jour.</p>
+            <div class="xacc-tags">
+              <span class="xacc-tag" data-i18n="gx.i6.t1">Commandes & appels</span>
+              <span class="xacc-tag" data-i18n="gx.i6.t2">Produits populaires</span>
+            </div>
+          </div>
+          <div class="dmk" data-dmk="gx-stats"></div>
+        </div></div></div>
+      </div>
+
+    </div><!-- .xacc-list -->
   </div>
 </section>
 
@@ -3829,11 +4186,11 @@ html.light .fo-card-featured{
   // ── NAV scroll state ───────────────────────────────────
   const nav=document.getElementById('nav');
   const sideDots=document.querySelectorAll('.s-dot');
-  const sectionIds=['hero','avantages','forfaits','devis','contact'];
+  const sectionIds=['hero','themes','pourquoi-qr','avantages','forfaits','contact'];
   const floatNav=document.getElementById('float-nav');
 
   // Float nav top position per section
-  const FN_TOP={hero:'8.5rem',avantages:'9.5rem',contact:'6.5rem'};
+  const FN_TOP={hero:'8.5rem',themes:'9.5rem','pourquoi-qr':'9.5rem',avantages:'9.5rem',contact:'6.5rem'};
   let _fnCurrentSec='hero';
 
   function _forfaitsNavTop(){
@@ -3963,6 +4320,7 @@ html.light .fo-card-featured{
   const fosPanels=document.querySelectorAll('.fo-panel');
   const stylePill=document.getElementById('foStylePill');
   function placeStylePill(i){
+    if(!stylePill)return;
     const btn=styleBtns[i];
     if(!btn){stylePill.style.opacity='0';return}
     stylePill.style.opacity='1';
@@ -4182,6 +4540,72 @@ html.light .fo-card-featured{
     el.classList.add('in');
   });
 
+  // ── ACCORDIONS (Pourquoi QR / Pourquoi GeNext) ─────────
+  document.querySelectorAll('.xacc-item').forEach(function(item,idx){
+    var btn=item.querySelector('.xacc-head-btn');
+    var panel=item.querySelector('.xacc-panel');
+    if(!btn||!panel)return;
+    var pid='xacc-panel-'+(item.dataset.accKey||idx);
+    panel.id=pid;
+    btn.setAttribute('aria-controls',pid);
+    btn.setAttribute('aria-expanded',item.classList.contains('is-open')?'true':'false');
+  });
+  window.toggleAcc=function(btn){
+    var item=btn.closest('.xacc-item');
+    if(!item)return;
+    var group=item.dataset.accGroup;
+    var opening=!item.classList.contains('is-open');
+    document.querySelectorAll('.xacc-item[data-acc-group="'+group+'"]').forEach(function(it){
+      it.classList.remove('is-open');
+      var b=it.querySelector('.xacc-head-btn');
+      if(b)b.setAttribute('aria-expanded','false');
+    });
+    if(opening){
+      item.classList.add('is-open');
+      btn.setAttribute('aria-expanded','true');
+      requestAnimationFrame(function(){
+        var rect=item.getBoundingClientRect();
+        if(rect.top<_navH()+10){
+          window.scrollTo({top:Math.round(window.scrollY+rect.top-_navH()-14),behavior:'smooth'});
+        }
+      });
+    }
+  };
+
+  // ── THEME GALLERY MARQUEE (cadre mobile, captures réelles) ──
+  var TG_THEMES=[
+    {id:'gold-noir',name:'Gold Noir',fam:'tg.fam.classic',famFr:'Classique'},
+    {id:'prestige',name:'Prestige',fam:'tg.fam.classic',famFr:'Classique'},
+    {id:'velvet-luxe',name:'Velvet Luxe',fam:'tg.fam.classic',famFr:'Classique'},
+    {id:'midnight-luxe',name:'Enseigne',fam:'tg.fam.classic',famFr:'Classique'},
+    {id:'neon-tokyo',name:'Neon Pulse',fam:'tg.fam.modern',famFr:'Moderne'},
+    {id:'midnight',name:'Minuit Violet',fam:'tg.fam.modern',famFr:'Moderne'},
+    {id:'botanical',name:'Botanical Forest',fam:'tg.fam.nature',famFr:'Nature'},
+    {id:'forest',name:'Forest',fam:'tg.fam.nature',famFr:'Nature'},
+    {id:'rose-parisien',name:'Rose Parisien',fam:'tg.fam.romantic',famFr:'Romantique'},
+    {id:'santorin',name:'Santorin',fam:'tg.fam.med',famFr:'Méditerranée'}
+  ];
+  function _tgCard(t){
+    return '<button class="tg-card" type="button" onclick="location.href=\'demo-themes.html?theme='+t.id+'\'">'+
+      '<span class="tg-phone"><span class="tg-phone-notch"></span>'+
+        '<img src="assets/themes/'+t.id+'.webp" alt="'+t.name+'" loading="lazy" width="240" height="341">'+
+      '</span>'+
+      '<span class="tg-card-label">'+
+        '<span class="tg-card-name">'+t.name+'</span>'+
+        '<span class="tg-card-family" data-i18n="'+t.fam+'">'+t.famFr+'</span>'+
+      '</span>'+
+    '</button>';
+  }
+  (function buildThemeMarquee(){
+    var row1=document.getElementById('tgRow1'),row2=document.getElementById('tgRow2');
+    if(!row1||!row2)return;
+    var half=Math.ceil(TG_THEMES.length/2);
+    var htmlA=TG_THEMES.slice(0,half).map(_tgCard).join('');
+    var htmlB=TG_THEMES.slice(half).map(_tgCard).join('');
+    row1.innerHTML=htmlA+htmlA;
+    row2.innerHTML=htmlB+htmlB;
+  })();
+
 })();
 
 // ════════════════════════════════════════════════════════════
@@ -4200,14 +4624,14 @@ html.light .fo-card-featured{
       'hero.cta1':'Découvrir les avantages','hero.cta2':'Voir les forfaits','hero.cta3':'Nous contacter',
       'hero.meta.num':'<span>02</span> forfaits','hero.meta.label':'Menu QR · Commandes &amp; Services<br>Démarrage 100% gratuit',
       'hero.hud.label':'Aperçu du menu',
-      'av.h2':'Cinq raisons de<br><em>passer au digital.</em>',
-      'av.lead':'Moins de friction pour vos clients, moins de charge pour votre équipe — et une image qui inspire confiance dès la première seconde.',
+      'av.h2':'Pourquoi choisir<br><em>GeNext.</em>',
+      'av.lead':'Un système complet pensé pour l\'expérience de vos clients et la simplicité de votre gestion, au quotidien.',
       'av.stat1.l':'Sans frais de création','av.stat2.l':'Langues disponibles','av.stat3.l':'Thèmes de design','av.stat4.l':'Mois d\'essai gratuit',
       'av.c1.h3':'Accès instantané,<br><em>sans contact ni attente.</em>','av.c1.p':'Dès qu\'il s\'assoit, votre client scanne et accède immédiatement à votre menu depuis son propre téléphone — sans attendre qu\'on lui apporte une carte, sans toucher des supports partagés. Une première impression soignée, dès la première seconde.','av.c1.t1':'Zéro attente','av.c1.t2':'Sans contact',
       'av.c2.h3':'Image soignée, ambiance premium,<br><em>clients qui reviennent.</em>','av.c2.p':'Un menu digital moderne avec thèmes, couleurs et photos de vos plats envoie un signal fort : votre établissement fait attention à chaque détail. Vos clients le ressentent dès le premier regard — et c\'est ce qui les pousse à revenir et à vous recommander.','av.c2.t1':'Image premium','av.c2.t2':'Fidélisation',
       'av.c3.h3':'5 langues, sans effort,<br><em>idéal pour les touristes.</em>','av.c3.p':'Votre menu s\'affiche dans la langue du visiteur — français, anglais, allemand, grec, arabe — sans aucune action de votre part. Accueillez touristes et expatriés sans friction. Un avantage décisif dans les destinations touristiques.','av.c3.t1':'Multilingue','av.c3.t2':'24h/24',
       'av.c4.h3':'Menu mis à jour en direct,<br><em>depuis votre téléphone.</em>','av.c4.p':'Prix, produits, photos, promotions — tout se met à jour en quelques secondes depuis votre interface d\'administration, sur mobile ou ordinateur. Zéro impression, zéro attente. Votre menu reflète toujours la réalité de votre cuisine.','av.c4.t1':'Admin simple','av.c4.t2':'Temps réel','av.c4.opt':'Optionnel',
-      'av.c5.h3':'Commander ou appeler<br><em>le serveur, en un tap.</em>','av.c5.p':'Depuis leur table, les clients peuvent commander leurs plats 🟢 ou appeler le serveur 🔴 — deux boutons distincts, clairs et intuitifs. Chaque action arrive instantanément sur l\'application du personnel.','av.c5.t1':'🟢 Commander','av.c5.t2':'🔴 Appeler le serveur','av.c5.opt':'Optionnel',
+      'av.c5.h3':'Commander ou appeler<br><em>le serveur, en un tap.</em>','av.c5.p':'Depuis leur table, les clients peuvent commander leurs plats 🟢 ou appeler le serveur 🔴 — deux boutons distincts, clairs et intuitifs. Chaque action arrive instantanément sur l\'application du personnel.','nav.themes':'Thèmes','tg.eyebrow':'Personnalisation','tg.h2':'Plus de 15 thèmes,<br><em>un seul menu.</em>','tg.lead':'Changez d\'ambiance en un clic depuis votre administration — chaque thème garde toutes les fonctionnalités, seul le style change.','tg.cta':'Explorer la galerie complète','tg.fam.classic':'Classique','tg.fam.modern':'Moderne','tg.fam.nature':'Nature','tg.fam.romantic':'Romantique','tg.fam.med':'Méditerranée','qr.eyebrow':'Le constat','qr.h2':'Pourquoi passer<br>au <em>Menu QR Code.</em>','qr.lead':'Le menu papier a fait son temps. Voici ce que change concrètement un menu digital pour votre établissement et vos clients.','qr.i1.h':'Hygiène et zéro contact','qr.i1.p':'Fini les menus papier plastifiés touchés par des dizaines de mains chaque jour. Le client scanne avec son propre téléphone et consulte votre carte sans aucun contact partagé — une image de propreté et de sérieux dès la première seconde.','qr.i1.t1':'Sans contact','qr.i1.t2':'Image professionnelle','qr.i2.h':'Mise à jour instantanée','qr.i2.p':'Un prix qui change, un plat en rupture, une promotion du jour — tout se met à jour en quelques secondes, sans réimpression ni délai. Votre menu reflète toujours exactement la réalité de votre cuisine.','qr.i2.t1':'Zéro réimpression','qr.i2.t2':'Temps réel','qr.i3.h':'Accessible dans leur langue','qr.i3.p':'Votre menu s\'affiche automatiquement dans la langue de votre visiteur. Un avantage décisif dans les zones touristiques — vos clients comprennent chaque plat, sans effort de votre part.','qr.i3.t1':'Touristes bienvenus','qr.i3.t2':'24h/24','qr.i4.h':'Économique et écologique','qr.i4.p':'Plus aucun frais d\'impression, de plastification ou de réimpression à chaque changement de carte. Zéro gaspillage papier — une démarche plus responsable, et des économies réelles chaque mois.','qr.i4.t1':'Zéro papier','qr.i4.t2':'Économies réelles','qr.i5.h':'Image moderne, confiance immédiate','qr.i5.p':'Un menu digital soigné, avec photos et design premium, envoie un signal fort avant même la première bouchée : votre établissement fait attention à chaque détail. Une première impression qui inspire confiance.','qr.i5.t1':'Image premium','qr.i5.t2':'Fidélisation','qr.i6.h':'Autonomie client, service plus fluide','qr.i6.p':'Votre client consulte la carte à son rythme, sans attendre qu\'on la lui apporte. Votre équipe se concentre sur le service plutôt que sur la récitation du menu — une expérience plus fluide, des deux côtés.','qr.i6.t1':'Zéro attente','qr.i6.t2':'Équipe plus efficace','gx.i1.h':'Plus de 15 thèmes, votre image sur-mesure','gx.i1.p':'Choisissez un style qui vous ressemble parmi plus de 15 thèmes — classique, moderne, romantique, nature ou méditerranéen — puis ajustez la couleur d\'accent en un clic. Toutes les fonctionnalités restent identiques, seule l\'ambiance change.','gx.i1.t1':'+15 thèmes','gx.i1.t2':'Couleurs personnalisables','gx.i2.h':'Commande à table et appel serveur en un tap','gx.i2.p':'Vos clients commandent directement depuis le menu ou appellent un serveur d\'un simple tap, sans se lever ni chercher du regard. Option activable ou non selon le forfait choisi.','gx.i2.t1':'Appel serveur','gx.i2.t2':'Commande en ligne','gx.i2.opt':'Optionnel','gx.i3.h':'Application serveur en temps réel','gx.i3.p':'Votre équipe reçoit chaque commande et chaque appel instantanément sur son téléphone, avec notification. Aucune formation nécessaire — l\'interface est pensée pour un usage immédiat pendant le service.','gx.i3.t1':'Notifications instantanées','gx.i3.t2':'Application Android','gx.i4.h':'Administration simple, tout se modifie en direct','gx.i4.p':'Modifiez vos prix, vos produits, vos photos ou vos promotions en quelques secondes, depuis votre téléphone ou votre ordinateur. Aucune compétence technique requise.','gx.i4.t1':'Admin simple','gx.i4.t2':'Temps réel','gx.i5.h':'Votre menu, disponible en 5 langues','gx.i5.p':'Français, anglais, allemand, grec, espagnol — votre menu, votre administration et votre application serveur sont déjà traduits. Chaque client voit le menu dans sa propre langue, automatiquement.','gx.i5.t1':'5 langues incluses','gx.i5.t2':'Détection automatique','gx.i6.h':'Statistiques et suivi de votre activité','gx.i6.p':'Visualisez vos commandes, vos appels et vos produits les plus consultés directement depuis votre administration. Une vision claire de l\'activité de votre établissement, jour après jour.','gx.i6.t1':'Commandes & appels','gx.i6.t2':'Produits populaires','av.c5.t1':'🟢 Commander','av.c5.t2':'🔴 Appeler le serveur','av.c5.opt':'Optionnel',
       'fo.h2':'Deux forfaits,<br><em>clé en main.</em>','fo.lead':'Commandez, recevez tout immédiatement — 1 mois d\'essai gratuit · démarrage 100% gratuit, sans frais de création.',
       'fo.style.pages':'Menu QR Code','fo.style.dynamic':'Menu et Commandes',
       'fo.p0.feat.h3':'Menu QR','fo.p0.feat.desc':'Un menu digital élégant accessible par QR code. Vos clients consultent votre carte depuis leur téléphone — sans rien télécharger.',
@@ -4283,14 +4707,14 @@ html.light .fo-card-featured{
       'hero.cta1':'Discover the benefits','hero.cta2':'View pricing','hero.cta3':'Contact us',
       'hero.meta.num':'<span>02</span> plans','hero.meta.label':'QR Menu · Orders &amp; Service<br>100% free start',
       'hero.hud.label':'Menu preview',
-      'av.h2':'Five reasons to<br><em>go digital.</em>',
-      'av.lead':'Less friction for your customers, less load on your team — and an image that builds trust from the very first second.',
+      'av.h2':'Why choose<br><em>GeNext.</em>',
+      'av.lead':'A complete system designed for your customers\' experience and the simplicity of your daily management.',
       'av.stat1.l':'No setup fee','av.stat2.l':'Languages available','av.stat3.l':'Design themes','av.stat4.l':'Month free trial',
       'av.c1.h3':'Instant access,<br><em>no contact, no wait.</em>','av.c1.p':'The moment they sit down, your customer scans and instantly accesses your menu on their own phone — no waiting for someone to bring a menu, no touching shared items. A polished first impression, right from the first second.','av.c1.t1':'Zero wait','av.c1.t2':'No contact',
       'av.c2.h3':'Premium image, polished feel,<br><em>customers who return.</em>','av.c2.p':'A modern digital menu with themes, colors and dish photos sends a clear signal: your establishment cares about every detail. Your customers feel it from the very first look — and that\'s what brings them back and makes them recommend you.','av.c2.t1':'Premium image','av.c2.t2':'Customer loyalty',
       'av.c3.h3':'5 languages, effortlessly,<br><em>ideal for tourists.</em>','av.c3.p':'Your menu appears in the visitor\'s language — French, English, German, Greek, Arabic — with no action needed on your part. Welcome tourists and expats without friction. A decisive advantage in tourist destinations.','av.c3.t1':'Multilingual','av.c3.t2':'24/7',
       'av.c4.h3':'Live menu updates,<br><em>from your phone.</em>','av.c4.p':'Prices, products, photos, promotions — everything updates in seconds from your admin interface, on mobile or computer. Zero printing, zero waiting. Your menu always reflects what\'s actually in your kitchen.','av.c4.t1':'Simple admin','av.c4.t2':'Real-time','av.c4.opt':'Optional',
-      'av.c5.h3':'Order food or call<br><em>the waiter, in one tap.</em>','av.c5.p':'From their table, customers can order food 🟢 or call the waiter 🔴 — two distinct, clear and intuitive buttons. Each action reaches the staff app instantly.','av.c5.t1':'🟢 Order food','av.c5.t2':'🔴 Call waiter','av.c5.opt':'Optional',
+      'av.c5.h3':'Order food or call<br><em>the waiter, in one tap.</em>','av.c5.p':'From their table, customers can order food 🟢 or call the waiter 🔴 — two distinct, clear and intuitive buttons. Each action reaches the staff app instantly.','nav.themes':'Themes','tg.eyebrow':'Customization','tg.h2':'15+ themes,<br><em>one single menu.</em>','tg.lead':'Switch the mood in one click from your admin panel — every theme keeps all features, only the style changes.','tg.cta':'Explore the full gallery','tg.fam.classic':'Classic','tg.fam.modern':'Modern','tg.fam.nature':'Nature','tg.fam.romantic':'Romantic','tg.fam.med':'Mediterranean','qr.eyebrow':'The reality','qr.h2':'Why switch<br>to a <em>QR Code Menu.</em>','qr.lead':'Paper menus have had their day. Here\'s what a digital menu concretely changes for your business and your customers.','qr.i1.h':'Hygiene and zero contact','qr.i1.p':'No more laminated paper menus touched by dozens of hands every day. Guests scan with their own phone and browse your menu with zero shared contact — a clean, professional impression from the first second.','qr.i1.t1':'Contact-free','qr.i1.t2':'Professional image','qr.i2.h':'Instant updates','qr.i2.p':'A price change, a sold-out dish, today\'s special — everything updates in seconds, with no reprinting and no delay. Your menu always matches exactly what\'s happening in your kitchen.','qr.i2.t1':'No reprinting','qr.i2.t2':'Real time','qr.i3.h':'Available in their language','qr.i3.p':'Your menu automatically displays in your visitor\'s language. A decisive advantage in tourist areas — your guests understand every dish, with zero effort on your part.','qr.i3.t1':'Tourist-friendly','qr.i3.t2':'24/7','qr.i4.h':'Cost-effective and eco-friendly','qr.i4.p':'No more printing, laminating or reprinting costs every time your menu changes. Zero paper waste — a more responsible approach, and real savings every month.','qr.i4.t1':'Zero paper','qr.i4.t2':'Real savings','qr.i5.h':'Modern image, instant trust','qr.i5.p':'A polished digital menu with photos and premium design sends a strong signal before the first bite: your establishment pays attention to every detail. A first impression that builds trust.','qr.i5.t1':'Premium image','qr.i5.t2':'Customer loyalty','qr.i6.h':'Customer freedom, smoother service','qr.i6.p':'Your guests browse the menu at their own pace, without waiting for someone to bring it. Your team focuses on service instead of reciting the menu — a smoother experience, on both sides.','qr.i6.t1':'No waiting','qr.i6.t2':'More efficient team','gx.i1.h':'15+ themes, your image, tailor-made','gx.i1.p':'Pick a style that matches you from over 15 themes — classic, modern, romantic, nature or Mediterranean — then adjust the accent color in one click. Every feature stays the same, only the mood changes.','gx.i1.t1':'15+ themes','gx.i1.t2':'Customizable colors','gx.i2.h':'Table ordering and waiter call in one tap','gx.i2.p':'Your guests order directly from the menu or call a waiter with a single tap, without standing up or looking around. Can be enabled or disabled depending on your plan.','gx.i2.t1':'Waiter call','gx.i2.t2':'Online ordering','gx.i2.opt':'Optional','gx.i3.h':'Real-time waiter app','gx.i3.p':'Your team receives every order and every call instantly on their phone, with a notification. No training needed — the interface is built for immediate use during service.','gx.i3.t1':'Instant notifications','gx.i3.t2':'Android app','gx.i4.h':'Simple admin, everything updates live','gx.i4.p':'Update your prices, products, photos or promotions in seconds, from your phone or computer. No technical skills required.','gx.i4.t1':'Simple admin','gx.i4.t2':'Real time','gx.i5.h':'Your menu, available in 5 languages','gx.i5.p':'French, English, German, Greek, Spanish — your menu, your admin panel and your waiter app are already translated. Every guest sees the menu in their own language, automatically.','gx.i5.t1':'5 languages included','gx.i5.t2':'Automatic detection','gx.i6.h':'Statistics and activity tracking','gx.i6.p':'See your orders, calls and most-viewed products directly from your admin panel. A clear view of your business activity, day after day.','gx.i6.t1':'Orders & calls','gx.i6.t2':'Popular products','av.c5.t1':'🟢 Order food','av.c5.t2':'🔴 Call waiter','av.c5.opt':'Optional',
       'fo.h2':'Two plans,<br><em>turnkey.</em>','fo.lead':'Order, receive everything instantly — 1-month free trial · 100% free start, no setup fee.',
       'fo.style.pages':'Menu QR Code','fo.style.dynamic':'Menu & Orders',
       'fo.p0.feat.h3':'Menu QR Code','fo.p0.feat.desc':'An elegant digital menu accessible via QR code. Your customers browse your menu from their phone — no downloads required.',
@@ -4370,14 +4794,14 @@ html.light .fo-card-featured{
       'hero.cta1':'Δείτε τα πλεονεκτήματα','hero.cta2':'Δείτε τις τιμές','hero.cta3':'Επικοινωνήστε μαζί μας',
       'hero.meta.num':'<span>02</span> πλάνα','hero.meta.label':'Menu QR · Μενού &amp; Παραγγελίες<br>100% δωρεάν εκκίνηση',
       'hero.hud.label':'Προεπισκόπηση μενού',
-      'av.h2':'Πέντε λόγοι για να<br><em>πάτε ψηφιακά.</em>',
-      'av.lead':'Λιγότερη ταλαιπωρία για τους πελάτες σας, λιγότερη πίεση για την ομάδα σας — και μια εικόνα που εμπνέει εμπιστοσύνη από το πρώτο δευτερόλεπτο.',
+      'av.h2':'Γιατί να επιλέξετε<br>το <em>GeNext.</em>',
+      'av.lead':'Ένα ολοκληρωμένο σύστημα σχεδιασμένο για την εμπειρία των πελατών σας και την απλότητα της καθημερινής σας διαχείρισης.',
       'av.stat1.l':'Χωρίς χρεώσεις εγγραφής','av.stat2.l':'Διαθέσιμες γλώσσες','av.stat3.l':'Θέματα σχεδιασμού','av.stat4.l':'Μήνας δωρεάν δοκιμή',
       'av.c1.h3':'Άμεση πρόσβαση,<br><em>χωρίς επαφή ή αναμονή.</em>','av.c1.p':'Μόλις καθίσουν, οι πελάτες σας σαρώνουν και έχουν άμεσα πρόσβαση στο μενού σας από το δικό τους τηλέφωνο — χωρίς να περιμένουν να τους φέρουν κατάλογο, χωρίς να αγγίξουν κοινόχρηστα αντικείμενα. Μια άψογη πρώτη εντύπωση, από το πρώτο δευτερόλεπτο.','av.c1.t1':'Μηδέν αναμονή','av.c1.t2':'Χωρίς επαφή',
       'av.c2.h3':'Premium εικόνα, κομψή ατμόσφαιρα,<br><em>πελάτες που επιστρέφουν.</em>','av.c2.p':'Ένα σύγχρονο ψηφιακό μενού με θέματα, χρώματα και φωτογραφίες των πιάτων σας στέλνει ένα ξεκάθαρο μήνυμα: η επιχείρησή σας φροντίζει κάθε λεπτομέρεια. Οι πελάτες σας το αισθάνονται από την πρώτη ματιά — και αυτό είναι που τους κάνει να επιστρέφουν και να σας συστήνουν.','av.c2.t1':'Premium εικόνα','av.c2.t2':'Πιστοί πελάτες',
       'av.c3.h3':'5 γλώσσες, αβίαστα,<br><em>ιδανικό για τουρίστες.</em>','av.c3.p':'Το μενού σας εμφανίζεται στη γλώσσα του επισκέπτη — γαλλικά, αγγλικά, γερμανικά, ελληνικά, αραβικά — χωρίς καμία ενέργεια από μέρους σας. Υποδεχτείτε τουρίστες και ξενόγλωσσους χωρίς τριβές. Αποφασιστικό πλεονέκτημα σε τουριστικούς προορισμούς.','av.c3.t1':'Πολύγλωσσο','av.c3.t2':'24ω/24',
       'av.c4.h3':'Ζωντανή ενημέρωση μενού,<br><em>από το τηλέφωνό σας.</em>','av.c4.p':'Τιμές, προϊόντα, φωτογραφίες, προσφορές — όλα ενημερώνονται σε δευτερόλεπτα από τη διεπαφή διαχείρισης, σε κινητό ή υπολογιστή. Μηδέν εκτυπώσεις, μηδέν αναμονή. Το μενού σας αντικατοπτρίζει πάντα αυτό που έχετε στην κουζίνα σας.','av.c4.t1':'Απλή διαχείριση','av.c4.t2':'Πραγματικός χρόνος','av.c4.opt':'Προαιρετικό',
-      'av.c5.h3':'Παραγγείλτε ή καλέστε<br><em>τον σερβιτόρο, με ένα tap.</em>','av.c5.p':'Από το τραπέζι τους, οι πελάτες μπορούν να παραγγείλουν 🟢 ή να καλέσουν τον σερβιτόρο 🔴 — δύο ξεχωριστά και διαισθητικά κουμπιά. Κάθε ενέργεια φτάνει άμεσα στην εφαρμογή του προσωπικού.','av.c5.t1':'🟢 Παραγγελία','av.c5.t2':'🔴 Κλήση σερβιτόρου','av.c5.opt':'Προαιρετικό',
+      'av.c5.h3':'Παραγγείλτε ή καλέστε<br><em>τον σερβιτόρο, με ένα tap.</em>','av.c5.p':'Από το τραπέζι τους, οι πελάτες μπορούν να παραγγείλουν 🟢 ή να καλέσουν τον σερβιτόρο 🔴 — δύο ξεχωριστά και διαισθητικά κουμπιά. Κάθε ενέργεια φτάνει άμεσα στην εφαρμογή του προσωπικού.','nav.themes':'Θέματα','tg.eyebrow':'Εξατομίκευση','tg.h2':'Πάνω από 15 θέματα,<br><em>ένα μόνο μενού.</em>','tg.lead':'Αλλάξτε ατμόσφαιρα με ένα κλικ από τη διαχείρισή σας — κάθε θέμα διατηρεί όλες τις λειτουργίες, αλλάζει μόνο το στιλ.','tg.cta':'Εξερευνήστε την πλήρη συλλογή','tg.fam.classic':'Κλασικό','tg.fam.modern':'Μοντέρνο','tg.fam.nature':'Φύση','tg.fam.romantic':'Ρομαντικό','tg.fam.med':'Μεσογειακό','qr.eyebrow':'Η πραγματικότητα','qr.h2':'Γιατί να περάσετε<br>σε <em>Μενού με QR Code.</em>','qr.lead':'Το χάρτινο μενού έχει κάνει τον κύκλο του. Δείτε τι αλλάζει ουσιαστικά ένα ψηφιακό μενού για την επιχείρησή σας και τους πελάτες σας.','qr.i1.h':'Υγιεινή και μηδενική επαφή','qr.i1.p':'Τέλος στα πλαστικοποιημένα χάρτινα μενού που αγγίζουν δεκάδες χέρια καθημερινά. Ο πελάτης σαρώνει με το δικό του τηλέφωνο και βλέπει το μενού σας χωρίς καμία κοινόχρηστη επαφή — μια εικόνα καθαριότητας και σοβαρότητας από το πρώτο δευτερόλεπτο.','qr.i1.t1':'Χωρίς επαφή','qr.i1.t2':'Επαγγελματική εικόνα','qr.i2.h':'Άμεση ενημέρωση','qr.i2.p':'Μια τιμή που αλλάζει, ένα πιάτο που εξαντλήθηκε, η προσφορά της ημέρας — όλα ενημερώνονται σε δευτερόλεπτα, χωρίς επανεκτύπωση ή καθυστέρηση. Το μενού σας αντικατοπτρίζει πάντα ακριβώς την πραγματικότητα της κουζίνας σας.','qr.i2.t1':'Καμία επανεκτύπωση','qr.i2.t2':'Πραγματικός χρόνος','qr.i3.h':'Προσβάσιμο στη γλώσσα τους','qr.i3.p':'Το μενού σας εμφανίζεται αυτόματα στη γλώσσα του επισκέπτη σας. Ένα καθοριστικό πλεονέκτημα σε τουριστικές περιοχές — οι πελάτες σας καταλαβαίνουν κάθε πιάτο, χωρίς καμία δική σας προσπάθεια.','qr.i3.t1':'Φιλικό προς τουρίστες','qr.i3.t2':'24/7','qr.i4.h':'Οικονομικό και οικολογικό','qr.i4.p':'Καμία πλέον δαπάνη εκτύπωσης, πλαστικοποίησης ή επανεκτύπωσης σε κάθε αλλαγή του μενού. Μηδενική σπατάλη χαρτιού — μια πιο υπεύθυνη προσέγγιση, και πραγματική εξοικονόμηση κάθε μήνα.','qr.i4.t1':'Μηδέν χαρτί','qr.i4.t2':'Πραγματική εξοικονόμηση','qr.i5.h':'Μοντέρνα εικόνα, άμεση εμπιστοσύνη','qr.i5.p':'Ένα φροντισμένο ψηφιακό μενού, με φωτογραφίες και premium σχεδιασμό, στέλνει ένα ισχυρό μήνυμα ακόμη και πριν από την πρώτη μπουκιά: η επιχείρησή σας προσέχει κάθε λεπτομέρεια. Μια πρώτη εντύπωση που εμπνέει εμπιστοσύνη.','qr.i5.t1':'Premium εικόνα','qr.i5.t2':'Πιστότητα πελατών','qr.i6.h':'Αυτονομία πελάτη, πιο ομαλή εξυπηρέτηση','qr.i6.p':'Ο πελάτης σας βλέπει το μενού με τον δικό του ρυθμό, χωρίς να περιμένει να του το φέρουν. Η ομάδα σας επικεντρώνεται στην εξυπηρέτηση αντί να απαγγέλλει το μενού — μια πιο ομαλή εμπειρία, και για τις δύο πλευρές.','qr.i6.t1':'Καμία αναμονή','qr.i6.t2':'Πιο αποδοτική ομάδα','gx.i1.h':'Πάνω από 15 θέματα, η εικόνα σας στα μέτρα σας','gx.i1.p':'Επιλέξτε ένα στιλ που σας ταιριάζει ανάμεσα σε πάνω από 15 θέματα — κλασικό, μοντέρνο, ρομαντικό, φύση ή μεσογειακό — και προσαρμόστε το χρώμα με ένα κλικ. Όλες οι λειτουργίες παραμένουν ίδιες, αλλάζει μόνο η ατμόσφαιρα.','gx.i1.t1':'15+ θέματα','gx.i1.t2':'Προσαρμόσιμα χρώματα','gx.i2.h':'Παραγγελία στο τραπέζι και κλήση σερβιτόρου με ένα tap','gx.i2.p':'Οι πελάτες σας παραγγέλνουν απευθείας από το μενού ή καλούν έναν σερβιτόρο με ένα απλό tap, χωρίς να σηκωθούν ή να ψάχνουν με το βλέμμα. Ενεργοποιείται ή όχι ανάλογα με το πακέτο σας.','gx.i2.t1':'Κλήση σερβιτόρου','gx.i2.t2':'Παραγγελία online','gx.i2.opt':'Προαιρετικό','gx.i3.h':'Εφαρμογή σερβιτόρου σε πραγματικό χρόνο','gx.i3.p':'Η ομάδα σας λαμβάνει κάθε παραγγελία και κάθε κλήση αμέσως στο τηλέφωνό της, με ειδοποίηση. Δεν χρειάζεται καμία εκπαίδευση — η διεπαφή είναι σχεδιασμένη για άμεση χρήση κατά τη διάρκεια της εξυπηρέτησης.','gx.i3.t1':'Άμεσες ειδοποιήσεις','gx.i3.t2':'Εφαρμογή Android','gx.i4.h':'Απλή διαχείριση, όλα ενημερώνονται ζωντανά','gx.i4.p':'Τροποποιήστε τις τιμές, τα προϊόντα, τις φωτογραφίες ή τις προσφορές σας σε δευτερόλεπτα, από το τηλέφωνο ή τον υπολογιστή σας. Δεν απαιτείται καμία τεχνική γνώση.','gx.i4.t1':'Απλή διαχείριση','gx.i4.t2':'Πραγματικός χρόνος','gx.i5.h':'Το μενού σας, διαθέσιμο σε 5 γλώσσες','gx.i5.p':'Γαλλικά, αγγλικά, γερμανικά, ελληνικά, ισπανικά — το μενού σας, η διαχείρισή σας και η εφαρμογή σερβιτόρου σας είναι ήδη μεταφρασμένα. Κάθε πελάτης βλέπει το μενού στη δική του γλώσσα, αυτόματα.','gx.i5.t1':'5 γλώσσες συμπεριλαμβάνονται','gx.i5.t2':'Αυτόματη ανίχνευση','gx.i6.h':'Στατιστικά και παρακολούθηση της δραστηριότητάς σας','gx.i6.p':'Δείτε τις παραγγελίες, τις κλήσεις και τα πιο δημοφιλή προϊόντα σας απευθείας από τη διαχείρισή σας. Μια καθαρή εικόνα της δραστηριότητας της επιχείρησής σας, μέρα με τη μέρα.','gx.i6.t1':'Παραγγελίες & κλήσεις','gx.i6.t2':'Δημοφιλή προϊόντα','av.c5.t1':'🟢 Παραγγελία','av.c5.t2':'🔴 Κλήση σερβιτόρου','av.c5.opt':'Προαιρετικό',
       'av.c6.h3':'Έτοιμο προς χρήση,<br><em>χωρίς ταλαιπωρία.</em>','av.c6.p':'Φιλοξενία, ανέβασμα, ενημερώσεις, υποστήριξη: όλα συμπεριλαμβάνονται. Εσείς φροντίζετε τους πελάτες, εμείς τα υπόλοιπα. Σε λειτουργία σε 1–2 εβδομάδες.','av.c6.t1':'Όλα συμπεριλαμβάνονται','av.c6.t2':'Αποκλειστική υποστήριξη',
       'fo.h2':'Δύο πλάνα,<br><em>έτοιμα για εσάς.</em>','fo.lead':'Παραγγείλτε, λάβετε τα πάντα άμεσα — 1 μήνας δωρεάν δοκιμή · 100% δωρεάν εκκίνηση, χωρίς τέλη δημιουργίας.',
       'fo.style.pages':'Menu QR Code','fo.style.dynamic':'Μενού & Παραγγελίες',
@@ -4458,14 +4882,14 @@ html.light .fo-card-featured{
       'hero.cta1':'Descubrir las ventajas','hero.cta2':'Ver los planes','hero.cta3':'Contáctenos',
       'hero.meta.num':'<span>02</span> planes','hero.meta.label':'Menu QR · Menú y Pedidos<br>Inicio 100% gratuito',
       'hero.hud.label':'Vista previa del menú',
-      'av.h2':'Cinco razones para<br><em>pasarse al digital.</em>',
-      'av.lead':'Menos fricción para sus clientes, menos carga para su equipo — y una imagen que inspira confianza desde el primer segundo.',
+      'av.h2':'Por qué elegir<br><em>GeNext.</em>',
+      'av.lead':'Un sistema completo pensado para la experiencia de sus clientes y la simplicidad de su gestión diaria.',
       'av.stat1.l':'Sin tarifa de creación','av.stat2.l':'Idiomas disponibles','av.stat3.l':'Temas de diseño','av.stat4.l':'Mes de prueba gratuito',
       'av.c1.h3':'Acceso instantáneo,<br><em>sin contacto ni espera.</em>','av.c1.p':'Nada más sentarse, su cliente escanea y accede inmediatamente a su menú desde su propio teléfono — sin esperar que le traigan la carta, sin tocar ninguna superficie compartida. La experiencia empieza en el momento de sentarse.',
       'av.c2.h3':'Imagen cuidada, ambiente premium,<br><em>clientes que vuelven.</em>','av.c2.p':'Un menú digital moderno con temas, colores y fotos de sus platos envía una señal clara: su establecimiento cuida cada detalle. Sus clientes lo perciben, hablan de ello y vuelven.',
       'av.c3.h3':'5 idiomas, sin esfuerzo,<br><em>ideal para turistas.</em>','av.c3.p':'Su menú se muestra en el idioma del visitante — francés, inglés, alemán, griego, español — sin ninguna acción de su parte. Acoja a turistas y expatriados con una experiencia fluida.',
       'av.c4.h3':'Menú actualizado en directo,<br><em>desde su teléfono.</em>','av.c4.p':'Precios, productos, fotos, promociones — todo se actualiza en segundos desde su interfaz de administración, en móvil u ordenador. Cero impresiones, cero carteles.',
-      'av.c5.h3':'Pedir o llamar<br><em>al camarero, de un toque.</em>','av.c5.p':'Desde su mesa, los clientes pueden pedir sus platos 🟢 o llamar al camarero 🔴 — dos botones distintos, claros e intuitivos. Cada acción llega instantáneamente a su teléfono o tablet, sin ruido, sin gritos.',
+      'av.c5.h3':'Pedir o llamar<br><em>al camarero, de un toque.</em>','av.c5.p':'Desde su mesa, los clientes pueden pedir sus platos 🟢 o llamar al camarero 🔴 — dos botones distintos, claros e intuitivos. Cada acción llega instantáneamente a su teléfono o tablet, sin ruido, sin gritos.','nav.themes':'Temas','tg.eyebrow':'Personalización','tg.h2':'Más de 15 temas,<br><em>un solo menú.</em>','tg.lead':'Cambie de ambiente con un clic desde su administración — cada tema conserva todas las funciones, solo cambia el estilo.','tg.cta':'Explorar la galería completa','tg.fam.classic':'Clásico','tg.fam.modern':'Moderno','tg.fam.nature':'Naturaleza','tg.fam.romantic':'Romántico','tg.fam.med':'Mediterráneo','qr.eyebrow':'La realidad','qr.h2':'Por qué pasar<br>a un <em>Menú con Código QR.</em>','qr.lead':'El menú de papel ha cumplido su ciclo. Esto es lo que cambia concretamente un menú digital para su negocio y sus clientes.','qr.i1.h':'Higiene y cero contacto','qr.i1.p':'Se acabaron los menús de papel plastificados tocados por decenas de manos cada día. El cliente escanea con su propio teléfono y consulta su carta sin ningún contacto compartido — una imagen de limpieza y seriedad desde el primer segundo.','qr.i1.t1':'Sin contacto','qr.i1.t2':'Imagen profesional','qr.i2.h':'Actualización instantánea','qr.i2.p':'Un precio que cambia, un plato agotado, una promoción del día — todo se actualiza en segundos, sin reimpresión ni demora. Su menú refleja siempre exactamente la realidad de su cocina.','qr.i2.t1':'Cero reimpresión','qr.i2.t2':'Tiempo real','qr.i3.h':'Accesible en su idioma','qr.i3.p':'Su menú se muestra automáticamente en el idioma de su visitante. Una ventaja decisiva en zonas turísticas — sus clientes entienden cada plato, sin ningún esfuerzo por su parte.','qr.i3.t1':'Turistas bienvenidos','qr.i3.t2':'24 horas','qr.i4.h':'Económico y ecológico','qr.i4.p':'Ningún gasto más de impresión, plastificado o reimpresión cada vez que cambia la carta. Cero desperdicio de papel — un enfoque más responsable, y ahorros reales cada mes.','qr.i4.t1':'Cero papel','qr.i4.t2':'Ahorros reales','qr.i5.h':'Imagen moderna, confianza inmediata','qr.i5.p':'Un menú digital cuidado, con fotos y diseño premium, envía una señal fuerte incluso antes del primer bocado: su negocio cuida cada detalle. Una primera impresión que inspira confianza.','qr.i5.t1':'Imagen premium','qr.i5.t2':'Fidelización','qr.i6.h':'Autonomía del cliente, servicio más fluido','qr.i6.p':'Su cliente consulta la carta a su propio ritmo, sin esperar a que se la traigan. Su equipo se concentra en el servicio en lugar de recitar el menú — una experiencia más fluida, para ambas partes.','qr.i6.t1':'Cero espera','qr.i6.t2':'Equipo más eficiente','gx.i1.h':'Más de 15 temas, su imagen a medida','gx.i1.p':'Elija un estilo que le represente entre más de 15 temas — clásico, moderno, romántico, naturaleza o mediterráneo — y ajuste el color de acento con un clic. Todas las funciones se mantienen, solo cambia el ambiente.','gx.i1.t1':'+15 temas','gx.i1.t2':'Colores personalizables','gx.i2.h':'Pedido en mesa y llamada al camarero en un toque','gx.i2.p':'Sus clientes piden directamente desde el menú o llaman a un camarero con un simple toque, sin levantarse ni buscar con la mirada. Activable o no según el plan elegido.','gx.i2.t1':'Llamada al camarero','gx.i2.t2':'Pedido en línea','gx.i2.opt':'Opcional','gx.i3.h':'Aplicación de camarero en tiempo real','gx.i3.p':'Su equipo recibe cada pedido y cada llamada al instante en su teléfono, con notificación. No se necesita formación — la interfaz está pensada para un uso inmediato durante el servicio.','gx.i3.t1':'Notificaciones instantáneas','gx.i3.t2':'Aplicación Android','gx.i4.h':'Administración simple, todo se actualiza en vivo','gx.i4.p':'Modifique sus precios, productos, fotos o promociones en segundos, desde su teléfono u ordenador. No se requiere ninguna competencia técnica.','gx.i4.t1':'Administración simple','gx.i4.t2':'Tiempo real','gx.i5.h':'Su menú, disponible en 5 idiomas','gx.i5.p':'Francés, inglés, alemán, griego, español — su menú, su administración y su aplicación de camarero ya están traducidos. Cada cliente ve el menú en su propio idioma, automáticamente.','gx.i5.t1':'5 idiomas incluidos','gx.i5.t2':'Detección automática','gx.i6.h':'Estadísticas y seguimiento de su actividad','gx.i6.p':'Visualice sus pedidos, llamadas y productos más consultados directamente desde su administración. Una visión clara de la actividad de su negocio, día tras día.','gx.i6.t1':'Pedidos y llamadas','gx.i6.t2':'Productos populares',
       'fo.h2':'Dos planes,<br><em>llave en mano.</em>','fo.lead':'Pida, reciba todo al instante — 1 mes de prueba gratis · inicio 100% gratuito, sin tarifa de creación.',
       'fo.style.pages':'Menu QR Code','fo.style.dynamic':'Menú y Pedidos',
       'fo.p0.feat.h3':'Menu QR','fo.p0.feat.desc':'Un menú digital elegante accesible por QR. Sus clientes consultan su carta desde su teléfono — sin descargar nada.',
@@ -4548,14 +4972,14 @@ html.light .fo-card-featured{
       'hero.cta1':'Vorteile entdecken','hero.cta2':'Preise ansehen','hero.cta3':'Kontakt aufnehmen',
       'hero.meta.num':'<span>02</span> Pläne','hero.meta.label':'Menu QR · Menü &amp; Bestellungen<br>100% kostenloser Start',
       'hero.hud.label':'Menüvorschau',
-      'av.h2':'Fünf Gründe für den<br><em>digitalen Wandel.</em>',
-      'av.lead':'Weniger Aufwand für Ihre Gäste, weniger Belastung für Ihr Team — und ein Image, das vom ersten Moment an Vertrauen schafft.',
+      'av.h2':'Warum<br><em>GeNext</em> wählen.',
+      'av.lead':'Ein komplettes System, entwickelt für das Erlebnis Ihrer Gäste und die Einfachheit Ihrer täglichen Verwaltung.',
       'av.stat1.l':'Keine Einrichtungsgebühr','av.stat2.l':'Verfügbare Sprachen','av.stat3.l':'Design-Themen','av.stat4.l':'Monat Testzeitraum gratis',
       'av.c1.h3':'Sofortiger Zugriff,<br><em>kein Kontakt, kein Warten.</em>','av.c1.p':'Sobald Ihre Gäste sitzen, scannen sie und rufen sofort Ihre Speisekarte auf ihrem eigenen Handy auf — ohne auf jemanden zu warten, ohne geteilte Gegenstände zu berühren. Ein gepflegter erster Eindruck, von der ersten Sekunde an.','av.c1.t1':'Null Wartezeit','av.c1.t2':'Kein Kontakt',
       'av.c2.h3':'Professionelles Image, Premium-Atmosphäre,<br><em>Gäste, die wiederkommen.</em>','av.c2.p':'Eine moderne digitale Speisekarte mit Themes, Farben und Fotos Ihrer Gerichte sendet ein klares Signal: Ihr Betrieb achtet auf jedes Detail. Ihre Gäste spüren das auf den ersten Blick — und genau das bringt sie zurück und lässt sie Sie weiterempfehlen.','av.c2.t1':'Premium-Image','av.c2.t2':'Gästetreue',
       'av.c3.h3':'5 Sprachen, mühelos,<br><em>ideal für Touristen.</em>','av.c3.p':'Ihre Speisekarte erscheint in der Sprache des Besuchers — Französisch, Englisch, Deutsch, Griechisch, Arabisch — ganz ohne Ihr Zutun. Empfangen Sie Touristen und Expats ohne Hürden. Ein entscheidender Vorteil in touristischen Regionen.','av.c3.t1':'Mehrsprachig','av.c3.t2':'24/7',
       'av.c4.h3':'Speisekarte live aktualisieren,<br><em>von Ihrem Handy.</em>','av.c4.p':'Preise, Produkte, Fotos, Aktionen — alles aktualisiert sich in Sekunden über Ihre Verwaltungsoberfläche, auf dem Handy oder Computer. Null Druck, null Warten. Ihre Speisekarte spiegelt immer wider, was in Ihrer Küche los ist.','av.c4.t1':'Einfache Verwaltung','av.c4.t2':'Echtzeit','av.c4.opt':'Optional',
-      'av.c5.h3':'Bestellen oder den<br><em>Kellner rufen — in einem Tap.</em>','av.c5.p':'Von ihrem Tisch aus können Gäste Essen bestellen 🟢 oder den Kellner rufen 🔴 — zwei klare, intuitive Schaltflächen. Jede Aktion kommt sofort auf dem Gerät des Personals an.','av.c5.t1':'🟢 Bestellen','av.c5.t2':'🔴 Kellner rufen','av.c5.opt':'Optional',
+      'av.c5.h3':'Bestellen oder den<br><em>Kellner rufen — in einem Tap.</em>','av.c5.p':'Von ihrem Tisch aus können Gäste Essen bestellen 🟢 oder den Kellner rufen 🔴 — zwei klare, intuitive Schaltflächen. Jede Aktion kommt sofort auf dem Gerät des Personals an.','nav.themes':'Designs','tg.eyebrow':'Personalisierung','tg.h2':'Über 15 Designs,<br><em>eine einzige Speisekarte.</em>','tg.lead':'Wechseln Sie die Stimmung mit einem Klick in Ihrer Verwaltung — jedes Design behält alle Funktionen, nur der Stil ändert sich.','tg.cta':'Die komplette Galerie entdecken','tg.fam.classic':'Klassisch','tg.fam.modern':'Modern','tg.fam.nature':'Natur','tg.fam.romantic':'Romantisch','tg.fam.med':'Mediterran','qr.eyebrow':'Die Realität','qr.h2':'Warum auf eine<br><em>QR-Code-Speisekarte</em> umsteigen.','qr.lead':'Die Papierkarte hat ausgedient. So verändert eine digitale Speisekarte konkret Ihren Betrieb und Ihre Gäste.','qr.i1.h':'Hygiene und null Kontakt','qr.i1.p':'Keine laminierten Papierkarten mehr, die täglich von Dutzenden Händen berührt werden. Der Gast scannt mit seinem eigenen Handy und sieht Ihre Karte ohne gemeinsam berührte Oberflächen — ein sauberer, professioneller Eindruck ab der ersten Sekunde.','qr.i1.t1':'Kontaktlos','qr.i1.t2':'Professionelles Image','qr.i2.h':'Sofortige Aktualisierung','qr.i2.p':'Ein geänderter Preis, ein ausverkauftes Gericht, das Tagesangebot — alles wird in Sekunden aktualisiert, ohne Neudruck und ohne Verzögerung. Ihre Karte entspricht immer genau der Realität Ihrer Küche.','qr.i2.t1':'Kein Neudruck','qr.i2.t2':'Echtzeit','qr.i3.h':'Verfügbar in ihrer Sprache','qr.i3.p':'Ihre Speisekarte wird automatisch in der Sprache Ihres Gastes angezeigt. Ein entscheidender Vorteil in touristischen Gebieten — Ihre Gäste verstehen jedes Gericht, ohne Ihr Zutun.','qr.i3.t1':'Touristenfreundlich','qr.i3.t2':'Rund um die Uhr','qr.i4.h':'Wirtschaftlich und umweltfreundlich','qr.i4.p':'Keine Druck-, Laminier- oder Neudruckkosten mehr bei jeder Änderung der Karte. Kein Papiermüll — ein verantwortungsvollerer Ansatz und echte Einsparungen jeden Monat.','qr.i4.t1':'Kein Papier','qr.i4.t2':'Echte Einsparungen','qr.i5.h':'Modernes Image, sofortiges Vertrauen','qr.i5.p':'Eine gepflegte digitale Speisekarte mit Fotos und hochwertigem Design sendet schon vor dem ersten Bissen ein starkes Signal: Ihr Betrieb achtet auf jedes Detail. Ein erster Eindruck, der Vertrauen schafft.','qr.i5.t1':'Premium-Image','qr.i5.t2':'Kundenbindung','qr.i6.h':'Freiheit für den Gast, flüssigerer Service','qr.i6.p':'Ihr Gast sieht sich die Karte in seinem eigenen Tempo an, ohne zu warten, bis sie ihm gebracht wird. Ihr Team konzentriert sich auf den Service statt auf das Aufsagen der Karte — ein flüssigeres Erlebnis für beide Seiten.','qr.i6.t1':'Keine Wartezeit','qr.i6.t2':'Effizienteres Team','gx.i1.h':'Über 15 Designs, Ihr Image nach Maß','gx.i1.p':'Wählen Sie aus über 15 Designs den Stil, der zu Ihnen passt — klassisch, modern, romantisch, natürlich oder mediterran — und passen Sie die Akzentfarbe mit einem Klick an. Alle Funktionen bleiben gleich, nur die Stimmung ändert sich.','gx.i1.t1':'15+ Designs','gx.i1.t2':'Anpassbare Farben','gx.i2.h':'Tischbestellung und Kellnerruf in einem Tap','gx.i2.p':'Ihre Gäste bestellen direkt über die Speisekarte oder rufen mit einem einzigen Tap einen Kellner, ohne aufzustehen oder sich umzuschauen. Je nach Tarif aktivierbar oder nicht.','gx.i2.t1':'Kellnerruf','gx.i2.t2':'Online-Bestellung','gx.i2.opt':'Optional','gx.i3.h':'Kellner-App in Echtzeit','gx.i3.p':'Ihr Team erhält jede Bestellung und jeden Anruf sofort auf dem Handy, mit Benachrichtigung. Keine Schulung nötig — die Oberfläche ist für den sofortigen Einsatz während des Service konzipiert.','gx.i3.t1':'Sofortige Benachrichtigungen','gx.i3.t2':'Android-App','gx.i4.h':'Einfache Verwaltung, alles live bearbeitbar','gx.i4.p':'Aktualisieren Sie Preise, Produkte, Fotos oder Aktionen in Sekunden, von Ihrem Handy oder Computer aus. Keine technischen Kenntnisse erforderlich.','gx.i4.t1':'Einfache Verwaltung','gx.i4.t2':'Echtzeit','gx.i5.h':'Ihre Speisekarte, verfügbar in 5 Sprachen','gx.i5.p':'Französisch, Englisch, Deutsch, Griechisch, Spanisch — Ihre Speisekarte, Ihre Verwaltung und Ihre Kellner-App sind bereits übersetzt. Jeder Gast sieht die Karte automatisch in seiner eigenen Sprache.','gx.i5.t1':'5 Sprachen inklusive','gx.i5.t2':'Automatische Erkennung','gx.i6.h':'Statistiken und Aktivitätsübersicht','gx.i6.p':'Sehen Sie Ihre Bestellungen, Anrufe und meistgesehenen Produkte direkt in Ihrer Verwaltung. Ein klarer Überblick über die Aktivität Ihres Betriebs, Tag für Tag.','gx.i6.t1':'Bestellungen & Anrufe','gx.i6.t2':'Beliebte Produkte','av.c5.t1':'🟢 Bestellen','av.c5.t2':'🔴 Kellner rufen','av.c5.opt':'Optional',
       'fo.h2':'Zwei Pläne,<br><em>schlüsselfertig.</em>','fo.lead':'Bestellen Sie, erhalten Sie alles sofort — 1 Monat kostenlos testen · 100% kostenloser Start, keine Einrichtungsgebühr.',
       'fo.style.pages':'Menu QR Code','fo.style.dynamic':'Menü & Bestellungen',
       'fo.p0.feat.h3':'Menu QR','fo.p0.feat.desc':'Eine elegante digitale Speisekarte, zugänglich per QR-Code. Ihre Gäste können Ihre Karte direkt vom Handy aus ansehen — ohne Download.',
@@ -4863,6 +5287,51 @@ html.light .fo-card-featured{
     _gdSet('gd-price-srv-card', window._gdPricing['srv-annual']);
     _gdSet('gd-pp0-annual',  window._gdPricing['qr-annual']);
     _gdSet('gd-pp1-annual',  window._gdPricing['srv-annual']);
+  });
+
+  // ── Device mockups (bureau + mobile) — Pourquoi QR / Pourquoi GeNext ──
+  // Photos gérées depuis l'application Control (Phase 2) — degradation gracieuse si absentes.
+  function _dmkPlaceholderSVG(){
+    return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="8.5" cy="10" r="1.5"/><path d="M21 15l-5-5L5 19"/></svg>';
+  }
+  function _dmkBuildFrame(el){
+    if(el.dataset.dmkBuilt)return;
+    el.dataset.dmkBuilt='1';
+    el.innerHTML=
+      '<div class="dmk-desktop">'+
+        '<div class="dmk-desktop-bar"><span></span><span></span><span></span></div>'+
+        '<div class="dmk-desktop-screen">'+
+          '<div class="dmk-placeholder">'+_dmkPlaceholderSVG()+'</div>'+
+          '<img class="dmk-img dmk-img-d" alt="" loading="lazy">'+
+        '</div>'+
+      '</div>'+
+      '<div class="dmk-mobile">'+
+        '<div class="dmk-mobile-notch"></div>'+
+        '<div class="dmk-mobile-screen">'+
+          '<div class="dmk-placeholder">'+_dmkPlaceholderSVG()+'</div>'+
+          '<img class="dmk-img dmk-img-m" alt="" loading="lazy">'+
+        '</div>'+
+      '</div>';
+  }
+  function _dmkSetImg(el,sel,url){
+    var img=el.querySelector(sel);
+    if(!img)return;
+    if(url){
+      img.onload=function(){img.classList.add('is-loaded');};
+      img.src=url;
+    } else {
+      img.removeAttribute('src');
+      img.classList.remove('is-loaded');
+    }
+  }
+  document.querySelectorAll('.dmk[data-dmk]').forEach(_dmkBuildFrame);
+  db.ref('demoPage/content').on('value', function(snap){
+    var data=snap.val()||{};
+    document.querySelectorAll('.dmk[data-dmk]').forEach(function(el){
+      var item=data[el.dataset.dmk]||{};
+      _dmkSetImg(el,'.dmk-img-d',item.desktop||'');
+      _dmkSetImg(el,'.dmk-img-m',item.mobile||'');
+    });
   });
 })();
 </script>
