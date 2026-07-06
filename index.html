@@ -4585,8 +4585,8 @@ html.light .dmk-placeholder{background:linear-gradient(160deg,rgba(200,164,78,.2
     {id:'rose-parisien',name:'Rose Parisien',fam:'tg.fam.romantic',famFr:'Romantique'},
     {id:'santorin',name:'Santorin',fam:'tg.fam.med',famFr:'Méditerranée'}
   ];
-  function _tgCard(t){
-    return '<button class="tg-card" type="button" onclick="location.href=\'demo-themes.html?theme='+t.id+'\'">'+
+  function _tgCard(t,dup){
+    return '<button class="tg-card" type="button"'+(dup?' aria-hidden="true" tabindex="-1"':'')+' onclick="location.href=\'demo-themes.html?theme='+t.id+'\'">'+
       '<span class="tg-phone"><span class="tg-phone-notch"></span>'+
         '<img src="assets/themes/'+t.id+'.webp" alt="'+t.name+'" loading="lazy" width="240" height="341">'+
       '</span>'+
@@ -4600,10 +4600,13 @@ html.light .dmk-placeholder{background:linear-gradient(160deg,rgba(200,164,78,.2
     var row1=document.getElementById('tgRow1'),row2=document.getElementById('tgRow2');
     if(!row1||!row2)return;
     var half=Math.ceil(TG_THEMES.length/2);
-    var htmlA=TG_THEMES.slice(0,half).map(_tgCard).join('');
-    var htmlB=TG_THEMES.slice(half).map(_tgCard).join('');
-    row1.innerHTML=htmlA+htmlA;
-    row2.innerHTML=htmlB+htmlB;
+    var setA=TG_THEMES.slice(0,half),setB=TG_THEMES.slice(half);
+    // Duplication nécessaire à la boucle infinie CSS — copie marquée aria-hidden/tabindex=-1
+    // pour ne jamais être annoncée deux fois par un lecteur d'écran ni doubler le tab clavier.
+    var htmlA=setA.map(function(t){return _tgCard(t,false);}).join('')+setA.map(function(t){return _tgCard(t,true);}).join('');
+    var htmlB=setB.map(function(t){return _tgCard(t,false);}).join('')+setB.map(function(t){return _tgCard(t,true);}).join('');
+    row1.innerHTML=htmlA;
+    row2.innerHTML=htmlB;
   })();
 
 })();
