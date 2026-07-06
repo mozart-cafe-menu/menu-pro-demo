@@ -4586,9 +4586,9 @@ html.light .dmk-placeholder{background:linear-gradient(160deg,rgba(200,164,78,.2
     {id:'santorin',name:'Santorin',fam:'tg.fam.med',famFr:'Méditerranée'}
   ];
   function _tgCard(t,dup){
-    return '<button class="tg-card" type="button"'+(dup?' aria-hidden="true" tabindex="-1"':'')+' onclick="location.href=\'demo-themes.html?theme='+t.id+'\'">'+
+    return '<button class="tg-card" type="button" data-theme-id="'+t.id+'"'+(dup?' aria-hidden="true" tabindex="-1"':'')+' onclick="location.href=\'demo-themes.html?theme='+t.id+'\'">'+
       '<span class="tg-phone"><span class="tg-phone-notch"></span>'+
-        '<img src="assets/themes/'+t.id+'.webp" alt="'+t.name+'" loading="lazy" width="240" height="341">'+
+        '<img class="tg-card-img" src="assets/themes/'+t.id+'.webp" alt="'+t.name+'" loading="lazy" width="240" height="341">'+
       '</span>'+
       '<span class="tg-card-label">'+
         '<span class="tg-card-name">'+t.name+'</span>'+
@@ -5334,6 +5334,29 @@ html.light .dmk-placeholder{background:linear-gradient(160deg,rgba(200,164,78,.2
       var item=data[el.dataset.dmk]||{};
       _dmkSetImg(el,'.dmk-img-d',item.desktop||'');
       _dmkSetImg(el,'.dmk-img-m',item.mobile||'');
+    });
+  });
+
+  // ── Galerie de thèmes — personnalisation (photo/nom/catégorie) depuis control-app ──
+  db.ref('demoPage/themes').on('value', function(snap){
+    var data=snap.val()||{};
+    Object.keys(data).forEach(function(id){
+      var entry=data[id];
+      if(!entry)return;
+      document.querySelectorAll('.tg-card[data-theme-id="'+id+'"]').forEach(function(card){
+        if(entry.img){
+          var img=card.querySelector('.tg-card-img');
+          if(img)img.src=entry.img;
+        }
+        if(entry.name){
+          var nameEl=card.querySelector('.tg-card-name');
+          if(nameEl)nameEl.textContent=entry.name;
+        }
+        if(entry.family){
+          var famEl=card.querySelector('.tg-card-family');
+          if(famEl){famEl.removeAttribute('data-i18n');famEl.textContent=entry.family;}
+        }
+      });
     });
   });
 })();
