@@ -3415,7 +3415,7 @@ html.light .dmk-placeholder{background:linear-gradient(160deg,rgba(200,164,78,.2
     </div>
 
     <div class="tg-cta reveal delay-2">
-      <a href="demo-themes.html" target="_blank" rel="noopener" class="btn btn-outline">
+      <a href="https://menu-saas-platform.vercel.app/?rid=pagedemo&table=1" target="_blank" rel="noopener" class="btn btn-outline">
         <span data-i18n="tg.cta">Explorer la galerie complète</span>
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
       </a>
@@ -4401,8 +4401,7 @@ html.light .dmk-placeholder{background:linear-gradient(160deg,rgba(200,164,78,.2
       label:'Élégance',
       desc:'Thèmes dynamiques — photos HD, animations, expérience immersive.',
       themes:[
-        {icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',name:'Dynamique',sub:'Hero animé, parallax, photos HD',url:'menu-demo.html'},
-        {icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>',name:'Galerie des thèmes',sub:'Prévisualisation de tous les thèmes',url:'demo-themes.html'}
+        {icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',name:'Dynamique',sub:'Hero animé, parallax, photos HD',url:'menu-demo.html'}
       ]
     },
     ultime:{
@@ -4411,8 +4410,7 @@ html.light .dmk-placeholder{background:linear-gradient(160deg,rgba(200,164,78,.2
       themes:[
         {icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>',name:'Papier',sub:'Thème Basic — carte classique',url:'demo-paper.html'},
         {icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>',name:'Livre',sub:'Thème Avancé — design éditorial',url:'menu-demo.html'},
-        {icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',name:'Dynamique',sub:'Thème Élégance — photos HD, animations',url:'menu-demo.html'},
-        {icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>',name:'Galerie des thèmes',sub:'Tous les thèmes disponibles',url:'demo-themes.html'}
+        {icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',name:'Dynamique',sub:'Thème Élégance — photos HD, animations',url:'menu-demo.html'}
       ]
     }
   };
@@ -4584,7 +4582,7 @@ html.light .dmk-placeholder{background:linear-gradient(160deg,rgba(200,164,78,.2
     {id:'santorin',name:'Santorin',fam:'tg.fam.med',famFr:'Méditerranée'}
   ];
   function _tgCard(t,dup){
-    return '<button class="tg-card" type="button" data-theme-id="'+t.id+'"'+(dup?' aria-hidden="true" tabindex="-1"':'')+' onclick="location.href=\'demo-themes.html?theme='+t.id+'\'">'+
+    return '<button class="tg-card" type="button" data-theme-id="'+t.id+'"'+(dup?' aria-hidden="true" tabindex="-1"':'')+' onclick="location.href=\'https://menu-saas-platform.vercel.app/?rid=pagedemo&table=1&demo_theme='+t.id+'\'">'+
       '<span class="tg-phone">'+
         '<img class="tg-card-img" src="assets/themes/'+t.id+'.webp" alt="'+t.name+'" loading="lazy" width="240" height="341">'+
       '</span>'+
