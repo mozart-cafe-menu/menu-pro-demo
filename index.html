@@ -3144,6 +3144,13 @@ html.light .dmk-placeholder{background:linear-gradient(160deg,rgba(200,164,78,.2
 </div>
 <script>
 (function(){
+  // Bouton "Accueil" du menu Page Demo (client/index.html) : retour instantané,
+  // sans rejouer le splash (utile uniquement pour un 1er chargement/partage de lien).
+  if(new URLSearchParams(location.search).get('instant')==='1'){
+    var s0=document.getElementById('gn-demo-splash');
+    if(s0)s0.remove();
+    return;
+  }
   // Verrouille le scroll pendant le splash : un scroll actif pendant l'animation
   // de dissolution (requestAnimationFrame) la fait ralentir/geler sur mobile.
   document.documentElement.style.overflow='hidden';
