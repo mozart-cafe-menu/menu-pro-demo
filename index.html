@@ -3003,10 +3003,6 @@ html.light .fo-card-featured{
   box-shadow:0 40px 84px -24px rgba(200,164,78,.4),0 0 0 1px rgba(200,164,78,.3);
   border-color:#2a2216;
 }
-.tg-phone-notch{
-  position:absolute;top:6px;left:50%;transform:translateX(-50%);
-  width:36%;height:15px;background:#1c1712;border-radius:10px;z-index:2;
-}
 .tg-phone img{width:100%;height:100%;object-fit:cover;object-position:top center;display:block}
 .tg-card-label{display:block;margin-top:.9rem}
 .tg-card-name{display:block;font-family:var(--serif);font-size:.92rem;color:var(--bone);letter-spacing:.01em}
@@ -3110,7 +3106,9 @@ html.light .fo-card-featured{
 .dmk-placeholder{
   position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
   background:linear-gradient(160deg,rgba(200,164,78,.16),rgba(20,17,12,.7));color:rgba(200,164,78,.5);
+  transition:opacity .4s var(--e-out);
 }
+.dmk-placeholder.is-hidden{opacity:0;pointer-events:none}
 .dmk-placeholder svg{width:26%;height:26%}
 .dmk-mobile .dmk-placeholder svg{width:32%;height:32%}
 html.light .dmk-desktop,html.light .dmk-mobile{background:#e9e1cc;border-color:rgba(26,18,8,.14)}
@@ -4587,7 +4585,7 @@ html.light .dmk-placeholder{background:linear-gradient(160deg,rgba(200,164,78,.2
   ];
   function _tgCard(t,dup){
     return '<button class="tg-card" type="button" data-theme-id="'+t.id+'"'+(dup?' aria-hidden="true" tabindex="-1"':'')+' onclick="location.href=\'demo-themes.html?theme='+t.id+'\'">'+
-      '<span class="tg-phone"><span class="tg-phone-notch"></span>'+
+      '<span class="tg-phone">'+
         '<img class="tg-card-img" src="assets/themes/'+t.id+'.webp" alt="'+t.name+'" loading="lazy" width="240" height="341">'+
       '</span>'+
       '<span class="tg-card-label">'+
@@ -5319,12 +5317,18 @@ html.light .dmk-placeholder{background:linear-gradient(160deg,rgba(200,164,78,.2
   function _dmkSetImg(el,sel,url){
     var img=el.querySelector(sel);
     if(!img)return;
+    var screen=img.closest('.dmk-desktop-screen,.dmk-mobile-screen');
+    var ph=screen?screen.querySelector('.dmk-placeholder'):null;
     if(url){
-      img.onload=function(){img.classList.add('is-loaded');};
+      img.onload=function(){
+        img.classList.add('is-loaded');
+        if(ph)ph.classList.add('is-hidden');
+      };
       img.src=url;
     } else {
       img.removeAttribute('src');
       img.classList.remove('is-loaded');
+      if(ph)ph.classList.remove('is-hidden');
     }
   }
   document.querySelectorAll('.dmk[data-dmk]').forEach(_dmkBuildFrame);
