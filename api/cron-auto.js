@@ -740,7 +740,7 @@ module.exports = async (req, res) => {
   if (mainSecret) {
     for (const [key, d] of Object.entries(commandes)) {
       if (!d || typeof d !== 'object') continue;
-      if (!d.pendingForfaitChange || !d.nextReminderAt) continue;
+      if (!d.pendingForfaitChange || !d.nextReminderAt || d.clientDeleted) continue;
       if (now < d.nextReminderAt - 24 * 60 * 60 * 1000) continue;
       const ridBP = (d.emailData && d.emailData.rid) || d.clientCree?.rid;
       if (!ridBP) continue;
