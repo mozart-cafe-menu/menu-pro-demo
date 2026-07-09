@@ -540,7 +540,7 @@ module.exports = async (req, res) => {
     const notSentDlv  = !d.emailLivraisonSent;
     const hasEmailDlv = d.emailData && d.emailData.email;
 
-    if (dueDelivery && notSentDlv && hasEmailDlv) {
+    if (dueDelivery && notSentDlv && hasEmailDlv && !d.clientDeleted) {
       try {
         const ed      = d.emailData;
         const lang    = (ed.lang && ['fr','en','el','es','de'].includes(ed.lang)) ? ed.lang : 'fr';
@@ -572,7 +572,7 @@ module.exports = async (req, res) => {
 
     // ── B_PAY : Email paiement dû (essai terminé / nouveau cycle) ───────────
     const _isPaidThisCycle = d.paidAt && d.paidAt >= d.nextReminderAt;
-    const _paymentDue = d.nextReminderAt && now >= d.nextReminderAt && !_isPaidThisCycle && !d.suspendu;
+    const _paymentDue = d.nextReminderAt && now >= d.nextReminderAt && !_isPaidThisCycle && !d.suspendu && !d.clientDeleted;
     const _payEmailNotSent = !d.lastPaymentEmailSent || d.lastPaymentEmailSent < d.nextReminderAt;
     if (_paymentDue && _payEmailNotSent && d.email && mainSecret) {
       try {
@@ -605,7 +605,7 @@ module.exports = async (req, res) => {
     }
 
     // ── B3 : Rappel paiement (4 jours après nextReminderAt) ─────────────────
-    const _reminderDue    = d.nextReminderAt && (now - d.nextReminderAt) >= FOUR_DAYS_MS && !_isPaidThisCycle && !d.suspendu;
+    const _reminderDue    = d.nextReminderAt && (now - d.nextReminderAt) >= FOUR_DAYS_MS && !_isPaidThisCycle && !d.suspendu && !d.clientDeleted;
     const _reminderNotSent = !d.lastReminderSent || d.lastReminderSent < d.nextReminderAt;
     if (_reminderDue && _reminderNotSent && d.email) {
       try {
@@ -642,7 +642,7 @@ module.exports = async (req, res) => {
   if (mainSecret) {
     for (const [key, d] of Object.entries(commandes)) {
       if (!d || typeof d !== 'object') continue;
-      if (!d.nextReminderAt || d.suspendu) continue;
+      if (!d.nextReminderAt || d.suspendu || d.clientDeleted) continue;
       const rid = (d.emailData && d.emailData.rid) || d.clientCree?.rid;
       if (!rid) continue;
       const overdue = now - d.nextReminderAt;
