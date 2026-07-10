@@ -232,10 +232,11 @@ module.exports = async function handler(req, res) {
 
   // Lire le prix réel du client depuis Firebase (prices combo > price custom > défaut)
   let effectivePrice;
+  let sub = null;
   try {
     const mainSecret = process.env.FIREBASE_MAIN_SECRET;
     if (mainSecret && rid) {
-      const sub = await fbGet(MAIN_DB, '/restaurants/' + rid + '/config/subscription', mainSecret);
+      sub = await fbGet(MAIN_DB, '/restaurants/' + rid + '/config/subscription', mainSecret);
       effectivePrice = _effectivePriceF(sub, newForfait, safeMode);
     }
   } catch(e) {}

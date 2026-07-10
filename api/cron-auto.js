@@ -203,7 +203,7 @@ function deliveryHtml(rawName, rid, pwd, isCS, lang, sub) {
       labelPwd: 'Mot de passe',
       btnAdmin: '🔑 Accéder au tableau de bord',
       subTitle: 'Votre abonnement',
-      subForfait: 'Forfait', subMode: 'Mode', subPrice: 'Prix (abonnement)', subCreation: 'Frais de création',
+      subForfait: 'Forfait', subMode: 'Mode', subPrice: 'Prix (abonnement)',
       apkTitle: 'Application serveur',
       apkSub: 'Faites télécharger cette application à votre personnel pour recevoir les commandes.',
       btnApk: '📱 Télécharger l\'application serveur',
@@ -219,7 +219,7 @@ function deliveryHtml(rawName, rid, pwd, isCS, lang, sub) {
       labelPwd: 'Password',
       btnAdmin: '🔑 Access dashboard',
       subTitle: 'Your subscription',
-      subForfait: 'Plan', subMode: 'Billing', subPrice: 'Subscription price', subCreation: 'Setup fee',
+      subForfait: 'Plan', subMode: 'Billing', subPrice: 'Subscription price',
       apkTitle: 'Server application',
       apkSub: 'Have your staff download this app to receive orders.',
       btnApk: '📱 Download server app',
@@ -235,7 +235,7 @@ function deliveryHtml(rawName, rid, pwd, isCS, lang, sub) {
       labelPwd: 'Κωδικός πρόσβασης',
       btnAdmin: '🔑 Πρόσβαση στον πίνακα ελέγχου',
       subTitle: 'Η συνδρομή σας',
-      subForfait: 'Πλάνο', subMode: 'Τρόπος', subPrice: 'Τιμή συνδρομής', subCreation: 'Τέλη δημιουργίας',
+      subForfait: 'Πλάνο', subMode: 'Τρόπος', subPrice: 'Τιμή συνδρομής',
       apkTitle: 'Εφαρμογή σερβιτόρων',
       apkSub: 'Κάντε το προσωπικό σας να κατεβάσει αυτή την εφαρμογή για να λαμβάνουν παραγγελίες.',
       btnApk: '📱 Λήψη εφαρμογής σερβιτόρων',
@@ -251,7 +251,7 @@ function deliveryHtml(rawName, rid, pwd, isCS, lang, sub) {
       labelPwd: 'Contraseña',
       btnAdmin: '🔑 Acceder al panel de control',
       subTitle: 'Su suscripción',
-      subForfait: 'Plan', subMode: 'Facturación', subPrice: 'Precio suscripción', subCreation: 'Tarifa de creación',
+      subForfait: 'Plan', subMode: 'Facturación', subPrice: 'Precio suscripción',
       apkTitle: 'Aplicación de camareros',
       apkSub: 'Pida a su personal que descargue esta aplicación para recibir pedidos.',
       btnApk: '📱 Descargar aplicación',
@@ -267,7 +267,7 @@ function deliveryHtml(rawName, rid, pwd, isCS, lang, sub) {
       labelPwd: 'Passwort',
       btnAdmin: '🔑 Dashboard aufrufen',
       subTitle: 'Ihr Abonnement',
-      subForfait: 'Plan', subMode: 'Abrechnung', subPrice: 'Abonnementpreis', subCreation: 'Einrichtungsgebühr',
+      subForfait: 'Plan', subMode: 'Abrechnung', subPrice: 'Abonnementpreis',
       apkTitle: 'Server-App',
       apkSub: 'Lassen Sie Ihr Personal diese App herunterladen, um Bestellungen zu erhalten.',
       btnApk: '📱 Server-App herunterladen',
@@ -689,6 +689,7 @@ module.exports = async (req, res) => {
       if (!d || typeof d !== 'object') continue;
       if (d.nextReminderAt) continue;
       if (!d.firstOpenAt)   continue;
+      if (d.clientDeleted)  continue;
       const rid5 = (d.emailData && d.emailData.rid) || d.clientCree?.rid;
       const trl5 = (() => { const dt = new Date(d.firstOpenAt); dt.setMonth(dt.getMonth() + 1); return dt.getTime(); })();
       // nextReminderAt = trialEndAt : premier paiement au bout d'1 mois d'essai
