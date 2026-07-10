@@ -167,10 +167,10 @@ html.light #gnav-theme-btn .moon{display:none}html.light #gnav-theme-btn .sun{di
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
       <span id="g-backlabel">Retour au site</span>
     </a>
-    <button id="gnav-lang-btn" onclick="gToggleLangDD(event)">
+    <button id="gnav-lang-btn" onclick="gToggleLangDD(event)" aria-label="Changer de langue" aria-haspopup="true" aria-expanded="false">
       <span id="g-lang-flag">🇫🇷</span><span id="g-lang-code">FR</span>
     </button>
-    <button id="gnav-theme-btn" onclick="gToggleTheme()" aria-label="Theme">
+    <button id="gnav-theme-btn" onclick="gToggleTheme()" aria-label="Changer de thème clair/sombre">
       <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
       <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
     </button>
@@ -234,9 +234,13 @@ function gToggleTheme(){
 /* ═══ LANG DROPDOWN ═══ */
 function gToggleLangDD(e){
   e.stopPropagation();
-  document.getElementById('g-langdd').classList.toggle('open');
+  var open=document.getElementById('g-langdd').classList.toggle('open');
+  document.getElementById('gnav-lang-btn').setAttribute('aria-expanded', open?'true':'false');
 }
-document.addEventListener('click',function(){document.getElementById('g-langdd').classList.remove('open');});
+document.addEventListener('click',function(){
+  document.getElementById('g-langdd').classList.remove('open');
+  document.getElementById('gnav-lang-btn').setAttribute('aria-expanded','false');
+});
 
 var FLAGS={fr:'🇫🇷',en:'🇬🇧',el:'🇬🇷',de:'🇩🇪',es:'🇪🇸'};
 var CODES={fr:'FR',en:'EN',el:'EL',de:'DE',es:'ES'};
@@ -262,31 +266,31 @@ var CHROME={
     searchPh:'Rechercher un article… (ex : QR code, thème, appel serveur)',
     emptyTitle:'Aucun résultat',emptySub:'Essayez un autre mot-clé, ou parcourez les catégories ci-dessus.',
     ctaTitle:'Une autre question ?',ctaLead:"Notre équipe répond rapidement à toute demande, même en dehors de ce guide.",ctaBtn:'Nous contacter',
-    foot:'© 2026 GeNext — Guide utilisateur', all:'Tout'},
+    foot:'© 2026 GeNext — Guide utilisateur', all:'Tout', clearLabel:'Effacer la recherche', themeLabel:'Changer de thème clair/sombre', langLabel:'Changer de langue'},
   en:{back:'Back to site',eyebrow:'FULL GUIDE',h1a:'Understand everything, ',h1b:'in a few minutes.',
     lead:"The complete manual for your digital menu: admin panel, waiter app, and the menu as seen by your customers. Search a word, or browse by topic.",
     searchPh:'Search an article… (e.g. QR code, theme, waiter call)',
     emptyTitle:'No results',emptySub:'Try another keyword, or browse the categories above.',
     ctaTitle:'Another question?',ctaLead:'Our team replies quickly to any request, even beyond this guide.',ctaBtn:'Contact us',
-    foot:'© 2026 GeNext — User guide', all:'All'},
+    foot:'© 2026 GeNext — User guide', all:'All', clearLabel:'Clear search', themeLabel:'Toggle light/dark mode', langLabel:'Change language'},
   el:{back:'Επιστροφή στον ιστότοπο',eyebrow:'ΠΛΗΡΗΣ ΟΔΗΓΟΣ',h1a:'Κατανοήστε τα πάντα, ',h1b:'σε λίγα λεπτά.',
     lead:'Το πλήρες εγχειρίδιο του ψηφιακού σας μενού: διαχείριση, εφαρμογή σερβιτόρου, και το μενού όπως το βλέπουν οι πελάτες σας. Αναζητήστε μια λέξη ή περιηγηθείτε ανά θέμα.',
     searchPh:'Αναζήτηση άρθρου… (π.χ. κωδικός QR, θέμα, κλήση σερβιτόρου)',
     emptyTitle:'Κανένα αποτέλεσμα',emptySub:'Δοκιμάστε άλλη λέξη-κλειδί, ή περιηγηθείτε στις κατηγορίες παραπάνω.',
     ctaTitle:'Άλλη ερώτηση;',ctaLead:'Η ομάδα μας απαντά γρήγορα σε κάθε αίτημα, ακόμα κι εκτός αυτού του οδηγού.',ctaBtn:'Επικοινωνήστε μαζί μας',
-    foot:'© 2026 GeNext — Οδηγός χρήσης', all:'Όλα'},
+    foot:'© 2026 GeNext — Οδηγός χρήσης', all:'Όλα', clearLabel:'Καθαρισμός αναζήτησης', themeLabel:'Εναλλαγή φωτεινής/σκοτεινής λειτουργίας', langLabel:'Αλλαγή γλώσσας'},
   de:{back:'Zurück zur Seite',eyebrow:'VOLLSTÄNDIGER LEITFADEN',h1a:'Alles verstehen, ',h1b:'in wenigen Minuten.',
     lead:'Die komplette Anleitung für Ihr digitales Menü: Admin-Bereich, Kellner-App, und das Menü aus Sicht Ihrer Gäste. Suchen Sie ein Wort oder durchstöbern Sie nach Thema.',
     searchPh:'Artikel suchen… (z. B. QR-Code, Design, Kellnerruf)',
     emptyTitle:'Keine Ergebnisse',emptySub:'Versuchen Sie ein anderes Stichwort oder durchsuchen Sie die Kategorien oben.',
     ctaTitle:'Noch eine Frage?',ctaLead:'Unser Team antwortet schnell auf jede Anfrage, auch über diesen Leitfaden hinaus.',ctaBtn:'Kontaktieren Sie uns',
-    foot:'© 2026 GeNext — Benutzerhandbuch', all:'Alle'},
+    foot:'© 2026 GeNext — Benutzerhandbuch', all:'Alle', clearLabel:'Suche löschen', themeLabel:'Hell-/Dunkelmodus umschalten', langLabel:'Sprache ändern'},
   es:{back:'Volver al sitio',eyebrow:'GUÍA COMPLETA',h1a:'Entiéndalo todo, ',h1b:'en pocos minutos.',
     lead:'El manual completo de su menú digital: panel de administración, aplicación de camarero, y el menú visto por sus clientes. Busque una palabra o explore por tema.',
     searchPh:'Buscar un artículo… (ej.: código QR, tema, llamada al camarero)',
     emptyTitle:'Sin resultados',emptySub:'Pruebe otra palabra clave, o explore las categorías de arriba.',
     ctaTitle:'¿Otra pregunta?',ctaLead:'Nuestro equipo responde rápidamente a cualquier solicitud, incluso fuera de esta guía.',ctaBtn:'Contáctenos',
-    foot:'© 2026 GeNext — Guía del usuario', all:'Todo'}
+    foot:'© 2026 GeNext — Guía del usuario', all:'Todo', clearLabel:'Borrar búsqueda', themeLabel:'Alternar modo claro/oscuro', langLabel:'Cambiar idioma'}
 };
 
 function applyChrome(l){
@@ -303,6 +307,9 @@ function applyChrome(l){
   document.getElementById('g-cta-lead').textContent=t.ctaLead;
   document.getElementById('g-cta-btn').childNodes[0].nodeValue=t.ctaBtn+' ';
   document.getElementById('g-foot').textContent=t.foot;
+  document.getElementById('g-search-clear').setAttribute('aria-label',t.clearLabel);
+  document.getElementById('gnav-theme-btn').setAttribute('aria-label',t.themeLabel);
+  document.getElementById('gnav-lang-btn').setAttribute('aria-label',t.langLabel);
 }
 
 /* ═══ CATEGORIES ═══ */
