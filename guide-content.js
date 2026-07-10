@@ -100,6 +100,26 @@ var ARTICLES = [
 },
 
 {
+  id:'adm-happyhour', cat:'admin', img:'04-admin-produits.webp',
+  title:{
+    fr:'Happy Hour et réductions sur un produit',
+    en:'Happy Hour and discounts on a product',
+    el:'Happy Hour και εκπτώσεις σε ένα προϊόν',
+    de:'Happy Hour und Rabatte auf ein Produkt',
+    es:'Happy Hour y descuentos en un producto'
+  },
+  imgAlt:{fr:'Liste des produits',en:'Product list',el:'Λίστα προϊόντων',de:'Produktliste',es:'Lista de productos'},
+  body:{
+    fr:"<p>En modifiant un produit, la section <strong>Prix</strong> propose une option <strong>Happy Hour</strong> : un second prix, réduit, qui remplace automatiquement le prix normal pendant une plage horaire et des jours de la semaine que vous choisissez.</p><p>Le prix normal s'affiche alors barré à côté du prix réduit sur le menu public — aucune action nécessaire de votre part une fois configuré, l'affichage bascule tout seul aux heures programmées, chaque semaine.</p>",
+    en:'<p>When editing a product, the <strong>Price</strong> section offers a <strong>Happy Hour</strong> option: a second, discounted price that automatically replaces the normal price during a time window and days of the week you choose.</p><p>The normal price then shows crossed out next to the discounted one on the public menu — no action needed on your part once set up, the display switches on its own at the scheduled times, every week.</p>',
+    el:'<p>Κατά την επεξεργασία ενός προϊόντος, η ενότητα <strong>Τιμή</strong> προσφέρει μια επιλογή <strong>Happy Hour</strong>: μια δεύτερη, μειωμένη τιμή που αντικαθιστά αυτόματα την κανονική τιμή σε ένα χρονικό διάστημα και ημέρες της εβδομάδας που επιλέγετε.</p><p>Η κανονική τιμή εμφανίζεται τότε διαγραμμένη δίπλα στη μειωμένη στο δημόσιο μενού — καμία ενέργεια δεν χρειάζεται από εσάς μετά τη ρύθμιση, η εμφάνιση αλλάζει μόνη της τις προγραμματισμένες ώρες, κάθε εβδομάδα.</p>',
+    de:'<p>Beim Bearbeiten eines Produkts bietet der Bereich <strong>Preis</strong> eine <strong>Happy-Hour</strong>-Option: ein zweiter, ermäßigter Preis, der den normalen Preis automatisch während eines von Ihnen gewählten Zeitfensters und an gewählten Wochentagen ersetzt.</p><p>Der normale Preis wird dann durchgestrichen neben dem ermäßigten Preis im öffentlichen Menü angezeigt — nach der Einrichtung ist Ihrerseits nichts weiter zu tun, die Anzeige wechselt jede Woche von selbst zu den geplanten Zeiten.</p>',
+    es:'<p>Al editar un producto, la sección <strong>Precio</strong> ofrece una opción <strong>Happy Hour</strong>: un segundo precio, reducido, que sustituye automáticamente al precio normal durante una franja horaria y unos días de la semana que usted elige.</p><p>El precio normal se muestra entonces tachado junto al precio reducido en el menú público — no se necesita ninguna acción por su parte una vez configurado, la visualización cambia sola a las horas programadas, cada semana.</p>'
+  },
+  kw:{fr:['happy hour','réduction','promotion','prix'],en:['happy hour','discount','promotion','price'],el:['happy hour','έκπτωση'],de:['happy hour','rabatt'],es:['happy hour','descuento']}
+},
+
+{
   id:'adm-themes', cat:'admin', img:'03-admin-design-theme.webp',
   title:{
     fr:'Changer de thème et de couleur',
@@ -120,6 +140,44 @@ var ARTICLES = [
 },
 
 {
+  id:'adm-couleur', cat:'admin',
+  title:{
+    fr:"Personnaliser la couleur d'accent",
+    en:'Customizing the accent color',
+    el:'Προσαρμογή του χρώματος έμφασης',
+    de:'Die Akzentfarbe anpassen',
+    es:'Personalizar el color de acento'
+  },
+  body:{
+    fr:"<p>Sur un thème proposant plusieurs couleurs, l'icône <strong>🎨</strong> (à côté de son nom) ouvre une palette de teintes prêtes à l'emploi, assorties à l'ambiance du thème. Touchez-en une pour l'appliquer immédiatement à votre menu public.</p><p>Cette couleur s'applique à tous les accents visuels (boutons, badges, icônes) — vous pouvez en changer aussi souvent que vous le souhaitez, sans jamais perdre vos catégories ni vos produits.</p>",
+    en:'<p>On a theme offering several colors, the <strong>🎨</strong> icon (next to its name) opens a palette of ready-made tones, matched to the theme\'s mood. Tap one to apply it instantly to your public menu.</p><p>This color applies to every visual accent (buttons, badges, icons) — you can change it as often as you like, without ever losing your categories or products.</p>',
+    el:'<p>Σε ένα θέμα με πολλά χρώματα, το εικονίδιο <strong>🎨</strong> (δίπλα στο όνομά του) ανοίγει μια παλέτα έτοιμων αποχρώσεων, ταιριασμένων με την ατμόσφαιρα του θέματος. Πατήστε μία για να την εφαρμόσετε αμέσως στο δημόσιο μενού σας.</p><p>Αυτό το χρώμα εφαρμόζεται σε όλες τις οπτικές πινελιές (κουμπιά, ετικέτες, εικονίδια) — μπορείτε να το αλλάζετε όσο συχνά θέλετε, χωρίς ποτέ να χάνετε τις κατηγορίες ή τα προϊόντα σας.</p>',
+    de:'<p>Bei einem Theme mit mehreren Farben öffnet das Symbol <strong>🎨</strong> (neben seinem Namen) eine Palette fertiger Farbtöne, passend zur Stimmung des Themes. Tippen Sie auf einen, um ihn sofort auf Ihr öffentliches Menü anzuwenden.</p><p>Diese Farbe gilt für alle visuellen Akzente (Schaltflächen, Abzeichen, Symbole) — Sie können sie so oft ändern, wie Sie möchten, ohne je Ihre Kategorien oder Produkte zu verlieren.</p>',
+    es:'<p>En un tema con varios colores, el icono <strong>🎨</strong> (junto a su nombre) abre una paleta de tonos listos, a juego con el ambiente del tema. Toque uno para aplicarlo al instante a su menú público.</p><p>Este color se aplica a todos los acentos visuales (botones, insignias, iconos) — puede cambiarlo tantas veces como quiera, sin perder nunca sus categorías ni productos.</p>'
+  },
+  kw:{fr:['couleur','palette','accent','🎨'],en:['color','palette','accent'],el:['χρώμα','παλέτα'],de:['farbe','palette'],es:['color','paleta']}
+},
+
+{
+  id:'adm-fete', cat:'admin',
+  title:{
+    fr:'Activer une animation pour les fêtes',
+    en:'Enabling a festive animation',
+    el:'Ενεργοποίηση εορταστικού εφέ',
+    de:'Eine Feiertagsanimation aktivieren',
+    es:'Activar una animación festiva'
+  },
+  body:{
+    fr:"<p>La section <strong>Fête active</strong> propose une liste d'occasions (Noël, Pâques, Nouvel An, 25 Mars, 28 Octobre, Épiphanie, 15 Août, Carnaval...). Touchez-en une pour habiller votre menu public d'une animation discrète et thématique — une seule occasion active à la fois.</p><p>Touchez <strong>Aucune</strong> pour revenir à l'affichage normal. Un geste simple pour marquer les grandes occasions sans toucher au reste de votre menu.</p>",
+    en:'<p>The <strong>Active event</strong> section offers a list of occasions (Christmas, Easter, New Year, national holidays, Epiphany, Carnival...). Tap one to dress your public menu with a discreet, themed animation — only one occasion active at a time.</p><p>Tap <strong>None</strong> to return to the normal display. A simple gesture to mark special occasions without touching the rest of your menu.</p>',
+    el:'<p>Η ενότητα <strong>Ενεργή γιορτή</strong> προσφέρει μια λίστα περιστάσεων (Χριστούγεννα, Πάσχα, Πρωτοχρονιά, εθνικές γιορτές, Θεοφάνεια, Αποκριές...). Πατήστε μία για να ντύσετε το δημόσιο μενού σας με ένα διακριτικό, θεματικό εφέ — μόνο μία περίσταση ενεργή τη φορά.</p><p>Πατήστε <strong>Καμία</strong> για επιστροφή στην κανονική εμφάνιση. Μια απλή χειρονομία για να γιορτάσετε τις σημαντικές περιστάσεις χωρίς να αγγίξετε το υπόλοιπο μενού σας.</p>',
+    de:'<p>Der Bereich <strong>Aktives Fest</strong> bietet eine Liste von Anlässen (Weihnachten, Ostern, Neujahr, Nationalfeiertage, Theophanie, Karneval...). Tippen Sie auf einen, um Ihr öffentliches Menü mit einer dezenten, thematischen Animation zu versehen — immer nur ein Anlass gleichzeitig aktiv.</p><p>Tippen Sie auf <strong>Keine</strong>, um zur normalen Anzeige zurückzukehren. Eine einfache Geste, um besondere Anlässe zu feiern, ohne den Rest Ihres Menüs anzufassen.</p>',
+    es:'<p>La sección <strong>Evento activo</strong> ofrece una lista de ocasiones (Navidad, Semana Santa, Año Nuevo, fiestas nacionales, Epifanía, Carnaval...). Toque una para vestir su menú público con una animación discreta y temática — solo una ocasión activa a la vez.</p><p>Toque <strong>Ninguna</strong> para volver a la visualización normal. Un gesto simple para celebrar las grandes ocasiones sin tocar el resto de su menú.</p>'
+  },
+  kw:{fr:['fête','événement','noël','pâques','animation'],en:['event','christmas','easter','animation'],el:['γιορτή','χριστούγεννα'],de:['fest','weihnachten'],es:['fiesta','navidad']}
+},
+
+{
   id:'adm-commandes', cat:'admin', img:'06-admin-orders-tab.webp',
   title:{
     fr:'Suivre commandes et appels depuis l\'administration',
@@ -137,6 +195,26 @@ var ARTICLES = [
     es:'<p>La pestaña <strong>Pedidos y llamadas</strong> agrupa tres secciones: <strong>Estadísticas</strong> (visitas, platos populares), <strong>Mesas y códigos QR</strong>, y <strong>Pedidos</strong> (historial completo, con el detalle de cada mesa).</p><p>Es una vista de respaldo: en el día a día, su equipo sigue los pedidos y llamadas en directo desde la aplicación de camarero en su teléfono, con una notificación sonora en cada nueva solicitud.</p>'
   },
   kw:{fr:['commandes','appels','statistiques','historique'],en:['orders','calls','statistics','history'],el:['παραγγελίες','κλήσεις','στατιστικά'],de:['bestellungen','rufe','statistik'],es:['pedidos','llamadas','estadísticas']}
+},
+
+{
+  id:'adm-statistiques', cat:'admin', img:'06-admin-orders-tab.webp',
+  title:{
+    fr:'Consulter vos statistiques',
+    en:'Viewing your statistics',
+    el:'Προβολή των στατιστικών σας',
+    de:'Ihre Statistiken einsehen',
+    es:'Consultar sus estadísticas'
+  },
+  imgAlt:{fr:'Section Statistiques',en:'Statistics section',el:'Ενότητα Στατιστικά',de:'Bereich Statistiken',es:'Sección Estadísticas'},
+  body:{
+    fr:"<p>La section <strong>Statistiques</strong> (onglet Commandes & Appels) donne une vue chiffrée de l'activité de votre menu : nombre de visites, plats les plus consultés, et volume de commandes ou d'appels sur la période.</p><p>Une manière simple de repérer vos plats les plus populaires — et de décider, par exemple, lesquels mettre en avant avec le badge <strong>« Populaire »</strong>.</p>",
+    en:"<p>The <strong>Statistics</strong> section (Orders & Calls tab) gives a numeric view of your menu's activity: number of visits, most-viewed dishes, and volume of orders or calls over the period.</p><p>A simple way to spot your most popular dishes — and decide, for instance, which ones to highlight with the <strong>\"Popular\"</strong> badge.</p>",
+    el:'<p>Η ενότητα <strong>Στατιστικά</strong> (καρτέλα Παραγγελίες & Κλήσεις) δίνει μια αριθμητική εικόνα της δραστηριότητας του μενού σας: αριθμό επισκέψεων, πιο δημοφιλή πιάτα, και όγκο παραγγελιών ή κλήσεων στη διάρκεια της περιόδου.</p><p>Ένας απλός τρόπος να εντοπίσετε τα πιο δημοφιλή σας πιάτα — και να αποφασίσετε, για παράδειγμα, ποια να αναδείξετε με την ετικέτα <strong>«Δημοφιλές»</strong>.</p>',
+    de:'<p>Der Bereich <strong>Statistiken</strong> (Reiter Bestellungen & Rufe) gibt einen zahlenmäßigen Überblick über die Aktivität Ihres Menüs: Anzahl der Besuche, meistgesehene Gerichte, und Umfang der Bestellungen oder Rufe im Zeitraum.</p><p>Eine einfache Möglichkeit, Ihre beliebtesten Gerichte zu erkennen — und zu entscheiden, welche Sie zum Beispiel mit dem Abzeichen <strong>„Beliebt"</strong> hervorheben.</p>',
+    es:'<p>La sección <strong>Estadísticas</strong> (pestaña Pedidos y llamadas) ofrece una vista numérica de la actividad de su menú: número de visitas, platos más vistos, y volumen de pedidos o llamadas en el período.</p><p>Una forma sencilla de detectar sus platos más populares — y decidir, por ejemplo, cuáles destacar con la insignia <strong>«Popular»</strong>.</p>'
+  },
+  kw:{fr:['statistiques','visites','plats populaires'],en:['statistics','visits','popular dishes'],el:['στατιστικά','επισκέψεις'],de:['statistik','besuche'],es:['estadísticas','visitas']}
 },
 
 {

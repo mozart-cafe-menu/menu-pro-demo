@@ -100,6 +100,8 @@ html.light #gnav-theme-btn .moon{display:none}html.light #gnav-theme-btn .sun{di
 .g-art:hover{border-color:var(--gold-3)}
 .g-art.match-hi{border-color:var(--gold)}
 .g-art-hd{display:flex;align-items:center;gap:1rem;padding:1.1rem 1.3rem;cursor:pointer;user-select:none}
+.g-art-hd:focus-visible{outline:2px solid var(--gold);outline-offset:-2px;border-radius:16px}
+.g-tab:focus-visible,.g-search-clear:focus-visible,#gnav-lang-btn:focus-visible,#gnav-theme-btn:focus-visible,.g-cta-btn:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 .g-art-num{font-family:var(--serif);font-size:.78rem;font-weight:600;color:var(--gold-2);background:rgba(200,164,78,.1);border:1px solid var(--line-2);border-radius:8px;padding:.3rem .55rem;flex-shrink:0}
 .g-art-title{font-size:1rem;font-weight:600;flex:1;line-height:1.4}
 .g-art-title mark{background:rgba(200,164,78,.35);color:inherit;border-radius:3px;padding:0 .1em}
@@ -191,7 +193,7 @@ html.light #gnav-theme-btn .moon{display:none}html.light #gnav-theme-btn .sun{di
 <div class="g-search-wrap">
   <div class="g-search">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-    <input type="text" id="g-search-input" placeholder="Rechercher un article… (ex : QR code, thème, appel serveur)" oninput="gOnSearch(this.value)">
+    <input type="text" id="g-search-input" aria-label="Rechercher un article" placeholder="Rechercher un article… (ex : QR code, thème, appel serveur)" oninput="gOnSearch(this.value)">
     <button class="g-search-clear" id="g-search-clear" onclick="gClearSearch()" aria-label="Effacer">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" width="12" height="12"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
@@ -294,6 +296,7 @@ function applyChrome(l){
   document.getElementById('g-h1').innerHTML=t.h1a+'<em>'+t.h1b+'</em>';
   document.getElementById('g-lead').textContent=t.lead;
   document.getElementById('g-search-input').placeholder=t.searchPh;
+  document.getElementById('g-search-input').setAttribute('aria-label',t.searchPh);
   document.getElementById('g-empty-title').textContent=t.emptyTitle;
   document.getElementById('g-empty-sub').textContent=t.emptySub;
   document.getElementById('g-cta-title').textContent=t.ctaTitle;
@@ -373,12 +376,12 @@ function renderArticles(l){
       var imgHtml = a.img ? '<div class="g-art-img-wrap"><img src="assets/guide/'+a.img+'" alt="'+ (a.imgAlt?a.imgAlt[l]:a.title[l]).replace(/"/g,'&quot;') +'" loading="lazy"></div>' : '';
       var tipHtml = a.tip ? '<div class="g-art-tip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg><span>'+a.tip[l]+'</span></div>' : '';
       html+='<article class="g-art'+(a.img?' has-img':'')+(a.tall?' tall':'')+(isOpen?' open':'')+'" data-id="'+a.id+'">'+
-        '<div class="g-art-hd" onclick="gToggleArt(\''+a.id+'\')">'+
+        '<div class="g-art-hd" role="button" tabindex="0" aria-expanded="'+(isOpen?'true':'false')+'" aria-controls="body-'+a.id+'" onclick="gToggleArt(\''+a.id+'\')" onkeydown="gArtKeydown(event,\''+a.id+'\')">'+
           '<div class="g-art-num">'+String(i+1).padStart(2,'0')+'</div>'+
           '<div class="g-art-title">'+title+'</div>'+
           '<div class="g-art-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg></div>'+
         '</div>'+
-        '<div class="g-art-body"><div class="g-art-body-inner"><div class="g-art-content">'+
+        '<div class="g-art-body" id="body-'+a.id+'"><div class="g-art-body-inner"><div class="g-art-content">'+
           '<div class="g-art-text">'+body+tipHtml+'</div>'+imgHtml+
         '</div></div></div>'+
       '</article>';
@@ -395,11 +398,20 @@ function highlight(text, q){
   return text.slice(0,idx) + '<mark>' + text.slice(idx, idx+q.length) + '</mark>' + text.slice(idx+q.length);
 }
 
+function gArtKeydown(ev,id){
+  if(ev.key==='Enter'||ev.key===' '||ev.key==='Spacebar'){
+    ev.preventDefault();
+    gToggleArt(id);
+  }
+}
+
 function gToggleArt(id){
   var el=document.querySelector('.g-art[data-id="'+id+'"]');
   if(!el) return;
   var willOpen=!el.classList.contains('open');
   el.classList.toggle('open', willOpen);
+  var hd=el.querySelector('.g-art-hd');
+  if(hd) hd.setAttribute('aria-expanded', willOpen?'true':'false');
   openIds[id]=willOpen;
 }
 
