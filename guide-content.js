@@ -1,0 +1,384 @@
+/* ═══════════════════════════════════════════════════════════════
+   GUIDE GeNext — Contenu des articles (5 langues)
+   Chargé par guide.html — ne définit que la variable ARTICLES.
+═══════════════════════════════════════════════════════════════ */
+var ARTICLES = [
+
+/* ───────────── ADMIN ───────────── */
+{
+  id:'adm-connexion', cat:'admin', img:'01-admin-login.webp',
+  title:{
+    fr:"Se connecter à votre panneau d'administration",
+    en:'Signing in to your admin panel',
+    el:'Σύνδεση στον πίνακα διαχείρισης',
+    de:'Anmeldung im Admin-Bereich',
+    es:'Iniciar sesión en su panel de administración'
+  },
+  imgAlt:{fr:"Écran de connexion de l'administration",en:'Admin login screen',el:'Οθόνη σύνδεσης διαχείρισης',de:'Admin-Anmeldebildschirm',es:'Pantalla de inicio de sesión'},
+  body:{
+    fr:"<p>Vous recevez un lien et un mot de passe par email dès la création de votre compte. Ouvrez ce lien sur ordinateur, tablette ou téléphone : aucune installation n'est nécessaire, tout se passe dans votre navigateur.</p><p>Saisissez votre mot de passe puis touchez <strong>Connexion</strong> — votre session reste ouverte tant que vous ne vous déconnectez pas vous-même.</p><p><strong>Mot de passe oublié ?</strong> Contactez-nous, nous vous en donnons un nouveau immédiatement.</p>",
+    en:"<p>You receive a link and a password by email as soon as your account is created. Open this link on a computer, tablet or phone: no installation needed, everything happens in your browser.</p><p>Enter your password then tap the <strong>login button</strong> — your session stays open until you sign out yourself.</p><p><strong>Forgot your password?</strong> Contact us, we'll give you a new one immediately.</p>",
+    el:'<p>Λαμβάνετε έναν σύνδεσμο και έναν κωδικό πρόσβασης μέσω email μόλις δημιουργηθεί ο λογαριασμός σας. Ανοίξτε τον σύνδεσμο σε υπολογιστή, tablet ή τηλέφωνο: δεν απαιτείται καμία εγκατάσταση, όλα γίνονται μέσα από τον περιηγητή σας.</p><p>Εισαγάγετε τον κωδικό σας και πατήστε το <strong>κουμπί σύνδεσης</strong> — η σύνδεσή σας παραμένει ανοιχτή μέχρι να αποσυνδεθείτε εσείς οι ίδιοι.</p><p><strong>Ξεχάσατε τον κωδικό σας;</strong> Επικοινωνήστε μαζί μας, θα σας δώσουμε αμέσως νέο.</p>',
+    de:'<p>Sie erhalten einen Link und ein Passwort per E-Mail, sobald Ihr Konto erstellt wurde. Öffnen Sie diesen Link auf Computer, Tablet oder Handy: keine Installation nötig, alles läuft im Browser.</p><p>Geben Sie Ihr Passwort ein und tippen Sie auf die <strong>Anmelden-Schaltfläche</strong> — Ihre Sitzung bleibt geöffnet, bis Sie sich selbst abmelden.</p><p><strong>Passwort vergessen?</strong> Kontaktieren Sie uns, wir geben Ihnen sofort ein neues.</p>',
+    es:'<p>Recibe un enlace y una contraseña por correo en cuanto se crea su cuenta. Abra ese enlace en ordenador, tableta o teléfono: no necesita instalar nada, todo ocurre en su navegador.</p><p>Introduzca su contraseña y toque el <strong>botón de inicio de sesión</strong> — su sesión permanece abierta hasta que usted mismo cierre sesión.</p><p><strong>¿Olvidó su contraseña?</strong> Contáctenos y le daremos una nueva de inmediato.</p>'
+  },
+  tip:{
+    fr:"Ajoutez cette page à l'écran d'accueil de votre téléphone (menu du navigateur → « Ajouter à l'écran d'accueil ») pour l'ouvrir en un geste, comme une vraie application.",
+    en:'Add this page to your phone\'s home screen (browser menu → "Add to Home Screen") to open it in one tap, like a real app.',
+    el:'Προσθέστε αυτή τη σελίδα στην αρχική οθόνη του τηλεφώνου σας (μενού περιηγητή → «Προσθήκη στην αρχική οθόνη») για να την ανοίγετε με ένα άγγιγμα, όπως μια πραγματική εφαρμογή.',
+    de:'Fügen Sie diese Seite dem Startbildschirm Ihres Handys hinzu (Browsermenü → „Zum Startbildschirm hinzufügen"), um sie mit einem Fingertipp zu öffnen, wie eine echte App.',
+    es:'Añada esta página a la pantalla de inicio de su teléfono (menú del navegador → «Añadir a pantalla de inicio») para abrirla con un solo toque, como una app real.'
+  },
+  kw:{fr:['login','se connecter','mot de passe','identifiants'],en:['login','sign in','password'],el:['σύνδεση','κωδικός'],de:['anmelden','login','passwort'],es:['iniciar sesión','contraseña']}
+},
+
+{
+  id:'adm-dashboard', cat:'admin', img:'02-admin-dashboard.webp',
+  title:{
+    fr:'Vue d\'ensemble : comment est organisé votre panneau',
+    en:'Overview: how your panel is organized',
+    el:'Επισκόπηση: πώς είναι οργανωμένος ο πίνακάς σας',
+    de:'Übersicht: So ist Ihr Bereich aufgebaut',
+    es:'Vista general: cómo está organizado su panel'
+  },
+  imgAlt:{fr:"Tableau de bord de l'administration",en:'Admin dashboard',el:'Πίνακας ελέγχου διαχείρισης',de:'Admin-Dashboard',es:'Panel de administración'},
+  body:{
+    fr:"<p>Votre panneau s'ouvre sur une liste de sections repliées, que vous dépliez en touchant leur titre : <strong>Design</strong> (thème et couleur), <strong>Fête active</strong>, <strong>Image principale</strong>, <strong>Infos</strong>, <strong>Note</strong>, puis vos <strong>Catégories</strong> et <strong>Produits</strong>.</p><p>Trois onglets en bas de l'écran séparent les grandes familles d'actions : <strong>Affichage Menu</strong> (ce que vos clients voient), <strong>Commandes & Appels</strong> (statistiques, QR codes, commandes), et <strong>Réglages</strong> (accès, langues, abonnement).</p><p>Chaque modification est enregistrée et visible par vos clients quasi instantanément — aucun bouton « Publier » séparé.</p>",
+    en:'<p>Your panel opens on a list of collapsed sections, which you expand by tapping their title: <strong>Design</strong> (theme and color), <strong>Active event</strong>, <strong>Main image</strong>, <strong>Info</strong>, <strong>Note</strong>, then your <strong>Categories</strong> and <strong>Products</strong>.</p><p>Three tabs at the bottom of the screen separate the main families of actions: <strong>Menu Display</strong> (what your customers see), <strong>Orders & Calls</strong> (stats, QR codes, orders), and <strong>Settings</strong> (access, languages, subscription).</p><p>Every change is saved and visible to your customers almost instantly — no separate "Publish" button.</p>',
+    el:'<p>Ο πίνακάς σας ανοίγει με μια λίστα από αναδιπλωμένες ενότητες, τις οποίες ανοίγετε πατώντας τον τίτλο τους: <strong>Design</strong> (θέμα και χρώμα), <strong>Ενεργή γιορτή</strong>, <strong>Κύρια εικόνα</strong>, <strong>Πληροφορίες</strong>, <strong>Σημείωση</strong>, και μετά τις <strong>Κατηγορίες</strong> και τα <strong>Προϊόντα</strong> σας.</p><p>Τρεις καρτέλες στο κάτω μέρος της οθόνης χωρίζουν τις βασικές οικογένειες ενεργειών: <strong>Εμφάνιση Μενού</strong> (αυτό που βλέπουν οι πελάτες σας), <strong>Παραγγελίες & Κλήσεις</strong> (στατιστικά, κωδικοί QR, παραγγελίες), και <strong>Ρυθμίσεις</strong> (πρόσβαση, γλώσσες, συνδρομή).</p><p>Κάθε αλλαγή αποθηκεύεται και είναι ορατή στους πελάτες σας σχεδόν αμέσως — χωρίς ξεχωριστό κουμπί «Δημοσίευση».</p>',
+    de:'<p>Ihr Bereich öffnet sich mit einer Liste eingeklappter Abschnitte, die Sie durch Tippen auf ihren Titel öffnen: <strong>Design</strong> (Thema und Farbe), <strong>Aktives Fest</strong>, <strong>Hauptbild</strong>, <strong>Infos</strong>, <strong>Hinweis</strong>, dann Ihre <strong>Kategorien</strong> und <strong>Produkte</strong>.</p><p>Drei Reiter am unteren Bildschirmrand trennen die großen Aktionsfamilien: <strong>Menüanzeige</strong> (was Ihre Gäste sehen), <strong>Bestellungen & Rufe</strong> (Statistiken, QR-Codes, Bestellungen), und <strong>Einstellungen</strong> (Zugang, Sprachen, Abonnement).</p><p>Jede Änderung wird gespeichert und ist für Ihre Gäste fast sofort sichtbar — keine separate „Veröffentlichen"-Schaltfläche.</p>',
+    es:'<p>Su panel se abre con una lista de secciones plegadas, que despliega tocando su título: <strong>Design</strong> (tema y color), <strong>Evento activo</strong>, <strong>Imagen principal</strong>, <strong>Información</strong>, <strong>Nota</strong>, y luego sus <strong>Categorías</strong> y <strong>Productos</strong>.</p><p>Tres pestañas en la parte inferior separan las grandes familias de acciones: <strong>Visualización del menú</strong> (lo que ven sus clientes), <strong>Pedidos y llamadas</strong> (estadísticas, códigos QR, pedidos), y <strong>Ajustes</strong> (acceso, idiomas, suscripción).</p><p>Cada cambio se guarda y es visible para sus clientes casi al instante — sin ningún botón «Publicar» separado.</p>'
+  },
+  kw:{fr:['tableau de bord','dashboard','onglets','sections'],en:['dashboard','tabs','sections'],el:['πίνακας','καρτέλες'],de:['dashboard','übersicht','reiter'],es:['panel','pestañas']}
+},
+
+{
+  id:'adm-categories', cat:'admin', img:'02-admin-dashboard.webp',
+  title:{
+    fr:'Créer et organiser vos catégories',
+    en:'Creating and organizing your categories',
+    el:'Δημιουργία και οργάνωση των κατηγοριών σας',
+    de:'Kategorien erstellen und organisieren',
+    es:'Crear y organizar sus categorías'
+  },
+  imgAlt:{fr:'Liste des catégories du menu',en:'Menu category list',el:'Λίστα κατηγοριών μενού',de:'Liste der Menükategorien',es:'Lista de categorías del menú'},
+  body:{
+    fr:'<p>Une catégorie regroupe vos produits (ex : « Boissons Chaudes », « Pizzas »). Pour en créer une, dépliez la section <strong>Catégories</strong> puis touchez le bouton d\'ajout en bas de la liste.</p><ul><li>Maintenez l\'icône <strong>⋮⋮</strong> à gauche du nom pour glisser une catégorie à la position voulue — l\'ordre change immédiatement pour vos clients.</li><li>L\'icône <strong>👁</strong> masque temporairement une catégorie sans la supprimer (utile hors saison).</li><li>Le menu déroulant <strong>Chaud / Froid</strong> ajuste son icône visuelle.</li><li>La case <strong>Programmation horaire</strong> n\'affiche une catégorie qu\'à certaines heures (ex : petit-déjeuner le matin seulement).</li></ul>',
+    en:'<p>A category groups your products (e.g. "Hot Drinks", "Pizzas"). To create one, expand the <strong>Categories</strong> section then tap the add button at the bottom of the list.</p><ul><li>Hold the <strong>⋮⋮</strong> icon left of the name to drag a category to the desired position — the order changes instantly for your customers.</li><li>The <strong>👁</strong> icon temporarily hides a category without deleting it (handy off-season).</li><li>The <strong>Hot / Cold</strong> dropdown adjusts its visual icon.</li><li>The <strong>Time schedule</strong> checkbox shows a category only at certain hours (e.g. breakfast menu, mornings only).</li></ul>',
+    el:'<p>Μια κατηγορία ομαδοποιεί τα προϊόντα σας (π.χ. «Ζεστά Ροφήματα», «Πίτσες»). Για να δημιουργήσετε μία, ανοίξτε την ενότητα <strong>Κατηγορίες</strong> και πατήστε το κουμπί προσθήκης στο κάτω μέρος της λίστας.</p><ul><li>Κρατήστε πατημένο το εικονίδιο <strong>⋮⋮</strong> αριστερά από το όνομα για να σύρετε μια κατηγορία στη θέση που θέλετε — η σειρά αλλάζει αμέσως για τους πελάτες σας.</li><li>Το εικονίδιο <strong>👁</strong> αποκρύπτει προσωρινά μια κατηγορία χωρίς να τη διαγράφει (χρήσιμο εκτός σεζόν).</li><li>Το αναπτυσσόμενο μενού <strong>Ζεστό / Κρύο</strong> προσαρμόζει το εικονίδιό της.</li><li>Το πλαίσιο <strong>Χρονοπρογραμματισμός</strong> εμφανίζει μια κατηγορία μόνο σε συγκεκριμένες ώρες (π.χ. πρωινό μόνο το πρωί).</li></ul>',
+    de:'<p>Eine Kategorie fasst Ihre Produkte zusammen (z. B. „Heiße Getränke", „Pizzen"). Zum Erstellen öffnen Sie den Abschnitt <strong>Kategorien</strong> und tippen auf die Hinzufügen-Schaltfläche unten in der Liste.</p><ul><li>Halten Sie das Symbol <strong>⋮⋮</strong> links vom Namen gedrückt, um eine Kategorie an die gewünschte Position zu ziehen — die Reihenfolge ändert sich sofort für Ihre Gäste.</li><li>Das Symbol <strong>👁</strong> blendet eine Kategorie vorübergehend aus, ohne sie zu löschen (praktisch außerhalb der Saison).</li><li>Das Dropdown <strong>Heiß / Kalt</strong> passt ihr visuelles Symbol an.</li><li>Das Kästchen <strong>Zeitplan</strong> zeigt eine Kategorie nur zu bestimmten Uhrzeiten an (z. B. Frühstück nur morgens).</li></ul>',
+    es:'<p>Una categoría agrupa sus productos (ej.: «Bebidas calientes», «Pizzas»). Para crear una, despliegue la sección <strong>Categorías</strong> y toque el botón de añadir al final de la lista.</p><ul><li>Mantenga pulsado el icono <strong>⋮⋮</strong> a la izquierda del nombre para arrastrar una categoría a la posición deseada — el orden cambia al instante para sus clientes.</li><li>El icono <strong>👁</strong> oculta temporalmente una categoría sin eliminarla (útil fuera de temporada).</li><li>El menú desplegable <strong>Caliente / Frío</strong> ajusta su icono visual.</li><li>La casilla <strong>Programación horaria</strong> muestra una categoría solo en ciertas horas (ej.: desayuno solo por la mañana).</li></ul>'
+  },
+  kw:{fr:['catégorie','ordre','glisser','masquer','horaire'],en:['category','order','drag','schedule'],el:['κατηγορία','σειρά'],de:['kategorie','reihenfolge'],es:['categoría','orden','horario']}
+},
+
+{
+  id:'adm-produits', cat:'admin', img:'04-admin-produits.webp',
+  title:{
+    fr:'Ajouter et modifier un produit',
+    en:'Adding and editing a product',
+    el:'Προσθήκη και επεξεργασία προϊόντος',
+    de:'Produkt hinzufügen und bearbeiten',
+    es:'Añadir y editar un producto'
+  },
+  imgAlt:{fr:'Liste des produits par catégorie',en:'Product list by category',el:'Λίστα προϊόντων ανά κατηγορία',de:'Produktliste nach Kategorie',es:'Lista de productos por categoría'},
+  body:{
+    fr:"<p>Dans la section <strong>Produits</strong>, chaque catégorie affiche ses plats sous forme de vignettes. Touchez <strong>+ Ajouter un produit</strong> pour en créer un nouveau, ou touchez un produit existant pour modifier son nom, sa description, son prix et sa photo — dans les 5 langues.</p><p>L'icône <strong>👁</strong> masque un produit en rupture de stock sans le supprimer (il réapparaît dès que vous le réactivez), et le glisser-déposer change son ordre d'affichage.</p><p>Une photo nette et lumineuse augmente nettement l'envie d'achat — nous pouvons vous aider à les préparer si besoin.</p>",
+    en:'<p>In the <strong>Products</strong> section, each category displays its dishes as tiles. Tap <strong>+ Add a product</strong> to create a new one, or tap an existing product to edit its name, description, price and photo — in all 5 languages.</p><p>The <strong>👁</strong> icon hides an out-of-stock product without deleting it (it reappears as soon as you reactivate it), and drag-and-drop changes its display order.</p><p>A sharp, well-lit photo noticeably increases customer appetite — we can help you prepare them if needed.</p>',
+    el:'<p>Στην ενότητα <strong>Προϊόντα</strong>, κάθε κατηγορία εμφανίζει τα πιάτα της ως καρτέλες. Πατήστε <strong>+ Προσθήκη προϊόντος</strong> για να δημιουργήσετε ένα νέο, ή πατήστε σε ένα υπάρχον προϊόν για να επεξεργαστείτε το όνομα, την περιγραφή, την τιμή και τη φωτογραφία του — και στις 5 γλώσσες.</p><p>Το εικονίδιο <strong>👁</strong> αποκρύπτει ένα προϊόν που έχει εξαντληθεί χωρίς να το διαγράφει (επανεμφανίζεται μόλις το ενεργοποιήσετε ξανά), και η μεταφορά με σύρσιμο αλλάζει τη σειρά εμφάνισής του.</p><p>Μια καθαρή και φωτεινή φωτογραφία αυξάνει αισθητά την όρεξη των πελατών — μπορούμε να σας βοηθήσουμε να τις ετοιμάσετε αν χρειαστεί.</p>',
+    de:'<p>Im Abschnitt <strong>Produkte</strong> zeigt jede Kategorie ihre Gerichte als Kacheln. Tippen Sie auf <strong>+ Produkt hinzufügen</strong>, um ein neues zu erstellen, oder auf ein bestehendes Produkt, um Name, Beschreibung, Preis und Foto zu bearbeiten — in allen 5 Sprachen.</p><p>Das Symbol <strong>👁</strong> blendet ein ausverkauftes Produkt aus, ohne es zu löschen (es erscheint wieder, sobald Sie es reaktivieren), und Ziehen ändert die Anzeigereihenfolge.</p><p>Ein scharfes, gut beleuchtetes Foto steigert den Appetit Ihrer Gäste spürbar — wir helfen Ihnen bei Bedarf gerne bei der Vorbereitung.</p>',
+    es:'<p>En la sección <strong>Productos</strong>, cada categoría muestra sus platos como tarjetas. Toque <strong>+ Añadir producto</strong> para crear uno nuevo, o toque un producto existente para editar su nombre, descripción, precio y foto — en los 5 idiomas.</p><p>El icono <strong>👁</strong> oculta un producto agotado sin eliminarlo (reaparece en cuanto lo reactive), y arrastrar y soltar cambia su orden de visualización.</p><p>Una foto nítida y bien iluminada aumenta notablemente las ganas de pedirlo — podemos ayudarle a prepararlas si lo necesita.</p>'
+  },
+  tip:{
+    fr:'Les badges comme « Populaire » ou « Nouveau » (visibles sur la fiche produit) attirent l\'œil de vos clients vers vos meilleures ventes.',
+    en:'Badges like "Popular" or "New" (visible on the product page) draw your customers\' attention to your best sellers.',
+    el:'Ετικέτες όπως «Δημοφιλές» ή «Νέο» (ορατές στην καρτέλα προϊόντος) τραβούν το βλέμμα των πελατών σας προς τις καλύτερες πωλήσεις σας.',
+    de:'Abzeichen wie „Beliebt" oder „Neu" (sichtbar auf der Produktseite) lenken den Blick Ihrer Gäste auf Ihre Bestseller.',
+    es:'Las insignias como «Popular» o «Nuevo» (visibles en la ficha del producto) atraen la atención de sus clientes hacia sus más vendidos.'
+  },
+  kw:{fr:['produit','plat','photo','prix','badge'],en:['product','dish','photo','price','badge'],el:['προϊόν','πιάτο','τιμή'],de:['produkt','gericht','preis'],es:['producto','plato','precio']}
+},
+
+{
+  id:'adm-themes', cat:'admin', img:'03-admin-design-theme.webp',
+  title:{
+    fr:'Changer de thème et de couleur',
+    en:'Changing theme and color',
+    el:'Αλλαγή θέματος και χρώματος',
+    de:'Design und Farbe ändern',
+    es:'Cambiar de tema y de color'
+  },
+  imgAlt:{fr:'Sélecteur de thèmes',en:'Theme selector',el:'Επιλογέας θεμάτων',de:'Design-Auswahl',es:'Selector de temas'},
+  body:{
+    fr:'<p>La section <strong>Design</strong> propose plus de 30 thèmes, répartis en 3 familles : <strong>Carte</strong> (sans photo de produits, épuré), <strong>Livre</strong> (jusqu\'à 3 photos par catégorie, façon carte de restaurant), et <strong>Élégant</strong> (1 photo par produit, immersif).</p><p>Touchez un thème pour l\'appliquer immédiatement à votre menu public, ou l\'icône <strong>🎨</strong> pour changer sa couleur d\'accent parmi plusieurs teintes.</p><p>Le réglage « Bouton thème pour vos visiteurs » laisse chaque client essayer un autre thème pour lui-même, sans jamais modifier votre configuration.</p>',
+    en:'<p>The <strong>Design</strong> section offers more than 30 themes, split into 3 families: <strong>Card</strong> (no product photos, minimalist), <strong>Book</strong> (up to 3 photos per category, restaurant-menu style), and <strong>Elegant</strong> (1 photo per product, immersive).</p><p>Tap a theme to apply it instantly to your public menu, or the <strong>🎨</strong> icon to change its accent color among several tones.</p><p>The "Theme button for your visitors" setting lets each customer try another theme just for themselves, without ever changing your configuration.</p>',
+    el:'<p>Η ενότητα <strong>Design</strong> προσφέρει πάνω από 30 θέματα, χωρισμένα σε 3 οικογένειες: <strong>Κάρτα</strong> (χωρίς φωτογραφίες προϊόντων, λιτό), <strong>Βιβλίο</strong> (έως 3 φωτογραφίες ανά κατηγορία, στυλ καταλόγου εστιατορίου), και <strong>Κομψό</strong> (1 φωτογραφία ανά προϊόν, εντυπωσιακό).</p><p>Πατήστε ένα θέμα για να το εφαρμόσετε αμέσως στο δημόσιο μενού σας, ή το εικονίδιο <strong>🎨</strong> για να αλλάξετε το χρώμα του ανάμεσα σε αρκετές αποχρώσεις.</p><p>Η ρύθμιση «Κουμπί θέματος για τους επισκέπτες σας» επιτρέπει σε κάθε πελάτη να δοκιμάσει άλλο θέμα μόνο για τον εαυτό του, χωρίς ποτέ να αλλάζει τη δική σας διαμόρφωση.</p>',
+    de:'<p>Der Bereich <strong>Design</strong> bietet über 30 Themes in 3 Familien: <strong>Karte</strong> (ohne Produktfotos, schlicht), <strong>Buch</strong> (bis zu 3 Fotos pro Kategorie, im Stil einer Restaurantkarte), und <strong>Elegant</strong> (1 Foto pro Produkt, immersiv).</p><p>Tippen Sie auf ein Theme, um es sofort auf Ihr öffentliches Menü anzuwenden, oder auf das Symbol <strong>🎨</strong>, um die Akzentfarbe aus mehreren Tönen zu ändern.</p><p>Die Einstellung „Theme-Button für Ihre Besucher" lässt jeden Gast ein anderes Theme nur für sich selbst ausprobieren, ohne je Ihre Konfiguration zu ändern.</p>',
+    es:'<p>La sección <strong>Design</strong> ofrece más de 30 temas, repartidos en 3 familias: <strong>Carta</strong> (sin foto de productos, minimalista), <strong>Libro</strong> (hasta 3 fotos por categoría, estilo carta de restaurante), y <strong>Elegante</strong> (1 foto por producto, inmersivo).</p><p>Toque un tema para aplicarlo al instante a su menú público, o el icono <strong>🎨</strong> para cambiar su color de acento entre varios tonos.</p><p>El ajuste «Botón de tema para sus visitantes» permite que cada cliente pruebe otro tema solo para sí mismo, sin modificar nunca su configuración.</p>'
+  },
+  kw:{fr:['thème','couleur','design','carte','livre','élégant'],en:['theme','color','design','card','book','elegant'],el:['θέμα','χρώμα'],de:['design','farbe','thema'],es:['tema','color','diseño']}
+},
+
+{
+  id:'adm-commandes', cat:'admin', img:'06-admin-orders-tab.webp',
+  title:{
+    fr:'Suivre commandes et appels depuis l\'administration',
+    en:'Tracking orders and calls from the admin panel',
+    el:'Παρακολούθηση παραγγελιών και κλήσεων από τη διαχείριση',
+    de:'Bestellungen und Rufe im Admin-Bereich verfolgen',
+    es:'Seguir pedidos y llamadas desde la administración'
+  },
+  imgAlt:{fr:"Onglet Commandes & Appels",en:'Orders & Calls tab',el:'Καρτέλα Παραγγελίες & Κλήσεις',de:'Reiter Bestellungen & Rufe',es:'Pestaña Pedidos y llamadas'},
+  body:{
+    fr:"<p>L'onglet <strong>Commandes & Appels</strong> regroupe trois sections : <strong>Statistiques</strong> (visites, plats populaires), <strong>Tables & QR Codes</strong>, et <strong>Commandes</strong> (historique complet, avec le détail de chaque table).</p><p>C'est une vue de secours : au quotidien, votre équipe suit les commandes et les appels en direct depuis l'application Serveur sur son téléphone, avec une notification sonore à chaque nouvelle demande.</p>",
+    en:'<p>The <strong>Orders & Calls</strong> tab groups three sections: <strong>Statistics</strong> (visits, popular dishes), <strong>Tables & QR Codes</strong>, and <strong>Orders</strong> (full history, with details for each table).</p><p>This is a backup view: day to day, your team follows orders and calls live from the Waiter App on their phone, with a sound notification for every new request.</p>',
+    el:'<p>Η καρτέλα <strong>Παραγγελίες & Κλήσεις</strong> ομαδοποιεί τρεις ενότητες: <strong>Στατιστικά</strong> (επισκέψεις, δημοφιλή πιάτα), <strong>Τραπέζια & Κωδικοί QR</strong>, και <strong>Παραγγελίες</strong> (πλήρες ιστορικό, με λεπτομέρειες κάθε τραπεζιού).</p><p>Πρόκειται για μια εφεδρική προβολή: καθημερινά, η ομάδα σας παρακολουθεί τις παραγγελίες και τις κλήσεις σε πραγματικό χρόνο από την Εφαρμογή Σερβιτόρου στο τηλέφωνό της, με ηχητική ειδοποίηση για κάθε νέο αίτημα.</p>',
+    de:'<p>Der Reiter <strong>Bestellungen & Rufe</strong> fasst drei Bereiche zusammen: <strong>Statistiken</strong> (Besuche, beliebte Gerichte), <strong>Tische & QR-Codes</strong>, und <strong>Bestellungen</strong> (vollständiger Verlauf, mit Details zu jedem Tisch).</p><p>Dies ist eine Reserveansicht: im Alltag verfolgt Ihr Team Bestellungen und Rufe live über die Kellner-App auf dem Handy, mit Tonbenachrichtigung bei jeder neuen Anfrage.</p>',
+    es:'<p>La pestaña <strong>Pedidos y llamadas</strong> agrupa tres secciones: <strong>Estadísticas</strong> (visitas, platos populares), <strong>Mesas y códigos QR</strong>, y <strong>Pedidos</strong> (historial completo, con el detalle de cada mesa).</p><p>Es una vista de respaldo: en el día a día, su equipo sigue los pedidos y llamadas en directo desde la aplicación de camarero en su teléfono, con una notificación sonora en cada nueva solicitud.</p>'
+  },
+  kw:{fr:['commandes','appels','statistiques','historique'],en:['orders','calls','statistics','history'],el:['παραγγελίες','κλήσεις','στατιστικά'],de:['bestellungen','rufe','statistik'],es:['pedidos','llamadas','estadísticas']}
+},
+
+{
+  id:'adm-qrcodes', cat:'admin', img:'08b-admin-qrcodes.webp',
+  title:{
+    fr:'Générer vos codes QR de table',
+    en:'Generating your table QR codes',
+    el:'Δημιουργία κωδικών QR για τα τραπέζια',
+    de:'Ihre Tisch-QR-Codes erstellen',
+    es:'Generar sus códigos QR de mesa'
+  },
+  imgAlt:{fr:'Génération des QR codes',en:'QR code generation',el:'Δημιουργία κωδικών QR',de:'QR-Code-Erstellung',es:'Generación de códigos QR'},
+  body:{
+    fr:"<p>Dans <strong>Tables & QR Codes</strong>, indiquez le nombre de tables de votre établissement puis touchez <strong>Générer</strong> : un QR code unique est créé pour chaque table.</p><p>Le bouton <strong>PDF QR</strong> télécharge un document prêt à imprimer et à poser sur chaque table.</p><p>Quand un client scanne le code de sa table, son numéro de table est automatiquement transmis avec chaque appel ou commande — votre équipe sait exactement où se rendre.</p>",
+    en:'<p>In <strong>Tables & QR Codes</strong>, enter the number of tables in your venue then tap <strong>Générer</strong>: a unique QR code is created for each table.</p><p>The <strong>PDF QR</strong> button downloads a print-ready document to place on each table.</p><p>When a customer scans their table\'s code, their table number is automatically sent with every call or order — your team knows exactly where to go.</p>',
+    el:'<p>Στα <strong>Τραπέζια & Κωδικοί QR</strong>, εισαγάγετε τον αριθμό τραπεζιών του καταστήματός σας και πατήστε <strong>Générer</strong>: δημιουργείται ένας μοναδικός κωδικός QR για κάθε τραπέζι.</p><p>Το κουμπί <strong>PDF QR</strong> κατεβάζει ένα έγγραφο έτοιμο για εκτύπωση, για να το τοποθετήσετε σε κάθε τραπέζι.</p><p>Όταν ένας πελάτης σαρώνει τον κωδικό του τραπεζιού του, ο αριθμός του τραπεζιού μεταδίδεται αυτόματα με κάθε κλήση ή παραγγελία — η ομάδα σας ξέρει ακριβώς πού να πάει.</p>',
+    de:'<p>Geben Sie unter <strong>Tische & QR-Codes</strong> die Anzahl der Tische Ihres Betriebs ein und tippen Sie auf <strong>Générer</strong>: für jeden Tisch wird ein eindeutiger QR-Code erstellt.</p><p>Die Schaltfläche <strong>PDF QR</strong> lädt ein druckfertiges Dokument herunter, das Sie auf jeden Tisch legen können.</p><p>Wenn ein Gast den Code seines Tisches scannt, wird seine Tischnummer automatisch bei jedem Ruf oder jeder Bestellung übermittelt — Ihr Team weiß genau, wohin es gehen muss.</p>',
+    es:'<p>En <strong>Mesas y códigos QR</strong>, indique el número de mesas de su local y toque <strong>Générer</strong>: se crea un código QR único para cada mesa.</p><p>El botón <strong>PDF QR</strong> descarga un documento listo para imprimir y colocar en cada mesa.</p><p>Cuando un cliente escanea el código de su mesa, su número de mesa se transmite automáticamente con cada llamada o pedido — su equipo sabe exactamente adónde ir.</p>'
+  },
+  tip:{
+    fr:"Un QR code affiché sans numéro de table fonctionne aussi (le client choisit sa table lui-même à l'écran) — pratique pour un comptoir à emporter ou une terrasse sans plan fixe.",
+    en:'A QR code displayed without a table number also works (the customer picks their table on screen) — handy for a takeaway counter or a terrace with no fixed layout.',
+    el:'Ένας κωδικός QR χωρίς αριθμό τραπεζιού λειτουργεί επίσης (ο πελάτης επιλέγει το τραπέζι του στην οθόνη) — χρήσιμο για πάγκο take-away ή βεράντα χωρίς σταθερή διάταξη.',
+    de:'Ein QR-Code ohne Tischnummer funktioniert ebenfalls (der Gast wählt seinen Tisch selbst auf dem Bildschirm) — praktisch für eine Take-away-Theke oder eine Terrasse ohne festen Plan.',
+    es:'Un código QR sin número de mesa también funciona (el cliente elige su mesa en la pantalla) — útil para un mostrador para llevar o una terraza sin disposición fija.'
+  },
+  kw:{fr:['qr code','table','pdf','générer'],en:['qr code','table','pdf','generate'],el:['qr','τραπέζι'],de:['qr-code','tisch'],es:['código qr','mesa']}
+},
+
+{
+  id:'adm-reglages', cat:'admin', img:'08-admin-reglages-langues.webp',
+  title:{
+    fr:'Accès, mot de passe et langues',
+    en:'Access, password and languages',
+    el:'Πρόσβαση, κωδικός και γλώσσες',
+    de:'Zugang, Passwort und Sprachen',
+    es:'Acceso, contraseña e idiomas'
+  },
+  imgAlt:{fr:'Réglages d\'accès et de langue',en:'Access and language settings',el:'Ρυθμίσεις πρόσβασης και γλώσσας',de:'Zugangs- und Spracheinstellungen',es:'Ajustes de acceso e idioma'},
+  body:{
+    fr:"<p>L'onglet <strong>Réglages</strong> centralise le nom de votre établissement et votre mot de passe d'accès, modifiable à tout moment.</p><p>Activez ou désactivez chacune des 5 langues disponibles, choisissez la <strong>langue affichée aux clients par défaut</strong> (vos clients peuvent toujours la changer eux-mêmes), et la <strong>langue de votre personnel</strong> pour l'administration et l'application Serveur.</p>",
+    en:'<p>The <strong>Settings</strong> tab centralizes your venue\'s name and your access password, editable at any time.</p><p>Turn each of the 5 available languages on or off, choose the <strong>default language shown to customers</strong> (your customers can always change it themselves), and the <strong>language for your staff</strong> for the admin panel and the Waiter App.</p>',
+    el:'<p>Η καρτέλα <strong>Ρυθμίσεις</strong> συγκεντρώνει το όνομα του καταστήματός σας και τον κωδικό πρόσβασής σας, τροποποιήσιμο ανά πάσα στιγμή.</p><p>Ενεργοποιήστε ή απενεργοποιήστε καθεμία από τις 5 διαθέσιμες γλώσσες, επιλέξτε τη <strong>γλώσσα που εμφανίζεται στους πελάτες από προεπιλογή</strong> (οι πελάτες σας μπορούν πάντα να την αλλάξουν οι ίδιοι), και τη <strong>γλώσσα του προσωπικού σας</strong> για τη διαχείριση και την Εφαρμογή Σερβιτόρου.</p>',
+    de:'<p>Der Reiter <strong>Einstellungen</strong> bündelt den Namen Ihres Betriebs und Ihr Zugangspasswort, jederzeit änderbar.</p><p>Aktivieren oder deaktivieren Sie jede der 5 verfügbaren Sprachen, wählen Sie die <strong>Standardsprache für Gäste</strong> (Ihre Gäste können sie jederzeit selbst ändern) und die <strong>Sprache Ihres Personals</strong> für den Admin-Bereich und die Kellner-App.</p>',
+    es:'<p>La pestaña <strong>Ajustes</strong> centraliza el nombre de su local y su contraseña de acceso, modificable en cualquier momento.</p><p>Active o desactive cada uno de los 5 idiomas disponibles, elija el <strong>idioma mostrado a los clientes por defecto</strong> (sus clientes siempre pueden cambiarlo ellos mismos), y el <strong>idioma de su personal</strong> para la administración y la aplicación de camarero.</p>'
+  },
+  kw:{fr:['mot de passe','langue','accès','réglages'],en:['password','language','access','settings'],el:['κωδικός','γλώσσα'],de:['passwort','sprache'],es:['contraseña','idioma']}
+},
+
+{
+  id:'adm-abonnement', cat:'admin', img:'09-admin-abonnement.webp',
+  title:{
+    fr:'Abonnement, paiement et assistance',
+    en:'Subscription, payment and support',
+    el:'Συνδρομή, πληρωμή και υποστήριξη',
+    de:'Abonnement, Zahlung und Support',
+    es:'Suscripción, pago y asistencia'
+  },
+  imgAlt:{fr:'Section Mon abonnement',en:'My subscription section',el:'Ενότητα Η συνδρομή μου',de:'Bereich Mein Abonnement',es:'Sección Mi suscripción'},
+  body:{
+    fr:"<p>Toujours dans <strong>Réglages</strong>, la section <strong>Mon abonnement</strong> rappelle votre formule active (Menu QR ou Commandes & Services) et son tarif annuel.</p><p>Vous y trouvez aussi un lien à partager pour recommander GeNext, et un bouton <strong>Nous contacter</strong> pour toute question — nous répondons rapidement, avant et après votre abonnement.</p>",
+    en:'<p>Still in <strong>Settings</strong>, the <strong>My subscription</strong> section reminds you of your active plan (Menu QR or Orders & Services) and its annual price.</p><p>You\'ll also find a shareable link to recommend GeNext, and a <strong>Contact us</strong> button for any question — we reply quickly, before and after your subscription.</p>',
+    el:'<p>Πάντα στις <strong>Ρυθμίσεις</strong>, η ενότητα <strong>Η συνδρομή μου</strong> σας υπενθυμίζει το ενεργό πακέτο σας (Menu QR ή Παραγγελίες & Υπηρεσίες) και την ετήσια τιμή του.</p><p>Εκεί θα βρείτε επίσης έναν σύνδεσμο για να προτείνετε το GeNext, και ένα κουμπί <strong>Επικοινωνήστε μαζί μας</strong> για κάθε ερώτηση — απαντάμε γρήγορα, πριν και μετά τη συνδρομή σας.</p>',
+    de:'<p>Ebenfalls unter <strong>Einstellungen</strong> zeigt der Bereich <strong>Mein Abonnement</strong> Ihr aktives Paket (Menu QR oder Bestellungen & Service) und dessen Jahrespreis.</p><p>Dort finden Sie auch einen teilbaren Link, um GeNext zu empfehlen, und eine Schaltfläche <strong>Kontaktieren Sie uns</strong> für jede Frage — wir antworten schnell, vor und nach Ihrem Abonnement.</p>',
+    es:'<p>Siempre en <strong>Ajustes</strong>, la sección <strong>Mi suscripción</strong> le recuerda su plan activo (Menu QR o Pedidos y Servicios) y su tarifa anual.</p><p>También encontrará un enlace para compartir y recomendar GeNext, y un botón <strong>Contáctenos</strong> para cualquier pregunta — respondemos rápidamente, antes y después de su suscripción.</p>'
+  },
+  kw:{fr:['abonnement','paiement','forfait','contact'],en:['subscription','payment','plan','contact'],el:['συνδρομή','πληρωμή'],de:['abonnement','zahlung'],es:['suscripción','pago']}
+},
+
+/* ───────────── SERVEUR ───────────── */
+{
+  id:'srv-installation', cat:'serveur', img:'11-server-app-home.webp', tall:true,
+  title:{
+    fr:"Installer et se connecter à l'application Serveur",
+    en:'Installing and signing in to the Waiter App',
+    el:'Εγκατάσταση και σύνδεση στην Εφαρμογή Σερβιτόρου',
+    de:'Kellner-App installieren und anmelden',
+    es:'Instalar e iniciar sesión en la aplicación de camarero'
+  },
+  imgAlt:{fr:"Écran d'accueil de l'application Serveur",en:'Waiter app home screen',el:'Αρχική οθόνη εφαρμογής σερβιτόρου',de:'Startbildschirm der Kellner-App',es:'Pantalla de inicio de la app de camarero'},
+  body:{
+    fr:"<p>L'application <strong>GeNext Staff</strong> s'installe sur le téléphone Android de votre équipe (fichier fourni par nos soins, aucun Play Store nécessaire).</p><p>Au premier lancement, saisissez l'identifiant de votre établissement — il reste enregistré ensuite, votre équipe n'a plus qu'à ouvrir l'application. L'indicateur <strong>Connecté</strong> en haut de l'écran confirme que tout fonctionne.</p>",
+    en:'<p>The <strong>GeNext Staff</strong> app installs on your team\'s Android phone (file provided by us, no Play Store needed).</p><p>On first launch, enter your venue\'s ID — it stays saved afterwards, your team just has to open the app. The <strong>Connected</strong> indicator at the top of the screen confirms everything works.</p>',
+    el:'<p>Η εφαρμογή <strong>GeNext Staff</strong> εγκαθίσταται στο Android τηλέφωνο της ομάδας σας (αρχείο που παρέχουμε εμείς, χωρίς Play Store).</p><p>Κατά την πρώτη εκκίνηση, εισαγάγετε το αναγνωριστικό του καταστήματός σας — παραμένει αποθηκευμένο στη συνέχεια, η ομάδα σας απλώς ανοίγει την εφαρμογή. Η ένδειξη <strong>Connecté</strong> στο πάνω μέρος της οθόνης επιβεβαιώνει ότι όλα λειτουργούν.</p>',
+    de:'<p>Die App <strong>GeNext Staff</strong> wird auf dem Android-Handy Ihres Teams installiert (von uns bereitgestellte Datei, kein Play Store nötig).</p><p>Beim ersten Start geben Sie die Kennung Ihres Betriebs ein — sie bleibt danach gespeichert, Ihr Team muss die App nur noch öffnen. Die Anzeige <strong>Connecté</strong> oben im Bildschirm bestätigt, dass alles funktioniert.</p>',
+    es:'<p>La aplicación <strong>GeNext Staff</strong> se instala en el teléfono Android de su equipo (archivo proporcionado por nosotros, sin necesidad de Play Store).</p><p>En el primer inicio, introduzca el identificador de su local — queda guardado después, su equipo solo tiene que abrir la aplicación. El indicador <strong>Connecté</strong> en la parte superior confirma que todo funciona.</p>'
+  },
+  tip:{
+    fr:"L'application fonctionne en arrière-plan : gardez le téléphone allumé et connecté au Wi-Fi pour ne manquer aucun appel.",
+    en:'The app runs in the background: keep the phone on and connected to Wi-Fi to never miss a call.',
+    el:'Η εφαρμογή λειτουργεί στο παρασκήνιο: κρατήστε το τηλέφωνο αναμμένο και συνδεδεμένο στο Wi-Fi για να μη χάνετε καμία κλήση.',
+    de:'Die App läuft im Hintergrund: Lassen Sie das Handy eingeschaltet und mit WLAN verbunden, um keinen Ruf zu verpassen.',
+    es:'La aplicación funciona en segundo plano: mantenga el teléfono encendido y conectado al Wi-Fi para no perder ninguna llamada.'
+  },
+  kw:{fr:['installer','serveur','staff','apk'],en:['install','waiter','staff','apk'],el:['εγκατάσταση','σερβιτόρος'],de:['installieren','kellner'],es:['instalar','camarero']}
+},
+
+{
+  id:'srv-appels-commandes', cat:'serveur', img:'11-server-app-home.webp', tall:true,
+  title:{
+    fr:'Recevoir un appel de table et une commande',
+    en:'Receiving a table call and an order',
+    el:'Λήψη κλήσης τραπεζιού και παραγγελίας',
+    de:'Tischruf und Bestellung empfangen',
+    es:'Recibir una llamada de mesa y un pedido'
+  },
+  imgAlt:{fr:'Onglet commandes de l\'application Serveur',en:'Orders tab in the waiter app',el:'Καρτέλα παραγγελιών εφαρμογής σερβιτόρου',de:'Bestellungsreiter der Kellner-App',es:'Pestaña de pedidos de la app de camarero'},
+  body:{
+    fr:"<p>Dès qu'un client appuie sur le bouton d'appel de son menu, l'onglet <strong>Appels</strong> affiche instantanément son numéro de table avec une notification sonore. Une pression suffit pour marquer l'appel comme traité.</p><p>Les commandes passées depuis le menu (formule Commandes & Services) arrivent de la même façon dans l'onglet <strong>Commandes</strong>, avec le détail des plats et quantités — votre équipe les prépare puis les marque comme servies.</p>",
+    en:'<p>As soon as a customer taps the call button on their menu, the <strong>Calls</strong> tab instantly shows their table number with a sound notification. One tap is enough to mark the call as handled.</p><p>Orders placed from the menu (Orders & Services plan) arrive the same way in the <strong>Orders</strong> tab, with dish and quantity details — your team prepares them then marks them as served.</p>',
+    el:'<p>Μόλις ένας πελάτης πατήσει το κουμπί κλήσης στο μενού του, η καρτέλα <strong>Κλήσεις</strong> εμφανίζει αμέσως τον αριθμό τραπεζιού του με ηχητική ειδοποίηση. Ένα άγγιγμα αρκεί για να σημειωθεί η κλήση ως εξυπηρετημένη.</p><p>Οι παραγγελίες από το μενού (πακέτο Παραγγελίες & Υπηρεσίες) φτάνουν με τον ίδιο τρόπο στην καρτέλα <strong>Παραγγελίες</strong>, με λεπτομέρειες πιάτων και ποσοτήτων — η ομάδα σας τις ετοιμάζει και τις σημειώνει ως σερβιρισμένες.</p>',
+    de:'<p>Sobald ein Gast auf die Ruf-Schaltfläche seines Menüs tippt, zeigt der Reiter <strong>Rufe</strong> sofort seine Tischnummer mit Tonbenachrichtigung. Ein Fingertipp genügt, um den Ruf als erledigt zu markieren.</p><p>Bestellungen aus dem Menü (Paket Bestellungen & Service) treffen genauso im Reiter <strong>Bestellungen</strong> ein, mit Details zu Gerichten und Mengen — Ihr Team bereitet sie zu und markiert sie als serviert.</p>',
+    es:'<p>En cuanto un cliente pulsa el botón de llamada en su menú, la pestaña <strong>Llamadas</strong> muestra al instante su número de mesa con una notificación sonora. Basta un toque para marcar la llamada como atendida.</p><p>Los pedidos realizados desde el menú (plan Pedidos y Servicios) llegan igual a la pestaña <strong>Pedidos</strong>, con el detalle de platos y cantidades — su equipo los prepara y los marca como servidos.</p>'
+  },
+  kw:{fr:['appel','commande','notification','table'],en:['call','order','notification','table'],el:['κλήση','παραγγελία'],de:['ruf','bestellung'],es:['llamada','pedido']}
+},
+
+{
+  id:'srv-astuces', cat:'serveur',
+  title:{
+    fr:'Astuces pour une équipe sereine',
+    en:'Tips for a smooth-running team',
+    el:'Συμβουλές για μια ήρεμη ομάδα',
+    de:'Tipps für ein entspanntes Team',
+    es:'Consejos para un equipo tranquilo'
+  },
+  body:{
+    fr:'<ul><li>Chaque membre de l\'équipe peut installer l\'application sur son propre téléphone — tous reçoivent les mêmes appels en même temps.</li><li>L\'onglet <strong>Messages</strong> permet de recevoir une note écrite de l\'administrateur (ex : rupture de stock du jour).</li><li>Le bouton <strong>Changer de restaurant</strong> dans Réglages déconnecte l\'appareil — utile si un téléphone change d\'établissement.</li><li>Le sélecteur de langue (5 langues) et le mode sombre/clair s\'ajustent en haut de l\'écran, indépendamment pour chaque téléphone.</li></ul>',
+    en:'<ul><li>Every team member can install the app on their own phone — everyone receives the same calls at the same time.</li><li>The <strong>Messages</strong> tab lets you receive a written note from the admin (e.g. today\'s out-of-stock items).</li><li>The <strong>Change restaurant</strong> button in Settings disconnects the device — handy if a phone moves to a different venue.</li><li>The language selector (5 languages) and dark/light mode adjust at the top of the screen, independently on each phone.</li></ul>',
+    el:'<ul><li>Κάθε μέλος της ομάδας μπορεί να εγκαταστήσει την εφαρμογή στο δικό του τηλέφωνο — όλοι λαμβάνουν τις ίδιες κλήσεις ταυτόχρονα.</li><li>Η καρτέλα <strong>Μηνύματα</strong> επιτρέπει τη λήψη γραπτού σημειώματος από τον διαχειριστή (π.χ. τι εξαντλήθηκε σήμερα).</li><li>Το κουμπί <strong>Αλλαγή εστιατορίου</strong> στις Ρυθμίσεις αποσυνδέει τη συσκευή — χρήσιμο αν ένα τηλέφωνο αλλάζει κατάστημα.</li><li>Ο επιλογέας γλώσσας (5 γλώσσες) και η σκοτεινή/φωτεινή λειτουργία ρυθμίζονται στο πάνω μέρος της οθόνης, ανεξάρτητα για κάθε τηλέφωνο.</li></ul>',
+    de:'<ul><li>Jedes Teammitglied kann die App auf dem eigenen Handy installieren — alle erhalten dieselben Rufe gleichzeitig.</li><li>Der Reiter <strong>Nachrichten</strong> ermöglicht den Empfang einer schriftlichen Notiz vom Administrator (z. B. was heute ausverkauft ist).</li><li>Die Schaltfläche <strong>Restaurant wechseln</strong> in den Einstellungen trennt das Gerät — praktisch, wenn ein Handy den Betrieb wechselt.</li><li>Die Sprachauswahl (5 Sprachen) und der Dunkel-/Hell-Modus werden oben im Bildschirm eingestellt, unabhängig für jedes Handy.</li></ul>',
+    es:'<ul><li>Cada miembro del equipo puede instalar la aplicación en su propio teléfono — todos reciben las mismas llamadas al mismo tiempo.</li><li>La pestaña <strong>Mensajes</strong> permite recibir una nota escrita del administrador (ej.: lo que se agotó hoy).</li><li>El botón <strong>Cambiar de restaurante</strong> en Ajustes desconecta el dispositivo — útil si un teléfono cambia de local.</li><li>El selector de idioma (5 idiomas) y el modo oscuro/claro se ajustan en la parte superior de la pantalla, de forma independiente en cada teléfono.</li></ul>'
+  },
+  kw:{fr:['messages','changer de restaurant','équipe'],en:['messages','change restaurant','team'],el:['μηνύματα','ομάδα'],de:['nachrichten','team'],es:['mensajes','equipo']}
+},
+
+/* ───────────── MENU CLIENT ───────────── */
+{
+  id:'menu-decouverte', cat:'menu', img:'12-client-menu-home.webp', tall:true,
+  title:{
+    fr:'Scanner le QR code et découvrir le menu',
+    en:'Scanning the QR code and discovering the menu',
+    el:'Σάρωση κωδικού QR και εξερεύνηση του μενού',
+    de:'QR-Code scannen und das Menü entdecken',
+    es:'Escanear el código QR y descubrir el menú'
+  },
+  imgAlt:{fr:'Menu client vu sur téléphone',en:'Customer menu on phone',el:'Μενού πελάτη σε τηλέφωνο',de:'Kundenmenü auf dem Handy',es:'Menú del cliente en el teléfono'},
+  body:{
+    fr:"<p>En scannant le QR code posé sur la table (avec l'appareil photo de son téléphone, sans application à installer), le client accède directement à votre menu.</p><p>Les catégories défilent horizontalement en haut de l'écran pour sauter directement à une rubrique, et chaque plat s'affiche avec sa photo, son prix et une courte description.</p>",
+    en:"<p>By scanning the QR code placed on the table (with their phone's camera, no app to install), the customer accesses your menu directly.</p><p>Categories scroll horizontally at the top of the screen to jump straight to a section, and each dish is displayed with its photo, price and a short description.</p>",
+    el:'<p>Σαρώνοντας τον κωδικό QR στο τραπέζι (με την κάμερα του τηλεφώνου του, χωρίς εγκατάσταση εφαρμογής), ο πελάτης έχει άμεση πρόσβαση στο μενού σας.</p><p>Οι κατηγορίες κυλούν οριζόντια στο πάνω μέρος της οθόνης για άμεση μετάβαση σε μια ενότητα, και κάθε πιάτο εμφανίζεται με τη φωτογραφία, την τιμή και μια σύντομη περιγραφή του.</p>',
+    de:'<p>Durch Scannen des QR-Codes auf dem Tisch (mit der Handykamera, ohne App-Installation) gelangt der Gast direkt zu Ihrem Menü.</p><p>Die Kategorien scrollen oben im Bildschirm horizontal, um direkt zu einem Bereich zu springen, und jedes Gericht wird mit Foto, Preis und kurzer Beschreibung angezeigt.</p>',
+    es:'<p>Al escanear el código QR de la mesa (con la cámara de su teléfono, sin instalar ninguna app), el cliente accede directamente a su menú.</p><p>Las categorías se desplazan horizontalmente en la parte superior para saltar directamente a una sección, y cada plato se muestra con su foto, precio y una breve descripción.</p>'
+  },
+  tip:{
+    fr:"Le menu s'adapte automatiquement au thème et à la couleur choisis dans votre administration — aucune action nécessaire de votre part après un changement.",
+    en:'The menu automatically adapts to the theme and color chosen in your admin panel — no action needed on your part after a change.',
+    el:'Το μενού προσαρμόζεται αυτόματα στο θέμα και το χρώμα που επιλέξατε στη διαχείριση — καμία ενέργεια δεν χρειάζεται από εσάς μετά από μια αλλαγή.',
+    de:'Das Menü passt sich automatisch dem in Ihrem Admin-Bereich gewählten Theme und der Farbe an — nach einer Änderung ist Ihrerseits nichts weiter zu tun.',
+    es:'El menú se adapta automáticamente al tema y color elegidos en su administración — no se necesita ninguna acción por su parte tras un cambio.'
+  },
+  kw:{fr:['qr code','scanner','découvrir','catégories'],en:['qr code','scan','discover','categories'],el:['qr','σάρωση'],de:['qr-code','scannen'],es:['código qr','escanear']}
+},
+
+{
+  id:'menu-recherche', cat:'menu', img:'13-client-menu-search.webp', tall:true,
+  title:{
+    fr:'Rechercher et filtrer un plat',
+    en:'Searching and filtering a dish',
+    el:'Αναζήτηση και φιλτράρισμα πιάτου',
+    de:'Ein Gericht suchen und filtern',
+    es:'Buscar y filtrar un plato'
+  },
+  imgAlt:{fr:'Recherche dans le menu',en:'Menu search',el:'Αναζήτηση στο μενού',de:'Menüsuche',es:'Búsqueda en el menú'},
+  body:{
+    fr:"<p>La barre de recherche en haut du menu filtre les plats en temps réel, dès la première lettre tapée — pratique pour un client pressé ou avec une envie précise.</p><p>Les badges colorés sous chaque plat (« Populaire », « Végétarien », allergènes...) aident aussi à filtrer d'un coup d'œil, sans taper de recherche.</p>",
+    en:"<p>The search bar at the top of the menu filters dishes in real time, from the very first letter typed — handy for a customer in a hurry or with a specific craving.</p><p>The colored badges under each dish (\"Popular\", \"Vegetarian\", allergens...) also help filter at a glance, without typing a search.</p>",
+    el:'<p>Η μπάρα αναζήτησης στο πάνω μέρος του μενού φιλτράρει τα πιάτα σε πραγματικό χρόνο, από το πρώτο γράμμα — χρήσιμο για έναν πελάτη που βιάζεται ή έχει συγκεκριμένη επιθυμία.</p><p>Οι έγχρωμες ετικέτες κάτω από κάθε πιάτο («Δημοφιλές», «Χορτοφαγικό», αλλεργιογόνα...) βοηθούν επίσης στο φιλτράρισμα με μια ματιά, χωρίς αναζήτηση.</p>',
+    de:'<p>Die Suchleiste oben im Menü filtert Gerichte in Echtzeit, schon ab dem ersten getippten Buchstaben — praktisch für einen eiligen Gast oder einen konkreten Wunsch.</p><p>Die farbigen Abzeichen unter jedem Gericht („Beliebt", „Vegetarisch", Allergene...) helfen ebenfalls, auf einen Blick zu filtern, ohne zu suchen.</p>',
+    es:'<p>La barra de búsqueda en la parte superior del menú filtra los platos en tiempo real, desde la primera letra escrita — práctico para un cliente con prisa o con un antojo concreto.</p><p>Las insignias de colores bajo cada plato («Popular», «Vegetariano», alérgenos...) también ayudan a filtrar de un vistazo, sin escribir ninguna búsqueda.</p>'
+  },
+  kw:{fr:['recherche','filtrer','badge','allergène'],en:['search','filter','badge','allergen'],el:['αναζήτηση','φίλτρο'],de:['suche','filter'],es:['búsqueda','filtro']}
+},
+
+{
+  id:'menu-produit', cat:'menu', img:'14-client-menu-product.webp', tall:true,
+  title:{
+    fr:"La fiche détaillée d'un produit",
+    en:'The detailed product page',
+    el:'Η αναλυτική καρτέλα ενός προϊόντος',
+    de:'Die detaillierte Produktseite',
+    es:'La ficha detallada de un producto'
+  },
+  imgAlt:{fr:'Fiche produit détaillée',en:'Detailed product page',el:'Αναλυτική καρτέλα προϊόντος',de:'Detaillierte Produktseite',es:'Ficha detallada del producto'},
+  body:{
+    fr:"<p>Toucher un plat ouvre sa fiche complète en plein écran : grande photo, description détaillée, prix, et bouton <strong>Ajouter au panier</strong> (formule Commandes & Services) ou simple consultation (formule Menu QR).</p><p>Les compteurs <strong>+ / −</strong> ajustent la quantité avant l'ajout.</p>",
+    en:'<p>Tapping a dish opens its full page in fullscreen: large photo, detailed description, price, and an <strong>Add to cart</strong> button (Orders & Services plan) or simple viewing (Menu QR plan).</p><p>The <strong>+ / −</strong> counters adjust the quantity before adding.</p>',
+    el:'<p>Το άγγιγμα ενός πιάτου ανοίγει την πλήρη καρτέλα του σε πλήρη οθόνη: μεγάλη φωτογραφία, αναλυτική περιγραφή, τιμή, και κουμπί <strong>Προσθήκη στο καλάθι</strong> (πακέτο Παραγγελίες & Υπηρεσίες) ή απλή προβολή (πακέτο Menu QR).</p><p>Οι μετρητές <strong>+ / −</strong> προσαρμόζουν την ποσότητα πριν την προσθήκη.</p>',
+    de:'<p>Ein Fingertipp auf ein Gericht öffnet dessen vollständige Seite im Vollbild: großes Foto, detaillierte Beschreibung, Preis, und eine Schaltfläche <strong>In den Warenkorb</strong> (Paket Bestellungen & Service) oder nur zur Ansicht (Paket Menu QR).</p><p>Die Zähler <strong>+ / −</strong> passen die Menge vor dem Hinzufügen an.</p>',
+    es:'<p>Al tocar un plato se abre su ficha completa a pantalla completa: foto grande, descripción detallada, precio, y botón <strong>Añadir al carrito</strong> (plan Pedidos y Servicios) o simple consulta (plan Menu QR).</p><p>Los contadores <strong>+ / −</strong> ajustan la cantidad antes de añadirlo.</p>'
+  },
+  kw:{fr:['fiche produit','détail','panier'],en:['product page','detail','cart'],el:['καρτέλα','καλάθι'],de:['produktseite','warenkorb'],es:['ficha','carrito']}
+},
+
+{
+  id:'menu-commander', cat:'menu', img:'14-client-menu-product.webp', tall:true,
+  title:{
+    fr:'Commander et appeler le serveur depuis le menu',
+    en:'Ordering and calling the waiter from the menu',
+    el:'Παραγγελία και κλήση σερβιτόρου από το μενού',
+    de:'Bestellen und den Kellner rufen über das Menü',
+    es:'Pedir y llamar al camarero desde el menú'
+  },
+  imgAlt:{fr:'Bouton ajouter au panier',en:'Add to cart button',el:'Κουμπί προσθήκης στο καλάθι',de:'Schaltfläche In den Warenkorb',es:'Botón añadir al carrito'},
+  body:{
+    fr:"<p>Avec la formule <strong>Commandes & Services</strong>, chaque plat ajouté au panier peut être envoyé directement en cuisine — le client valide sa commande, et votre équipe la reçoit en quelques secondes sur l'application Serveur.</p><p>Un bouton d'appel dédié permet aussi de solliciter un serveur sans passer commande (besoin d'aide, addition, etc.), toujours avec le numéro de table transmis automatiquement.</p>",
+    en:"<p>With the <strong>Orders & Services</strong> plan, every dish added to the cart can be sent straight to the kitchen — the customer confirms their order, and your team receives it within seconds on the Waiter App.</p><p>A dedicated call button also lets customers request a waiter without ordering (need help, the bill, etc.), always with the table number sent automatically.</p>",
+    el:'<p>Με το πακέτο <strong>Παραγγελίες & Υπηρεσίες</strong>, κάθε πιάτο που προστίθεται στο καλάθι μπορεί να σταλεί απευθείας στην κουζίνα — ο πελάτης επιβεβαιώνει την παραγγελία του, και η ομάδα σας τη λαμβάνει μέσα σε δευτερόλεπτα στην Εφαρμογή Σερβιτόρου.</p><p>Ένα ειδικό κουμπί κλήσης επιτρέπει επίσης να ζητηθεί σερβιτόρος χωρίς παραγγελία (βοήθεια, λογαριασμός κ.λπ.), πάντα με τον αριθμό τραπεζιού να μεταδίδεται αυτόματα.</p>',
+    de:'<p>Mit dem Paket <strong>Bestellungen & Service</strong> kann jedes zum Warenkorb hinzugefügte Gericht direkt an die Küche gesendet werden — der Gast bestätigt seine Bestellung, und Ihr Team erhält sie innerhalb von Sekunden auf der Kellner-App.</p><p>Eine eigene Ruf-Schaltfläche ermöglicht es Gästen auch, einen Kellner ohne Bestellung zu rufen (Hilfe, Rechnung usw.), stets mit automatisch übermittelter Tischnummer.</p>',
+    es:'<p>Con el plan <strong>Pedidos y Servicios</strong>, cada plato añadido al carrito puede enviarse directamente a la cocina — el cliente confirma su pedido, y su equipo lo recibe en segundos en la aplicación de camarero.</p><p>Un botón de llamada específico también permite solicitar a un camarero sin pedir nada (ayuda, la cuenta, etc.), siempre con el número de mesa transmitido automáticamente.</p>'
+  },
+  kw:{fr:['commander','appeler','serveur','panier'],en:['order','call','waiter','cart'],el:['παραγγελία','κλήση'],de:['bestellen','rufen'],es:['pedir','llamar']}
+},
+
+{
+  id:'menu-langues', cat:'menu', img:'12-client-menu-home.webp', tall:true,
+  title:{
+    fr:'Changer de langue et de thème (côté client)',
+    en:'Changing language and theme (customer side)',
+    el:'Αλλαγή γλώσσας και θέματος (πλευρά πελάτη)',
+    de:'Sprache und Design ändern (Gästeseite)',
+    es:'Cambiar de idioma y tema (lado cliente)'
+  },
+  imgAlt:{fr:'Sélecteur de langue du menu client',en:'Customer menu language selector',el:'Επιλογέας γλώσσας μενού πελάτη',de:'Sprachauswahl im Kundenmenü',es:'Selector de idioma del menú del cliente'},
+  body:{
+    fr:"<p>Les drapeaux en haut de l'écran changent la langue du menu instantanément, parmi les 5 disponibles — utile pour vos clients internationaux.</p><p>L'icône lune/soleil bascule entre mode sombre et mode clair selon la préférence du client, sans jamais modifier votre configuration d'administration. Si l'option est activée, un bouton palette permet aussi d'essayer un autre thème pour soi-même.</p>",
+    en:"<p>The flags at the top of the screen change the menu's language instantly, among the 5 available — useful for your international customers.</p><p>The moon/sun icon switches between dark and light mode according to the customer's preference, without ever changing your admin configuration. If enabled, a palette button also lets them try another theme just for themselves.</p>",
+    el:'<p>Οι σημαίες στο πάνω μέρος της οθόνης αλλάζουν αμέσως τη γλώσσα του μενού, από τις 5 διαθέσιμες — χρήσιμο για τους διεθνείς πελάτες σας.</p><p>Το εικονίδιο φεγγάρι/ήλιος εναλλάσσει σκοτεινή και φωτεινή λειτουργία ανάλογα με την προτίμηση του πελάτη, χωρίς ποτέ να αλλάζει τη δική σας διαμόρφωση διαχείρισης. Αν είναι ενεργοποιημένη η επιλογή, ένα κουμπί παλέτας επιτρέπει επίσης να δοκιμάσει άλλο θέμα μόνο για τον εαυτό του.</p>',
+    de:'<p>Die Flaggen oben im Bildschirm ändern die Menüsprache sofort, unter den 5 verfügbaren — nützlich für Ihre internationalen Gäste.</p><p>Das Mond-/Sonnen-Symbol wechselt je nach Vorliebe des Gastes zwischen Dunkel- und Hell-Modus, ohne je Ihre Admin-Konfiguration zu ändern. Falls aktiviert, lässt eine Paletten-Schaltfläche den Gast auch ein anderes Theme nur für sich selbst ausprobieren.</p>',
+    es:'<p>Las banderas en la parte superior de la pantalla cambian el idioma del menú al instante, entre los 5 disponibles — útil para sus clientes internacionales.</p><p>El icono luna/sol alterna entre modo oscuro y modo claro según la preferencia del cliente, sin modificar nunca su configuración de administración. Si la opción está activada, un botón de paleta también permite probar otro tema solo para uno mismo.</p>'
+  },
+  kw:{fr:['langue','drapeau','mode sombre','palette'],en:['language','flag','dark mode','palette'],el:['γλώσσα','σημαία'],de:['sprache','flagge'],es:['idioma','bandera']}
+}
+
+];
