@@ -202,6 +202,7 @@ function deliveryHtml(rawName, rid, pwd, isCS, lang, sub) {
       labelId: 'Identifiant (ID restaurant)',
       labelPwd: 'Mot de passe',
       btnAdmin: '🔑 Accéder au tableau de bord',
+      tip: '💡 Le bouton s\'ouvre dans votre application mail ? Appuyez sur ⋮ (ou Partager) puis « Ouvrir dans le navigateur » pour une meilleure expérience.',
       subTitle: 'Votre abonnement',
       subForfait: 'Forfait', subMode: 'Mode', subPrice: 'Prix (abonnement)',
       apkTitle: 'Application serveur',
@@ -218,6 +219,7 @@ function deliveryHtml(rawName, rid, pwd, isCS, lang, sub) {
       labelId: 'Restaurant ID',
       labelPwd: 'Password',
       btnAdmin: '🔑 Access dashboard',
+      tip: '💡 Does the button open inside your mail app? Tap ⋮ (or Share) then "Open in browser" for a better experience.',
       subTitle: 'Your subscription',
       subForfait: 'Plan', subMode: 'Billing', subPrice: 'Subscription price',
       apkTitle: 'Server application',
@@ -234,6 +236,7 @@ function deliveryHtml(rawName, rid, pwd, isCS, lang, sub) {
       labelId: 'Αναγνωριστικό εστιατορίου',
       labelPwd: 'Κωδικός πρόσβασης',
       btnAdmin: '🔑 Πρόσβαση στον πίνακα ελέγχου',
+      tip: '💡 Το κουμπί ανοίγει μέσα στην εφαρμογή email; Πατήστε ⋮ (ή Κοινή χρήση) και μετά «Άνοιγμα σε πρόγραμμα περιήγησης» για καλύτερη εμπειρία.',
       subTitle: 'Η συνδρομή σας',
       subForfait: 'Πλάνο', subMode: 'Τρόπος', subPrice: 'Τιμή συνδρομής',
       apkTitle: 'Εφαρμογή σερβιτόρων',
@@ -250,6 +253,7 @@ function deliveryHtml(rawName, rid, pwd, isCS, lang, sub) {
       labelId: 'Identificador (ID restaurante)',
       labelPwd: 'Contraseña',
       btnAdmin: '🔑 Acceder al panel de control',
+      tip: '💡 ¿El botón se abre dentro de su aplicación de correo? Toque ⋮ (o Compartir) y luego «Abrir en el navegador» para una mejor experiencia.',
       subTitle: 'Su suscripción',
       subForfait: 'Plan', subMode: 'Facturación', subPrice: 'Precio suscripción',
       apkTitle: 'Aplicación de camareros',
@@ -266,6 +270,7 @@ function deliveryHtml(rawName, rid, pwd, isCS, lang, sub) {
       labelId: 'Restaurant-ID',
       labelPwd: 'Passwort',
       btnAdmin: '🔑 Dashboard aufrufen',
+      tip: '💡 Öffnet sich der Button in Ihrer Mail-App? Tippen Sie auf ⋮ (oder Teilen) und dann auf „Im Browser öffnen" für eine bessere Erfahrung.',
       subTitle: 'Ihr Abonnement',
       subForfait: 'Plan', subMode: 'Abrechnung', subPrice: 'Abonnementpreis',
       apkTitle: 'Server-App',
@@ -304,9 +309,10 @@ function deliveryHtml(rawName, rid, pwd, isCS, lang, sub) {
     + '<p style="color:#2a1f10;line-height:1.7;margin-bottom:20px;font-size:0.92rem">' + t.intro + '<br>' + t.sub + '</p>'
     + _credentialsCard(t.labelId, rid, t.labelPwd, pwd)
     + subCard
-    + '<table width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="padding-bottom:20px">'
+    + '<table width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="padding-bottom:8px">'
     + _btnHtml(ADMIN_URL, t.btnAdmin, null)
     + '</td></tr></table>'
+    + '<table width="100%" cellpadding="0" cellspacing="0"><tr><td align="center" style="padding-bottom:20px"><p style="margin:0 auto;color:#6b5a3a;font-size:0.76rem;line-height:1.5;max-width:420px;text-align:center">' + t.tip + '</p></td></tr></table>'
     + (isCS
       ? '<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#f8f4ec" style="background-color:#f8f4ec;border:1px solid #e8dfc8;border-radius:10px;margin-bottom:20px"><tr><td style="padding:16px 20px">'
         + '<p style="margin:0 0 6px;font-weight:700;color:#2a1f10;font-size:0.92rem">' + t.apkTitle + '</p>'
