@@ -801,7 +801,6 @@ document.addEventListener('keydown', function(ev){
   [...document.querySelectorAll('.g-langdd button')].forEach(function(b){b.classList.toggle('on',b.dataset.l===l);});
   applyChrome(l);
   buildSidebar(l);
-  openIds[ARTICLES[0]?ARTICLES[0].id:'']=true;
   renderArticles(l);
 
   // Deep-link support: guide.html?q=recherche or #article-id
