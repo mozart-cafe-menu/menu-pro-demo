@@ -5089,7 +5089,7 @@ html.light .dmk-plain{background:#e9e1cc;border-color:rgba(26,18,8,.14)}
   function _tgCard(t,dup){
     return '<button class="tg-card" type="button" data-theme-id="'+t.id+'"'+(dup?' aria-hidden="true" tabindex="-1"':'')+' onclick="_tgOpenTheme(\''+t.id+'\')">'+
       '<span class="tg-phone">'+
-        '<img class="tg-card-img" src="assets/themes/'+t.id+'.webp" alt="'+t.name+'" loading="lazy" width="786" height="1686">'+
+        '<img class="tg-card-img" alt="'+t.name+'" loading="lazy" width="786" height="1686" style="display:none">'+
       '</span>'+
       '<span class="tg-card-label">'+
         '<span class="tg-card-name">'+t.name+'</span>'+
@@ -5895,9 +5895,10 @@ html.light .dmk-plain{background:#e9e1cc;border-color:rgba(26,18,8,.14)}
       var entry=data[id];
       if(!entry)return;
       document.querySelectorAll('.tg-card[data-theme-id="'+id+'"]').forEach(function(card){
-        if(entry.img){
-          var img=card.querySelector('.tg-card-img');
-          if(img)img.src=entry.img;
+        var img=card.querySelector('.tg-card-img');
+        if(img){
+          if(entry.img){ img.src=entry.img; img.style.display='block'; }
+          else { img.removeAttribute('src'); img.style.display='none'; }
         }
         if(entry.name){
           var nameEl=card.querySelector('.tg-card-name');
