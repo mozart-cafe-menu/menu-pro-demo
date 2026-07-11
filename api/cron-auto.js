@@ -21,7 +21,7 @@ function escHtml(s) {
 
 const CONTROL_DB   = 'https://menu-pro-control-default-rtdb.europe-west1.firebasedatabase.app';
 const MAIN_DB      = 'https://menu-saas-platform-default-rtdb.europe-west1.firebasedatabase.app';
-const ADMIN_URL    = 'https://menu-saas-platform.vercel.app/admin.html';
+const ADMIN_URL    = 'https://genext-qr.com/admin';
 const APK_URL      = 'https://github.com/Cafe-elysee/menu-saas-platform/releases/download/apk-serveur-v1/MenuProServeur-SaaS-v1.0.apk';
 const FOUR_DAYS_MS  = 4  * 24 * 60 * 60 * 1000;
 const FIVE_DAYS_MS  = 5  * 24 * 60 * 60 * 1000;
