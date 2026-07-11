@@ -163,9 +163,9 @@ html.light #gnav-theme-btn .moon{display:none}html.light #gnav-theme-btn .sun{di
     <span>GeNext</span>
   </a>
   <div class="g-navmid" style="position:relative">
-    <a href="index.html" class="g-back">
+    <a href="index.html" class="g-back" id="g-back">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-      <span id="g-backlabel">Retour au site</span>
+      <span id="g-backlabel">Retour</span>
     </a>
     <button id="gnav-lang-btn" onclick="gToggleLangDD(event)" aria-label="Changer de langue" aria-haspopup="true" aria-expanded="false">
       <span id="g-lang-flag">🇫🇷</span><span id="g-lang-code">FR</span>
@@ -261,7 +261,7 @@ function gSetLang(l){
 
 /* ═══ UI CHROME I18N ═══ */
 var CHROME={
-  fr:{back:'Retour au site',eyebrow:'GUIDE COMPLET',h1a:'Tout comprendre, ',h1b:'en quelques minutes.',
+  fr:{back:'Retour',eyebrow:'GUIDE COMPLET',h1a:'Tout comprendre, ',h1b:'en quelques minutes.',
     lead:"Le mode d'emploi complet de votre menu digital : administration, application serveur, et menu vu par vos clients. Cherchez un mot, ou parcourez par thème.",
     searchPh:'Rechercher un article… (ex : QR code, thème, appel serveur)',
     emptyTitle:'Aucun résultat',emptySub:'Essayez un autre mot-clé, ou parcourez les catégories ci-dessus.',
@@ -348,8 +348,10 @@ function gFilterCat(cat){
 /* ═══ RENDER ARTICLES ═══ */
 function stripHtml(h){ var d=document.createElement('div'); d.innerHTML=h; return d.textContent||''; }
 function norm(s){ return (s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,''); }
+function escAttr(s){ return (s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
 var openIds={}; // remembers which article ids are expanded across re-renders
+var GUIDE_IMG_OVERRIDES={}; // photos personnalisées depuis control-app — demoPage/guideContent/{articleId}
 
 function renderArticles(l){
   var main=document.getElementById('g-main');
@@ -380,9 +382,10 @@ function renderArticles(l){
       if(query){
         title = highlight(title, query);
       }
-      var imgHtml = a.img ? '<div class="g-art-img-wrap"><img src="assets/guide/'+a.img+'" alt="'+ (a.imgAlt?a.imgAlt[l]:a.title[l]).replace(/"/g,'&quot;') +'" loading="lazy"></div>' : '';
+      var imgUrl = GUIDE_IMG_OVERRIDES[a.id] || (a.img ? 'assets/guide/'+a.img : '');
+      var imgHtml = imgUrl ? '<div class="g-art-img-wrap"><img src="'+escAttr(imgUrl)+'" alt="'+ escAttr(a.imgAlt?a.imgAlt[l]:a.title[l]) +'" loading="lazy"></div>' : '';
       var tipHtml = a.tip ? '<div class="g-art-tip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg><span>'+a.tip[l]+'</span></div>' : '';
-      html+='<article class="g-art'+(a.img?' has-img':'')+(a.tall?' tall':'')+(isOpen?' open':'')+'" data-id="'+a.id+'">'+
+      html+='<article class="g-art'+(imgUrl?' has-img':'')+(a.tall?' tall':'')+(isOpen?' open':'')+'" data-id="'+a.id+'">'+
         '<div class="g-art-hd" role="button" tabindex="0" aria-expanded="'+(isOpen?'true':'false')+'" aria-controls="body-'+a.id+'" onclick="gToggleArt(\''+a.id+'\')" onkeydown="gArtKeydown(event,\''+a.id+'\')">'+
           '<div class="g-art-num">'+String(i+1).padStart(2,'0')+'</div>'+
           '<div class="g-art-title">'+title+'</div>'+
@@ -449,6 +452,16 @@ function gClearSearch(){
 
   // Deep-link support: guide.html?q=recherche or #article-id
   var params=new URLSearchParams(location.search);
+
+  // Retour contextuel : si le Guide a été ouvert depuis l'admin (?from=admin&rid=xxx),
+  // le bouton Retour ramène vers l'admin (même rid) au lieu de la page démo par défaut.
+  var fromOrigin=params.get('from');
+  var originRid=params.get('rid');
+  if(fromOrigin==='admin' && originRid){
+    var backHref='https://menu-saas-platform.vercel.app/admin.html?rid='+encodeURIComponent(originRid);
+    document.getElementById('g-back').setAttribute('href',backHref);
+  }
+
   var q=params.get('q');
   if(q){ document.getElementById('g-search-input').value=q; gOnSearch(q); }
   if(location.hash){
@@ -465,6 +478,29 @@ function gClearSearch(){
       },300);
     }
   }
+})();
+</script>
+
+<!-- Firebase — photos du Guide personnalisées depuis control-app -->
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+<script>
+(function(){
+  var app = firebase.apps.find(function(a){return a.name==='demo-photos';})
+         || firebase.initializeApp({
+              apiKey:            "AIzaSyCM6SiQoWQfsq_t-80EfiVplXV9p534_eI",
+              authDomain:        "menu-saas-platform.firebaseapp.com",
+              databaseURL:       "https://menu-saas-platform-default-rtdb.europe-west1.firebasedatabase.app",
+              projectId:         "menu-saas-platform",
+              storageBucket:     "menu-saas-platform.firebasestorage.app",
+              messagingSenderId: "460781372428",
+              appId:             "1:460781372428:web:55c33bfb6f8f8d5582da29"
+            }, 'demo-photos');
+  var db = firebase.database(app);
+  db.ref('demoPage/guideContent').on('value', function(snap){
+    GUIDE_IMG_OVERRIDES = snap.val() || {};
+    renderArticles(curLang);
+  });
 })();
 </script>
 </body>
