@@ -21,136 +21,222 @@
   --serif:'Fraunces',ui-serif,Georgia,serif;
   --sans:'Inter',ui-sans-serif,system-ui,sans-serif;
   --e-out:cubic-bezier(.16,1,.3,1);
-  --pad-x:clamp(1.25rem,5vw,4rem);--max:1180px;--radius:18px;
+  --pad-x:clamp(1.05rem,5vw,4rem);--max:1180px;--radius:18px;
+  --navh:60px;
 }
 html.light{
   --ink:#fdfaf5;--ink-2:#f5f0e8;--ink-3:#eee8d8;
-  --line:rgba(140,110,45,.18);--line-2:rgba(140,110,45,.28);
+  --line:rgba(140,110,45,.16);--line-2:rgba(140,110,45,.26);
   --bone:#1a1208;--bone-2:#3d2a0e;
-  --mute:rgba(26,18,8,.65);--mute-2:rgba(26,18,8,.42);
+  --mute:rgba(26,18,8,.62);--mute-2:rgba(26,18,8,.40);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{font-size:16px;-webkit-text-size-adjust:100%;scroll-behavior:smooth;background:var(--ink)}
 body{font-family:var(--sans);background-color:var(--ink);color:var(--bone);line-height:1.55;overflow-x:hidden;-webkit-font-smoothing:antialiased;transition:background-color .3s,color .3s}
+body.g-lock{overflow:hidden}
 img,svg{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
 button,input{background:none;border:none;color:inherit;font:inherit}
+button{cursor:pointer}
 ::selection{background:var(--gold);color:var(--ink)}
 ::-webkit-scrollbar{width:6px;height:6px}
-::-webkit-scrollbar-track{background:var(--ink)}
+::-webkit-scrollbar-track{background:transparent}
 ::-webkit-scrollbar-thumb{background:linear-gradient(var(--gold-3),var(--gold));border-radius:3px}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 
 /* ── NAV ── */
-#nav{position:sticky;top:0;z-index:200;display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.9rem var(--pad-x);background:color-mix(in srgb,var(--ink) 88%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
-.g-logo{display:flex;align-items:center;gap:.6rem;font-family:var(--serif);font-size:1.15rem;font-weight:600;color:var(--gold);flex-shrink:0}
-.g-logo img{width:34px;height:34px;border-radius:50%}
+#nav{position:sticky;top:0;z-index:220;display:flex;align-items:center;justify-content:space-between;gap:.6rem;padding:.72rem var(--pad-x);background:color-mix(in srgb,var(--ink) 90%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);min-height:var(--navh)}
+.g-logo{display:flex;align-items:center;gap:.55rem;font-family:var(--serif);font-size:1.1rem;font-weight:600;color:var(--gold);flex-shrink:0}
+.g-logo img{width:30px;height:30px;border-radius:50%}
+.g-logo span{display:none}
 .g-logo .lt{display:none}
 html.light .g-logo .dk{display:none}
 html.light .g-logo .lt{display:block}
-.g-back{display:flex;align-items:center;gap:.4rem;font-size:.82rem;color:var(--mute);transition:color .2s}
-.g-back:hover{color:var(--gold)}
-.g-back svg{width:15px;height:15px}
-.g-navmid{display:flex;align-items:center;gap:.55rem;flex-shrink:0}
-#gnav-lang-btn,#gnav-theme-btn{display:flex;align-items:center;gap:.35rem;padding:.45rem .7rem;border-radius:99px;border:1px solid var(--line-2);cursor:pointer;font-size:.78rem;font-weight:600;color:var(--bone);transition:border-color .2s,background .2s}
-#gnav-lang-btn:hover,#gnav-theme-btn:hover{border-color:var(--gold)}
-#gnav-theme-btn svg{width:16px;height:16px;color:var(--gold)}
+.g-navmid{display:flex;align-items:center;gap:.3rem;flex-shrink:0}
+.g-icon-btn{display:flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;border:1px solid var(--line-2);color:var(--bone);transition:border-color .2s,background .2s,color .2s;flex-shrink:0}
+.g-icon-btn svg{width:17px;height:17px}
+.g-icon-btn:hover{border-color:var(--gold);color:var(--gold)}
+.g-menu-btn{display:flex}
+.g-back{gap:.35rem}
+.g-back span{display:none}
+#gnav-lang-btn{width:auto;padding:0 .65rem;gap:.3rem;border-radius:99px;font-size:.76rem;font-weight:700}
+#gnav-lang-btn .g-lang-code-txt{display:none}
 #gnav-theme-btn .moon{display:block}#gnav-theme-btn .sun{display:none}
 html.light #gnav-theme-btn .moon{display:none}html.light #gnav-theme-btn .sun{display:block}
-.g-langdd{position:absolute;top:calc(100% + 8px);right:var(--pad-x);background:var(--ink-2);border:1px solid var(--line-2);border-radius:14px;padding:.4rem;display:none;flex-direction:column;min-width:170px;box-shadow:0 24px 60px -12px rgba(0,0,0,.5);z-index:210}
+.g-langdd{position:absolute;top:calc(100% + 8px);right:var(--pad-x);background:var(--ink-2);border:1px solid var(--line-2);border-radius:14px;padding:.4rem;display:none;flex-direction:column;min-width:170px;box-shadow:0 24px 60px -12px rgba(0,0,0,.5);z-index:230}
 .g-langdd.open{display:flex}
 .g-langdd button{display:flex;align-items:center;gap:.6rem;padding:.55rem .7rem;border-radius:9px;font-size:.86rem;text-align:left;width:100%;transition:background .15s}
 .g-langdd button:hover{background:var(--line)}
 .g-langdd button.on{color:var(--gold);font-weight:600}
 
-/* ── HERO / SEARCH ── */
-.g-hero{padding:clamp(2.4rem,6vw,4.2rem) var(--pad-x) 1.6rem;max-width:var(--max);margin:0 auto;text-align:center}
-.g-eyebrow{font-size:.72rem;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:.9rem}
-.g-h1{font-family:var(--serif);font-size:clamp(1.9rem,4.4vw,3rem);font-weight:600;line-height:1.12;margin-bottom:.85rem}
+/* ── HERO ── */
+.g-hero{padding:1.5rem var(--pad-x) 1.1rem;max-width:var(--max);margin:0 auto;text-align:center}
+.g-eyebrow{font-size:.66rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.55rem}
+.g-h1{font-family:var(--serif);font-size:clamp(1.5rem,6.4vw,2.9rem);font-weight:600;line-height:1.14;margin-bottom:.55rem}
 .g-h1 em{font-style:normal;color:var(--gold)}
-.g-lead{font-size:1rem;color:var(--mute);max-width:600px;margin:0 auto 2rem;line-height:1.65}
-.g-search-wrap{position:sticky;top:66px;z-index:150;max-width:640px;margin:0 auto 1.6rem;background:var(--ink);padding:.4rem 0}
-.g-search{position:relative;display:flex;align-items:center}
-.g-search svg{position:absolute;left:1.1rem;width:19px;height:19px;color:var(--mute)}
-.g-search input{width:100%;padding:.95rem 1.2rem .95rem 3rem;border-radius:99px;border:1.5px solid var(--line-2);background:var(--ink-2);font-size:.95rem;color:var(--bone);transition:border-color .2s,box-shadow .2s}
-.g-search input:focus{border-color:var(--gold);box-shadow:0 0 0 4px rgba(200,164,78,.12)}
-.g-search input::placeholder{color:var(--mute-2)}
-.g-search-clear{position:absolute;right:1rem;width:22px;height:22px;border-radius:50%;display:none;align-items:center;justify-content:center;color:var(--mute);background:var(--line)}
-.g-search-clear.show{display:flex}
-.g-search-clear:hover{color:var(--gold)}
+.g-lead{font-size:.88rem;color:var(--mute);max-width:560px;margin:0 auto;line-height:1.6}
 
-/* ── CATEGORY TABS ── */
-.g-tabs{display:flex;gap:.55rem;justify-content:center;flex-wrap:wrap;max-width:var(--max);margin:0 auto 2.6rem;padding:0 var(--pad-x)}
-.g-tab{display:flex;align-items:center;gap:.5rem;padding:.6rem 1.15rem;border-radius:99px;border:1.5px solid var(--line-2);font-size:.84rem;font-weight:600;color:var(--mute);cursor:pointer;transition:all .25s var(--e-out)}
-.g-tab svg{width:16px;height:16px}
-.g-tab:hover{border-color:var(--gold-3);color:var(--bone)}
-.g-tab.on{background:linear-gradient(135deg,var(--gold-2),var(--gold));border-color:transparent;color:#170f04}
-.g-tab .g-tab-count{opacity:.65;font-weight:500}
-.g-tab.on .g-tab-count{opacity:.75}
+/* ── SHELL (sidebar + content) ── */
+.g-shell{max-width:var(--max);margin:0 auto;padding:.4rem var(--pad-x) 0}
 
-/* ── CONTENT ── */
-.g-main{max-width:var(--max);margin:0 auto;padding:0 var(--pad-x) 5rem}
-.g-catgroup{margin-bottom:3rem}
-.g-catgroup-hd{display:flex;align-items:center;gap:.8rem;margin-bottom:1.2rem;padding-bottom:.8rem;border-bottom:1px solid var(--line-2)}
-.g-catgroup-ic{width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg,rgba(200,164,78,.18),rgba(200,164,78,.06));border:1px solid var(--line-2);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.g-catgroup-ic svg{width:19px;height:19px;color:var(--gold)}
-.g-catgroup-title{font-family:var(--serif);font-size:1.4rem;font-weight:600}
-.g-catgroup-sub{font-size:.82rem;color:var(--mute);margin-top:.15rem}
+/* Sidebar / mobile drawer */
+.g-side-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(2px);opacity:0;pointer-events:none;transition:opacity .3s var(--e-out);z-index:290}
+.g-side-backdrop.show{opacity:1;pointer-events:all}
+.g-side{position:fixed;top:0;left:0;bottom:0;width:min(84vw,340px);background:var(--ink-2);border-right:1px solid var(--line-2);z-index:300;transform:translateX(-100%);transition:transform .35s var(--e-out);display:flex;flex-direction:column;box-shadow:24px 0 60px -20px rgba(0,0,0,.5)}
+.g-side.open{transform:translateX(0)}
+.g-side-hd{display:flex;align-items:center;justify-content:space-between;padding:.85rem 1.1rem;border-bottom:1px solid var(--line);flex-shrink:0}
+.g-side-hd-title{font-family:var(--serif);font-size:1.02rem;font-weight:600;color:var(--gold)}
+.g-side-close{width:34px;height:34px;border-radius:50%;border:1px solid var(--line-2);display:flex;align-items:center;justify-content:center}
+.g-side-close svg{width:15px;height:15px}
+.g-toc{flex:1;overflow-y:auto;padding:.7rem .65rem 1.4rem;overscroll-behavior:contain}
+.g-toc-group{margin-bottom:1.3rem}
+.g-toc-group-hd{display:flex;align-items:center;gap:.55rem;padding:.3rem .5rem .5rem;font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--mute)}
+.g-toc-group-hd svg{width:14px;height:14px;color:var(--gold);flex-shrink:0}
+.g-toc-link{display:block;padding:.55rem .5rem .55rem 1.55rem;border-radius:10px;font-size:.84rem;color:var(--bone);line-height:1.35;position:relative;transition:background .15s,color .15s}
+.g-toc-link::before{content:'';position:absolute;left:.5rem;top:50%;width:5px;height:5px;border-radius:50%;background:var(--line-2);transform:translateY(-50%);transition:background .15s}
+.g-toc-link:hover{background:var(--line)}
+.g-toc-link.on{background:rgba(200,164,78,.12);color:var(--gold-2);font-weight:600}
+.g-toc-link.on::before{background:var(--gold)}
 
-.g-art{border:1px solid var(--line-2);border-radius:16px;margin-bottom:.85rem;overflow:hidden;background:linear-gradient(180deg,var(--ink-2),var(--ink));transition:border-color .25s}
-.g-art:hover{border-color:var(--gold-3)}
-.g-art.match-hi{border-color:var(--gold)}
-.g-art-hd{display:flex;align-items:center;gap:1rem;padding:1.1rem 1.3rem;cursor:pointer;user-select:none}
-.g-art-hd:focus-visible{outline:2px solid var(--gold);outline-offset:-2px;border-radius:16px}
-.g-tab:focus-visible,.g-search-clear:focus-visible,#gnav-lang-btn:focus-visible,#gnav-theme-btn:focus-visible,.g-cta-btn:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
-.g-art-num{font-family:var(--serif);font-size:.78rem;font-weight:600;color:var(--gold-2);background:rgba(200,164,78,.1);border:1px solid var(--line-2);border-radius:8px;padding:.3rem .55rem;flex-shrink:0}
-.g-art-title{font-size:1rem;font-weight:600;flex:1;line-height:1.4}
+.g-content{max-width:720px;margin:0 auto;padding-bottom:4rem}
+
+/* ── ARTICLE GROUPS (mobile = flat list, no boxed cards) ── */
+.g-catgroup{margin-bottom:1.9rem;scroll-margin-top:calc(var(--navh) + 12px)}
+.g-catgroup-hd{display:flex;align-items:center;gap:.65rem;margin-bottom:.5rem;padding-bottom:.5rem;border-bottom:1px solid var(--line-2)}
+.g-catgroup-ic{width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,rgba(200,164,78,.16),rgba(200,164,78,.05));border:1px solid var(--line-2);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.g-catgroup-ic svg{width:15px;height:15px;color:var(--gold)}
+.g-catgroup-title{font-family:var(--serif);font-size:1.08rem;font-weight:600}
+.g-catgroup-sub{font-size:.72rem;color:var(--mute);margin-top:.1rem}
+
+.g-art{border:0;border-bottom:1px solid var(--line);border-radius:0;background:transparent;transition:background-color .2s}
+.g-art:last-child{border-bottom:0}
+.g-art-hd{display:flex;align-items:flex-start;gap:.7rem;padding:.9rem 0;cursor:pointer;user-select:none}
+.g-art-num{font-family:var(--sans);font-size:.72rem;font-weight:700;color:var(--gold-2);opacity:.75;flex-shrink:0;padding-top:.16rem;min-width:1.3em}
+.g-art-title{font-size:.93rem;font-weight:600;flex:1;line-height:1.42;padding-top:.02rem}
 .g-art-title mark{background:rgba(200,164,78,.35);color:inherit;border-radius:3px;padding:0 .1em}
-.g-art-chev{width:30px;height:30px;border-radius:50%;border:1px solid var(--line-2);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .35s var(--e-out),border-color .2s}
-.g-art-chev svg{width:15px;height:15px}
+.g-art-chev{width:26px;height:26px;border-radius:50%;border:1px solid var(--line-2);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .35s var(--e-out),border-color .2s;margin-top:-.05rem}
+.g-art-chev svg{width:13px;height:13px}
 .g-art.open .g-art-chev{transform:rotate(180deg);border-color:var(--gold)}
-.g-art-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .45s var(--e-out)}
+.g-art-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .4s var(--e-out)}
 .g-art.open .g-art-body{grid-template-rows:1fr}
 .g-art-body-inner{overflow:hidden}
-.g-art-content{display:grid;grid-template-columns:1fr;gap:1.4rem;padding:0 1.3rem 1.5rem}
-.g-art.has-img .g-art-content{grid-template-columns:1.15fr .85fr}
-.g-art-text{font-size:.92rem;color:var(--mute);line-height:1.75}
-.g-art-text p{margin-bottom:.85rem}
+.g-art-content{display:grid;grid-template-columns:1fr;gap:1rem;padding:0 0 1.15rem calc(1.3em + .7rem)}
+.g-art-text{font-size:.87rem;color:var(--mute);line-height:1.7}
+.g-art-text p{margin-bottom:.75rem}
 .g-art-text p:last-child{margin-bottom:0}
 .g-art-text strong{color:var(--bone);font-weight:600}
-.g-art-text ul,.g-art-text ol{margin:0 0 .85rem 1.2rem}
-.g-art-text li{margin-bottom:.45rem}
+.g-art-text ul,.g-art-text ol{margin:0 0 .75rem 1.15rem}
+.g-art-text li{margin-bottom:.4rem}
 .g-art-text mark{background:rgba(200,164,78,.35);color:inherit;border-radius:3px;padding:0 .1em}
-.g-art-tip{margin-top:.9rem;padding:.75rem .9rem;border-radius:10px;background:rgba(200,164,78,.08);border:1px solid var(--line-2);font-size:.82rem;color:var(--bone);display:flex;gap:.55rem}
-.g-art-tip svg{width:16px;height:16px;color:var(--gold);flex-shrink:0;margin-top:.1rem}
-.g-art-img-wrap{border-radius:13px;overflow:hidden;border:1px solid var(--line-2);align-self:start;background:var(--ink-3)}
+.g-art-tip{margin-top:.75rem;padding:.7rem .85rem;border-radius:10px;background:rgba(200,164,78,.08);border:1px solid var(--line-2);font-size:.79rem;color:var(--bone);display:flex;gap:.5rem}
+.g-art-tip svg{width:15px;height:15px;color:var(--gold);flex-shrink:0;margin-top:.1rem}
+.g-art-img-wrap{border-radius:12px;overflow:hidden;border:1px solid var(--line-2);align-self:start;background:var(--ink-3);order:-1}
 .g-art-img-wrap img{width:100%;height:auto;display:block}
-.g-art.has-img.tall .g-art-img-wrap{max-width:220px;margin:0 auto}
-@media(max-width:760px){
-  .g-art.has-img .g-art-content{grid-template-columns:1fr}
-  .g-art.has-img .g-art-img-wrap{order:-1}
-  .g-art.has-img.tall .g-art-img-wrap{max-width:260px}
-}
+.g-art.tall .g-art-img-wrap{max-width:230px;margin:0 auto}
 
-.g-empty{display:none;text-align:center;padding:4rem 1rem;color:var(--mute)}
+.g-empty{display:none;text-align:center;padding:2.4rem 1rem}
 .g-empty.show{display:block}
-.g-empty svg{width:44px;height:44px;color:var(--mute-2);margin:0 auto 1rem}
-.g-empty-title{font-family:var(--serif);font-size:1.3rem;color:var(--bone);margin-bottom:.5rem}
+.g-empty svg{width:38px;height:38px;color:var(--mute-2);margin:0 auto .9rem}
+.g-empty-title{font-family:var(--serif);font-size:1.1rem;color:var(--bone);margin-bottom:.35rem}
+.g-empty-sub{font-size:.82rem;color:var(--mute)}
 
-.g-cta{max-width:var(--max);margin:0 auto;padding:0 var(--pad-x) 5rem;text-align:center}
-.g-cta-card{border:1px solid var(--line-2);border-radius:20px;padding:2.4rem 1.5rem;background:linear-gradient(180deg,var(--ink-2),var(--ink))}
-.g-cta-title{font-family:var(--serif);font-size:1.4rem;margin-bottom:.6rem}
-.g-cta-lead{color:var(--mute);font-size:.9rem;margin-bottom:1.4rem;max-width:420px;margin-left:auto;margin-right:auto}
-.g-cta-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.6rem;border-radius:99px;background:linear-gradient(135deg,var(--gold-2),var(--gold));color:#170f04;font-weight:700;font-size:.9rem}
+.g-cta{margin:1.2rem 0 0;text-align:center}
+.g-cta-card{border:1px solid var(--line-2);border-radius:18px;padding:1.9rem 1.3rem;background:linear-gradient(180deg,var(--ink-2),var(--ink))}
+.g-cta-title{font-family:var(--serif);font-size:1.2rem;margin-bottom:.5rem}
+.g-cta-lead{color:var(--mute);font-size:.85rem;margin-bottom:1.2rem;max-width:400px;margin-left:auto;margin-right:auto}
+.g-cta-btn{display:inline-flex;align-items:center;gap:.5rem;padding:.8rem 1.5rem;border-radius:99px;background:linear-gradient(135deg,var(--gold-2),var(--gold));color:#170f04;font-weight:700;font-size:.87rem}
 
-.g-foot{text-align:center;padding:1.6rem var(--pad-x) 2.4rem;font-size:.75rem;color:var(--mute-2)}
+.g-foot{text-align:center;padding:1.3rem var(--pad-x) 1.6rem;font-size:.72rem;color:var(--mute-2)}
 
-@media(max-width:640px){
-  #nav{padding:.75rem 1rem}
-  .g-navmid{gap:.4rem}
-  #gnav-lang-btn span:last-child{display:none}
-  .g-search-wrap{top:58px}
-  .g-art-hd{padding:1rem}
-  .g-art-content{padding:0 1rem 1.2rem}
+/* ── COMMAND-PALETTE SEARCH ── */
+.g-cmdk{position:fixed;inset:0;z-index:400;display:none;align-items:flex-start;justify-content:center;padding:0}
+.g-cmdk.open{display:flex}
+.g-cmdk-backdrop{position:absolute;inset:0;background:rgba(6,4,2,.6);backdrop-filter:blur(3px)}
+.g-cmdk-modal{position:relative;width:100%;max-width:600px;background:var(--ink-2);border:1px solid var(--line-2);box-shadow:0 30px 80px -20px rgba(0,0,0,.6);display:flex;flex-direction:column;max-height:100vh;overflow:hidden;
+  margin-top:0;border-radius:0;height:100vh}
+.g-cmdk-inputwrap{display:flex;align-items:center;gap:.7rem;padding:.95rem 1.1rem;border-bottom:1px solid var(--line);flex-shrink:0}
+.g-cmdk-inputwrap svg{width:18px;height:18px;color:var(--gold);flex-shrink:0}
+#g-cmdk-input{flex:1;font-size:1rem;color:var(--bone);min-width:0}
+#g-cmdk-input::placeholder{color:var(--mute-2)}
+.g-cmdk-close{width:32px;height:32px;border-radius:50%;border:1px solid var(--line-2);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.g-cmdk-close svg{width:13px;height:13px}
+.g-cmdk-kbd{display:none;font-size:.68rem;font-weight:700;color:var(--mute);border:1px solid var(--line-2);border-radius:6px;padding:.15rem .4rem;flex-shrink:0}
+.g-cmdk-results{flex:1;overflow-y:auto;padding:.5rem;overscroll-behavior:contain}
+.g-cmdk-hint{padding:2.6rem 1.2rem;text-align:center;color:var(--mute)}
+.g-cmdk-hint svg{width:34px;height:34px;color:var(--mute-2);margin:0 auto .8rem}
+.g-cmdk-hint-title{font-family:var(--serif);font-size:1.05rem;color:var(--bone);margin-bottom:.3rem}
+.g-cmdk-hint-sub{font-size:.8rem}
+.g-cmdk-empty{padding:2.6rem 1.2rem;text-align:center;color:var(--mute)}
+.g-cmdk-empty svg{width:32px;height:32px;color:var(--mute-2);margin:0 auto .8rem}
+.g-cmdk-result{display:flex;align-items:flex-start;gap:.75rem;padding:.75rem .7rem;border-radius:12px;cursor:pointer;transition:background .12s}
+.g-cmdk-result.active,.g-cmdk-result:hover{background:var(--line)}
+.g-cmdk-result-ic{width:32px;height:32px;border-radius:9px;background:rgba(200,164,78,.1);border:1px solid var(--line-2);display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.05rem}
+.g-cmdk-result-ic svg{width:15px;height:15px;color:var(--gold)}
+.g-cmdk-result-title{font-size:.88rem;font-weight:600;line-height:1.35;margin-bottom:.18rem}
+.g-cmdk-result-title mark{background:rgba(200,164,78,.35);color:inherit;border-radius:3px;padding:0 .1em}
+.g-cmdk-result-snip{font-size:.76rem;color:var(--mute);line-height:1.5}
+.g-cmdk-result-snip mark{background:rgba(200,164,78,.35);color:inherit;border-radius:3px;padding:0 .1em}
+.g-cmdk-result-cat{font-size:.65rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--gold-2);opacity:.8;margin-top:.28rem}
+
+/* ── DESKTOP UPGRADES (mobile-first: overrides live here) ── */
+@media(min-width:700px){
+  .g-logo span{display:block}
+  .g-back span{display:block}
+  #gnav-lang-btn .g-lang-code-txt{display:block}
+  .g-art-hd{padding:1.05rem 0}
+}
+@media(min-width:960px){
+  :root{--navh:70px}
+  #nav{padding:1rem var(--pad-x)}
+  .g-logo{font-size:1.2rem;gap:.65rem}
+  .g-logo img{width:36px;height:36px}
+  .g-icon-btn{width:40px;height:40px}
+  .g-menu-btn{display:none}
+
+  .g-hero{padding:clamp(2.2rem,5vw,3.6rem) var(--pad-x) 1.8rem}
+  .g-eyebrow{margin-bottom:.85rem}
+  .g-lead{font-size:1rem}
+
+  .g-shell{display:grid;grid-template-columns:250px 1fr;align-items:start;gap:3rem;padding:1.6rem var(--pad-x) 0}
+  .g-side-backdrop{display:none}
+  .g-side{position:sticky;top:calc(var(--navh) + 20px);left:0;bottom:auto;transform:none;width:100%;height:calc(100vh - var(--navh) - 40px);background:transparent;border-right:0;box-shadow:none;z-index:1}
+  .g-side-hd{display:none}
+  .g-toc{padding:0}
+
+  .g-content{max-width:none;margin:0}
+
+  .g-catgroup{margin-bottom:3rem}
+  .g-catgroup-hd{gap:.85rem;margin-bottom:1.2rem;padding-bottom:.8rem}
+  .g-catgroup-ic{width:38px;height:38px;border-radius:11px}
+  .g-catgroup-ic svg{width:19px;height:19px}
+  .g-catgroup-title{font-size:1.4rem}
+  .g-catgroup-sub{font-size:.82rem;margin-top:.15rem}
+
+  .g-art{border:1px solid var(--line-2);border-radius:16px;margin-bottom:.85rem;overflow:hidden;background:linear-gradient(180deg,var(--ink-2),var(--ink));transition:border-color .25s}
+  .g-art:hover{border-color:var(--gold-3)}
+  .g-art-hd{padding:1.1rem 1.3rem;gap:1rem}
+  .g-art-num{font-family:var(--serif);font-size:.78rem;background:rgba(200,164,78,.1);border:1px solid var(--line-2);border-radius:8px;padding:.3rem .55rem;opacity:1;min-width:0}
+  .g-art-title{font-size:1rem}
+  .g-art-chev{width:30px;height:30px}
+  .g-art-chev svg{width:15px;height:15px}
+  .g-art-content{padding:0 1.3rem 1.5rem;gap:1.4rem}
+  .g-art.has-img .g-art-content{grid-template-columns:1.15fr .85fr}
+  .g-art.has-img .g-art-img-wrap{order:0}
+  .g-art.has-img.tall .g-art-img-wrap{max-width:220px}
+  .g-art-text{font-size:.92rem}
+
+  .g-cta{margin-top:1.5rem}
+  .g-cta-card{padding:2.4rem 1.5rem;border-radius:20px}
+  .g-cta-title{font-size:1.4rem}
+  .g-cta-lead{font-size:.9rem}
+
+  .g-cmdk{align-items:flex-start;padding-top:12vh}
+  .g-cmdk-modal{border-radius:20px;height:auto;max-height:min(600px,76vh)}
+  .g-cmdk-kbd{display:block}
+}
+@media(max-width:400px){
+  .g-art-num{display:none}
+  .g-art-content{padding-left:0}
 }
 </style>
 </head>
@@ -163,14 +249,20 @@ html.light #gnav-theme-btn .moon{display:none}html.light #gnav-theme-btn .sun{di
     <span>GeNext</span>
   </a>
   <div class="g-navmid" style="position:relative">
-    <a href="/" class="g-back" id="g-back">
+    <a href="/" class="g-icon-btn g-back" id="g-back" aria-label="Retour">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
       <span id="g-backlabel">Retour</span>
     </a>
-    <button id="gnav-lang-btn" onclick="gToggleLangDD(event)" aria-label="Changer de langue" aria-haspopup="true" aria-expanded="false">
-      <span id="g-lang-flag">🇫🇷</span><span id="g-lang-code">FR</span>
+    <button id="gnav-menu-btn" class="g-icon-btn g-menu-btn" onclick="toggleDrawer()" aria-label="Sommaire" aria-haspopup="true" aria-expanded="false">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="14" y2="17"/></svg>
     </button>
-    <button id="gnav-theme-btn" onclick="gToggleTheme()" aria-label="Changer de thème clair/sombre">
+    <button id="gnav-search-btn" class="g-icon-btn" onclick="openSearch()" aria-label="Rechercher">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </button>
+    <button id="gnav-lang-btn" class="g-icon-btn" onclick="gToggleLangDD(event)" aria-label="Changer de langue" aria-haspopup="true" aria-expanded="false">
+      <span id="g-lang-flag">🇫🇷</span><span id="g-lang-code" class="g-lang-code-txt">FR</span>
+    </button>
+    <button id="gnav-theme-btn" class="g-icon-btn" onclick="gToggleTheme()" aria-label="Changer de thème clair/sombre">
       <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
       <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
     </button>
@@ -187,41 +279,66 @@ html.light #gnav-theme-btn .moon{display:none}html.light #gnav-theme-btn .sun{di
 <header class="g-hero">
   <div class="g-eyebrow" id="g-eyebrow">GUIDE COMPLET</div>
   <h1 class="g-h1" id="g-h1">Tout comprendre, <em>en quelques minutes.</em></h1>
-  <p class="g-lead" id="g-lead">Le mode d'emploi complet de votre menu digital : administration, application serveur, et menu vu par vos clients. Cherchez un mot, ou parcourez par thème.</p>
+  <p class="g-lead" id="g-lead">Le mode d'emploi complet de votre menu digital : administration, application serveur, et menu vu par vos clients.</p>
 </header>
 
-<div class="g-search-wrap">
-  <div class="g-search">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-    <input type="text" id="g-search-input" aria-label="Rechercher un article" placeholder="Rechercher un article… (ex : QR code, thème, appel serveur)" oninput="gOnSearch(this.value)">
-    <button class="g-search-clear" id="g-search-clear" onclick="gClearSearch()" aria-label="Effacer">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" width="12" height="12"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-    </button>
+<div class="g-side-backdrop" id="g-side-backdrop" onclick="closeDrawer()"></div>
+
+<div class="g-shell">
+  <aside class="g-side" id="g-side" aria-labelledby="g-side-hd-title">
+    <div class="g-side-hd">
+      <span class="g-side-hd-title" id="g-side-hd-title">Sommaire</span>
+      <button class="g-side-close" id="g-side-close" onclick="closeDrawer()" aria-label="Fermer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <nav class="g-toc" id="g-toc"></nav>
+  </aside>
+  <div class="g-content">
+    <main id="g-main"></main>
+
+    <div class="g-empty" id="g-empty">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <div class="g-empty-title" id="g-empty-title">Aucun résultat</div>
+      <div class="g-empty-sub" id="g-empty-sub">Essayez un autre mot-clé.</div>
+    </div>
+
+    <div class="g-cta">
+      <div class="g-cta-card">
+        <div class="g-cta-title" id="g-cta-title">Une autre question ?</div>
+        <p class="g-cta-lead" id="g-cta-lead">Notre équipe répond rapidement à toute demande, même en dehors de ce guide.</p>
+        <a href="/#contact" class="g-cta-btn" id="g-cta-btn">
+          Nous contacter
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <footer class="g-foot" id="g-foot">© 2026 GeNext — Guide utilisateur</footer>
   </div>
 </div>
 
-<div class="g-tabs" id="g-tabs"></div>
-
-<main class="g-main" id="g-main"></main>
-
-<div class="g-empty" id="g-empty">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-  <div class="g-empty-title" id="g-empty-title">Aucun résultat</div>
-  <div id="g-empty-sub">Essayez un autre mot-clé, ou parcourez les catégories ci-dessus.</div>
-</div>
-
-<div class="g-cta">
-  <div class="g-cta-card">
-    <div class="g-cta-title" id="g-cta-title">Une autre question ?</div>
-    <p class="g-cta-lead" id="g-cta-lead">Notre équipe répond rapidement à toute demande, même en dehors de ce guide.</p>
-    <a href="/#contact" class="g-cta-btn" id="g-cta-btn">
-      Nous contacter
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
-    </a>
+<!-- ═══ COMMAND-PALETTE SEARCH ═══ -->
+<div class="g-cmdk" id="g-cmdk" role="dialog" aria-modal="true" aria-label="Rechercher">
+  <div class="g-cmdk-backdrop" onclick="closeSearch()"></div>
+  <div class="g-cmdk-modal">
+    <div class="g-cmdk-inputwrap">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <input type="text" id="g-cmdk-input" aria-label="Rechercher un article" placeholder="Rechercher un article…" oninput="onSearchInput(this.value)" onkeydown="onSearchKeydown(event)" autocomplete="off">
+      <span class="g-cmdk-kbd">Esc</span>
+      <button class="g-cmdk-close" onclick="closeSearch()" aria-label="Fermer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="g-cmdk-results" id="g-cmdk-results">
+      <div class="g-cmdk-hint" id="g-cmdk-hint">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <div class="g-cmdk-hint-title" id="g-cmdk-hint-title">Tapez pour rechercher</div>
+        <div class="g-cmdk-hint-sub" id="g-cmdk-hint-sub">Parmi tous les articles du guide</div>
+      </div>
+    </div>
   </div>
 </div>
-
-<footer class="g-foot" id="g-foot">© 2026 GeNext — Guide utilisateur</footer>
 
 <script>
 /* ═══ THEME ═══ */
@@ -254,60 +371,68 @@ function gSetLang(l){
   document.documentElement.lang=l;
   [...document.querySelectorAll('.g-langdd button')].forEach(function(b){b.classList.toggle('on',b.dataset.l===l);});
   applyChrome(l);
-  buildTabs(l);
+  buildSidebar(l);
   renderArticles(l);
+  if(document.getElementById('g-cmdk').classList.contains('open')){ onSearchInput(document.getElementById('g-cmdk-input').value); }
   document.getElementById('g-langdd').classList.remove('open');
 }
 
 /* ═══ UI CHROME I18N ═══ */
 var CHROME={
   fr:{back:'Retour',eyebrow:'GUIDE COMPLET',h1a:'Tout comprendre, ',h1b:'en quelques minutes.',
-    lead:"Le mode d'emploi complet de votre menu digital : administration, application serveur, et menu vu par vos clients. Cherchez un mot, ou parcourez par thème.",
-    searchPh:'Rechercher un article… (ex : QR code, thème, appel serveur)',
-    emptyTitle:'Aucun résultat',emptySub:'Essayez un autre mot-clé, ou parcourez les catégories ci-dessus.',
+    lead:"Le mode d'emploi complet de votre menu digital : administration, application serveur, et menu vu par vos clients.",
+    searchPh:'Rechercher un article…', searchHintTitle:'Tapez pour rechercher', searchHintSub:'Parmi tous les articles du guide',
+    emptyTitle:'Aucun résultat',emptySub:'Essayez un autre mot-clé.',
     ctaTitle:'Une autre question ?',ctaLead:"Notre équipe répond rapidement à toute demande, même en dehors de ce guide.",ctaBtn:'Nous contacter',
-    foot:'© 2026 GeNext — Guide utilisateur', all:'Tout', clearLabel:'Effacer la recherche', themeLabel:'Changer de thème clair/sombre', langLabel:'Changer de langue'},
+    foot:'© 2026 GeNext — Guide utilisateur', menuLabel:'Sommaire', searchLabel:'Rechercher', closeLabel:'Fermer', themeLabel:'Changer de thème clair/sombre', langLabel:'Changer de langue'},
   en:{back:'Back',eyebrow:'FULL GUIDE',h1a:'Understand everything, ',h1b:'in a few minutes.',
-    lead:"The complete manual for your digital menu: admin panel, waiter app, and the menu as seen by your customers. Search a word, or browse by topic.",
-    searchPh:'Search an article… (e.g. QR code, theme, waiter call)',
-    emptyTitle:'No results',emptySub:'Try another keyword, or browse the categories above.',
+    lead:"The complete manual for your digital menu: admin panel, waiter app, and the menu as seen by your customers.",
+    searchPh:'Search an article…', searchHintTitle:'Type to search', searchHintSub:'Across every article in the guide',
+    emptyTitle:'No results',emptySub:'Try another keyword.',
     ctaTitle:'Another question?',ctaLead:'Our team replies quickly to any request, even beyond this guide.',ctaBtn:'Contact us',
-    foot:'© 2026 GeNext — User guide', all:'All', clearLabel:'Clear search', themeLabel:'Toggle light/dark mode', langLabel:'Change language'},
+    foot:'© 2026 GeNext — User guide', menuLabel:'Contents', searchLabel:'Search', closeLabel:'Close', themeLabel:'Toggle light/dark mode', langLabel:'Change language'},
   el:{back:'Επιστροφή',eyebrow:'ΠΛΗΡΗΣ ΟΔΗΓΟΣ',h1a:'Κατανοήστε τα πάντα, ',h1b:'σε λίγα λεπτά.',
-    lead:'Το πλήρες εγχειρίδιο του ψηφιακού σας μενού: διαχείριση, εφαρμογή σερβιτόρου, και το μενού όπως το βλέπουν οι πελάτες σας. Αναζητήστε μια λέξη ή περιηγηθείτε ανά θέμα.',
-    searchPh:'Αναζήτηση άρθρου… (π.χ. κωδικός QR, θέμα, κλήση σερβιτόρου)',
-    emptyTitle:'Κανένα αποτέλεσμα',emptySub:'Δοκιμάστε άλλη λέξη-κλειδί, ή περιηγηθείτε στις κατηγορίες παραπάνω.',
+    lead:'Το πλήρες εγχειρίδιο του ψηφιακού σας μενού: διαχείριση, εφαρμογή σερβιτόρου, και το μενού όπως το βλέπουν οι πελάτες σας.',
+    searchPh:'Αναζήτηση άρθρου…', searchHintTitle:'Πληκτρολογήστε για αναζήτηση', searchHintSub:'Σε όλα τα άρθρα του οδηγού',
+    emptyTitle:'Κανένα αποτέλεσμα',emptySub:'Δοκιμάστε άλλη λέξη-κλειδί.',
     ctaTitle:'Άλλη ερώτηση;',ctaLead:'Η ομάδα μας απαντά γρήγορα σε κάθε αίτημα, ακόμα κι εκτός αυτού του οδηγού.',ctaBtn:'Επικοινωνήστε μαζί μας',
-    foot:'© 2026 GeNext — Οδηγός χρήσης', all:'Όλα', clearLabel:'Καθαρισμός αναζήτησης', themeLabel:'Εναλλαγή φωτεινής/σκοτεινής λειτουργίας', langLabel:'Αλλαγή γλώσσας'},
+    foot:'© 2026 GeNext — Οδηγός χρήσης', menuLabel:'Περιεχόμενα', searchLabel:'Αναζήτηση', closeLabel:'Κλείσιμο', themeLabel:'Εναλλαγή φωτεινής/σκοτεινής λειτουργίας', langLabel:'Αλλαγή γλώσσας'},
   de:{back:'Zurück',eyebrow:'VOLLSTÄNDIGER LEITFADEN',h1a:'Alles verstehen, ',h1b:'in wenigen Minuten.',
-    lead:'Die komplette Anleitung für Ihr digitales Menü: Admin-Bereich, Kellner-App, und das Menü aus Sicht Ihrer Gäste. Suchen Sie ein Wort oder durchstöbern Sie nach Thema.',
-    searchPh:'Artikel suchen… (z. B. QR-Code, Design, Kellnerruf)',
-    emptyTitle:'Keine Ergebnisse',emptySub:'Versuchen Sie ein anderes Stichwort oder durchsuchen Sie die Kategorien oben.',
+    lead:'Die komplette Anleitung für Ihr digitales Menü: Admin-Bereich, Kellner-App, und das Menü aus Sicht Ihrer Gäste.',
+    searchPh:'Artikel suchen…', searchHintTitle:'Zum Suchen tippen', searchHintSub:'In allen Artikeln des Leitfadens',
+    emptyTitle:'Keine Ergebnisse',emptySub:'Versuchen Sie ein anderes Stichwort.',
     ctaTitle:'Noch eine Frage?',ctaLead:'Unser Team antwortet schnell auf jede Anfrage, auch über diesen Leitfaden hinaus.',ctaBtn:'Kontaktieren Sie uns',
-    foot:'© 2026 GeNext — Benutzerhandbuch', all:'Alle', clearLabel:'Suche löschen', themeLabel:'Hell-/Dunkelmodus umschalten', langLabel:'Sprache ändern'},
+    foot:'© 2026 GeNext — Benutzerhandbuch', menuLabel:'Inhalt', searchLabel:'Suchen', closeLabel:'Schließen', themeLabel:'Hell-/Dunkelmodus umschalten', langLabel:'Sprache ändern'},
   es:{back:'Volver',eyebrow:'GUÍA COMPLETA',h1a:'Entiéndalo todo, ',h1b:'en pocos minutos.',
-    lead:'El manual completo de su menú digital: panel de administración, aplicación de camarero, y el menú visto por sus clientes. Busque una palabra o explore por tema.',
-    searchPh:'Buscar un artículo… (ej.: código QR, tema, llamada al camarero)',
-    emptyTitle:'Sin resultados',emptySub:'Pruebe otra palabra clave, o explore las categorías de arriba.',
+    lead:'El manual completo de su menú digital: panel de administración, aplicación de camarero, y el menú visto por sus clientes.',
+    searchPh:'Buscar un artículo…', searchHintTitle:'Escriba para buscar', searchHintSub:'En todos los artículos de la guía',
+    emptyTitle:'Sin resultados',emptySub:'Pruebe otra palabra clave.',
     ctaTitle:'¿Otra pregunta?',ctaLead:'Nuestro equipo responde rápidamente a cualquier solicitud, incluso fuera de esta guía.',ctaBtn:'Contáctenos',
-    foot:'© 2026 GeNext — Guía del usuario', all:'Todo', clearLabel:'Borrar búsqueda', themeLabel:'Alternar modo claro/oscuro', langLabel:'Cambiar idioma'}
+    foot:'© 2026 GeNext — Guía del usuario', menuLabel:'Índice', searchLabel:'Buscar', closeLabel:'Cerrar', themeLabel:'Alternar modo claro/oscuro', langLabel:'Cambiar idioma'}
 };
 
 function applyChrome(l){
   var t=CHROME[l];
   document.getElementById('g-backlabel').textContent=t.back;
+  document.getElementById('g-back').setAttribute('aria-label',t.back);
   document.getElementById('g-eyebrow').textContent=t.eyebrow;
   document.getElementById('g-h1').innerHTML=t.h1a+'<em>'+t.h1b+'</em>';
   document.getElementById('g-lead').textContent=t.lead;
-  document.getElementById('g-search-input').placeholder=t.searchPh;
-  document.getElementById('g-search-input').setAttribute('aria-label',t.searchPh);
+  document.getElementById('g-cmdk-input').placeholder=t.searchPh;
+  document.getElementById('g-cmdk-input').setAttribute('aria-label',t.searchPh);
+  document.getElementById('g-cmdk-hint-title').textContent=t.searchHintTitle;
+  document.getElementById('g-cmdk-hint-sub').textContent=t.searchHintSub;
   document.getElementById('g-empty-title').textContent=t.emptyTitle;
   document.getElementById('g-empty-sub').textContent=t.emptySub;
   document.getElementById('g-cta-title').textContent=t.ctaTitle;
   document.getElementById('g-cta-lead').textContent=t.ctaLead;
   document.getElementById('g-cta-btn').childNodes[0].nodeValue=t.ctaBtn+' ';
   document.getElementById('g-foot').textContent=t.foot;
-  document.getElementById('g-search-clear').setAttribute('aria-label',t.clearLabel);
+  document.getElementById('g-side-hd-title').textContent=t.menuLabel;
+  document.getElementById('gnav-menu-btn').setAttribute('aria-label',t.menuLabel);
+  document.getElementById('gnav-search-btn').setAttribute('aria-label',t.searchLabel);
+  document.getElementById('g-side-close').setAttribute('aria-label',t.closeLabel);
+  document.querySelector('.g-cmdk-close').setAttribute('aria-label',t.closeLabel);
   document.getElementById('gnav-theme-btn').setAttribute('aria-label',t.themeLabel);
   document.getElementById('gnav-lang-btn').setAttribute('aria-label',t.langLabel);
 }
@@ -325,21 +450,53 @@ var CATS=[
     sub:{fr:'Ce que vos clients voient et font en scannant le QR code',en:'What your customers see and do when scanning the QR code',el:'Τι βλέπουν και κάνουν οι πελάτες σας όταν σκανάρουν τον κωδικό QR',de:'Was Ihre Gäste sehen und tun, wenn sie den QR-Code scannen',es:'Lo que ven y hacen sus clientes al escanear el código QR'}}
 ];
 
-function buildTabs(l){
-  var wrap=document.getElementById('g-tabs');
-  var counts={admin:0,serveur:0,menu:0};
-  ARTICLES.forEach(function(a){counts[a.cat]=(counts[a.cat]||0)+1;});
-  var html='<button class="g-tab on" data-cat="all" onclick="gFilterCat(\'all\')">'+CHROME[l].all+' <span class="g-tab-count">'+ARTICLES.length+'</span></button>';
+/* ═══ SIDEBAR / DRAWER TOC ═══ */
+function buildSidebar(l){
+  var byCat={};
+  ARTICLES.forEach(function(a){ (byCat[a.cat]=byCat[a.cat]||[]).push(a); });
+  var html='';
   CATS.forEach(function(c){
-    html+='<button class="g-tab" data-cat="'+c.id+'" onclick="gFilterCat(\''+c.id+'\')">'+c.icon+' '+c.name[l]+' <span class="g-tab-count">'+counts[c.id]+'</span></button>';
+    if(!byCat[c.id]) return;
+    html+='<div class="g-toc-group"><div class="g-toc-group-hd">'+c.icon+'<span>'+c.name[l]+'</span></div>';
+    byCat[c.id].forEach(function(a){
+      html+='<a class="g-toc-link" href="#'+a.id+'" data-id="'+a.id+'" onclick="event.preventDefault();gotoArticle(\''+a.id+'\')">'+a.title[l]+'</a>';
+    });
+    html+='</div>';
   });
-  wrap.innerHTML=html;
+  document.getElementById('g-toc').innerHTML=html;
 }
-var curCat='all';
-function gFilterCat(cat){
-  curCat=cat;
-  [...document.querySelectorAll('.g-tab')].forEach(function(b){b.classList.toggle('on',b.dataset.cat===cat);});
-  renderArticles(curLang);
+
+/* ═══ DRAWER (mobile) ═══ */
+var _lockCount=0;
+function _lockBody(on){
+  _lockCount += on?1:-1;
+  if(_lockCount<0) _lockCount=0;
+  document.body.classList.toggle('g-lock', _lockCount>0);
+}
+function openDrawer(){
+  var el=document.getElementById('g-side');
+  el.classList.add('open');
+  el.setAttribute('role','dialog');
+  el.setAttribute('aria-modal','true');
+  document.getElementById('g-side-backdrop').classList.add('show');
+  document.getElementById('gnav-menu-btn').setAttribute('aria-expanded','true');
+  _lockBody(true);
+  setTimeout(function(){ document.getElementById('g-side-close').focus(); },10);
+}
+function closeDrawer(restoreFocus){
+  var el=document.getElementById('g-side');
+  if(!el.classList.contains('open')) return;
+  el.classList.remove('open');
+  el.removeAttribute('role');
+  el.removeAttribute('aria-modal');
+  document.getElementById('g-side-backdrop').classList.remove('show');
+  var btn=document.getElementById('gnav-menu-btn');
+  btn.setAttribute('aria-expanded','false');
+  _lockBody(false);
+  if(restoreFocus!==false) btn.focus();
+}
+function toggleDrawer(){
+  document.getElementById('g-side').classList.contains('open') ? closeDrawer(true) : openDrawer();
 }
 </script>
 
@@ -355,33 +512,18 @@ var GUIDE_IMG_OVERRIDES={}; // photos personnalisées depuis control-app — dem
 
 function renderArticles(l){
   var main=document.getElementById('g-main');
-  var query=norm(document.getElementById('g-search-input').value.trim());
-  var list=ARTICLES.filter(function(a){ return curCat==='all' || a.cat===curCat; });
-
-  var matched=list;
-  if(query){
-    matched=list.filter(function(a){
-      var hay=norm(a.title[l]+' '+stripHtml(a.body[l])+' '+(a.kw&&a.kw[l]?a.kw[l].join(' '):''));
-      return hay.indexOf(query)!==-1;
-    });
-  }
-
-  document.getElementById('g-empty').classList.toggle('show', matched.length===0);
-  if(matched.length===0){ main.innerHTML=''; return; }
+  document.getElementById('g-empty').classList.remove('show');
 
   var byCat={};
-  matched.forEach(function(a){ (byCat[a.cat]=byCat[a.cat]||[]).push(a); });
+  ARTICLES.forEach(function(a){ (byCat[a.cat]=byCat[a.cat]||[]).push(a); });
 
   var html='';
   CATS.forEach(function(c){
     if(!byCat[c.id]) return;
-    html+='<section class="g-catgroup"><div class="g-catgroup-hd"><div class="g-catgroup-ic">'+c.icon+'</div><div><div class="g-catgroup-title">'+c.name[l]+'</div><div class="g-catgroup-sub">'+c.sub[l]+'</div></div></div>';
+    html+='<section class="g-catgroup" id="'+c.id+'"><div class="g-catgroup-hd"><div class="g-catgroup-ic">'+c.icon+'</div><div><div class="g-catgroup-title">'+c.name[l]+'</div><div class="g-catgroup-sub">'+c.sub[l]+'</div></div></div>';
     byCat[c.id].forEach(function(a,i){
-      var isOpen = query ? true : !!openIds[a.id];
+      var isOpen = !!openIds[a.id];
       var title = a.title[l], body = a.body[l];
-      if(query){
-        title = highlight(title, query);
-      }
       var imgUrl = GUIDE_IMG_OVERRIDES[a.id] || (a.img ? 'assets/guide/'+a.img : '');
       var imgHtml = imgUrl ? '<div class="g-art-img-wrap"><img src="'+escAttr(imgUrl)+'" alt="'+ escAttr(a.imgAlt?a.imgAlt[l]:a.title[l]) +'" loading="lazy"></div>' : '';
       var tipHtml = a.tip ? '<div class="g-art-tip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg><span>'+a.tip[l]+'</span></div>' : '';
@@ -399,13 +541,39 @@ function renderArticles(l){
     html+='</section>';
   });
   main.innerHTML=html;
+  initScrollSpy();
 }
 
-function highlight(text, q){
-  if(!q) return text;
-  var idx = norm(text).indexOf(q);
-  if(idx===-1) return text;
-  return text.slice(0,idx) + '<mark>' + text.slice(idx, idx+q.length) + '</mark>' + text.slice(idx+q.length);
+/* Highlights every occurrence of every token inside text (accent/case-insensitive
+   matching via norm(), applied on the ORIGINAL string so accents stay visible).
+   Overlapping/adjacent matches are merged so <mark> tags never nest or corrupt HTML. */
+function highlightTokens(text, tokens){
+  if(!tokens || !tokens.length) return text;
+  var normText = norm(text);
+  var ranges=[];
+  tokens.forEach(function(tok){
+    if(!tok) return;
+    var start=0, idx;
+    while((idx=normText.indexOf(tok,start))!==-1){
+      ranges.push([idx, idx+tok.length]);
+      start=idx+tok.length;
+    }
+  });
+  if(!ranges.length) return text;
+  ranges.sort(function(a,b){ return a[0]-b[0]; });
+  var merged=[ranges[0]];
+  for(var i=1;i<ranges.length;i++){
+    var last=merged[merged.length-1];
+    if(ranges[i][0]<=last[1]) last[1]=Math.max(last[1],ranges[i][1]);
+    else merged.push(ranges[i]);
+  }
+  var out='', pos=0;
+  merged.forEach(function(r){
+    out += text.slice(pos, r[0]) + '<mark>' + text.slice(r[0], r[1]) + '</mark>';
+    pos = r[1];
+  });
+  out += text.slice(pos);
+  return out;
 }
 
 function gArtKeydown(ev,id){
@@ -425,15 +593,201 @@ function gToggleArt(id){
   openIds[id]=willOpen;
 }
 
-function gOnSearch(v){
-  document.getElementById('g-search-clear').classList.toggle('show', v.length>0);
-  renderArticles(curLang);
+/* Opens an article (from sidebar / search / deep-link) and scrolls to it */
+function gotoArticle(id){
+  closeDrawer(false);
+  closeSearch(false);
+  var el=document.querySelector('.g-art[data-id="'+id+'"]');
+  if(!el) return;
+  if(!el.classList.contains('open')){
+    el.classList.add('open');
+    openIds[id]=true;
+    var hd=el.querySelector('.g-art-hd');
+    if(hd) hd.setAttribute('aria-expanded','true');
+  }
+  setActiveTocLink(id);
+  requestAnimationFrame(function(){
+    var navH = document.getElementById('nav').offsetHeight;
+    var y = el.getBoundingClientRect().top + window.pageYOffset - navH - 14;
+    window.scrollTo({top:Math.max(0,y), behavior:'smooth'});
+  });
 }
-function gClearSearch(){
-  document.getElementById('g-search-input').value='';
-  document.getElementById('g-search-clear').classList.remove('show');
-  renderArticles(curLang);
+
+function setActiveTocLink(id){
+  [...document.querySelectorAll('.g-toc-link')].forEach(function(l){ l.classList.toggle('on', l.dataset.id===id); });
 }
+
+/* ═══ SCROLLSPY ═══ */
+var _spyObserver=null;
+function initScrollSpy(){
+  if(_spyObserver) _spyObserver.disconnect();
+  var navH = document.getElementById('nav').offsetHeight;
+  _spyObserver = new IntersectionObserver(function(entries){
+    var visible = entries.filter(function(e){ return e.isIntersecting; });
+    if(!visible.length) return;
+    visible.sort(function(a,b){ return a.boundingClientRect.top - b.boundingClientRect.top; });
+    var id = visible[0].target.getAttribute('data-id');
+    if(id) setActiveTocLink(id);
+  },{ rootMargin: (-navH-8)+'px 0px -70% 0px', threshold:0 });
+  [...document.querySelectorAll('.g-art')].forEach(function(el){ _spyObserver.observe(el); });
+}
+
+/* ═══ COMMAND-PALETTE SEARCH ═══ */
+var _cmdkIndex=-1, _cmdkResults=[];
+
+function openSearch(){
+  closeDrawer(false);
+  var el=document.getElementById('g-cmdk');
+  el.classList.add('open');
+  _lockBody(true);
+  var input=document.getElementById('g-cmdk-input');
+  setTimeout(function(){ input.focus(); },10);
+}
+function closeSearch(restoreFocus){
+  var el=document.getElementById('g-cmdk');
+  if(!el.classList.contains('open')) return;
+  el.classList.remove('open');
+  _lockBody(false);
+  if(restoreFocus!==false) document.getElementById('gnav-search-btn').focus();
+}
+
+/* Builds a short excerpt around the earliest matching token, so the user sees
+   WHY the article matched even when the match is buried in the body text. */
+function buildSnippet(a,l,tokens){
+  var bodyText=stripHtml(a.body[l]);
+  var normBody=norm(bodyText);
+  var bestIdx=-1;
+  tokens.forEach(function(tok){
+    var idx=normBody.indexOf(tok);
+    if(idx!==-1 && (bestIdx===-1 || idx<bestIdx)) bestIdx=idx;
+  });
+  if(bestIdx===-1) return highlightTokens(bodyText.slice(0,100)+(bodyText.length>100?'…':''), tokens);
+  var start=Math.max(0, bestIdx-36);
+  var end=Math.min(bodyText.length, bestIdx+70);
+  var snippet=(start>0?'…':'')+bodyText.slice(start,end)+(end<bodyText.length?'…':'');
+  return highlightTokens(snippet, tokens);
+}
+
+/* A match "at a word boundary" (whole word, not buried inside an unrelated word
+   like "art" inside "départ") is a much stronger relevance signal than a bare
+   substring — this is what keeps generic/short words from producing noisy results. */
+function _isBoundaryChar(ch){
+  return !ch || /[\s.,;:!?()«»"'\-–—/·…]/.test(ch);
+}
+function _tokenScore(haystack, tok, boundaryPts, substringPts){
+  var idx=haystack.indexOf(tok);
+  if(idx===-1) return 0;
+  var before = idx>0 ? haystack[idx-1] : '';
+  var after = (idx+tok.length)<haystack.length ? haystack[idx+tok.length] : '';
+  return (_isBoundaryChar(before) && _isBoundaryChar(after)) ? boundaryPts : substringPts;
+}
+
+/* Multi-word AND search (like every modern search engine): each word typed must be
+   found SOMEWHERE (title, keywords or body), in any order — not just as one exact
+   phrase. Ranked by relevance: whole-word title match > exact phrase > keywords > body,
+   with mid-word incidental matches scored far lower than genuine word matches. */
+function searchArticles(l, tokens){
+  if(!tokens.length) return [];
+  var phrase=tokens.join(' ');
+  var scored=[];
+  ARTICLES.forEach(function(a,idx){
+    var title=norm(a.title[l]);
+    var body=norm(stripHtml(a.body[l]));
+    var kwArr=a.kw&&a.kw[l]?a.kw[l].map(norm):[];
+    var kwText=kwArr.join(' ');
+    var allMatch = tokens.every(function(tok){
+      return title.indexOf(tok)!==-1 || kwText.indexOf(tok)!==-1 || body.indexOf(tok)!==-1;
+    });
+    if(!allMatch) return;
+    var score=0;
+    tokens.forEach(function(tok){
+      score += _tokenScore(title, tok, 100, 30);
+      score += _tokenScore(kwText, tok, 42, 14);
+      score += _tokenScore(body, tok, 9, 3);
+    });
+    if(title.indexOf(phrase)!==-1) score+=60;
+    else if(kwText.indexOf(phrase)!==-1 || body.indexOf(phrase)!==-1) score+=15;
+    if(title.indexOf(tokens[0])===0) score+=25;
+    scored.push({a:a,score:score,idx:idx});
+  });
+  scored.sort(function(x,y){ return y.score-x.score || x.idx-y.idx; });
+  return scored.slice(0,12).map(function(s){ return s.a; });
+}
+
+function onSearchInput(v){
+  var l=curLang, q=v.trim();
+  var resultsEl=document.getElementById('g-cmdk-results');
+  _cmdkIndex=-1;
+  if(!q){
+    var t=CHROME[l];
+    resultsEl.innerHTML='<div class="g-cmdk-hint" id="g-cmdk-hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><div class="g-cmdk-hint-title">'+t.searchHintTitle+'</div><div class="g-cmdk-hint-sub">'+t.searchHintSub+'</div></div>';
+    _cmdkResults=[];
+    return;
+  }
+  var tokens=norm(q).split(/\s+/).filter(Boolean);
+  var matches=searchArticles(l, tokens);
+  _cmdkResults=matches;
+  if(!matches.length){
+    var t2=CHROME[l];
+    resultsEl.innerHTML='<div class="g-cmdk-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><div class="g-cmdk-hint-title">'+t2.emptyTitle+'</div><div class="g-cmdk-hint-sub">'+t2.emptySub+'</div></div>';
+    return;
+  }
+  var catById={}; CATS.forEach(function(c){ catById[c.id]=c; });
+  var html='';
+  matches.forEach(function(a,i){
+    var c=catById[a.cat];
+    html+='<div class="g-cmdk-result" data-i="'+i+'" data-id="'+a.id+'" onclick="gotoArticle(\''+a.id+'\')" onmouseenter="_cmdkSetActive('+i+',false)">'+
+      '<div class="g-cmdk-result-ic">'+c.icon+'</div>'+
+      '<div><div class="g-cmdk-result-title">'+highlightTokens(a.title[l],tokens)+'</div>'+
+      '<div class="g-cmdk-result-snip">'+buildSnippet(a,l,tokens)+'</div>'+
+      '<div class="g-cmdk-result-cat">'+c.name[l]+'</div></div>'+
+    '</div>';
+  });
+  resultsEl.innerHTML=html;
+}
+
+function _cmdkSetActive(i, scroll){
+  _cmdkIndex=i;
+  var items=[...document.querySelectorAll('.g-cmdk-result')];
+  items.forEach(function(el){ el.classList.toggle('active', +el.dataset.i===i); });
+  if(scroll && items[i]) items[i].scrollIntoView({block:'nearest'});
+}
+
+function onSearchKeydown(ev){
+  if(ev.key==='Escape'){ closeSearch(); return; }
+  if(!_cmdkResults.length) return;
+  if(ev.key==='ArrowDown'){
+    ev.preventDefault();
+    _cmdkSetActive((_cmdkIndex+1)%_cmdkResults.length, true);
+  } else if(ev.key==='ArrowUp'){
+    ev.preventDefault();
+    _cmdkSetActive((_cmdkIndex-1+_cmdkResults.length)%_cmdkResults.length, true);
+  } else if(ev.key==='Enter'){
+    ev.preventDefault();
+    var pick = _cmdkIndex>=0 ? _cmdkResults[_cmdkIndex] : _cmdkResults[0];
+    if(pick) gotoArticle(pick.id);
+  }
+}
+
+/* Global shortcuts: "/" opens search (outside inputs), Ctrl/Cmd+K always toggles it */
+document.addEventListener('keydown', function(ev){
+  var tag = (ev.target && ev.target.tagName) || '';
+  var typing = tag==='INPUT' || tag==='TEXTAREA' || (ev.target && ev.target.isContentEditable);
+  if((ev.ctrlKey||ev.metaKey) && ev.key.toLowerCase()==='k'){
+    ev.preventDefault();
+    document.getElementById('g-cmdk').classList.contains('open') ? closeSearch() : openSearch();
+    return;
+  }
+  if(ev.key==='/' && !typing){
+    ev.preventDefault();
+    openSearch();
+    return;
+  }
+  if(ev.key==='Escape'){
+    if(document.getElementById('g-cmdk').classList.contains('open')) closeSearch();
+    else if(document.getElementById('g-side').classList.contains('open')) closeDrawer();
+  }
+});
 
 /* ═══ INIT ═══ */
 (function(){
@@ -446,7 +800,7 @@ function gClearSearch(){
   document.documentElement.lang=l;
   [...document.querySelectorAll('.g-langdd button')].forEach(function(b){b.classList.toggle('on',b.dataset.l===l);});
   applyChrome(l);
-  buildTabs(l);
+  buildSidebar(l);
   openIds[ARTICLES[0]?ARTICLES[0].id:'']=true;
   renderArticles(l);
 
@@ -463,19 +817,18 @@ function gClearSearch(){
   }
 
   var q=params.get('q');
-  if(q){ document.getElementById('g-search-input').value=q; gOnSearch(q); }
+  if(q){
+    openSearch();
+    document.getElementById('g-cmdk-input').value=q;
+    onSearchInput(q);
+  }
   if(location.hash){
     var id=location.hash.slice(1);
     var target=ARTICLES.find(function(a){return a.id===id;});
     if(target){
-      curCat=target.cat;
-      gFilterCat(target.cat);
       openIds[id]=true;
       renderArticles(l);
-      setTimeout(function(){
-        var el=document.querySelector('.g-art[data-id="'+id+'"]');
-        if(el) el.scrollIntoView({behavior:'smooth',block:'center'});
-      },300);
+      setTimeout(function(){ gotoArticle(id); },250);
     }
   }
 })();
