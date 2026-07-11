@@ -3324,9 +3324,10 @@ html.light .dmk-plain{background:#e9e1cc;border-color:rgba(26,18,8,.14)}
 
 /* ── Séparateur visuel entre groupes A/B (Fix #252, section Avantages) ── */
 .xacc-group-label{
-  display:flex;align-items:center;gap:.6rem;margin:.4rem 0 .2rem;padding:0 .3rem;
+  display:flex;align-items:center;gap:.6rem;margin:1.9rem 0 .3rem;padding:0 .3rem;
   font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-2);font-weight:600;
 }
+.xacc-group-label:first-child{margin-top:.4rem}
 .xacc-group-label::after{content:'';flex:1;height:1px;background:var(--line-2)}
 .xacc-group-label .xacc-group-badge{
   font-size:.62rem;letter-spacing:.03em;text-transform:none;font-weight:500;
