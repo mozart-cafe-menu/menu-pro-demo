@@ -5918,6 +5918,16 @@ html.light .dmk-plain{background:#e9e1cc;border-color:rgba(26,18,8,.14)}
 (function(){
   'use strict';
 
+  // Détecte si la page est servie depuis son propre domaine (menu-pro-demo.vercel.app,
+  // ou une URL preview Vercel) ou proxée depuis un autre domaine (ex: genext-qr.com,
+  // via un rewrite Vercel vers une URL externe) — dans ce 2e cas, ses propres routes
+  // /api/* doivent passer par le préfixe réservé /site-api/* côté domaine proxy pour
+  // ne jamais entrer en collision avec les fonctions /api/* du projet SaaS qui possède
+  // le nom de domaine (ex: notify-forfait.js existe dans les 2 projets, logique différente).
+  var API_BASE = (location.hostname === 'menu-pro-demo.vercel.app' ||
+                   /^menu-pro-demo-[a-z0-9-]+-mozart-cafe-menus-projects\.vercel\.app$/.test(location.hostname))
+    ? '/api' : '/site-api';
+
   // ── Pays / indicatifs ─────────────────────────────────
   var COUNTRIES = [
     {c:'+33',f:'🇫🇷',n:'France'},
@@ -6221,7 +6231,7 @@ html.light .dmk-plain{background:#e9e1cc;border-color:rgba(26,18,8,.14)}
       var chain = Promise.resolve();
       batches.forEach(function(batch, idx) {
         chain = chain.then(function() {
-          return fetch('/api/menu-upload', {
+          return fetch(API_BASE + '/menu-upload', {
             method: 'POST', headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
               rid: rid, restaurantName: restaurantName, files: batch,
@@ -6294,7 +6304,7 @@ html.light .dmk-plain{background:#e9e1cc;border-color:rgba(26,18,8,.14)}
 
     getControlDb().ref('/commandes/' + ts).set(commande)
       .then(function() {
-        return fetch('/api/notify-commande', {
+        return fetch(API_BASE + '/notify-commande', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
