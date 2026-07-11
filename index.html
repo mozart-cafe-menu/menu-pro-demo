@@ -3063,65 +3063,87 @@ html.light .fo-card-featured{
 
 /* ═══════════════════════════════════════════════════════════════
    NEW · 05c · ACCORDIONS — #pourquoi-qr + #avantages (features)
+   Mobile-first : liste allégée à séparateurs fins (même esprit que le
+   Guide utilisateur, voir feedback_guide_page_v2) — cartes premium
+   bordées réservées au desktop (≥861px), jamais l'inverse. Chaque item
+   apparaît en fondu/glissement individuel au scroll (IntersectionObserver
+   dédié, voir JS plus bas), et son contenu se révèle en cascade à
+   l'ouverture (pas seulement un déplissage de hauteur).
 ═══════════════════════════════════════════════════════════════ */
 .xacc-shell{position:relative;z-index:2;width:100%;max-width:var(--max);margin:0 auto;padding:0 var(--pad-x)}
 .xacc-head{max-width:680px;margin:0 auto 3rem;text-align:center}
 .xacc-head .eyebrow{justify-content:center;margin:0 auto 1rem}
 .xacc-head h2{font-size:clamp(2.1rem,5vw,3.8rem);margin-bottom:.9rem}
 .xacc-head .lead{max-width:560px;margin:0 auto}
-.xacc-list{display:flex;flex-direction:column;gap:.85rem;max-width:980px;margin:0 auto}
+.xacc-list{display:flex;flex-direction:column;gap:0;max-width:980px;margin:0 auto}
 .xacc-item{
-  border:1px solid var(--line-2);border-radius:20px;background:var(--ink-2);
-  overflow:hidden;transition:border-color .4s,box-shadow .4s,background .4s;
+  border:0;border-bottom:1px solid var(--line);border-radius:0;background:transparent;
+  overflow:hidden;transition:opacity .7s var(--e-out),transform .7s var(--e-out),border-color .4s,box-shadow .4s,background-color .5s;
 }
-.xacc-item.is-open{
-  border-color:rgba(200,164,78,.42);
-  box-shadow:0 28px 68px -30px rgba(200,164,78,.24);
-}
+.xacc-item:last-child{border-bottom:0}
+.xacc-item.is-open{background:rgba(200,164,78,.04)}
 .xacc-head-btn{
-  width:100%;display:flex;align-items:center;gap:1.1rem;padding:1.25rem 1.5rem;
+  width:100%;display:flex;align-items:center;gap:.85rem;padding:1rem 0;
   text-align:left;cursor:pointer;background:none;border:none;font:inherit;color:inherit;
 }
-.xacc-num{font-family:var(--serif);font-size:.82rem;color:var(--mute-2);flex-shrink:0;width:1.5rem}
+.xacc-num{font-family:var(--serif);font-size:.82rem;color:var(--mute-2);flex-shrink:0;width:1.5rem;display:none}
 .xacc-icon{
-  width:42px;height:42px;border-radius:12px;flex-shrink:0;display:flex;align-items:center;justify-content:center;
+  width:34px;height:34px;border-radius:10px;flex-shrink:0;display:flex;align-items:center;justify-content:center;
   background:rgba(200,164,78,.1);border:1px solid var(--line-2);color:var(--gold);
   transition:background .4s,border-color .4s,transform .45s var(--e-back),color .4s;
 }
-.xacc-icon svg{width:19px;height:19px}
+.xacc-icon svg{width:16px;height:16px}
 .xacc-item.is-open .xacc-icon{
   background:linear-gradient(135deg,var(--gold-2),var(--gold),var(--gold-3));
   color:#0c0a08;transform:scale(1.08) rotate(-4deg);border-color:transparent;
 }
-.xacc-title{flex:1;font-family:var(--serif);font-size:clamp(1rem,2vw,1.22rem);font-weight:500;color:var(--bone);letter-spacing:-.01em}
+.xacc-title{flex:1;font-family:var(--serif);font-size:1rem;font-weight:500;color:var(--bone);letter-spacing:-.01em;line-height:1.4}
 .xacc-chev{
-  width:32px;height:32px;border-radius:50%;border:1px solid var(--line-2);flex-shrink:0;
+  width:27px;height:27px;border-radius:50%;border:1px solid var(--line-2);flex-shrink:0;
   display:flex;align-items:center;justify-content:center;
   transition:transform .5s var(--e-out),border-color .3s,background .3s;
 }
 .xacc-item.is-open .xacc-chev{transform:rotate(180deg);border-color:var(--gold);background:rgba(200,164,78,.12)}
-.xacc-chev svg{width:13px;height:13px;color:var(--mute);transition:color .3s}
+.xacc-chev svg{width:12px;height:12px;color:var(--mute);transition:color .3s}
 .xacc-item.is-open .xacc-chev svg{color:var(--gold)}
 .xacc-panel{display:grid;grid-template-rows:0fr;transition:grid-template-rows .55s var(--e-out)}
 .xacc-item.is-open .xacc-panel{grid-template-rows:1fr}
 .xacc-panel-inner{overflow:hidden}
 .xacc-panel-body{
-  display:grid;grid-template-columns:1.05fr 1fr;gap:2.6rem;align-items:center;
-  padding:.3rem 1.5rem 2.3rem;
+  display:grid;grid-template-columns:1fr;gap:1.4rem;
+  padding:.15rem 0 1.6rem;
 }
-.xacc-desc{color:var(--mute);font-size:.95rem;line-height:1.72}
+.xacc-panel-body>*{opacity:0;transform:translateY(12px);transition:opacity .5s var(--e-out),transform .5s var(--e-out)}
+.xacc-item.is-open .xacc-panel-body>*{opacity:1;transform:none}
+.xacc-item.is-open .xacc-panel-body>*:nth-child(1){transition-delay:.08s}
+.xacc-item.is-open .xacc-panel-body>*:nth-child(2){transition-delay:.18s}
+.xacc-desc{color:var(--mute);font-size:.9rem;line-height:1.72}
 .xacc-tags{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.15rem}
 .xacc-tag{
   font-size:.7rem;letter-spacing:.03em;padding:.35rem .75rem;border-radius:20px;
   background:rgba(200,164,78,.1);border:1px solid var(--line-2);color:var(--gold-2);
 }
-@media(max-width:860px){
-  .xacc-panel-body{grid-template-columns:1fr;gap:1.5rem}
-  .xacc-head-btn{padding:1.05rem 1.1rem}
-  .xacc-num{display:none}
+@media(min-width:861px){
+  .xacc-list{gap:.85rem}
+  .xacc-item{
+    border:1px solid var(--line-2);border-radius:20px;background:var(--ink-2);
+  }
+  .xacc-item.is-open{
+    border-color:rgba(200,164,78,.42);background:var(--ink-2);
+    box-shadow:0 28px 68px -30px rgba(200,164,78,.24);
+  }
+  .xacc-head-btn{gap:1.1rem;padding:1.25rem 1.5rem}
+  .xacc-num{display:block}
+  .xacc-icon{width:42px;height:42px;border-radius:12px}
+  .xacc-icon svg{width:19px;height:19px}
+  .xacc-title{font-size:clamp(1rem,2vw,1.22rem)}
+  .xacc-chev{width:32px;height:32px}
+  .xacc-chev svg{width:13px;height:13px}
+  .xacc-panel-body{grid-template-columns:1.05fr 1fr;gap:2.6rem;align-items:center;padding:.3rem 1.5rem 2.3rem}
 }
 @media(prefers-reduced-motion:reduce){
-  .xacc-panel,.xacc-icon,.xacc-chev,.xacc-chev svg{transition:none}
+  .xacc-panel,.xacc-icon,.xacc-chev,.xacc-chev svg,.xacc-item,.xacc-panel-body>*{transition:none}
+  .xacc-item,.xacc-panel-body>*{opacity:1;transform:none}
 }
 
 /* ═══════════════════════════════════════════════════════════════
@@ -3648,10 +3670,10 @@ html.light .dmk-plain{background:#e9e1cc;border-color:rgba(26,18,8,.14)}
       <p class="lead" data-i18n="qr.lead">Le menu papier a fait son temps. Voici ce que change concrètement un menu digital pour votre établissement et vos clients.</p>
     </header>
 
-    <div class="xacc-list reveal delay-1" id="qrAccList">
+    <div class="xacc-list" id="qrAccList">
 
       <!-- 01 · Investissement rentable — 1 photo sans cadre -->
-      <div class="xacc-item is-open" data-acc-group="qr" data-acc-key="qr-hygiene">
+      <div class="xacc-item reveal delay-1 is-open" data-acc-group="qr" data-acc-key="qr-hygiene">
         <button class="xacc-head-btn" onclick="toggleAcc(this)">
           <span class="xacc-num">01</span>
           <span class="xacc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8.6 9.3c1-.9 2.2-1.4 3.5-1.4 2.9 0 5.2 2.3 5.2 5.1s-2.3 5.1-5.2 5.1c-1.3 0-2.5-.5-3.5-1.4"/><path d="M6.6 10.6h5.4M6.6 13.4h4.1"/></svg></span>
@@ -3671,7 +3693,7 @@ html.light .dmk-plain{background:#e9e1cc;border-color:rgba(26,18,8,.14)}
       </div>
 
       <!-- 02 · Agilité totale — cadre bureau + mobile (inchangé) -->
-      <div class="xacc-item" data-acc-group="qr" data-acc-key="qr-instant">
+      <div class="xacc-item reveal delay-2" data-acc-group="qr" data-acc-key="qr-instant">
         <button class="xacc-head-btn" onclick="toggleAcc(this)">
           <span class="xacc-num">02</span>
           <span class="xacc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5l3.4 2"/></svg></span>
@@ -3691,7 +3713,7 @@ html.light .dmk-plain{background:#e9e1cc;border-color:rgba(26,18,8,.14)}
       </div>
 
       <!-- 03 · Vitrine dynamique — 3 photos cadre téléphone -->
-      <div class="xacc-item" data-acc-group="qr" data-acc-key="qr-multilang">
+      <div class="xacc-item reveal delay-3" data-acc-group="qr" data-acc-key="qr-multilang">
         <button class="xacc-head-btn" onclick="toggleAcc(this)">
           <span class="xacc-num">03</span>
           <span class="xacc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></span>
@@ -3711,7 +3733,7 @@ html.light .dmk-plain{background:#e9e1cc;border-color:rgba(26,18,8,.14)}
       </div>
 
       <!-- 04 · Expérience client premium — 1 photo sans cadre -->
-      <div class="xacc-item" data-acc-group="qr" data-acc-key="qr-eco">
+      <div class="xacc-item reveal delay-1" data-acc-group="qr" data-acc-key="qr-eco">
         <button class="xacc-head-btn" onclick="toggleAcc(this)">
           <span class="xacc-num">04</span>
           <span class="xacc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8V5a1 1 0 011-1h3M4 16v3a1 1 0 001 1h3M20 8V5a1 1 0 00-1-1h-3M20 16v3a1 1 0 01-1 1h-3"/><rect x="9.5" y="9.5" width="5" height="5" rx="1"/></svg></span>
@@ -3731,7 +3753,7 @@ html.light .dmk-plain{background:#e9e1cc;border-color:rgba(26,18,8,.14)}
       </div>
 
       <!-- 05 · Pilotage par la donnée — cadre bureau + mobile (inchangé) -->
-      <div class="xacc-item" data-acc-group="qr" data-acc-key="qr-image">
+      <div class="xacc-item reveal delay-2" data-acc-group="qr" data-acc-key="qr-image">
         <button class="xacc-head-btn" onclick="toggleAcc(this)">
           <span class="xacc-num">05</span>
           <span class="xacc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="12" width="3.2" height="8" rx="1"/><rect x="10.4" y="7" width="3.2" height="13" rx="1"/><rect x="16.8" y="3" width="3.2" height="17" rx="1"/></svg></span>
@@ -3751,7 +3773,7 @@ html.light .dmk-plain{background:#e9e1cc;border-color:rgba(26,18,8,.14)}
       </div>
 
       <!-- 06 · Image de marque — 1 photo sans cadre -->
-      <div class="xacc-item" data-acc-group="qr" data-acc-key="qr-autonomy">
+      <div class="xacc-item reveal delay-3" data-acc-group="qr" data-acc-key="qr-autonomy">
         <button class="xacc-head-btn" onclick="toggleAcc(this)">
           <span class="xacc-num">06</span>
           <span class="xacc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l7 3v6c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V5l7-3z"/><path d="M9 12l2 2 4-4"/></svg></span>
@@ -3810,12 +3832,12 @@ html.light .dmk-plain{background:#e9e1cc;border-color:rgba(26,18,8,.14)}
     </div>
 
     <!-- Accordéon : 6 fonctionnalités GeNext -->
-    <div class="xacc-list reveal delay-2" id="gxAccList">
+    <div class="xacc-list" id="gxAccList">
 
       <div class="xacc-group-label" data-i18n="gx.groupA">Menu QR Code</div>
 
       <!-- 01 · Identité visuelle -->
-      <div class="xacc-item is-open" data-acc-group="gx" data-acc-key="gx-identity">
+      <div class="xacc-item reveal delay-1 is-open" data-acc-group="gx" data-acc-key="gx-identity">
         <button class="xacc-head-btn" onclick="toggleAcc(this)">
           <span class="xacc-num">01</span>
           <span class="xacc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><circle cx="8" cy="10" r="2"/><path d="M4 18c0-2 1.8-3 4-3s4 1 4 3"/><line x1="14" y1="8" x2="20" y2="8"/><line x1="14" y1="12" x2="20" y2="12"/></svg></span>
@@ -3835,7 +3857,7 @@ html.light .dmk-plain{background:#e9e1cc;border-color:rgba(26,18,8,.14)}
       </div>
 
       <!-- 02 · Thèmes -->
-      <div class="xacc-item" data-acc-group="gx" data-acc-key="gx-themes">
+      <div class="xacc-item reveal delay-2" data-acc-group="gx" data-acc-key="gx-themes">
         <button class="xacc-head-btn" onclick="toggleAcc(this)">
           <span class="xacc-num">02</span>
           <span class="xacc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/><circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/><circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/><circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.9 0 1.5-.7 1.5-1.5 0-.4-.15-.75-.4-1.03-.24-.28-.4-.63-.4-1.03 0-.83.68-1.44 1.5-1.44H16c3.3 0 6-2.7 6-6 0-5-4.5-9-10-9z"/></svg></span>
@@ -3855,7 +3877,7 @@ html.light .dmk-plain{background:#e9e1cc;border-color:rgba(26,18,8,.14)}
       </div>
 
       <!-- 03 · Multilingue -->
-      <div class="xacc-item" data-acc-group="gx" data-acc-key="gx-lang">
+      <div class="xacc-item reveal delay-3" data-acc-group="gx" data-acc-key="gx-lang">
         <button class="xacc-head-btn" onclick="toggleAcc(this)">
           <span class="xacc-num">03</span>
           <span class="xacc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></span>
@@ -3876,7 +3898,7 @@ html.light .dmk-plain{background:#e9e1cc;border-color:rgba(26,18,8,.14)}
       </div>
 
       <!-- 04 · Organisation & recherche -->
-      <div class="xacc-item" data-acc-group="gx" data-acc-key="gx-nav">
+      <div class="xacc-item reveal delay-1" data-acc-group="gx" data-acc-key="gx-nav">
         <button class="xacc-head-btn" onclick="toggleAcc(this)">
           <span class="xacc-num">04</span>
           <span class="xacc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
@@ -3896,7 +3918,7 @@ html.light .dmk-plain{background:#e9e1cc;border-color:rgba(26,18,8,.14)}
       </div>
 
       <!-- 05 · Gestion commerciale & promotions -->
-      <div class="xacc-item" data-acc-group="gx" data-acc-key="gx-promo">
+      <div class="xacc-item reveal delay-2" data-acc-group="gx" data-acc-key="gx-promo">
         <button class="xacc-head-btn" onclick="toggleAcc(this)">
           <span class="xacc-num">05</span>
           <span class="xacc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41L11 3.83A2 2 0 009.59 3H4a1 1 0 00-1 1v5.59a2 2 0 00.59 1.41l9.58 9.58a2 2 0 002.82 0l4.6-4.6a2 2 0 000-2.82z"/><circle cx="7.5" cy="7.5" r="1.2" fill="currentColor" stroke="none"/></svg></span>
@@ -3916,7 +3938,7 @@ html.light .dmk-plain{background:#e9e1cc;border-color:rgba(26,18,8,.14)}
       </div>
 
       <!-- 06 · Options Dose & Sucre -->
-      <div class="xacc-item" data-acc-group="gx" data-acc-key="gx-options">
+      <div class="xacc-item reveal delay-3" data-acc-group="gx" data-acc-key="gx-options">
         <button class="xacc-head-btn" onclick="toggleAcc(this)">
           <span class="xacc-num">06</span>
           <span class="xacc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><circle cx="9" cy="6" r="2" fill="currentColor" stroke="none"/><line x1="4" y1="12" x2="20" y2="12"/><circle cx="15" cy="12" r="2" fill="currentColor" stroke="none"/><line x1="4" y1="18" x2="20" y2="18"/><circle cx="7" cy="18" r="2" fill="currentColor" stroke="none"/></svg></span>
@@ -3936,7 +3958,7 @@ html.light .dmk-plain{background:#e9e1cc;border-color:rgba(26,18,8,.14)}
       </div>
 
       <!-- 07 · Communication & programmation -->
-      <div class="xacc-item" data-acc-group="gx" data-acc-key="gx-notif">
+      <div class="xacc-item reveal delay-1" data-acc-group="gx" data-acc-key="gx-notif">
         <button class="xacc-head-btn" onclick="toggleAcc(this)">
           <span class="xacc-num">07</span>
           <span class="xacc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11v2a1 1 0 001 1h2l4 4V6l-4 4H4a1 1 0 00-1 1z"/><path d="M15 8a3 3 0 010 8"/><path d="M18 5a7 7 0 010 14"/></svg></span>
@@ -3956,7 +3978,7 @@ html.light .dmk-plain{background:#e9e1cc;border-color:rgba(26,18,8,.14)}
       </div>
 
       <!-- 08 · Digitalisation & QR Code -->
-      <div class="xacc-item" data-acc-group="gx" data-acc-key="gx-digital">
+      <div class="xacc-item reveal delay-2" data-acc-group="gx" data-acc-key="gx-digital">
         <button class="xacc-head-btn" onclick="toggleAcc(this)">
           <span class="xacc-num">08</span>
           <span class="xacc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM19 14h2v2h-2zM14 19h2v2h-2zM19 19h2v2h-2z"/></svg></span>
@@ -3976,7 +3998,7 @@ html.light .dmk-plain{background:#e9e1cc;border-color:rgba(26,18,8,.14)}
       </div>
 
       <!-- 09 · Avis Google en un clic -->
-      <div class="xacc-item" data-acc-group="gx" data-acc-key="gx-review">
+      <div class="xacc-item reveal delay-3" data-acc-group="gx" data-acc-key="gx-review">
         <button class="xacc-head-btn" onclick="toggleAcc(this)">
           <span class="xacc-num">09</span>
           <span class="xacc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span>
@@ -3998,7 +4020,7 @@ html.light .dmk-plain{background:#e9e1cc;border-color:rgba(26,18,8,.14)}
       <div class="xacc-group-label is-optional" data-i18n="gx.groupB">En plus, avec le forfait Commande & Appels<span class="xacc-group-badge" data-i18n="gx.groupB.badge">Optionnel</span></div>
 
       <!-- 10 · Commande & appel serveur -->
-      <div class="xacc-item" data-acc-group="gx" data-acc-key="gx-order">
+      <div class="xacc-item reveal delay-1" data-acc-group="gx" data-acc-key="gx-order">
         <button class="xacc-head-btn" onclick="toggleAcc(this)">
           <span class="xacc-num">10</span>
           <span class="xacc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg></span>
@@ -4018,7 +4040,7 @@ html.light .dmk-plain{background:#e9e1cc;border-color:rgba(26,18,8,.14)}
       </div>
 
       <!-- 11 · QR Code par table -->
-      <div class="xacc-item" data-acc-group="gx" data-acc-key="gx-qrtable">
+      <div class="xacc-item reveal delay-2" data-acc-group="gx" data-acc-key="gx-qrtable">
         <button class="xacc-head-btn" onclick="toggleAcc(this)">
           <span class="xacc-num">11</span>
           <span class="xacc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span>
@@ -4038,7 +4060,7 @@ html.light .dmk-plain{background:#e9e1cc;border-color:rgba(26,18,8,.14)}
       </div>
 
       <!-- 12 · Application serveur & suivi client -->
-      <div class="xacc-item" data-acc-group="gx" data-acc-key="gx-server">
+      <div class="xacc-item reveal delay-3" data-acc-group="gx" data-acc-key="gx-server">
         <button class="xacc-head-btn" onclick="toggleAcc(this)">
           <span class="xacc-num">12</span>
           <span class="xacc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2.5"/><line x1="11" y1="18" x2="13" y2="18"/></svg></span>
@@ -4058,7 +4080,7 @@ html.light .dmk-plain{background:#e9e1cc;border-color:rgba(26,18,8,.14)}
       </div>
 
       <!-- 13 · Statistiques & analyse -->
-      <div class="xacc-item" data-acc-group="gx" data-acc-key="gx-stats">
+      <div class="xacc-item reveal delay-1" data-acc-group="gx" data-acc-key="gx-stats">
         <button class="xacc-head-btn" onclick="toggleAcc(this)">
           <span class="xacc-num">13</span>
           <span class="xacc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg></span>
@@ -4091,9 +4113,9 @@ html.light .dmk-plain{background:#e9e1cc;border-color:rgba(26,18,8,.14)}
       <p class="lead" data-i18n="faq.lead">Tout ce que vous devez savoir avant de vous lancer — en toute transparence.</p>
     </header>
 
-    <div class="faq-list reveal delay-1" id="faqList">
+    <div class="faq-list" id="faqList">
 
-      <div class="xacc-item faq-item is-open" data-acc-group="faq" data-acc-key="faq-q1">
+      <div class="xacc-item reveal delay-2 faq-item is-open" data-acc-group="faq" data-acc-key="faq-q1">
         <button class="xacc-head-btn" onclick="toggleAcc(this)">
           <span class="xacc-num">Q1</span>
           <span class="xacc-title" data-i18n="faq.q1.q">Est-ce que vous créez mon menu QR code ou dois-je le faire moi-même ?</span>
@@ -4104,7 +4126,7 @@ html.light .dmk-plain{background:#e9e1cc;border-color:rgba(26,18,8,.14)}
         </div></div></div>
       </div>
 
-      <div class="xacc-item faq-item" data-acc-group="faq" data-acc-key="faq-q3">
+      <div class="xacc-item reveal delay-3 faq-item" data-acc-group="faq" data-acc-key="faq-q3">
         <button class="xacc-head-btn" onclick="toggleAcc(this)">
           <span class="xacc-num">Q2</span>
           <span class="xacc-title" data-i18n="faq.q3.q">Est-ce que le premier mois est vraiment gratuit ?</span>
@@ -4115,7 +4137,7 @@ html.light .dmk-plain{background:#e9e1cc;border-color:rgba(26,18,8,.14)}
         </div></div></div>
       </div>
 
-      <div class="xacc-item faq-item" data-acc-group="faq" data-acc-key="faq-q4">
+      <div class="xacc-item reveal delay-1 faq-item" data-acc-group="faq" data-acc-key="faq-q4">
         <button class="xacc-head-btn" onclick="toggleAcc(this)">
           <span class="xacc-num">Q3</span>
           <span class="xacc-title" data-i18n="faq.q4.q">Comment et quand je paye ?</span>
@@ -4126,7 +4148,7 @@ html.light .dmk-plain{background:#e9e1cc;border-color:rgba(26,18,8,.14)}
         </div></div></div>
       </div>
 
-      <div class="xacc-item faq-item" data-acc-group="faq" data-acc-key="faq-q5">
+      <div class="xacc-item reveal delay-2 faq-item" data-acc-group="faq" data-acc-key="faq-q5">
         <button class="xacc-head-btn" onclick="toggleAcc(this)">
           <span class="xacc-num">Q4</span>
           <span class="xacc-title" data-i18n="faq.q5.q">Est-ce que le menu sera facile à utiliser pour mes clients ?</span>
@@ -4137,7 +4159,7 @@ html.light .dmk-plain{background:#e9e1cc;border-color:rgba(26,18,8,.14)}
         </div></div></div>
       </div>
 
-      <div class="xacc-item faq-item" data-acc-group="faq" data-acc-key="faq-q6">
+      <div class="xacc-item reveal delay-3 faq-item" data-acc-group="faq" data-acc-key="faq-q6">
         <button class="xacc-head-btn" onclick="toggleAcc(this)">
           <span class="xacc-num">Q5</span>
           <span class="xacc-title" data-i18n="faq.q6.q">Est-ce que l'interface admin sera facile à utiliser ?</span>
@@ -4148,7 +4170,7 @@ html.light .dmk-plain{background:#e9e1cc;border-color:rgba(26,18,8,.14)}
         </div></div></div>
       </div>
 
-      <div class="xacc-item faq-item" data-acc-group="faq" data-acc-key="faq-q7">
+      <div class="xacc-item reveal delay-1 faq-item" data-acc-group="faq" data-acc-key="faq-q7">
         <button class="xacc-head-btn" onclick="toggleAcc(this)">
           <span class="xacc-num">Q6</span>
           <span class="xacc-title" data-i18n="faq.q7.q">Dois-je remplir toutes les langues moi-même ?</span>
