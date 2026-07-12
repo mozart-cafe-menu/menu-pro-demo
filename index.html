@@ -1983,6 +1983,10 @@ html[dir="rtl"] #lang-dropdown{left:var(--pad-x);right:auto}
 .fo-card-price-months{font-size:.74rem;color:var(--gold)}
 .fo-card-monthly{font-size:.81rem;color:var(--mute);line-height:1.4;margin-top:-.3rem}
 .fo-card-monthly strong{color:var(--bone-2);font-weight:600}
+/* Accent doré pour la mention "démarrage gratuit" — contraste vérifié : gold-2 en mode
+   sombre (12.4:1), #6b5218 en mode clair (6.5-7.1:1), même recette que .xacc-group-label. */
+.fo-card-monthly.fo-card-gift{color:var(--gold-2)}
+html.light .fo-card-monthly.fo-card-gift{color:#6b5218}
 .fo-card-actions{display:flex;flex-direction:column;gap:.6rem;margin-top:auto;padding-top:.4rem}
 /* ── Forfait selector buttons ── */
 .fo-selector{
@@ -4237,7 +4241,7 @@ html.light .xacc-group-label,html.light .xacc-group-label .xacc-group-badge{colo
             <span class="fo-card-price-months" data-i18n="fo.card.from3">après 1 mois d'essai gratuit</span>
           </div>
         </div>
-        <div class="fo-card-monthly" style="color:var(--gold-2);font-size:.82rem" data-i18n="fp.step1.sub.card">🎁 Démarrage 100% gratuit · aucun frais de création</div>
+        <div class="fo-card-monthly fo-card-gift" data-i18n="fp.step1.sub.card">🎁 Démarrage 100% gratuit · aucun frais de création</div>
         <div class="fo-card-actions">
           <button class="fo-card-btn-detail" onclick="openPopup('pop-forfait-0')" data-i18n="fo.card.details">Voir les détails</button>
           <button class="fo-card-btn-cmd" onclick="openCommanderPopup(0)" data-i18n="fo.card.cmd">Choisir</button>
@@ -4260,7 +4264,7 @@ html.light .xacc-group-label,html.light .xacc-group-label .xacc-group-badge{colo
             <span class="fo-card-price-months" data-i18n="fo.card.from3">après 1 mois d'essai gratuit</span>
           </div>
         </div>
-        <div class="fo-card-monthly" style="color:var(--gold-2);font-size:.82rem" data-i18n="fp.step1.sub.card">🎁 Démarrage 100% gratuit · aucun frais de création</div>
+        <div class="fo-card-monthly fo-card-gift" data-i18n="fp.step1.sub.card">🎁 Démarrage 100% gratuit · aucun frais de création</div>
         <div class="fo-card-actions">
           <button class="fo-card-btn-detail" onclick="openPopup('pop-forfait-1')" data-i18n="fo.card.details">Voir les détails</button>
           <button class="fo-card-btn-cmd" onclick="openCommanderPopup(1)" data-i18n="fo.card.cmd">Choisir</button>
