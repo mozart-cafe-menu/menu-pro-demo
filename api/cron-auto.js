@@ -506,6 +506,32 @@ function suspensionHtml(rawName, amount, mode, lang) {
     + '</table>';
 }
 
+// ── Email : upgrade au prorata non confirmé/payé après 7j → retour automatique ──
+function upgradeTimeoutHtml(rawName, lang) {
+  const name = escHtml(rawName || '');
+  const T = {
+    fr: { subtitle: 'Retour à votre forfait actuel', greeting: 'Bonjour,', intro: 'Votre demande de mise à niveau pour <strong style="color:#c8a44e">' + name + '</strong> n\'a pas été confirmée dans le délai de 7 jours.', body: 'Vous restez sur votre forfait actuel, sans aucun changement ni impact sur votre abonnement en cours. Vous pouvez refaire cette demande à tout moment.', footer: 'GeNext · Menus digitaux pour cafés et restaurants' },
+    en: { subtitle: 'Back to your current plan', greeting: 'Hello,', intro: 'Your upgrade request for <strong style="color:#c8a44e">' + name + '</strong> was not confirmed within the 7-day window.', body: 'You remain on your current plan, with no change or impact on your active subscription. You can request this upgrade again at any time.', footer: 'GeNext · Digital menus for cafés and restaurants' },
+    el: { subtitle: 'Επιστροφή στο τρέχον πλάνο', greeting: 'Γεια σας,', intro: 'Το αίτημα αναβάθμισης για <strong style="color:#c8a44e">' + name + '</strong> δεν επιβεβαιώθηκε εντός 7 ημερών.', body: 'Παραμένετε στο τρέχον πλάνο σας, χωρίς καμία αλλαγή. Μπορείτε να υποβάλετε ξανά το αίτημα οποτεδήποτε.', footer: 'GeNext · Ψηφιακά μενού για καφέ και εστιατόρια' },
+    es: { subtitle: 'Vuelta a su plan actual', greeting: '¡Hola,', intro: 'Su solicitud de mejora para <strong style="color:#c8a44e">' + name + '</strong> no se confirmó en el plazo de 7 días.', body: 'Permanece en su plan actual, sin ningún cambio. Puede volver a solicitar esta mejora en cualquier momento.', footer: 'GeNext · Menús digitales para cafés y restaurantes' },
+    de: { subtitle: 'Zurück zu Ihrem aktuellen Plan', greeting: 'Hallo,', intro: 'Ihre Upgrade-Anfrage für <strong style="color:#c8a44e">' + name + '</strong> wurde nicht innerhalb von 7 Tagen bestätigt.', body: 'Sie bleiben auf Ihrem aktuellen Plan, ohne Änderung. Sie können das Upgrade jederzeit erneut anfragen.', footer: 'GeNext · Digitale Speisekarten für Cafés und Restaurants' }
+  };
+  const t = T[lang] || T.fr;
+  return '<table width="100%" cellpadding="0" cellspacing="0" bgcolor="#f2ece0" style="background-color:#f2ece0">'
+    + '<tr><td align="center" style="padding:16px 8px">'
+    + '<table width="580" cellpadding="0" cellspacing="0" bgcolor="#ffffff" style="max-width:580px;width:100%;background-color:#ffffff;font-family:\'Segoe UI\',Arial,sans-serif">'
+    + _headerHtml(t.subtitle)
+    + '<tr><td bgcolor="#ffffff" style="background-color:#ffffff;padding:28px 32px">'
+    + '<h2 style="margin:0 0 12px;font-size:1.15rem;color:#c8a44e">' + t.greeting + '</h2>'
+    + '<p style="color:#2a1f10;line-height:1.7;margin-bottom:14px;font-size:0.92rem">' + t.intro + '</p>'
+    + '<p style="color:#7a6555;line-height:1.7;margin:0;font-size:0.88rem">' + t.body + '</p>'
+    + '</td></tr>'
+    + _footerHtml(t.footer)
+    + '</table>'
+    + '</td></tr>'
+    + '</table>';
+}
+
 // ── Handler principal ────────────────────────────────────────────────────────
 module.exports = async (req, res) => {
   res.setHeader('Content-Type', 'application/json');
@@ -754,18 +780,64 @@ module.exports = async (req, res) => {
       const pfc   = d.pendingForfaitChange;
       const isCS  = pfc.forfait === 'commandes-services';
       const feats = { callBtn: isCS, orderUI: isCS, photos: true, tableSystem: isCS, qrOrdering: isCS, eventOverlay: true };
+      // Nouveau cycle démarré exactement à l'échéance déjà en cours (le downgrade
+      // programmé s'applique à la date prévue, pas au moment du run du cron).
+      const newEndDate = (() => {
+        const dt = new Date(d.nextReminderAt);
+        dt.setMonth(dt.getMonth() + (d.paymentMode === 'annual' ? 12 : 1));
+        return dt.getTime();
+      })();
       try {
         await fbPatch(MAIN_DB, '/restaurants/' + ridBP + '/config/features', mainSecret, feats);
         await fbPatch(MAIN_DB, '/restaurants/' + ridBP + '/config/subscription', mainSecret, {
-          forfait: pfc.forfait, price: pfc.price, pendingChange: null, lastForfaitChange: now
+          forfait: pfc.forfait, price: pfc.price, pendingChange: null, lastForfaitChange: now, endDate: newEndDate
         });
         await fbPatch(CONTROL_DB, '/commandes/' + key, secret, {
-          forfait: pfc.forfait, price: pfc.price, pendingForfaitChange: null
+          forfait: pfc.forfait, price: pfc.price, pendingForfaitChange: null, nextReminderAt: newEndDate
         });
         stats.pendingApplied++;
         console.log('✅ BP forfait appliqué:', ridBP, '→', pfc.forfait);
       } catch(e) {
         console.error('⚠ BP erreur ' + ridBP + ':', e.message);
+      }
+    }
+  }
+
+  // ── B_UPG_TIMEOUT : auto-annuler un upgrade prorata non confirmé/payé après 7j ──
+  // Le forfait actif n'a jamais changé pendant l'attente (pendingUpgrade porte tout
+  // le devis) — il suffit d'effacer pendingUpgrade. AUCUNE suspension : le client a
+  // déjà un forfait payé et valide, on ne pénalise jamais une dépense non confirmée.
+  stats.upgradeTimeouts = 0;
+  if (mainSecret) {
+    for (const [key, d] of Object.entries(commandes)) {
+      if (!d || typeof d !== 'object') continue;
+      if (!d.pendingUpgrade || d.clientDeleted) continue;
+      if (now < d.pendingUpgrade.deadline) continue;
+      const ridUT = (d.emailData && d.emailData.rid) || d.clientCree?.rid;
+      if (!ridUT) continue;
+      try {
+        await fbPatch(CONTROL_DB, '/commandes/' + key, secret, { pendingUpgrade: null });
+        await fbPatch(MAIN_DB, '/restaurants/' + ridUT + '/config/subscription', mainSecret, { pendingUpgrade: null });
+        stats.upgradeTimeouts++;
+        console.log('↩️ B_UPG_TIMEOUT retour auto:', ridUT);
+        const emailAddr = (d.emailData && d.emailData.email) || d.email || '';
+        const langUT = (d.emailData && d.emailData.lang) || d.langue || 'fr';
+        if (emailAddr) {
+          try {
+            await transport.sendMail({
+              from:    `"GeNext" <${process.env.GMAIL_USER}>`,
+              replyTo: process.env.GMAIL_USER,
+              to: emailAddr,
+              subject: { fr:'↩️ Retour à votre forfait actuel — GeNext', en:'↩️ Back to your current plan — GeNext', el:'↩️ Επιστροφή στο τρέχον πλάνο — GeNext', es:'↩️ Vuelta a su plan actual — GeNext', de:'↩️ Zurück zu Ihrem aktuellen Plan — GeNext' }[langUT] || '↩️ Retour à votre forfait actuel — GeNext',
+              html: upgradeTimeoutHtml(d.restaurant || d.emailData?.restaurant || '', langUT),
+              text: 'Retour automatique à votre forfait actuel — délai de confirmation dépassé.\n\nGeNext — ' + process.env.GMAIL_USER,
+              headers: { 'List-Unsubscribe': '<mailto:' + process.env.GMAIL_USER + '?subject=unsubscribe>' },
+              attachments: [LOGO_ATTACHMENT]
+            });
+          } catch(e) { console.error('⚠ B_UPG_TIMEOUT email erreur ' + ridUT + ':', e.message); }
+        }
+      } catch(e) {
+        console.error('⚠ B_UPG_TIMEOUT erreur ' + ridUT + ':', e.message);
       }
     }
   }
