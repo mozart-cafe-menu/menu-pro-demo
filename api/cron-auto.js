@@ -628,8 +628,11 @@ module.exports = async (req, res) => {
     }
 
     // ── B_PAY : Email paiement dû (essai terminé / nouveau cycle) ───────────
+    // Bornée à la fenêtre 0-4 jours : si le cron n'a pas tourné depuis longtemps (panne),
+    // un client déjà à J+4 ou J+7 doit recevoir le rappel/la suspension appropriés (B3/B4),
+    // pas cet email "paiement dû" en plus le même jour dans le désordre.
     const _isPaidThisCycle = d.paidAt && d.paidAt >= d.nextReminderAt;
-    const _paymentDue = d.nextReminderAt && now >= d.nextReminderAt && !_isPaidThisCycle && !d.suspendu && !d.clientDeleted;
+    const _paymentDue = d.nextReminderAt && now >= d.nextReminderAt && (now - d.nextReminderAt) < FOUR_DAYS_MS && !_isPaidThisCycle && !d.suspendu && !d.clientDeleted;
     const _payEmailNotSent = !d.lastPaymentEmailSent || d.lastPaymentEmailSent < d.nextReminderAt;
     if (_paymentDue && _payEmailNotSent && d.email && mainSecret) {
       try {
@@ -662,7 +665,9 @@ module.exports = async (req, res) => {
     }
 
     // ── B3 : Rappel paiement (4 jours après nextReminderAt) ─────────────────
-    const _reminderDue    = d.nextReminderAt && (now - d.nextReminderAt) >= FOUR_DAYS_MS && !_isPaidThisCycle && !d.suspendu && !d.clientDeleted;
+    // Bornée à < 7 jours : au-delà, B4 suspend ce même run — évite d'envoyer un rappel
+    // "payez avant le X" en même temps qu'un email de suspension contradictoire.
+    const _reminderDue    = d.nextReminderAt && (now - d.nextReminderAt) >= FOUR_DAYS_MS && (now - d.nextReminderAt) < SEVEN_DAYS_MS && !_isPaidThisCycle && !d.suspendu && !d.clientDeleted;
     const _reminderNotSent = !d.lastReminderSent || d.lastReminderSent < d.nextReminderAt;
     if (_reminderDue && _reminderNotSent && d.email) {
       try {
@@ -798,7 +803,10 @@ module.exports = async (req, res) => {
   if (mainSecret) {
     for (const [key, d] of Object.entries(commandes)) {
       if (!d || typeof d !== 'object') continue;
-      if (!d.pendingForfaitChange || !d.nextReminderAt || d.clientDeleted) continue;
+      // d.suspendu exclu : un client suspendu pour impayé ne doit jamais voir son
+      // changement de forfait programmé s'appliquer (avancerait nextReminderAt/endDate
+      // d'un cycle complet, masquant silencieusement l'impayé comme si le client avait payé).
+      if (!d.pendingForfaitChange || !d.nextReminderAt || d.clientDeleted || d.suspendu) continue;
       if (now < d.nextReminderAt - 24 * 60 * 60 * 1000) continue;
       const ridBP = (d.emailData && d.emailData.rid) || d.clientCree?.rid;
       if (!ridBP) continue;
