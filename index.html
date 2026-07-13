@@ -6379,6 +6379,14 @@ html.light .xacc-group-label,html.light .xacc-group-label .xacc-group-badge{colo
           btn.disabled = false; btn.textContent = _sT['cmd.submit']||'Envoyer ma demande →';
           return;
         }
+        // Toute autre réponse non-2xx (ex. erreur serveur 500) : ne jamais afficher le popup
+        // de succès — le prospect croirait sa demande traitée alors qu'aucun email n'est parti.
+        if (res.status < 200 || res.status >= 300) {
+          fb.className = 'cmd-feedback err';
+          fb.textContent = _sT['cmd.err.network'] || '⚠ Erreur réseau : ';
+          btn.disabled = false; btn.textContent = _sT['cmd.submit']||'Envoyer ma demande →';
+          return;
+        }
         // Upload optionnel du menu (fire & forget)
         if (_cmdMenuFiles.length > 0 && data && data.created && data.created.rid) {
           var _photoHelpChk = document.getElementById('cmd-photo-help');
