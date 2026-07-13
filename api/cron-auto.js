@@ -65,6 +65,7 @@ function fbRequest(db, path, method, secret, body) {
 
 const fbGet   = (db, path, secret)       => fbRequest(db, path, 'GET',   secret, null);
 const fbPatch = (db, path, secret, body) => fbRequest(db, path, 'PATCH', secret, body);
+const fbPush  = (db, path, secret, body) => fbRequest(db, path, 'POST',  secret, body);
 
 // ── Prix par défaut ─────────────────────────────────────────────────────────
 const PM_MONTHLY      = { 'menu-qr': 49, 'commandes-services': 99 };
@@ -832,6 +833,14 @@ module.exports = async (req, res) => {
         await fbPatch(CONTROL_DB, '/commandes/' + key, secret, {
           forfait: pfc.forfait, price: pfc.price, pendingForfaitChange: null
         });
+        try {
+          await fbPush(CONTROL_DB, '/commandes/' + key + '/forfaitHistory', secret, {
+            date: now, type: 'downgrade-scheduled',
+            fromForfait: d.forfait || 'menu-qr', toForfait: pfc.forfait,
+            fromMode: d.paymentMode || 'monthly', toMode: d.paymentMode || 'monthly',
+            fromPrice: d.price ?? null, toPrice: pfc.price
+          });
+        } catch(e) {}
         stats.pendingApplied++;
         console.log('✅ BP forfait appliqué:', ridBP, '→', pfc.forfait);
       } catch(e) {
