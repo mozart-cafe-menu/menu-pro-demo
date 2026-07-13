@@ -4483,22 +4483,6 @@ html.light .xacc-group-label,html.light .xacc-group-label .xacc-group-badge{colo
   </div>
 </div>
 
-<!-- Popup Thèmes (contenu dynamique) -->
-<div class="popup" id="pop-themes-tier" onclick="popupOutside(event,'pop-themes-tier')">
-  <div class="popup-card">
-    <button class="popup-close" onclick="closePopup('pop-themes-tier')" aria-label="Fermer">
-      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
-    </button>
-    <div class="eyebrow popup-eyebrow" id="pop-themes-eyebrow">Thèmes</div>
-    <h3 id="pop-themes-title">Choisissez votre <em>ambiance.</em></h3>
-    <p class="popup-lead" id="pop-themes-lead">Explorez les thèmes disponibles et prévisualisez-les en direct avec vos couleurs.</p>
-    <div class="pop-themes-grid" id="pop-themes-grid">
-      <!-- Rempli dynamiquement par JS -->
-    </div>
-    <p class="popup-foot" data-i18n="pp.foot">Mode démo — aucune action n'est enregistrée.</p>
-  </div>
-</div>
-
 <!-- Popup Bell (conserver pour compatibilité) -->
 <div class="popup" id="pop-bell" onclick="popupOutside(event,'pop-bell')">
   <div class="popup-card">
@@ -4819,18 +4803,6 @@ html.light .xacc-group-label,html.light .xacc-group-label .xacc-group-badge{colo
     if(active)placeStylePill(+active.dataset.i);
   });
 
-  // ── Admin toggle ───────────────────────────────────────
-  window.toggleAdmin=function(panelIdx,mode){
-    const panel=fosPanels[panelIdx];
-    if(!panel)return;
-    const btns=panel.querySelectorAll('.fo-admin-btn');
-    btns.forEach((b,j)=>b.classList.toggle('is-active',j===(mode==='avec'?0:1)));
-    const admPrice=document.getElementById('adm-price-'+panelIdx);
-    const modifNote=document.getElementById('modif-note-'+panelIdx);
-    if(admPrice)admPrice.classList.toggle('is-visible',mode==='avec');
-    if(modifNote)modifNote.classList.toggle('is-visible',mode==='sans');
-  };
-
   // ── Sub-page switcher ──────────────────────────────────
   window.switchSubPage=function(panelIdx,subIdx){
     const panel=fosPanels[panelIdx];
@@ -4857,69 +4829,6 @@ html.light .xacc-group-label,html.light .xacc-group-label .xacc-group-badge{colo
       switchSubPage(panelIdx,cur);
     },{passive:true});
   });
-
-  // ── THEME POPUP ────────────────────────────────────────
-  const TIER_THEMES={
-    basic:{
-      label:'Basic',
-      desc:'Le thème Papier — élégant, épuré, intemporel.',
-      themes:[
-        {icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>',name:'Papier',sub:'Carte de restaurant classique',url:'demo-paper.html'}
-      ]
-    },
-    avance:{
-      label:'Avancé',
-      desc:'La famille Livre — typographie premium, mise en page éditoriale.',
-      themes:[
-        {icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>',name:'Livre',sub:'Design éditorial raffiné',url:'menu-demo.html'}
-      ]
-    },
-    elegance:{
-      label:'Élégance',
-      desc:'Thèmes dynamiques — photos HD, animations, expérience immersive.',
-      themes:[
-        {icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',name:'Dynamique',sub:'Hero animé, parallax, photos HD',url:'menu-demo.html'}
-      ]
-    },
-    ultime:{
-      label:'Ultime',
-      desc:'Tous les thèmes — Basic, Avancé et Élégance.',
-      themes:[
-        {icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>',name:'Papier',sub:'Thème Basic — carte classique',url:'demo-paper.html'},
-        {icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>',name:'Livre',sub:'Thème Avancé — design éditorial',url:'menu-demo.html'},
-        {icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',name:'Dynamique',sub:'Thème Élégance — photos HD, animations',url:'menu-demo.html'}
-      ]
-    }
-  };
-
-  window.openThemePopup=function(tier){
-    const data=TIER_THEMES[tier];
-    if(!data)return;
-    var _tLang=localStorage.getItem('mqr_lang')||'fr';
-    var _tT=(typeof T!=='undefined'&&T[_tLang])||{};
-    var _tLabel=(_tLang==='fr'?(tier==='0'?'Menu QR Code':'Commandes &amp; Services'):((_tT['fo.card0.name']&&tier==='0')?_tT['fo.card0.name']:(_tT['fo.card1.name']||data.label)));
-    document.getElementById('pop-themes-eyebrow').textContent=(_tT['themes.prefix']||'Thèmes')+' '+_tLabel.replace(/&amp;/g,'&');
-    var _titleEl=document.getElementById('pop-themes-title');
-    _titleEl.textContent='';
-    _titleEl.appendChild(document.createTextNode((_tT['themes.explore']||'Explorez les thèmes')+' '));
-    var _titleEm=document.createElement('em');
-    _titleEm.textContent=_tLabel.replace(/&amp;/g,'&')+'.';
-    _titleEl.appendChild(_titleEm);
-    document.getElementById('pop-themes-lead').textContent=_tT['pp.themes.lead']||data.desc;
-    const _btnLabel=_tT['fo.btn.demo']||'Voir un exemple';
-    const grid=document.getElementById('pop-themes-grid');
-    grid.innerHTML=data.themes.map(t=>`
-      <div class="pop-theme-item">
-        <div class="pop-theme-icon">${t.icon}</div>
-        <div class="pop-theme-meta"><strong>${t.name}</strong><small>${t.sub}</small></div>
-        <button class="fo-btn fo-btn-test" style="flex:none;padding:.5rem 1rem;font-size:.8rem;border-radius:10px" data-url="${t.url}" data-dname="${t.name.replace(/"/g,'&quot;')}">${_btnLabel}</button>
-      </div>
-    `).join('');
-    grid.querySelectorAll('.fo-btn-test').forEach(function(btn){
-      btn.addEventListener('click',function(){openDemoFs(this.dataset.url,this.dataset.dname);});
-    });
-    openPopup('pop-themes-tier');
-  };
 
   // ── DEMO FULL-SCREEN ───────────────────────────────────
   const FS_COLORS=[
