@@ -5785,6 +5785,7 @@ html.light .xacc-group-label,html.light .xacc-group-label .xacc-group-badge{colo
 <!-- Firebase — lecture des photos hero depuis Control -->
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
 <script>
 (function(){
   var app = firebase.apps.find(function(a){return a.name==='demo-photos';})
@@ -6097,18 +6098,35 @@ html.light .xacc-group-label,html.light .xacc-group-label .xacc-group-badge{colo
 
   // ── Firebase Control ──────────────────────────────────
   var _controlDb = null;
+  var _controlApp = null;
   function getControlDb() {
     if (_controlDb) return _controlDb;
-    var app = (firebase.apps || []).find(function(a){ return a.name === 'ctrl-cmd'; })
+    _controlApp = (firebase.apps || []).find(function(a){ return a.name === 'ctrl-cmd'; })
       || firebase.initializeApp({
            apiKey:      'AIzaSyAwHbV2dueFQFL5eJCNkB0siVjdB_7AtKU',
            databaseURL: 'https://menu-pro-control-default-rtdb.europe-west1.firebasedatabase.app',
            projectId:   'menu-pro-control',
            appId:       '1:457842698651:web:f5cbff82ec4cb729ded93e'
          }, 'ctrl-cmd');
-    _controlDb = firebase.database(app);
+    _controlDb = firebase.database(_controlApp);
     return _controlDb;
   }
+
+  // Connexion anonyme Firebase (projet Control) — invisible pour le visiteur, aucun
+  // changement d'UX. Nécessaire pour que les règles Firebase du signup puissent exiger
+  // auth != null sans dépendre uniquement de la fraîcheur d'une clé /commandes/{ts}.
+  var _ctrlAnonAuthPromise = null;
+  function ensureCtrlAnonAuth() {
+    if (!_ctrlAnonAuthPromise) {
+      getControlDb(); // s'assure que _controlApp est initialisé
+      _ctrlAnonAuthPromise = new Promise(function(resolve){
+        firebase.auth(_controlApp).onAuthStateChanged(function(user){ if (user) resolve(user); });
+        firebase.auth(_controlApp).signInAnonymously().catch(function(e){ console.error('anon auth failed', e); resolve(null); });
+      });
+    }
+    return _ctrlAnonAuthPromise;
+  }
+  ensureCtrlAnonAuth();
 
   // Marque le choix de langue de commande comme explicite dès que le client
   // touche lui-même le champ — voir _cmdLangTouched (Fix #227).
@@ -6277,7 +6295,7 @@ html.light .xacc-group-label,html.light .xacc-group-label .xacc-group-badge{colo
   }
 
   // ── Envoi ─────────────────────────────────────────────
-  window.submitCommander = function() {
+  window.submitCommander = async function() {
     var fb   = document.getElementById('cmd-feedback');
     var btn  = document.getElementById('cmd-submit');
     var rest = document.getElementById('cmd-restaurant').value.trim();
@@ -6333,6 +6351,7 @@ html.light .xacc-group-label,html.light .xacc-group-label .xacc-group-badge{colo
 
     btn.disabled = true; btn.textContent = _sT['cmd.sending']||'⏳ Envoi en cours…';
 
+    await ensureCtrlAnonAuth();
     getControlDb().ref('/commandes/' + ts).set(commande)
       .then(function() {
         return fetch(API_BASE + '/notify-commande', {
