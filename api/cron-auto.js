@@ -713,6 +713,10 @@ module.exports = async (req, res) => {
         try {
           await fbPatch(MAIN_DB, '/restaurants/' + rid + '/config', mainSecret, { active: false, suspendu: true });
           await fbPatch(CONTROL_DB, '/commandes/' + key, secret, { suspendu: true });
+          // Refléter immédiatement dans l'objet en mémoire (même référence que `commandes[key]`) —
+          // sinon les blocs suivants du même run (BP notamment) liraient encore `suspendu:false`
+          // et agiraient sur un client qui vient tout juste d'être suspendu pour impayé.
+          d.suspendu = true;
           stats.suspensions++;
           console.log('⏸ Suspendu:', rid, '(commande ' + key + ')');
           if (d.email) {
@@ -813,20 +817,20 @@ module.exports = async (req, res) => {
       const pfc   = d.pendingForfaitChange;
       const isCS  = pfc.forfait === 'commandes-services';
       const feats = { callBtn: isCS, orderUI: isCS, photos: true, tableSystem: isCS, qrOrdering: isCS, eventOverlay: true };
-      // Nouveau cycle démarré exactement à l'échéance déjà en cours (le downgrade
-      // programmé s'applique à la date prévue, pas au moment du run du cron).
-      const newEndDate = (() => {
-        const dt = new Date(d.nextReminderAt);
-        dt.setMonth(dt.getMonth() + (d.paymentMode === 'annual' ? 12 : 1));
-        return dt.getTime();
-      })();
+      // IMPORTANT : n'avance JAMAIS nextReminderAt/endDate ici — ce bloc ne fait
+      // qu'activer le nouveau forfait/prix à la date prévue. L'échéance de paiement
+      // reste inchangée, exactement comme pour tout autre client : B_PAY/B3/B4 continuent
+      // de réclamer un vrai paiement à `nextReminderAt`, et c'est seulement le clic
+      // "Marquer comme payé" de Malek (_markPaid) qui fait avancer le cycle. Avancer le
+      // cycle ici aurait offert un cycle complet gratuit sans aucune preuve de paiement
+      // (bug critique confirmé par audit — perte de revenu systématique).
       try {
         await fbPatch(MAIN_DB, '/restaurants/' + ridBP + '/config/features', mainSecret, feats);
         await fbPatch(MAIN_DB, '/restaurants/' + ridBP + '/config/subscription', mainSecret, {
-          forfait: pfc.forfait, price: pfc.price, pendingChange: null, lastForfaitChange: now, endDate: newEndDate
+          forfait: pfc.forfait, price: pfc.price, pendingChange: null, lastForfaitChange: now
         });
         await fbPatch(CONTROL_DB, '/commandes/' + key, secret, {
-          forfait: pfc.forfait, price: pfc.price, pendingForfaitChange: null, nextReminderAt: newEndDate
+          forfait: pfc.forfait, price: pfc.price, pendingForfaitChange: null
         });
         stats.pendingApplied++;
         console.log('✅ BP forfait appliqué:', ridBP, '→', pfc.forfait);
