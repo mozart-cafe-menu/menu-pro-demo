@@ -70,7 +70,30 @@ const fbPatch = (db, path, secret, body) => fbRequest(db, path, 'PATCH', secret,
 const PM_MONTHLY      = { 'menu-qr': 49, 'commandes-services': 99 };
 const PM_ANNUAL       = { 'menu-qr': 490, 'commandes-services': 990 };
 // ── Lire le prix effectif abonnement (priorité : prices[combo] → price → défaut) ─
-function _effectivePrice(d) {
+// Tarif public courant (demoPage/pricing) — même source que control-app/_getComboPrice
+// et notify-forfait/fetchSaasPricing. Sans ce palier, un client sans prix personnalisé
+// recevait un montant fige (PM_ANNUAL/PM_MONTHLY, jamais mis a jour) au lieu du vrai
+// tarif public actuel dans les emails automatiques (suspension, rappel...).
+function fetchGlobalPrices() {
+  return new Promise(resolve => {
+    const u = new URL(MAIN_DB + '/demoPage/pricing.json');
+    const opts = { hostname: u.hostname, path: u.pathname + u.search, method: 'GET' };
+    const req = https.request(opts, r => {
+      let data = ''; r.on('data', c => data += c);
+      r.on('end', () => {
+        try {
+          const p = JSON.parse(data);
+          const prices = p && p.prices;
+          resolve((prices && typeof prices === 'object') ? prices : null);
+        } catch (e) { resolve(null); }
+      });
+    });
+    req.on('error', () => resolve(null));
+    req.end();
+  });
+}
+
+function _effectivePrice(d, globalPrices) {
   const forfait = d.forfait || 'menu-qr';
   const isAnn   = d.paymentMode === 'annual';
   const f = forfait === 'commandes-services' ? 'srv' : 'qr';
@@ -78,6 +101,7 @@ function _effectivePrice(d) {
   const ck = f + '-' + m;
   if (d.prices && d.prices[ck] != null) return d.prices[ck];
   if (d.price != null && d.price >= 0) return d.price;
+  if (globalPrices && globalPrices[ck] != null) return Number(globalPrices[ck]);
   return isAnn ? (PM_ANNUAL[forfait] || 490) : (PM_MONTHLY[forfait] || 49);
 }
 
@@ -562,6 +586,7 @@ module.exports = async (req, res) => {
     return res.status(200).json({ message: 'No commandes', stats });
   }
 
+  const globalPrices = await fetchGlobalPrices().catch(() => null);
   const transport = createTransport();
 
   for (const [key, d] of Object.entries(commandes)) {
@@ -579,7 +604,7 @@ module.exports = async (req, res) => {
         const isCS    = (d.forfait || ed.forfait) === 'commandes-services';
         const forfait = d.forfait || ed.forfait || 'menu-qr';
         const payMode = d.paymentMode || ed.paymentMode || 'annual';
-        const price      = _effectivePrice(d);
+        const price      = _effectivePrice(d, globalPrices);
         const isAnn      = payMode === 'annual';
         const priceStr   = price + ' €/' + (isAnn ? 'an' : 'mois');
         const subDetails = { forfait, paymentMode: payMode, priceStr };
@@ -611,7 +636,7 @@ module.exports = async (req, res) => {
         const langP     = (d.langue && ['fr','en','el','es','de'].includes(d.langue)) ? d.langue : 'fr';
         const forfaitP  = d.forfait || 'menu-qr';
         const isAnnP    = d.paymentMode === 'annual';
-        const priceP    = _effectivePrice(d);
+        const priceP    = _effectivePrice(d, globalPrices);
         const modesP    = MODE_LABEL[langP] || MODE_LABEL.fr;
         const forLabP   = FORFAIT_LABEL[langP] || FORFAIT_LABEL.fr;
         const modeP     = (forLabP[forfaitP] || forfaitP) + ' · ' + (isAnnP ? modesP.annual : modesP.monthly);
@@ -644,7 +669,7 @@ module.exports = async (req, res) => {
         const lang       = (d.langue && ['fr','en','el','es','de'].includes(d.langue)) ? d.langue : 'fr';
         const forfait    = d.forfait || 'menu-qr';
         const isAnn      = d.paymentMode === 'annual';
-        const price      = _effectivePrice(d);
+        const price      = _effectivePrice(d, globalPrices);
         const modes      = MODE_LABEL[lang] || MODE_LABEL.fr;
         const forLabels  = FORFAIT_LABEL[lang] || FORFAIT_LABEL.fr;
         const mode       = (forLabels[forfait] || forfait) + ' · ' + (isAnn ? modes.annual : modes.monthly);
@@ -688,7 +713,7 @@ module.exports = async (req, res) => {
           if (d.email) {
             const lang4    = (['fr','en','el','es','de'].includes(d.langue)) ? d.langue : 'fr';
             const forfait4 = d.forfait || 'menu-qr';
-            const price4   = _effectivePrice(d);
+            const price4   = _effectivePrice(d, globalPrices);
             const modes4   = MODE_LABEL[lang4] || MODE_LABEL.fr;
             const forLbls4 = FORFAIT_LABEL[lang4] || FORFAIT_LABEL.fr;
             const mode4    = (forLbls4[forfait4] || forfait4) + ' · ' + (d.paymentMode === 'annual' ? modes4.annual : modes4.monthly);
