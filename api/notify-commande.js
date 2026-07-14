@@ -348,6 +348,13 @@ module.exports = async (req, res) => {
   try {
     const { restaurant, forfait, forfaitType, paymentMode, langue, email, commandeKey, source } = req.body || {};
     if (!restaurant) { res.status(400).json({ error: 'Missing restaurant' }); return; }
+    // Le formulaire public valide déjà l'email côté client, mais un appel direct de l'API
+    // (bypass du formulaire) créait un restaurant avec subscription.email:null — silencieux
+    // sur le moment, mais cron-auto.js (B_PAY/B3/B4) ne peut alors jamais cibler ce client
+    // pour ses rappels de paiement (perte de revenu silencieuse, audit 2026-07-16).
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email))) {
+      res.status(400).json({ error: 'Missing or invalid email' }); return;
+    }
 
     const rest        = String(restaurant).slice(0, 60);
     const safeKey     = commandeKey ? String(commandeKey).replace(/[^a-zA-Z0-9_-]/g, '').slice(0, 40) : null;
@@ -359,7 +366,7 @@ module.exports = async (req, res) => {
 
     // ── 1. Notification FCM ─────────────────────────────────────────────────
     const fcmTitle   = isAdminSrc ? '👤 Nouveau client créé' : '🆕 Nouvelle commande';
-    const fcmPayload = JSON.stringify({ title: fcmTitle, body: bodyText, type: 'commande' });
+    const fcmPayload = JSON.stringify({ title: fcmTitle, body: bodyText, type: 'commande', secret: process.env.FIREBASE_CONTROL_SECRET });
     const fcmResult  = await httpsRequest(
       'https://menu-saas-platform.vercel.app/api/notify-control',
       { method: 'POST', headers: { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(fcmPayload) } },

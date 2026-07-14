@@ -58,7 +58,7 @@ module.exports = async (req, res) => {
     const payload = JSON.stringify({
       title: '📋 GeNext — Devis',
       body:  bodyText,
-      type:  'devis'
+      type:  'devis', secret: process.env.FIREBASE_CONTROL_SECRET
     });
 
     const result = await httpsRequest(

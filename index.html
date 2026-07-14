@@ -6177,7 +6177,7 @@ html.light .xacc-group-label,html.light .xacc-group-label .xacc-group-badge{colo
     return batches;
   }
 
-  function _uploadMenuFiles(rid, restaurantName, files, wantsPhotoHelp) {
+  function _uploadMenuFiles(rid, restaurantName, files, wantsPhotoHelp, commandeKey) {
     if (!rid || !files || !files.length) return;
     Promise.all(files.map(_processMenuFile)).then(function(processed) {
       var batches = _batchMenuFiles(processed);
@@ -6188,6 +6188,7 @@ html.light .xacc-group-label,html.light .xacc-group-label .xacc-group-badge{colo
       // un seul email "tout regroupé" à la fin n'est pas possible sans stockage
       // intermédiaire — dans l'immense majorité des cas il n'y a qu'un seul lot
       // (un email), un envoi volumineux donnera 2-3 emails clairement numérotés.
+      var anyFailed = false;
       var chain = Promise.resolve();
       batches.forEach(function(batch, idx) {
         chain = chain.then(function() {
@@ -6198,10 +6199,19 @@ html.light .xacc-group-label,html.light .xacc-group-label .xacc-group-badge{colo
               batchIndex: idx, batchTotal: batches.length,
               wantsPhotoHelp: wantsPhotoHelp
             })
-          }).catch(function() {});
+          }).then(function(r) { if (!r.ok) anyFailed = true; }).catch(function() { anyFailed = true; });
         });
       });
-      return chain;
+      // Échec silencieux corrigé (audit 2026-07-16) : avant ce fix, ni le client ni Malek
+      // n'étaient jamais informés si un lot échouait (timeout/quota/erreur 500) — le popup
+      // de succès de la commande s'affiche indépendamment de cet envoi. Le flag ci-dessous
+      // rend l'échec visible sur la carte client (control-app), sans bloquer/retarder la
+      // confirmation de commande déjà envoyée au prospect.
+      return chain.then(function() {
+        if (anyFailed && commandeKey) {
+          getControlDb().ref('/commandes/' + commandeKey + '/menuUploadFailed').set(Date.now()).catch(function() {});
+        }
+      });
     }).catch(function() {});
   }
 
@@ -6300,7 +6310,7 @@ html.light .xacc-group-label,html.light .xacc-group-label .xacc-group-badge{colo
         // Upload optionnel du menu (fire & forget)
         if (_cmdMenuFiles.length > 0 && data && data.created && data.created.rid) {
           var _photoHelpChk = document.getElementById('cmd-photo-help');
-          _uploadMenuFiles(data.created.rid, rest, _cmdMenuFiles.slice(), !!(_photoHelpChk && _photoHelpChk.checked));
+          _uploadMenuFiles(data.created.rid, rest, _cmdMenuFiles.slice(), !!(_photoHelpChk && _photoHelpChk.checked), String(ts));
         }
         // Fermer le formulaire, ouvrir le popup de confirmation
         closePopup('pop-commander');
