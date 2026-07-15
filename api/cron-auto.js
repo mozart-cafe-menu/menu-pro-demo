@@ -65,6 +65,25 @@ function fbRequest(db, path, method, secret, body) {
 
 const fbGet   = (db, path, secret)       => fbRequest(db, path, 'GET',   secret, null);
 const fbPatch = (db, path, secret, body) => fbRequest(db, path, 'PATCH', secret, body);
+
+// Lecture "shallow" (clés uniquement, pas le contenu) — utilisée par B0 pour vérifier
+// l'EXISTENCE d'un restaurant sans rapatrier tout son menu/config (coûteux et inutile
+// ici, on ne veut qu'un Set de rids valides).
+function fbGetShallowKeys(db, path, secret) {
+  return new Promise((resolve) => {
+    const url  = new URL(db + path + '.json?shallow=true&auth=' + secret);
+    const opts = { hostname: url.hostname, path: url.pathname + url.search, method: 'GET' };
+    const req = https.request(opts, res => {
+      let data = '';
+      res.on('data', d => data += d);
+      res.on('end', () => {
+        try { resolve(JSON.parse(data)); } catch(e) { resolve(null); }
+      });
+    });
+    req.on('error', () => resolve(null));
+    req.end();
+  });
+}
 const fbPush  = (db, path, secret, body) => fbRequest(db, path, 'POST',  secret, body);
 
 // ── Prix par défaut ─────────────────────────────────────────────────────────
@@ -589,6 +608,40 @@ module.exports = async (req, res) => {
 
   const globalPrices = await fetchGlobalPrices().catch(() => null);
   const transport = createTransport();
+
+  // ── B0 : Auto-guérison des commandes orphelines ──────────────────────────────
+  // Un client supprimé (restaurant retiré de MAIN_DB) DOIT avoir 'clientDeleted:true'
+  // sur sa commande CONTROL_DB pour que B_PAY/B3/B4/B5/BP/B_UPG_TIMEOUT l'ignorent (déjà
+  // le cas, voir leurs gardes existantes). Si cette écriture a échoué au moment de la
+  // suppression (bug confirmé et corrigé côté control-app le 2026-07-15, voir
+  // confirmDeleteClient()), la commande restait active aux yeux du cron indéfiniment —
+  // exactement le symptôme rapporté par Malek (client absent de sa liste Clients, mais
+  // rappel de paiement quand même envoyé). Ce bloc referme le trou RÉTROACTIVEMENT pour
+  // toute commande déjà dans cet état incohérent, sans attendre une nouvelle suppression :
+  // si le restaurant n'existe plus du tout dans MAIN_DB, la commande est auto-marquée
+  // 'clientDeleted' avant que les blocs suivants ne la traitent dans CE MÊME run.
+  stats.orphanHealed = 0;
+  if (mainSecret) {
+    try {
+      const restaurantKeys = await fbGetShallowKeys(MAIN_DB, '/restaurants', mainSecret);
+      // Fail-safe strict : si la lecture échoue ou renvoie un format inattendu, ne RIEN
+      // guérir ce run plutôt que de risquer de marquer à tort un client bien réel comme
+      // supprimé sur la base d'une donnée incertaine (réseau, quota, panne MAIN_DB...).
+      if (restaurantKeys && typeof restaurantKeys === 'object') {
+        for (const [key, d] of Object.entries(commandes)) {
+          if (!d || typeof d !== 'object' || d.clientDeleted) continue;
+          const rid = (d.emailData && d.emailData.rid) || (d.clientCree && d.clientCree.rid) || null;
+          if (!rid || restaurantKeys[rid]) continue; // pas encore de client créé, ou restaurant toujours existant
+          try {
+            await fbPatch(CONTROL_DB, '/commandes/' + key, secret, { clientDeleted: true, clientDeletedAt: now });
+            d.clientDeleted = true; // reflété immédiatement : ignoré par B_PAY/B3/B4/B5/BP/B_UPG_TIMEOUT plus bas dans CE run
+            stats.orphanHealed++;
+            console.log('🩹 B0 commande orpheline guérie:', key, '— restaurant', rid, 'introuvable dans MAIN_DB');
+          } catch(e) { console.error('⚠ B0 erreur ' + key + ':', e.message); }
+        }
+      }
+    } catch(e) { console.error('⚠ B0 lecture restaurants échouée:', e.message); }
+  }
 
   for (const [key, d] of Object.entries(commandes)) {
     if (!d || typeof d !== 'object') continue;
