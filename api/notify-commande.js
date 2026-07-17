@@ -50,14 +50,18 @@ function buildRidTs(name, extra) {
 }
 
 // ── Génération mot de passe (même algo que control-app) ─────────────────────
-function buildPwdDefault(name) {
-  const words = name.trim()
-    .normalize('NFD').replace(/[̀-ͯ]/g, '')
-    .toLowerCase().replace(/[^a-z0-9 ]/g, '').trim()
-    .split(/\s+/).filter(w => w.length > 0);
-  if (!words.length) return 'pr' + new Date().getFullYear();
-  const ini = words.length === 1 ? words[0].slice(0, 2) : words.map(w => w[0]).join('');
-  return ini + new Date().getFullYear();
+// 🔴 Sécurité (2026-07-17) : l'ancien mot de passe était PRÉVISIBLE (initiales du nom +
+// année, ex. "Café Mozarre" → "cm2026") — calculable par quiconque connaît le nom public
+// du restaurant (affiché sur son propre menu QR). Remplacé par un mot de passe aléatoire
+// cryptographique (crypto.randomBytes), jamais devinable, communiqué au client UNIQUEMENT
+// par l'email d'identifiants (deliveryHtml). Voir aussi le retrait de config.adminPwd
+// (plaintext jamais stocké désormais) dans autoCreateRestaurant() ci-dessous.
+function buildPwdDefault() {
+  const ALPHABET = 'abcdefghjkmnpqrstuvwxyzABCDEFGHJKMNPQRSTUVWXYZ23456789'; // sans 0/O/1/l/i ambigus
+  const bytes = crypto.randomBytes(10);
+  let pwd = '';
+  for (let i = 0; i < 10; i++) pwd += ALPHABET[bytes[i] % ALPHABET.length];
+  return pwd;
 }
 
 // ── Firebase REST ───────────────────────────────────────────────────────────
@@ -282,7 +286,7 @@ async function autoCreateRestaurant(restaurant, forfaitType, paymentMode, email,
     }
   }
 
-  const pwd  = buildPwdDefault(restaurant);
+  const pwd  = buildPwdDefault();
   const hash = sha256(pwd);
   const ts   = Date.now();
   const isCS = forfaitType === 'commandes-services';
@@ -303,7 +307,6 @@ async function autoCreateRestaurant(restaurant, forfaitType, paymentMode, email,
     profile: { name: restaurant, createdAt: ts, langs: ['fr','en','el','de','es'], orderLang: lang },
     config: {
       adminHash: hash,
-      adminPwd:  pwd,
       tableCount: 0,
       active: true,
       features: { callBtn: isCS, orderUI: isCS, photos: true, tableSystem: isCS, qrOrdering: isCS, eventOverlay: true },

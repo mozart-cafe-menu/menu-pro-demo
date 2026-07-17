@@ -580,9 +580,12 @@ function upgradeTimeoutHtml(rawName, lang) {
 module.exports = async (req, res) => {
   res.setHeader('Content-Type', 'application/json');
 
-  // Protection cron : Vercel auto-set CRON_SECRET en production
+  // Protection cron — fail-closed : si CRON_SECRET n'est pas configuré, on refuse
+  // TOUT accès plutôt que de laisser passer (l'ancien "if(cronSecret && ...)" ouvrait
+  // cet endpoint à n'importe qui, sans authentification, dès que la variable manquait —
+  // confirmé actif en production le 2026-07-17, corrigé + CRON_SECRET reconfiguré).
   const cronSecret = process.env.CRON_SECRET;
-  if (cronSecret && req.headers.authorization !== `Bearer ${cronSecret}`) {
+  if (!cronSecret || req.headers.authorization !== `Bearer ${cronSecret}`) {
     return res.status(401).json({ error: 'Unauthorized' });
   }
 
