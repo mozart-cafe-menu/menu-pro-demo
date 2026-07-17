@@ -128,6 +128,10 @@ button{background:none;border:none;color:inherit;font:inherit;cursor:pointer}
 .eyebrow::before{
   content:'';width:28px;height:1px;background:var(--gold);display:inline-block;
 }
+/* Contraste WCAG AA (2026-07-17) : var(--gold) sur fond clair ≈ 2.3:1 (sous 4.5:1) —
+   même recette que .fo-card-gift/.fp-promise svg déjà corrigés (#6b5218, 6.5-7.1:1). */
+html.light .eyebrow{color:#6b5218}
+html.light .eyebrow::before{background:#6b5218}
 .display{
   font-family:var(--serif);
   font-weight:300;
@@ -5107,7 +5111,7 @@ html.light .xacc-group-label,html.light .xacc-group-label .xacc-group-badge{colo
       'fo.p1.f5':'QR code individuel par table · statistiques commandes et appels',
       'fo.p1.side.label':'Commandes & Services','fo.p1.side.tag':'/mois · système complet · sans engagement',
       'fo.opts.h3':'Options <em>à la carte</em>','fo.opts.p':'Ajoutez les fonctionnalités qui correspondent à votre flux de service — indépendamment du style choisi.',
-      'fo.opt0.name':'Option Thèmes','fo.opt0.desc':'Accès à plus de 20 thèmes visuels premium (Gold Noir, Neon, Botanical, Rose Parisien…) avec variantes de couleurs — changez l\'ambiance de votre menu à tout moment depuis l\'admin.',
+      'fo.opt0.name':'Option Thèmes','fo.opt0.desc':'Accès à plus de 30 thèmes visuels premium (Gold Noir, Neon, Botanical, Rose Parisien…) avec variantes de couleurs — changez l\'ambiance de votre menu à tout moment depuis l\'admin.',
       'fo.opt1.name':'Option Sonnette','fo.opt1.desc':'Vos clients appellent le serveur en un tap depuis leur table. Notification push instantanée reçue sur votre téléphone ou tablette — sans application à installer côté client.',
       'fo.opt2.name':'Option Commande','fo.opt2.desc':'Vos clients passent leur commande directement depuis le menu QR code. Suivi live de la préparation affiché côté client, historique et gestion des commandes côté établissement.',
       'co.eyebrow':'Nous contacter','co.h2':'Parlons de<br>votre <em>projet.</em>','co.lead':'Une question, une demande, une suggestion — nous répondons sous 24h, dans la langue qui vous convient. Choisissez le canal qui vous arrange.',
@@ -5196,7 +5200,7 @@ html.light .xacc-group-label,html.light .xacc-group-label .xacc-group-badge{colo
       
       
       'fo.opts.h3':'À la carte <em>options</em>','fo.opts.p':'Add the features that match your service flow — regardless of the style chosen.',
-      'fo.opt0.name':'Themes Option','fo.opt0.desc':'Access to 20+ premium visual themes (Gold Noir, Neon, Botanical, Rose Parisian…) with color variants — change your menu\'s look at any time from the admin panel.',
+      'fo.opt0.name':'Themes Option','fo.opt0.desc':'Access to 30+ premium visual themes (Gold Noir, Neon, Botanical, Rose Parisian…) with color variants — change your menu\'s look at any time from the admin panel.',
       'fo.opt1.name':'Bell Option','fo.opt1.desc':'Customers call the waiter with a single tap from their table. Instant push notification on your phone or tablet — no app needed on the customer side.',
       'fo.opt2.name':'Order Option','fo.opt2.desc':'Customers place their order directly from the QR code menu. Live preparation tracking shown to the customer, full order history and management on the venue side.',
       'co.eyebrow':'Contact us','co.h2':'Let\'s talk about<br>your <em>project.</em>','co.lead':'A question, a request, a suggestion — we respond within 24h, in the language that suits you. Choose the channel that works for you.',
@@ -5285,7 +5289,7 @@ html.light .xacc-group-label,html.light .xacc-group-label .xacc-group-badge{colo
       
       
       'fo.opts.h3':'Επιλογές <em>à la carte</em>','fo.opts.p':'Προσθέστε τις λειτουργίες που ταιριάζουν στη ροή εξυπηρέτησής σας — ανεξάρτητα από το στυλ που επιλέξατε.',
-      'fo.opt0.name':'Επιλογή Θεμάτων','fo.opt0.desc':'Πρόσβαση σε 20+ premium οπτικά θέματα (Gold Noir, Neon, Botanical, Rose Parisien…) με παραλλαγές χρωμάτων — αλλάξτε την εμφάνιση του μενού σας οποιαδήποτε στιγμή από τον πίνακα admin.',
+      'fo.opt0.name':'Επιλογή Θεμάτων','fo.opt0.desc':'Πρόσβαση σε 30+ premium οπτικά θέματα (Gold Noir, Neon, Botanical, Rose Parisien…) με παραλλαγές χρωμάτων — αλλάξτε την εμφάνιση του μενού σας οποιαδήποτε στιγμή από τον πίνακα admin.',
       'fo.opt1.name':'Επιλογή Κουδουνιού','fo.opt1.desc':'Οι πελάτες καλούν τον σερβιτόρο με ένα tap από το τραπέζι τους. Άμεση push ειδοποίηση στο κινητό ή tablet σας — χωρίς εφαρμογή από την πλευρά του πελάτη.',
       'fo.opt2.name':'Επιλογή Παραγγελίας','fo.opt2.desc':'Οι πελάτες παραγγέλνουν απευθείας από το μενού QR code. Live παρακολούθηση παρασκευής για τον πελάτη, πλήρες ιστορικό και διαχείριση παραγγελιών για την επιχείρηση.',
       'co.eyebrow':'Επικοινωνία','co.h2':'Ας μιλήσουμε για<br>το <em>έργο σας.</em>','co.lead':'Μια ερώτηση, ένα αίτημα, μια πρόταση — απαντάμε εντός 24 ωρών, στη γλώσσα που σας εξυπηρετεί.',
@@ -5368,7 +5372,7 @@ html.light .xacc-group-label,html.light .xacc-group-label .xacc-group-badge{colo
       'fo.p1.f5':'QR individual por mesa · estadísticas de pedidos y llamadas',
       'fo.p1.side.label':'Pedidos y Servicios','fo.p1.side.tag':'/mes · sistema completo · sin compromiso',
       'fo.opts.h3':'Opciones <em>à la carte</em>','fo.opts.p':'Añada las funcionalidades que se adaptan a su flujo de servicio — independientemente del estilo elegido.',
-      'fo.opt0.name':'Opción Temas','fo.opt0.desc':'Acceso a más de 20 temas visuales premium (Gold Negro, Neon, Botanical, Rosa Parisino…) con variantes de color — cambie el ambiente de su menú en cualquier momento desde el admin.',
+      'fo.opt0.name':'Opción Temas','fo.opt0.desc':'Acceso a más de 30 temas visuales premium (Gold Negro, Neon, Botanical, Rosa Parisino…) con variantes de color — cambie el ambiente de su menú en cualquier momento desde el admin.',
       'fo.opt1.name':'Opción Timbre','fo.opt1.desc':'Sus clientes llaman al camarero con un toque desde su mesa. Notificación push instantánea recibida en su teléfono o tablet — sin aplicación que instalar en el lado del cliente.',
       'fo.opt2.name':'Opción Pedido','fo.opt2.desc':'Sus clientes hacen su pedido directamente desde el menú QR. Seguimiento en directo de la preparación mostrado al cliente, historial y gestión de pedidos en el establecimiento.',
       'co.eyebrow':'Contáctenos','co.h2':'Hablemos de<br>su <em>proyecto.</em>','co.lead':'Una pregunta, una solicitud, una sugerencia — respondemos en 24h, en el idioma que prefiera. Elija el canal que más le convenga.',
@@ -5464,7 +5468,7 @@ html.light .xacc-group-label,html.light .xacc-group-label .xacc-group-badge{colo
       
       
       'fo.opts.h3':'Optionen <em>à la carte</em>','fo.opts.p':'Fügen Sie die Funktionen hinzu, die zu Ihrem Service-Ablauf passen — unabhängig vom gewählten Stil.',
-      'fo.opt0.name':'Themes-Option','fo.opt0.desc':'Zugang zu über 20 Premium-Themes (Gold Noir, Neon, Botanical, Rose Parisien…) mit Farbvarianten — ändern Sie das Erscheinungsbild Ihres Menüs jederzeit über das Admin-Panel.',
+      'fo.opt0.name':'Themes-Option','fo.opt0.desc':'Zugang zu über 30 Premium-Themes (Gold Noir, Neon, Botanical, Rose Parisien…) mit Farbvarianten — ändern Sie das Erscheinungsbild Ihres Menüs jederzeit über das Admin-Panel.',
       'fo.opt1.name':'Klingel-Option','fo.opt1.desc':'Gäste rufen den Kellner mit einem einzigen Tap von ihrem Tisch. Sofortige Push-Benachrichtigung auf Ihrem Telefon oder Tablet — ohne App auf Gästeseite.',
       'fo.opt2.name':'Bestell-Option','fo.opt2.desc':'Gäste geben ihre Bestellung direkt über das QR-Code-Menü auf. Live-Verfolgung der Zubereitung für den Gast, vollständige Bestellhistorie und -verwaltung auf Betriebsseite.',
       'co.eyebrow':'Kontakt','co.h2':'Sprechen wir über<br>Ihr <em>Projekt.</em>','co.lead':'Eine Frage, eine Anfrage, ein Vorschlag — wir antworten innerhalb von 24h, in der Sprache, die Ihnen passt.',
