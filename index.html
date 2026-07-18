@@ -2769,16 +2769,25 @@ html.light .pm-cta-btn.pm-cta-gold{color:#1a1208}
      naturellement se placer en un seul endroit prévisible, juste avant la
      pagination, comme une marge de pied de page plutôt qu'un vide au milieu. */
   #hero{min-height:100svh}
-  .hero-grid{padding:max(6.2rem,9vh) var(--pad-x) max(1rem,1.8vh);gap:.65rem;align-content:start}
+  /* Fix #256 (retour Malek, 2026-07-18, suite Fix #255) : padding-bottom rendu fluide
+     par la même interpolation (voir hero-meta plus bas) — le formule standard et la
+     formule "écran bas" (règle ≤700px de hauteur) étaient déjà toutes deux en vh mais
+     divergeaient brutalement à la frontière des 700px ; nichées dans le clamp pour
+     lisser la zone 700-950px sans rien changer en dessous de 700 ni au-delà de 950. */
+  .hero-grid{padding:max(6.2rem,9vh) var(--pad-x) clamp(max(.15rem,0.5vh),calc(5.44vh - 2.16rem),max(1rem,1.8vh));gap:.65rem;align-content:start}
   /* Fix #254c (retour Malek) : l'espace libre restant en bas (avant la pagination) est
      réinvesti ici, entre l'accroche dorée et le titre — un rapport bénéfices/temps
-     largement positif pour l'utilisateur mérite une vraie respiration éditoriale. */
-  .hero-eyebrow{margin-bottom:1.35rem}
+     largement positif pour l'utilisateur mérite une vraie respiration éditoriale.
+     Fix #256 : rendu fluide (même logique que hero-meta/hero-grid ci-dessus) car ce
+     gros espace fixe (1.35rem) était justement ce qui manquait en bas de l'écran sur
+     les hauteurs intermédiaires (confirmé par screenshot réel Malek, Redmi Note 13,
+     pagination collée à la barre système Android malgré le Fix #255). */
+  .hero-eyebrow{margin-bottom:clamp(.4rem,calc(6.08vh - 2.26rem),1.35rem)}
   .hero-title{font-size:clamp(1.4rem,6.4vw,2.6rem);line-height:1.04}
   .hero-alt{font-size:.75rem;line-height:1.4;max-width:100%;gap:.4rem;margin:0 0 .6rem}
   .hero-alt-ico{width:12px;height:12px;margin-top:.2rem}
   .hero-lead{font-size:.82rem;line-height:1.45;max-width:100%;margin-top:.35rem}
-  .hero-cta-row{flex-direction:column;align-items:stretch;gap:.45rem;margin-top:.7rem}
+  .hero-cta-row{flex-direction:column;align-items:stretch;gap:.45rem;margin-top:clamp(.25rem,calc(2.88vh - 1.01rem),.7rem)}
   .hero-cta-row .btn-ghost{display:none}
   .btn{justify-content:center;padding:.68rem 1.2rem;font-size:.84rem;min-height:42px}
   /* Fix #255 (retour Malek, 2026-07-19) : gap/margin-top de .hero-meta rendus fluides
@@ -2792,7 +2801,7 @@ html.light .pm-cta-btn.pm-cta-gold{color:#1a1208}
   .hero-meta{gap:clamp(.25rem,calc(1.92vh - .59rem),.55rem);margin-top:clamp(.15rem,calc(2.88vh - 1.11rem),.6rem)}
   .hero-meta-num{font-size:1.35rem}
   .hero-meta-label{font-size:.74rem;line-height:1.4}
-  .hero-hud{flex-wrap:wrap;gap:.4rem;padding:.55rem var(--pad-x)}
+  .hero-hud{flex-wrap:wrap;gap:.4rem;padding:clamp(.3rem,calc(1.6vh - .4rem),.55rem) var(--pad-x)}
   .hero-hud-counter{font-size:.78rem}
   .hero-hud-progress{order:3;flex:1 1 100%}
   .hud-arrow{width:32px;height:32px;min-height:40px;min-width:40px}
@@ -2889,18 +2898,15 @@ html.light .pm-cta-btn.pm-cta-gold{color:#1a1208}
    d'écran — seule sa valeur en vh peut légitimement varier, jamais en dessous du plancher
    sûr fixé par la règle ≤600px. Seul le padding-bottom est encore réduit ici. ── */
 @media(max-height:700px) and (max-width:600px){
-  .hero-grid{padding-bottom:max(.15rem,0.5vh)}
-  .hero-eyebrow{margin-bottom:.4rem}
   .hero-title{font-size:clamp(1.1rem,5vw,1.9rem);line-height:1.06;margin-bottom:.3rem}
   .hero-alt{font-size:.66rem;line-height:1.28;gap:.32rem;margin:0}
   .hero-alt-ico{width:10px;height:10px;margin-top:.15rem}
   .hero-lead{font-size:.76rem;line-height:1.35;margin-top:.2rem;margin-bottom:.4rem}
-  .hero-cta-row{margin-top:.25rem;gap:.3rem}
+  .hero-cta-row{gap:.3rem}
   .btn{min-height:36px;padding:.5rem 1.2rem;font-size:.8rem}
   .hero-meta{margin-top:.15rem;gap:.25rem}
   .hero-meta-num{font-size:1.15rem}
   .hero-meta-label{font-size:.68rem;line-height:1.3}
-  .hero-hud{padding:.3rem var(--pad-x)}
 }
 
 /* ── Small phones (381-480px) ── */
