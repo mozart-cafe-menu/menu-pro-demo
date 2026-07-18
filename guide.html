@@ -15,6 +15,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 
 <style>
+/* Fix #257 (2026-07-18) : meme correctif police grecque que index.html (Fraunces
+   sans glyphes grecs -> fallback Georgia surdimensionne). Voir index.html pour
+   le detail complet. */
+@font-face{font-family:'Fraunces';font-weight:100 900;font-style:normal;src:url(https://fonts.gstatic.com/s/ebgaramond/v33/SlGUmQSNjdsmc35JDF1K5GR2SDktYw.woff2) format('woff2');unicode-range:U+370-377,U+37A-37F,U+384-38A,U+38C,U+38E-3A1,U+3A3-3FF;font-display:swap}
+@font-face{font-family:'Fraunces';font-weight:100 900;font-style:italic;src:url(https://fonts.gstatic.com/s/ebgaramond/v33/SlGUmQSNjdsmc35JDF1K5GR2SDktYw.woff2) format('woff2');unicode-range:U+370-377,U+37A-37F,U+384-38A,U+38C,U+38E-3A1,U+3A3-3FF;font-display:swap}
 :root{
   --ink:#0a0907;--ink-2:#100e0a;--ink-3:#191510;
   --line:rgba(231,206,151,.10);--line-2:rgba(231,206,151,.18);
