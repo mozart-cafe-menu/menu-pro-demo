@@ -14,6 +14,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT@9..144,300..900,0..100&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
 
 <style>
+/* Fix #257 (2026-07-18) : Fraunces (--serif) n'inclut aucun glyphe grec (subsets
+   Google Fonts = latin/latin-ext/vietnamese uniquement) — le grec retombait sur
+   ui-serif/Georgia (police système), visuellement bien plus grande, débordant le
+   hero et masquant le hero-hud (pagination photos). EB Garamond couvre le grec
+   (U+370-3FF) ; même technique que client/index.html (2026-07-18). font-weight
+   100 900 est nécessaire pour gagner le matching face à Fraunces (variable font
+   300-900) — un poids fixe unique perdait systématiquement l'arbitrage. Vérifié
+   par rendu headless réel (avant/après, 700-950px de hauteur) : le hero grec
+   tient dans le même écran, hero-hud inclus, sans toucher au français/autres
+   langues (déjà couverts par Inter/Fraunces natifs, non concernés). */
+@font-face{font-family:'Fraunces';font-weight:100 900;font-style:normal;src:url(https://fonts.gstatic.com/s/ebgaramond/v33/SlGUmQSNjdsmc35JDF1K5GR2SDktYw.woff2) format('woff2');unicode-range:U+370-377,U+37A-37F,U+384-38A,U+38C,U+38E-3A1,U+3A3-3FF;font-display:swap}
+@font-face{font-family:'Fraunces';font-weight:100 900;font-style:italic;src:url(https://fonts.gstatic.com/s/ebgaramond/v33/SlGUmQSNjdsmc35JDF1K5GR2SDktYw.woff2) format('woff2');unicode-range:U+370-377,U+37A-37F,U+384-38A,U+38C,U+38E-3A1,U+3A3-3FF;font-display:swap}
 /* ═══════════════════════════════════════════════════════════════
    01 · DESIGN TOKENS
 ═══════════════════════════════════════════════════════════════ */
