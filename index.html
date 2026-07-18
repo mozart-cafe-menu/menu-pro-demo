@@ -2781,7 +2781,15 @@ html.light .pm-cta-btn.pm-cta-gold{color:#1a1208}
   .hero-cta-row{flex-direction:column;align-items:stretch;gap:.45rem;margin-top:.7rem}
   .hero-cta-row .btn-ghost{display:none}
   .btn{justify-content:center;padding:.68rem 1.2rem;font-size:.84rem;min-height:42px}
-  .hero-meta{gap:.55rem;margin-top:.6rem}
+  /* Fix #255 (retour Malek, 2026-07-19) : gap/margin-top de .hero-meta rendus fluides
+     (interpolation linéaire en vh, pas un 3ᵉ palier fixe) pour les hauteurs
+     intermédiaires (~700-950px, ex. Redmi Note 13) — ni assez basses pour déclencher
+     la règle ≤700px de hauteur ci-dessous (qui reste inchangée, valeurs identiques
+     à hauteur=700 pour zéro régression), ni assez hautes pour "profiter" de la
+     valeur pleine ci-dessous. Le hero-hud (pagination photos) remonte ainsi
+     proportionnellement dans l'écran selon la hauteur réelle, plutôt que de
+     dépendre d'un unique palier ≤700px qui ne couvrait pas ces appareils. */
+  .hero-meta{gap:clamp(.25rem,calc(1.92vh - .59rem),.55rem);margin-top:clamp(.15rem,calc(2.88vh - 1.11rem),.6rem)}
   .hero-meta-num{font-size:1.35rem}
   .hero-meta-label{font-size:.74rem;line-height:1.4}
   .hero-hud{flex-wrap:wrap;gap:.4rem;padding:.55rem var(--pad-x)}
