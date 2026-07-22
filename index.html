@@ -144,6 +144,9 @@ button{background:none;border:none;color:inherit;font:inherit;cursor:pointer}
    même recette que .fo-card-gift/.fp-promise svg déjà corrigés (#6b5218, 6.5-7.1:1). */
 html.light .eyebrow{color:#6b5218}
 html.light .eyebrow::before{background:#6b5218}
+/* Fix (2026-07-22, audit SKILL.md) : même piège sur .hero-meta-num span (texte "1 mois"
+   du hero) — var(--gold-2) nu sur fond clair ≈1.5:1, quasi invisible. Même recette. */
+html.light .hero-meta-num span{color:#6b5218}
 .display{
   font-family:var(--serif);
   font-weight:300;
@@ -3713,9 +3716,29 @@ html.light .xacc-group-label,html.light .xacc-group-label .xacc-group-badge{colo
     <div class="xacc-list" id="qrAccList">
 
       <!-- 01 · Investissement rentable — 1 photo sans cadre -->
-      <div class="xacc-item reveal delay-1 is-open" data-acc-group="qr" data-acc-key="qr-hygiene">
+      <!-- 01 · Image de marque — 1 photo sans cadre -->
+      <div class="xacc-item reveal delay-1 is-open" data-acc-group="qr" data-acc-key="qr-autonomy">
         <button class="xacc-head-btn" onclick="toggleAcc(this)">
           <span class="xacc-num">01</span>
+          <span class="xacc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l7 3v6c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V5l7-3z"/><path d="M9 12l2 2 4-4"/></svg></span>
+          <span class="xacc-title" data-i18n="qr.i6.h">L'image de marque : le reflet de votre professionnalisme</span>
+          <span class="xacc-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
+        </button>
+        <div class="xacc-panel"><div class="xacc-panel-inner"><div class="xacc-panel-body">
+          <div>
+            <p class="xacc-desc" data-i18n="qr.i6.p">La première chose qu'un client touche est votre menu. Oubliez les cartes papier cornées, tachées ou jaunies. Avec le QR code, votre menu est toujours impeccable, moderne et professionnel — l'assurance d'une première impression parfaite dès l'arrivée du client.</p>
+            <div class="xacc-tags">
+              <span class="xacc-tag" data-i18n="qr.i6.t1">Toujours impeccable</span>
+              <span class="xacc-tag" data-i18n="qr.i6.t2">Première impression parfaite</span>
+            </div>
+          </div>
+          <div class="dmk" data-dmk="qr-autonomy" data-dmk-type="single"></div>
+        </div></div></div>
+      </div>
+
+      <div class="xacc-item reveal delay-2" data-acc-group="qr" data-acc-key="qr-hygiene">
+        <button class="xacc-head-btn" onclick="toggleAcc(this)">
+          <span class="xacc-num">02</span>
           <span class="xacc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8.6 9.3c1-.9 2.2-1.4 3.5-1.4 2.9 0 5.2 2.3 5.2 5.1s-2.3 5.1-5.2 5.1c-1.3 0-2.5-.5-3.5-1.4"/><path d="M6.6 10.6h5.4M6.6 13.4h4.1"/></svg></span>
           <span class="xacc-title" data-i18n="qr.i1.h">L'investissement qui travaille pour vous</span>
           <span class="xacc-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
@@ -3732,10 +3755,10 @@ html.light .xacc-group-label,html.light .xacc-group-label .xacc-group-badge{colo
         </div></div></div>
       </div>
 
-      <!-- 02 · Agilité totale — cadre bureau + mobile (inchangé) -->
-      <div class="xacc-item reveal delay-2" data-acc-group="qr" data-acc-key="qr-instant">
+      <!-- 03 · Agilité totale — cadre bureau + mobile (inchangé) -->
+      <div class="xacc-item reveal delay-3" data-acc-group="qr" data-acc-key="qr-instant">
         <button class="xacc-head-btn" onclick="toggleAcc(this)">
-          <span class="xacc-num">02</span>
+          <span class="xacc-num">03</span>
           <span class="xacc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7.5v5l3.4 2"/></svg></span>
           <span class="xacc-title" data-i18n="qr.i2.h">L'agilité totale : le menu qui s'adapte en temps réel</span>
           <span class="xacc-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
@@ -3752,10 +3775,10 @@ html.light .xacc-group-label,html.light .xacc-group-label .xacc-group-badge{colo
         </div></div></div>
       </div>
 
-      <!-- 03 · Vitrine dynamique — 3 photos cadre téléphone -->
-      <div class="xacc-item reveal delay-3" data-acc-group="qr" data-acc-key="qr-multilang">
+      <!-- 04 · Vitrine dynamique — 3 photos cadre téléphone -->
+      <div class="xacc-item reveal delay-1" data-acc-group="qr" data-acc-key="qr-multilang">
         <button class="xacc-head-btn" onclick="toggleAcc(this)">
-          <span class="xacc-num">03</span>
+          <span class="xacc-num">04</span>
           <span class="xacc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg></span>
           <span class="xacc-title" data-i18n="qr.i3.h">La vitrine dynamique : vendez par l'image, pas par la liste</span>
           <span class="xacc-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
@@ -3772,10 +3795,10 @@ html.light .xacc-group-label,html.light .xacc-group-label .xacc-group-badge{colo
         </div></div></div>
       </div>
 
-      <!-- 04 · Expérience client premium — 1 photo sans cadre -->
-      <div class="xacc-item reveal delay-1" data-acc-group="qr" data-acc-key="qr-eco">
+      <!-- 05 · Expérience client premium — 1 photo sans cadre -->
+      <div class="xacc-item reveal delay-2" data-acc-group="qr" data-acc-key="qr-eco">
         <button class="xacc-head-btn" onclick="toggleAcc(this)">
-          <span class="xacc-num">04</span>
+          <span class="xacc-num">05</span>
           <span class="xacc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8V5a1 1 0 011-1h3M4 16v3a1 1 0 001 1h3M20 8V5a1 1 0 00-1-1h-3M20 16v3a1 1 0 01-1 1h-3"/><rect x="9.5" y="9.5" width="5" height="5" rx="1"/></svg></span>
           <span class="xacc-title" data-i18n="qr.i4.h">L'expérience client premium : fluidité et autonomie</span>
           <span class="xacc-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
@@ -3792,10 +3815,10 @@ html.light .xacc-group-label,html.light .xacc-group-label .xacc-group-badge{colo
         </div></div></div>
       </div>
 
-      <!-- 05 · Pilotage par la donnée — cadre bureau + mobile (inchangé) -->
-      <div class="xacc-item reveal delay-2" data-acc-group="qr" data-acc-key="qr-image">
+      <!-- 06 · Pilotage par la donnée — cadre bureau + mobile (inchangé) -->
+      <div class="xacc-item reveal delay-3" data-acc-group="qr" data-acc-key="qr-image">
         <button class="xacc-head-btn" onclick="toggleAcc(this)">
-          <span class="xacc-num">05</span>
+          <span class="xacc-num">06</span>
           <span class="xacc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="12" width="3.2" height="8" rx="1"/><rect x="10.4" y="7" width="3.2" height="13" rx="1"/><rect x="16.8" y="3" width="3.2" height="17" rx="1"/></svg></span>
           <span class="xacc-title" data-i18n="qr.i5.h">Le pilotage par la donnée : décidez avec des chiffres</span>
           <span class="xacc-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
@@ -3809,26 +3832,6 @@ html.light .xacc-group-label,html.light .xacc-group-label .xacc-group-badge{colo
             </div>
           </div>
           <div class="dmk" data-dmk="qr-image" data-dmk-type="dual"></div>
-        </div></div></div>
-      </div>
-
-      <!-- 06 · Image de marque — 1 photo sans cadre -->
-      <div class="xacc-item reveal delay-3" data-acc-group="qr" data-acc-key="qr-autonomy">
-        <button class="xacc-head-btn" onclick="toggleAcc(this)">
-          <span class="xacc-num">06</span>
-          <span class="xacc-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l7 3v6c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V5l7-3z"/><path d="M9 12l2 2 4-4"/></svg></span>
-          <span class="xacc-title" data-i18n="qr.i6.h">L'image de marque : le reflet de votre professionnalisme</span>
-          <span class="xacc-chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
-        </button>
-        <div class="xacc-panel"><div class="xacc-panel-inner"><div class="xacc-panel-body">
-          <div>
-            <p class="xacc-desc" data-i18n="qr.i6.p">La première chose qu'un client touche est votre menu. Oubliez les cartes papier cornées, tachées ou jaunies. Avec le QR code, votre menu est toujours impeccable, moderne et professionnel — l'assurance d'une première impression parfaite dès l'arrivée du client.</p>
-            <div class="xacc-tags">
-              <span class="xacc-tag" data-i18n="qr.i6.t1">Toujours impeccable</span>
-              <span class="xacc-tag" data-i18n="qr.i6.t2">Première impression parfaite</span>
-            </div>
-          </div>
-          <div class="dmk" data-dmk="qr-autonomy" data-dmk-type="single"></div>
         </div></div></div>
       </div>
 
