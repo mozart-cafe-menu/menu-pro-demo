@@ -3831,7 +3831,7 @@ html.light .xacc-group-label,html.light .xacc-group-label .xacc-group-badge{colo
               <span class="xacc-tag" data-i18n="qr.i5.t2">Décisions data-driven</span>
             </div>
           </div>
-          <div class="dmk" data-dmk="qr-image" data-dmk-type="dual"></div>
+          <div class="dmk" data-dmk="qr-image" data-dmk-type="d1m3"></div>
         </div></div></div>
       </div>
 
@@ -4078,7 +4078,7 @@ html.light .xacc-group-label,html.light .xacc-group-label .xacc-group-badge{colo
               <span class="xacc-tag" data-i18n="gx.i9.t2">Numéro de table inclus</span>
             </div>
           </div>
-          <div class="dmk" data-dmk="gx-order" data-dmk-type="b1"></div>
+          <div class="dmk" data-dmk="gx-order" data-dmk-type="phone4"></div>
         </div></div></div>
       </div>
 
@@ -4118,7 +4118,7 @@ html.light .xacc-group-label,html.light .xacc-group-label .xacc-group-badge{colo
               <span class="xacc-tag" data-i18n="gx.i11.t2">3 statuts de commande</span>
             </div>
           </div>
-          <div class="dmk" data-dmk="gx-server" data-dmk-type="phone2"></div>
+          <div class="dmk" data-dmk="gx-server" data-dmk-type="phone4"></div>
         </div></div></div>
       </div>
 
@@ -4138,7 +4138,7 @@ html.light .xacc-group-label,html.light .xacc-group-label .xacc-group-badge{colo
               <span class="xacc-tag" data-i18n="gx.i12.t2">Historique financier</span>
             </div>
           </div>
-          <div class="dmk" data-dmk="gx-stats" data-dmk-type="dual"></div>
+          <div class="dmk" data-dmk="gx-stats" data-dmk-type="d1m3"></div>
         </div></div></div>
       </div>
 
@@ -5808,13 +5808,16 @@ html.light .xacc-group-label,html.light .xacc-group-label .xacc-group-badge{colo
     return '<div class="dmk-mobile"><div class="dmk-mobile-screen">'+_dmkScreenHTML(imgCls)+'</div></div>';
   }
   // Mises en page possibles (data-dmk-type) : 'dual' (défaut, bureau+mobile encadrés),
-  // 'single' (1 photo sans cadre), 'pair' (2 photos sans cadre côte à côte), 'triple'/'phone2'/'phone5' (N photos cadre téléphone),
-  // 'desktop2phone1' (2 cadres bureau + 1 cadre téléphone), 'b1' (1 téléphone seul + cluster bureau+téléphone)
+  // 'single' (1 photo sans cadre), 'pair' (2 photos sans cadre côte à côte), 'triple'/'phone2'/'phone4'/'phone5' (N photos cadre téléphone),
+  // 'desktop2phone1' (2 cadres bureau + 1 cadre téléphone), 'b1' (1 téléphone seul + cluster bureau+téléphone),
+  // 'd1m3' (1 cadre bureau + 3 cadres téléphone)
   function _dmkSlotsForType(type){
     if(type==='single') return [{cls:'dmk-img-1',key:'img1'}];
     if(type==='pair' || type==='phone2') return [{cls:'dmk-img-1',key:'img1'},{cls:'dmk-img-2',key:'img2'}];
     if(type==='triple' || type==='desktop2phone1' || type==='b1') return [{cls:'dmk-img-1',key:'img1'},{cls:'dmk-img-2',key:'img2'},{cls:'dmk-img-3',key:'img3'}];
+    if(type==='phone4') return [1,2,3,4].map(function(n){return {cls:'dmk-img-'+n,key:'img'+n};});
     if(type==='phone5') return [1,2,3,4,5].map(function(n){return {cls:'dmk-img-'+n,key:'img'+n};});
+    if(type==='d1m3') return [{cls:'dmk-img-d',key:'desktop'},{cls:'dmk-img-1',key:'img1'},{cls:'dmk-img-2',key:'img2'},{cls:'dmk-img-3',key:'img3'}];
     return [{cls:'dmk-img-d',key:'desktop'},{cls:'dmk-img-m',key:'mobile'}];
   }
   function _dmkBuildFrame(el){
@@ -5833,10 +5836,14 @@ html.light .xacc-group-label,html.light .xacc-group-label .xacc-group-badge{colo
       el.innerHTML='<div class="dmk-trio">'+_dmkFramePhone('dmk-img-1')+_dmkFramePhone('dmk-img-2')+_dmkFramePhone('dmk-img-3')+'</div>';
     } else if(type==='phone2'){
       el.innerHTML='<div class="dmk-trio">'+_dmkFramePhone('dmk-img-1')+_dmkFramePhone('dmk-img-2')+'</div>';
+    } else if(type==='phone4'){
+      el.innerHTML='<div class="dmk-trio">'+[1,2,3,4].map(function(n){return _dmkFramePhone('dmk-img-'+n);}).join('')+'</div>';
     } else if(type==='phone5'){
       el.innerHTML='<div class="dmk-trio dmk-phone5">'+[1,2,3,4,5].map(function(n){return _dmkFramePhone('dmk-img-'+n);}).join('')+'</div>';
     } else if(type==='desktop2phone1'){
       el.innerHTML='<div class="dmk-row-mixed">'+_dmkFrameDesktop('dmk-img-1')+_dmkFrameDesktop('dmk-img-2')+_dmkFramePhone('dmk-img-3')+'</div>';
+    } else if(type==='d1m3'){
+      el.innerHTML='<div class="dmk-row-mixed">'+_dmkFrameDesktop('dmk-img-d')+_dmkFramePhone('dmk-img-1')+_dmkFramePhone('dmk-img-2')+_dmkFramePhone('dmk-img-3')+'</div>';
     } else if(type==='b1'){
       el.innerHTML=
         '<div class="dmk-b1">'+
