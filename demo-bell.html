@@ -56,20 +56,42 @@
 <body>
   <div class="demo-bar">
     <div class="demo-bar-left">
-      <span class="demo-bar-badge">MODE DÉMO</span>
-      <span class="demo-bar-title"><strong>Option Sonnette</strong> — Appel serveur en un tap</span>
+      <span class="demo-bar-badge" id="d-badge">MODE DÉMO</span>
+      <span class="demo-bar-title"><strong id="d-title">Option Sonnette</strong> <span id="d-sub">— Appel serveur en un tap</span></span>
     </div>
     <div class="demo-bar-right">
       <a href="demo-server.html?section=calls" target="_blank" class="demo-bar-link outline">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/></svg>
-        App serveur
+        <span id="d-app">App serveur</span>
       </a>
       <a href="/" class="demo-bar-link outline">
         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
-        Retour
+        <span id="d-back">Retour</span>
       </a>
     </div>
   </div>
+
+  <script>
+  /* Cette page suit la langue choisie sur le site (même clé localStorage que index.html) —
+     avant ce correctif elle restait en français quelle que soit la langue du visiteur. */
+  (function(){
+    var T = {
+      fr:{badge:'MODE DÉMO',    title:'Option Sonnette',       sub:'— Appel serveur en un tap',            app:'App serveur',             back:'Retour', doc:'Démo — Option Sonnette | GeNext'},
+      en:{badge:'DEMO MODE',    title:'Waiter call',           sub:'— Call the waiter in one tap',         app:'Server app',              back:'Back',   doc:'Demo — Waiter call | GeNext'},
+      el:{badge:'ΛΕΙΤΟΥΡΓΙΑ ΕΠΙΔΕΙΞΗΣ', title:'Κλήση σερβιτόρου', sub:'— Κλήση σερβιτόρου με ένα άγγιγμα', app:'Εφαρμογή σερβιτόρου',  back:'Πίσω',   doc:'Επίδειξη — Κλήση σερβιτόρου | GeNext'},
+      es:{badge:'MODO DEMO',    title:'Llamada al camarero',   sub:'— Llamar al camarero con un toque',    app:'App de camareros',        back:'Volver', doc:'Demo — Llamada al camarero | GeNext'},
+      de:{badge:'DEMO-MODUS',   title:'Kellnerruf',            sub:'— Kellnerruf mit einem Tipp',          app:'Server-App',              back:'Zurück', doc:'Demo — Kellnerruf | GeNext'}
+    };
+    var l = 'fr';
+    try { l = localStorage.getItem('mqr_lang') || 'fr'; } catch(e) {}
+    var t = T[l] || T.fr;
+    document.documentElement.lang = l;
+    document.title = t.doc;
+    var set = function(id, v) { var el = document.getElementById(id); if (el) el.textContent = v; };
+    set('d-badge', t.badge); set('d-title', t.title); set('d-sub', t.sub);
+    set('d-app', t.app);     set('d-back', t.back);
+  })();
+  </script>
 
   <iframe
     class="demo-frame"
